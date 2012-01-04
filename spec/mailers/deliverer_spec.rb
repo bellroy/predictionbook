@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
 
 describe Deliverer do
   it 'should set default host (we are not in a controller)' do
