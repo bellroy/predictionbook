@@ -14,9 +14,9 @@ describe Notification do
     end
     it 'must be unique per user and prediction' do
       user = User.new
-      user.save(false)
+      user.save(:validate => false)
       prediction = Prediction.new
-      prediction.save(false)
+      prediction.save(:validate=> false)
       Notification.create!(:user => user, :prediction => prediction)
       lambda { Notification.create!(:user => user, :prediction => prediction)
       }.should raise_error(ActiveRecord::RecordInvalid, /already been taken/)
@@ -103,9 +103,9 @@ describe Notification do
     end
     it 'must be unique per user and prediction' do
       user = User.new
-      user.save(false)
+      user.save(:validate=> false)
       prediction = Prediction.new
-      prediction.save(false)
+      prediction.save(:validate=> false)
       Notification.create!(:user => user, :prediction => prediction)
       lambda { Notification.create!(:user => user, :prediction => prediction)
       }.should raise_error(ActiveRecord::RecordInvalid, /already been taken/)

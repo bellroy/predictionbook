@@ -7,8 +7,8 @@ describe DeadlineNotification do
       describe 'unsent' do
         it 'should find all unsent' do
           unsent = DeadlineNotification.new(:sent => false)
-          unsent.save(false)
-          DeadlineNotification.new(:sent => true).save(false)
+          unsent.save(:validate=> false)
+          DeadlineNotification.new(:sent => true).save(:validate=> false)
           
           DeadlineNotification.unsent.should == [unsent]
         end
