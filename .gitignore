@@ -1,0 +1,8 @@
+.bundle
+log/*.log
+tmp/
+.sass-cache/
+public/assets
+config/database.yml
+*.DS_Store
+public/uploads/*
