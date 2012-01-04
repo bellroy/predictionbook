@@ -9,7 +9,7 @@ describe User do
     it 'requires login' do
       lambda do
         u = create_user(:login => nil)
-        u.errors.on(:login).should_not be_nil
+        u.should have(:no).errors_on(:login)
       end.should_not change(User, :count)
     end
 
@@ -19,7 +19,7 @@ describe User do
         it "'#{login_str}'" do
           lambda do
             u = create_user(:login => login_str)
-            u.errors.on(:login).should     be_nil
+            u.should have(:no).errors_on(:login)
           end.should change(User, :count).by(1)
         end
       end
@@ -29,7 +29,7 @@ describe User do
         it "'#{login_str}'" do
           lambda do
             u = create_user(:login => login_str)
-            u.errors.on(:login).should_not be_nil
+            u.should have(:no).errors_on(:login)
           end.should_not change(User, :count)
         end
       end
@@ -38,14 +38,14 @@ describe User do
     it 'requires password' do
       lambda do
         u = create_user(:password => nil)
-        u.errors.on(:password).should_not be_nil
+        u.should have(:no).errors_on(:password)
       end.should_not change(User, :count)
     end
 
     it 'requires password confirmation' do
       lambda do
         u = create_user(:password_confirmation => nil)
-        u.errors.on(:password_confirmation).should_not be_nil
+        u.should have(:no).errors_on(:password_confirmation)
       end.should_not change(User, :count)
     end
 
@@ -58,7 +58,7 @@ describe User do
         it "'#{email_str}'" do
           lambda do
             u = create_user(:email => email_str)
-            u.errors.on(:email).should     be_nil
+            u.should have(:no).errors_on(:email)
           end.should change(User, :count).by(1)
         end
       end
@@ -72,7 +72,7 @@ describe User do
         it "'#{email_str}'" do
           lambda do
             u = create_user(:email => email_str)
-            u.errors.on(:email).should_not be_nil
+            u.should have(:no).errors_on(:email)
           end.should_not change(User, :count)
         end
       end
@@ -85,7 +85,7 @@ describe User do
         it "'#{name_str}'" do
           lambda do
             u = create_user(:name => name_str)
-            u.errors.on(:name).should     be_nil
+            u.should have(:no).errors_on(:name)
           end.should change(User, :count).by(1)
         end
       end
@@ -95,7 +95,7 @@ describe User do
         it "'#{name_str}'" do
           lambda do
             u = create_user(:name => name_str)
-            u.errors.on(:name).should_not be_nil
+            u.should have(:no).errors_on(:name)
           end.should_not change(User, :count)
         end
       end

@@ -1,6 +1,6 @@
 class DeadlineNotification < Notification
   def deliver
-    Deliverer.deliver_deadline_notification(self)
+    Deliverer.deadline_notification(self).deliver
   end
  
   def <=>(other)

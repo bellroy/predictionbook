@@ -57,7 +57,7 @@ class Prediction < ActiveRecord::Base
   validate :confidence_on_response, :on => :create
   
   def after_validation
-    errors.add(:deadline_text, errors.on(:deadline))
+    errors.add(:deadline_text, errors[:deadline])
   end
   
   def initialize(attrs = {})
@@ -179,8 +179,8 @@ class Prediction < ActiveRecord::Base
   end
   
   def confidence_on_response
-    if @initial_response && @initial_response.errors.on(:confidence)
-      errors.add(:initial_confidence, @initial_response.errors.on(:confidence))
+    if @initial_response && @initial_response.errors[:confidence]
+      errors.add(:initial_confidence, @initial_response.errors[:confidence])
     end
   end
 end
