@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/Satish/restful-authentication
-  revision: 63aeed7a2eeb00be8491808794a3c7cc7aa948c9
-  ref: 63aeed7a2eeb00be8491
-  branch: rails3
-  specs:
-    restful-authentication (2.0.0.beta1)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -183,7 +175,6 @@ DEPENDENCIES
   mysql2 (~> 0.3)
   rails (~> 3.1.3)
   rb-fsevent
-  restful-authentication!
   rspec-rails (~> 2.6)
   ruby-debug
   sass-rails (~> 3.1.5)

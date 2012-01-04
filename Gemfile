@@ -7,9 +7,6 @@ gem "version_fu", "~> 1.0.1"
 
 gem 'exception_notification'
 
-gem 'restful-authentication', :git => "git://github.com/Satish/restful-authentication", :ref => '63aeed7a2eeb00be8491',
-                              :branch => 'rails3'
-
 gem 'jquery-rails'
 gem 'RedCloth', '~>4.2.7'
 gem 'uuidtools', '~> 1.0.0'
@@ -36,7 +33,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'capybara'
   gem "guard-rspec"
-  # gem 'rspec-caching-test-plugin', :git=> 'git://github.com/econsultancy/rspec-caching-test-plugin.git',
-                                   # :branch=> 'econsultancy-2011-08-05',
-                                   # :require=> 'cache_test'
 end
+
+#restful-authentication needs to be installed as a plugin or it doesn't work
+#rspec-caching-test-plugin is quite old and is not available as a gem
