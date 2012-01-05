@@ -79,11 +79,7 @@ describe ResponsesController do
     def get_preview
       get :preview, :response => { :comment => 'some text' }
     end
-    it 'should route responses/preview to preview action' do
-      route_for(:controller => 'responses',
-        :action => 'preview').should == '/responses/preview'
-    end
-    
+   
     it 'should respond to preview action' do
       get_preview
       response.should be_success
