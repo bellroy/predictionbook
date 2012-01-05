@@ -238,8 +238,7 @@ describe Response do
     
     it 'should limit comments to 250 characters' do
       response = valid_response(:comment => ("A" * 251))
-      response.should_not be_valid
-      response.errors[:comment].should =~ /250/
+      response.should have(1).error_on(:comment)
     end
     
     it 'should allow html that would still display less than 250 characters' do
