@@ -80,7 +80,7 @@ module AuthenticatedSystem
     end
     
     def access_forbidden
-      render_optional_error_file 403
+      render :text=> 'Access Forbidden', :status=> 403
     end
 
     # Store the URI of the current request in the session.

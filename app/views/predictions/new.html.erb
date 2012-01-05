@@ -1,0 +1,4 @@
+<%= render :partial => 'form' %>
+<%- cache(user_statistics_cache_key(current_user)) do -%>
+	<%= render :partial => 'statistics/show' %>
+<%- end -%>

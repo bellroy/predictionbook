@@ -218,6 +218,7 @@ describe PredictionsController do
     end
     
     before(:each) do
+      @prediction = create_valid_prediction
       Prediction.stub!(:create!)
       Prediction.stub!(:recent)
       controller.stub!(:logged_in?).and_return(true)
@@ -233,19 +234,16 @@ describe PredictionsController do
     it 'should use the current_user as the creator' do
       u = mock_model(User)
       controller.stub!(:current_user).and_return(u)
-      Prediction.should_receive(:create!).with(hash_including(:creator => u))
+      Prediction.should_receive(:create!).with(hash_including(:creator => u)).and_return(@prediction)
       post_prediction
     end
 
     it 'should create a new prediction with the POSTed params' do
-      Prediction.should_receive(:create!).with(hash_including(:a => :param))
-      post_prediction(:a => :param)
+      Prediction.should_receive(:create!).with(hash_including(:description => 'foobar')).and_return(@prediction)
+      post_prediction(:description => 'foobar')
     end
       
     describe 'redirect' do
-      before do
-        @prediction = Prediction.new
-      end
       it "should redirect to the prediction view page" do
         Prediction.stub!(:create!).and_return(@prediction)
         post_prediction
@@ -261,6 +259,7 @@ describe PredictionsController do
     end
     
     it 'should set the Time.zone to users preference' do
+      Prediction.stub!(:create!).and_return(@prediction)
       controller.should_receive(:set_timezone).at_least(:once) # before filters suck in spec-land
       post_prediction
     end
@@ -371,7 +370,7 @@ describe PredictionsController do
   
   describe 'Updating the outcome of a prediction' do
     before(:each) do
-      @prediction = mock_model(Prediction, :null_object => true, :to_param => '1')
+      @prediction = mock_model(Prediction, :to_param => '1').as_null_object
       Prediction.stub!(:find).and_return(@prediction)
       controller.stub!(:logged_in?).and_return(true)
       controller.stub!(:current_user)
@@ -427,9 +426,8 @@ describe PredictionsController do
         lambda { post_outcome }.should expire_fragment("views/statistics_partial-#{@prediction.creator.to_param}")
       end
       it 'should expire fragment for other users that have wagered on the prediction' do
-        mock_wager = mock_model(Response, :user => mock_model(User, :id => 'mr-meetoo', :to_param => 'mr-meetoo'))
-        @prediction.stub!(:wagers).and_return([mock_wager])
-        lambda { post_outcome }.should expire_fragment("views/statistics_partial-#{mock_wager.user.to_param}")
+        @prediction.responses.create!(:user => valid_user(:login=> 'mr-meeto'), :confidence=> '90')
+        lambda { post_outcome }.should expire_fragment("views/statistics_partial-mr-meeto")
       end
       it "should not expire fragment for other users that haven't wagered on the prediction" do
         @prediction.stub!(:wagers).and_return([])
@@ -443,7 +441,7 @@ describe PredictionsController do
 
   describe 'Withdrawing a prediction' do
     before(:each) do
-      @prediction = mock_model(Prediction, :null_object => true, :id => '12')
+      @prediction = mock_model(Prediction, :id => '12').as_null_object
       Prediction.stub!(:find).and_return(@prediction)
       controller.stub!(:logged_in?).and_return(true)
     end
@@ -628,7 +626,7 @@ describe PredictionsController do
       end
       it 'should update the prediction' do
         Prediction.stub!(:find).and_return(@p)
-        @p.should_receive(:update_attributes!).with(:prediction_params)
+        @p.should_receive(:update_attributes!).with('prediction_params')
         controller.stub!(:must_be_authorized_for_prediction)
         put :update, :id => @p.id, :prediction => :prediction_params
       end

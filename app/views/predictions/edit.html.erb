@@ -1,0 +1,10 @@
+<% form_for(@prediction) do |f| %>
+<div class="clear">
+  <h2>Edit this Prediction</h2>
+  <%= f.text_area :description, :label => 'What do you think will happen?' %>
+  <%= f.text_field :deadline_text, :label => 'When you will know?', :preview => true %>
+  <%= f.submit 'Save changes' %>
+  <%= f.check_box :private, :label => 'Keep this prediction private.' %>
+  <p class='note'><%= render :partial => 'private_note' %></p>
+</div>
+<% end %>

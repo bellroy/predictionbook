@@ -1,0 +1,43 @@
+<%- content_for :bodyclass do -%>home<%- end -%>
+
+<%- content_for :feature do -%>
+<div id="feature">
+	<img id="title" src="/images/title-banner.png" alt="How Sure Are You?" />
+	<div class="content clear">
+		<h2>Find out just how sure you should be, and get better at being only as sure as the facts justify.</h2>
+    <%- unless logged_in? -%>
+		<p class="actions clear">
+		  <%= link_to 'Login', login_path, :class => 'button' %>
+		  <span>or</span>
+		  <%= link_to 'Sign Up', signup_path, :class => 'button' %>
+	  </p>
+	  <%- end -%>
+	</div>
+	<img id="illustration" src="/images/graphs.png" alt="PredictionBook" />
+</div><!-- #feature -->
+<%- end -%>
+
+<%= render :partial => 'form' if current_user %>
+
+<% unless current_user -%>
+<div id="intro">
+	<h2>What is PredictionBook?</h2>
+	<p class="quote">PredictionBook is a site to record and track your predictions.</p>
+	<h3>How sure are you?</h3>
+    <p>Rather than just recording <strong>what</strong> you think will happen, PredictionBook allows you to record just how sure you are that it will happen. You can distinguish between those things you think will probably occur, and those things you're really really sure will occur. If you're properly calibrated, you'll be able to see that about 60% of the things you're 60% sure will happen, do happen, and 90% of the things you're 90% sure will happen, do happen.</p>
+</div><!-- #intro -->
+<% end -%>
+	
+<div id='popular'>
+  <%= render :partial => 'list', :locals => { :title => 'Popular Predictions' } %>
+</div>
+
+<% if current_user -%>
+<div id='responses'>
+  <h2><%= link_to 'Happenstance', happenstance_path %></h2>
+  <ul>
+  <%= render :partial => @responses %>
+  </ul>
+</div>
+<% end -%>
+

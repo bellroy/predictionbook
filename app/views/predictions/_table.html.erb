@@ -1,0 +1,29 @@
+<table>
+  <colgroup>
+    <col class="creator" />
+    <col class="description" />
+    <col class="known" />
+    <col class="support" />
+    <col class="outcome" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Creator</th>
+      <th>Prediction</th>
+      <th>Known</th>
+      <th>Support</th>      
+      <th>Outcome</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%- predictions.each do |prediction| -%>
+    <tr>
+      <td><%= show_user(prediction.creator) %></td>
+      <td><%= link_to show_title(prediction.description), prediction_path(prediction) %></td>
+      <td><%= show_time(prediction.deadline) %></td>
+      <td><%= confidence_and_count(prediction) %></td>
+      <td><%= outcome(prediction) %></td>
+    </tr>
+  <%- end -%>
+  </tbody>
+</table>

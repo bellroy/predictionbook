@@ -1,0 +1,3 @@
+<%= show_user(event.prediction.creator) %>
+<%= changes(event).to_sentence(:skip_last_comma => true) %>
+<%= show_time(event.created_at) %>

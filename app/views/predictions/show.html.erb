@@ -1,0 +1,53 @@
+<h1 class="<%= @prediction.readable_outcome %>">
+  <%= show_title(@prediction.description) %>
+  <% if current_user && current_user.authorized_for(@prediction) %>
+    <%= link_to 'Edit', edit_prediction_path(@prediction), :class => 'edit' %>
+  <% end %>
+</h1>
+<p>
+  Created by <%= show_user(@prediction.creator) %>
+  <%= show_time(@prediction.created_at) %>;
+  known <%= show_time(@prediction.deadline) -%><% if @prediction.judgement %>; 
+  <%= render :partial => @prediction.judgement %><% end -%>
+</p>
+<%- if @prediction.private? -%>
+<p class='note'>
+  This prediction is <strong>private</strong>. <%= render :partial => 'predictions/private_note' %>
+</p>
+<%- end -%>
+<%= render :partial => 'predictions/events' %>
+<% if logged_in? -%>
+<div id='response'>
+  <%= render :partial => 'responses/form' %>
+</div>
+<div id='notification'>
+<h2>Email Notifications</h2>
+<div id="deadline_notification"><%= render :partial => @deadline_notification %></div>
+<div id="response_notification"><%= render :partial => @response_notification %></div>
+</div>
+<% else -%>
+<p><span class='notice'>Please <%= link_to 'log in', login_path %> to respond to or judge prediction</span></p>
+<% end -%>
+<% if logged_in? && !@prediction.withdrawn? -%>
+<div id="judgement">
+  <h2>Judge this prediction</h2>
+  <p class="note">Only judge this prediction once its outcome is known.<br />Record your opinion above, <strong>not</strong> here!</p>
+  <% form_tag(judge_prediction_path(@prediction)) do %>
+    <%=  outcome_button 'Unknown' %>
+    <%=  outcome_button 'Right' %>
+    <%=  outcome_button 'Wrong' %>
+  <% end %>
+  <% if @prediction.withdrawable_by?(current_user) %>
+  <div class="withdraw">
+    <p class="note">
+      You may want to withdraw a prediction if you feel it no longer makes sense,
+      or if it would not be possible to decide its outcome.
+    </p>
+    <% form_for([:withdraw, @prediction], :html => {:method => :post}) do |f| %>
+      <%= f.submit 'Withdraw Prediction', :confirm => 'Are you sure you want to withdraw this prediction?' %>
+    <% end %>
+  </div>
+  <% end %>
+  <br />
+</div>
+<% end %>

@@ -38,7 +38,7 @@ class Response < ActiveRecord::Base
     :conditions => {'predictions.private' => false}
   
   def self.recent
-    not_private.rsort
+    rsort.not_private
   end
   
   def self.prefetch_joins
