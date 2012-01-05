@@ -47,7 +47,9 @@ describe DeadlineNotification do
     end
     describe 'deliver' do
       it 'should do the actual mailer stuff' do
-        Deliverer.should_receive(:deliver_deadline_notification).with(@dn)
+        mailer = mock :mail
+        mailer.should_receive(:deliver)
+        Deliverer.should_receive(:deadline_notification).with(@dn).and_return(mailer)
         @dn.deliver
       end
     end
