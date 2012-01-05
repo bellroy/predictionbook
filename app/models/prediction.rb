@@ -25,7 +25,7 @@ class Prediction < ActiveRecord::Base
     sort(:deadline).not_private.not_withdrawn.all(:include => :judgements, :conditions => "judgements.outcome IS NULL AND deadline > UTC_TIMESTAMP()")
   end
   def self.recent
-    not_private.not_withdrawn(:include => [:judgements, :responses, :creator]).rsort
+    rsort.not_private.not_withdrawn(:include => [:judgements, :responses, :creator])
   end
   def self.popular
     opts = {

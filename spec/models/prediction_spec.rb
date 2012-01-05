@@ -85,7 +85,10 @@ describe Prediction do
   end
 
   describe "associations" do
-    it { should have_many(:responses) }
+    it { should have_many(:deadline_notifications).dependent(:destroy) }
+    it { should have_many(:response_notifications).dependent(:destroy) }
+    it { should have_many(:judgements).dependent(:destroy) }
+    it { should have_many(:responses).dependent(:destroy) }
     it { should respond_to(:wagers) }
   end
 
@@ -394,23 +397,6 @@ describe Prediction do
 
     it 'should not exist when notify creator is false' do
       Prediction.new(:notify_creator => false).deadline_notifications.should be_empty
-    end
-  end
-  describe 'when deleted (for admin purposes)' do
-    before do
-      @p = Prediction.new
-    end
-    after do
-      @p.destroy
-    end
-    it 'should destroy assigned responses' do
-      @p.responses.build.should_receive(:destroy)
-    end
-    it 'should destroy assigned judgements' do
-      @p.judgements.build.should_receive(:destroy)
-    end
-    it 'should destroy assigned deadline notifications' do      
-      @p.deadline_notifications.build.should_receive(:destroy)
     end
   end
 
