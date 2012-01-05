@@ -1,8 +1,48 @@
 PredictionBook2::Application.routes.draw do
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
 
-  resources :predictions
+  match '/logout' => 'sessions#destroy', :as => :logout
+  match '/login' => 'sessions#new', :as => :login
+
+  resource :session
+
+  match '/register' => 'users#create', :as => :register
+  match '/signup' => 'users#new', :as => :logout
+
+  resources :users do
+    get :settings, :on=> :member
+    resources :deadline_notifications
+  end
+
+  resources :deadline_notifications
+  resources :response_notifications
+
+  resource :feedback, :controller=> 'feedback'
+
+  resources :responses do
+    get :preview, :on=> :collection
+  end
+
+  resources :predictions do
+    collection do
+      get :recent
+      get :unjudged
+      get :judged
+      get :future
+    end
+    member do
+      post :withdraw
+      post :judge
+    end
+
+    resources :responses do
+      get :preview, :on=> :collection
+    end
+  end
+
+  match '/happenstance' => 'predictions#happenstance', :as=> :happenstance
+
+  root :to => 'predictions#home'
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
