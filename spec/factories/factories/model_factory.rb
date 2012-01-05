@@ -31,6 +31,20 @@ module ModelFactory
     User.new({:login => 'zippy', :password => password, :password_confirmation => password_confirmation}.merge(attributes))
   end
   
+  def valid_deadline_notification(attributes={})
+    DeadlineNotification.new({
+      :user=> valid_user(:email=> 'zippy@predictionbook.com'),
+      :prediction=> valid_prediction
+    }.merge(attributes))
+  end
+
+  def valid_response_notification(attributes={})
+    ResponseNotification.new({
+      :user=> valid_user(:email=> 'zippy@predictionbook.com'),
+      :prediction=> valid_prediction
+    }.merge(attributes))
+  end
+
   def self.produced_models
     instance_methods.grep(/^valid_/).collect{|method| method.gsub(/^valid_/,'')}
   end

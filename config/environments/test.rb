@@ -35,5 +35,6 @@ PredictionBook2::Application.configure do
   # config.active_record.schema_format = :sql
 
   # Print deprecation notices to the stderr
+  config.action_mailer.default_url_options = { :host => 'localhost', :port=> '3000' }
   config.active_support.deprecation = :stderr
 end

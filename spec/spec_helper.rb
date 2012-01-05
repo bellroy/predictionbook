@@ -10,5 +10,7 @@ RSpec.configure do |config|
   config.mock_with :rspec
   config.use_transactional_fixtures = true
   config.render_views
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
 end
 

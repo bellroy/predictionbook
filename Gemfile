@@ -33,6 +33,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'capybara'
   gem "guard-rspec"
+  gem 'email_spec'
 end
 
 #restful-authentication needs to be installed as a plugin or it doesn't work
