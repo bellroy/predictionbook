@@ -6,14 +6,6 @@ describe PredictionsController do
   end
   
   describe 'getting the homepage' do
-    it 'should map GET / to home action' do
-      params_from(:get, '/').should == {
-        :controller => 'predictions', :action => 'home'
-      }
-    end
-    it 'should map home action to /' do
-      route_for(:controller => 'predictions', :action => 'home').should == '/'
-    end
     it 'should assign a new prediction' do
       Prediction.stub!(:new).and_return(:new_prediction)
       get :home
@@ -111,17 +103,7 @@ describe PredictionsController do
       @recent = mock('recent predictions', :limit => nil)
       Prediction.stub!(:recent).and_return(@recent)
     end
-    
-    it 'should map /predictions to "index" action' do
-      params_from(:get, '/predictions').should == {
-        :controller => 'predictions', :action => 'index'
-      }
-    end
-    
-    it 'should map "index" action to /predictions' do
-      route_for(:controller => 'predictions', :action => 'index').should == '/predictions'
-    end
-    
+
     describe 'index of predictions' do
       it 'should find all recent predictions' do
         Prediction.should_receive(:recent)
@@ -207,23 +189,7 @@ describe PredictionsController do
       controller.should_receive(:store_location)
       get :new
     end
-    
-    it 'should map "new" action to predictions/new' do
-      route_for(:controller => 'predictions', :action => 'new').should == '/predictions/new'
-    end
-    
-    it 'should map GET to /predictions/new to "new" action' do
-      params_from(:get, '/predictions/new').should == {
-        :controller => 'predictions', :action => 'new'
-      }
-    end
-    
-    it 'should map GET to / to "index" action' do
-      params_from(:get, '/').should == {
-        :controller => 'predictions', :action => 'home'
-      }
-    end
-    
+   
     it 'should respond with http success status' do
       get :new
       response.should be_success
@@ -263,12 +229,7 @@ describe PredictionsController do
       response.should redirect_to(login_path)
     end
     
-    it 'should map POST to /predictions to "create" action' do
-      params_from(:post, '/predictions').should == {
-        :controller => 'predictions', :action => 'create'
-      }
-    end
-    
+   
     it 'should use the current_user as the creator' do
       u = mock_model(User)
       controller.stub!(:current_user).and_return(u)
@@ -288,7 +249,7 @@ describe PredictionsController do
       it "should redirect to the prediction view page" do
         Prediction.stub!(:create!).and_return(@prediction)
         post_prediction
-        
+
         response.should redirect_to(prediction_path(@prediction))
       end
       it 'should go to the index predictions view if there was a duplicate submit' do
@@ -335,15 +296,7 @@ describe PredictionsController do
       controller.stub!(:logged_in?).and_return(true)
       controller.stub!(:current_user).and_return(mock_model(User))
     end
-    it 'should map GET /preditions/:id to show' do
-      params_from(:get, '/predictions/1').should == {
-        :controller => 'predictions', :action => 'show', :id => '1'
-      }
-    end
-    it 'should map show action to /predictions/:id' do
-      route_for(:controller => 'predictions', :action => 'show', :id => '6').should == '/predictions/6'
-    end
-    
+   
     it 'should assign the prediction to prediction' do
       get :show, :id => '1'
       assigns[:prediction].should == @prediction
@@ -423,19 +376,7 @@ describe PredictionsController do
       controller.stub!(:logged_in?).and_return(true)
       controller.stub!(:current_user)
     end
-    
-    it 'should map POST to /predictions/:id/judge to "judge" action' do
-      params_from(:post, '/predictions/1/judge').should == {
-        :controller => 'predictions', :action => 'judge', :id => '1'
-      }
-    end
-    
-    it 'should map "judge" action to /predictions/1/judge' do
-      route_for(
-        :controller => 'predictions', :action => 'judge', :id => '1'
-      ).should == { :path => '/predictions/1/judge', :method => :post }
-    end
-    
+
     def post_outcome(params={})
       post :judge, {:id => '1', :outcome => ''}.merge(params)
     end
@@ -513,19 +454,7 @@ describe PredictionsController do
         controller.stub!(:must_be_authorized_for_prediction)
       end
 
-      it 'should map POST to /predictions/:id/withdraw to update action' do
-        params_from(:post, '/predictions/1/withdraw').should == {
-          :controller => 'predictions', :action => 'withdraw', :id => '1'
-        }
-      end
-    
-      it 'should map the "withdraw" action to /predictions/1/withdraw' do
-        route_for(
-          :controller => 'predictions', :action => 'withdraw', :id => '1'
-        ).should == { :path => '/predictions/1/withdraw', :method => :post }
-      end
-    
-      it 'should require the user to be logged in' do
+     it 'should require the user to be logged in' do
         controller.stub!(:logged_in?).and_return(false)
         post :withdraw, :id => '12'
         response.should redirect_to(login_path)
@@ -580,15 +509,7 @@ describe PredictionsController do
       controller.stub!(:logged_in?).and_return(true)
       controller.stub!(:current_user).and_return(mock_model(User))
     end
-    it 'should map GET /preditions/:id to show' do
-      params_from(:get, '/predictions/1').should == {
-        :controller => 'predictions', :action => 'show', :id => '1'
-      }
-    end
-    it 'should map show action to /predictions/:id' do
-      route_for(:controller => 'predictions', :action => 'show', :id => '6').should == '/predictions/6'
-    end
-    
+   
     it 'should assign the prediction to @prediction' do
       get :show, :id => '1'
       assigns[:prediction].should == @prediction

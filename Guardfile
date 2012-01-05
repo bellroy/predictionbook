@@ -9,4 +9,5 @@ guard 'rspec', :version => 2, :all_on_start => false, :all_after_pass => false d
   watch(%r{^spec/support/(.+)\.rb$})                  { "spec" }
   watch('spec/spec_helper.rb')                        { "spec" }
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
+  watch('config/routes.rb')  { "spec/routing" }
 end
