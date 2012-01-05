@@ -23,7 +23,7 @@ end
 
 describe Statistics::Interval do
   describe 'ranges' do
-    before(:all) do
+    before(:each) do
       wagers = []
       outcomes = [true, false, nil]
       (0..100).each do |c|
