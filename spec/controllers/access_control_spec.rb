@@ -31,9 +31,9 @@ end
 #
 
 ACCESS_CONTROL_FORMATS = [
-  ['',     "success"],
+  ['html',     "success"],
   ['xml',  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<hash>\n  <success>xml</success>\n</hash>\n"],
-  ['json', "{\"success\": \"json\"}"],]
+  ['json', "{\"success\":\"json\"}"],]
 ACCESS_CONTROL_AM_I_LOGGED_IN = [
   [:i_am_logged_in,     :quentin],
   [:i_am_not_logged_in, nil],]
@@ -42,11 +42,21 @@ ACCESS_CONTROL_IS_LOGIN_REQD = [
   :login_is_required,]
 
 describe AccessControlTestController do
+  render_views
+
   before do
     # is there a better way to do this?
-    ActionController::Routing::Routes.add_route '/login_is_required',           :controller => 'access_control_test',   :action => 'login_is_required'
-    ActionController::Routing::Routes.add_route '/login_not_required',          :controller => 'access_control_test',   :action => 'login_not_required'
+    Rails.application.routes.draw do
+      match '/login_is_required' => 'access_control_test#login_is_required'
+      match '/login_not_required' => 'access_control_test#login_not_required'
+      match '/login' => 'sessions#new', :as => :login
+    end
   end
+
+  after do
+    Rails.application.reload_routes!
+  end
+
 
   ACCESS_CONTROL_FORMATS.each do |format, success_text|
     ACCESS_CONTROL_AM_I_LOGGED_IN.each do |logged_in_status, user_login|
@@ -60,7 +70,7 @@ describe AccessControlTestController do
           if ((login_reqd_status == :login_not_required) ||
               (login_reqd_status == :login_is_required && logged_in_status == :i_am_logged_in))
             it "succeeds" do
-              response.should have_text(success_text)
+              response.body.should == success_text
               response.code.to_s.should == '200'
             end
 
@@ -71,7 +81,7 @@ describe AccessControlTestController do
               end
             else
               it "returns 'Access denied' and a 406 (Access Denied) status code" do
-                response.should have_text("HTTP Basic: Access denied.\n")
+                response.body.should == "HTTP Basic: Access denied.\n"
                 response.code.to_s.should == '401'
               end
             end
