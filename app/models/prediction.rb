@@ -12,8 +12,9 @@ class Prediction < ActiveRecord::Base
   # if you change the implementation of 'public', also change this scope in response
   scope :not_private, :conditions => { :private => false }
   def self.unjudged
-    not_private.not_withdrawn.rsort(:deadline).all(:include => :judgements,
-      :conditions => '(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NULL AND deadline < UTC_TIMESTAMP()')
+    not_private.not_withdrawn.all(:include => :judgements,
+      :conditions => '(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NULL AND deadline < UTC_TIMESTAMP()').
+      rsort(:deadline)
   end
   def self.judged
     not_private.not_withdrawn.all(:include => :judgements,
@@ -24,7 +25,7 @@ class Prediction < ActiveRecord::Base
     sort(:deadline).not_private.not_withdrawn.all(:include => :judgements, :conditions => "judgements.outcome IS NULL AND deadline > UTC_TIMESTAMP()")
   end
   def self.recent
-    rsort.not_private.not_withdrawn(:include => [:judgements, :responses, :creator])
+    not_private.not_withdrawn(:include => [:judgements, :responses, :creator]).rsort
   end
   def self.popular
     opts = {

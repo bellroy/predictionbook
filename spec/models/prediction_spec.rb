@@ -81,26 +81,15 @@ describe Prediction do
       create_valid_prediction
       lambda {create_valid_prediction}.should raise_error(Prediction::DuplicateRecord)
     end
-    
+
   end
-  
+
+  describe "associations" do
+    it { should have_many(:responses) }
+    it { should respond_to(:wagers) }
+  end
+
   describe 'with responses' do
-    it 'should have responses' do
-      Prediction.new.should respond_to(:responses)
-    end
-
-    it 'should have many responses' do
-      Prediction.new.responses.should be_kind_of(Array)
-    end
-
-    it 'should have wagers' do
-      Prediction.new.should respond_to(:wagers)
-    end
-    
-    it 'should have many wagers' do
-      Prediction.new.wagers.should be_kind_of(Array)
-    end
-    
     describe 'initial response creation' do
       it 'should build a response on new' do
         p = Prediction.new

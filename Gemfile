@@ -11,7 +11,6 @@ gem 'jquery-rails'
 gem 'RedCloth', '~>4.2.7'
 gem 'uuidtools', '~> 1.0.0'
 
-
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'
   gem 'uglifier', '>= 1.0.3'
