@@ -5,7 +5,7 @@ describe Deliverer do
   include Rails.application.routes.url_helpers
 
   describe "deadline notification" do
-    before :all do 
+    before :each do 
       @deadline_notification = valid_deadline_notification
       @deadline_notification.save
       @deliverer = Deliverer.deadline_notification(@deadline_notification)
