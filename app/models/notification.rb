@@ -16,7 +16,7 @@ class Notification < ActiveRecord::Base
   scope :enabled,   :conditions => {:enabled => true}
   scope :disabled,  :conditions => {:enabled => false}
   
-  def initialize(attrs={})
+  def initialize(attrs = {}, options = {})
     super
     self.uuid ||= UUID.random_create.to_s
   end

@@ -60,7 +60,7 @@ class Prediction < ActiveRecord::Base
     errors.add(:deadline_text, errors[:deadline])
   end
   
-  def initialize(attrs = {})
+  def initialize(attrs = {}, options = {})
     super
     self.uuid ||= UUID.random_create.to_s
     
