@@ -3,4 +3,6 @@
 1. Use FactoryGirl. This will causes problems with models like prediction which override initialize.
 2. Deliverer.default_url_options should be set via config.action_mailer.default_url_options in the correspoding environment file, eg. see test.rb
 3. Use AREL or meta-where to build complex scopes in Prediction
-5. Rewrite access_control_spec
+4. Rewrite access_control_spec
+5. Upgrade JQuery and related plugins
+6. Enable asset pipeline
