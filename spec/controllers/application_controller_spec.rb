@@ -60,7 +60,7 @@ describe ApplicationController do
       controller.stub!(:params).and_return({})
     end
     it 'should set current user to deadline user if found' do
-      dn = mock_model(DeadlineNotification, :user => :lazy_user, :null_object => true)
+      dn = mock_model(DeadlineNotification, :user => :lazy_user).as_null_object
       DeadlineNotification.stub!(:use_token!).and_yield(dn)
       controller.should_receive(:current_user=).with(:lazy_user)
     end

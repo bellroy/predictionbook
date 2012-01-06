@@ -15,7 +15,7 @@ describe ResponseNotificationsController do
         controller.stub!(:notification_collection).and_return(@collection = mock('collection'))
       end
       it 'should create a response notification record' do
-        @collection.should_receive(:create!).with('prediction_id' => '7').and_return(mock_model(ResponseNotification, :null_object => true))
+        @collection.should_receive(:create!).with('prediction_id' => '7').and_return(mock_model(ResponseNotification).as_null_object)
         post :create, :response_notification => {:prediction_id => '7'}
       end
       it 'should redirect back to the prediction' do
@@ -35,7 +35,7 @@ describe ResponseNotificationsController do
       before(:each) do
         controller.stub!(:login_required)
         controller.stub!(:notification_collection).and_return(collection = mock('collection'))
-        collection.stub!(:find).and_return(@notification = mock_model(ResponseNotification, :null_object => true))
+        collection.stub!(:find).and_return(@notification = mock_model(ResponseNotification).as_null_object)
       end
       it 'should update a response notification record' do
         @notification.should_receive(:update_attributes!)

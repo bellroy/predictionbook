@@ -39,7 +39,7 @@ describe DeadlineNotificationsController do
         controller.stub!(:notification_collection).and_return(@collection = mock('collection'))
       end
       it 'should create one' do
-        @collection.should_receive(:create!).with('prediction_id' => '7').and_return(mock_model(DeadlineNotification, :null_object => true))
+        @collection.should_receive(:create!).with('prediction_id' => '7').and_return(mock_model(DeadlineNotification).as_null_object)
         post :create, :deadline_notification => {:prediction_id => '7'}
       end
       it "should redirect to the prediction_path of it's prediction" do
@@ -58,7 +58,7 @@ describe DeadlineNotificationsController do
     describe 'logged in' do
       before do
         controller.stub!(:logged_in?).and_return true
-        @notification = mock_model(DeadlineNotification, :null_object => true)
+        @notification = mock_model(DeadlineNotification).as_null_object
         controller.stub!(:current_user).and_return(user = mock('user'))
         controller.stub!(:notification_collection).and_return(collection = mock('collection'))
         collection.stub!(:find).and_return(@notification)

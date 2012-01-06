@@ -92,13 +92,13 @@ describe ResponsesController do
     
     it 'should build a new response on the prediction from the params' do
       Response.should_receive(:new).with('comment' => 'some text').and_return(
-        mock_model(Response, :null_object => true)
+        mock_model(Response).as_null_object
       )
       get_preview
     end
     
     it "should not save the comment" do
-      Response.stub!(:new).and_return(response = mock_model(Response, :null_object => true))
+      Response.stub!(:new).and_return(response = mock_model(Response).as_null_object)
       response.should_not_receive(:save!)
       get_preview
     end
