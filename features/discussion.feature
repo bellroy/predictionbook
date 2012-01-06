@@ -14,5 +14,4 @@ Scenario: Posting a confidence on a closed prediction
   Given I am on the prediction page
   And I take note of the response count
   When I submit a confidence
-  Then the response code should be 422
-  And The response count should be unchanged
+  Then The response count should be unchanged
