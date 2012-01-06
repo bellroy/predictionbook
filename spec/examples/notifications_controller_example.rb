@@ -9,7 +9,7 @@ shared_examples_for 'NotificationsController' do
 
     describe 'creating a notification' do
       before(:each) do
-        @notification = mock('notification', :null_object => true)
+        @notification = mock('notification').as_null_object
         collection = mock('notifications', :create! => @notification)
         controller.stub!(:notification_collection).and_return(collection)
       end
@@ -32,7 +32,7 @@ shared_examples_for 'NotificationsController' do
   
     describe 'updating a notification' do
       before(:each) do
-        @notification = mock('notification', :null_object => true)
+        @notification = mock('notification').as_null_object
         collection = mock('notifications', :find => @notification)
         controller.stub!(:notification_collection).and_return(collection)
       end

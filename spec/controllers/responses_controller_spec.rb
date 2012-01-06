@@ -14,9 +14,8 @@ describe ResponsesController do
       @wagers = mock('responses', :create! => nil)
       @prediction = mock_model(Prediction,
        :to_param => '1',
-       :responses => @wagers,
-       :null_object => true
-      )
+       :responses => @wagers
+      ).as_null_object
       Prediction.stub!(:find).and_return(@prediction)
       controller.stub!(:logged_in?).and_return(true)
     end

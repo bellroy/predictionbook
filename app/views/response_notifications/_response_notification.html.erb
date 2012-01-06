@@ -1,0 +1,12 @@
+<% form_for(response_notification, :html => {:class => 'single-checkbox-form'}) do |f| %>
+<%= f.hidden_field :prediction_id -%>
+<%= f.check_box :enabled, :label => 'Email me if someone responds to this prediction' %>
+<%= f.submit 'Update', :class => 'noscript' %>
+<% end %>
+<p class="note">
+  You <%= response_notification.enabled? ? 'will' : 'would' %> be notified when someone comments
+  <% if response_notification.open? %>
+    or puts a wager
+  <% end %>
+  on this prediction.
+</p>

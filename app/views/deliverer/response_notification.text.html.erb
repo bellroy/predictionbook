@@ -1,0 +1,9 @@
+<h2>Prediction: <%= @prediction.description %></h2>
+
+<p>
+  There <%= @prediction.wagers.size == 1 ? 'is' : 'are' %> currently
+  <%= pluralize(@prediction.wagers.size, 'wager') %>, and
+  <%= pluralize(@prediction.comments.size, 'comment') %>.
+</p>
+
+<p><%= link_to "Check out what's happened", prediction_link(@notification) %></p>

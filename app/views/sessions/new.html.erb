@@ -1,0 +1,6 @@
+<% form_for User.new, { :url => session_path } do |f| %>
+<%= f.text_field :login, :value => @login %>
+<%= f.password_field :password %>
+<%= f.check_box :remember_me %>
+<%= f.submit 'Log in' %>
+<% end %>

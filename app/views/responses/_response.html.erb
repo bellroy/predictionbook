@@ -1,0 +1,2 @@
+<%= render :partial => 'responses/wager', :locals => {:wager => response} if response.confidence? -%>
+<%= render :partial => 'responses/comment', :locals => {:comment => response}  if response.comment? -%>

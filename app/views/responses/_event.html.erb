@@ -1,0 +1,3 @@
+<%= show_user(event.user) %>
+<%= [confidence_for(event), comment_for(event)].compact.join(" and ") %>
+<%= show_time(event.created_at) %>

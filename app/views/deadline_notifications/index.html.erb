@@ -1,0 +1,21 @@
+<h1>Email Notifications for <%= show_user(@user) -%></h1>
+
+<%- unless @pending.empty? -%>
+<h2 id='pending'>Waiting to be sent</h2>
+<ul class='future'><%= render :partial => 'list', :locals => {:deadline_notifications => @pending} -%></ul>
+<%- end -%>
+
+<%- unless @waiting.empty? -%>
+<h2 id='waiting'>Waiting for deadline</h2>
+<ul class='future'><%= render :partial => 'list', :locals => {:deadline_notifications => @waiting} -%></ul>
+<%- end -%>
+
+<%- unless @known.empty? -%>
+<h2 id='unsent'>Judged before deadline</h2>
+<ul class='judged'><%= render :partial => 'list', :locals => {:deadline_notifications => @known} -%></ul>
+<%- end -%>
+
+<%- unless @sent.empty? -%>
+<h2 id='sent'>Sent</h2>
+<ul class='future'><%= render :partial => 'list', :locals => {:deadline_notifications => @sent} -%></ul>
+<%- end -%>

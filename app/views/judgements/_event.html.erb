@@ -1,0 +1,10 @@
+<%- unless event.worthless? -%>
+<% if event.user -%>
+  <%= show_user(event.user) -%>
+<% else %>
+  Anonymous
+<% end %>
+judged this prediction
+<span class='outcome'><%= event.outcome_in_words -%></span>
+<%= show_time(event.created_at, 'created_at') -%>.
+<%- end -%>

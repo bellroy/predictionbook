@@ -1,0 +1,9 @@
+<%- cache(user_statistics_cache_key @user) do -%>
+	<%= render :partial => 'statistics/show' %>
+<%- end -%>
+<div id="predictions">
+  <h2>Predictions by <%= show_user(@user) %></h2>
+  <ul>
+  <%= render :partial => @predictions %>
+  </ul>
+</div>

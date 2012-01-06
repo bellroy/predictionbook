@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UsersController do
   before(:each) do
-    @user = mock('user', :null_object => true)
+    @user = mock('user').as_null_object
     User.stub!(:[]).and_return(@user)
     controller.stub!(:set_timezone)
     controller.stub!(:current_user).and_return(@user)

@@ -1,0 +1,10 @@
+Prediction: <%= @prediction.description %>
+
+<%- if @prediction.responses.size > 1 -%>
+Since you created this prediction <%= pluralize(@prediction.responses.size - 1, 'other person') %> had something to say about your prediction, of which <%= @prediction.wagers.size - 1 %> placed a wager where their mouth is.
+
+<%- end -%>
+Now that “<%= @prediction.prettied_deadline %>” has been reached it’s judgement time.
+
+Go forth and deliver your judgement at:
+<%= prediction_link(@deadline) %>

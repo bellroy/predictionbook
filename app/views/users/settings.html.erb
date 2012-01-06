@@ -1,0 +1,16 @@
+<h2>Settings</h2>
+<% form_for @user do |f| -%>
+<%= f.text_field :name %>
+<%= f.text_field :email %>
+<%= f.timezone_field :timezone %>
+<%= f.check_box :private_default, :label => 'Keep my predictions private by default' %>
+<p class='note'><%= render :partial => 'predictions/private_note' %></p>
+<%= f.submit 'Change details' %>
+<% end -%>
+<h2>Password</h2>
+<% form_for @user do |f| -%>
+<%= f.password_field :password %>
+<%= f.password_field :password_confirmation %>
+<%= f.submit 'Change password' %>
+<% end -%>
+<h2><%= link_to 'View notifications', [@user,:deadline_notifications] %></h2>

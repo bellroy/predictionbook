@@ -1,14 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>PredictionBook2</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  <title>PredictionBook: <%=h @title ? @title : 'How sure are you?' -%></title>
+  <meta charset="utf-8" />
+  <%= stylesheet_link_tag %w(/styling/application /styling/predictions /styling/forms /styling/home /styling/footer /facebox/facebox) %>
+  <% [6,7].each do |ie_version| %>
+  <!--[if IE <%= ie_version %>]>
+      <%= stylesheet_link_tag "/styling/ie#{ie_version}.css" %>
+  <![endif]-->
+  <% end %>
+  <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js' %>
+  <%= javascript_include_tag %w(application /facebox/facebox jquery/ajaxqueue jquery/form jquery/livequery) %>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 </head>
-<body>
+<body class="<%= yield :bodyclass %>">
 
-<%= yield %>
+<div id="container">
+
+	<div id="header" class="wrapper clear">
+		<div id="main_nav" class="clear">
+			<ul id="nav-menu">
+			  <li><%= link_to 'Make a Prediction', new_prediction_path %></li>
+        <li><%= link_to 'View predictions', predictions_path %></li>
+			  <li><%= link_to 'Happenstance', happenstance_path %></li>
+        <li><%= link_to 'Upcoming predictions', future_predictions_path %></li>
+			</ul>
+      
+      <ul id="user-links">
+		  <%- unless logged_in? -%>
+        <li><%= link_to 'Login', login_path %></li>
+        <li><%= link_to 'Signup', signup_path %></li>
+  		<%- else -%>
+  		  <li>Hello, <%= show_user(current_user)  %></li>
+  		  <li><%= link_to 'Settings', settings_user_path(current_user) %></li>
+  		  <li><%= link_to 'Logout', logout_path  %></li>
+  		<%- end -%>
+      </ul>
+
+		</div><!-- #nav -->
+		<div id="header-main" class="clear">
+		  <%= link_to image_tag('logo.png', :alt => 'PredictionBook'), '/', :id => 'logo' %>
+
+			<form id="search" method="get" action="http://www.google.com/search">
+				<div class="clear">
+					<input type="hidden" name="sitesearch" value="predictionbook.com" />
+					<input name="q" type="text" />
+					<input type="image" src="/styling/button-search.png" alt="Search" />
+				</div>
+			</form>
+		</div><!-- #header-main -->
+	</div><!-- #header -->			
+
+	<div id="main-wrap">
+	<div id="main-inner">
+	<div id="main" class="wrapper clear">
+
+		<%= yield :feature %>
+		
+		<%= render :partial => 'layouts/messages' %>
+
+		<div id="content" class="clear">
+      <%= yield %>
+		</div><!-- #content -->
+		
+	</div><!-- #main -->
+	</div><!-- #main-inner -->
+	</div><!-- #main-wrap -->
+
+	<div id="footer" class="wrapper clear">
+		<ul class="left-links">
+			<li><%= link_to 'Home', '/' %></li>
+			<li><%= link_to 'Make a Prediction', new_prediction_path %></li>
+		  <li><%= link_to 'View predictions', predictions_path %></li>
+      <li><%= link_to 'Happenstance', happenstance_path %></li>
+      <li><%= link_to 'Upcoming predictions', future_predictions_path %></li>
+      <%# <li><a href="#">Education Centre</a></li>
+      <li><a href="#">Links</a></li> %>
+		</ul>
+	<ul class="right-links">
+		<span class="copyright">PredictionBook © 2008-2011</span>
+	</ul>
+
+
+	</div><!-- #footer -->
+
+</div><!-- #container -->
+
+<script src="http://pbook.uservoice.com/pages/general/widgets/tab.js?alignment=right&amp;color=000000" type="text/javascript"></script>
+
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+  try {
+    var pageTracker = _gat._getTracker("[your_analytics_tracker_id]");
+    pageTracker._trackPageview();
+  } catch(err) {}
+</script>
 
 </body>
 </html>

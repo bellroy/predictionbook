@@ -1,0 +1,15 @@
+<h2><strong>Add your estimate or comment</strong></h2>
+<% form_for([@prediction,@prediction_response]) do |f| %>
+  <% if @prediction.open? %>
+  <%= f.confidence_field(:confidence, :label => 'What\'s your estimate of this happening?') %>
+    <% unless @prediction.count_wagers_by(current_user).zero? %>
+    <p class="note">
+      You can put another wager on this prediction; you may want to do this if
+      you have revised an estimate or have had a change of opinion.
+      Older wagers are still kept as they are a record of how you felt at the time.
+    </p>
+    <% end %>
+  <% end %>
+  <%= f.text_area :comment, :label => 'Anything to add?', :preview => true %>
+  <%= f.submit 'Record my prediction' %>
+<% end %>
