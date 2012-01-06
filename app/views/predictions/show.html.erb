@@ -15,7 +15,7 @@
   This prediction is <strong>private</strong>. <%= render :partial => 'predictions/private_note' %>
 </p>
 <%- end -%>
-<%= render :partial => 'predictions/events' %>
+<%= render 'predictions/events', :events=> @events %>
 <% if logged_in? -%>
 <div id='response'>
   <%= render :partial => 'responses/form' %>
