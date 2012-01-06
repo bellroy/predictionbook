@@ -73,7 +73,7 @@ describe ResponsesController do
   describe 'comment preview' do
     before(:each) do
       controller.stub!(:login_required)
-      controller.stub!(:render).with(:partial => 'responses/preview')
+      controller.stub!(:render_template).with(:partial => 'responses/_preview')
     end
     def get_preview
       get :preview, :response => { :comment => 'some text' }
