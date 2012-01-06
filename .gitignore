@@ -6,3 +6,5 @@ public/assets
 config/database.yml
 *.DS_Store
 public/uploads/*
+cache
+coverage
