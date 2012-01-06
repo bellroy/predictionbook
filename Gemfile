@@ -11,11 +11,6 @@ gem 'RedCloth', '~>4.2.7'
 gem 'uuidtools', '~> 1.0.0'
 gem 'formatize'
 
-group :assets do
-  gem 'sass-rails',   '~> 3.1.5'
-  gem 'uglifier', '>= 1.0.3'
-end
-
 group :test, :development do
   gem 'rspec-rails', '~> 2.6'
   gem "ruby-debug"
