@@ -1,4 +1,4 @@
-<% form_for(response_notification, :html => {:class => 'single-checkbox-form'}) do |f| %>
+<%= form_for(response_notification, :html => {:class => 'single-checkbox-form'}) do |f| %>
 <%= f.hidden_field :prediction_id -%>
 <%= f.check_box :enabled, :label => 'Email me if someone responds to this prediction' %>
 <%= f.submit 'Update', :class => 'noscript' %>

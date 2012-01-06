@@ -32,7 +32,7 @@
 <div id="judgement">
   <h2>Judge this prediction</h2>
   <p class="note">Only judge this prediction once its outcome is known.<br />Record your opinion above, <strong>not</strong> here!</p>
-  <% form_tag(judge_prediction_path(@prediction)) do %>
+  <%= form_tag(judge_prediction_path(@prediction)) do %>
     <%=  outcome_button 'Unknown' %>
     <%=  outcome_button 'Right' %>
     <%=  outcome_button 'Wrong' %>
@@ -43,7 +43,7 @@
       You may want to withdraw a prediction if you feel it no longer makes sense,
       or if it would not be possible to decide its outcome.
     </p>
-    <% form_for([:withdraw, @prediction], :html => {:method => :post}) do |f| %>
+    <%= form_for([:withdraw, @prediction], :html => {:method => :post}) do |f| %>
       <%= f.submit 'Withdraw Prediction', :confirm => 'Are you sure you want to withdraw this prediction?' %>
     <% end %>
   </div>

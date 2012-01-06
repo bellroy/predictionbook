@@ -1,6 +1,6 @@
 <h1>Sign up as a new user</h1>
 
-<% form_for @user, :url => users_path do |f| -%>
+<%= form_for @user, :url => users_path do |f| -%>
 <%= f.text_field :login %>
 
 <%= f.text_field :email %>

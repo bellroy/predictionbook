@@ -1,5 +1,5 @@
 <%- if deadline_notification.open? && !deadline_notification.overdue? -%>
-  <% form_for(deadline_notification, :html => {:class => 'single-checkbox-form'}) do |f| %>
+  <%= form_for(deadline_notification, :html => {:class => 'single-checkbox-form'}) do |f| %>
     <%= f.hidden_field :prediction_id -%>
     <%= f.check_box :enabled, :label => 'Email me when the outcome should be known' %>
     <%= f.submit 'Update', :class => 'noscript' %>
