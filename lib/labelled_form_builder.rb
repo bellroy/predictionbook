@@ -45,7 +45,7 @@ class LabelledFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def timezone_field(method, options={})
-    zones = ActiveSupport::TimeZone::ZONES.sort_by(&:utc_offset).collect do |tz|
+    zones = ActiveSupport::TimeZone.all.sort_by(&:utc_offset).collect do |tz|
       ["#{tz.name} #{tz.to_s.sub(tz.name,'')}", tz.name]
     end
     labelling_surround(method,options) do |method, options|
@@ -54,7 +54,7 @@ class LabelledFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def submit(text, options={})
-    @template.content_tag(:p, super)
+    @template.content_tag(:p, super).html_safe
   end
 
   private
@@ -62,7 +62,7 @@ class LabelledFormBuilder < ActionView::Helpers::FormBuilder
     trailing_content, preview, label_containing, label_string = extract_labelling_options!(options)
     label_string ||= method.to_s.humanize
 
-    error = object.errors.on(method)
+    error = object.errors[method]
     control = yield(method, {:size => nil}.merge(options)) #size isn't valid in html5
     outer_class = error ? 'error' : nil
     @template.content_tag(:p, :class => outer_class) do
@@ -74,20 +74,20 @@ class LabelledFormBuilder < ActionView::Helpers::FormBuilder
       content << trailing_content if trailing_content
       content << error_content(method) if error
       content << preview_content(method) if preview
-      content.join
+      content.join.html_safe
     end
   end
 
   def error_content(method)
     @template.content_tag(
       :span,
-      [object.errors.on(method)].flatten.first,
+      [object.errors[method]].flatten.first,
       :class => 'message'
-    )
+    ).html_safe
   end
 
   def counter_content(method, amount)
-    @template.content_tag(:label, amount, :class => 'counter', :for => "#{object_name}_#{method}")
+    @template.content_tag(:label, amount, :class => 'counter', :for => "#{object_name}_#{method}").html_safe
   end
 
   def preview_content(method)
@@ -96,7 +96,7 @@ class LabelledFormBuilder < ActionView::Helpers::FormBuilder
       '',
       :id => "#{object_name}_#{method}_preview",
       :class => 'preview'
-    )
+    ).html_safe
   end
 
   def extract_labelling_options!(options)

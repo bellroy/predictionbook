@@ -12,7 +12,7 @@ describe LabelledFormBuilder do
   end
 
   before(:each) do
-    @errors = mock('errors', :on => nil)
+    @errors = {}
     @record = mock('record', :errors => @errors)
     @template = BogusTemplate.new
     @builder = LabelledFormBuilder.new('record_name', @record, @template, {}, nil)
@@ -29,7 +29,7 @@ describe LabelledFormBuilder do
   end
 
   it 'should add the error message in the generated field if it has an error' do
-    @errors.stub!(:on).with(:name).and_return('error_message')
+    @errors[:name] = 'error_message'
     @builder.text_field(:name).should =~ /error_message/
   end
 

@@ -1,5 +1,5 @@
 <h2>Settings</h2>
-<% form_for @user do |f| -%>
+<%= form_for @user do |f| -%>
 <%= f.text_field :name %>
 <%= f.text_field :email %>
 <%= f.timezone_field :timezone %>
@@ -8,7 +8,7 @@
 <%= f.submit 'Change details' %>
 <% end -%>
 <h2>Password</h2>
-<% form_for @user do |f| -%>
+<%= form_for @user do |f| -%>
 <%= f.password_field :password %>
 <%= f.password_field :password_confirmation %>
 <%= f.submit 'Change password' %>
