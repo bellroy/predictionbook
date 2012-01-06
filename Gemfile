@@ -7,7 +7,6 @@ gem "version_fu", "~> 1.0.1"
 
 gem 'exception_notification'
 
-gem 'jquery-rails'
 gem 'RedCloth', '~>4.2.7'
 gem 'uuidtools', '~> 1.0.0'
 gem 'formatize'
