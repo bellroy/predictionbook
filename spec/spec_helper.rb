@@ -17,4 +17,5 @@ RSpec.configure do |config|
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
   config.include(ModelFactory)
+  config.include Rails.application.routes.url_helpers, :type=> :views
 end

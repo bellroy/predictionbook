@@ -6,7 +6,7 @@ PredictionBook2::Application.routes.draw do
   resource :session
 
   match '/register' => 'users#create', :as => :register
-  match '/signup' => 'users#new', :as => :logout
+  match '/signup' => 'users#new', :as => :signup
 
   resources :users do
     get :settings, :on=> :member
