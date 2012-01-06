@@ -3,10 +3,11 @@ require 'spec_helper'
 describe "prediction list" do
 
   before do
-    assigns[:predictions] = []
-    assigns[:statistics] = Statistics.new([])
-    template.stub!(:show_statistics?).and_return(false)
-    template.stub!(:current_user).and_return User.new
+    assign(:predictions, [])
+    assign(:statistics, Statistics.new([]))
+    view.stub!(:statistics).and_return(Statistics.new([]))
+    view.stub!(:show_statistics?).and_return(false)
+    view.stub!(:current_user).and_return User.new
   end
 
   def render_view
@@ -16,15 +17,14 @@ describe "prediction list" do
   describe 'when showing statistics' do
 
     before(:each) do
-      template.stub!(:show_statistics?).and_return(true)
-      template.stub!(:global_statistics_cache_key).and_return("foo")
-      template.stub!(:render).and_return("something to render")
+      view.stub!(:show_statistics?).and_return(true)
+      view.stub!(:global_statistics_cache_key).and_return("foo")
     end
 
     it 'should render the statistics partial if show_statistics? is true' do
-      template.stub!(:cache).and_yield
-      template.should_receive(:render).with(:partial => 'statistics/show')
+      view.stub!(:cache).and_yield
       render_view
+      view.should render_template(:partial => 'statistics/_show')
     end
 
     it 'should cache the statistics partial' do
@@ -32,7 +32,7 @@ describe "prediction list" do
     end
 
     it "should use the global cache key for the partial" do
-      template.should_receive(:global_statistics_cache_key)
+      view.should_receive(:global_statistics_cache_key)
       render_view
     end
 
@@ -44,12 +44,12 @@ describe "prediction list" do
 
       it "should show a message if there are no predictions" do
         render_view
-        response.should have_tag('p', /No predictions to show; so\s+make your own!/)
+        rendered.should have_css('p', :text=> /No predictions to show; so\s+make your own!/)
       end
 
       it "should provide a link to make a new prediction if there are none" do
         render_view
-        response.should have_tag('a[href=?]', '/predictions/new')
+        rendered.should have_selector("a[href='/predictions/new']")
       end
 
     end
@@ -57,12 +57,12 @@ describe "prediction list" do
     describe "when not logged in" do
     
       before do
-        template.stub!(:current_user).and_return nil
+        view.stub!(:current_user).and_return nil
       end
 
       it "should show a message if there are no predictions" do
         render_view
-        response.should have_tag('p', 'No predictions to show')
+        rendered.should have_css('p', :text=> 'No predictions to show')
       end
     
     end
