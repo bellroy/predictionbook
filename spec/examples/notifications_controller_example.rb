@@ -14,7 +14,7 @@ shared_examples_for 'NotificationsController' do
         controller.stub!(:notification_collection).and_return(collection)
       end
       it 'should ask if is xhr?' do
-        request.should_receive(:xhr?)
+        request.should_receive(:xhr?).at_least(1)
         post :create
       end
       it 'should redirect to the prediction' do
@@ -37,7 +37,7 @@ shared_examples_for 'NotificationsController' do
         controller.stub!(:notification_collection).and_return(collection)
       end
       it 'should ask if is xhr?' do
-        request.should_receive(:xhr?)
+        request.should_receive(:xhr?).at_least(1)
         put :update, :id => '1'
       end
       it 'should redirect to the prediction' do

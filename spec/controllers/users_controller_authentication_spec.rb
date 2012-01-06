@@ -41,14 +41,14 @@ describe UsersController do
     it 'should allow nil' do
       lambda do
         create_user(:email => nil)
-        assigns[:user].errors_on(:email).should be_nil
+        assigns[:user].should have(:no).errors_on(:email)
         response.should be_redirect
       end.should change(User, :count)  
     end
     it 'should allow empty string' do
       lambda do
         create_user(:email => '')
-        assigns[:user].errors_on(:email).should be_nil
+        assigns[:user].should have(:no).errors_on(:email)
         response.should be_redirect
       end.should change(User, :count)
     end
@@ -58,14 +58,14 @@ describe UsersController do
     it 'should allow nil' do
       lambda do
         create_user(:name => nil)
-        assigns[:user].errors_on(:name).should be_nil
+        assigns[:user].should have(:no).errors_on(:name)
         response.should be_redirect
       end.should change(User, :count)  
     end
     it 'should allow empty string' do
       lambda do
         create_user(:name => '')
-        assigns[:user].errors_on(:name).should be_nil
+        assigns[:user].should have(:no).errors_on(:name)
         response.should be_redirect
       end.should change(User, :count)
     end
