@@ -1,8 +1,18 @@
-h2. Techinical Debt
+h1. Prediction Book
 
-* Use FactoryGirl. This will causes problems with models like prediction which override initialize.
-* Deliverer.default_url_options should be set via config.action_mailer.default_url_options in the correspoding environment file, eg. see test.rb
-* Use AREL or meta-where to build complex scopes in Prediction
-* Rewrite access_control_spec
-* Upgrade JQuery and related plugins
+h3. Deployment
+
+Set the following environment variables appropriately, via @capistrano@ or on the machine via @.bashrc@
+
+* @REST_AUTH_SITE_KEY@
+* @SESSION_SECRET@
+* @GOOGLE_ANALYTICS_ID@
+
+h3. Techinical Debt
+
+* Use @FactoryGirl@. This will causes problems with models like prediction which override initialize.
+* @Deliverer.default_url_options@ should be set via @config.action_mailer.default_url_options@ in the corresponding environment file, eg. see @test.rb@
+* Use @AREL@ or @meta-where@ to build complex scopes in @Prediction@
+* Rewrite @access_control_spec@
+* Upgrade @JQuery@ and related plugins
 * Enable asset pipeline
