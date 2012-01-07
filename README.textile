@@ -13,7 +13,7 @@ h3. Local development
 * @cp config/credentials.yml.example config/credentials.yml@.
 * @rake db:create && rake db:schema:load@
 * @rake spec && rake cucumber@
-
+* @Thin@ is supported. @rake thin:start@ starts it on port @9001@ in the @production@ environment. Look at @config/thin.yml@ for details.
 
 h3. Techinical Debt
 

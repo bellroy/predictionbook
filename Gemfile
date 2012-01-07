@@ -13,6 +13,7 @@ gem 'formatize'
 
 #Servers
 gem "mysql2", '~> 0.3'
+gem 'thin'
 
 #App housekeeping
 gem 'exception_notification'
