@@ -4,6 +4,7 @@ tmp/
 .sass-cache/
 public/assets
 config/database.yml
+config/credentials.yml
 *.DS_Store
 public/uploads/*
 cache

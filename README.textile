@@ -2,11 +2,18 @@ h1. Prediction Book
 
 h3. Deployment
 
-Set the following environment variables appropriately, via @capistrano@ or on the machine via @.bashrc@
+Create these files on the server. If using @capistrano@, create these in @shared/config@ and have the @capistrano@ @after_symlink@ step create a symlinks to it in @current/config@
 
-* @REST_AUTH_SITE_KEY@
-* @SESSION_SECRET@
-* @GOOGLE_ANALYTICS_ID@
+* @config/database.yml@
+* @config/credentials.yml@
+
+h3. Local development
+
+* @cp config/database.yml.example config/database.yml.example@. Then customize it based on your environment.
+* @cp config/credentials.yml.example config/credentials.yml@.
+* @rake db:create && rake db:schema:load@
+* @rake spec && rake cucumber@
+
 
 h3. Techinical Debt
 
