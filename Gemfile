@@ -1,15 +1,21 @@
 source 'http://rubygems.org'
 
 gem 'rails', '~> 3.1.3'
-gem "mysql2", '~> 0.3'
+
+#Models
 gem 'chronic', '0.3.0'
 gem "version_fu", "~> 1.0.1"
-
-gem 'exception_notification'
-
-gem 'RedCloth', '~>4.2.7'
 gem 'uuidtools', '~> 1.0.0'
+
+#Views
+gem 'RedCloth', '~>4.2.7'
 gem 'formatize'
+
+#Servers
+gem "mysql2", '~> 0.3'
+
+#App housekeeping
+gem 'exception_notification'
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.6'
