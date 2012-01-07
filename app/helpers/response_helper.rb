@@ -13,7 +13,7 @@ module ResponseHelper
       if wager.action_comment?
         content_tag(:span, h(wager.action_comment), :class => "action-comment")
       else
-        "said “#{content_tag(:span, markup(wager.comment), :class => "comment")}”".html_safe
+        "said “#{content_tag(:span, markup(wager.comment).html_safe, :class => "comment")}”".html_safe
       end
     end
   end
