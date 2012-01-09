@@ -12,7 +12,7 @@ describe PredictionsController do
       assigns[:prediction].should == :new_prediction
     end
     it 'should assign some responses' do
-      Response.stub!(:recent).and_return(mock('responses', :limit => :responses))
+      Response.stub!(:limit).and_return(mock('responses', :recent=> :responses))
       get :home
       assigns[:responses].should == :responses
     end
@@ -40,85 +40,31 @@ describe PredictionsController do
   end
   
   describe 'getting the “happenstance” page' do
-    describe 'unjudged' do
-      before(:each) do
-        @mock_collection = mock('collection').as_null_object
-        Prediction.stub!(:unjudged).and_return(@mock_collection)
-      end
-      it 'should assign to commented' do
-        get :happenstance
-        assigns[:unjudged].should == @mock_collection
-      end
-      it 'should limit the predictions by 5' do
-        @mock_collection.should_receive(:limit).with(5).and_return(@mock_collection)
-        get :happenstance
-      end
-    end 
-    describe 'judged' do
-      before(:each) do
-        @mock_collection = mock('collection').as_null_object
-        Prediction.stub!(:judged).and_return(@mock_collection)
-      end
-      it 'should assign to commented' do
-        get :happenstance
-        assigns[:judged].should == @mock_collection
-      end
-      it 'should limit the predictions by 5' do
-        @mock_collection.should_receive(:limit).with(5).and_return(@mock_collection)
-        get :happenstance
-      end
-    end 
-    describe 'with a recent responses collection' do
-      before(:each) do
-        @mock_collection = mock('collection').as_null_object
-        Response.stub!(:recent).and_return(@mock_collection)
-      end
-      it 'should assign to commented' do
-        get :happenstance
-        assigns[:responses].should == @mock_collection
-      end
-      it 'should limit the comments by 25' do
-        @mock_collection.should_receive(:limit).with(25).and_return(@mock_collection)
-        get :happenstance
-      end
-    end
-    describe 'with a recent predictions collection' do
-      before(:each) do
-        @mock_collection = mock('collection').as_null_object
-        Prediction.stub!(:recent).and_return(@mock_collection)
-      end
-      it 'should assign to commented' do
-        get :happenstance
-        assigns[:recent].should == @mock_collection
-      end
-      it 'should limit the predictions by 5' do
-        @mock_collection.should_receive(:limit).with(5).and_return(@mock_collection)
-        get :happenstance
-      end
+    it 'should assign predictions' do
+      unjudged = mock(:unjudged).as_null_object
+      judged= mock(:judged).as_null_object
+      recent = mock(:recent).as_null_object
+      responses = mock(:responses).as_null_object
+      Prediction.should_receive(:limit).with(5).and_return(mock(:collection, :unjudged=> unjudged))
+      Prediction.should_receive(:limit).with(5).and_return(mock(:collection, :judged=> judged))
+      Prediction.should_receive(:limit).with(5).and_return(mock(:collection, :recent=> recent))
+      Response.should_receive(:limit).with(25).and_return(mock(:collection, :recent=> responses))
+      get :happenstance
+
+      assigns[:unjudged].should == unjudged
+      assigns[:judged].should == judged
+      assigns[:recent].should == recent
+      assigns[:responses].should == responses
     end
   end
-  
+
   describe 'Getting a list of all predictions' do
-    before(:each) do
-      @recent = mock('recent predictions', :limit => nil)
-      Prediction.stub!(:recent).and_return(@recent)
-    end
-
     describe 'index of predictions' do
-      it 'should find all recent predictions' do
-        Prediction.should_receive(:recent)
-        get :index
-      end
-
       it 'should assign recent predictions for the view' do
-        @recent.stub!(:limit).and_return(:recent_predictions)
+        recent = mock(:recent_predictions).as_null_object
+        Prediction.should_receive(:limit).with(100).and_return(mock(:collection, :recent=> recent))
         get :index
-        assigns[:predictions].should == :recent_predictions
-      end
-      
-      it 'should limit the results to 100 predictions' do
-        @recent.should_receive(:limit).with(100)
-        get :index
+        assigns[:predictions].should == recent 
       end
     end
     
