@@ -1,6 +1,6 @@
 class ResponseNotification < Notification
   def deliver
-    Deliverer.deliver_response_notification(self)
+    Deliverer.response_notification(self).deliver
   end
 
   def viewed!
