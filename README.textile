@@ -2,7 +2,7 @@ h1. Prediction Book
 
 h3. Deployment
 
-Create these files on the server. If using @capistrano@, create these in @shared/config@ and have the @capistrano@ @after_symlink@ step create a symlinks to it in @current/config@
+Create these files on the server. If using @capistrano@, create these in @shared/config@ and have the @capistrano@ @after_symlink@ step create a symlink to it in @current/config@
 
 * @config/database.yml@
 * @config/credentials.yml@
@@ -17,9 +17,13 @@ h3. Local development
 
 h3. Techinical Debt
 
-* Use @FactoryGirl@. This will causes problems with models like prediction which override initialize.
+* Use FactoryGirl. This will causes problems with models like @Prediction@ which override initialize.
 * @Deliverer.default_url_options@ should be set via @config.action_mailer.default_url_options@ in the corresponding environment file, eg. see @test.rb@
 * Use @AREL@ or @meta-where@ to build complex scopes in @Prediction@
 * Rewrite @access_control_spec@
-* Upgrade @JQuery@ and related plugins
+* Upgrade JQuery and related plugins
 * Enable asset pipeline
+
+h3. Rails migration notes
+
+* DB migration: Rails 3 uses the @schema_migrations@ table to record schema versions, while Rails 2 used @schema_info@. So, for future migrations to run properly after the production dump import, @schema_migrations@ must be created with equivalent informatio from @schema_info@.
