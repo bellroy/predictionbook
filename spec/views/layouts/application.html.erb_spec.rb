@@ -13,7 +13,7 @@ describe 'layouts/application.html.erb' do
     
     it 'should not show logout link' do
       render
-      response.should_not have_link('Logout', :href=>logout_path)
+      rendered.should_not have_link('Logout', :href=>logout_path)
     end
   end
   
@@ -35,7 +35,7 @@ describe 'layouts/application.html.erb' do
     
     it 'should show logout link' do
       render
-      response.should have_link('Logout', :href=>logout_path)
+      rendered.should have_link('Logout', :href=>logout_path)
     end
   end
 end
