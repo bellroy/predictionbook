@@ -28,3 +28,4 @@ h3. Techinical Debt
 h3. Rails migration notes
 
 * DB migration: Rails 3 uses the @schema_migrations@ table to record schema versions, while Rails 2 used @schema_info@. So, for future migrations to run properly after the production dump import, @schema_migrations@ must be created with equivalent informatio from @schema_info@.
+* Create @credentials.yml@ with values from the Rails2 app.
