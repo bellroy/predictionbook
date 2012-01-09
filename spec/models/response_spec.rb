@@ -30,11 +30,7 @@ describe Response do
       before(:each) do
         5.times{create_valid_response}
       end
-      it 'should default to 3' do
-        Response.limit.size.should == 3
-      end
-
-      it 'should take argument' do
+      it 'should return specified collection size' do
         Response.limit(4).size.should == 4
       end
     end

@@ -10,9 +10,4 @@ describe 'Array core extensions' do
       ary.rsort(:number).should == [c,b,a]
     end
   end
-  describe 'limit' do
-    it 'get the first n elements' do
-      [1,2,3,4,5].limit(2).should == [1,2]
-    end
-  end
 end

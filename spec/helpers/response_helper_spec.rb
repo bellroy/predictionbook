@@ -25,7 +25,7 @@ describe ResponseHelper do
         @comment = mock('comment', :to_html => '', :starts_with? => false)
         @response.stub!(:comment?).and_return(true)
         @response.stub!(:comment).and_return(@comment)
-        stub!(:markup)
+        stub!(:markup).and_return("comment")
       end
       it 'should get the responses comment' do
         @response.should_receive(:comment).at_least(:once).and_return(@comment)
