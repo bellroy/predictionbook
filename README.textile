@@ -23,6 +23,7 @@ h3. Techinical Debt
 * Scopes in @Prediction@ should be made chainable, to be used like @Prediction.recent.limit(10)@ instead of @Prediction.limit(10).recent@
 * Rewrite @access_control_spec@
 * Upgrade JQuery and related plugins
+* Use @sorcery* or *devise* for authentication.
 * Enable asset pipeline
 
 h3. Rails migration notes
