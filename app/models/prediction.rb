@@ -57,7 +57,7 @@ class Prediction < ActiveRecord::Base
   validates_presence_of :initial_confidence, :message => 'How sure are you?', :on => :create
   validate :confidence_on_response, :on => :create
   
-  def after_validation
+  after_validation do
     errors.add(:deadline_text, errors[:deadline])
   end
   

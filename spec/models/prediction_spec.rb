@@ -416,6 +416,12 @@ describe Prediction do
       prediction.deadline_text = 'tomorrow'
       prediction.deadline.to_s(:db).should == 1.day.from_now.noon.to_s(:db)
     end
+
+    it 'should have an error on deadline_text if invalid' do
+      prediction = Prediction.new
+      prediction.save
+      prediction.errors.keys.should include(:deadline_text)
+    end
     
     describe 'prettied' do
       it 'should look nice' do
