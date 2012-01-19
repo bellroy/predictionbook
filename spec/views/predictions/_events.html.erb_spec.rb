@@ -7,7 +7,8 @@ describe 'Prediction responses partial' do
   end
   
   before(:each) do
-    @wager = mock_model(Response, :created_at => Time.now).as_null_object
+    user = mock_model(User).as_null_object
+    @wager = mock_model(Response, :created_at => Time.now, :user => user).as_null_object
     @events = [@wager]
   end
   it 'should list the responses' do

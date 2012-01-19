@@ -39,7 +39,9 @@ describe DeadlineNotificationsController do
         controller.stub!(:notification_collection).and_return(@collection = mock('collection'))
       end
       it 'should create one' do
-        @collection.should_receive(:create!).with('prediction_id' => '7').and_return(mock_model(DeadlineNotification).as_null_object)
+        notification = mock_model(ResponseNotification).as_null_object
+	notification.stub!(:prediction).and_return(mock('prediction',:id => 1))
+        @collection.should_receive(:create!).with('prediction_id' => '7').and_return(notification)
         post :create, :deadline_notification => {:prediction_id => '7'}
       end
       it "should redirect to the prediction_path of it's prediction" do
