@@ -38,10 +38,11 @@ describe 'Prediction responses partial' do
   end
   describe 'should include any supplied comments' do
     before(:each) do
+      @wager.stub!(:comment?).and_return(true)
       @wager.stub!(:comment).and_return(@comment = mock('comment'))
       @wager.stub!(:action_comment?).and_return(false)
     end
-    it 'should show use the markup helper to render any supplied comment' do
+    it 'should use the markup helper to render any supplied comment' do
       view.should_receive(:markup).with(@comment).and_return("comment")
       render_partial
     end
