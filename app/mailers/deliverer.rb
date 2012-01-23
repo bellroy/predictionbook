@@ -1,7 +1,7 @@
 class Deliverer < ActionMailer::Base
   # helper :mailer
-  default :reply_to=> %{"PredictionBook" <no-reply@#{default_url_options[:host]}>},
-          :from=>     %{"PredictionBook" <no-reply@#{default_url_options[:host]}>}
+  default :reply_to=> Proc.new { no_reply },
+          :from=> Proc.new { no_reply }
 
   def deadline_notification dn
     @prediction = dn.prediction
@@ -17,4 +17,9 @@ class Deliverer < ActionMailer::Base
     subject = "[PredictionBook] There has been some activity on ‘#{rn.description}’"
     mail(:subject=> subject, :to=> rn.email_with_name)
   end
+
+  private
+    def no_reply
+      %{"PredictionBook" <no-reply@#{default_url_options[:host]}>}
+    end
 end
