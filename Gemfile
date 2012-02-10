@@ -18,6 +18,11 @@ gem 'thin'
 #App housekeeping
 gem 'exception_notification'
 
+group :development do
+  gem "capistrano"
+  gem "capistrano-ext"
+end
+
 group :test, :development do
   gem 'rspec-rails', '~> 2.6'
   gem "ruby-debug19"
