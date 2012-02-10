@@ -1,4 +1,5 @@
 .bundle
+.rmvrc
 log/*.log
 tmp/
 .sass-cache/
