@@ -46,7 +46,7 @@ module ModelFactory
   end
 
   def self.produced_models
-    instance_methods.grep(/^valid_/).collect{|method| method.gsub(/^valid_/,'')}
+    instance_methods.grep(/^valid_/).collect{|method| method.to_s.gsub(/^valid_/,'')}
   end
   
   produced_models.each do |model_name|

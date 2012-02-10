@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module MarkupHelper
   # A copy of the private AUTO_LINK_RE from ActionView::Helpers::TextHelper,
   # slightly simplified.

@@ -20,7 +20,7 @@ gem 'exception_notification'
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.6'
-  gem "ruby-debug"
+  gem "ruby-debug19"
   gem 'hirb'
   gem 'wirble'
   gem 'awesome_print'

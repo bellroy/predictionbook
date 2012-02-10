@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class PredictionsController < ApplicationController
   before_filter :login_required, :only => [:new, :create, :judge, :withdraw, :edit, :update]
   before_filter :find_prediction, :only => [:judge, :show, :withdraw, :edit, :update]

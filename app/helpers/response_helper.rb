@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module ResponseHelper
   def confidence_for(wager)
     unless wager.confidence.blank?

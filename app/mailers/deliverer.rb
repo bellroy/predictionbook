@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Deliverer < ActionMailer::Base
   # helper :mailer
   default :reply_to=> Proc.new { no_reply },
