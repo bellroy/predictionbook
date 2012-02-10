@@ -10,3 +10,7 @@ config/credentials.yml
 public/uploads/*
 cache
 coverage
+
+# Vagrant
+Vagrantfile
+.vagrant
