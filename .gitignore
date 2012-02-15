@@ -11,6 +11,9 @@ public/uploads/*
 cache
 coverage
 
+# Secrets repo
+secrets
+
 # Vagrant
 Vagrantfile
 .vagrant
