@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '~> 3.1.3'
 
 #Models
-gem 'chronic', '0.3.0'
+gem 'chronic'
 gem "version_fu", "~> 1.0.1"
 gem 'uuidtools', '~> 1.0.0'
 
