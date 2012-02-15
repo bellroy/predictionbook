@@ -22,6 +22,9 @@ set :bundle_without, [:development, :test, :cucumber, :darwin, :linux]
 
 set :engine, "passenger"
 
+# Secrets
+set :secrets_repository, "git@git.trikeapps.com:secrets/predictionboook.git"
+
 # This must be passed as a block, since rails_env is defined in the individual
 # stages later.
 set(:deploy_to) { "/srv/www/#{application}-#{rails_env}" }
@@ -29,6 +32,7 @@ set(:deploy_to) { "/srv/www/#{application}-#{rails_env}" }
 ssh_options[:forward_agent] = true
 
 after "deploy:update_code", "bluepill:stop",
+                            "secrets:update_configs",
                             "deploy:symlink_remote_db_yaml",
                             "deploy:symlink_remote_config_yamls"
 
