@@ -34,7 +34,7 @@ describe Statistics::Interval do
         # cycle outcomes
         outcomes.unshift(outcomes.pop)
       end
-      @i50,@i60,@i70,@i80,@i90,@i100 = Statistics.new(wagers).collect
+      @i50,@i60,@i70,@i80,@i90,@i100 = Statistics.new(wagers).map { |interval| interval }
     end
 
     describe 'heading' do
