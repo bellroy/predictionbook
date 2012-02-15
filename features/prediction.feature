@@ -6,9 +6,9 @@ Background:
   And I am on the make new prediction page
 
 Scenario: Making a new prediction
-  When I fill in "What do you think will happen?" with "Desc"
-  And I fill in "How sure are you?" with "55"
-  And I fill in "When you will know?" with "tomorrow"
+  When I fill in "What do you think will (or won't) happen?" with "Desc"
+  And I fill in "What's your estimate of this happening?" with "55"
+  And I fill in "When will you know?" with "tomorrow"
   And I press "Lock it in!"
   Then I should see "Desc"
   And I should see "known in 1 day"
