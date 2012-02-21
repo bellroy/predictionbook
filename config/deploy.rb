@@ -23,7 +23,7 @@ set :bundle_without, [:development, :test, :cucumber, :darwin, :linux]
 set :engine, "passenger"
 
 # Secrets
-set :secrets_repository, "git@git.trikeapps.com:secrets/predictionboook.git"
+set :secrets_repository, "git@git.trikeapps.com:settings/predictionbook.git"
 
 # This must be passed as a block, since rails_env is defined in the individual
 # stages later.
