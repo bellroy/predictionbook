@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
   
   def settings
-      @title = "Settings for #{current_user}"
+    @title = "Settings for #{current_user}"
   end
  
   def create
@@ -53,7 +53,8 @@ class UsersController < ApplicationController
     @statistics ||= @user.statistics
   end
   
-  protected
+protected
+
   def lookup_user
     @user = User[params[:id]]
   end
@@ -61,5 +62,5 @@ class UsersController < ApplicationController
   def user_is_current_user
     access_forbidden unless current_user == @user
   end
-  
 end
+

@@ -62,10 +62,10 @@ module AuthenticatedSystem
     # to access the requested action.  For example, a popup window might
     # simply close itself.
     def access_denied
-      
+
       #fix for IE 6 sending "any" header for normal requests. See: http://geminstallthat.wordpress.com/2008/05/14/ie6-accept-header-is-faulty/
       request.format = :html if request.env['HTTP_USER_AGENT'] =~ /msie/i && (request.format.to_s =~ /(text|html|xml|js|\*)/).nil?
-      
+
       respond_to do |format|
         format.html do
           store_location
@@ -89,11 +89,11 @@ module AuthenticatedSystem
     def store_location
       session[:return_to] = request.fullpath
     end
-    
+
     def store_referer_if_no_destination
       session[:return_to] ||= request.referer if request.referer
     end
-    
+
     def referer_requires_login?
       if referer = request.referer
         path_requires_login?(URI.parse(referer).path)
@@ -101,7 +101,7 @@ module AuthenticatedSystem
     rescue
       false
     end
-    
+
     def path_requires_login?(path)
       route = ActionController::Routing::Routes.recognize_path(path, :method => :get)
       controller = "#{route[:controller]}_controller".camelize.constantize
@@ -147,7 +147,7 @@ module AuthenticatedSystem
         self.current_user = User.authenticate(login, password)
       end
     end
-    
+
     #
     # Logout
     #
@@ -182,7 +182,7 @@ module AuthenticatedSystem
       logout_keeping_session!
       reset_session
     end
-    
+
     #
     # Remember_me Tokens
     #
@@ -194,29 +194,29 @@ module AuthenticatedSystem
 
     def valid_remember_cookie?
       return nil unless @current_user
-      (@current_user.remember_token?) && 
+      (@current_user.remember_token?) &&
         (cookies[:auth_token] == @current_user.remember_token)
     end
-    
+
     # Refresh the cookie auth token if it exists, create it otherwise
     def handle_remember_cookie! new_cookie_flag
       return unless @current_user
       case
       when valid_remember_cookie? then @current_user.refresh_token # keeping same expiry date
-      when new_cookie_flag        then @current_user.remember_me 
+      when new_cookie_flag        then @current_user.remember_me
       else                             @current_user.forget_me
       end
       send_remember_cookie!
     end
-  
+
     def kill_remember_cookie!
       cookies.delete :auth_token
     end
-    
+
     def send_remember_cookie!
       cookies[:auth_token] = {
         :value   => @current_user.remember_token,
         :expires => @current_user.remember_token_expires_at }
     end
-
 end
+
