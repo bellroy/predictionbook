@@ -13,6 +13,8 @@ PredictionBook2::Application.routes.draw do
     resources :deadline_notifications
   end
 
+  resources :passwords, :only => [:new, :create]
+
   resources :deadline_notifications
   resources :response_notifications
 

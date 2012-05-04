@@ -53,6 +53,10 @@ module AuthenticatedSystem
       authorized? || access_denied
     end
 
+    def not_logged_in_required
+      !logged_in? || permission_denied
+    end
+
     # Redirect as appropriate when an access request fails.
     #
     # The default action is to redirect to the login screen.
@@ -78,7 +82,16 @@ module AuthenticatedSystem
         end
       end
     end
-    
+
+    def permission_denied
+      respond_to do |format|
+        format.html do
+          flash[:error] = "You don't have permission to complete that action."
+          redirect_to root_path
+        end
+      end
+    end
+
     def access_forbidden
       render :text=> 'Access Forbidden', :status=> 403
     end
