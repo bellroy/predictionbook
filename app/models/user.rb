@@ -89,4 +89,12 @@ class User < ActiveRecord::Base
   def remember_me
     remember_me_for 2.years
   end
+
+  def reset_password
+    self.password = self.password_confirmation = SecureRandom.hex(6)
+    self.save!
+
+    UserMailer.password_reset(self).deliver
+  end
 end
+

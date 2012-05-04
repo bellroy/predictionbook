@@ -93,4 +93,25 @@ describe User do
       @user.authorized_for(@prediction).should == true
     end
   end
+
+  describe "reset password" do
+    before do
+      @user = User.create!(
+        :login                  => "test1",
+        :email                  => "test@example.com",
+        :password               => "test123",
+        :password_confirmation  => "test123"
+      )
+
+      UserMailer.stub_chain [:reset_password, :deliver]
+    end
+
+    it "should assign a random password" do
+      User.authenticate("test1", "test123").should be
+
+      @user.reset_password
+      User.authenticate("test1", "test123").should_not be
+    end
+  end
 end
+
