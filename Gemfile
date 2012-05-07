@@ -17,6 +17,7 @@ gem 'thin'
 
 #App housekeeping
 gem 'exception_notification'
+gem "typus"
 
 group :development do
   gem "capistrano"
