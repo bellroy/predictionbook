@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
   #NOTE: You can't set anything via mass assignment that is not in this list
   ## eg. User.new(:foo => 'bar') # will not assign foo
   attr_accessible :login, :email, :name, :password, :password_confirmation, :timezone, :private_default
+  attr_accessible :login, :email, :name, :admin, :as => :admin
 
   def self.authenticate(login, password)
     u = find_by_login(login) # need to get the salt
