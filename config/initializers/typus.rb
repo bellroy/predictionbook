@@ -1,3 +1,5 @@
+require File.join(Rails.root, "lib/ext", "typus")
+
 Typus.setup do |config|
 
   # Application name.
