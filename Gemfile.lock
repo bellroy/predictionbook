@@ -223,6 +223,7 @@ DEPENDENCIES
   gherkin (~> 2.7.1)
   guard-rspec
   hirb
+  jquery-rails
   launchy
   mysql2 (~> 0.3)
   rails (~> 3.1.3)

@@ -3,14 +3,13 @@
 <head>
   <title>PredictionBook: <%=h @title ? @title : 'How sure are you?' -%></title>
   <meta charset="utf-8" />
-  <%= stylesheet_link_tag %w(/styling/application /styling/predictions /styling/forms /styling/home /styling/footer /facebox/facebox) %>
+  <%= stylesheet_link_tag "application" %>
   <% [6,7].each do |ie_version| %>
   <!--[if IE <%= ie_version %>]>
-      <%= stylesheet_link_tag "/styling/ie#{ie_version}.css" %>
+    <%= stylesheet_link_tag "ie#{ie_version}.css" %>
   <![endif]-->
   <% end %>
-  <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js' %>
-  <%= javascript_include_tag %w(application /facebox/facebox jquery/ajaxqueue jquery/form jquery/livequery) %>
+  <%= javascript_include_tag "application" %>
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <body class="<%= yield :bodyclass %>">
@@ -45,7 +44,7 @@
 				<div class="clear">
 					<input type="hidden" name="sitesearch" value="predictionbook.com" />
 					<input name="q" type="text" />
-					<input type="image" src="/styling/button-search.png" alt="Search" />
+          <input type="image" src="<%= asset_path("button-search.png") %>" alt="Search" />
 				</div>
 			</form>
 		</div><!-- #header-main -->

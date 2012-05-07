@@ -3,5 +3,268 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
- *= require_tree . 
+ *= require home
+ *= require forms
+ *= require predictions
+ *= require footer
+ *= require facebox
 */
+
+/* General Page Structure
+-------------------------------------------------------------------------------------- */
+html {
+	background: url(bg-tile.gif) repeat top left;
+}
+body {
+	background: transparent url(bg-gradient.png) repeat-x top left;
+	margin: 0;
+	padding: 17px 0 20px;
+}
+#container {
+	margin: 0 auto;
+	padding: 0;
+	width: 990px;
+}
+div.wrapper {
+	padding: 0 45px;
+	width: 900px;
+}
+#header {
+	background: url(header.png) no-repeat top center;
+	height: 104px;
+	padding-bottom: 13px;
+	overflow: hidden;
+}
+#main-wrap {
+	background: url(content-top.png) no-repeat top center;
+	padding-top: 40px;
+	position: relative;
+}
+#main-inner {
+	background: url(content-bottom.png) no-repeat bottom center;
+	padding-bottom: 40px;
+}
+#main {
+	background: url(content-inner.png) repeat-y top center;
+}
+
+
+/* General Styles
+-------------------------------------------------------------------------------------- */
+.clear:after,
+form div.row:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+a img {
+	border: none;
+}
+
+
+/* General Typography
+-------------------------------------------------------------------------------------- */
+body {
+	font: 12px/1.5 Arial, Helvetica, sans-serif;
+}
+h1, h2, h3, h4, h5, h6, p, ol, ul {
+	margin: 0 0 12px;
+}
+h1, h2 {
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+}
+h1 {
+	color: #363535;
+	font-size: 18px;
+	word-wrap: break-word;
+}
+h2 {
+	display: inline-block;
+	font-size: 15px;
+	background-color: #221e1f;
+	color: #fff;
+	font-weight: normal;
+	padding: 3px 10px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+h3 {
+	font-size: 12px;
+}
+a {
+	text-decoration:none;
+	color: #00C;
+}
+a:hover {
+	background-color: #cee;
+}
+a:visited {
+	color: #808;
+}
+#content h2 a, h2 a:visited {
+	color: white;
+	font-weight: normal;
+	text-decoration: underline;
+}
+h2 a:hover {
+	background-color: #ccc;
+}
+abbr {
+	border-bottom: 1px dotted #ccc;
+}
+
+/* Buttons
+-------------------------------------------------------------------------------------- */
+a.button {
+	background: url(button-purple.png) no-repeat top left;
+	color: #fff;
+	display: block;
+	font-size: 11px;
+	font-weight: bold;
+	height: 25px;
+	line-height: 25px;
+	outline: none;
+	padding-right: 10px;
+	text-align: center;
+	text-decoration: none;
+	width: 167px;
+}
+
+
+/* Header
+-------------------------------------------------------------------------------------- */
+#main_nav {
+	color: #fff;
+	height: 29px;
+	overflow: hidden;
+}
+
+#main_nav a,
+#footer a {
+	color: #fff;
+	background: transparent;
+	text-decoration: none;
+}
+
+#main_nav a:hover,
+#footer a:hover {
+	color: #e8e8e8;
+	background: transparent;
+}
+
+#nav-menu li:hover {
+	background-color: #655271;
+}
+
+ul#nav-menu {
+	list-style: none;
+	margin: 0 0 0 12px;
+	padding: 0;
+}
+ul#nav-menu li {
+	background: #765b82 url(header-tab-shadow.png) repeat-x bottom left;
+	display: block;
+	height: 29px;
+	float: left;
+	margin-right: 2px;
+}
+ul#nav-menu li a {
+	display: block;
+	height: inherit;
+	line-height: 29px;
+	outline: none;
+	padding: 0 20px;
+}
+#user-links {
+	background: #77ae51 url(header-tab-shadow.png) repeat-x bottom left;
+	float: right;
+	height: 29px;
+	margin: 0 8px 0 0;
+	line-height: 29px;
+	padding: 0 15px;
+	list-style: none;
+}
+
+#user-links li {
+	display: block;
+	float: left;
+}
+
+#user-links li::after {
+	content: '|';
+	margin: 0 10px;
+}
+
+#user-links li:last-child::after {
+	margin: 0;
+	content: '';
+}
+
+#header-main {
+	height: 75px;
+	overflow: hidden;
+	width: inherit;
+}
+a#logo {
+	float: left;
+	margin-right: 10px;
+	outline: none;
+}
+a#logo:hover {
+	background-color:inherit;
+}
+a#logo img {
+	display: block;
+}
+#title {
+	text-align:right;
+	line-height: 75px;
+	margin-right: 3em;
+}
+#title h1 {
+}
+
+
+/* Content
+-------------------------------------------------------------------------------------- */
+#content {
+	padding: 0 30px;
+	position: relative;
+	z-index: 10;
+}
+#content a {
+	font-weight: bold;
+}
+
+#notice, #error {
+	position: absolute;
+	margin: 0 30px 5px 30px;
+	top: 1em;
+	text-align: center;
+	width: 83%;
+}
+#error {
+	color: #f22;
+	font-weight: bold;
+}
+#notice {
+	color: #2a2;
+}
+
+span.correct {
+	padding-right: 17px;
+	background: url(tick.png) top right no-repeat;
+}
+span.wrong {
+	padding-right: 14px;
+	background: url(cross.png) bottom right no-repeat;
+}
+
+.break-word {
+	word-wrap: break-word;
+}
+
