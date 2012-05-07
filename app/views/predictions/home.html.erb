@@ -2,7 +2,7 @@
 
 <%- content_for :feature do -%>
 <div id="feature">
-	<img id="title" src="/images/title-banner.png" alt="How Sure Are You?" />
+  <%= image_tag "title-banner.png", :id => "title", :alt => "How Sure Are You?" %>
 	<div class="content clear">
 		<h2>Find out just how sure you should be, and get better at being only as sure as the facts justify.</h2>
     <%- unless logged_in? -%>
@@ -13,7 +13,7 @@
 	  </p>
 	  <%- end -%>
 	</div>
-	<img id="illustration" src="/images/graphs.png" alt="PredictionBook" />
+  <%= image_tag "graphs.png", :id => "illustration", :alt => "PredictionBook" %>
 </div><!-- #feature -->
 <%- end -%>
 
