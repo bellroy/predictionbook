@@ -55,6 +55,7 @@ end
 
 group :assets do
   gem 'uglifier'
+  gem 'therubyracer'
 end
 
 #restful-authentication needs to be installed as a plugin or it doesn't work
