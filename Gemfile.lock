@@ -76,6 +76,8 @@ GEM
     eventmachine (0.12.10)
     exception_notification (2.5.2)
       actionmailer (>= 3.0.4)
+    execjs (1.3.2)
+      multi_json (~> 1.0)
     factory_girl (2.4.2)
       activesupport
     ffaker (1.12.1)
@@ -196,6 +198,9 @@ GEM
       jquery-rails
       rails (>= 3.1.3)
     tzinfo (0.3.31)
+    uglifier (1.2.4)
+      execjs (>= 0.3.0)
+      multi_json (>= 1.0.2)
     uuidtools (1.0.7)
     version_fu (1.0.1)
     wirble (0.1.3)
@@ -233,6 +238,7 @@ DEPENDENCIES
   shoulda-matchers
   thin
   typus
+  uglifier
   uuidtools (~> 1.0.0)
   version_fu (~> 1.0.1)
   wirble
