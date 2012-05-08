@@ -7,6 +7,7 @@ set :stages, stages
 set :default_stage, 'staging'
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
+load 'deploy/assets'
 
 set :application, "predictionbook"
 # This must be passed as a block, since rails_env is defined in the individual
@@ -31,12 +32,12 @@ set(:deploy_to) { "/srv/www/#{application}-#{rails_env}" }
 
 ssh_options[:forward_agent] = true
 
-after "deploy:update_code", "bluepill:stop",
-                            "secrets:update_configs",
-                            "deploy:symlink_remote_db_yaml",
-                            "deploy:symlink_remote_config_yamls"
+before "deploy:assets:precompile", "bluepill:stop",
+                                   "secrets:update_configs",
+                                   "deploy:symlink_remote_db_yaml",
+                                   "deploy:symlink_remote_config_yamls"
 
-after "deploy:symlink",     "bluepill:start"
+after "deploy:symlink",            "bluepill:start"
 
 namespace :deploy do
   desc 'Link to a database.yml file stored on the server'
