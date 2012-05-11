@@ -18,6 +18,7 @@ gem 'thin'
 
 #App housekeeping
 gem 'exception_notification'
+gem "whenever"
 gem "typus"
 
 group :development do
