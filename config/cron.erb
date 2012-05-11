@@ -1,3 +1,0 @@
-#/etc/cron.d/predictionbook-deliverer
-# Send notification emails for <%= application %>
-*/5  *  * * *   www-data  (cd /srv/www/<%= application %>/current && RAILS_ENV=<%= stage %> rake --trace send_email_notifications) > /dev/null
