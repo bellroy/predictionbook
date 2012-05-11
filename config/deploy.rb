@@ -7,6 +7,7 @@ set :stages, stages
 set :default_stage, 'staging'
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
+require 'whenever/capistrano'
 load 'deploy/assets'
 
 set :application, "predictionbook"
@@ -22,6 +23,9 @@ set :deploy_via, :remote_cache
 set :bundle_without, [:development, :test, :cucumber, :darwin, :linux]
 
 set :engine, "passenger"
+
+set :whenever_command, "bundle exec whenever"
+set :whenever_environment, defer { stage }
 
 # Secrets
 set :secrets_repository, "git@git.trikeapps.com:settings/predictionbook.git"
