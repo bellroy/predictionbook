@@ -6,7 +6,7 @@
 env :PATH, "/usr/local/bin:/usr/bin:/bin"
 
 if environment == "production"
-  every 5.minutes do
+  every 10.minutes do
     rake "send_email_notifications"
   end
 end
