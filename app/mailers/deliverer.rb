@@ -6,17 +6,22 @@ class Deliverer < ActionMailer::Base
 
   def deadline_notification dn
     @prediction = dn.prediction
-    @deadline = dn
+    @deadline   = dn
 
-    subject = "[PredictionBook] Judgement Day for ‘#{dn.description}’"
-    mail(:subject=> subject, :to=> dn.email_with_name)
+    mail(
+      :subject => "[PredictionBook] Judgement Day for ‘#{dn.description}’",
+      :to      => dn.email_with_name
+    )
   end
 
   def response_notification rn
-    @prediction = rn.prediction
+    @prediction   = rn.prediction
     @notification = rn
-    subject = "[PredictionBook] There has been some activity on ‘#{rn.description}’"
-    mail(:subject=> subject, :to=> rn.email_with_name)
+
+    mail(
+      :subject => "[PredictionBook] There has been some activity on ‘#{rn.description}’",
+      :to      => rn.email_with_name
+    )
   end
 
 private
