@@ -6,8 +6,8 @@ class UsersController < ApplicationController
   helper_method :statistics
 
   def show
-    @title = "Predictions by #{@user}"
-    @predictions = @user.predictions
+    @title       = "Most recent predictions by #{@user}"
+    @predictions = @user.predictions.limit(100)
     @predictions = @predictions.not_private unless current_user == @user
   end
 
