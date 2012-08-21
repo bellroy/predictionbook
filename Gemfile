@@ -32,7 +32,6 @@ group :test, :development do
   gem 'hirb'
   gem 'wirble'
   gem 'awesome_print'
-  gem 'rb-fsevent', :require => false #OSX specific
 end
 
 group :cucumber, :development do
@@ -56,8 +55,17 @@ end
 
 group :assets do
   gem 'uglifier'
+end
+
+group :linux do
+  # Does not build on Mountain Lion nor is it needed on OS X
   gem 'therubyracer'
 end
+
+group :darwin do
+  gem 'rb-fsevent', :require => false #OSX specific
+end
+
 
 #restful-authentication needs to be installed as a plugin or it doesn't work
 #rspec-caching-test-plugin is quite old and is not available as a gem
