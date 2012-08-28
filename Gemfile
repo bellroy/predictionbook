@@ -57,7 +57,7 @@ group :assets do
   gem 'uglifier'
 end
 
-group :linux do
+group :linux, :production do
   # Does not build on Mountain Lion nor is it needed on OS X
   gem 'therubyracer'
 end
