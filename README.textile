@@ -7,17 +7,9 @@ Create these files on the server. If using @capistrano@, create these in @shared
 * @config/database.yml@
 * @config/credentials.yml@
 
-h3. Local development
-
-* @cp config/database.yml.example config/database.yml.example@. Then customize it based on your environment.
-* @cp config/credentials.yml.example config/credentials.yml@.
-* @rake db:create && rake db:schema:load@
-* @rake spec && rake cucumber@
-* Thin is supported. @rake thin:start@ starts it on port 9001 in the production environment. Look at @config/thin.yml@ for details.
-
 h3. Techinical Debt
 
-* Use FactoryGirl. This will causes problems with models like @Prediction@ which override initialize.
+* Use FactoryGirl. This will cause problems with models like @Prediction@ which override initialize.
 * @Deliverer.default_url_options@ should be set via @config.action_mailer.default_url_options@ in the corresponding environment file, eg. see @test.rb@
 * Use @AREL@ or @meta-where@ to build complex scopes in @Prediction@
 * Scopes in @Prediction@ should be made chainable, to be used like @Prediction.recent.limit(10)@ instead of @Prediction.limit(10).recent@
@@ -26,12 +18,8 @@ h3. Techinical Debt
 * Use @sorcery* or *devise* for authentication.
 * Enable asset pipeline
 
-h3. Rails migration notes
-
-* DB migration: Rails 3 uses the @schema_migrations@ table to record schema versions, while Rails 2 used @schema_info@. So, for future migrations to run properly after the production dump import, @schema_migrations@ must be created with equivalent informatio from @schema_info@.
-* Create @credentials.yml@ with values from the Rails2 app.
-
 h3. Code Style guides
 
 * "Ruby Style Guide":https://github.com/bbatsov/ruby-style-guide/blob/master/README.md
 * "Rails Style Guide":https://github.com/bbatsov/rails-style-guide/blob/master/README.md
+
