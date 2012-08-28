@@ -2,10 +2,28 @@ h1. Prediction Book
 
 h3. Deployment
 
-Create these files on the server. If using @capistrano@, create these in @shared/config@ and have the @capistrano@ @after_symlink@ step create a symlink to it in @current/config@
+Predictionbook runs on AWS behind a load balancer.
 
-* @config/database.yml@
-* @config/credentials.yml@
+h4. Building a new AMI for production
+
+* Find the latest steak AMI (production.steak-build00XX) and start a new instance (micro is good enough, key pair is not necessary, security group: webservers)
+* grab the public dns for the instance and put it in config/deploy/production.rb
+* Deploy the app with capistrano
+* Build an AMI after deployment and increase the build number in the name (production.steak-build00XY)
+
+h4. Updating the Load Balancer
+
+* Connect to the machine and sudo in as root
+* cd /usr/local/sbin
+* run ./aws-deploy-ami (build number: XY)
+
+h4. Cleanup
+
+* After a new instance was started, terminate the old steak instance (the one in the load balancer, not the one used for deployment)
+* Cancel the script that keeps checking for the correct number of instances
+* Fix the minimum number of instances after updating the auto scaling group:
+  as-update-auto-scaling-group steak-production --max-size 10 --min-size 1 steak-production-build00XY
+* Terminate the instance that was used for deployment
 
 h3. Techinical Debt
 
