@@ -17,29 +17,28 @@ describe UsersController do
       show
     end
     it 'should get all the recent predictions by user name' do
-      @user.should_receive(:predictions)
+      @user.should_receive(:predictions).and_return mock(Array, :limit => mock(Array, :not_private => []))
       show
     end
     it 'should limit the scope to not_private predictions if not logged in as the user of the page' do
       controller.stub!(:current_user).and_return :eve
-      predictions = []
-      @user.stub!(:predictions).and_return predictions
-      predictions.should_receive(:not_private).and_return :public_predictions
+      @user.stub!(:predictions).and_return mock(Array, :limit => predictions =  [])
+      predictions.should_receive(:not_private).and_return predictions
       
       show
-      assigns[:predictions].should == :public_predictions
+      assigns[:predictions].should == predictions
     end
     it 'should not limit the scope if current_user is owner of page' do
       controller.stub!(:current_user).and_return @user
-      @user.stub!(:predictions).and_return :private_predictions
+      @user.stub!(:predictions).and_return mock(Array, :limit => predictions = mock(Array))
       
       show
-      assigns[:predictions].should == :private_predictions
+      assigns[:predictions].should == predictions
     end
     it 'should assign the predictions' do
-      @user.stub!(:predictions).and_return(:predictions)
+      @user.stub!(:predictions).and_return(mock(Array, :limit => predictions = []))
       show
-      assigns[:predictions].should == :predictions
+      assigns[:predictions].should == predictions
     end
     it 'should assign the user' do
       show
