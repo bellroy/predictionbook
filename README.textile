@@ -4,6 +4,12 @@ h3. Deployment
 
 Predictionbook runs on AWS behind a load balancer.
 
+h4. Preconbditions
+
+* Install Amazon Command Line Tools and make them properly run
+** http://aws.amazon.com/developertools/351?_encoding=UTF8&jiveRedirect=1
+** http://www.techrepublic.com/blog/datacenter/how-to-use-the-command-line-with-amazons-ec2-api-tools/5574
+
 h4. Building a new AMI for production
 
 * Find the latest steak AMI (production.steak-build00XX) and start a new instance (micro is good enough, key pair is not necessary, security group: webservers)
