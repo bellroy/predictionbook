@@ -38,13 +38,13 @@ describe ResponseNotificationsController do
         controller.stub!(:login_required)
         controller.stub!(:notification_collection).and_return(collection = mock('collection'))
         collection.stub!(:find).and_return(@notification = mock_model(ResponseNotification).as_null_object)
+        @notification.stub!(:prediction).and_return(mock_model(Prediction, :id => '7'))
       end
       it 'should update a response notification record' do
         @notification.should_receive(:update_attributes!)
         put :update, :id => 'hai', :response_notification => {:prediction_id => '7'}
       end
       it 'should redirect back to the prediction' do
-        @notification.stub!(:prediction).and_return(mock_model(Prediction, :id => '7'))
         put :update, :id => 'hai'
         response.should redirect_to(prediction_path('7'))
       end

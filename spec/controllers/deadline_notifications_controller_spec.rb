@@ -61,6 +61,7 @@ describe DeadlineNotificationsController do
       before do
         controller.stub!(:logged_in?).and_return true
         @notification = mock_model(DeadlineNotification).as_null_object
+        @notification.stub!(:prediction).and_return(mock_model(Prediction, :id => '7'))
         controller.stub!(:current_user).and_return(user = mock('user'))
         controller.stub!(:notification_collection).and_return(collection = mock('collection'))
         collection.stub!(:find).and_return(@notification)
@@ -71,7 +72,6 @@ describe DeadlineNotificationsController do
         put :update, :id => '1', :deadline_notification => { :enabled => '1' }
       end
       it "should redirect to the prediction_path of it's prediction" do
-        @notification.stub!(:prediction).and_return(mock_model(Prediction, :id => '7'))
         put :update, :id => '1'
         response.should redirect_to(prediction_path('7'))
       end
