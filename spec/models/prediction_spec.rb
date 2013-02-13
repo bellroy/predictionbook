@@ -3,11 +3,11 @@ require 'spec_helper'
 describe Prediction do
   def described_type;Prediction;end
   include ModelFactory
-  
+
   it 'should have a creator attribute that is initially nil' do
     Prediction.new.creator.should be_nil
   end
-  
+
   it 'should have a description attribute that is initially nil' do
     Prediction.new.description.should be_nil
   end
@@ -16,46 +16,57 @@ describe Prediction do
     Prediction.new.initial_confidence.should be_nil
     Prediction.new.should respond_to(:initial_confidence=)
   end
-  
+
   describe 'validations' do
-    before(:each) do
-      @prediction = Prediction.new
-      @prediction.valid?
+    describe 'with default values' do
+      before(:each) do
+        @prediction = Prediction.new
+        @prediction.valid?
+      end
+
+      it 'should pass on objects from modelfactory' do
+        valid_prediction.should be_valid
+        create_valid_prediction.should be_valid
+      end
+
+      it 'should require a creator' do
+        @prediction.should have(1).error_on(:creator)
+      end
+
+      it 'should require a deadline' do
+        @prediction.should have(1).error_on(:deadline)
+      end
+
+      it 'should require a description' do
+        @prediction.should have(1).error_on(:description)
+      end
     end
-    
-    it 'should pass on objects from modelfactory' do
-      valid_prediction.should be_valid
-      create_valid_prediction.should be_valid
-    end
-    
-    it 'should require a creator' do
-      @prediction.should have(1).error_on(:creator)
-    end
-    
-    it 'should require a deadline' do
-      @prediction.should have(1).error_on(:deadline)
-    end
-    
-    it 'should require a description' do
-      @prediction.should have(1).error_on(:description)
+
+    describe 'with invalid values' do
+      it 'should not accept a deadline too far into the future to store' do
+        date = 300000.years.from_now
+        prediction = Prediction.new(:deadline => date)
+        prediction.valid?
+        prediction.should have(1).error_on(:deadline)
+      end
     end
   end
-  
+
   describe 'with uuid' do
     it 'should have a uuid attribute' do
       Prediction.new.should respond_to(:uuid)
     end
-    
+
     def stub_uuid_create(string)
       uuid = UUID.parse(string)
       UUID.stub!(:random_create).and_return(uuid)
     end
-    
+
     it 'should set the UUID for a new record' do
       stub_uuid_create('21f7f8de-8051-5b89-8680-0195ef798b6a')
       Prediction.new.uuid.should == '21f7f8de-8051-5b89-8680-0195ef798b6a'
     end
-    
+
     it 'should persist UUID set for the new record' do
       stub_uuid_create('64a5189c-25b3-11da-a97b-00c04fd430c8')
       prediction = valid_prediction
@@ -63,19 +74,19 @@ describe Prediction do
       prediction.save!
       prediction.reload.uuid.should == '64a5189c-25b3-11da-a97b-00c04fd430c8'
     end
-    
+
     it 'should allow write access to UUIDs on create' do
       prediction = create_valid_prediction(:uuid => '21f7f8de-8051-5b89-8680-0195ef798b6a')
       prediction.uuid.should == '21f7f8de-8051-5b89-8680-0195ef798b6a'
     end
-    
+
     it 'should not allow write access to UUIDs loaded from DB' do
       stub_uuid_create('64a5189c-25b3-11da-a97b-00c04fd430c8')
       prediction = create_valid_prediction
       prediction.update_attributes! :uuid => 'other uuid'
       prediction.reload.uuid.should == '64a5189c-25b3-11da-a97b-00c04fd430c8'
     end
-    
+
     it 'should raise DuplicateRecord on create if there is a record with that UUID already' do
       stub_uuid_create('64a5189c-25b3-11da-a97b-00c04fd430c8')
       create_valid_prediction
@@ -111,7 +122,7 @@ describe Prediction do
       end
     end
   end
-  
+
   describe '#judgement' do
     it 'should return most recent judgement' do
       prediction = create_valid_prediction
@@ -124,34 +135,34 @@ describe Prediction do
       create_valid_prediction.judgement.should be_nil
     end
   end
-  
-  describe '#judged_at' do 
+
+  describe '#judged_at' do
     it 'should return when judgement occured' do
       prediction = create_valid_prediction
-      
+
       judged_at = 15.minutes.from_now
       Time.stub!(:now).and_return(judged_at)
       prediction.judge!(:right)
-      
+
       prediction.judged_at.should == judged_at
     end
   end
-  
+
   describe 'finders and scopes' do
     it_should_behave_like 'model class with common scopes'
 
     before do
       Prediction.destroy_all
     end
-    
+
     it 'should have a finder for the most recent predictions' do
       prediction1 = create_valid_prediction(:created_at => 2.weeks.ago)
       prediction2 = create_valid_prediction
       Prediction.recent.should == [prediction2, prediction1]
     end
-    
+
     describe 'popular predictions' do
-    
+
       it "should have a finder for recent popular predictions" do
         prediction1 = create_valid_prediction(:created_at => 1.week.ago, :deadline => 4.days.from_now)
         create_valid_response(:prediction => prediction1)
@@ -175,43 +186,43 @@ describe Prediction do
         prediction2 = create_valid_prediction(:created_at => 1.week.ago, :deadline => 1.day.from_now)
         Prediction.popular.should == [prediction2]
       end
-      
+
       it "excludes predictions made more than 2 weeks ago" do
         create_valid_prediction(:created_at => 3.weeks.ago, :deadline => 1.day.from_now)
         create_valid_prediction(:created_at => 4.weeks.ago, :deadline => 2.days.from_now)
         create_valid_prediction(:created_at => 5.weeks.ago, :deadline => 3.days.from_now)
         Prediction.popular.should be_empty
       end
-      
+
     end
-    
+
     describe 'judged predictions' do
       it 'should order by most recently judged first' do
         first = create_valid_prediction
         last = create_valid_prediction
-        
+
         first.judge!(:right)
         future = 10.minutes.from_now.time
         Time.stub!(:now).and_return(future)
         last.judge!(:right)
-        
+
         Prediction.judged.should == [last, first]
       end
-      
+
       it 'should include judged predictions' do
         judged = create_valid_prediction
         judged.judge!(:right, nil)
 
         Prediction.judged.should == [judged]
       end
-      
+
       it 'should not include unjudged predictions' do
         create_valid_prediction
-        
+
         Prediction.judged.should == []
       end
     end
-    
+
     describe 'for unjudged predictions' do
       it 'should not return judged predictions' do
         judged = create_valid_prediction
@@ -220,18 +231,18 @@ describe Prediction do
 
         Prediction.unjudged.should == [unjudged]
       end
-      
+
       it 'should not return predictions whose deadline is in the future' do
         future = create_valid_prediction(:deadline => 2.years.from_now)
         past = create_valid_prediction(:deadline => 2.days.ago)
-        
+
         Prediction.unjudged.should == [past]
       end
 
       it 'should order by deadline' do
         long_ago = create_valid_prediction(:deadline => 2.days.ago)
         longer_ago = create_valid_prediction(:deadline => 2.weeks.ago)
-        
+
         Prediction.unjudged.should == [long_ago, longer_ago]
       end
 
@@ -253,7 +264,7 @@ describe Prediction do
         Prediction.unjudged.should == []
       end
     end
-    
+
     describe 'for future predictions' do
       it 'should not return judged predictions' do
         judged = create_valid_prediction(:deadline => 2.days.from_now)
@@ -262,22 +273,22 @@ describe Prediction do
 
         Prediction.future.should == [unjudged]
       end
-      
+
       it 'should not return predictions whose deadline is in the past' do
         future = create_valid_prediction(:deadline => 2.years.from_now)
         past = create_valid_prediction(:deadline => 2.days.ago)
-        
+
         Prediction.future.should == [future]
       end
-      
+
       it 'should order by ascending deadline' do
         further = create_valid_prediction(:deadline => 2.weeks.from_now)
         sooner = create_valid_prediction(:deadline => 2.days.from_now)
-        
+
         Prediction.future.should == [sooner,further]
       end
     end
-    
+
     describe 'sorting scope' do
       it 'should default to creation date order' do
         older = create_valid_prediction(:created_at => 2.years.ago)
@@ -288,7 +299,7 @@ describe Prediction do
       it 'should order according to optional first arg' do
         a = create_valid_prediction(:description => 'aaaaaaartghhh')
         y = create_valid_prediction(:description => 'yaaaaaahhh')
-        
+
         Prediction.sort(:description).should contain_in_order([a, y])
       end
     end
@@ -302,12 +313,12 @@ describe Prediction do
       it 'should order according to optional first arg' do
         a = create_valid_prediction(:description => 'aaaaaaartghhh')
         y = create_valid_prediction(:description => 'yaaaaaahhh')
-        
+
         Prediction.rsort(:description).should contain_in_order([y, a])
       end
     end
   end
-  
+
   describe 'private' do
     describe 'default' do
       it 'should be false' do
@@ -333,7 +344,7 @@ describe Prediction do
       end
     end
   end
-  
+
   describe 'notify creator' do
     describe 'default' do
       describe 'when has creator' do
@@ -404,13 +415,13 @@ describe Prediction do
     it 'should have a deadline attribute that is initially nil' do
       Prediction.new.deadline.should be_nil
     end
-    
+
     it 'should be a date field' do
       date = 5.weeks.from_now
       prediction = Prediction.new(:deadline => date)
       prediction.deadline.to_s(:db).should == date.to_s(:db)
     end
-    
+
     it 'should transform natural language date "tomorrow" to date' do
       prediction = Prediction.new
       prediction.deadline_text = 'tomorrow'
@@ -422,7 +433,7 @@ describe Prediction do
       prediction.save
       prediction.errors.keys.should include(:deadline_text)
     end
-    
+
     describe 'prettied' do
       it 'should look nice' do
         prediction = Prediction.new
@@ -437,7 +448,7 @@ describe Prediction do
       prediction.stub!(:outcome).and_return(nil)
       prediction.should be_due_for_judgement
     end
-    it 'should be false when outcome known and past deadline' do 
+    it 'should be false when outcome known and past deadline' do
       prediction = Prediction.new(:deadline => 10.minutes.ago)
       prediction.stub!(:outcome).and_return(true)
       prediction.should_not be_due_for_judgement
@@ -453,7 +464,7 @@ describe Prediction do
       prediction.should_not be_due_for_judgement
     end
   end
-  
+
   describe 'outcome' do
     it 'should have an outcome attribute that is initially nil' do
       Prediction.new.outcome.should be_nil
@@ -463,7 +474,7 @@ describe Prediction do
       it 'should have a list of judgements' do
         Prediction.new.judgements.should == []
       end
-      
+
       describe 'delegate' do
         it 'should delegate outcome to judgement' do
           prediction = Prediction.new
@@ -474,13 +485,13 @@ describe Prediction do
           Prediction.new.outcome.should be_nil
         end
       end
-      
+
       describe '#judge' do
         before(:each) do
           @prediction = create_valid_prediction
           @user = mock_model(User)
         end
-        
+
         it 'should set the outcome to true' do
           @prediction.judge!('right', @user)
           @prediction.outcome.should == true
@@ -490,7 +501,7 @@ describe Prediction do
           @prediction.judge!('wrong', @user)
           @prediction.judgements.first.user.should == @user
         end
-        
+
         it 'should create a new judgement' do
           @prediction.judge!('wrong', @user)
           @prediction.reload
@@ -498,37 +509,37 @@ describe Prediction do
         end
       end
     end
-    
+
     describe 'withdraw modifier' do
       before(:each) do
         @prediction = create_valid_prediction
       end
-      
+
       it 'should not be withdrawn by default' do
         @prediction.should_not be_withdrawn
       end
-      
+
       it 'should set the withdrawn boolean to true when withdraw! called' do
         @prediction.should_receive(:update_attribute).with(:withdrawn, true)
         @prediction.withdraw!
       end
-      
+
       it 'should still be withdrawn after reloading' do
         @prediction.withdraw!
         @prediction.reload.should be_withdrawn
       end
-      
+
       it 'should not withdraw if the prediction is not open' do
         @prediction.stub!(:open?).and_return(false)
         lambda { @prediction.withdraw! }.should raise_error(ArgumentError)
       end
     end
-    
+
     describe 'query methods' do
       before(:each) do
         @prediction = Prediction.new
       end
-      
+
       it 'should return true for right? when outcome is true' do
         @prediction.stub!(:outcome).and_return(true)
         @prediction.right?.should be_true
@@ -541,7 +552,7 @@ describe Prediction do
         @prediction.stub!(:outcome).and_return(nil)
         @prediction.unknown?.should be_true
       end
-      
+
       describe 'open' do
         it 'should be true when outcome is unknown and not withdrawn?' do
           @prediction.stub!(:withdrawn?).and_return(false)
@@ -577,7 +588,7 @@ describe Prediction do
       end
     end
   end
-  
+
   describe 'confidence aggregation' do
     it 'should delegate to wagers' do
       prediction = Prediction.new
@@ -587,7 +598,7 @@ describe Prediction do
       prediction.mean_confidence.should == :mean_confidence
     end
   end
-  
+
   describe 'events collection' do
     before(:each) do
       @prediction = Prediction.new
@@ -606,16 +617,16 @@ describe Prediction do
     it 'should return all responses' do
       @prediction.events.should include(@r1, @r2)
     end
-    
+
     it 'should return all judgments' do
       @prediction.events.should include(@j1, @j2)
     end
-    
+
     it 'should include all subsequent versions after the initial creation' do
       @prediction.events.should include(@v2, @v3)
       @prediction.events.should_not include(@v1)
     end
-    
+
     it 'should sort all by created_at date' do
       @prediction.events.should == [@r1, @j1, @v2, @j2, @v3, @r2]
     end
