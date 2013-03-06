@@ -4,3 +4,10 @@
 <% if flash[:notice] %>
   <div id="notice"><%=flash[:notice] %></div>
 <% end %>
+
+<% if current_user.try(:has_overdue_judgements?) %>
+  <div id="overdue">
+    You have one or more predictions with overdue judgements.
+    <%= link_to 'Judge them!', due_for_judgement_user_path(current_user) %>
+  </div>
+<% end %>

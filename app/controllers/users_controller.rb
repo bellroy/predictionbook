@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_filter :lookup_user, :only => [:show, :update, :settings]
+  before_filter :lookup_user, :only => [:show, :update, :settings, :due_for_judgement]
   before_filter :login_required, :only => [:settings, :update]
   before_filter :user_is_current_user, :only => [:settings, :update]
-  
+
   helper_method :statistics
 
   def show
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @title = "Signup"
     @user = User.new
   end
- 
+
   def update
     @user.update_attributes(params[:user])
     if @user.valid?
@@ -26,11 +26,11 @@ class UsersController < ApplicationController
       render :action => :settings
     end
   end
-  
+
   def settings
     @title = "Settings for #{current_user}"
   end
- 
+
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
@@ -48,17 +48,24 @@ class UsersController < ApplicationController
       render :action => 'new'
     end
   end
-  
+
   def statistics
     @statistics ||= @user.statistics
   end
-  
+
+  def due_for_judgement
+    @title = "Predictions by #{@user} due for judgement"
+    @predictions = @user.predictions
+    @predictions = @predictions.not_private unless current_user == @user
+    @predictions = @predictions.select { |x| x.due_for_judgement? }
+  end
+
 protected
 
   def lookup_user
     @user = User[params[:id]]
   end
-  
+
   def user_is_current_user
     access_forbidden unless current_user == @user
   end
