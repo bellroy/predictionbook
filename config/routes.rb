@@ -10,6 +10,7 @@ PredictionBook2::Application.routes.draw do
 
   resources :users do
     get :settings, :on=> :member
+    get :due_for_judgement, :on => :member
     resources :deadline_notifications
   end
 

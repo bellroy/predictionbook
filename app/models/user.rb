@@ -67,6 +67,10 @@ class User < ActiveRecord::Base
     !email.blank?
   end
 
+  def has_overdue_judgements?
+    !!predictions.index { |x| x.due_for_judgement?}
+  end
+
   def authorized_for(prediction)
     if prediction.private?
       self == prediction.creator

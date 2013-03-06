@@ -240,7 +240,7 @@ a#logo img {
 	font-weight: bold;
 }
 
-#notice, #error {
+#notice, #error, #overdue {
 	position: absolute;
 	margin: 0 30px 5px 30px;
 	top: 1em;
