@@ -1,0 +1,112 @@
+/* IE6 PNG Fix
+-------------------------------------------------------------------------------------- */
+a#logo img,
+img#title,
+img#illustration,
+a.button {
+	behavior: url(/styling/iepngfix/iepngfix.htc);
+	/* Using v1.0 of script from http://www.twinhelix.com/css/iepngfix/ */
+}
+
+
+/* General Page Structure
+-------------------------------------------------------------------------------------- */
+body {
+	background: none;
+}
+#header {
+	background: url(ie6/header.png) no-repeat top center;
+}
+#main-wrap {
+	background: url(ie6/content-top.png) no-repeat top center;
+}
+#main-inner {
+	background: url(ie6/content-bottom.png) no-repeat bottom center;
+}
+#main {
+	background: url(ie6/content-inner.png) repeat-y top center;
+}
+
+
+/* General Typography
+-------------------------------------------------------------------------------------- */
+h2 {
+	display: inline;
+}
+
+
+/* Header
+-------------------------------------------------------------------------------------- */
+a#logo {
+	background-color: transparent !important;
+}
+ul#nav-menu li {
+	background-image: url(ie6/header-tab-purple.png);
+}
+#user-links {
+	background-image: url(ie6/header-tab-green.png);
+	padding: 0 10px 0 15px;
+}
+#user-links li {
+	margin-right: expression(this.nextSibling==null?'0':'7px');
+	padding-right: 7px;
+}
+
+
+/* Buttons
+-------------------------------------------------------------------------------------- */
+a.button {
+	background-color: transparent !important;
+	cursor: pointer;
+	color: #fff !important;
+}
+
+
+/* Forms
+-------------------------------------------------------------------------------------- */
+input.input,
+textarea {
+	border: 1px solid #ccc;
+	font: 11px Arial, Helvetica, sans-serif;
+	font-size: larger;
+	margin: 0 5px 0 0;
+	padding: 5px;
+	width: 225px;
+}
+body.home #new_prediction {
+	width: 410px;
+}
+form #prediction_description {
+	width: 25em;
+}
+form div.clear {
+	behavior: none; /* Not working */
+}
+
+
+/* Content
+-------------------------------------------------------------------------------------- */
+#feature {
+	background: url(ie6/sky.png) no-repeat top left;
+}
+#content ul {
+	margin-left: 20px;
+	padding: 0;
+}
+ul#responses {
+	padding-left: 20px;
+}
+#predictions {
+  float: left;
+  width: 500px;
+}
+
+
+/* Footer
+-------------------------------------------------------------------------------------- */
+#footer {
+	background: url(ie6/footer-shadow.png) no-repeat top center;
+}
+#footer ul.left-links li {
+	border-right-style: expression(this.nextSibling==null?'none':'solid');
+}

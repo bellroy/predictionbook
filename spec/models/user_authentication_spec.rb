@@ -1,0 +1,187 @@
+require 'spec_helper'
+
+# Be sure to include AuthenticatedTestHelper in spec/spec_helper.rb instead.
+# Then, you can remove it from this and the functional test.
+include AuthenticatedTestHelper
+
+describe User do
+  describe 'validations' do
+    it 'requires login' do
+      lambda do
+        u = create_user(:login => nil)
+        u.errors_on(:login).should_not be_empty
+      end.should_not change(User, :count)
+    end
+
+    describe 'allows legitimate logins:' do
+      ['123', '1234567890_234567890_234567890_234567890', 
+       'hello.-_there@funnychar.com'].each do |login_str|
+        it "'#{login_str}'" do
+          lambda do
+            u = create_user(:login => login_str)
+            u.should have(:no).errors_on(:login)
+          end.should change(User, :count).by(1)
+        end
+      end
+    end
+    describe 'disallows illegitimate logins:' do
+      ["tab\t", "newline\n"].each do |login_str|
+        it "'#{login_str}'" do
+          lambda do
+            u = create_user(:login => login_str)
+            u.should have(1).errors_on(:login)
+          end.should_not change(User, :count)
+        end
+      end
+    end
+
+    it 'requires password' do
+      lambda do
+        u = create_user(:password => nil)
+        u.errors_on(:password).should_not be_empty
+      end.should_not change(User, :count)
+    end
+
+    it 'requires password confirmation' do
+      lambda do
+        u = create_user(:password_confirmation => nil)
+        u.should have(1).errors_on(:password_confirmation)
+      end.should_not change(User, :count)
+    end
+
+    describe 'allows legitimate emails:' do
+      ['', nil, 'foo@bar.com', 'foo@newskool-tld.museum', 'foo@twoletter-tld.de', 'foo@nonexistant-tld.qq',
+       'r@a.wk', '1234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890@gmail.com',
+       'hello.-_there@funnychar.com', 'uucp%addr@gmail.com', 'hello+routing-str@gmail.com',
+       'domain@can.haz.many.sub.doma.in', 
+      ].each do |email_str|
+        it "'#{email_str}'" do
+          lambda do
+            u = create_user(:email => email_str)
+            u.should have(:no).errors_on(:email)
+          end.should change(User, :count).by(1)
+        end
+      end
+    end
+    describe 'disallows illegitimate emails' do
+      ['!!@nobadchars.com', "tab\t", "newline\n",
+       'r@.wk', '1234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890@gmail2.com',
+       # these are technically allowed but not seen in practice:
+       'uucp!addr@gmail.com', 'semicolon;@gmail.com', 'quote"@gmail.com', 'tick\'@gmail.com', 'backtick`@gmail.com', 'space @gmail.com', 'bracket<@gmail.com', 'bracket>@gmail.com'
+      ].each do |email_str|
+        it "'#{email_str}'" do
+          lambda do
+            u = create_user(:email => email_str)
+            u.errors_on(:email).should_not be_empty
+          end.should_not change(User, :count)
+        end
+      end
+    end
+
+    describe 'allows legitimate names:' do
+      [ '', nil, 'Andre The Giant (7\'4", 520 lb.) -- has a posse', 
+       '', '1234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890',
+      ].each do |name_str|
+        it "'#{name_str}'" do
+          lambda do
+            u = create_user(:name => name_str)
+            u.should have(:no).errors_on(:name)
+          end.should change(User, :count).by(1)
+        end
+      end
+    end
+    describe "disallows illegitimate names" do
+      ["tab\t", "newline\n"].each do |name_str|
+        it "'#{name_str}'" do
+          lambda do
+            u = create_user(:name => name_str)
+            u.should have(1).errors_on(:name)
+          end.should_not change(User, :count)
+        end
+      end
+    end
+  end
+
+  describe 'Authentication' do
+    before do
+      @user = create_user(
+        :login => 'quentin',
+        :email => 'quentin@example.com',
+        :password => 'monkey', :password_confirmation => 'monkey'
+      )
+    end
+
+    it 'resets password' do
+      @user.update_attributes(:password => 'new password', :password_confirmation => 'new password')
+      User.authenticate('quentin', 'new password').should == @user
+    end
+
+    it 'does not rehash password' do
+      @user.update_attributes(:login => 'quentin2')
+      User.authenticate('quentin2', 'monkey').should == @user
+    end
+
+    it 'authenticates user' do
+      User.authenticate('quentin', 'monkey').should == @user
+    end
+
+    it "doesn't authenticates user with bad password" do
+      User.authenticate('quentin', 'monkey').should == @user
+    end
+
+    # New installs should bump this up and set REST_AUTH_DIGEST_STRETCHES to give a 10ms encrypt time or so
+    desired_encryption_expensiveness_ms = 0.1
+    it "takes longer than #{desired_encryption_expensiveness_ms}ms to encrypt a password" do
+     test_reps = 100
+     start_time = Time.now; test_reps.times{ User.authenticate('quentin', 'monkey'+rand.to_s) }; end_time   = Time.now
+     auth_time_ms = 1000 * (end_time - start_time)/test_reps
+     auth_time_ms.should > desired_encryption_expensiveness_ms
+    end
+
+    it 'sets remember token' do
+      @user.remember_me
+      @user.remember_token.should_not be_nil
+      @user.remember_token_expires_at.should_not be_nil
+    end
+
+    it 'unsets remember token' do
+      @user.remember_me
+      @user.remember_token.should_not be_nil
+      @user.forget_me
+      @user.remember_token.should be_nil
+    end
+
+    it 'remembers me for one week' do
+      before = 1.week.from_now.utc
+      @user.remember_me_for 1.week
+      after = 1.week.from_now.utc
+      @user.remember_token.should_not be_nil
+      @user.remember_token_expires_at.should_not be_nil
+      @user.remember_token_expires_at.between?(before, after).should be_true
+    end
+
+    it 'remembers me until one week' do
+      time = 1.week.from_now.utc
+      @user.remember_me_until time
+      @user.remember_token.should_not be_nil
+      @user.remember_token_expires_at.should_not be_nil
+      @user.remember_token_expires_at.should == time
+    end
+
+    it 'remembers me default two years' do
+      before = 2.years.from_now.utc
+      @user.remember_me
+      after = 2.years.from_now.utc
+      @user.remember_token.should_not be_nil
+      @user.remember_token_expires_at.should_not be_nil
+      @user.remember_token_expires_at.between?(before, after).should be_true
+    end
+  end
+
+protected
+  def create_user(options = {})
+    record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
+    record.save
+    record
+  end
+end

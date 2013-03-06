@@ -1,0 +1,7 @@
+<ul id="responses">
+  <%- events.each do |event| -%>
+  <li class="<%= event.is_a?(Response) ? 'response' : 'change' %>">
+    <%= render_event_partial(event) %>
+  </li>
+  <%- end -%>
+</ul>

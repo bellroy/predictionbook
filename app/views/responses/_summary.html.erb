@@ -1,0 +1,10 @@
+<span class='responses'>
+(<span class='mean_confidence'>
+  <%= responses.wagers.mean_confidence -%>% confidence</span><%- unless responses.wagers.size == 1 -%>;
+ <span class='wagers_count'>
+   <%= responses.wagers.size %> wagers</span><%- end -%><%- unless responses.comments.empty? -%>;
+ <span class='comments_count'>
+   <%= pluralize responses.comments.size, 'comment' %>
+ </span><%- end -%>
+ )
+</span>

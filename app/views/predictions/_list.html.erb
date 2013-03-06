@@ -1,0 +1,20 @@
+<%- if show_statistics? -%>
+	<%- cache(global_statistics_cache_key) do -%>
+		<%= render :partial => 'statistics/show' %>
+	<%- end -%>
+<%- end -%>
+
+<h2><%= title || 'Predictions' %></h2>
+
+<div class="popular">
+  <%- if not @predictions.empty? -%>
+  <ul <%= "class='#{@filter}'" if @filter %>>
+    <%= render :partial => @predictions  %>
+  </ul>
+  <%- else -%>
+  <p>
+    No predictions to show<%- if current_user %>; so
+    <%= link_to 'make your own!', new_prediction_path %><%- end %>
+  </p>
+  <%- end %>
+</div>

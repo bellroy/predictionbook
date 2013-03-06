@@ -1,0 +1,19 @@
+.bundle
+.rvmrc
+log/*.log
+tmp/
+.sass-cache/
+public/assets
+config/database.yml
+config/credentials.yml
+*.DS_Store
+public/uploads/*
+cache
+coverage
+
+# Secrets repo
+secrets
+
+# Vagrant
+Vagrantfile
+.vagrant

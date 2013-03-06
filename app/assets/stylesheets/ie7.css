@@ -1,0 +1,43 @@
+/* General Typography
+-------------------------------------------------------------------------------------- */
+h2 {
+	display: inline;
+}
+
+
+/* Header
+-------------------------------------------------------------------------------------- */
+a#logo {
+	background-color: transparent !important;
+}
+#user-links {
+	padding: 0 10px 0 15px;
+}
+#user-links li {
+	margin-right: expression(this.nextSibling==null?'0':'7px');
+	padding-right: 7px;
+}
+
+
+/* Buttons
+-------------------------------------------------------------------------------------- */
+a.button {
+	background-color: transparent !important;
+	cursor: pointer;
+	color: #fff !important;
+}
+
+
+/* Content
+-------------------------------------------------------------------------------------- */
+#content ul {
+	margin-left: 20px;
+	padding: 0;
+}
+
+/* Responses on prediction show pages
+-------------------------------------------------------------------------------------- */
+ul#responses {
+	margin-left: 0;
+	padding-left: 40px;
+}
