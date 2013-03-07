@@ -1,0 +1,32 @@
+== Local installation
+
+=== OSX, Linux
+
+Something like:
+[source,shell]
+--------------------
+$ git clone git://github.com/tricycle/predictionbook-public.git
+$ cd predictionbook-public
+$ cp config/database.example.yml config/database.yml # update db user / password / database names if necessary
+$ cp config/credentials.example.yml config/credentials.yml
+$ bundle install
+$ rake secret # run twice ; set 'session_secret' / 'rest_auth_site_key' in credentials.yml
+$ rake db:create
+$ rake db:schema:load
+$ rake spec # run specs
+$ rake cucmber # run cucumber features
+$ script/server
+$ ^Z # ctrl+z
+$ bg
+$ open http://127.0.0.1:3000/
+$ fg
+--------------------
+
+=== Google Analytics
+
+* In file "config/credentials.yml"
+  + replace [your_analytics_tracker_id] with your Google Analytics tracker id
+
+=== OSX "Can't connect to local MySQL server through socket" Error
+
+* add "host: 127.0.0.1" to the database.yml for local
