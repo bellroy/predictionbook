@@ -1,3 +1,11 @@
+========================================================================
+== IGNORE THIS CRAP AND ENSURE THAT WE BY NOW DEPLOY THE "PROPER" WAY
+==
+== IF WE DO BY NOW, REMOVE THIS FILE
+==
+== (sorry for all caps)
+========================================================================
+
 h1. Prediction Book
 
 h3. Deployment
