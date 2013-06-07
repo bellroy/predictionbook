@@ -16,7 +16,7 @@ set :application, "predictionbook"
 set(:user) { "#{application}-#{rails_env}" }
 
 set :scm, "git"
-set :repository, "git@git.trikeapps.com:predictionbook.git"
+set :repository, "git@github.com:tricycle/predictionbook-deploy.git"
 set :repository_cache, 'cached-copy'
 set :git_enable_submodules, 1
 set :deploy_via, :remote_cache
