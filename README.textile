@@ -1,57 +1,46 @@
-========================================================================
-== IGNORE THIS CRAP AND ENSURE THAT WE BY NOW DEPLOY THE "PROPER" WAY
-==
-== IF WE DO BY NOW, REMOVE THIS FILE
-==
-== (sorry for all caps)
-========================================================================
-
 h1. Prediction Book
 
-h3. Deployment
+There are two prediction-book repositories to
 
-Predictionbook runs on AWS behind a load balancer.
+* Allow engaged prediction-book users to contribute changes (predictionbook)
+* Allow us to keep prediction-book deployment / setup information safe (predictionbook-private)
 
-h4. Preconbditions
+h2. Public repository
 
-* Install Amazon Command Line Tools and make them properly run
-** http://aws.amazon.com/developertools/351?_encoding=UTF8&jiveRedirect=1
-** http://www.techrepublic.com/blog/datacenter/how-to-use-the-command-line-with-amazons-ec2-api-tools/5574
+All functional changes should (must) be done on this repository. Contributors make pull requests to this repository.
 
-h4. Building a new AMI for production
+git@github.com:tricycle/predictionbook.git
 
-* Find the latest steak AMI (production.steak-build00XX) and start a new instance (micro is good enough, key pair is not necessary, security group: webservers)
-* grab the public dns for the instance and put it in config/deploy/production.rb
-* Deploy the app with capistrano
-* Build an AMI after deployment and increase the build number in the name (production.steak-build00XY)
+h2. Private repository
 
-h4. Updating the Load Balancer
+All changes made to the public repository need to be pulled into this repository.
 
-* Connect to the machine and sudo in as root
-* cd /usr/local/sbin
-* run ./aws-deploy-ami (build number: XY)
+This repository contains additional deployment and setup information (that cannot go into the secrets repo), all other sources should be in-sync.
 
-h4. Cleanup
+Changes to this repository must not be pushed to the public repository.
 
-* After a new instance was started, terminate the old steak instance (the one in the load balancer, not the one used for deployment)
-* Cancel the script that keeps checking for the correct number of instances
-* Fix the minimum number of instances after updating the auto scaling group:
-  as-update-auto-scaling-group steak-production --max-size 10 --min-size 1 steak-production-build00XY
-* Terminate the instance that was used for deployment
+git@git.trikeapps.com:predictionbook.git
 
-h3. Techinical Debt
+h3. Configure private repository with remote public repository
 
-* Use FactoryGirl. This will cause problems with models like @Prediction@ which override initialize.
-* @Deliverer.default_url_options@ should be set via @config.action_mailer.default_url_options@ in the corresponding environment file, eg. see @test.rb@
-* Use @AREL@ or @meta-where@ to build complex scopes in @Prediction@
-* Scopes in @Prediction@ should be made chainable, to be used like @Prediction.recent.limit(10)@ instead of @Prediction.limit(10).recent@
-* Rewrite @access_control_spec@
-* Upgrade JQuery and related plugins
-* Use @sorcery* or *devise* for authentication.
-* Enable asset pipeline
+Within the local clone of the private repository, add the public repository as a new remote:
 
-h3. Code Style guides
+git remote add public git@github.com:tricycle/predictionbook.git
 
-* "Ruby Style Guide":https://github.com/bbatsov/ruby-style-guide/blob/master/README.md
-* "Rails Style Guide":https://github.com/bbatsov/rails-style-guide/blob/master/README.md
+In order to NOT push changes from the private to the public repository, cripple the push url:
 
+git remote set-url --push public no-pushing
+
+h3. Pull changes from the public repository
+
+Fetch changes from public repository
+
+git fetch public
+
+Merge changes from public repository
+
+git merge public/master --no-ff
+
+Push changes to private remote repository
+
+git push origin master
