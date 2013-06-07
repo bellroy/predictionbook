@@ -2,14 +2,14 @@ h1. Prediction Book
 
 There are two prediction-book repositories to
 
-* Allow engaged prediction-book users to contribute changes (predictionbook-public)
+* Allow engaged prediction-book users to contribute changes (predictionbook)
 * Allow us to keep prediction-book deployment / setup information safe (predictionbook-private)
 
 h2. Public repository
 
 All functional changes should (must) be done on this repository. Contributors make pull requests to this repository.
 
-git@github.com:tricycle/predictionbook-public.git
+git@github.com:tricycle/predictionbook.git
 
 h2. Private repository
 
@@ -25,7 +25,7 @@ h3. Configure private repository with remote public repository
 
 Within the local clone of the private repository, add the public repository as a new remote:
 
-git remote add public git@github.com:tricycle/predictionbook-public.git
+git remote add public git@github.com:tricycle/predictionbook.git
 
 In order to NOT push changes from the private to the public repository, cripple the push url:
 
