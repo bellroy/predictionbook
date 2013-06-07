@@ -1,8 +1,8 @@
 set :domains, %w(predictionbook.com)
 set :rails_env, 'production'
-set :branch, "master"
+set :branch, "stable"
 
-role :app,    '' # Deploy to fresh instance and build AMI from this instance
-role :web,    ''
-role :db,     '', :primary => true
+role :app, 'tofu.trikeapps.com'
+role :web, 'tofu.trikeapps.com'
+role :db,  'tofu.trikeapps.com', :primary => true
 
