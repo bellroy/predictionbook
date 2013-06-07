@@ -36,12 +36,11 @@ set(:deploy_to) { "/srv/www/#{application}-#{rails_env}" }
 
 ssh_options[:forward_agent] = true
 
-before "deploy:assets:precompile", "bluepill:stop",
-                                   "secrets:update_configs",
+before "deploy:assets:precompile", "secrets:update_configs",
                                    "deploy:symlink_remote_db_yaml",
                                    "deploy:symlink_remote_config_yamls"
 
-after "deploy:symlink",            "bluepill:start"
+after "deploy:symlink",            "deploy:restart"
 
 namespace :deploy do
   desc 'Link to a database.yml file stored on the server'
@@ -55,14 +54,9 @@ namespace :deploy do
       run "ln -sf #{shared_path}/config/#{filename}.yml #{release_path}/config/#{filename}.yml"
     end
   end
-end
-
-namespace :bluepill do
-  [:start, :stop].each do |command|
-    desc "#{command} bluepill"
-    task command, :roles => [:app, :worker] do
-      run "sudo /etc/init.d/bluepill #{command}"
-    end
+  
+  desc "Restart web server"
+  task "restart", :roles => [:app, :worker] do
+    run "touch #{release_path}/tmp/restart.txt"
   end
 end
-
