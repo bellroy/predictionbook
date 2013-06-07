@@ -41,6 +41,14 @@ Merge changes from public repository
 
 git merge public/master --no-ff
 
-Push changes to deploy remote repository
+Push changes to deploy repository
 
 git push origin master
+
+h3. Deploy to production (from stable)
+
+git checkout stable
+
+git merge master --no-ff
+
+cap production deploy
