@@ -3,7 +3,7 @@ h1. Prediction Book
 There are two prediction-book repositories to
 
 * Allow engaged prediction-book users to contribute changes (predictionbook)
-* Allow us to keep prediction-book deployment / setup information safe (predictionbook-private)
+* Allow us to keep prediction-book deployment / setup information safe (predictionbook-deploy)
 
 h2. Public repository
 
@@ -11,7 +11,7 @@ All functional changes should (must) be done on this repository. Contributors ma
 
 git@github.com:tricycle/predictionbook.git
 
-h2. Private repository
+h2. Deploy repository
 
 All changes made to the public repository need to be pulled into this repository.
 
@@ -19,15 +19,15 @@ This repository contains additional deployment and setup information (that canno
 
 Changes to this repository must not be pushed to the public repository.
 
-git@git.trikeapps.com:predictionbook.git
+git@github.com:tricycle/predictionbook-deploy.git
 
-h3. Configure private repository with remote public repository
+h3. Configure deploy repository with remote public repository
 
-Within the local clone of the private repository, add the public repository as a new remote:
+Within the local clone of the deploy repository, add the public repository as a new remote:
 
 git remote add public git@github.com:tricycle/predictionbook.git
 
-In order to NOT push changes from the private to the public repository, cripple the push url:
+In order to NOT push changes from the deploy to the public repository, cripple the push url:
 
 git remote set-url --push public no-pushing
 
@@ -41,6 +41,6 @@ Merge changes from public repository
 
 git merge public/master --no-ff
 
-Push changes to private remote repository
+Push changes to deploy remote repository
 
 git push origin master
