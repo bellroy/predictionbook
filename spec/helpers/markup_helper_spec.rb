@@ -43,4 +43,14 @@ describe MarkupHelper do
       classes('test', %w(two three)).should == 'test two three'
     end
   end
+  
+  describe "html_encode" do
+    it "encodes html" do
+      html_encode("<a href='http://www.prodictionbook.com'>test</a>").should == "&lt;a href=&apos;http://www.prodictionbook.com&apos;&gt;test&lt;/a&gt;"
+    end
+
+    it "properly preserves entities" do
+      html_encode("Prediction & Book").should == "Prediction &amp; Book"
+    end
+  end
 end

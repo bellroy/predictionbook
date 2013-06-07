@@ -11,6 +11,7 @@ gem 'uuidtools', '~> 1.0.0'
 #Views
 gem 'RedCloth', '~>4.2.7'
 gem 'formatize'
+gem 'htmlentities'
 
 #Servers
 gem "mysql2", '~> 0.3'

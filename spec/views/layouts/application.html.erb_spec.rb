@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'layouts/application.html.erb' do
   describe 'when user not logged in' do
     before(:each) do
+      view.stub!(:authenticate_with_http_basic => nil)
       view.stub!(:logged_in?).and_return(false)
     end
     

@@ -24,15 +24,15 @@ module MarkupHelper
   def show_user(user, cls=nil)
     link_to h(user), user_path(user), :class => classes('user',cls)
   end
-  
+
   def show_time(time, cls=nil)
     content_tag(:span, time_in_words_with_context(time), :title => time.to_s, :class => classes('date',cls))
   end
-  
+
   def show_title(text)
-    sanitize textilize_without_paragraph(html_escape(text).gsub('&quot;','"')), :tags => %w(i b em strong u)
+    sanitize textilize_without_paragraph(html_encode(text).gsub('&quot;','"')), :tags => %w(i b em strong u)
   end
-  
+
   def confidence_and_count(prediction)
     "#{prediction.wager_count} with #{prediction.mean_confidence}%"
   end
@@ -51,11 +51,11 @@ module MarkupHelper
   def markup(text)
     CleanCloth.new(linkify_for_redcloth(text)).to_html
   end
-  
+
   def classes(*args)
     args.flatten.compact.join(' ')
   end
-  
+
   def certainty_heading(heading)
     case heading
     when "100"
@@ -64,7 +64,7 @@ module MarkupHelper
       "#{heading}%"
     end
   end
-  
+
   def outcome(prediction)
     content_tag(:span, :title => prediction.readable_outcome) do
       case prediction.outcome
@@ -78,5 +78,10 @@ module MarkupHelper
   def style_for_confidence(confidence)
     # http://www.w3.org/TR/css3-color/#hsl-examples
     "background-color: hsl(#{(confidence * (200/100.0) - 70)}, 100%, 90%);".html_safe
+  end
+
+  def html_encode(string)
+    # encode tags, not entities
+    HTMLEntities.new.encode(string.html_safe, :basic)
   end
 end

@@ -73,11 +73,13 @@
 		  <li><%= link_to 'View predictions', predictions_path %></li>
       <li><%= link_to 'Happenstance', happenstance_path %></li>
       <li><%= link_to 'Upcoming predictions', future_predictions_path %></li>
+      <li><%= link_to 'PredictionBook on GitHub', "https://github.com/tricycle/predictionbook" %></li>
+
       <%# <li><a href="#">Education Centre</a></li>
       <li><a href="#">Links</a></li> %>
 		</ul>
 	<ul class="right-links">
-		<span class="copyright">PredictionBook © 2008-2011</span>
+		<span class="copyright">PredictionBook © 2008-<%= Date.today.year %></span>
 	</ul>
 
 
