@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
 
   validates_length_of       :email,    :within => 6..100, :allow_nil => true #r@a.wk
   validates_uniqueness_of   :email,    :case_sensitive => false, :allow_nil => true
-  validates_format_of       :email,    :with => /\A#{Authentication.email_name_regex}@[-A-Z\._]+\z/i, :message => Authentication.bad_email_message, :allow_nil => true
+  validates_format_of       :email,    :with => /\A#{Authentication.email_name_regex}@[-A-Z0-9\._]+\z/i, :message => Authentication.bad_email_message, :allow_nil => true
 
   #NOTE: You can't set anything via mass assignment that is not in this list
   ## eg. User.new(:foo => 'bar') # will not assign foo
