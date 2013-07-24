@@ -9,7 +9,7 @@ There are two prediction-book repositories to
 
 All functional changes should (must) be done on this repository. Contributors make pull requests to this repository.
 
-  git@github.com:tricycle/predictionbook.git
+	git@github.com:tricycle/predictionbook.git
 
 ## Deploy repository
 
@@ -47,8 +47,8 @@ This repository contains additional deployment and setup information **(that can
 
 ### Deploy to production (from stable)
 
-	git checkout stable@
+	git checkout stable
 
-	git merge master --no-ff@
+	git merge master --no-ff
 
-	cap production deploy@
+	cap production deploy
