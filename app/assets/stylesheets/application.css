@@ -240,12 +240,13 @@ a#logo img {
 	font-weight: bold;
 }
 
-#notice, #error, #overdue {
+#alert-messages {
 	position: absolute;
 	margin: 0 30px 5px 30px;
 	top: 1em;
 	text-align: center;
 	width: 83%;
+	z-index:10;
 }
 #error {
 	color: #f22;

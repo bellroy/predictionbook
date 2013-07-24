@@ -22,6 +22,9 @@ gem 'exception_notification'
 gem "whenever"
 gem "typus"
 
+#Misc
+gem 'honeypot-captcha'
+
 group :development do
   gem "capistrano"
   gem "capistrano-ext"
