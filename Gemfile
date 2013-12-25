@@ -32,7 +32,7 @@ end
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.6'
-  gem "ruby-debug19"
+  gem 'debugger'
   gem 'hirb'
   gem 'wirble'
   gem 'awesome_print'
