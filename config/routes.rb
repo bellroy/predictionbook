@@ -1,5 +1,7 @@
 PredictionBook2::Application.routes.draw do
 
+  match '/credence' => 'credence#go', :as => :credence
+
   match '/logout' => 'sessions#destroy', :as => :logout
   match '/login' => 'sessions#new', :as => :login
 

@@ -1,0 +1,8 @@
+<h1>The Credence Game</h1>
+
+<p><%= @question.text %></p>
+<ul>
+<% for answer in @question.answers %>
+  <li><%= answer.text %> (<%= answer.value %>)</li>
+<% end %>
+</ul>
