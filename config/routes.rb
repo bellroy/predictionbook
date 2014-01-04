@@ -1,6 +1,7 @@
 PredictionBook2::Application.routes.draw do
 
-  match '/credence' => 'credence#go', :as => :credence
+  get '/credence' => 'credence#go', :as => :credence
+  post '/credence' => 'credence#answer', :as => :credence_answer
 
   match '/logout' => 'sessions#destroy', :as => :logout
   match '/login' => 'sessions#new', :as => :login

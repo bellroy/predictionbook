@@ -13,7 +13,7 @@ class CredenceQuestion
     (Math.log(2* truth_credence.to_f/100.0, 2) * 100).round
   end
 
-  attr_reader :text, :answers
+  attr_reader :text, :answers, :correct_index
 end
 
 class CredenceAnswer
