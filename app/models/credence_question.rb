@@ -1,9 +1,16 @@
 class CredenceQuestion
   def initialize()
     @text = "The following are both numbers. Which is larger?"
-    @answers = [ CredenceAnswer.new('Two', 2),
-                 CredenceAnswer.new('Three', 3) ]
-    @correct_index = 1
+
+    v1 = rand(10)
+    v2 = rand(10)
+    while v1 == v2
+      v2 = rand(10)
+    end
+
+    @answers = [ CredenceAnswer.new('First', v1),
+                 CredenceAnswer.new('Second', v2) ]
+    @correct_index = v1 > v2 ? 0 : 1
   end
 
   # Check whether n is the correct answer, and scores according to credence.

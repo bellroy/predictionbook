@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120507034756) do
+ActiveRecord::Schema.define(:version => 20140124195410) do
+
+  create_table "credence_games", :force => true do |t|
+    t.integer  "current_question_id"
+    t.integer  "score",               :default => 0, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "judgements", :force => true do |t|
     t.integer  "prediction_id"
@@ -79,6 +86,16 @@ ActiveRecord::Schema.define(:version => 20120507034756) do
 
   add_index "responses", ["prediction_id"], :name => "index_responses_on_prediction_id"
   add_index "responses", ["user_id"], :name => "index_responses_on_user_id"
+
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
     t.string   "login"
