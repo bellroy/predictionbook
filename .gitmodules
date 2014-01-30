@@ -1,3 +1,0 @@
-[submodule "config/cap-tasks"]
-	path = config/cap-tasks
-	url = git@git.trikeapps.com:trike/capistrano.git
