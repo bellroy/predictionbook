@@ -2,7 +2,7 @@ set :domains, %w(staging.predictionbook.trikeapps.com)
 set :rails_env, 'staging'
 set :branch, "master"
 
-role :app,    'staging.steak.trikeapps.com'
-role :web,    'staging.steak.trikeapps.com'
-role :db,     'staging.steak.trikeapps.com', :primary => true
+role :app,    '10.0.3.100'
+role :web,    '10.0.3.100'
+role :db,     '10.0.3.100', :primary => true
 
