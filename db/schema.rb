@@ -11,11 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140124195410) do
+ActiveRecord::Schema.define(:version => 20140129211037) do
 
   create_table "credence_games", :force => true do |t|
     t.integer  "current_question_id"
     t.integer  "score",               :default => 0, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "credence_question_generators", :force => true do |t|
+    t.boolean  "enabled"
+    t.string   "text"
+    t.string   "prefix"
+    t.string   "suffix"
+    t.string   "type"
+    t.integer  "adjacentWithin"
+    t.float    "weight"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

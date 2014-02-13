@@ -1,0 +1,5 @@
+2
+Official CFAR Questions
+appliedrationality.org/uploads/games/credence/OfficialCfarQuestions.xml
+LessWrong Berlin Meetup Questions
+appliedrationality.org/uploads/games/credence/LW_Berlin.xml

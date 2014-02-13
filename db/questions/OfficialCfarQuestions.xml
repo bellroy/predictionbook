@@ -1,0 +1,2971 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Questions>
+	<QuestionGenerator Tags="U.S.A.;Population" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher population in 2010?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people">
+		<Answer Text="California" Value="37,253,956.00" />
+		<Answer Text="Texas" Value="25,145,561.00" />
+		<Answer Text="New York" Value="19,378,102.00" />
+		<Answer Text="Florida" Value="18,801,310.00" />
+		<Answer Text="Illinois" Value="12,830,632.00" />
+		<Answer Text="Pennsylvania" Value="12,702,379.00" />
+		<Answer Text="Ohio" Value="11,536,504.00" />
+		<Answer Text="Michigan" Value="9,883,640.00" />
+		<Answer Text="Georgia" Value="9,687,653.00" />
+		<Answer Text="North Carolina" Value="9,535,483.00" />
+		<Answer Text="New Jersey" Value="8,791,894.00" />
+		<Answer Text="Virginia" Value="8,001,024.00" />
+		<Answer Text="Washington" Value="6,724,540.00" />
+		<Answer Text="Massachusetts" Value="6,547,629.00" />
+		<Answer Text="Indiana" Value="6,483,802.00" />
+		<Answer Text="Arizona" Value="6,392,017.00" />
+		<Answer Text="Tennessee" Value="6,346,105.00" />
+		<Answer Text="Missouri" Value="5,988,927.00" />
+		<Answer Text="Maryland" Value="5,773,552.00" />
+		<Answer Text="Wisconsin" Value="5,686,986.00" />
+		<Answer Text="Minnesota" Value="5,303,925.00" />
+		<Answer Text="Colorado" Value="5,029,196.00" />
+		<Answer Text="Alabama" Value="4,779,736.00" />
+		<Answer Text="South Carolina" Value="4,625,364.00" />
+		<Answer Text="Louisiana" Value="4,533,372.00" />
+		<Answer Text="Kentucky" Value="4,339,367.00" />
+		<Answer Text="Oregon" Value="3,831,074.00" />
+		<Answer Text="Oklahoma" Value="3,751,351.00" />
+		<Answer Text="Connecticut" Value="3,574,097.00" />
+		<Answer Text="Iowa" Value="3,046,355.00" />
+		<Answer Text="Mississippi" Value="2,967,297.00" />
+		<Answer Text="Arkansas" Value="2,915,918.00" />
+		<Answer Text="Kansas" Value="2,853,118.00" />
+		<Answer Text="Utah" Value="2,763,885.00" />
+		<Answer Text="Nevada" Value="2,700,551.00" />
+		<Answer Text="New Mexico" Value="2,059,179.00" />
+		<Answer Text="West Virginia" Value="1,852,994.00" />
+		<Answer Text="Nebraska" Value="1,826,341.00" />
+		<Answer Text="Idaho" Value="1,567,582.00" />
+		<Answer Text="Hawaii" Value="1,360,301.00" />
+		<Answer Text="Maine" Value="1,328,361.00" />
+		<Answer Text="New Hampshire" Value="1,316,470.00" />
+		<Answer Text="Rhode Island" Value="1,052,567.00" />
+		<Answer Text="Montana" Value="989,415.00" />
+		<Answer Text="Delaware" Value="897,934.00" />
+		<Answer Text="South Dakota" Value="814,180.00" />
+		<Answer Text="Alaska" Value="710,231.00" />
+		<Answer Text="North Dakota" Value="672,591.00" />
+		<Answer Text="Vermont" Value="625,741.00" />
+		<Answer Text="Wyoming" Value="563,626.00" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Population" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher population density in 2010?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people">
+		<Answer Text="New Jersey" Value="1195.5" />
+		<Answer Text="Rhode Island" Value="1018.1" />
+		<Answer Text="Massachusetts" Value="839.4" />
+		<Answer Text="Connecticut" Value="738.1" />
+		<Answer Text="Maryland" Value="594.8" />
+		<Answer Text="Delaware" Value="460.8" />
+		<Answer Text="New York" Value="411.2" />
+		<Answer Text="Florida" Value="350.6" />
+		<Answer Text="Pennsylvania" Value="283.9" />
+		<Answer Text="Ohio" Value="282.3" />
+		<Answer Text="California" Value="239.1" />
+		<Answer Text="Illinois" Value="231.1" />
+		<Answer Text="Hawaii" Value="211.8" />
+		<Answer Text="Virginia" Value="202.6" />
+		<Answer Text="North Carolina" Value="196.1" />
+		<Answer Text="Indiana" Value="181" />
+		<Answer Text="Michigan" Value="174.8" />
+		<Answer Text="Georgia" Value="168.4" />
+		<Answer Text="South Carolina" Value="153.9" />
+		<Answer Text="Tennessee" Value="153.9" />
+		<Answer Text="New Hampshire" Value="147" />
+		<Answer Text="Kentucky" Value="109.9" />
+		<Answer Text="Wisconsin" Value="105" />
+		<Answer Text="Louisiana" Value="104.9" />
+		<Answer Text="Washington" Value="101.2" />
+		<Answer Text="Texas" Value="96.3" />
+		<Answer Text="Alabama" Value="94.4" />
+		<Answer Text="Missouri" Value="87.1" />
+		<Answer Text="West Virginia" Value="77.1" />
+		<Answer Text="Vermont" Value="67.9" />
+		<Answer Text="Minnesota" Value="66.6" />
+		<Answer Text="Mississippi" Value="63.2" />
+		<Answer Text="Arizona" Value="56.3" />
+		<Answer Text="Arkansas" Value="56" />
+		<Answer Text="Oklahoma" Value="54.7" />
+		<Answer Text="Iowa" Value="54.5" />
+		<Answer Text="Colorado" Value="48.5" />
+		<Answer Text="Maine" Value="43.1" />
+		<Answer Text="Oregon" Value="39.9" />
+		<Answer Text="Kansas" Value="34.9" />
+		<Answer Text="Utah" Value="33.6" />
+		<Answer Text="Nevada" Value="24.6" />
+		<Answer Text="Nebraska" Value="23.8" />
+		<Answer Text="Idaho" Value="19" />
+		<Answer Text="New Mexico" Value="17" />
+		<Answer Text="South Dakota" Value="10.7" />
+		<Answer Text="North Dakota" Value="9.7" />
+		<Answer Text="Montana" Value="6.8" />
+		<Answer Text="Wyoming" Value="5.8" />
+		<Answer Text="Alaska" Value="1.2" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Transportation" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher percentage of adults commuting to work by public transportation in 2010?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" of commuting workers">
+		<Answer Text="New York" Value="26.7%" />
+		<Answer Text="New Jersey" Value="10.8%" />
+		<Answer Text="Massachusetts" Value="9.1%" />
+		<Answer Text="Maryland" Value="8.6%" />
+		<Answer Text="Illinois" Value="8.5%" />
+		<Answer Text="Hawaii" Value="6.6%" />
+		<Answer Text="Washington" Value="5.5%" />
+		<Answer Text="Pennsylvania" Value="5.4%" />
+		<Answer Text="California" Value="5.2%" />
+		<Answer Text="Connecticut" Value="4.5%" />
+		<Answer Text="Virginia" Value="4.4%" />
+		<Answer Text="Oregon" Value="4.2%" />
+		<Answer Text="Minnesota" Value="3.5%" />
+		<Answer Text="Nevada" Value="3.3%" />
+		<Answer Text="Colorado" Value="3%" />
+		<Answer Text="Delaware" Value="3%" />
+		<Answer Text="Rhode Island" Value="2.8%" />
+		<Answer Text="Georgia" Value="2.3%" />
+		<Answer Text="Utah" Value="2.1%" />
+		<Answer Text="Florida" Value="2%" />
+		<Answer Text="Arizona" Value="1.8%" />
+		<Answer Text="Ohio" Value="1.7%" />
+		<Answer Text="Wisconsin" Value="1.7%" />
+		<Answer Text="Wyoming" Value="1.7%" />
+		<Answer Text="Missouri" Value="1.6%" />
+		<Answer Text="Texas" Value="1.5%" />
+		<Answer Text="Louisiana" Value="1.4%" />
+		<Answer Text="Michigan" Value="1.3%" />
+		<Answer Text="Vermont" Value="1.3%" />
+		<Answer Text="Alaska" Value="1.2%" />
+		<Answer Text="New Mexico" Value="1.2%" />
+		<Answer Text="Iowa" Value="1.1%" />
+		<Answer Text="Kentucky" Value="1.1%" />
+		<Answer Text="Indiana" Value="1%" />
+		<Answer Text="North Carolina" Value="1%" />
+		<Answer Text="New Hampshire" Value="0.9%" />
+		<Answer Text="Idaho" Value="0.8%" />
+		<Answer Text="Montana" Value="0.8%" />
+		<Answer Text="North Dakota" Value="0.7%" />
+		<Answer Text="Tennessee" Value="0.7%" />
+		<Answer Text="West Virginia" Value="0.7%" />
+		<Answer Text="Nebraska" Value="0.6%" />
+		<Answer Text="Arkansas" Value="0.5%" />
+		<Answer Text="Kansas" Value="0.5%" />
+		<Answer Text="Maine" Value="0.5%" />
+		<Answer Text="Oklahoma" Value="0.5%" />
+		<Answer Text="South Carolina" Value="0.5%" />
+		<Answer Text="South Dakota" Value="0.5%" />
+		<Answer Text="Maine" Value="0.5%" />
+		<Answer Text="Alabama" Value="0.4%" />
+		<Answer Text="Mississippi" Value="0.4%" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Area" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a larger total area in 2010?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" square miles">
+		<Answer Text="Alaska" Value="663,267.26" />
+		<Answer Text="Texas" Value="268,580.82" />
+		<Answer Text="California" Value="163,695.57" />
+		<Answer Text="Montana" Value="147,042.40" />
+		<Answer Text="New Mexico" Value="121,589.48" />
+		<Answer Text="Arizona" Value="113,998.30" />
+		<Answer Text="Nevada" Value="110,560.71" />
+		<Answer Text="Colorado" Value="104,093.57" />
+		<Answer Text="Oregon" Value="98,380.64" />
+		<Answer Text="Wyoming" Value="97,813.56" />
+		<Answer Text="Michigan" Value="96,716.11" />
+		<Answer Text="Minnesota" Value="86,938.87" />
+		<Answer Text="Utah" Value="84,898.83" />
+		<Answer Text="Idaho" Value="83,570.08" />
+		<Answer Text="Kansas" Value="82,276.84" />
+		<Answer Text="Nebraska" Value="77,353.73" />
+		<Answer Text="South Dakota" Value="77,116.49" />
+		<Answer Text="Washington" Value="71,299.64" />
+		<Answer Text="North Dakota" Value="70,699.79" />
+		<Answer Text="Oklahoma" Value="69,898.19" />
+		<Answer Text="Missouri" Value="69,704.31" />
+		<Answer Text="Florida" Value="65,754.59" />
+		<Answer Text="Wisconsin" Value="65,497.82" />
+		<Answer Text="Georgia" Value="59,424.77" />
+		<Answer Text="Illinois" Value="57,914.38" />
+		<Answer Text="Iowa" Value="56,271.55" />
+		<Answer Text="New York" Value="54,556.00" />
+		<Answer Text="North Carolina" Value="53,818.51" />
+		<Answer Text="Arkansas" Value="53,178.62" />
+		<Answer Text="Alabama" Value="52,419.02" />
+		<Answer Text="Louisiana" Value="51,839.70" />
+		<Answer Text="Mississippi" Value="48,430.19" />
+		<Answer Text="Pennsylvania" Value="46,055.24" />
+		<Answer Text="Ohio" Value="44,824.90" />
+		<Answer Text="Virginia" Value="42,774.20" />
+		<Answer Text="Tennessee" Value="42,143.27" />
+		<Answer Text="Kentucky" Value="40,409.02" />
+		<Answer Text="Indiana" Value="36,417.73" />
+		<Answer Text="Maine" Value="35,384.65" />
+		<Answer Text="South Carolina" Value="32,020.20" />
+		<Answer Text="West Virginia" Value="24,229.76" />
+		<Answer Text="Maryland" Value="12,406.68" />
+		<Answer Text="Hawaii" Value="10,930.98" />
+		<Answer Text="Massachusetts" Value="10,554.57" />
+		<Answer Text="Vermont" Value="9,614.26" />
+		<Answer Text="New Hampshire" Value="9,349.94" />
+		<Answer Text="New Jersey" Value="8,721.30" />
+		<Answer Text="Connecticut" Value="5,543.33" />
+		<Answer Text="Delaware" Value="2,489.27" />
+		<Answer Text="Rhode Island" Value="1,545.05" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Chemistry" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these chemical elements has a higher boiling point?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" Kelvin">
+		<Answer Text="Rhenium" Value="5869" />
+		<Answer Text="Tungsten" Value="5828" />
+		<Answer Text="Tantalum" Value="5731" />
+		<Answer Text="Osmium" Value="5285" />
+		<Answer Text="Technetium" Value="5150" />
+		<Answer Text="Thorium" Value="5061" />
+		<Answer Text="Niobium" Value="5017" />
+		<Answer Text="Molybdenum" Value="4912" />
+		<Answer Text="Hafnium" Value="4876" />
+		<Answer Text="Iridium" Value="4701" />
+		<Answer Text="Zirconium" Value="4682" />
+		<Answer Text="Ruthenium" Value="4423" />
+		<Answer Text="Uranium" Value="4404" />
+		<Answer Text="Carbon" Value="4300" />
+		<Answer Text="Protactinium" Value="4300" />
+		<Answer Text="Neptunium" Value="4273" />
+		<Answer Text="Boron" Value="4200" />
+		<Answer Text="Platinum" Value="4098" />
+		<Answer Text="Rhodium" Value="3968" />
+		<Answer Text="Praseodymium" Value="3793" />
+		<Answer Text="Lanthanum" Value="3737" />
+		<Answer Text="Cerium" Value="3716" />
+		<Answer Text="Vanadium" Value="3680" />
+		<Answer Text="Lutetium" Value="3675" />
+		<Answer Text="Yttrium" Value="3609" />
+		<Answer Text="Titanium" Value="3560" />
+		<Answer Text="Gadolinium" Value="3546" />
+		<Answer Text="Silicon" Value="3538" />
+		<Answer Text="Terbium" Value="3503" />
+		<Answer Text="Erbium" Value="3503" />
+		<Answer Text="Plutonium" Value="3501" />
+		<Answer Text="Actinium" Value="3471" />
+		<Answer Text="Curium" Value="3383" />
+		<Answer Text="Neodymium" Value="3347" />
+		<Answer Text="Promethium" Value="3273" />
+		<Answer Text="Palladium" Value="3236" />
+		<Answer Text="Cobalt" Value="3200" />
+		<Answer Text="Nickel" Value="3186" />
+		<Answer Text="Iron" Value="3134" />
+		<Answer Text="Gold" Value="3129" />
+		<Answer Text="Scandium" Value="3109" />
+		<Answer Text="Germanium" Value="3106" />
+		<Answer Text="Holmium" Value="2993" />
+		<Answer Text="Chromium" Value="2944" />
+		<Answer Text="Americium" Value="2880" />
+		<Answer Text="Tin" Value="2875" />
+		<Answer Text="Dysprosium" Value="2840" />
+		<Answer Text="Copper" Value="2835" />
+		<Answer Text="Aluminium" Value="2792" />
+		<Answer Text="Beryllium" Value="2742" />
+		<Answer Text="Gallium" Value="2477" />
+		<Answer Text="Silver" Value="2435" />
+		<Answer Text="Indium" Value="2345" />
+		<Answer Text="Manganese" Value="2334" />
+		<Answer Text="Thulium" Value="2223" />
+		<Answer Text="Barium" Value="2170" />
+		<Answer Text="Samarium" Value="2067" />
+		<Answer Text="Lead" Value="2022" />
+		<Answer Text="Radium" Value="2010" />
+		<Answer Text="Antimony" Value="1860" />
+		<Answer Text="Bismuth" Value="1837" />
+		<Answer Text="Europium" Value="1802" />
+		<Answer Text="Calcium" Value="1757" />
+		<Answer Text="Thallium" Value="1746" />
+		<Answer Text="Strontium" Value="1655" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Chemistry" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these chemical elements has a higher atomic weight?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Ununseptium" Value="294" />
+		<Answer Text="Ununhexium" Value="293" />
+		<Answer Text="Ununquadium" Value="289" />
+		<Answer Text="Ununpentium" Value="288" />
+		<Answer Text="Ununtrium" Value="286" />
+		<Answer Text="Copernicium" Value="285" />
+		<Answer Text="Roentgenium" Value="281" />
+		<Answer Text="Darmstadtium" Value="281" />
+		<Answer Text="Meitnerium" Value="278" />
+		<Answer Text="Bohrium" Value="270" />
+		<Answer Text="Hassium" Value="269" />
+		<Answer Text="Seaborgium" Value="269" />
+		<Answer Text="Dubnium" Value="268" />
+		<Answer Text="Rutherfordium" Value="267" />
+		<Answer Text="Lawrencium" Value="262" />
+		<Answer Text="Nobelium" Value="259" />
+		<Answer Text="Mendelevium" Value="258" />
+		<Answer Text="Fermium" Value="257" />
+		<Answer Text="Einsteinium" Value="252" />
+		<Answer Text="Californium" Value="251" />
+		<Answer Text="Berkelium" Value="247" />
+		<Answer Text="Curium" Value="247" />
+		<Answer Text="Plutonium" Value="244" />
+		<Answer Text="Americium" Value="243" />
+		<Answer Text="Uranium" Value="238.02891" />
+		<Answer Text="Neptunium" Value="237" />
+		<Answer Text="Thorium" Value="232.03806" />
+		<Answer Text="Protactinium" Value="231.03588" />
+		<Answer Text="Actinium" Value="227" />
+		<Answer Text="Radium" Value="226" />
+		<Answer Text="Francium" Value="223" />
+		<Answer Text="Radon" Value="222" />
+		<Answer Text="Astatine" Value="210" />
+		<Answer Text="Polonium" Value="210" />
+		<Answer Text="Bismuth" Value="208.9804" />
+		<Answer Text="Lead" Value="207.2" />
+		<Answer Text="Thallium" Value="204.3833" />
+		<Answer Text="Mercury" Value="200.59" />
+		<Answer Text="Gold" Value="196.966569" />
+		<Answer Text="Platinum" Value="195.084" />
+		<Answer Text="Iridium" Value="192.217" />
+		<Answer Text="Osmium" Value="190.23" />
+		<Answer Text="Rhenium" Value="186.207" />
+		<Answer Text="Tungsten" Value="183.84" />
+		<Answer Text="Tantalum" Value="180.94788" />
+		<Answer Text="Hafnium" Value="178.49" />
+		<Answer Text="Lutetium" Value="174.9668" />
+		<Answer Text="Ytterbium" Value="173.054" />
+		<Answer Text="Thulium" Value="168.93421" />
+		<Answer Text="Erbium" Value="167.259" />
+		<Answer Text="Holmium" Value="164.93032" />
+		<Answer Text="Dysprosium" Value="162.5" />
+		<Answer Text="Terbium" Value="158.92535" />
+		<Answer Text="Gadolinium" Value="157.25" />
+		<Answer Text="Europium" Value="151.964" />
+		<Answer Text="Samarium" Value="150.36" />
+		<Answer Text="Promethium" Value="145" />
+		<Answer Text="Neodymium" Value="144.242" />
+		<Answer Text="Praseodymium" Value="140.90765" />
+		<Answer Text="Cerium" Value="140.116" />
+		<Answer Text="Lanthanum" Value="138.90547" />
+		<Answer Text="Barium" Value="137.327" />
+		<Answer Text="Caesium" Value="132.9054519" />
+		<Answer Text="Xenon" Value="131.293" />
+		<Answer Text="Tellurium" Value="127.6" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="International;Area" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these countries has more inland area as of 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" km^2">
+		<Answer Text="Russia" Value="17,098,242.00" />
+		<Answer Text="Canada" Value="9,984,670.00" />
+		<Answer Text="United States" Value="9,826,675.00" />
+		<Answer Text="China" Value="9,640,005.00" />
+		<Answer Text="Brazil" Value="8,514,877.00" />
+		<Answer Text="Australia" Value="7,692,024.00" />
+		<Answer Text="India" Value="3,166,414.00" />
+		<Answer Text="Argentina" Value="2,780,400.00" />
+		<Answer Text="Kazakhstan" Value="2,724,900.00" />
+		<Answer Text="Algeria" Value="2,381,741.00" />
+		<Answer Text="Democratic Republic of the Congo" Value="2,344,858.00" />
+		<Answer Text="Saudi Arabia" Value="2,250,000.00" />
+		<Answer Text="Greenland" Value="2,166,086.00" />
+		<Answer Text="Mexico" Value="1,964,375.00" />
+		<Answer Text="Indonesia" Value="1,910,931.00" />
+		<Answer Text="Sudan" Value="1,861,484.00" />
+		<Answer Text="Libya" Value="1,759,540.00" />
+		<Answer Text="Iran" Value="1,648,195.00" />
+		<Answer Text="Mongolia" Value="1,564,110.00" />
+		<Answer Text="Peru" Value="1,285,216.00" />
+		<Answer Text="Chad" Value="1,284,000.00" />
+		<Answer Text="Niger" Value="1,267,000.00" />
+		<Answer Text="Angola" Value="1,246,700.00" />
+		<Answer Text="Mali" Value="1,240,192.00" />
+		<Answer Text="South Africa" Value="1,221,037.00" />
+		<Answer Text="Colombia" Value="1,141,748.00" />
+		<Answer Text="Ethiopia" Value="1,104,300.00" />
+		<Answer Text="Bolivia" Value="1,098,581.00" />
+		<Answer Text="Mauritania" Value="1,025,520.00" />
+		<Answer Text="Egypt" Value="1,002,000.00" />
+		<Answer Text="Tanzania" Value="945,087.00" />
+		<Answer Text="Nigeria" Value="923,768.00" />
+		<Answer Text="Venezuela" Value="912,050.00" />
+		<Answer Text="Namibia" Value="824,268.00" />
+		<Answer Text="Mozambique" Value="801,590.00" />
+		<Answer Text="Pakistan" Value="796,095.00" />
+		<Answer Text="Turkey" Value="783,562.00" />
+		<Answer Text="Chile" Value="756,102.00" />
+		<Answer Text="Zambia" Value="752,612.00" />
+		<Answer Text="Burma" Value="676,578.00" />
+		<Answer Text="Afghanistan" Value="652,230.00" />
+		<Answer Text="Somalia" Value="637,657.00" />
+		<Answer Text="Central African Republic" Value="622,984.00" />
+		<Answer Text="South Sudan" Value="619,745.00" />
+		<Answer Text="Ukraine" Value="603,500.00" />
+		<Answer Text="Madagascar" Value="587,041.00" />
+		<Answer Text="Botswana" Value="582,000.00" />
+		<Answer Text="Kenya" Value="580,367.00" />
+		<Answer Text="France" Value="551,500.00" />
+		<Answer Text="Yemen" Value="527,968.00" />
+		<Answer Text="Thailand" Value="513,120.00" />
+		<Answer Text="Spain" Value="505,370.00" />
+		<Answer Text="Turkmenistan" Value="488,100.00" />
+		<Answer Text="Cameroon" Value="475,442.00" />
+		<Answer Text="Papua New Guinea" Value="462,840.00" />
+		<Answer Text="Sweden" Value="450,295.00" />
+		<Answer Text="Uzbekistan" Value="447,400.00" />
+		<Answer Text="Morocco" Value="446,550.00" />
+		<Answer Text="Iraq" Value="438,317.00" />
+		<Answer Text="Paraguay" Value="406,752.00" />
+		<Answer Text="Zimbabwe" Value="390,757.00" />
+		<Answer Text="Japan" Value="377,930.00" />
+		<Answer Text="Germany" Value="357,114.00" />
+		<Answer Text="Republic of the Congo" Value="342,000.00" />
+		<Answer Text="Finland" Value="338,424.00" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Geology" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these geological eras started first?" AdjacentWithin="-1" InfoPrefix="about " InfoSuffix=" million years ago">
+		<Answer Text="Cryptic" Value="4570" />
+		<Answer Text="Basin Groups" Value="4150" />
+		<Answer Text="Nectarian" Value="3920" />
+		<Answer Text="Early Imbrian" Value="3850" />
+		<Answer Text="Eoarchean" Value="3800" />
+		<Answer Text="Paleoarchean" Value="3600" />
+		<Answer Text="Mesoarchean" Value="3200" />
+		<Answer Text="Neoarchean" Value="2800" />
+		<Answer Text="Paleo-proterozoic" Value="2500" />
+		<Answer Text="Meso-proterozoic" Value="1600" />
+		<Answer Text="Neo-proterozoic" Value="1000" />
+		<Answer Text="Paleozoic" Value="542" />
+		<Answer Text="Mesozoic" Value="251" />
+		<Answer Text="Cenozoic" Value="65.5" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;History" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US Presidents served first?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="George Washington" Value="1st" />
+		<Answer Text="John Adams" Value="2nd" />
+		<Answer Text="Thomas Jefferson" Value="3rd" />
+		<Answer Text="James Madison" Value="4th" />
+		<Answer Text="James Monroe" Value="5th" />
+		<Answer Text="John Quincy Adams" Value="6th" />
+		<Answer Text="Andrew Jackson" Value="7th" />
+		<Answer Text="Martin Van Buren" Value="8th" />
+		<Answer Text="William Henry Harrison" Value="9th" />
+		<Answer Text="John Tyler" Value="10th" />
+		<Answer Text="James K. Polk" Value="11th" />
+		<Answer Text="Zachary Taylor" Value="12th" />
+		<Answer Text="Millard Fillmore" Value="13th" />
+		<Answer Text="Franklin Pierce" Value="14th" />
+		<Answer Text="James Buchanan" Value="15th" />
+		<Answer Text="Abraham Lincoln" Value="16th" />
+		<Answer Text="Andrew Johnson" Value="17th" />
+		<Answer Text="Ulysses S. Grant" Value="18th" />
+		<Answer Text="Rutherford B. Hayes" Value="19th" />
+		<Answer Text="James A. Garfield" Value="20th" />
+		<Answer Text="Chester A. Arthur" Value="21st" />
+		<Answer Text="Grover Cleveland" Value="22nd" />
+		<Answer Text="Benjamin Harrison" Value="23rd" />
+		<Answer Text="Grover Cleveland" Value="24th" />
+		<Answer Text="William McKinley" Value="25th" />
+		<Answer Text="Theodore Roosevelt" Value="26th" />
+		<Answer Text="William Howard Taft" Value="27th" />
+		<Answer Text="Woodrow Wilson" Value="28th" />
+		<Answer Text="Warren G. Harding" Value="29th" />
+		<Answer Text="Calvin Coolidge" Value="30th" />
+		<Answer Text="Herbert Hoover" Value="31st" />
+		<Answer Text="Franklin D. Roosevelt" Value="32nd" />
+		<Answer Text="Harry S. Truman" Value="33rd" />
+		<Answer Text="Dwight D. Eisenhower" Value="34th" />
+		<Answer Text="John F. Kennedy" Value="35th" />
+		<Answer Text="Lyndon B. Johnson" Value="36th" />
+		<Answer Text="Richard Nixon" Value="37th" />
+		<Answer Text="Gerald Ford" Value="38th" />
+		<Answer Text="Jimmy Carter" Value="39th" />
+		<Answer Text="Ronald Reagan" Value="40th" />
+		<Answer Text="George H. W. Bush" Value="41st" />
+		<Answer Text="Bill Clinton" Value="42nd" />
+		<Answer Text="George W. Bush" Value="43rd" />
+		<Answer Text="Barack Obama" Value="44th" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;History" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US Vice Presidents served first?" AdjacentWithin="-1" InfoPrefix="began in " InfoSuffix="">
+		<Answer Text="John Adams" Value="1789" />
+		<Answer Text="Thomas Jefferson" Value="1797" />
+		<Answer Text="Aaron Burr, Jr." Value="1801" />
+		<Answer Text="George Clinton" Value="1805" />
+		<Answer Text="Elbridge Gerry" Value="1813" />
+		<Answer Text="Daniel D. Tompkins" Value="1817" />
+		<Answer Text="John C. Calhoun" Value="1825" />
+		<Answer Text="Martin Van Buren" Value="1833" />
+		<Answer Text="Richard Mentor Johnson" Value="1837" />
+		<Answer Text="John Tyler" Value="1841" />
+		<Answer Text="George M. Dallas" Value="1845" />
+		<Answer Text="Millard Fillmore" Value="1849" />
+		<Answer Text="William R. King" Value="1853" />
+		<Answer Text="John C. Breckinridge" Value="1857" />
+		<Answer Text="Hannibal Hamlin" Value="1861" />
+		<Answer Text="Andrew Johnson" Value="1865" />
+		<Answer Text="Schuyler Colfax" Value="1869" />
+		<Answer Text="Henry Wilson" Value="1873" />
+		<Answer Text="William A. Wheeler" Value="1877" />
+		<Answer Text="Chester A. Arthur" Value="1881" />
+		<Answer Text="Thomas A. Hendricks" Value="1885" />
+		<Answer Text="Levi P. Morton" Value="1889" />
+		<Answer Text="Adlai Stevenson I" Value="1893" />
+		<Answer Text="Garret A. Hobart" Value="1897" />
+		<Answer Text="Theodore Roosevelt" Value="1901" />
+		<Answer Text="Charles W. Fairbanks" Value="1905" />
+		<Answer Text="James S. Sherman" Value="1909" />
+		<Answer Text="Thomas R. Marshall" Value="1913" />
+		<Answer Text="Calvin Coolidge" Value="1921" />
+		<Answer Text="Charles G. Dawes" Value="1925" />
+		<Answer Text="Charles Curtis" Value="1929" />
+		<Answer Text="John Nance Garner" Value="1933" />
+		<Answer Text="Henry A. Wallace" Value="1941" />
+		<Answer Text="Harry S. Truman" Value="1945" />
+		<Answer Text="Alben Barkley" Value="1949" />
+		<Answer Text="Richard Nixon" Value="1953" />
+		<Answer Text="Lyndon B. Johnson" Value="1961" />
+		<Answer Text="Hubert Humphrey" Value="1965" />
+		<Answer Text="Spiro Agnew" Value="1969" />
+		<Answer Text="Gerald Ford" Value="1973" />
+		<Answer Text="Nelson Rockefeller" Value="1974" />
+		<Answer Text="Walter Mondale" Value="1977" />
+		<Answer Text="George H. W. Bush" Value="1981" />
+		<Answer Text="Dan Quayle" Value="1989" />
+		<Answer Text="Al Gore" Value="1993" />
+		<Answer Text="Dick Cheney" Value="2001" />
+		<Answer Text="Joe Biden" Value="2009" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;History" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US Presidents was President for a longer time?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" days">
+		<Answer Text="Franklin D. Roosevelt" Value="4422" />
+		<Answer Text="Grover Cleveland" Value="2922" />
+		<Answer Text="Thomas Jefferson" Value="2922" />
+		<Answer Text="Dwight D. Eisenhower" Value="2922" />
+		<Answer Text="Andrew Jackson" Value="2922" />
+		<Answer Text="Ronald Reagan" Value="2922" />
+		<Answer Text="Ulysses S. Grant" Value="2922" />
+		<Answer Text="Woodrow Wilson" Value="2922" />
+		<Answer Text="George W. Bush" Value="2922" />
+		<Answer Text="Bill Clinton" Value="2922" />
+		<Answer Text="James Madison" Value="2922" />
+		<Answer Text="James Monroe" Value="2922" />
+		<Answer Text="George Washington" Value="2865" />
+		<Answer Text="Harry S. Truman" Value="2840" />
+		<Answer Text="Theodore Roosevelt" Value="2728" />
+		<Answer Text="Calvin Coolidge" Value="2041" />
+		<Answer Text="Richard M. Nixon" Value="2027" />
+		<Answer Text="Lyndon B. Johnson" Value="1886" />
+		<Answer Text="William McKinley" Value="1654" />
+		<Answer Text="Abraham Lincoln" Value="1503" />
+		<Answer Text="James Buchanan" Value="1461" />
+		<Answer Text="James Knox Polk" Value="1461" />
+		<Answer Text="William Howard Taft" Value="1461" />
+		<Answer Text="Jimmy Carter" Value="1461" />
+		<Answer Text="Herbert Hoover" Value="1461" />
+		<Answer Text="Benjamin Harrison" Value="1461" />
+		<Answer Text="Franklin Pierce" Value="1461" />
+		<Answer Text="George H. W. Bush" Value="1461" />
+		<Answer Text="Martin Van Buren" Value="1461" />
+		<Answer Text="Rutherford B. Hayes" Value="1461" />
+		<Answer Text="John Quincy Adams" Value="1461" />
+		<Answer Text="John Adams" Value="1460" />
+		<Answer Text="John Tyler" Value="1430" />
+		<Answer Text="Andrew Johnson" Value="1419" />
+		<Answer Text="Chester A. Arthur" Value="1262" />
+		<Answer Text="Barack Obama" Value="1188" />
+		<Answer Text="John F. Kennedy" Value="1036" />
+		<Answer Text="Millard Fillmore" Value="969" />
+		<Answer Text="Gerald R. Ford" Value="895" />
+		<Answer Text="Warren G. Harding" Value="881" />
+		<Answer Text="Zachary Taylor" Value="491" />
+		<Answer Text="James A. Garfield" Value="199" />
+		<Answer Text="William Henry Harrison" Value="31" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;History" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US Postmaster Generals served first?" AdjacentWithin="-1" InfoPrefix="began on " InfoSuffix="">
+		<Answer Text="Benjamin Franklin" Value="7/26/1775" />
+		<Answer Text="Richard Bache" Value="11/7/1776" />
+		<Answer Text="Ebenezer Hazard" Value="1/28/1782" />
+		<Answer Text="Samuel Osgood" Value="9/26/1789" />
+		<Answer Text="Timothy Pickering" Value="8/12/1791" />
+		<Answer Text="Joseph Habersham" Value="2/25/1795" />
+		<Answer Text="Gideon Granger" Value="11/28/1801" />
+		<Answer Text="Return J. Meigs, Jr." Value="3/17/1814" />
+		<Answer Text="John McLean" Value="6/26/1823" />
+		<Answer Text="William T. Barry" Value="3/9/1829" />
+		<Answer Text="Amos Kendall" Value="5/1/1833" />
+		<Answer Text="John M. Niles" Value="5/19/1840" />
+		<Answer Text="Francis Granger" Value="3/6/1841" />
+		<Answer Text="Charles A. Wickliffe" Value="9/13/1841" />
+		<Answer Text="Cave Johnson" Value="3/6/1845" />
+		<Answer Text="Jacob Collamer" Value="3/8/1849" />
+		<Answer Text="Nathan K. Hall" Value="7/23/1850" />
+		<Answer Text="Samuel D. Hubbard" Value="8/31/1852" />
+		<Answer Text="James Campbell" Value="3/7/1853" />
+		<Answer Text="Aaron V. Brown" Value="3/6/1857" />
+		<Answer Text="Joseph Holt" Value="3/14/1859" />
+		<Answer Text="Horatio King" Value="2/12/1861" />
+		<Answer Text="Montgomery Blair" Value="3/5/1861" />
+		<Answer Text="William Dennison" Value="9/24/1864" />
+		<Answer Text="Alexander W. Randall" Value="7/25/1866" />
+		<Answer Text="John A. J. Creswell" Value="3/5/1869" />
+		<Answer Text="James W. Marshall" Value="7/3/1874" />
+		<Answer Text="Marshall Jewell" Value="8/24/1874" />
+		<Answer Text="James N. Tyner" Value="7/12/1876" />
+		<Answer Text="David M. Key" Value="3/12/1877" />
+		<Answer Text="Horace Maynard" Value="6/2/1880" />
+		<Answer Text="Thomas L. James" Value="3/5/1881" />
+		<Answer Text="Timothy O. Howe" Value="12/20/1881" />
+		<Answer Text="Walter Q. Gresham" Value="4/3/1883" />
+		<Answer Text="Frank Hatton" Value="10/14/1884" />
+		<Answer Text="William F. Vilas" Value="3/6/1885" />
+		<Answer Text="Donald M. Dickinson" Value="1/6/1888" />
+		<Answer Text="John Wanamaker" Value="3/5/1889" />
+		<Answer Text="Wilson S. Bissell" Value="3/6/1893" />
+		<Answer Text="William L. Wilson" Value="3/1/1895" />
+		<Answer Text="James A. Gary" Value="3/5/1897" />
+		<Answer Text="Charles Emory Smith" Value="4/21/1898" />
+		<Answer Text="Henry C. Payne" Value="1/9/1902" />
+		<Answer Text="Robert J. Wynne" Value="10/10/1904" />
+		<Answer Text="George B. Cortelyou" Value="3/6/1905" />
+		<Answer Text="George von L. Meyer" Value="1/15/1907" />
+		<Answer Text="Frank H. Hitchcock" Value="3/5/1909" />
+		<Answer Text="Albert S. Burleson" Value="3/5/1913" />
+		<Answer Text="Will H. Hays" Value="3/5/1921" />
+		<Answer Text="Hubert Work" Value="3/4/1922" />
+		<Answer Text="Harry S. New" Value="2/27/1923" />
+		<Answer Text="Walter F. Brown" Value="3/5/1929" />
+		<Answer Text="James A. Farley" Value="3/4/1933" />
+		<Answer Text="Frank C. Walker" Value="9/10/1940" />
+		<Answer Text="Robert E. Hannegan" Value="5/8/1945" />
+		<Answer Text="Jesse Monroe Donaldson" Value="12/16/1947" />
+		<Answer Text="Arthur E. Summerfield" Value="1/21/1953" />
+		<Answer Text="J. Edward Day" Value="1/21/1961" />
+		<Answer Text="John A. Gronouski" Value="9/30/1963" />
+		<Answer Text="Lawrence F. O'Brien" Value="11/3/1965" />
+		<Answer Text="W. Marvin Watson" Value="4/26/1968" />
+		<Answer Text="Winton M. Blount" Value="1/22/1969" />
+		<Answer Text="Winton M. Blount" Value="7/1/1971" />
+		<Answer Text="E. T. Klassen" Value="1/1/1972" />
+		<Answer Text="Benjamin F. Bailar" Value="2/16/1975" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these countries had a higher (total) GDP in 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" million USD">
+		<Answer Text="United States" Value="15,094,025" />
+		<Answer Text="China" Value="7,298,147" />
+		<Answer Text="Japan" Value="5,869,471" />
+		<Answer Text="Germany" Value="3,577,031" />
+		<Answer Text="France" Value="2,776,324" />
+		<Answer Text="Brazil" Value="2,492,908" />
+		<Answer Text="United Kingdom" Value="2,417,570" />
+		<Answer Text="Italy" Value="2,198,730" />
+		<Answer Text="Russia" Value="1,850,401" />
+		<Answer Text="India" Value="1,843,382" />
+		<Answer Text="Canada" Value="1,758,680" />
+		<Answer Text="Spain" Value="1,493,513" />
+		<Answer Text="Australia" Value="1,488,221" />
+		<Answer Text="Mexico" Value="1,154,784" />
+		<Answer Text="Korea, South" Value="1,116,247" />
+		<Answer Text="Indonesia" Value="845,680" />
+		<Answer Text="Netherlands" Value="840,433" />
+		<Answer Text="Turkey" Value="778,089" />
+		<Answer Text="Switzerland" Value="636,059" />
+		<Answer Text="Saudi Arabia" Value="577,595" />
+		<Answer Text="Sweden" Value="538,237" />
+		<Answer Text="Poland" Value="513,821" />
+		<Answer Text="Belgium" Value="513,396" />
+		<Answer Text="Taiwan" Value="504,612" />
+		<Answer Text="Norway" Value="483,650" />
+		<Answer Text="Iran" Value="482,445" />
+		<Answer Text="Argentina" Value="447,644" />
+		<Answer Text="Austria" Value="419,243" />
+		<Answer Text="South Africa" Value="408,074" />
+		<Answer Text="United Arab Emirates" Value="360,136" />
+		<Answer Text="Thailand" Value="345,649" />
+		<Answer Text="Denmark" Value="333,238" />
+		<Answer Text="Colombia" Value="328,422" />
+		<Answer Text="Venezuela" Value="315,841" />
+		<Answer Text="Greece" Value="303,065" />
+		<Answer Text="Malaysia" Value="278,680" />
+		<Answer Text="Finland" Value="266,553" />
+		<Answer Text="Singapore" Value="259,849" />
+		<Answer Text="Chile" Value="248,411" />
+		<Answer Text="Hong Kong" Value="243,302" />
+		<Answer Text="Israel" Value="242,897" />
+		<Answer Text="Nigeria" Value="238,920" />
+		<Answer Text="Portugal" Value="238,880" />
+		<Answer Text="Egypt" Value="235,719" />
+		<Answer Text="Ireland" Value="217,669" />
+		<Answer Text="Czech Republic" Value="215,265" />
+		<Answer Text="Philippines" Value="213,129" />
+		<Answer Text="Pakistan" Value="210,566" />
+		<Answer Text="Algeria" Value="190,709" />
+		<Answer Text="Romania" Value="189,776" />
+		<Answer Text="Kazakhstan" Value="178,312" />
+		<Answer Text="Kuwait" Value="176,667" />
+		<Answer Text="Qatar" Value="173,847" />
+		<Answer Text="Peru" Value="173,502" />
+		<Answer Text="Ukraine" Value="164,960" />
+		<Answer Text="New Zealand" Value="161,851" />
+		<Answer Text="Hungary" Value="140,303" />
+		<Answer Text="Vietnam" Value="122,722" />
+		<Answer Text="Iraq" Value="115,388" />
+		<Answer Text="Bangladesh" Value="113,032" />
+		<Answer Text="Angola" Value="100,948" />
+		<Answer Text="Morocco" Value="99,241" />
+		<Answer Text="Slovakia" Value="96,089" />
+		<Answer Text="Oman" Value="71,888" />
+		<Answer Text="Ecuador" Value="66,381" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these OECD countries spent a higher percentage of their total GDP on healthcare in 2009?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="%">
+		<Answer Text="United States" Value="17.4" />
+		<Answer Text="Netherlands" Value="12" />
+		<Answer Text="France" Value="11.8" />
+		<Answer Text="Germany" Value="11.6" />
+		<Answer Text="Denmark" Value="11.5" />
+		<Answer Text="Canada" Value="11.4" />
+		<Answer Text="Switzerland" Value="11.4" />
+		<Answer Text="Austria" Value="11" />
+		<Answer Text="Belgium" Value="10.9" />
+		<Answer Text="New Zealand" Value="10.3" />
+		<Answer Text="Sweden" Value="10" />
+		<Answer Text="United Kingdom" Value="9.8" />
+		<Answer Text="Iceland" Value="9.7" />
+		<Answer Text="Norway" Value="9.6" />
+		<Answer Text="Spain" Value="9.5" />
+		<Answer Text="Ireland" Value="9.5" />
+		<Answer Text="Italy" Value="9.5" />
+		<Answer Text="Slovenia" Value="9.3" />
+		<Answer Text="Finland" Value="9.2" />
+		<Answer Text="Slovakia" Value="9.1" />
+		<Answer Text="Chile" Value="8.4" />
+		<Answer Text="Israel" Value="7.9" />
+		<Answer Text="Luxembourg" Value="7.8" />
+		<Answer Text="Hungary" Value="7.4" />
+		<Answer Text="Poland" Value="7.4" />
+		<Answer Text="Estonia" Value="7" />
+		<Answer Text="Korea, South" Value="6.9" />
+		<Answer Text="Czech Republic" Value="6.8" />
+		<Answer Text="Mexico" Value="6.4" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Hot 100 hits was #1 for longer in 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="&quot;We Found Love&quot; – Rihanna feat. Calvin Harris" Value="8 weeks" />
+		<Answer Text="&quot;Rolling in the Deep&quot; – Adele" Value="7 weeks" />
+		<Answer Text="&quot;Born This Way&quot;- Lady Gaga" Value="6 weeks" />
+		<Answer Text="&quot;Party Rock Anthem&quot; – LMFAO feat. Lauren Bennett, and GoonRock" Value="6 weeks" />
+		<Answer Text="&quot;E.T.&quot; – Katy Perry feat. Kanye West" Value="5 weeks" />
+		<Answer Text="&quot;Someone Like You&quot; – Adele" Value="5 weeks" />
+		<Answer Text="&quot;Grenade&quot; – Bruno Mars" Value="4 weeks" />
+		<Answer Text="&quot;Moves Like Jagger&quot; – Maroon 5 feat. Christina Aguilera" Value="4 weeks" />
+		<Answer Text="&quot;Firework&quot; – Katy Perry" Value="2 weeks" />
+		<Answer Text="&quot;Last Friday Night T.G.I.F.&quot; – Katy Perry" Value="2 weeks" />
+		<Answer Text="&quot;Hold It Against Me&quot; – Britney Spears" Value="1 week" />
+		<Answer Text="&quot;Black and Yellow&quot; – Wiz Khalifa" Value="1 week" />
+		<Answer Text="&quot;S&amp;M&quot; – Rihanna" Value="1 week" />
+		<Answer Text="&quot;Give Me Everything&quot; – Pitbull feat. Ne-Yo, Afrojack, and Nayer" Value="1 week" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Astronomy" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these planets has a higher density?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" g/cm^3">
+		<Answer Text="Earth" Value="5.515" />
+		<Answer Text="Mercury" Value="5.43" />
+		<Answer Text="Venus" Value="5.24" />
+		<Answer Text="Mars" Value="3.94" />
+		<Answer Text="Neptune" Value="1.76" />
+		<Answer Text="Jupiter" Value="1.33" />
+		<Answer Text="Uranus" Value="1.3" />
+		<Answer Text="Saturn" Value="0.7" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Population" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher population density in 2010?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people/sq.mi.">
+		<Answer Text="New Jersey" Value="1195.5" />
+		<Answer Text="Rhode Island" Value="1018.1" />
+		<Answer Text="Massachusetts" Value="839.4" />
+		<Answer Text="Connecticut" Value="738.1" />
+		<Answer Text="Maryland" Value="594.8" />
+		<Answer Text="Delaware" Value="460.8" />
+		<Answer Text="New York" Value="411.2" />
+		<Answer Text="Florida" Value="350.6" />
+		<Answer Text="Pennsylvania" Value="283.9" />
+		<Answer Text="Ohio" Value="282.3" />
+		<Answer Text="California" Value="239.1" />
+		<Answer Text="Illinois" Value="231.1" />
+		<Answer Text="Hawaii" Value="211.8" />
+		<Answer Text="Virginia" Value="202.6" />
+		<Answer Text="North Carolina" Value="196.1" />
+		<Answer Text="Indiana" Value="181" />
+		<Answer Text="Michigan" Value="174.8" />
+		<Answer Text="Georgia" Value="168.4" />
+		<Answer Text="South Carolina" Value="153.9" />
+		<Answer Text="Tennessee" Value="153.9" />
+		<Answer Text="New Hampshire" Value="147" />
+		<Answer Text="Kentucky" Value="109.9" />
+		<Answer Text="Wisconsin" Value="105" />
+		<Answer Text="Louisiana" Value="104.9" />
+		<Answer Text="Washington" Value="101.2" />
+		<Answer Text="Texas" Value="96.3" />
+		<Answer Text="Alabama" Value="94.4" />
+		<Answer Text="Missouri" Value="87.1" />
+		<Answer Text="West Virginia" Value="77.1" />
+		<Answer Text="Vermont" Value="67.9" />
+		<Answer Text="Minnesota" Value="66.6" />
+		<Answer Text="Mississippi" Value="63.2" />
+		<Answer Text="Arizona" Value="56.3" />
+		<Answer Text="Arkansas" Value="56" />
+		<Answer Text="Oklahoma" Value="54.7" />
+		<Answer Text="Iowa" Value="54.5" />
+		<Answer Text="Colorado" Value="48.5" />
+		<Answer Text="Maine" Value="43.1" />
+		<Answer Text="Oregon" Value="39.9" />
+		<Answer Text="Kansas" Value="34.9" />
+		<Answer Text="Utah" Value="33.6" />
+		<Answer Text="Nevada" Value="24.6" />
+		<Answer Text="Nebraska" Value="23.8" />
+		<Answer Text="Idaho" Value="19" />
+		<Answer Text="New Mexico" Value="17" />
+		<Answer Text="South Dakota" Value="10.7" />
+		<Answer Text="North Dakota" Value="9.7" />
+		<Answer Text="Montana" Value="6.8" />
+		<Answer Text="Wyoming" Value="5.8" />
+		<Answer Text="Alaska" Value="1.2" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Science::Geography" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state has a higher peak elevation?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" ft">
+		<Answer Text="Alaska" Value="20,320.00" />
+		<Answer Text="California" Value="14,505.00" />
+		<Answer Text="Colorado" Value="14,440.00" />
+		<Answer Text="Washington" Value="14,417.00" />
+		<Answer Text="Wyoming" Value="13,809.00" />
+		<Answer Text="Hawai?i" Value="13,803.00" />
+		<Answer Text="Utah" Value="13,518.00" />
+		<Answer Text="New Mexico" Value="13,167.00" />
+		<Answer Text="Nevada" Value="13,147.00" />
+		<Answer Text="Montana" Value="12,807.00" />
+		<Answer Text="Idaho" Value="12,668.00" />
+		<Answer Text="Arizona" Value="12,637.00" />
+		<Answer Text="Oregon" Value="11,249.00" />
+		<Answer Text="Texas" Value="8751" />
+		<Answer Text="South Dakota" Value="7244" />
+		<Answer Text="North Carolina" Value="6684" />
+		<Answer Text="Tennessee" Value="6643" />
+		<Answer Text="New Hampshire" Value="6288" />
+		<Answer Text="Virginia" Value="5729" />
+		<Answer Text="Nebraska" Value="5427" />
+		<Answer Text="New York" Value="5343" />
+		<Answer Text="Maine" Value="5270" />
+		<Answer Text="Oklahoma" Value="4975" />
+		<Answer Text="West Virginia" Value="4862" />
+		<Answer Text="Georgia" Value="4784" />
+		<Answer Text="Vermont" Value="4395" />
+		<Answer Text="Kentucky" Value="4145" />
+		<Answer Text="Kansas" Value="4041" />
+		<Answer Text="South Carolina" Value="3560" />
+		<Answer Text="North Dakota" Value="3508" />
+		<Answer Text="Massachusetts" Value="3489" />
+		<Answer Text="Maryland" Value="3360" />
+		<Answer Text="Pennsylvania" Value="3213" />
+		<Answer Text="Arkansas" Value="2753" />
+		<Answer Text="Alabama" Value="2413" />
+		<Answer Text="Connecticut" Value="2379" />
+		<Answer Text="Minnesota" Value="2302" />
+		<Answer Text="Michigan" Value="1979" />
+		<Answer Text="Wisconsin" Value="1951" />
+		<Answer Text="New Jersey" Value="1802" />
+		<Answer Text="Missouri" Value="1772" />
+		<Answer Text="Iowa" Value="1671" />
+		<Answer Text="Ohio" Value="1549" />
+		<Answer Text="Indiana" Value="1257" />
+		<Answer Text="Illinois" Value="1235" />
+		<Answer Text="Rhode Island" Value="811" />
+		<Answer Text="Mississippi" Value="807" />
+		<Answer Text="Louisiana" Value="535" />
+		<Answer Text="District of Columbia" Value="490" />
+		<Answer Text="Delaware" Value="447" />
+		<Answer Text="Florida" Value="345" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Transportation" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US states has more road vehicles per capita?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" vehicles per 1000 people">
+		<Answer Text="Wyoming" Value="1140" />
+		<Answer Text="Montana" Value="1120" />
+		<Answer Text="North Dakota" Value="1080" />
+		<Answer Text="Iowa" Value="1050" />
+		<Answer Text="Alabama" Value="1030" />
+		<Answer Text="Nebraska" Value="1000" />
+		<Answer Text="Alaska" Value="960" />
+		<Answer Text="Delaware" Value="950" />
+		<Answer Text="South Dakota" Value="950" />
+		<Answer Text="Ohio" Value="910" />
+		<Answer Text="Louisiana" Value="910" />
+		<Answer Text="Vermont" Value="910" />
+		<Answer Text="Utah" Value="870" />
+		<Answer Text="Michigan" Value="870" />
+		<Answer Text="Washington" Value="870" />
+		<Answer Text="Minnesota" Value="870" />
+		<Answer Text="Oklahoma" Value="860" />
+		<Answer Text="Connecticut" Value="860" />
+		<Answer Text="Wisconsin" Value="860" />
+		<Answer Text="Kentucky" Value="840" />
+		<Answer Text="California" Value="840" />
+		<Answer Text="Virginia" Value="840" />
+		<Answer Text="Tennessee" Value="840" />
+		<Answer Text="Kansas" Value="830" />
+		<Answer Text="New Hampshire" Value="830" />
+		<Answer Text="Missouri" Value="830" />
+		<Answer Text="Georgia" Value="820" />
+		<Answer Text="Massachusetts" Value="820" />
+		<Answer Text="Idaho" Value="790" />
+		<Answer Text="Maryland" Value="790" />
+		<Answer Text="Maine" Value="780" />
+		<Answer Text="South Carolina" Value="770" />
+		<Answer Text="Oregon" Value="770" />
+		<Answer Text="New Mexico" Value="770" />
+		<Answer Text="Hawaii" Value="760" />
+		<Answer Text="Pennsylvania" Value="760" />
+		<Answer Text="West Virginia" Value="750" />
+		<Answer Text="Illinois" Value="750" />
+		<Answer Text="Rhode Island" Value="730" />
+		<Answer Text="Texas" Value="720" />
+		<Answer Text="Florida" Value="710" />
+		<Answer Text="Arkansas" Value="700" />
+		<Answer Text="New Jersey" Value="690" />
+		<Answer Text="Mississippi" Value="680" />
+		<Answer Text="North Carolina" Value="670" />
+		<Answer Text="Arizona" Value="660" />
+		<Answer Text="Indiana" Value="610" />
+		<Answer Text="New York" Value="570" />
+		<Answer Text="Nevada" Value="500" />
+		<Answer Text="Colorado" Value="340" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Chemistry" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these elements has a higher specific heat capacity?  (Each has a known specific capacity.)" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" J/gK">
+		<Answer Text="Hydrogen" Value="14.304" />
+		<Answer Text="Helium" Value="5.193" />
+		<Answer Text="Lithium" Value="3.582" />
+		<Answer Text="Beryllium" Value="1.825" />
+		<Answer Text="Sodium" Value="1.228" />
+		<Answer Text="Nitrogen" Value="1.04" />
+		<Answer Text="Neon" Value="1.03" />
+		<Answer Text="Boron" Value="1.026" />
+		<Answer Text="Magnesium" Value="1.023" />
+		<Answer Text="Oxygen" Value="0.918" />
+		<Answer Text="Aluminium" Value="0.897" />
+		<Answer Text="Fluorine" Value="0.824" />
+		<Answer Text="Phosphorus" Value="0.769" />
+		<Answer Text="Potassium" Value="0.757" />
+		<Answer Text="Sulfur" Value="0.71" />
+		<Answer Text="Carbon" Value="0.709" />
+		<Answer Text="Silicon" Value="0.705" />
+		<Answer Text="Calcium" Value="0.647" />
+		<Answer Text="Scandium" Value="0.568" />
+		<Answer Text="Titanium" Value="0.523" />
+		<Answer Text="Argon" Value="0.52" />
+		<Answer Text="Vanadium" Value="0.489" />
+		<Answer Text="Chlorine" Value="0.479" />
+		<Answer Text="Manganese" Value="0.479" />
+		<Answer Text="Bromine" Value="0.474" />
+		<Answer Text="Chromium" Value="0.449" />
+		<Answer Text="Iron" Value="0.449" />
+		<Answer Text="Nickel" Value="0.444" />
+		<Answer Text="Cobalt" Value="0.421" />
+		<Answer Text="Zinc" Value="0.388" />
+		<Answer Text="Copper" Value="0.385" />
+		<Answer Text="Gallium" Value="0.371" />
+		<Answer Text="Rubidium" Value="0.363" />
+		<Answer Text="Arsenic" Value="0.329" />
+		<Answer Text="Selenium" Value="0.321" />
+		<Answer Text="Germanium" Value="0.32" />
+		<Answer Text="Strontium" Value="0.301" />
+		<Answer Text="Yttrium" Value="0.298" />
+		<Answer Text="Zirconium" Value="0.278" />
+		<Answer Text="Niobium" Value="0.265" />
+		<Answer Text="Molybdenum" Value="0.251" />
+		<Answer Text="Krypton" Value="0.248" />
+		<Answer Text="Palladium" Value="0.244" />
+		<Answer Text="Rhodium" Value="0.243" />
+		<Answer Text="Caesium" Value="0.242" />
+		<Answer Text="Ruthenium" Value="0.238" />
+		<Answer Text="Gadolinium" Value="0.236" />
+		<Answer Text="Silver" Value="0.235" />
+		<Answer Text="Indium" Value="0.233" />
+		<Answer Text="Cadmium" Value="0.232" />
+		<Answer Text="Tin" Value="0.228" />
+		<Answer Text="Iodine" Value="0.214" />
+		<Answer Text="Antimony" Value="0.207" />
+		<Answer Text="Barium" Value="0.204" />
+		<Answer Text="Tellurium" Value="0.202" />
+		<Answer Text="Samarium" Value="0.197" />
+		<Answer Text="Lanthanum" Value="0.195" />
+		<Answer Text="Praseodymium" Value="0.193" />
+		<Answer Text="Cerium" Value="0.192" />
+		<Answer Text="Neodymium" Value="0.19" />
+		<Answer Text="Europium" Value="0.182" />
+		<Answer Text="Terbium" Value="0.182" />
+		<Answer Text="Dysprosium" Value="0.17" />
+		<Answer Text="Erbium" Value="0.168" />
+		<Answer Text="Holmium" Value="0.165" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Chemistry" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these elements, each present in the Earth's crust at more than 0.1 mg/kg, is more abundant there?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" mg/kg">
+		<Answer Text="Oxygen" Value="461,000.00" />
+		<Answer Text="Silicon" Value="282,000.00" />
+		<Answer Text="Aluminium" Value="82,300.00" />
+		<Answer Text="Iron" Value="56,300.00" />
+		<Answer Text="Calcium" Value="41,500.00" />
+		<Answer Text="Sodium" Value="23,600.00" />
+		<Answer Text="Magnesium" Value="23,300.00" />
+		<Answer Text="Potassium" Value="20,900.00" />
+		<Answer Text="Titanium" Value="5650" />
+		<Answer Text="Hydrogen" Value="1400" />
+		<Answer Text="Phosphorus" Value="1050" />
+		<Answer Text="Manganese" Value="950" />
+		<Answer Text="Fluorine" Value="585" />
+		<Answer Text="Barium" Value="425" />
+		<Answer Text="Strontium" Value="370" />
+		<Answer Text="Sulfur" Value="350" />
+		<Answer Text="Carbon" Value="200" />
+		<Answer Text="Zirconium" Value="165" />
+		<Answer Text="Chlorine" Value="145" />
+		<Answer Text="Vanadium" Value="120" />
+		<Answer Text="Chromium" Value="102" />
+		<Answer Text="Rubidium" Value="90" />
+		<Answer Text="Nickel" Value="84" />
+		<Answer Text="Zinc" Value="70" />
+		<Answer Text="Cerium" Value="66.5" />
+		<Answer Text="Copper" Value="60" />
+		<Answer Text="Neodymium" Value="41.5" />
+		<Answer Text="Lanthanum" Value="39" />
+		<Answer Text="Yttrium" Value="33" />
+		<Answer Text="Cobalt" Value="25" />
+		<Answer Text="Scandium" Value="22" />
+		<Answer Text="Niobium" Value="20" />
+		<Answer Text="Lithium" Value="20" />
+		<Answer Text="Gallium" Value="19" />
+		<Answer Text="Nitrogen" Value="19" />
+		<Answer Text="Lead" Value="14" />
+		<Answer Text="Boron" Value="10" />
+		<Answer Text="Thorium" Value="9.6" />
+		<Answer Text="Praseodymium" Value="9.2" />
+		<Answer Text="Samarium" Value="7.05" />
+		<Answer Text="Gadolinium" Value="6.2" />
+		<Answer Text="Dysprosium" Value="5.2" />
+		<Answer Text="Erbium" Value="3.5" />
+		<Answer Text="Argon" Value="3.5" />
+		<Answer Text="Ytterbium" Value="3.2" />
+		<Answer Text="Caesium" Value="3" />
+		<Answer Text="Hafnium" Value="3" />
+		<Answer Text="Beryllium" Value="2.8" />
+		<Answer Text="Uranium" Value="2.7" />
+		<Answer Text="Bromine" Value="2.4" />
+		<Answer Text="Tin" Value="2.3" />
+		<Answer Text="Europium" Value="2" />
+		<Answer Text="Tantalum" Value="2" />
+		<Answer Text="Arsenic" Value="1.8" />
+		<Answer Text="Germanium" Value="1.5" />
+		<Answer Text="Tungsten" Value="1.3" />
+		<Answer Text="Holmium" Value="1.3" />
+		<Answer Text="Molybdenum" Value="1.2" />
+		<Answer Text="Terbium" Value="1.2" />
+		<Answer Text="Thallium" Value="0.85" />
+		<Answer Text="Lutetium" Value="0.8" />
+		<Answer Text="Thulium" Value="0.52" />
+		<Answer Text="Iodine" Value="0.45" />
+		<Answer Text="Indium" Value="0.25" />
+		<Answer Text="Antimony" Value="0.2" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher rate of unemployment for the month of March, 2012?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="%">
+		<Answer Text="Nevada" Value="12" />
+		<Answer Text="Rhode Island" Value="11.1" />
+		<Answer Text="California" Value="11" />
+		<Answer Text="District of Columbia" Value="9.8" />
+		<Answer Text="North Carolina" Value="9.7" />
+		<Answer Text="New Jersey" Value="9" />
+		<Answer Text="Florida" Value="9" />
+		<Answer Text="Georgia" Value="9" />
+		<Answer Text="Mississippi" Value="9" />
+		<Answer Text="South Carolina" Value="8.9" />
+		<Answer Text="Illinois" Value="8.8" />
+		<Answer Text="Oregon" Value="8.6" />
+		<Answer Text="Arizona" Value="8.6" />
+		<Answer Text="Kentucky" Value="8.6" />
+		<Answer Text="Michigan" Value="8.5" />
+		<Answer Text="New York" Value="8.5" />
+		<Answer Text="Washington" Value="8.3" />
+		<Answer Text="Indiana" Value="8.2" />
+		<Answer Text="Tennessee" Value="7.9" />
+		<Answer Text="Idaho" Value="7.9" />
+		<Answer Text="Colorado" Value="7.8" />
+		<Answer Text="Connecticut" Value="7.7" />
+		<Answer Text="Ohio" Value="7.5" />
+		<Answer Text="Pennsylvania" Value="7.5" />
+		<Answer Text="Arkansas" Value="7.4" />
+		<Answer Text="Missouri" Value="7.4" />
+		<Answer Text="Alabama" Value="7.3" />
+		<Answer Text="Maine" Value="7.2" />
+		<Answer Text="New Mexico" Value="7.2" />
+		<Answer Text="Louisiana" Value="7.1" />
+		<Answer Text="Texas" Value="7" />
+		<Answer Text="Alaska" Value="7" />
+		<Answer Text="Delaware" Value="6.9" />
+		<Answer Text="West Virginia" Value="6.9" />
+		<Answer Text="Wisconsin" Value="6.8" />
+		<Answer Text="Maryland" Value="6.6" />
+		<Answer Text="Massachusetts" Value="6.5" />
+		<Answer Text="Hawaii" Value="6.4" />
+		<Answer Text="Kansas" Value="6.2" />
+		<Answer Text="Montana" Value="6.2" />
+		<Answer Text="Minnesota" Value="5.8" />
+		<Answer Text="Utah" Value="5.8" />
+		<Answer Text="Virginia" Value="5.6" />
+		<Answer Text="Oklahoma" Value="5.4" />
+		<Answer Text="Wyoming" Value="5.3" />
+		<Answer Text="Iowa" Value="5.2" />
+		<Answer Text="New Hampshire" Value="5.2" />
+		<Answer Text="Vermont" Value="4.8" />
+		<Answer Text="South Dakota" Value="4.3" />
+		<Answer Text="Nebraska" Value="4" />
+		<Answer Text="North Dakota" Value="3" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="International;Science::Geography" Used="y" Type="Match" Weight="1" QuestionText="Which of these country capitals is the capital of __ as of April 2012?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Abkhazia" Value="Sukhumi" />
+		<Answer Text="Afghanistan" Value="Kabul" />
+		<Answer Text="Akrotiri and Dhekelia" Value="Episkopi Cantonment" />
+		<Answer Text="Albania" Value="Tirana" />
+		<Answer Text="Algeria" Value="Algiers" />
+		<Answer Text="American Samoa" Value="Pago Pago" />
+		<Answer Text="Andorra" Value="Andorra la Vella" />
+		<Answer Text="Angola" Value="Luanda" />
+		<Answer Text="Anguilla" Value="The Valley" />
+		<Answer Text="Antigua and Barbuda" Value="St. John's" />
+		<Answer Text="Argentina" Value="Buenos Aires" />
+		<Answer Text="Armenia" Value="Yerevan" />
+		<Answer Text="Aruba" Value="Oranjestad" />
+		<Answer Text="Ascension Island" Value="Georgetown" />
+		<Answer Text="Australia" Value="Canberra" />
+		<Answer Text="Austria" Value="Vienna" />
+		<Answer Text="Azerbaijan" Value="Baku" />
+		<Answer Text="Bahamas" Value="Nassau" />
+		<Answer Text="Bahrain" Value="Manama" />
+		<Answer Text="Bangladesh" Value="Dhaka" />
+		<Answer Text="Barbados" Value="Bridgetown" />
+		<Answer Text="Belarus" Value="Minsk" />
+		<Answer Text="Belgium" Value="Brussels" />
+		<Answer Text="Belize" Value="Belmopan" />
+		<Answer Text="Bermuda" Value="Hamilton" />
+		<Answer Text="Bhutan" Value="Thimphu" />
+		<Answer Text="Bosnia and Herzegovina" Value="Sarajevo" />
+		<Answer Text="Botswana" Value="Gaborone" />
+		<Answer Text="Brazil" Value="Brasília" />
+		<Answer Text="British Virgin Islands" Value="Road Town" />
+		<Answer Text="Bulgaria" Value="Sofia" />
+		<Answer Text="Burkina Faso" Value="Ouagadougou" />
+		<Answer Text="Burundi" Value="Bujumbura" />
+		<Answer Text="Cambodia" Value="Phnom Penh" />
+		<Answer Text="Cameroon" Value="Yaoundé" />
+		<Answer Text="Canada" Value="Ottawa" />
+		<Answer Text="Cape Verde" Value="Praia" />
+		<Answer Text="Cayman Islands" Value="George Town" />
+		<Answer Text="Central African Republic" Value="Bangui" />
+		<Answer Text="Chad" Value="N'Djamena" />
+		<Answer Text="Chile" Value="Santiago" />
+		<Answer Text="Christmas Island" Value="Flying Fish Cove" />
+		<Answer Text="Cocos (Keeling) Islands" Value="West Island" />
+		<Answer Text="Colombia" Value="Bogotá" />
+		<Answer Text="Comoros" Value="Moroni" />
+		<Answer Text="Cook Islands" Value="Avarua" />
+		<Answer Text="Costa Rica" Value="San José" />
+		<Answer Text="Croatia" Value="Zagreb" />
+		<Answer Text="Cuba" Value="Havana" />
+		<Answer Text="Curaçao" Value="Willemstad" />
+		<Answer Text="Cyprus" Value="Nicosia" />
+		<Answer Text="Czech Republic" Value="Prague" />
+		<Answer Text="the Democratic Republic of the Congo" Value="Kinshasa" />
+		<Answer Text="Denmark" Value="Copenhagen" />
+		<Answer Text="Djibouti" Value="Djibouti" />
+		<Answer Text="Dominica" Value="Roseau" />
+		<Answer Text="Dominican Republic" Value="Santo Domingo" />
+		<Answer Text="East Timor (Timor-Leste)" Value="Dili" />
+		<Answer Text="Easter Island" Value="Hanga Roa" />
+		<Answer Text="Ecuador" Value="Quito" />
+		<Answer Text="Egypt" Value="Cairo" />
+		<Answer Text="El Salvador" Value="San Salvador" />
+		<Answer Text="Equatorial Guinea" Value="Malabo" />
+		<Answer Text="Eritrea" Value="Asmara" />
+		<Answer Text="Estonia" Value="Tallinn" />
+		<Answer Text="Ethiopia" Value="Addis Ababa" />
+		<Answer Text="Falkland Islands" Value="Stanley" />
+		<Answer Text="Faroe Islands" Value="Tórshavn" />
+		<Answer Text="the  Federated States of Micronesia" Value="Palikir" />
+		<Answer Text="Fiji" Value="Suva" />
+		<Answer Text="Finland" Value="Helsinki" />
+		<Answer Text="France" Value="Paris" />
+		<Answer Text="French Guiana" Value="Cayenne" />
+		<Answer Text="French Polynesia" Value="Papeete" />
+		<Answer Text="Gabon" Value="Libreville" />
+		<Answer Text="Gambia" Value="Banjul" />
+		<Answer Text="Georgia" Value="Tbilisi" />
+		<Answer Text="Germany" Value="Berlin" />
+		<Answer Text="Ghana" Value="Accra" />
+		<Answer Text="Gibraltar" Value="Gibraltar" />
+		<Answer Text="Greece" Value="Athens" />
+		<Answer Text="Greenland" Value="Nuuk" />
+		<Answer Text="Grenada" Value="St. George's" />
+		<Answer Text="Guam" Value="Hagåtña" />
+		<Answer Text="Guatemala" Value="Guatemala City" />
+		<Answer Text="Guernsey" Value="St. Peter Port" />
+		<Answer Text="Guinea" Value="Conakry" />
+		<Answer Text="Guinea-Bissau" Value="Bissau" />
+		<Answer Text="Guyana" Value="Georgetown" />
+		<Answer Text="Haiti" Value="Port-au-Prince" />
+		<Answer Text="Honduras" Value="Tegucigalpa" />
+		<Answer Text="Hungary" Value="Budapest" />
+		<Answer Text="Iceland" Value="Reykjavík" />
+		<Answer Text="India" Value="New Delhi" />
+		<Answer Text="Indonesia" Value="Jakarta" />
+		<Answer Text="Iran" Value="Tehran" />
+		<Answer Text="Iraq" Value="Baghdad" />
+		<Answer Text="Ireland" Value="Dublin" />
+		<Answer Text="Isle of Man" Value="Douglas" />
+		<Answer Text="Italy" Value="Rome" />
+		<Answer Text="Jamaica" Value="Kingston" />
+		<Answer Text="Japan" Value="Tokyo" />
+		<Answer Text="Jersey" Value="St. Helier" />
+		<Answer Text="Jordan" Value="Amman" />
+		<Answer Text="Kazakhstan" Value="Astana" />
+		<Answer Text="Kenya" Value="Nairobi" />
+		<Answer Text="Kiribati" Value="Tarawa" />
+		<Answer Text="Kosovo[j]" Value="Pristina" />
+		<Answer Text="Kuwait" Value="Kuwait City" />
+		<Answer Text="Kyrgyzstan" Value="Bishkek" />
+		<Answer Text="Laos" Value="Vientiane" />
+		<Answer Text="Latvia" Value="Riga" />
+		<Answer Text="Lebanon" Value="Beirut" />
+		<Answer Text="Lesotho" Value="Maseru" />
+		<Answer Text="Liberia" Value="Monrovia" />
+		<Answer Text="Libya" Value="Tripoli" />
+		<Answer Text="Liechtenstein" Value="Vaduz" />
+		<Answer Text="Lithuania" Value="Vilnius" />
+		<Answer Text="Luxembourg" Value="Luxembourg" />
+		<Answer Text="Macedonia" Value="Skopje" />
+		<Answer Text="Madagascar" Value="Antananarivo" />
+		<Answer Text="Malawi" Value="Lilongwe" />
+		<Answer Text="Malaysia (official)" Value="Kuala Lumpur" />
+		<Answer Text="Maldives" Value="Malé" />
+		<Answer Text="Mali" Value="Bamako" />
+		<Answer Text="Malta" Value="Valletta" />
+		<Answer Text="Marshall Islands" Value="Majuro" />
+		<Answer Text="Mauritania" Value="Nouakchott" />
+		<Answer Text="Mauritius" Value="Port Louis" />
+		<Answer Text="Moldova" Value="Chisinau" />
+		<Answer Text="Monaco" Value="Monaco" />
+		<Answer Text="Mongolia" Value="Ulan Bator" />
+		<Answer Text="Montenegro" Value="Podgorica" />
+		<Answer Text="Morocco" Value="Rabat" />
+		<Answer Text="Mozambique" Value="Maputo" />
+		<Answer Text="Myanmar" Value="Naypyidaw" />
+		<Answer Text="Nagorno-Karabakh Republic" Value="Stepanakert" />
+		<Answer Text="Namibia" Value="Windhoek" />
+		<Answer Text="Nauru" Value="Yaren (de facto)" />
+		<Answer Text="Nepal" Value="Kathmandu" />
+		<Answer Text="New Caledonia" Value="Nouméa" />
+		<Answer Text="New Zealand" Value="Wellington" />
+		<Answer Text="Nicaragua" Value="Managua" />
+		<Answer Text="Niger" Value="Niamey" />
+		<Answer Text="Nigeria" Value="Abuja" />
+		<Answer Text="Niue" Value="Alofi" />
+		<Answer Text="Norfolk Island" Value="Kingston" />
+		<Answer Text="North Korea" Value="Pyongyang" />
+		<Answer Text="Northern Cyprus" Value="Nicosia" />
+		<Answer Text="the United Kingdom Northern Ireland" Value="Belfast" />
+		<Answer Text="Northern Mariana Islands" Value="Saipan" />
+		<Answer Text="Norway" Value="Oslo" />
+		<Answer Text="Oman" Value="Muscat" />
+		<Answer Text="Pakistan" Value="Islamabad" />
+		<Answer Text="Palau" Value="Melekeok" />
+		<Answer Text="Panama" Value="Panama City" />
+		<Answer Text="Papua New Guinea" Value="Port Moresby" />
+		<Answer Text="Paraguay" Value="Asunción" />
+		<Answer Text="Peru" Value="Lima" />
+		<Answer Text="Philippines" Value="Manila" />
+		<Answer Text="Pitcairn Islands" Value="Adamstown" />
+		<Answer Text="Poland" Value="Warsaw" />
+		<Answer Text="Portugal" Value="Lisbon" />
+		<Answer Text="Puerto Rico" Value="San Juan" />
+		<Answer Text="Qatar" Value="Doha" />
+		<Answer Text="the  Republic of the Congo" Value="Brazzaville" />
+		<Answer Text="Romania" Value="Bucharest" />
+		<Answer Text="Russia" Value="Moscow" />
+		<Answer Text="Rwanda" Value="Kigali" />
+		<Answer Text="Saint Barthélemy" Value="Gustavia" />
+		<Answer Text="Saint Helena" Value="Jamestown" />
+		<Answer Text="Saint Kitts and Nevis" Value="Basseterre" />
+		<Answer Text="Saint Lucia" Value="Castries" />
+		<Answer Text="Saint Martin" Value="Marigot" />
+		<Answer Text="Saint Pierre and Miquelon" Value="St. Pierre" />
+		<Answer Text="Saint Vincent and the Grenadines" Value="Kingstown" />
+		<Answer Text="Samoa" Value="Apia" />
+		<Answer Text="San Marino" Value="San Marino" />
+		<Answer Text="Saudi Arabia" Value="Riyadh" />
+		<Answer Text="Scotland" Value="Edinburgh" />
+		<Answer Text="Senegal" Value="Dakar" />
+		<Answer Text="Serbia" Value="Belgrade" />
+		<Answer Text="Seychelles" Value="Victoria" />
+		<Answer Text="Sierra Leone" Value="Freetown" />
+		<Answer Text="Singapore" Value="Singapore" />
+		<Answer Text="Sint Maarten" Value="Philipsburg" />
+		<Answer Text="Slovakia" Value="Bratislava" />
+		<Answer Text="Slovenia" Value="Ljubljana" />
+		<Answer Text="Solomon Islands" Value="Honiara" />
+		<Answer Text="Somalia" Value="Mogadishu" />
+		<Answer Text="South Korea" Value="Seoul" />
+		<Answer Text="South Ossetia" Value="Tskhinvali" />
+		<Answer Text="South Sudan" Value="Juba" />
+		<Answer Text="Spain" Value="Madrid" />
+		<Answer Text="Sudan" Value="Khartoum" />
+		<Answer Text="Suriname" Value="Paramaribo" />
+		<Answer Text="Sweden" Value="Stockholm" />
+		<Answer Text="Switzerland" Value="Bern" />
+		<Answer Text="Syria" Value="Damascus" />
+		<Answer Text="São Tomé and Príncipe" Value="São Tomé" />
+		<Answer Text="Tajikistan" Value="Dushanbe" />
+		<Answer Text="Thailand" Value="Bangkok" />
+		<Answer Text="Togo" Value="Lomé" />
+		<Answer Text="Tonga" Value="Nuku?alofa" />
+		<Answer Text="Transnistria" Value="Tiraspol" />
+		<Answer Text="Trinidad and Tobago" Value="Port of Spain" />
+		<Answer Text="Tristan da Cunha" Value="Edinburgh of the Seven Seas" />
+		<Answer Text="Tunisia" Value="Tunis" />
+		<Answer Text="Turkey" Value="Ankara" />
+		<Answer Text="Turkmenistan" Value="Ashgabat" />
+		<Answer Text="Turks and Caicos Islands" Value="Cockburn Town" />
+		<Answer Text="Tuvalu" Value="Funafuti" />
+		<Answer Text="Uganda" Value="Kampala" />
+		<Answer Text="Ukraine" Value="Kiev" />
+		<Answer Text="United Arab Emirates" Value="Abu Dhabi" />
+		<Answer Text="United States" Value="Washington, D.C." />
+		<Answer Text="United States Virgin Islands" Value="Charlotte Amalie" />
+		<Answer Text="Uruguay" Value="Montevideo" />
+		<Answer Text="Uzbekistan" Value="Tashkent" />
+		<Answer Text="Vanuatu" Value="Port Vila" />
+		<Answer Text="Venezuela" Value="Caracas" />
+		<Answer Text="Vietnam" Value="Hanoi" />
+		<Answer Text="Wales" Value="Cardiff" />
+		<Answer Text="Wallis and Futuna" Value="Mata-Utu" />
+		<Answer Text="Yemen" Value="Sanaá" />
+		<Answer Text="Zambia" Value="Lusaka" />
+		<Answer Text="Zimbabwe" Value="Harare" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Film" Used="y" Type="Match" Weight="1" QuestionText="Which of these winners of the Academy Award for Best Picture was the winner in __?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="1928" Value="Wings" />
+		<Answer Text="1929" Value="The Broadway Melody" />
+		<Answer Text="1930" Value="All Quiet on the Western Front" />
+		<Answer Text="1931" Value="Cimarron" />
+		<Answer Text="1932" Value="Grand Hotel" />
+		<Answer Text="1933" Value="Cavalcade" />
+		<Answer Text="1934" Value="It Happened One Night" />
+		<Answer Text="1935" Value="Mutiny on the Bounty" />
+		<Answer Text="1936" Value="The Great Ziegfeld" />
+		<Answer Text="1937" Value="The Life of Emile Zola" />
+		<Answer Text="1938" Value="You Can't Take It With You" />
+		<Answer Text="1939" Value="Gone with the Wind" />
+		<Answer Text="1940" Value="Rebecca" />
+		<Answer Text="1941" Value="How Green Was My Valley" />
+		<Answer Text="1942" Value="Mrs. Miniver" />
+		<Answer Text="1943" Value="Casablanca" />
+		<Answer Text="1944" Value="Going My Way" />
+		<Answer Text="1945" Value="The Lost Weekend" />
+		<Answer Text="1946" Value="The Best Years of Our Lives" />
+		<Answer Text="1947" Value="Gentleman's Agreement" />
+		<Answer Text="1948" Value="Hamlet" />
+		<Answer Text="1949" Value="All the King's Men" />
+		<Answer Text="1950" Value="All About Eve" />
+		<Answer Text="1951" Value="An American in Paris" />
+		<Answer Text="1952" Value="The Greatest Show on Earth" />
+		<Answer Text="1953" Value="From Here to Eternity" />
+		<Answer Text="1954" Value="On the Waterfront" />
+		<Answer Text="1955" Value="Marty" />
+		<Answer Text="1956" Value="Around the World in 80 Days" />
+		<Answer Text="1957" Value="The Bridge on the River Kwai" />
+		<Answer Text="1958" Value="Gigi" />
+		<Answer Text="1959" Value="Ben-Hur" />
+		<Answer Text="1960" Value="The Apartment" />
+		<Answer Text="1961" Value="West Side Story" />
+		<Answer Text="1962" Value="Lawrence of Arabia" />
+		<Answer Text="1963" Value="Tom Jones" />
+		<Answer Text="1964" Value="My Fair Lady" />
+		<Answer Text="1965" Value="The Sound of Music" />
+		<Answer Text="1966" Value="A Man for All Seasons" />
+		<Answer Text="1967" Value="In the Heat of the Night" />
+		<Answer Text="1968" Value="Oliver!" />
+		<Answer Text="1969" Value="Midnight Cowboy" />
+		<Answer Text="1970" Value="Patton" />
+		<Answer Text="1971" Value="The French Connection" />
+		<Answer Text="1972" Value="The Godfather" />
+		<Answer Text="1973" Value="The Sting" />
+		<Answer Text="1974" Value="The Godfather Part II" />
+		<Answer Text="1975" Value="One Flew Over the Cuckoo's Nest" />
+		<Answer Text="1976" Value="Rocky" />
+		<Answer Text="1977" Value="Annie Hall" />
+		<Answer Text="1978" Value="The Deer Hunter" />
+		<Answer Text="1979" Value="Kramer vs. Kramer" />
+		<Answer Text="1980" Value="Ordinary People" />
+		<Answer Text="1981" Value="Chariots of Fire" />
+		<Answer Text="1982" Value="Gandhi" />
+		<Answer Text="1983" Value="Terms of Endearment" />
+		<Answer Text="1984" Value="Amadeus" />
+		<Answer Text="1985" Value="Out of Africa" />
+		<Answer Text="1986" Value="Platoon" />
+		<Answer Text="1987" Value="The Last Emperor[" />
+		<Answer Text="1988" Value="Rain Man" />
+		<Answer Text="1989" Value="Driving Miss Daisy" />
+		<Answer Text="1990" Value="Dances with Wolves" />
+		<Answer Text="1991" Value="The Silence of the Lambs" />
+		<Answer Text="1992" Value="Unforgiven" />
+		<Answer Text="1993" Value="Schindler's List" />
+		<Answer Text="1994" Value="Forrest Gump" />
+		<Answer Text="1995" Value="Braveheart" />
+		<Answer Text="1996" Value="The English Patient" />
+		<Answer Text="1997" Value="Titanic" />
+		<Answer Text="1998" Value="Shakespeare in Love" />
+		<Answer Text="1999" Value="American Beauty" />
+		<Answer Text="2000" Value="Gladiator" />
+		<Answer Text="2001" Value="A Beautiful Mind" />
+		<Answer Text="2002" Value="Chicago" />
+		<Answer Text="2003" Value="The Lord of the Rings: The Return of the King" />
+		<Answer Text="2004" Value="Million Dollar Baby" />
+		<Answer Text="2005" Value="Crash" />
+		<Answer Text="2006" Value="The Departed" />
+		<Answer Text="2007" Value="No Country for Old Men" />
+		<Answer Text="2008" Value="Slumdog Millionaire" />
+		<Answer Text="2009" Value="The Hurt Locker" />
+		<Answer Text="2010" Value="The King's Speech" />
+		<Answer Text="2011" Value="The Artist" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Chemistry" Used="y" Type="Match" Weight="1" QuestionText="Which of these is the chemical symbol for __?" AdjacentWithin="1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Actinium" Value="Ac" />
+		<Answer Text="Aluminium (Aluminum)" Value="Al" />
+		<Answer Text="Americium" Value="Am" />
+		<Answer Text="Antimony" Value="Sb" />
+		<Answer Text="Argon" Value="Ar" />
+		<Answer Text="Arsenic" Value="As" />
+		<Answer Text="Astatine" Value="At" />
+		<Answer Text="Barium" Value="Ba" />
+		<Answer Text="Berkelium" Value="Bk" />
+		<Answer Text="Beryllium" Value="Be" />
+		<Answer Text="Bismuth" Value="Bi" />
+		<Answer Text="Bohrium" Value="Bh" />
+		<Answer Text="Boron" Value="B" />
+		<Answer Text="Bromine" Value="Br" />
+		<Answer Text="Cadmium" Value="Cd" />
+		<Answer Text="Caesium (Cesium)" Value="Cs" />
+		<Answer Text="Calcium" Value="Ca" />
+		<Answer Text="Californium" Value="Cf" />
+		<Answer Text="Carbon" Value="C" />
+		<Answer Text="Cerium" Value="Ce" />
+		<Answer Text="Chlorine" Value="Cl" />
+		<Answer Text="Chromium" Value="Cr" />
+		<Answer Text="Cobalt" Value="Co" />
+		<Answer Text="Copernicium" Value="Cn" />
+		<Answer Text="Copper" Value="Cu" />
+		<Answer Text="Curium" Value="Cm" />
+		<Answer Text="Darmstadtium" Value="Ds" />
+		<Answer Text="Dubnium" Value="Db" />
+		<Answer Text="Dysprosium" Value="Dy" />
+		<Answer Text="Einsteinium" Value="Es" />
+		<Answer Text="Erbium" Value="Er" />
+		<Answer Text="Europium" Value="Eu" />
+		<Answer Text="Fermium" Value="Fm" />
+		<Answer Text="Fluorine" Value="F" />
+		<Answer Text="Francium" Value="Fr" />
+		<Answer Text="Gadolinium" Value="Gd" />
+		<Answer Text="Gallium" Value="Ga" />
+		<Answer Text="Germanium" Value="Ge" />
+		<Answer Text="Gold" Value="Au" />
+		<Answer Text="Hafnium" Value="Hf" />
+		<Answer Text="Hassium" Value="Hs" />
+		<Answer Text="Helium" Value="He" />
+		<Answer Text="Holmium" Value="Ho" />
+		<Answer Text="Hydrogen" Value="H" />
+		<Answer Text="Indium" Value="In" />
+		<Answer Text="Iodine" Value="I" />
+		<Answer Text="Iridium" Value="Ir" />
+		<Answer Text="Iron" Value="Fe" />
+		<Answer Text="Krypton" Value="Kr" />
+		<Answer Text="Lanthanum" Value="La" />
+		<Answer Text="Lawrencium" Value="Lr" />
+		<Answer Text="Lead" Value="Pb" />
+		<Answer Text="Lithium" Value="Li" />
+		<Answer Text="Lutetium" Value="Lu" />
+		<Answer Text="Magnesium" Value="Mg" />
+		<Answer Text="Manganese" Value="Mn" />
+		<Answer Text="Meitnerium" Value="Mt" />
+		<Answer Text="Mendelevium" Value="Md" />
+		<Answer Text="Mercury" Value="Hg" />
+		<Answer Text="Molybdenum" Value="Mo" />
+		<Answer Text="Neodymium" Value="Nd" />
+		<Answer Text="Neon" Value="Ne" />
+		<Answer Text="Neptunium" Value="Np" />
+		<Answer Text="Nickel" Value="Ni" />
+		<Answer Text="Niobium" Value="Nb" />
+		<Answer Text="Nitrogen" Value="N" />
+		<Answer Text="Nobelium" Value="No" />
+		<Answer Text="Osmium" Value="Os" />
+		<Answer Text="Oxygen" Value="O" />
+		<Answer Text="Palladium" Value="Pd" />
+		<Answer Text="Phosphorus" Value="P" />
+		<Answer Text="Platinum" Value="Pt" />
+		<Answer Text="Plutonium" Value="Pu" />
+		<Answer Text="Polonium" Value="Po" />
+		<Answer Text="Potassium" Value="K" />
+		<Answer Text="Praseodymium" Value="Pr" />
+		<Answer Text="Promethium" Value="Pm" />
+		<Answer Text="Protactinium" Value="Pa" />
+		<Answer Text="Radium" Value="Ra" />
+		<Answer Text="Radon" Value="Rn" />
+		<Answer Text="Rhenium" Value="Re" />
+		<Answer Text="Rhodium" Value="Rh" />
+		<Answer Text="Roentgenium" Value="Rg" />
+		<Answer Text="Rubidium" Value="Rb" />
+		<Answer Text="Ruthenium" Value="Ru" />
+		<Answer Text="Rutherfordium" Value="Rf" />
+		<Answer Text="Samarium" Value="Sm" />
+		<Answer Text="Scandium" Value="Sc" />
+		<Answer Text="Seaborgium" Value="Sg" />
+		<Answer Text="Selenium" Value="Se" />
+		<Answer Text="Silicon" Value="Si" />
+		<Answer Text="Silver" Value="Ag" />
+		<Answer Text="Sodium" Value="Na" />
+		<Answer Text="Strontium" Value="Sr" />
+		<Answer Text="Sulfur (Sulphur)" Value="S" />
+		<Answer Text="Tantalum" Value="Ta" />
+		<Answer Text="Technetium" Value="Tc" />
+		<Answer Text="Tellurium" Value="Te" />
+		<Answer Text="Terbium" Value="Tb" />
+		<Answer Text="Thallium" Value="Tl" />
+		<Answer Text="Thorium" Value="Th" />
+		<Answer Text="Thulium" Value="Tm" />
+		<Answer Text="Tin" Value="Sn" />
+		<Answer Text="Titanium" Value="Ti" />
+		<Answer Text="Tungsten" Value="W" />
+		<Answer Text="Ununhexium" Value="Uuh" />
+		<Answer Text="Ununoctium" Value="Uuo" />
+		<Answer Text="Ununpentium" Value="Uup" />
+		<Answer Text="Ununquadium" Value="Uuq" />
+		<Answer Text="Ununseptium" Value="Uus" />
+		<Answer Text="Ununtrium" Value="Uut" />
+		<Answer Text="Uranium" Value="U" />
+		<Answer Text="Vanadium" Value="V" />
+		<Answer Text="Xenon" Value="Xe" />
+		<Answer Text="Ytterbium" Value="Yb" />
+		<Answer Text="Yttrium" Value="Y" />
+		<Answer Text="Zinc" Value="Zn" />
+		<Answer Text="Zirconium" Value="Zr" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Science::Geography" Used="y" Type="Match" Weight="1" QuestionText="Which of these USA state capitals is the captial of __, as of 2012?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Alabama" Value="Montgomery" />
+		<Answer Text="Alaska" Value="Juneau" />
+		<Answer Text="Arizona" Value="Phoenix" />
+		<Answer Text="Arkansas" Value="Little Rock" />
+		<Answer Text="California" Value="Sacramento" />
+		<Answer Text="Colorado" Value="Denver" />
+		<Answer Text="Connecticut" Value="Hartford" />
+		<Answer Text="Delaware" Value="Dover" />
+		<Answer Text="Florida" Value="Tallahassee" />
+		<Answer Text="Georgia" Value="Atlanta" />
+		<Answer Text="Hawaii" Value="Honolulu" />
+		<Answer Text="Idaho" Value="Boise" />
+		<Answer Text="Illinois" Value="Springfield" />
+		<Answer Text="Indiana" Value="Indianapolis" />
+		<Answer Text="Iowa" Value="Des Moines" />
+		<Answer Text="Kansas" Value="Topeka" />
+		<Answer Text="Kentucky" Value="Frankfort" />
+		<Answer Text="Louisiana" Value="Baton Rouge" />
+		<Answer Text="Maine" Value="Augusta" />
+		<Answer Text="Maryland" Value="Annapolis" />
+		<Answer Text="Massachusetts" Value="Boston" />
+		<Answer Text="Michigan" Value="Lansing" />
+		<Answer Text="Minnesota" Value="Saint Paul" />
+		<Answer Text="Mississippi" Value="Jackson" />
+		<Answer Text="Missouri" Value="Jefferson City" />
+		<Answer Text="Montana" Value="Helena" />
+		<Answer Text="Nebraska" Value="Lincoln" />
+		<Answer Text="Nevada" Value="Carson City" />
+		<Answer Text="New Hampshire" Value="Concord" />
+		<Answer Text="New Jersey" Value="Trenton" />
+		<Answer Text="New Mexico" Value="Santa Fe" />
+		<Answer Text="New York" Value="Albany" />
+		<Answer Text="North Carolina" Value="Raleigh" />
+		<Answer Text="North Dakota" Value="Bismarck" />
+		<Answer Text="Ohio" Value="Columbus" />
+		<Answer Text="Oklahoma" Value="Oklahoma City" />
+		<Answer Text="Oregon" Value="Salem" />
+		<Answer Text="Pennsylvania" Value="Harrisburg" />
+		<Answer Text="Rhode Island" Value="Providence" />
+		<Answer Text="South Carolina" Value="Columbia" />
+		<Answer Text="South Dakota" Value="Pierre" />
+		<Answer Text="Tennessee" Value="Nashville" />
+		<Answer Text="Texas" Value="Austin" />
+		<Answer Text="Utah" Value="Salt Lake City" />
+		<Answer Text="Vermont" Value="Montpelier" />
+		<Answer Text="Virginia" Value="Richmond" />
+		<Answer Text="Washington" Value="Olympia" />
+		<Answer Text="West Virginia" Value="Charleston" />
+		<Answer Text="Wisconsin" Value="Madison" />
+		<Answer Text="Wyoming" Value="Cheyenne" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Zoology" Used="y" Type="Sorted" Weight="1" QuestionText="By average mass, each of the following is one of the 10 largest living species of reptile.  Which one is larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="kg">
+		<Answer Text="Saltwater crocodile" Value="454" />
+		<Answer Text="Nile crocodile" Value="382" />
+		<Answer Text="Leatherback sea turtle" Value="364" />
+		<Answer Text="Black caiman" Value="300" />
+		<Answer Text="Orinoco crocodile" Value="290" />
+		<Answer Text="American crocodile" Value="277" />
+		<Answer Text="American alligator" Value="260" />
+		<Answer Text="Aldabra giant tortoise" Value="205" />
+		<Answer Text="Gharial" Value="200" />
+		<Answer Text="Galapagos tortoise" Value="175" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Zoology" Used="y" Type="Sorted" Weight="1" QuestionText="By average mass, each of the following is one of the 10 largest living animal species.  Which one is larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Blue Whale" Value="110,000 kg" />
+		<Answer Text="North Pacific Right Whale" Value="60,000 kg" />
+		<Answer Text="Southern Right Whale" Value="58,000 kg" />
+		<Answer Text="Fin Whale" Value="57,000 kg" />
+		<Answer Text="North Atlantic Right Whale" Value="55,000 kg" />
+		<Answer Text="Bowhead Whale" Value="54,500 kg" />
+		<Answer Text="Sperm Whale" Value="31,250 kg" />
+		<Answer Text="Humpback Whale" Value="29,000 kg" />
+		<Answer Text="Sei Whale" Value="22,500 kg" />
+		<Answer Text="Gray Whale" Value="19,500 kg" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Zoology" Used="y" Type="Sorted" Weight="1" QuestionText="By average mass, each of the following is one of the 10 largest living species of terrestrial animals.  Which one is larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="African Bush Elephant" Value="4,900 kg" />
+		<Answer Text="Asian Elephant" Value="4,150 kg" />
+		<Answer Text="African Forest Elephant" Value="2,800 kg" />
+		<Answer Text="White Rhinoceros" Value="2,100 kg" />
+		<Answer Text="Indian Rhinoceros" Value="1,900 kg" />
+		<Answer Text="Hippopotamus" Value="1,800 kg" />
+		<Answer Text="Javan Rhinoceros" Value="1,715 kg" />
+		<Answer Text="Black Rhinoceros" Value="1,100 kg" />
+		<Answer Text="Giraffe" Value="1,015 kg" />
+		<Answer Text="Walrus" Value="944 kg" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="International;People" Used="y" Type="Sorted" Weight="1" QuestionText="In 2011, each of these people was ranked by Forbes as one of the ten richest billionaires in the world.  Who was ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" billion USD">
+		<Answer Text="Carlos Slim" Value="69" />
+		<Answer Text="Bill Gates" Value="61" />
+		<Answer Text="Warren Buffett" Value="44" />
+		<Answer Text="Bernard Arnault" Value="41" />
+		<Answer Text="Amancio Ortega" Value="37.5" />
+		<Answer Text="Lawrence Ellison" Value="36" />
+		<Answer Text="Eike Batista" Value="30" />
+		<Answer Text="Stefan Persson" Value="26" />
+		<Answer Text="Li Ka-shing" Value="25.5" />
+		<Answer Text="Karl Albrecht" Value="25.4" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="International;People" Used="y" Type="Sorted" Weight="1" QuestionText="In 2006, each of these people was ranked by Forbes as one of the ten richest billionaires in the world.  Who was ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" billion USD">
+		<Answer Text="Bill Gates" Value="52" />
+		<Answer Text="Warren Buffett" Value="42" />
+		<Answer Text="Carlos Slim Helú" Value="30" />
+		<Answer Text="Ingvar Kamprad" Value="28" />
+		<Answer Text="Lakshmi Mittal" Value="23.5" />
+		<Answer Text="Paul Allen" Value="22" />
+		<Answer Text="Bernard Arnault" Value="21.5" />
+		<Answer Text="Prince Al-Waleed" Value="20" />
+		<Answer Text="Kenneth Thomson" Value="19.6" />
+		<Answer Text="Li Ka Shing" Value="18.8" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Film" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these IMDB Top 250 films of all time was ranked higher by the end of 2011?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
+		<Answer Text="The Shawshank Redemption (1994)" Value="1" />
+		<Answer Text="The Godfather (1972)" Value="2" />
+		<Answer Text="The Godfather: Part II (1974)" Value="3" />
+		<Answer Text="Pulp Fiction (1994)" Value="4" />
+		<Answer Text="The Good, the Bad and the Ugly (1966)" Value="5" />
+		<Answer Text="12 Angry Men (1957)" Value="6" />
+		<Answer Text="Schindler's List (1993)" Value="7" />
+		<Answer Text="The Dark Knight (2008)" Value="8" />
+		<Answer Text="The Lord of the Rings: The Return of the King (2003)" Value="9" />
+		<Answer Text="One Flew Over the Cuckoo's Nest (1975)" Value="10" />
+		<Answer Text="Star Wars: Episode V - The Empire Strikes Back (1980)" Value="11" />
+		<Answer Text="Fight Club (1999)" Value="12" />
+		<Answer Text="Seven Samurai (1954)" Value="13" />
+		<Answer Text="Inception (2010)" Value="14" />
+		<Answer Text="The Lord of the Rings: The Fellowship of the Ring (2001)" Value="15" />
+		<Answer Text="Goodfellas (1990)" Value="16" />
+		<Answer Text="Star Wars: Episode IV - A New Hope (1977)" Value="17" />
+		<Answer Text="City of God (2002)" Value="18" />
+		<Answer Text="Casablanca (1942)" Value="19" />
+		<Answer Text="The Matrix (1999)" Value="20" />
+		<Answer Text="Once Upon a Time in the West (1968)" Value="21" />
+		<Answer Text="Rear Window (1954)" Value="22" />
+		<Answer Text="Raiders of the Lost Ark (1981)" Value="23" />
+		<Answer Text="The Silence of the Lambs (1991)" Value="24" />
+		<Answer Text="The Usual Suspects (1995)" Value="25" />
+		<Answer Text="The Lord of the Rings: The Two Towers (2002)" Value="26" />
+		<Answer Text="Se7en (1995)" Value="27" />
+		<Answer Text="Forrest Gump (1994)" Value="28" />
+		<Answer Text="Psycho (1960)" Value="29" />
+		<Answer Text="It's a Wonderful Life (1946)" Value="30" />
+		<Answer Text="Leon: The Professional (1994)" Value="31" />
+		<Answer Text="Sunset Blvd. (1950)" Value="32" />
+		<Answer Text="Memento (2000)" Value="33" />
+		<Answer Text="Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1964)" Value="34" />
+		<Answer Text="Apocalypse Now (1979)" Value="35" />
+		<Answer Text="American History X (1998)" Value="36" />
+		<Answer Text="North by Northwest (1959)" Value="37" />
+		<Answer Text="Terminator 2: Judgment Day (1991)" Value="38" />
+		<Answer Text="Citizen Kane (1941)" Value="39" />
+		<Answer Text="Saving Private Ryan (1998)" Value="40" />
+		<Answer Text="City Lights (1931)" Value="41" />
+		<Answer Text="Alien (1979)" Value="42" />
+		<Answer Text="American Beauty (1999)" Value="43" />
+		<Answer Text="Spirited Away (2001)" Value="44" />
+		<Answer Text="Toy Story 3 (2010)" Value="45" />
+		<Answer Text="Taxi Driver (1976)" Value="46" />
+		<Answer Text="The Shining (1980)" Value="47" />
+		<Answer Text="Vertigo (1958)" Value="48" />
+		<Answer Text="M (1931)" Value="49" />
+		<Answer Text="Paths of Glory (1957)" Value="50" />
+		<Answer Text="The Pianist (2002)" Value="51" />
+		<Answer Text="Modern Times (1936)" Value="52" />
+		<Answer Text="Amélie (2001)" Value="53" />
+		<Answer Text="The Departed (2006)" Value="54" />
+		<Answer Text="Double Indemnity (1944)" Value="55" />
+		<Answer Text="WALL·E (2008)" Value="56" />
+		<Answer Text="The Lives of Others (2006)" Value="57" />
+		<Answer Text="Aliens (1986)" Value="58" />
+		<Answer Text="A Clockwork Orange (1971)" Value="59" />
+		<Answer Text="Life Is Beautiful (1997)" Value="60" />
+		<Answer Text="Lawrence of Arabia (1962)" Value="61" />
+		<Answer Text="To Kill a Mockingbird (1962)" Value="62" />
+		<Answer Text="Back to the Future (1985)" Value="63" />
+		<Answer Text="Das Boot (1981)" Value="64" />
+		<Answer Text="Requiem for a Dream (2000)" Value="65" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Film" Used="y" Type="Sorted" Weight="1" QuestionText="Without adjusting for inflation, each of these is one of the 40 most expensive film productions of all time.  Which one cost more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Pirates of the Caribbean: At World's End" Value="$300m" />
+		<Answer Text="Tangled" Value="$260m" />
+		<Answer Text="Spider-Man 3" Value="$258m" />
+		<Answer Text="John Carter" Value="$250m" />
+		<Answer Text="Harry Potter and the Half-Blood Prince" Value="$250m" />
+		<Answer Text="Avatar" Value="$237m" />
+		<Answer Text="The Chronicles of Narnia: Prince Caspian" Value="$225m" />
+		<Answer Text="Pirates of the Caribbean: Dead Man's Chest" Value="$225m" />
+		<Answer Text="X-Men: The Last Stand" Value="$210m" />
+		<Answer Text="Superman Returns" Value="$209m" />
+		<Answer Text="King Kong" Value="$207m" />
+		<Answer Text="Titanic" Value="$200m" />
+		<Answer Text="Transformers: Revenge of the Fallen" Value="$200m" />
+		<Answer Text="2012" Value="$200m" />
+		<Answer Text="Spider-Man 2" Value="$200m" />
+		<Answer Text="Quantum of Solace" Value="$200m" />
+		<Answer Text="Terminator Salvation" Value="$200m" />
+		<Answer Text="Toy Story 3" Value="$200m" />
+		<Answer Text="Green Lantern" Value="$200m" />
+		<Answer Text="Cars 2" Value="$200m" />
+		<Answer Text="Transformers: Dark of the Moon" Value="$195m" />
+		<Answer Text="Indiana Jones and the Kingdom of the Crystal Skull" Value="$185m" />
+		<Answer Text="The Dark Knight" Value="$185m" />
+		<Answer Text="The Golden Compass" Value="$180m" />
+		<Answer Text="The Chronicles of Narnia: The Lion, the Witch and the Wardrobe" Value="$180m" />
+		<Answer Text="WALL-E" Value="$180m" />
+		<Answer Text="Troy" Value="$175m" />
+		<Answer Text="Evan Almighty" Value="$175m" />
+		<Answer Text="Monsters vs. Aliens" Value="$175m" />
+		<Answer Text="Up" Value="$175m" />
+		<Answer Text="A Christmas Carol" Value="$175m" />
+		<Answer Text="Waterworld" Value="$172m" />
+		<Answer Text="Wild Wild West" Value="$170m" />
+		<Answer Text="Terminator 3: Rise of the Machines" Value="$170m" />
+		<Answer Text="G.I. Joe: The Rise of Cobra" Value="$170m" />
+		<Answer Text="Iron Man 2" Value="$170m" />
+		<Answer Text="Tron: Legacy" Value="$170m" />
+		<Answer Text="How to Train Your Dragon" Value="$165m" />
+		<Answer Text="Cowboys and Aliens" Value="$163m" />
+		<Answer Text="Sahara" Value="$160m" />
+		<Answer Text="Van Helsing" Value="$160m" />
+		<Answer Text="Poseidon" Value="$160m" />
+		<Answer Text="Shrek the Third" Value="$160m" />
+		<Answer Text="Inception" Value="$160m" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Film" Used="y" Type="Sorted" Weight="1" QuestionText="Adjusting for inflation, each of these is one of the 30 most expensive film productions of all time.  Which one cost more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="million">
+		<Answer Text="Pirates of the Caribbean: At World's End" Value="$336" />
+		<Answer Text="Titanic" Value="$290" />
+		<Answer Text="Spider-Man 3" Value="$289" />
+		<Answer Text="Tangled" Value="$277" />
+		<Answer Text="Harry Potter and the Half-Blood Prince" Value="$271" />
+		<Answer Text="Waterworld" Value="$262" />
+		<Answer Text="Pirates of the Caribbean: Dead Man's Chest" Value="$259" />
+		<Answer Text="Avatar" Value="$257" />
+		<Answer Text="John Carter" Value="$250" />
+		<Answer Text="King Kong" Value="$246" />
+		<Answer Text="Spider-Man 2" Value="$246" />
+		<Answer Text="The Chronicles of Narnia: Prince Caspian" Value="$243" />
+		<Answer Text="X-Men: The Last Stand" Value="$242" />
+		<Answer Text="Superman Returns" Value="$241" />
+		<Answer Text="Wild Wild West" Value="$237" />
+		<Answer Text="Cleopatra" Value="$236" />
+		<Answer Text="The Dark Knight Rises" Value="$230" />
+		<Answer Text="The Avengers" Value="$220" />
+		<Answer Text="Transformers: Revenge of the Fallen" Value="$217" />
+		<Answer Text="2012" Value="$217" />
+		<Answer Text="Terminator Salvation" Value="$217" />
+		<Answer Text="Quantum of Solace" Value="$216" />
+		<Answer Text="Troy" Value="$215" />
+		<Answer Text="Terminator 3: Rise of the Machines" Value="$215" />
+		<Answer Text="Men in Black 3" Value="$215" />
+		<Answer Text="The Chronicles of Narnia: The Lion, the Witch and the Wardrobe" Value="$214" />
+		<Answer Text="Toy Story 3" Value="$213" />
+		<Answer Text="Battleship" Value="$209" />
+		<Answer Text="Green Lantern" Value="$207" />
+		<Answer Text="Cars 2" Value="$207" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these islands is one of the five largest in the world.  Which one is bigger? " AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" km^2">
+		<Answer Text="Greenland" Value="2,130,800.00" />
+		<Answer Text="New Guinea" Value="785,753.00" />
+		<Answer Text="Borneo" Value="748,168.00" />
+		<Answer Text="Madagascar" Value="587,713.00" />
+		<Answer Text="Baffin Island" Value="507,451.00" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Population" Used="y" Type="Sorted" Weight="1" QuestionText="By population in 2011, each of these was one of the 100 largest US cities.  Which one was larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people">
+		<Answer Text="New York" Value="8,175,133.00" />
+		<Answer Text="Los Angeles" Value="3,792,621.00" />
+		<Answer Text="Chicago" Value="2,695,598.00" />
+		<Answer Text="Houston" Value="2,099,451.00" />
+		<Answer Text="Philadelphia" Value="1,526,006.00" />
+		<Answer Text="Phoenix" Value="1,445,632.00" />
+		<Answer Text="San Antonio" Value="1,327,407.00" />
+		<Answer Text="San Diego" Value="1,307,402.00" />
+		<Answer Text="Dallas" Value="1,197,816.00" />
+		<Answer Text="San Jose" Value="945,942.00" />
+		<Answer Text="Jacksonville" Value="821,784.00" />
+		<Answer Text="Indianapolis" Value="820,445.00" />
+		<Answer Text="San Francisco" Value="805,235.00" />
+		<Answer Text="Austin" Value="790,390.00" />
+		<Answer Text="Columbus" Value="787,033.00" />
+		<Answer Text="Fort Worth" Value="741,206.00" />
+		<Answer Text="Charlotte" Value="731,424.00" />
+		<Answer Text="Detroit" Value="713,777.00" />
+		<Answer Text="El Paso" Value="649,121.00" />
+		<Answer Text="Memphis" Value="646,889.00" />
+		<Answer Text="Baltimore" Value="620,961.00" />
+		<Answer Text="Boston" Value="617,594.00" />
+		<Answer Text="Seattle" Value="608,660.00" />
+		<Answer Text="Washington" Value="601,723.00" />
+		<Answer Text="Nashville" Value="601,222.00" />
+		<Answer Text="Denver" Value="600,158.00" />
+		<Answer Text="Louisville" Value="597,337.00" />
+		<Answer Text="Milwaukee" Value="594,833.00" />
+		<Answer Text="Portland" Value="583,776.00" />
+		<Answer Text="Las Vegas" Value="583,756.00" />
+		<Answer Text="Oklahoma City" Value="579,999.00" />
+		<Answer Text="Albuquerque" Value="545,852.00" />
+		<Answer Text="Tucson" Value="520,116.00" />
+		<Answer Text="Fresno" Value="494,665.00" />
+		<Answer Text="Sacramento" Value="466,488.00" />
+		<Answer Text="Long Beach" Value="462,257.00" />
+		<Answer Text="Kansas City" Value="459,787.00" />
+		<Answer Text="Mesa" Value="439,041.00" />
+		<Answer Text="Virginia Beach" Value="437,994.00" />
+		<Answer Text="Atlanta" Value="420,003.00" />
+		<Answer Text="Colorado Springs" Value="416,427.00" />
+		<Answer Text="Omaha" Value="408,958.00" />
+		<Answer Text="Raleigh" Value="403,892.00" />
+		<Answer Text="Miami" Value="399,457.00" />
+		<Answer Text="Cleveland" Value="396,815.00" />
+		<Answer Text="Tulsa" Value="391,906.00" />
+		<Answer Text="Oakland" Value="390,724.00" />
+		<Answer Text="Minneapolis" Value="382,578.00" />
+		<Answer Text="Wichita" Value="382,368.00" />
+		<Answer Text="Arlington" Value="365,438.00" />
+		<Answer Text="Bakersfield" Value="347,483.00" />
+		<Answer Text="New Orleans" Value="343,829.00" />
+		<Answer Text="Honolulu" Value="337,256.00" />
+		<Answer Text="Anaheim" Value="336,265.00" />
+		<Answer Text="Tampa" Value="335,709.00" />
+		<Answer Text="Aurora" Value="325,078.00" />
+		<Answer Text="Santa Ana" Value="324,528.00" />
+		<Answer Text="St. Louis" Value="319,294.00" />
+		<Answer Text="Pittsburgh" Value="305,704.00" />
+		<Answer Text="Corpus Christi" Value="305,215.00" />
+		<Answer Text="Riverside" Value="303,871.00" />
+		<Answer Text="Cincinnati" Value="296,943.00" />
+		<Answer Text="Lexington" Value="295,803.00" />
+		<Answer Text="Anchorage" Value="291,826.00" />
+		<Answer Text="Stockton" Value="291,707.00" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="1" QuestionText="By volume, each of these is one of the world's 20 largest lakes.  Which one is larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km^3">
+		<Answer Text="Baikal" Value="23,600.00" />
+		<Answer Text="Tanganyika" Value="18,900.00" />
+		<Answer Text="Superior" Value="12,100.00" />
+		<Answer Text="Michigan-Huron" Value="8458" />
+		<Answer Text="Malawi" Value="8400" />
+		<Answer Text="Vostok" Value="5400" />
+		<Answer Text="Victoria" Value="2750" />
+		<Answer Text="Great Bear Lake" Value="2236" />
+		<Answer Text="Great Slave Lake" Value="2090" />
+		<Answer Text="Issyk-Kul" Value="1738" />
+		<Answer Text="Ontario" Value="1639" />
+		<Answer Text="Ladoga" Value="908" />
+		<Answer Text="Titicaca" Value="893" />
+		<Answer Text="Erie" Value="489" />
+		<Answer Text="Winnipeg" Value="283" />
+		<Answer Text="Onega" Value="280" />
+		<Answer Text="Albert" Value="280" />
+		<Answer Text="Athabasca" Value="204" />
+		<Answer Text="Turkana" Value="204" />
+		<Answer Text="Vänern" Value="153" />
+		<Answer Text="Nicaragua" Value="108" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Hot 100 Hits from 2011 was #1 for longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" weeks">
+		<Answer Text="We Found Love" Value="10" />
+		<Answer Text="Rolling in the Deep" Value="7" />
+		<Answer Text="Born This Way" Value="6" />
+		<Answer Text="Party Rock Anthem" Value="6" />
+		<Answer Text="E.T." Value="5" />
+		<Answer Text="Someone Like You" Value="5" />
+		<Answer Text="Grenade" Value="4" />
+		<Answer Text="Moves Like Jagger" Value="4" />
+		<Answer Text="Last Friday Night (T.G.I.F.)" Value="2" />
+		<Answer Text="Hold It Against Me" Value="1" />
+		<Answer Text="Black and Yellow" Value="1" />
+		<Answer Text="S&amp;M" Value="1" />
+		<Answer Text="Give Me Everything" Value="1" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Top 10 Artists from 2011 was ranked higher?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
+		<Answer Text="Adele" Value="1" />
+		<Answer Text="Rihanna" Value="2" />
+		<Answer Text="Katy Perry" Value="3" />
+		<Answer Text="Lady Gaga" Value="4" />
+		<Answer Text="Lil Wayne" Value="5" />
+		<Answer Text="Bruno Mars" Value="6" />
+		<Answer Text="Nicki Minaj" Value="7" />
+		<Answer Text="Taylor Swift" Value="8" />
+		<Answer Text="Justin Bieber" Value="9" />
+		<Answer Text="Chris Brown" Value="10" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="International;Health" Used="y" Type="Sorted" Weight="1" QuestionText="Which of the following causes of death, each among 70 causes surveyed by the World Health Organization, was the ultimate cause of more deaths in 2002?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="% of deaths worldwide">
+		<Answer Text="Cardiovascular diseases" Value="29.34" />
+		<Answer Text="Infectious and parasitic diseases" Value="23.04" />
+		<Answer Text="Ischemic heart disease" Value="12.64" />
+		<Answer Text="Malignant neoplasms (cancers)" Value="12.49" />
+		<Answer Text="Cerebrovascular disease (Stroke)" Value="9.66" />
+		<Answer Text="Respiratory infections" Value="6.95" />
+		<Answer Text="Lower respiratory tract infections" Value="6.81" />
+		<Answer Text="Respiratory diseases" Value="6.49" />
+		<Answer Text="Unintentional injuries" Value="6.23" />
+		<Answer Text="HIV/AIDS" Value="4.87" />
+		<Answer Text="Chronic obstructive pulmonary disease" Value="4.82" />
+		<Answer Text="Perinatal conditions" Value="4.32" />
+		<Answer Text="Digestive diseases" Value="3.45" />
+		<Answer Text="Diarrhea diseases" Value="3.15" />
+		<Answer Text="Intentional injuries (Suicide, Violence, War, etc.)" Value="2.84" />
+		<Answer Text="Tuberculosis" Value="2.75" />
+		<Answer Text="Malaria" Value="2.23" />
+		<Answer Text="Lung cancers" Value="2.18" />
+		<Answer Text="Road traffic accidents" Value="2.09" />
+		<Answer Text="Childhood diseases" Value="1.97" />
+		<Answer Text="Neuropsychiatric disorders" Value="1.95" />
+		<Answer Text="Diabetes mellitus" Value="1.73" />
+		<Answer Text="Hypertensive heart disease" Value="1.6" />
+		<Answer Text="Suicide" Value="1.53" />
+		<Answer Text="Diseases of the genitourinary system" Value="1.49" />
+		<Answer Text="Stomach cancer" Value="1.49" />
+		<Answer Text="Cirrhosis of the liver" Value="1.38" />
+		<Answer Text="Nephritis/nephropathy" Value="1.19" />
+		<Answer Text="Colorectal cancer" Value="1.09" />
+		<Answer Text="Liver cancer" Value="1.08" />
+		<Answer Text="Measles" Value="1.07" />
+		<Answer Text="Violence" Value="0.98" />
+		<Answer Text="Maternal conditions" Value="0.89" />
+		<Answer Text="Congenital abnormalities" Value="0.86" />
+		<Answer Text="Nutritional deficiencies" Value="0.85" />
+		<Answer Text="Breast cancer" Value="0.84" />
+		<Answer Text="Esophageal cancer" Value="0.78" />
+		<Answer Text="Inflammatory heart disease" Value="0.71" />
+		<Answer Text="Alzheimer's disease and other dementias" Value="0.7" />
+		<Answer Text="Falls" Value="0.69" />
+		<Answer Text="Drowning" Value="0.67" />
+		<Answer Text="Poisoning" Value="0.61" />
+		<Answer Text="Lymphomas, multiple myeloma" Value="0.59" />
+		<Answer Text="Rheumatic heart disease" Value="0.57" />
+		<Answer Text="Oral and oropharynx cancers" Value="0.56" />
+		<Answer Text="Fires" Value="0.55" />
+		<Answer Text="Pertussis" Value="0.52" />
+		<Answer Text="Prostate cancer" Value="0.47" />
+		<Answer Text="Leukemia" Value="0.46" />
+		<Answer Text="Protein-energy malnutrition" Value="0.46" />
+		<Answer Text="Peptic ulcer disease" Value="0.46" />
+		<Answer Text="Endocrine/nutritional disorders" Value="0.43" />
+		<Answer Text="Cervical cancer" Value="0.42" />
+		<Answer Text="Asthma" Value="0.42" />
+		<Answer Text="Pancreatic cancer" Value="0.41" />
+		<Answer Text="Tetanus" Value="0.38" />
+		<Answer Text="Sexually transmitted diseases excluding HIV/AIDS" Value="0.32" />
+		<Answer Text="Bladder cancer" Value="0.31" />
+		<Answer Text="War" Value="0.3" />
+		<Answer Text="Meningitis" Value="0.3" />
+		<Answer Text="Syphilis" Value="0.28" />
+		<Answer Text="Neoplasms other than malignant" Value="0.26" />
+		<Answer Text="Ovarian cancer" Value="0.24" />
+		<Answer Text="Iron deficiency anemia" Value="0.24" />
+		<Answer Text="Tropical diseases excluding malaria" Value="0.23" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;TV" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these top 10 longest running US television series ran longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Meet the Press" Value="64 years" />
+		<Answer Text="CBS Evening News" Value="63 years" />
+		<Answer Text="Hallmark Hall of Fame (ABC)" Value="60 years" />
+		<Answer Text="Today (NBC)" Value="60 years" />
+		<Answer Text="Guiding Light (CBS)" Value="57 years" />
+		<Answer Text="Face the Nation (CBS)" Value="57 years" />
+		<Answer Text="It Is Written (syndication)" Value="56 years" />
+		<Answer Text="The Open Mind (syndication)" Value="55 years" />
+		<Answer Text="Candid Camera (CBS)" Value="55 years" />
+		<Answer Text="As the World Turns (CBS)" Value="54 years" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Sports::Baseball" Used="y" Type="Sorted" Weight="1" QuestionText="In terms of total career earnings prior to 2011, each of these people is among the 20 highest paid Major League Baseball players of all time.  Who was paid more in total?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Alex Rodriguez" Value="$296,416,252" />
+		<Answer Text="Derek Jeter" Value="$220,159,364" />
+		<Answer Text="Manny Ramirez" Value="$204,807,069" />
+		<Answer Text="Barry Bonds" Value="$188,245,322" />
+		<Answer Text="Randy Johnson" Value="$175,550,019" />
+		<Answer Text="Gary Sheffield" Value="$168,008,550" />
+		<Answer Text="Chipper Jones" Value="$155,552,133" />
+		<Answer Text="Greg Maddux" Value="$153,845,000" />
+		<Answer Text="Ken Griffey, Jr." Value="$151,703,682" />
+		<Answer Text="Todd Helton" Value="$151,590,000" />
+		<Answer Text="Roger Clemens" Value="$150,601,000" />
+		<Answer Text="Carlos Delgado" Value="$146,299,000" />
+		<Answer Text="Pedro Martínez" Value="$146,259,585" />
+		<Answer Text="Mike Mussina" Value="$144,533,619" />
+		<Answer Text="Mariano Rivera" Value="$144,441,825" />
+		<Answer Text="Jim Thome" Value="$141,461,667" />
+		<Answer Text="John Smoltz" Value="$135,595,446" />
+		<Answer Text="Carlos Beltran" Value="$134,952,782" />
+		<Answer Text="Magglio Ordonez" Value="$133,470,746" />
+		<Answer Text="Jason Giambi" Value="$131,808,996" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="By 2008, which of these artists had more weeks with a #1 hit on the Billboard Hot 100?  (Each is among the top 10 artists of all time by this ranking.)" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" weeks">
+		<Answer Text="Mariah Carey" Value="79" />
+		<Answer Text="The Beatles" Value="59" />
+		<Answer Text="Boyz II Men" Value="50" />
+		<Answer Text="Usher" Value="43" />
+		<Answer Text="Michael Jackson" Value="37" />
+		<Answer Text="Elton John" Value="34" />
+		<Answer Text="Janet Jackson" Value="33" />
+		<Answer Text="Beyonce" Value="32" />
+		<Answer Text="Madonna" Value="32" />
+		<Answer Text="Whitney Houston" Value="31" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="By their number of Billboard Hot 100 hits prior to 2008, each of these musicians or groups ranks among the 10 most popular of all time.  Who ranks higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" Hot 100 hits">
+		<Answer Text="Elvis Presley" Value="108" />
+		<Answer Text="James Brown" Value="89" />
+		<Answer Text="Ray Charles" Value="73" />
+		<Answer Text="Aretha Franklin" Value="73" />
+		<Answer Text="The Beatles" Value="72" />
+		<Answer Text="Elton John" Value="67" />
+		<Answer Text="Stevie Wonder" Value="63" />
+		<Answer Text="The Rolling Stones" Value="57" />
+		<Answer Text="Marvin Gaye" Value="56" />
+		<Answer Text="Frankie Valli &amp; The 4 Seasons" Value="56" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Cars" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these was among the 10 most sold motor vehicles in the USA in 2011.  Which one sold more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" thousand">
+		<Answer Text="Ford F-Series" Value="585" />
+		<Answer Text="Chevrolet Silverado" Value="415" />
+		<Answer Text="Toyota Camry" Value="309" />
+		<Answer Text="Nissan Altima" Value="269" />
+		<Answer Text="Ford Escape" Value="254" />
+		<Answer Text="Ford Fusion" Value="248" />
+		<Answer Text="Ram Pickup" Value="245" />
+		<Answer Text="Toyota Corolla/Matrix" Value="240" />
+		<Answer Text="Honda Accord" Value="236" />
+		<Answer Text="Chevrolet Cruze" Value="232" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Education" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these was among the 20 largest US colleges by total enrollment in fall 2010.  Which one had a higher enrollment?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" students">
+		<Answer Text="University of Phoenix" Value="532,672.00" />
+		<Answer Text="Community College of the Air Force" Value="324,573.00" />
+		<Answer Text="Kaplan University" Value="96,166.00" />
+		<Answer Text="Miami Dade College" Value="96,123.00" />
+		<Answer Text="Houston Community College" Value="78,780.00" />
+		<Answer Text="Ashford University" Value="78,353.00" />
+		<Answer Text="Arizona State University" Value="75,341.00" />
+		<Answer Text="Strayer University" Value="74,713.00" />
+		<Answer Text="Lone Star College System" Value="69,340.00" />
+		<Answer Text="Northern Virginia Community College" Value="67,175.00" />
+		<Answer Text="University of Minnesota, Twin Cities" Value="65,006.00" />
+		<Answer Text="Austin Community College District" Value="64,276.00" />
+		<Answer Text="The Ohio State University" Value="60,035.00" />
+		<Answer Text="Tarrant County College District" Value="62,488.00" />
+		<Answer Text="College of Southern Nevada" Value="59,691.00" />
+		<Answer Text="University of Florida" Value="59,614.00" />
+		<Answer Text="University of Central Florida" Value="59,360.00" />
+		<Answer Text="American River College" Value="57,959.00" />
+		<Answer Text="Pima Community College" Value="57,924.00" />
+		<Answer Text="East Los Angeles College" Value="57,340.00" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="By income per capita in 2000, each of these was among the 100 richest US towns or cities with at least 1000 households.   Which one had a higher income per capita?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Palm Beach, Florida" Value="$109,219" />
+		<Answer Text="Bloomfield Hills, Michigan" Value="$104,920" />
+		<Answer Text="Belle Meade, Tennessee" Value="$104,908" />
+		<Answer Text="Woodside, California" Value="$104,667" />
+		<Answer Text="Indian River Shores, Florida" Value="$102,511" />
+		<Answer Text="Cherry Hills Village, Colorado" Value="$99,996" />
+		<Answer Text="Portola Valley, California" Value="$99,621" />
+		<Answer Text="Newport Coast, California" Value="$98,770" />
+		<Answer Text="Hillsborough, California" Value="$98,643" />
+		<Answer Text="Piney Point Village, Texas" Value="$97,247" />
+		<Answer Text="Highland Park, Texas" Value="$97,008" />
+		<Answer Text="The Village of Indian Hill, Ohio" Value="$96,872" />
+		<Answer Text="Mission Hills, Kansas" Value="$95,405" />
+		<Answer Text="Los Altos Hills, California" Value="$92,840" />
+		<Answer Text="Gladwyne, Pennsylvania" Value="$90,940" />
+		<Answer Text="South Beach, Florida" Value="$90,938" />
+		<Answer Text="Scarsdale, New York" Value="$89,907" />
+		<Answer Text="Armonk, New York" Value="$89,907" />
+		<Answer Text="Ladue, Missouri" Value="$89,623" />
+		<Answer Text="Bronxville, New York" Value="$89,483" />
+		<Answer Text="Pelican Bay, Florida" Value="$89,063" />
+		<Answer Text="Hunters Creek Village, Texas" Value="$88,821" />
+		<Answer Text="Glencoe, Illinois" Value="$88,059" />
+		<Answer Text="Muttontown, New York" Value="$88,020" />
+		<Answer Text="Bunker Hill Village, Texas" Value="$86,434" />
+		<Answer Text="Tiburon, California" Value="$85,966" />
+		<Answer Text="Saddle River, New Jersey" Value="$85,934" />
+		<Answer Text="Winnetka, Illinois" Value="$84,134" />
+		<Answer Text="Greenville, Delaware" Value="$83,223" />
+		<Answer Text="New Canaan, Connecticut" Value="$82,049" />
+		<Answer Text="Medina, Washington" Value="$81,742" />
+		<Answer Text="Paradise Valley, Arizona" Value="$81,290" />
+		<Answer Text="North Barrington, Illinois" Value="$81,243" />
+		<Answer Text="Sausalito, California" Value="$81,040" />
+		<Answer Text="Longboat Key, Florida" Value="$80,963" />
+		<Answer Text="Fox Chapel, Pennsylvania" Value="$80,610" />
+		<Answer Text="Weston, Massachusetts" Value="$79,640" />
+		<Answer Text="Genesee, Colorado" Value="$79,180" />
+		<Answer Text="Clyde Hill, Washington" Value="$78,252" />
+		<Answer Text="Great Falls, Virginia" Value="$78,149" />
+		<Answer Text="Chappaqua, New York" Value="$77,835" />
+		<Answer Text="Darien, Connecticut" Value="$77,519" />
+		<Answer Text="Travilah, Maryland" Value="$77,129" />
+		<Answer Text="Lake Forest, Illinois" Value="$77,092" />
+		<Answer Text="Alpine, New Jersey" Value="$76,995" />
+		<Answer Text="Millburn, New Jersey" Value="$76,796" />
+		<Answer Text="Lloyd Harbor, New York" Value="$76,696" />
+		<Answer Text="Oak Brook, Illinois" Value="$76,688" />
+		<Answer Text="Monte Sereno, California" Value="$76,577" />
+		<Answer Text="Rye (city), New York" Value="$76,566" />
+		<Answer Text="Indian Wells, California" Value="$76,187" />
+		<Answer Text="South Barrington, Illinois" Value="$76,078" />
+		<Answer Text="Carlisle, Massachusetts" Value="$75,553" />
+		<Answer Text="Pound Ridge, New York" Value="$74,914" />
+		<Answer Text="Weston, Connecticut" Value="$74,817" />
+		<Answer Text="Greenwich, Connecticut" Value="$74,346" />
+		<Answer Text="Malibu, California" Value="$74,336" />
+		<Answer Text="New Castle, New York" Value="$73,888" />
+		<Answer Text="Rumson, New Jersey" Value="$73,692" />
+		<Answer Text="Larchmont, New York" Value="$73,675" />
+		<Answer Text="Westport, Connecticut" Value="$73,664" />
+		<Answer Text="Nichols Hills, Oklahoma" Value="$73,661" />
+		<Answer Text="Barrington Hills, Illinois" Value="$73,629" />
+		<Answer Text="Inverness, Illinois" Value="$73,271" />
+		<Answer Text="Harding Township, New Jersey" Value="$72,689" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="By dollar-value of exports in 2011, each of these was among the 100 most export productive countries in the world.  Which one ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="People's Republic of China" Value="$1,898,000,000,000" />
+		<Answer Text="United States" Value="$1,511,000,000,000" />
+		<Answer Text="Germany" Value="$1,408,000,000,000" />
+		<Answer Text="Japan" Value="$800,800,000,000" />
+		<Answer Text="France" Value="$578,400,000,000" />
+		<Answer Text="Netherlands" Value="$576,900,000,000" />
+		<Answer Text="South Korea" Value="$556,500,000,000" />
+		<Answer Text="Italy" Value="$522,000,000,000" />
+		<Answer Text="Russia" Value="$498,600,000,000" />
+		<Answer Text="United Kingdom" Value="$495,400,000,000" />
+		<Answer Text="Canada" Value="$450,600,000,000" />
+		<Answer Text="Hong Kong" Value="$427,900,000,000" />
+		<Answer Text="Singapore" Value="$409,200,000,000" />
+		<Answer Text="Saudi Arabia" Value="$350,700,000,000" />
+		<Answer Text="Mexico" Value="$336,300,000,000" />
+		<Answer Text="Belgium" Value="$332,000,000,000" />
+		<Answer Text="Spain" Value="$330,600,000,000" />
+		<Answer Text="Taiwan" Value="$325,100,000,000" />
+		<Answer Text="Switzerland" Value="$308,300,000,000" />
+		<Answer Text="India" Value="$303,700,000,000" />
+		<Answer Text="Australia" Value="$266,000,000,000" />
+		<Answer Text="United Arab Emirates" Value="$265,300,000,000" />
+		<Answer Text="Brazil" Value="$250,800,000,000" />
+		<Answer Text="Thailand" Value="$244,400,000,000" />
+		<Answer Text="Malaysia" Value="$212,700,000,000" />
+		<Answer Text="Indonesia" Value="$208,900,000,000" />
+		<Answer Text="Sweden" Value="$204,200,000,000" />
+		<Answer Text="Poland" Value="$197,100,000,000" />
+		<Answer Text="Austria" Value="$180,700,000,000" />
+		<Answer Text="Norway" Value="$159,800,000,000" />
+		<Answer Text="Czech Republic" Value="$146,700,000,000" />
+		<Answer Text="Turkey" Value="$133,000,000,000" />
+		<Answer Text="Iran" Value="$131,800,000,000" />
+		<Answer Text="Ireland" Value="$124,300,000,000" />
+		<Answer Text="Denmark" Value="$111,100,000,000" />
+		<Answer Text="Qatar" Value="$104,300,000,000" />
+		<Answer Text="Hungary" Value="$103,100,000,000" />
+		<Answer Text="Nigeria" Value="$101,100,000,000" />
+		<Answer Text="Vietnam" Value="$96,300,000,000" />
+		<Answer Text="Kuwait" Value="$94,470,000,000" />
+		<Answer Text="South Africa" Value="$94,210,000,000" />
+		<Answer Text="Venezuela" Value="$92,600,000,000" />
+		<Answer Text="Kazakhstan" Value="$88,890,000,000" />
+		<Answer Text="Chile" Value="$86,130,000,000" />
+		<Answer Text="Finland" Value="$85,400,000,000" />
+		<Answer Text="Argentina" Value="$83,710,000,000" />
+		<Answer Text="Algeria" Value="$78,510,000,000" />
+		<Answer Text="Iraq" Value="$78,380,000,000" />
+		<Answer Text="Puerto Rico" Value="$75,574,000,000" />
+		<Answer Text="Slovakia" Value="$75,300,000,000" />
+		<Answer Text="Angola" Value="$65,630,000,000" />
+		<Answer Text="Romania" Value="$62,500,000,000" />
+		<Answer Text="Israel" Value="$62,500,000,000" />
+		<Answer Text="Ukraine" Value="$60,670,000,000" />
+		<Answer Text="Colombia" Value="$56,500,000,000" />
+		<Answer Text="Portugal" Value="$55,800,000,000" />
+		<Answer Text="Philippines" Value="$54,170,000,000" />
+		<Answer Text="Peru" Value="$46,270,000,000" />
+		<Answer Text="Oman" Value="$43,530,000,000" />
+		<Answer Text="New Zealand" Value="$40,920,000,000" />
+		<Answer Text="Belarus" Value="$40,000,000,000" />
+		<Answer Text="Slovenia" Value="$28,960,000,000" />
+		<Answer Text="Egypt" Value="$27,960,000,000" />
+		<Answer Text="Greece" Value="$26,640,000,000" />
+		<Answer Text="Lithuania" Value="$26,530,000,000" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Education" Used="y" Type="Sorted" Weight="1" QuestionText="In 2011, Forbes Magazine ranked each of the following among the best 100 colleges in the United States.  Which one did they rank higher?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
+		<Answer Text="Williams College" Value="1" />
+		<Answer Text="Princeton University" Value="2" />
+		<Answer Text="West Point United States Military Academy" Value="3" />
+		<Answer Text="Amherst College" Value="4" />
+		<Answer Text="Stanford University" Value="5" />
+		<Answer Text="Harvard University" Value="6" />
+		<Answer Text="Haverford College" Value="7" />
+		<Answer Text="University of Chicago" Value="8" />
+		<Answer Text="Massachusetts Institute of Technology" Value="9" />
+		<Answer Text="United States Air Force Academy" Value="10" />
+		<Answer Text="Northwestern University" Value="11" />
+		<Answer Text="Claremont McKenna College" Value="12" />
+		<Answer Text="California Institute of Technology" Value="13" />
+		<Answer Text="Yale University" Value="14" />
+		<Answer Text="Carleton College" Value="15" />
+		<Answer Text="Swarthmore College" Value="16" />
+		<Answer Text="United States Naval Academy" Value="17" />
+		<Answer Text="University of Notre Dame" Value="18" />
+		<Answer Text="Wellesley College" Value="19" />
+		<Answer Text="Colby College" Value="20" />
+		<Answer Text="Brown University" Value="21" />
+		<Answer Text="Duke University" Value="22" />
+		<Answer Text="Pomona College" Value="23" />
+		<Answer Text="Vassar College" Value="24" />
+		<Answer Text="Washington and Lee University" Value="25" />
+		<Answer Text="Boston College" Value="26" />
+		<Answer Text="College of the Holy Cross" Value="27" />
+		<Answer Text="Rice University" Value="28" />
+		<Answer Text="Union College" Value="29" />
+		<Answer Text="Dartmouth College" Value="30" />
+		<Answer Text="Colorado College" Value="31" />
+		<Answer Text="Bates College" Value="32" />
+		<Answer Text="Lafayette College" Value="33" />
+		<Answer Text="Centre College" Value="34" />
+		<Answer Text="Wesleyan University" Value="35" />
+		<Answer Text="Whitman College" Value="36" />
+		<Answer Text="Colgate University" Value="37" />
+		<Answer Text="Bowdoin College" Value="38" />
+		<Answer Text="Tufts University" Value="39" />
+		<Answer Text="Middlebury College" Value="40" />
+		<Answer Text="Scripps College" Value="41" />
+		<Answer Text="Columbia University in the City of New York" Value="42" />
+		<Answer Text="Kenyon College" Value="43" />
+		<Answer Text="Harvey Mudd College" Value="44" />
+		<Answer Text="Emory University" Value="45" />
+		<Answer Text="University of Virginia-Main Campus" Value="46" />
+		<Answer Text="Georgetown University" Value="47" />
+		<Answer Text="Bucknell University" Value="48" />
+		<Answer Text="College of William and Mary" Value="49" />
+		<Answer Text="DePauw University" Value="50" />
+		<Answer Text="Cornell University" Value="51" />
+		<Answer Text="University of Pennsylvania" Value="52" />
+		<Answer Text="Vanderbilt University" Value="53" />
+		<Answer Text="Bryn Mawr College" Value="54" />
+		<Answer Text="University of California-Los Angeles" Value="55" />
+		<Answer Text="Smith College" Value="56" />
+		<Answer Text="Sewanee: The University of the South" Value="57" />
+		<Answer Text="Barnard College" Value="58" />
+		<Answer Text="Dickinson College" Value="59" />
+		<Answer Text="Hillsdale College" Value="60" />
+		<Answer Text="Davidson College" Value="61" />
+		<Answer Text="Connecticut College" Value="62" />
+		<Answer Text="Lawrence University" Value="63" />
+		<Answer Text="St Lawrence University" Value="64" />
+		<Answer Text="Virginia Military Institute" Value="65" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these was ranked by Forbes as one of the world's 100 most profitable companies for the 2011 fiscal year.  Which one earned more profit?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" billion">
+		<Answer Text="Exxon Mobil" Value="$41.1" />
+		<Answer Text="Apple" Value="$33" />
+		<Answer Text="Gazprom" Value="$31.7" />
+		<Answer Text="Royal Dutch Shell" Value="$30.9" />
+		<Answer Text="Chevron" Value="$26.9" />
+		<Answer Text="BP" Value="$25.7" />
+		<Answer Text="ICBC" Value="$25.1" />
+		<Answer Text="BHP Billiton" Value="$23.6" />
+		<Answer Text="Microsoft" Value="$23.5" />
+		<Answer Text="Volkswagen Group" Value="$21.5" />
+		<Answer Text="PetroChina" Value="$20.6" />
+		<Answer Text="China Construction Bank" Value="$20.5" />
+		<Answer Text="Vale" Value="$20.3" />
+		<Answer Text="Ford Motor" Value="$20.2" />
+		<Answer Text="Petrobras-Petróleo Brasil" Value="$20.1" />
+		<Answer Text="China Mobile" Value="$19.5" />
+		<Answer Text="JPMorgan Chase" Value="$19" />
+		<Answer Text="American Intl Group" Value="$17.8" />
+		<Answer Text="HSBC Holdings" Value="$16.2" />
+		<Answer Text="IBM" Value="$15.9" />
+		<Answer Text="Total" Value="$15.9" />
+		<Answer Text="Wells Fargo" Value="$15.9" />
+		<Answer Text="Bank of China" Value="$15.8" />
+		<Answer Text="Wal-Mart Stores" Value="$15.7" />
+		<Answer Text="Agricultural Bank of China" Value="$14.4" />
+		<Answer Text="General Electric" Value="$14.2" />
+		<Answer Text="Statoil" Value="$13.1" />
+		<Answer Text="Intel" Value="$12.9" />
+		<Answer Text="Vodafone" Value="$12.8" />
+		<Answer Text="ConocoPhillips" Value="$12.4" />
+		<Answer Text="Sinopec-China Petroleum" Value="$11.6" />
+		<Answer Text="Samsung Electronics" Value="$11.5" />
+		<Answer Text="Rosneft" Value="$11.3" />
+		<Answer Text="Citigroup" Value="$11.1" />
+		<Answer Text="Lukoil" Value="$10.4" />
+		<Answer Text="Berkshire Hathaway" Value="$10.3" />
+		<Answer Text="Nestlé" Value="$10.1" />
+		<Answer Text="Procter &amp; Gamble" Value="$10.1" />
+		<Answer Text="Roche Holding" Value="$10" />
+		<Answer Text="Pfizer" Value="$10" />
+		<Answer Text="Google" Value="$9.7" />
+		<Answer Text="Johnson &amp; Johnson" Value="$9.7" />
+		<Answer Text="AstraZeneca" Value="$9.6" />
+		<Answer Text="Oracle" Value="$9.4" />
+		<Answer Text="General Motors" Value="$9.2" />
+		<Answer Text="Novartis" Value="$9.1" />
+		<Answer Text="TNK-BP Holding" Value="$9" />
+		<Answer Text="ENI" Value="$8.9" />
+		<Answer Text="Philip Morris International" Value="$8.6" />
+		<Answer Text="Coca-Cola" Value="$8.6" />
+		<Answer Text="Ecopetrol" Value="$8.4" />
+		<Answer Text="GlaxoSmithKline" Value="$8.2" />
+		<Answer Text="Siemens" Value="$8.2" />
+		<Answer Text="Cnooc" Value="$8" />
+		<Answer Text="BASF" Value="$8" />
+		<Answer Text="BNP Paribas" Value="$7.9" />
+		<Answer Text="Saudi Basic Industries" Value="$7.8" />
+		<Answer Text="Portugal Telecom" Value="$7.6" />
+		<Answer Text="ING Group" Value="$7.5" />
+		<Answer Text="Sanofi" Value="$7.4" />
+		<Answer Text="Itaú Unibanco Holding" Value="$7.4" />
+		<Answer Text="China Shenhua Energy" Value="$7.3" />
+		<Answer Text="Daimler" Value="$7.3" />
+		<Answer Text="Westpac Banking Group" Value="$7.2" />
+		<Answer Text="Cisco Systems" Value="$7" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;People" Used="y" Type="Sorted" Weight="1" QuestionText="In a 1999 survey by Gallup, each of these individuals was ranked among the 10 people in the world most admired by US Americans for their actions in the 20th century.  Who was ranked higher?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
+		<Answer Text="Mother Teresa" Value="1" />
+		<Answer Text="Martin Luther King, Jr." Value="2" />
+		<Answer Text="John F. Kennedy" Value="3" />
+		<Answer Text="Albert Einstein" Value="4" />
+		<Answer Text="Helen Keller" Value="5" />
+		<Answer Text="Franklin D. Roosevelt" Value="6" />
+		<Answer Text="Billy Graham" Value="7" />
+		<Answer Text="Pope John Paul II" Value="8" />
+		<Answer Text="Eleanor Roosevelt" Value="9" />
+		<Answer Text="Winston Churchill" Value="10" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Sports::Hockey" Used="y" Type="Sorted" Weight="1" QuestionText="Which hockey team had more apperances in the Stanley Cup finals, as of 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" appearances for the Cup">
+		<Answer Text="Montreal Canadiens" Value="34" />
+		<Answer Text="Detroit Red Wings" Value="24" />
+		<Answer Text="Toronto Maple Leafs" Value="21" />
+		<Answer Text="Boston Bruins" Value="18" />
+		<Answer Text="Chicago Blackhawks" Value="11" />
+		<Answer Text="New York Rangers" Value="10" />
+		<Answer Text="Philadelphia Flyers" Value="8" />
+		<Answer Text="Edmonton Oilers" Value="7" />
+		<Answer Text="New York Islanders" Value="5" />
+		<Answer Text="New Jersey Devils" Value="4" />
+		<Answer Text="Pittsburgh Penguins" Value="4" />
+		<Answer Text="Dallas Stars" Value="4" />
+		<Answer Text="Calgary Flames" Value="3" />
+		<Answer Text="St. Louis Blues" Value="3" />
+		<Answer Text="Vancouver Canucks" Value="3" />
+		<Answer Text="Colorado Avalanche" Value="2" />
+		<Answer Text="Anaheim Ducks" Value="2" />
+		<Answer Text="Carolina Hurricanes" Value="2" />
+		<Answer Text="Buffalo Sabres" Value="2" />
+		<Answer Text="Tampa Bay Lightning" Value="1" />
+		<Answer Text="Florida Panthers" Value="1" />
+		<Answer Text="Los Angeles Kings" Value="1" />
+		<Answer Text="Ottawa Senators" Value="1" />
+		<Answer Text="Washington Capitals" Value="1" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Linguistics" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these is among the 100 most common written words in the Oxford English Corpus.  Which word is more common?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
+		<Answer Text="the" Value="1" />
+		<Answer Text="be" Value="2" />
+		<Answer Text="to" Value="3" />
+		<Answer Text="of" Value="4" />
+		<Answer Text="and" Value="5" />
+		<Answer Text="a" Value="6" />
+		<Answer Text="in" Value="7" />
+		<Answer Text="that" Value="8" />
+		<Answer Text="have" Value="9" />
+		<Answer Text="I" Value="10" />
+		<Answer Text="it" Value="11" />
+		<Answer Text="for" Value="12" />
+		<Answer Text="not" Value="13" />
+		<Answer Text="on" Value="14" />
+		<Answer Text="with" Value="15" />
+		<Answer Text="he" Value="16" />
+		<Answer Text="as" Value="17" />
+		<Answer Text="you" Value="18" />
+		<Answer Text="do" Value="19" />
+		<Answer Text="at" Value="20" />
+		<Answer Text="this" Value="21" />
+		<Answer Text="but" Value="22" />
+		<Answer Text="his" Value="23" />
+		<Answer Text="by" Value="24" />
+		<Answer Text="from" Value="25" />
+		<Answer Text="they" Value="26" />
+		<Answer Text="we" Value="27" />
+		<Answer Text="say" Value="28" />
+		<Answer Text="her" Value="29" />
+		<Answer Text="she" Value="30" />
+		<Answer Text="or" Value="31" />
+		<Answer Text="an" Value="32" />
+		<Answer Text="will" Value="33" />
+		<Answer Text="my" Value="34" />
+		<Answer Text="one" Value="35" />
+		<Answer Text="all" Value="36" />
+		<Answer Text="would" Value="37" />
+		<Answer Text="there" Value="38" />
+		<Answer Text="their" Value="39" />
+		<Answer Text="what" Value="40" />
+		<Answer Text="so" Value="41" />
+		<Answer Text="up" Value="42" />
+		<Answer Text="out" Value="43" />
+		<Answer Text="if" Value="44" />
+		<Answer Text="about" Value="45" />
+		<Answer Text="who" Value="46" />
+		<Answer Text="get" Value="47" />
+		<Answer Text="which" Value="48" />
+		<Answer Text="go" Value="49" />
+		<Answer Text="me" Value="50" />
+		<Answer Text="when" Value="51" />
+		<Answer Text="make" Value="52" />
+		<Answer Text="can" Value="53" />
+		<Answer Text="like" Value="54" />
+		<Answer Text="time" Value="55" />
+		<Answer Text="no" Value="56" />
+		<Answer Text="just" Value="57" />
+		<Answer Text="him" Value="58" />
+		<Answer Text="know" Value="59" />
+		<Answer Text="take" Value="60" />
+		<Answer Text="person" Value="61" />
+		<Answer Text="into" Value="62" />
+		<Answer Text="year" Value="63" />
+		<Answer Text="your" Value="64" />
+		<Answer Text="good" Value="65" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="By GDP per capita, each of these was among the world's 100 richest countries in 2011.  Which one ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" USD">
+		<Answer Text="Monaco" Value="178,800.00" />
+		<Answer Text="Liechtenstein" Value="125,600.00" />
+		<Answer Text="Luxembourg" Value="125,000.00" />
+		<Answer Text="Norway" Value="102,200.00" />
+		<Answer Text="Qatar" Value="93,700.00" />
+		<Answer Text="Switzerland" Value="87,200.00" />
+		<Answer Text="United Arab Emirates" Value="69,600.00" />
+		<Answer Text="Australia" Value="69,200.00" />
+		<Answer Text="Kuwait" Value="65,900.00" />
+		<Answer Text="Sweden" Value="62,900.00" />
+		<Answer Text="Denmark" Value="59,800.00" />
+		<Answer Text="Jersey" Value="57,600.00" />
+		<Answer Text="Falkland Islands" Value="53,000.00" />
+		<Answer Text="Austria" Value="51,700.00" />
+		<Answer Text="Canada" Value="51,700.00" />
+		<Answer Text="Finland" Value="51,500.00" />
+		<Answer Text="Netherlands" Value="51,500.00" />
+		<Answer Text="Singapore" Value="50,800.00" />
+		<Answer Text="Belgium" Value="50,700.00" />
+		<Answer Text="San Marino" Value="50,600.00" />
+		<Answer Text="United States" Value="48,400.00" />
+		<Answer Text="Ireland" Value="47,500.00" />
+		<Answer Text="Cayman Islands" Value="47,000.00" />
+		<Answer Text="Japan" Value="45,900.00" />
+		<Answer Text="Faroe Islands" Value="45,300.00" />
+		<Answer Text="Iceland" Value="45,300.00" />
+		<Answer Text="Germany" Value="44,500.00" />
+		<Answer Text="Guernsey" Value="43,400.00" />
+		<Answer Text="France" Value="43,100.00" />
+		<Answer Text="United Kingdom" Value="39,600.00" />
+		<Answer Text="Macau" Value="39,500.00" />
+		<Answer Text="New Zealand" Value="39,300.00" />
+		<Answer Text="Virgin Islands, British" Value="38,900.00" />
+		<Answer Text="Brunei" Value="38,800.00" />
+		<Answer Text="Gibraltar" Value="38,800.00" />
+		<Answer Text="Greenland" Value="37,500.00" />
+		<Answer Text="Italy" Value="36,800.00" />
+		<Answer Text="Curaçao" Value="36,200.00" />
+		<Answer Text="European Union" Value="35,200.00" />
+		<Answer Text="Isle of Man" Value="34,200.00" />
+		<Answer Text="Hong Kong" Value="34,000.00" />
+		<Answer Text="Spain" Value="32,900.00" />
+		<Answer Text="Israel" Value="32,800.00" />
+		<Answer Text="Greece" Value="29,000.00" />
+		<Answer Text="Equatorial Guinea" Value="29,000.00" />
+		<Answer Text="Slovenia" Value="26,200.00" />
+		<Answer Text="Bahamas, The" Value="25,900.00" />
+		<Answer Text="French Polynesia" Value="24,300.00" />
+		<Answer Text="Korea, South" Value="23,900.00" />
+		<Answer Text="Puerto Rico" Value="23,500.00" />
+		<Answer Text="Aruba" Value="23,300.00" />
+		<Answer Text="Cyprus" Value="22,900.00" />
+		<Answer Text="Portugal" Value="22,500.00" />
+		<Answer Text="Oman" Value="22,100.00" />
+		<Answer Text="Sint Maarten" Value="21,900.00" />
+		<Answer Text="Taiwan" Value="21,900.00" />
+		<Answer Text="Bahrain" Value="21,700.00" />
+		<Answer Text="Czech Republic" Value="21,600.00" />
+		<Answer Text="Saudi Arabia" Value="21,400.00" />
+		<Answer Text="Malta" Value="21,300.00" />
+		<Answer Text="Trinidad and Tobago" Value="18,000.00" />
+		<Answer Text="Slovakia" Value="17,700.00" />
+		<Answer Text="Guam" Value="17,500.00" />
+		<Answer Text="Estonia" Value="17,500.00" />
+		<Answer Text="Barbados" Value="15,300.00" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;People" Used="y" Type="Sorted" Weight="1" QuestionText="Each of the following was one of the 10 most commonly given names to male babies born in 2007 in the USA.  Which one was more common?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" most common">
+		<Answer Text="Jacob" Value="1st" />
+		<Answer Text="Michael" Value="2nd" />
+		<Answer Text="Ethan" Value="3rd" />
+		<Answer Text="Joshua" Value="4th" />
+		<Answer Text="Daniel" Value="5th" />
+		<Answer Text="Christopher" Value="6th" />
+		<Answer Text="Anthony" Value="7th" />
+		<Answer Text="William" Value="8th" />
+		<Answer Text="Matthew" Value="9th" />
+		<Answer Text="Andrew" Value="10th" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;People" Used="y" Type="Sorted" Weight="1" QuestionText="Each of the following was one of the 10 most commonly given names to female babies born in 2007 in the USA.  Which one was more common?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" most common">
+		<Answer Text="Emily" Value="1st" />
+		<Answer Text="Isabella" Value="2nd" />
+		<Answer Text="Emma" Value="3rd" />
+		<Answer Text="Ava" Value="4th" />
+		<Answer Text="Madison" Value="5th" />
+		<Answer Text="Sophia" Value="6th" />
+		<Answer Text="Olivia" Value="7th" />
+		<Answer Text="Abigail" Value="8th" />
+		<Answer Text="Hannah" Value="9th" />
+		<Answer Text="Elizabeth" Value="10th" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="International" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these cities ranks among the top 50 in the world by their number of buildings taller than 100m.  Which one has more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" buildings over 100m">
+		<Answer Text="Hong Kong" Value="2354" />
+		<Answer Text="New York City" Value="794" />
+		<Answer Text="Tokyo" Value="556" />
+		<Answer Text="Shanghai" Value="430" />
+		<Answer Text="Dubai" Value="403" />
+		<Answer Text="Bangkok" Value="355" />
+		<Answer Text="Chicago" Value="341" />
+		<Answer Text="Guangzhou" Value="295" />
+		<Answer Text="Seoul" Value="282" />
+		<Answer Text="Kuala Lumpur" Value="244" />
+		<Answer Text="Singapore" Value="238" />
+		<Answer Text="Shenzhen" Value="235" />
+		<Answer Text="Chongqing" Value="226" />
+		<Answer Text="Toronto" Value="216" />
+		<Answer Text="Sao Paulo" Value="194" />
+		<Answer Text="Metro Manila" Value="186" />
+		<Answer Text="Panama City" Value="185" />
+		<Answer Text="Osaka" Value="172" />
+		<Answer Text="Beijing" Value="172" />
+		<Answer Text="Jakarta" Value="170" />
+		<Answer Text="Miami" Value="137" />
+		<Answer Text="Moscow" Value="132" />
+		<Answer Text="Tianjin" Value="131" />
+		<Answer Text="Macau" Value="131" />
+		<Answer Text="Buenos Aires" Value="122" />
+		<Answer Text="Mumbai" Value="118" />
+		<Answer Text="Mexico City" Value="114" />
+		<Answer Text="Nanjing" Value="110" />
+		<Answer Text="Honolulu" Value="104" />
+		<Answer Text="Sydney" Value="102" />
+		<Answer Text="Dalian" Value="93" />
+		<Answer Text="Istanbul" Value="90" />
+		<Answer Text="Houston" Value="86" />
+		<Answer Text="Doha" Value="78" />
+		<Answer Text="Melbourne" Value="62" />
+		<Answer Text="Brisbane" Value="51" />
+		<Answer Text="London" Value="48" />
+		<Answer Text="San Francisco" Value="37" />
+		<Answer Text="Frankfurt" Value="29" />
+		<Answer Text="Benidorm" Value="27" />
+		<Answer Text="Barcelona" Value="15" />
+		<Answer Text="Warsaw" Value="15" />
+		<Answer Text="Madrid" Value="13" />
+		<Answer Text="Cincinnati" Value="13" />
+		<Answer Text="Brussel" Value="12" />
+		<Answer Text="Santo Domingo" Value="11" />
+		<Answer Text="Kolkata" Value="11" />
+		<Answer Text="Milan" Value="10" />
+		<Answer Text="Vienna" Value="10" />
+		<Answer Text="Naples" Value="8" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Hot 100 Hits from 2001 was #1 for longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" weeks">
+		<Answer Text="All For You" Value="7" />
+		<Answer Text="Fallin'" Value="6" />
+		<Answer Text="Family Affair" Value="6" />
+		<Answer Text="U Got It Bad" Value="6" />
+		<Answer Text="Lady Marmalade" Value="5" />
+		<Answer Text="I'm Real" Value="5" />
+		<Answer Text="Stutter" Value="4" />
+		<Answer Text="U Remind Me" Value="4" />
+		<Answer Text="How You Remind Me" Value="4" />
+		<Answer Text="It Wasn't Me" Value="2" />
+		<Answer Text="Butterfly" Value="2" />
+		<Answer Text="Bootylicious" Value="2" />
+		<Answer Text="Ms Jackson" Value="1" />
+		<Answer Text="Angel" Value="1" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following African rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
+		<Answer Text="Nile - Kagera River" Value="6650" />
+		<Answer Text="Congo River - Chambeshi River" Value="4700" />
+		<Answer Text="Niger River" Value="4200" />
+		<Answer Text="Zambezi" Value="2693" />
+		<Answer Text="Ubangi River - Uele River" Value="2270" />
+		<Answer Text="Kasai River" Value="2153" />
+		<Answer Text="Orange River" Value="2092" />
+		<Answer Text="Limpopo River" Value="1800" />
+		<Answer Text="Senegal River" Value="1641" />
+		<Answer Text="Blue Nile" Value="1600" />
+		<Answer Text="Okavango River" Value="1600" />
+		<Answer Text="Volta River" Value="1600" />
+		<Answer Text="Jubba River - Shebelle River" Value="1580" />
+		<Answer Text="Benue River" Value="1400" />
+		<Answer Text="Lomami River" Value="1280" />
+		<Answer Text="Draa River" Value="1218" />
+		<Answer Text="Vaal River" Value="1210" />
+		<Answer Text="Shire River" Value="1200" />
+		<Answer Text="Sankuru River" Value="1150" />
+		<Answer Text="Kwango River" Value="1100" />
+		<Answer Text="Gambia River" Value="1094" />
+		<Answer Text="Aruwimi" Value="1030" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following Asian rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
+		<Answer Text="Yangtze River" Value="6300" />
+		<Answer Text="Yenisei River - Angara River - Selenge River" Value="5539" />
+		<Answer Text="Yellow River" Value="5464" />
+		<Answer Text="Ob River - Irtysh" Value="5410" />
+		<Answer Text="Amur River - Argun River (Asia)" Value="4444" />
+		<Answer Text="Lena River" Value="4400" />
+		<Answer Text="Mekong" Value="4350" />
+		<Answer Text="Shatt al-Arab - Euphrates" Value="3596" />
+		<Answer Text="Indus River" Value="3180" />
+		<Answer Text="Syr Darya - Naryn River" Value="3078" />
+		<Answer Text="Salween River" Value="3060" />
+		<Answer Text="Lower Tunguska" Value="2989" />
+		<Answer Text="Brahmaputra River - Tsangpo River" Value="2948" />
+		<Answer Text="Vilyuy" Value="2650" />
+		<Answer Text="Ganges River - Hooghly River - Padma River" Value="2620" />
+		<Answer Text="Amu Darya - Panj" Value="2620" />
+		<Answer Text="Kolyma River" Value="2513" />
+		<Answer Text="Ob River - Katun River" Value="2490" />
+		<Answer Text="Ishim River" Value="2450" />
+		<Answer Text="Olenyok River" Value="2292" />
+		<Answer Text="Aldan River" Value="2273" />
+		<Answer Text="Pearl River (China) - Zhujiang River" Value="2200" />
+		<Answer Text="Ayeyarwady River" Value="2170" />
+		<Answer Text="Tarim River" Value="2100" />
+		<Answer Text="Vitim River" Value="1978" />
+		<Answer Text="Tigris" Value="1950" />
+		<Answer Text="Songhua River" Value="1927" />
+		<Answer Text="Stony Tunguska" Value="1865" />
+		<Answer Text="Indigirka River" Value="1726" />
+		<Answer Text="Khatanga River" Value="1600" />
+		<Answer Text="Tobol River" Value="1591" />
+		<Answer Text="Han River (Hanshui)" Value="1532" />
+		<Answer Text="Yenisei River - Little Yenisei River" Value="1480" />
+		<Answer Text="Godavari River" Value="1465" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following Australian rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
+		<Answer Text="Murray River - Darling River" Value="3672" />
+		<Answer Text="Murrumbidgee River" Value="1600" />
+		<Answer Text="Cooper Creek - Barcoo River" Value="1420" />
+		<Answer Text="Warburton Creek - Georgina River" Value="1400" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following European rivers is among the 175 longest in the world. Which one s longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
+		<Answer Text="Volga" Value="3645" />
+		<Answer Text="Danube - Breg River" Value="2888" />
+		<Answer Text="Ural River" Value="2428" />
+		<Answer Text="Dnieper River" Value="2287" />
+		<Answer Text="Don River, Russia" Value="1870" />
+		<Answer Text="Pechora River" Value="1809" />
+		<Answer Text="Kama River" Value="1805" />
+		<Answer Text="Oka River" Value="1500" />
+		<Answer Text="Belaya River" Value="1420" />
+		<Answer Text="Dniester" Value="1411" />
+		<Answer Text="Vyatka River" Value="1370" />
+		<Answer Text="Mtkvari River" Value="1364" />
+		<Answer Text="Northern Dvina - Sukhona River" Value="1302" />
+		<Answer Text="Elbe - Vltava" Value="1252" />
+		<Answer Text="Rhine" Value="1233" />
+		<Answer Text="Desna River" Value="1130" />
+		<Answer Text="Vychegda River" Value="1130" />
+		<Answer Text="Seversky Donets" Value="1078" />
+		<Answer Text="Vistula" Value="1047" />
+		<Answer Text="Daugava" Value="1020" />
+		<Answer Text="Loire River" Value="1012" />
+		<Answer Text="Khoper River" Value="1010" />
+		<Answer Text="Tagus" Value="1006" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following North American rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
+		<Answer Text="Mississippi River - Missouri River - Jefferson River" Value="6275" />
+		<Answer Text="Mackenzie River - Peace River (Canada) - Finlay River" Value="4241" />
+		<Answer Text="Yukon River" Value="3185" />
+		<Answer Text="Saint Lawrence River - Niagara River - Detroit River - St. Clair River - St. Marys River (Michigan-Ontario) - Saint Louis River" Value="3058" />
+		<Answer Text="Rio Grande" Value="3057" />
+		<Answer Text="Nelson River - Saskatchewan River" Value="2570" />
+		<Answer Text="Arkansas River" Value="2348" />
+		<Answer Text="Colorado River" Value="2333" />
+		<Answer Text="Columbia River" Value="2250" />
+		<Answer Text="Red River (Mississippi watershed)" Value="2188" />
+		<Answer Text="Ohio River - Allegheny River" Value="2102" />
+		<Answer Text="Snake River" Value="1670" />
+		<Answer Text="Churchill River (Hudson Bay)" Value="1600" />
+		<Answer Text="Platte River" Value="1594" />
+		<Answer Text="Pecos River" Value="1490" />
+		<Answer Text="Colorado River (Texas)" Value="1438" />
+		<Answer Text="Fraser River" Value="1368" />
+		<Answer Text="Brazos River" Value="1352" />
+		<Answer Text="Ottawa River" Value="1271" />
+		<Answer Text="Mississippi River" Value="1236" />
+		<Answer Text="Athabasca River" Value="1231" />
+		<Answer Text="Canadian River" Value="1223" />
+		<Answer Text="North Saskatchewan River" Value="1220" />
+		<Answer Text="Green River (Utah)" Value="1175" />
+		<Answer Text="Milk River (Montana-Alberta)" Value="1173" />
+		<Answer Text="James River (Dakotas)" Value="1143" />
+		<Answer Text="Cimarron River (Arkansas River)" Value="1123" />
+		<Answer Text="Liard River" Value="1115" />
+		<Answer Text="Cumberland River" Value="1105" />
+		<Answer Text="White River (Arkansas)" Value="1102" />
+		<Answer Text="Yellowstone River" Value="1080" />
+		<Answer Text="Kuskokwim River" Value="1050" />
+		<Answer Text="Tennessee River" Value="1049" />
+		<Answer Text="Gila River" Value="1015" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following South American rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
+		<Answer Text="Amazon River - Ucayali River - Apurímac River" Value="6400" />
+		<Answer Text="Paraná River - Río de la Plata" Value="4880" />
+		<Answer Text="Tocantins River - Araguaia River" Value="3650" />
+		<Answer Text="Madeira River - Mamoré River - Río Grande (Bolivia) - Caine River - Rocha" Value="3380" />
+		<Answer Text="Purus" Value="3211" />
+		<Answer Text="São Francisco River" Value="3180" />
+		<Answer Text="Araguaia River" Value="2627" />
+		<Answer Text="Japurá River" Value="2615" />
+		<Answer Text="River Paraguay" Value="2549" />
+		<Answer Text="Pilcomayo River" Value="2500" />
+		<Answer Text="Juruá" Value="2410" />
+		<Answer Text="Rio Negro (Amazon)" Value="2250" />
+		<Answer Text="Orinoco" Value="2101" />
+		<Answer Text="Xingu River" Value="2100" />
+		<Answer Text="Salado River" Value="2010" />
+		<Answer Text="Tapajós" Value="1900" />
+		<Answer Text="Guaporé" Value="1749" />
+		<Answer Text="Uruguay River" Value="1610" />
+		<Answer Text="Beni River" Value="1599" />
+		<Answer Text="Içá River" Value="1575" />
+		<Answer Text="Magdalena River" Value="1550" />
+		<Answer Text="Río Grande (Bolivia)" Value="1438" />
+		<Answer Text="Marañón River (Peru)" Value="1415" />
+		<Answer Text="Grande River" Value="1360" />
+		<Answer Text="Cauca River" Value="1350" />
+		<Answer Text="Iguassu River" Value="1320" />
+		<Answer Text="Iriri River" Value="1300" />
+		<Answer Text="Juruena River" Value="1240" />
+		<Answer Text="Madre de Dios River" Value="1130" />
+		<Answer Text="Tietê River" Value="1130" />
+		<Answer Text="Paraíba do Sul River" Value="1120" />
+		<Answer Text="Huallaga River" Value="1100" />
+		<Answer Text="Bermejo River" Value="1050" />
+		<Answer Text="Guaviare River" Value="1050" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Sports::Football" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these teams was earlier in their first winning of the Superbowl?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Green Bay Packers" Value="1/15/1967" />
+		<Answer Text="New York Jets" Value="1/12/1969" />
+		<Answer Text="Kansas City Chiefs" Value="1/11/1970" />
+		<Answer Text="Baltimore Colts" Value="1/17/1971" />
+		<Answer Text="Dallas Cowboys" Value="1/16/1972" />
+		<Answer Text="Miami Dolphins" Value="1/14/1973" />
+		<Answer Text="Pittsburgh Steelers" Value="1/12/1975" />
+		<Answer Text="Oakland Raiders" Value="1/9/1977" />
+		<Answer Text="San Francisco 49ers" Value="1/24/1982" />
+		<Answer Text="Washington Redskins" Value="1/30/1983" />
+		<Answer Text="Los Angeles Raiders" Value="1/22/1984" />
+		<Answer Text="Chicago Bears" Value="1/26/1986" />
+		<Answer Text="New York Giants" Value="1/25/1987" />
+		<Answer Text="Denver Broncos" Value="1/25/1998" />
+		<Answer Text="St. Louis Rams" Value="1/30/2000" />
+		<Answer Text="Baltimore Ravens" Value="1/28/2001" />
+		<Answer Text="New England Patriots" Value="2/3/2002" />
+		<Answer Text="Tampa Bay Buccaneers" Value="1/26/2003" />
+		<Answer Text="Indianapolis Colts" Value="2/4/2007" />
+		<Answer Text="New Orleans Saints" Value="2/7/2010" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Sports::Baseball" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these teams was earlier in their first winning of the World Series?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Boston Americans" Value="1903" />
+		<Answer Text="New York Giants" Value="1905" />
+		<Answer Text="Chicago White Sox" Value="1906" />
+		<Answer Text="Chicago Cubs" Value="1907" />
+		<Answer Text="Pittsburgh Pirates" Value="1909" />
+		<Answer Text="Philadelphia Athletics" Value="1910" />
+		<Answer Text="Boston Red Sox" Value="1912" />
+		<Answer Text="Boston Braves" Value="1914" />
+		<Answer Text="Cincinnati Reds" Value="1919" />
+		<Answer Text="Cleveland Indians" Value="1920" />
+		<Answer Text="New York Yankees" Value="1923" />
+		<Answer Text="Washington Senators" Value="1924" />
+		<Answer Text="St. Louis Cardinals" Value="1926" />
+		<Answer Text="Detroit Tigers" Value="1935" />
+		<Answer Text="Brooklyn Dodgers" Value="1955" />
+		<Answer Text="Milwaukee Braves" Value="1957" />
+		<Answer Text="Los Angeles Dodgers" Value="1959" />
+		<Answer Text="Baltimore Orioles" Value="1966" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="International;Sports::Soccer" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these countries was earlier in their first winning of the World Cup?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Uruguay" Value="1930" />
+		<Answer Text="Italy" Value="1938" />
+		<Answer Text="West Germany" Value="1958" />
+		<Answer Text="Brazil" Value="1962" />
+		<Answer Text="England" Value="1970" />
+		<Answer Text="Argentina" Value="1982" />
+		<Answer Text="France" Value="2002" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Sports::Football" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these Superbowl MVPs was earlier in first winning the title?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Bart Starr" Value="1967" />
+		<Answer Text="Joe Namath" Value="1969" />
+		<Answer Text="Len Dawson" Value="1970" />
+		<Answer Text="Chuck Howley" Value="1971" />
+		<Answer Text="Roger Staubach" Value="1972" />
+		<Answer Text="Jake Scott" Value="1973" />
+		<Answer Text="Larry Csonka" Value="1974" />
+		<Answer Text="Franco Harris" Value="1975" />
+		<Answer Text="Lynn Swann" Value="1976" />
+		<Answer Text="Fred Biletnikoff" Value="1977" />
+		<Answer Text="Harvey Martin" Value="1978" />
+		<Answer Text="Randy White" Value="1978" />
+		<Answer Text="Terry Bradshaw" Value="1979" />
+		<Answer Text="Jim Plunkett" Value="1981" />
+		<Answer Text="Joe Montana" Value="1982" />
+		<Answer Text="John Riggins" Value="1983" />
+		<Answer Text="Marcus Allen" Value="1984" />
+		<Answer Text="Richard Dent" Value="1986" />
+		<Answer Text="Phil Simms" Value="1987" />
+		<Answer Text="Doug Williams" Value="1988" />
+		<Answer Text="Jerry Rice" Value="1989" />
+		<Answer Text="Ottis Anderson" Value="1991" />
+		<Answer Text="Mark Rypien" Value="1992" />
+		<Answer Text="Troy Aikman" Value="1993" />
+		<Answer Text="Emmitt Smith" Value="1994" />
+		<Answer Text="Steve Young" Value="1995" />
+		<Answer Text="Larry Brown" Value="1996" />
+		<Answer Text="Desmond Howard" Value="1997" />
+		<Answer Text="Terrell Davis" Value="1998" />
+		<Answer Text="John Elway" Value="1999" />
+		<Answer Text="Kurt Warner" Value="2000" />
+		<Answer Text="Ray Lewis" Value="2001" />
+		<Answer Text="Tom Brady" Value="2002" />
+		<Answer Text="Dexter Jackson" Value="2003" />
+		<Answer Text="Deion Branch" Value="2005" />
+		<Answer Text="Hines Ward" Value="2006" />
+		<Answer Text="Peyton Manning" Value="2007" />
+		<Answer Text="Eli Manning" Value="2008" />
+		<Answer Text="Santonio Holmes" Value="2009" />
+		<Answer Text="Drew Brees" Value="2010" />
+		<Answer Text="Aaron Rodgers" Value="2011" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Sports::Hockey" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these hockey teams was earlier in their first Stanley Cup victory?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Montreal Hockey Club" Value="3/17/1893" />
+		<Answer Text="Montreal Victorias" Value="3/8/1895" />
+		<Answer Text="Winnipeg Victorias" Value="3/17/1893" />
+		<Answer Text="Montreal Shamrocks" Value="3/6/1897" />
+		<Answer Text="Montreal HC" Value="1/29/1901" />
+		<Answer Text="Ottawa HC" Value="1/21/1902" />
+		<Answer Text="Montreal Wanderers" Value="3/3/1905" />
+		<Answer Text="Kenora Thistles" Value="2/27/1906" />
+		<Answer Text="Quebec Bulldogs" Value="3/12/1910" />
+		<Answer Text="Toronto Hockey Club" Value="3/5/1912" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Sports::Boxing" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Each of these people is a heavyweight boxing champion according to at least one recognizing body.  Who was earlier in their first reign as champion?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="John L. Sullivan" Value="8/29/1882" />
+		<Answer Text="James J. Corbett" Value="9/7/1892" />
+		<Answer Text="Bob Fitzsimmons" Value="3/17/1897" />
+		<Answer Text="James J. Jeffries" Value="6/9/1899" />
+		<Answer Text="Marvin Hart" Value="7/3/1905" />
+		<Answer Text="Tommy Burns" Value="2/23/1906" />
+		<Answer Text="Jack Johnson" Value="12/26/1908" />
+		<Answer Text="Jess Willard" Value="4/5/1915" />
+		<Answer Text="Jack Dempsey" Value="7/4/1919" />
+		<Answer Text="Gene Tunney" Value="9/23/1926" />
+		<Answer Text="Max Schmeling" Value="6/12/1930" />
+		<Answer Text="Jack Sharkey" Value="6/21/1932" />
+		<Answer Text="Primo Carnera" Value="6/29/1933" />
+		<Answer Text="Max Baer" Value="6/14/1934" />
+		<Answer Text="James J. Braddock" Value="6/13/1935" />
+		<Answer Text="Joe Louis" Value="6/22/1937" />
+		<Answer Text="Ezzard Charles" Value="6/22/1949" />
+		<Answer Text="Lee Savold" Value="6/6/1950" />
+		<Answer Text="Jersey Joe Walcott" Value="7/18/1951" />
+		<Answer Text="Rocky Marciano" Value="9/23/1952" />
+		<Answer Text="Floyd Patterson" Value="11/30/1956" />
+		<Answer Text="Ingemar Johansson" Value="6/26/1959" />
+		<Answer Text="Sonny Liston" Value="9/25/1962" />
+		<Answer Text="Cassius Clay (Muhammad Ali)" Value="2/25/1964" />
+		<Answer Text="Ernie Terrell" Value="3/5/1965" />
+		<Answer Text="Muhammad Ali" Value="2/6/1967" />
+		<Answer Text="Joe Frazier" Value="3/4/1968" />
+		<Answer Text="Jimmy Ellis" Value="4/28/1968" />
+		<Answer Text="George Foreman" Value="1/22/1973" />
+		<Answer Text="Leon Spinks" Value="2/15/1978" />
+		<Answer Text="Ken Norton" Value="3/18/1978" />
+		<Answer Text="Larry Holmes" Value="6/9/1978" />
+		<Answer Text="John Tate" Value="10/20/1979" />
+		<Answer Text="Mike Weaver" Value="3/31/1980" />
+		<Answer Text="Michael Dokes" Value="12/10/1982" />
+		<Answer Text="Gerrie Coetzee" Value="9/23/1983" />
+		<Answer Text="Tim Witherspoon" Value="3/9/1984" />
+		<Answer Text="Pinklon Thomas" Value="8/31/1984" />
+		<Answer Text="Greg Page" Value="12/1/1984" />
+		<Answer Text="Tony Tubbs" Value="4/29/1985" />
+		<Answer Text="Michael Spinks" Value="9/21/1985" />
+		<Answer Text="Trevor Berbick" Value="3/22/1986" />
+		<Answer Text="Mike Tyson" Value="11/22/1986" />
+		<Answer Text="James 'Bonecrusher' Smith" Value="12/12/1986" />
+		<Answer Text="Tony Tucker" Value="5/30/1987" />
+		<Answer Text="Francesco Damiani" Value="5/6/1989" />
+		<Answer Text="James &quot;Buster&quot; Douglas" Value="2/11/1990" />
+		<Answer Text="Evander Holyfield" Value="10/25/1990" />
+		<Answer Text="Ray Mercer" Value="1/11/1991" />
+		<Answer Text="Michael Moorer" Value="5/15/1992" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="Sports::Martial Arts" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these fighters was earlier in their first UFC Heavyweight championship victory?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Mark Coleman" Value="2/7/1997" />
+		<Answer Text="Maurice Smith" Value="7/27/1997" />
+		<Answer Text="Randy Couture" Value="12/21/1997" />
+		<Answer Text="Netherlands Bas Rutten" Value="5/7/1999" />
+		<Answer Text="Kevin Randleman" Value="11/19/1999" />
+		<Answer Text="Josh Barnett" Value="3/22/2002" />
+		<Answer Text="Ricco Rodriguez" Value="9/27/2002" />
+		<Answer Text="Tim Sylvia" Value="2/28/2003" />
+		<Answer Text="Frank Mir" Value="6/19/2004" />
+		<Answer Text="Andrei Arlovski" Value="2/5/2005" />
+		<Answer Text="Antônio Rodrigo Nogueira" Value="2/2/2008" />
+		<Answer Text="Brock Lesnar" Value="11/15/2008" />
+		<Answer Text="Shane Carwin" Value="3/27/2010" />
+		<Answer Text="Cain Velasquez" Value="10/23/2010" />
+		<Answer Text="Junior dos Santos" Value="11/12/2011" />
+	</QuestionGenerator>
+	<QuestionGenerator Tags="U.S.A.;Sports::Basketball" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these teams was earlier in their first winning of the NBA Championship?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+		<Answer Text="Minneapolis Lakers" Value="1950" />
+		<Answer Text="Rochester Royals" Value="1951" />
+		<Answer Text="Syracuse Nationals" Value="1955" />
+		<Answer Text="Philadelphia Warriors" Value="1956" />
+		<Answer Text="Boston Celtics" Value="1957" />
+		<Answer Text="St. Louis Hawks" Value="1958" />
+		<Answer Text="Philadelphia 76ers" Value="1967" />
+		<Answer Text="New York Knicks" Value="1970" />
+		<Answer Text="Milwaukee Bucks" Value="1971" />
+		<Answer Text="Los Angeles Lakers" Value="1972" />
+		<Answer Text="Golden State Warriors" Value="1975" />
+		<Answer Text="Portland Trail Blazers" Value="1977" />
+		<Answer Text="Washington Bullets" Value="1978" />
+		<Answer Text="Seattle SuperSonics" Value="1979" />
+		<Answer Text="Detroit Pistons" Value="1989" />
+		<Answer Text="Chicago Bulls" Value="1991" />
+		<Answer Text="Houston Rockets" Value="1994" />
+		<Answer Text="San Antonio Spurs" Value="1999" />
+		<Answer Text="Miami Heat" Value="2006" />
+		<Answer Text="Dallas Mavericks" Value="2011" />
+	</QuestionGenerator>
+</Questions>

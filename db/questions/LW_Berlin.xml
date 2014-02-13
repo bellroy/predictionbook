@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Questions>
+
+<QuestionGenerator Tags="Science" Used="y" Type="Match" Weight="1" QuestionText="What (SI) unit is __ measured in?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="" Source="">
+  <Answer Text="length" Value="meter (m)"/>
+  <Answer Text="mass" Value="kilogram (kg)"/>
+  <Answer Text="time" Value="second (s)"/>
+  <Answer Text="electric current" Value="ampere (A)"/>
+  <Answer Text="thermodynamic temperature" Value="kelvin (K)"/>
+  <Answer Text="amount of substance" Value="mole (mol)"/>
+  <Answer Text="luminous intensity" Value="candela (cd)"/>
+  <Answer Text="force, weight" Value="newton (N = kg m s^-2)"/>
+  <Answer Text="pressure, stress" Value="pascal (Pa = N m^-2)"/>
+  <Answer Text="energy, work, heat" Value="joule (J = N m)"/>
+  <Answer Text="power, radiant flux" Value="watt (W = J s^-1)"/>
+  <Answer Text="electric charge, quantity of electricity" Value="coulomb (C = A s)"/>
+  <Answer Text="voltage, electrical potential difference" Value="volt (V = W A^-1 = J C^-1)"/>
+  <Answer Text="electric capacitance" Value="farad (F = C V^-1)"/>
+  <Answer Text="electric resistance" Value="ohm (Omega = V A^-1)"/>
+  <Answer Text="magnetic flux" Value="weber (Wb = J A^-1)"/>
+  <Answer Text="magnetic field strength" Value="tesla (T = V s m^-2)"/>
+  <Answer Text="inductance" Value="henry (H = V s A^-1)"/>
+  <Answer Text="luminous flux" Value="lumen (lm = cd sr)"/>
+  <Answer Text="illuminance" Value="lux (lx = lm m^-2)"/>
+  <Answer Text="radioactivity" Value="becquerel (Bq = s^-1)"/>
+  <Answer Text="absorbed dose of ionizing radiation" Value="gray (Gy = J kg^-1)"/>
+  <Answer Text="equivalent dose of ionizing radiation" Value="sievert (Sv = J kg^-1)"/>
+  <Answer Text="catalytic activity" Value="katal (kat = mol s^-1)"/>
+</QuestionGenerator>
+
+<QuestionGenerator Tags="Science::Astronomy" Used="y" Type="Sorted" Weight="1"
+QuestionText="Each of the following solar systems is among the 10 closest to the sun. Which one is closer?"
+AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" lightyears" Source="http://en.wikipedia.org/wiki/Closest_stars">
+  <Answer Text="Alpha Centauri" Value="4.3"/>
+  <Answer Text="Barnard's Star" Value="6.0"/>
+  <Answer Text="Wolf 359" Value="7.8"/>
+  <Answer Text="Lalande 21185" Value="8.3"/>
+  <Answer Text="Sirius" Value="8.6"/>
+  <Answer Text="Luyten 726-8" Value="8.7"/>
+  <Answer Text="Ross 154" Value="9.7"/>
+  <Answer Text="Ross 248" Value="10.3"/>
+  <Answer Text="Epsilon Eridani" Value="10.5"/>
+  <Answer Text="Lacaille 9352" Value="10.7"/>
+</QuestionGenerator>
+
+<QuestionGenerator Tags="International;Population" Used="y" Type="Sorted" Weight="1"
+QuestionText="Each of the following countries is among the 10 most populous according to the 2012 estimates by the United Nations Department of Economic and Social Affairs. Which one has more people?"
+AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people" Source="http://en.wikipedia.org/wiki/List_of_countries_by_population">
+  <Answer Text="China" Value="1,347,350,000"/>
+  <Answer Text="India" Value="1,210,193,422"/>
+  <Answer Text="United States" Value="314,849,000"/>
+  <Answer Text="Indonesia" Value="237,641,326"/>
+  <Answer Text="Brazil" Value="193,946,886"/>
+  <Answer Text="Pakistan" Value="181,355,000"/>
+  <Answer Text="Nigeria" Value="166,629,000"/>
+  <Answer Text="Bangladesh" Value="152,518,015"/>
+  <Answer Text="Russia" Value="143,300,000"/>
+  <Answer Text="Japan" Value="127,530,000"/>
+</QuestionGenerator>
+
+<QuestionGenerator Tags="International" Used="y" Type="Sorted" Weight="1"
+QuestionText="Each of the following countries is among the 10 with the highest electricity production according to the 2010 data of the BP Workbook of historical data 1965-2010. Which produced more electricity?"
+AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" GWh" Source="http://en.wikipedia.org/wiki/List_of_countries_by_electricity_production">
+  <Answer Text="United States" Value="4,325,900"/>
+  <Answer Text="China" Value="4,206,500"/>
+  <Answer Text="Japan" Value="1,145,300"/>
+  <Answer Text="Russia" Value="1,036,800"/>
+  <Answer Text="India" Value="922,200"/>
+  <Answer Text="Canada" Value="629,900"/>
+  <Answer Text="Germany" Value="621,000"/>
+  <Answer Text="France" Value="573,200"/>
+  <Answer Text="Korea, South" Value="497,200"/>
+  <Answer Text="Brazil" Value="484,800"/>
+</QuestionGenerator>
+
+<QuestionGenerator Tags="International;Population" Used="y" Type="Match" Weight="1"
+QuestionText="What was the estimated world population in __ AD according to the United Nations Department of Economic and Social Affairs? (rounded to 100 millions)"
+AdjacentWithin="2" InfoPrefix="" InfoSuffix=" people" Source="http://en.wikipedia.org/wiki/World_population_estimates">
+  <Answer Text="1" Value="300,000,000"/>
+  <Answer Text="1500" Value="500,000,000"/>
+  <Answer Text="1750" Value="800,000,000"/>
+  <Answer Text="1850" Value="1,300,000,000"/>
+  <Answer Text="1900" Value="1,700,000,000"/>
+  <Answer Text="1950" Value="2,500,000,000"/>
+  <Answer Text="1975" Value="4,100,000,000"/>
+  <Answer Text="1990" Value="5,300,000,000"/>
+  <Answer Text="2000" Value="6,100,000,000"/>
+  <Answer Text="2010" Value="6,900,000,000"/>
+</QuestionGenerator>
+
+</Questions>
