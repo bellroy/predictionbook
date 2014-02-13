@@ -8,8 +8,12 @@ class CredenceQuestion
       v2 = rand(10)
     end
 
-    @answers = [ CredenceAnswer.new('First', v1),
-                 CredenceAnswer.new('Second', v2) ]
+    @answers = [ CredenceAnswer.new(text: 'First',
+                                    real_val: v1,
+                                    display_val: v1.to_s),
+                 CredenceAnswer.new(text: 'Second',
+                                    real_val: v2,
+                                    display_val: v2.to_s) ]
     @correct_index = v1 > v2 ? 0 : 1
   end
 
@@ -21,13 +25,4 @@ class CredenceQuestion
   end
 
   attr_reader :text, :answers, :correct_index
-end
-
-class CredenceAnswer
-  def initialize(text, value)
-    @text = text
-    @value = value
-  end
-
-  attr_reader :text, :value
 end

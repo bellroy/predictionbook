@@ -2,6 +2,8 @@ desc "Import credence questions."
 task :import_credence_questions => :environment do
   doc = Nokogiri::XML(open('db/questions/OfficialCfarQuestions.xml'))
   doc.search('QuestionGenerator').each do |gen|
+    next if gen['Type'] != 'Sorted'
+
     cq = CredenceQuestionGenerator.new(
       :enabled => gen['Used'].to_s == 'y',
       :type => gen['Type'].to_s,
@@ -12,10 +14,12 @@ task :import_credence_questions => :environment do
       :weight => gen['Weight'].to_s.to_f)
     cq.save
 
-    puts
-    puts gen['QuestionText']
+    # This real_val is wrong. It breaks silently on things like "8,800" and
+    # "12/3/1999" which show up in the question list.
     gen.search('Answer').each do |ans|
-      puts "#{ans['Text']} => #{ans['Value']}"
+      cq.credence_answers.create(:text => ans['Text'],
+                                 :display_val => ans['Value'].to_s,
+                                 :real_val => ans['Value'].to_s.to_f)
     end
   end
 end
