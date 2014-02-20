@@ -6,7 +6,7 @@
   <ul>
   <% @question.answers.each_with_index do |answer, i| %>
     <li>
-      <%= answer.text %> (<%= answer.display_val %>)
+      <%= answer.text %> (<%= answer.display_val %> => <%= answer.real_val %>)
       <% for pct in [51, 60, 70, 80, 90, 99] %>
         <%= submit_tag("#{pct}%", name: "submit-#{i}") %>
       <% end %>

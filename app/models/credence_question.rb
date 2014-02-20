@@ -2,19 +2,17 @@ class CredenceQuestion
   def initialize()
     @text = "The following are both numbers. Which is larger?"
 
-    v1 = rand(10)
-    v2 = rand(10)
-    while v1 == v2
-      v2 = rand(10)
-    end
+    # XXX This doesn't take gen.weight into account.
+    num_gens = CredenceQuestionGenerator.count
+    gen = CredenceQuestionGenerator.first(offset: rand(num_gens))
 
-    @answers = [ CredenceAnswer.new(text: 'First',
-                                    real_val: v1,
-                                    display_val: v1.to_s),
-                 CredenceAnswer.new(text: 'Second',
-                                    real_val: v2,
-                                    display_val: v2.to_s) ]
-    @correct_index = v1 > v2 ? 0 : 1
+    @text = gen.text
+
+    answer_ids = gen.credence_answer_ids.shuffle.slice(0,2)
+
+    @answers = [ CredenceAnswer.find(answer_ids[0]),
+                 CredenceAnswer.find(answer_ids[1]) ]
+    @correct_index = @answers[0].real_val > @answers[1].real_val ? 0 : 1
   end
 
   # Check whether n is the correct answer, and scores according to credence.
