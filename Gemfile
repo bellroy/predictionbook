@@ -39,7 +39,6 @@ group :test, :development do
 end
 
 group :cucumber, :development do
-  gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'gherkin', '~> 2.7.1'
@@ -47,12 +46,15 @@ group :cucumber, :development do
   gem 'cucumber', '~> 1.1.4'
 end
 
+group :cucumber, :development, :test do
+  gem 'capybara'
+end
+
 group :test do
   gem 'factory_girl'
   gem 'database_cleaner'
   gem 'ffaker'
   gem 'shoulda-matchers'
-  gem 'capybara'
   gem "guard-rspec"
   gem 'email_spec'
 end
