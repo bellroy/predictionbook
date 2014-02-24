@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+u = User.new({:login => "Test", :password => "blahblah", :password_confirmation =>"blahblah"})
+
+u.save
+
+
+p = u.predictions.build(:deadline => 24.days.from_now, :initial_confidence => 24, :creator => User.first, :description => "this event will come true")
+p.save
+
