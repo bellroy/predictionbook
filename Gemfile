@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '~> 3.1.11'
 gem 'jquery-rails'
-
+gem 'debugger'
 #Models
 gem 'chronic'
 gem "version_fu", "~> 1.0.1"
