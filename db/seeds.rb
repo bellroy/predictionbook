@@ -31,4 +31,9 @@ judged.save
 
 judgement = Judgement.new({:user_id => second_user.id, :prediction_id => judged.id,:outcome => 0})
 judgement.save()
+
+commented = first_user.predictions.build({:deadline => 3.days.from_now, :initial_confidence => 77, :description => "commented prediction", :creator => first_user})
+commented.save
+commented.responses.create(:user => second_user, :confidence => 44, :comment => "No way this will happen!")
+
 puts "END SEEDING"
