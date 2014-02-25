@@ -25,4 +25,10 @@ first_response.save()
 unjudged = second_user.predictions.build({:deadline => 24.days.ago, :initial_confidence => 33, :description => "this event has came past", :creator => second_user})
 unjudged.save
 
+
+judged = first_user.predictions.build({:deadline => 3.days.ago, :initial_confidence => 44, :description => "this event is judged", :creator => first_user})
+judged.save
+
+judgement = Judgement.new({:user_id => second_user.id, :prediction_id => judged.id,:outcome => 0})
+judgement.save()
 puts "END SEEDING"
