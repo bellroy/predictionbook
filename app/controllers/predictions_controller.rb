@@ -17,7 +17,9 @@ class PredictionsController < ApplicationController
   
   def create
     begin
-      @prediction = Prediction.create!(params[:prediction].merge(:creator => current_user))
+      prediction_params = params[:prediction]
+      prediction_params[:private] = current_user.private_default if !prediction_params.has_key?(:private)
+      @prediction = Prediction.create!(prediction_params.merge(:creator => current_user))
     rescue Prediction::DuplicateRecord => duplicate
       @prediction = duplicate.record
     end
