@@ -25,11 +25,22 @@ describe DeadlineNotification do
     end
     describe 'notify overdue unsent' do
       it 'should send notification emails for all unsent and overdue' do
-        dn = DeadlineNotification.new
-        dn.should_receive(:deliver!)
-        DeadlineNotification.should_receive(:sendable).and_return([dn])
-      
+        user = build(:user_with_email)
+        prediction = build(:prediction, :deadline => 2.days.ago, :creator => user)
+        prediction.save!
+        dn = prediction.deadline_notifications.first
+        dn.update_attributes!(:enabled => true, :sent => false)
         DeadlineNotification.send_all!
+        dn.reload.should be_sent
+      end
+      it 'should not send notification emails for pending notifications' do
+        user = build(:user_with_email)
+        prediction = build(:prediction, :deadline => 2.days.from_now, :creator => user)
+        prediction.save!
+        dn = prediction.deadline_notifications.first
+        dn.update_attributes!(:enabled => true, :sent => false)
+        DeadlineNotification.send_all!
+        dn.reload.should_not be_sent
       end
     end
   end
