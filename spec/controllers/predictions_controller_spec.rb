@@ -170,8 +170,51 @@ describe PredictionsController do
       Prediction.stub!(:create!)
       Prediction.stub!(:recent)
       controller.stub!(:logged_in?).and_return(true)
+      @user = build(:user)
+      controller.stub!(:current_user).and_return(@user)
     end
     
+    describe "privacy" do
+      before do
+        @user.private_default = true
+        Prediction.stub!(:create!).and_return(@prediction)
+      end
+
+      describe "when creator private default is true " do
+        it "should be false when prediction privacy is false" do
+          Prediction.should_receive(:create!).with(hash_including("private" => "0"))
+          post_prediction("private" => "0")
+        end
+        it "should be true when prediction privacy is true " do
+          Prediction.should_receive(:create!).with(hash_including("private" => "1"))
+          post_prediction("private" => "1")
+        end
+        it "should be true when prediction privacy is not provided" do
+          Prediction.should_receive(:create!).with(hash_including("private" => @user.private_default))
+          post_prediction
+        end
+      end
+
+      describe "when creator private default is false" do
+        before do
+          @user.private_default = false
+        end
+
+        it "should be false when prediction privacy is false" do
+          Prediction.should_receive(:create!).with(hash_including("private" => "0"))
+          post_prediction("private" => "0")
+        end
+        it "should be true when prediction privacy is true " do
+          Prediction.should_receive(:create!).with(hash_including("private" => "1"))
+          post_prediction("private" => "1")
+        end
+        it "should be false when prediction privacy is not provided" do
+          Prediction.should_receive(:create!).with(hash_including("private" => @user.private_default))
+          post_prediction
+        end
+      end
+    end
+
     it 'should redirect to the login page if not logged in' do
       controller.stub!(:logged_in?).and_return(false)
       post_prediction
