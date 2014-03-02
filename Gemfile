@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '~> 3.1.11'
 gem 'jquery-rails'
-
+gem 'debugger'
 #Models
 gem 'chronic'
 gem "version_fu", "~> 1.0.1"
@@ -39,20 +39,21 @@ group :test, :development do
 end
 
 group :cucumber, :development do
-  gem 'capybara'
-  gem 'database_cleaner'
   gem 'launchy'
   gem 'gherkin', '~> 2.7.1'
   gem 'cucumber-rails', '~> 1.2.0'
   gem 'cucumber', '~> 1.1.4'
 end
 
+group :cucumber, :development, :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+end
+
 group :test do
   gem 'factory_girl'
-  gem 'database_cleaner'
   gem 'ffaker'
   gem 'shoulda-matchers'
-  gem 'capybara'
   gem "guard-rspec"
   gem 'email_spec'
 end

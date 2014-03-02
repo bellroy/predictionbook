@@ -12,12 +12,18 @@ class PredictionsController < ApplicationController
   def new
     @title = "Make a Prediction"
     @statistics = current_user.statistics if current_user
-    @prediction = Prediction.new(:creator => current_user)
+    privacy = false
+    if current_user
+      privacy = current_user.private_default
+    end
+    @prediction = Prediction.new(:creator => current_user, :private => privacy)
   end
   
   def create
     begin
-      @prediction = Prediction.create!(params[:prediction].merge(:creator => current_user))
+      prediction_params = params[:prediction]
+      prediction_params[:private] = current_user.private_default if !prediction_params.has_key?(:private)
+      @prediction = Prediction.create!(prediction_params.merge(:creator => current_user))
     rescue Prediction::DuplicateRecord => duplicate
       @prediction = duplicate.record
     end
@@ -40,7 +46,11 @@ class PredictionsController < ApplicationController
   end
   
   def home
-    @prediction = Prediction.new(:creator => current_user)
+    privacy = false
+    if current_user
+      privacy = current_user.private_default
+    end
+    @prediction = Prediction.new(:creator => current_user, :private => privacy)
     @responses = Response.limit(25).recent
     @title = "How sure are you?"
     @filter = 'popular'

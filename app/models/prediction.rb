@@ -62,13 +62,11 @@ class Prediction < ActiveRecord::Base
     errors.add(:deadline_text, errors[:deadline])
   end
 
-  def initialize(attrs = {}, options = {})
-    super
+  after_initialize do
     self.uuid ||= UUID.random_create.to_s
+  end
 
-    if creator and !attrs.include? :private
-      self.private = creator.private_default
-    end
+  before_validation(:on => :create) do
 
     @initial_response = self.responses.build(
       :prediction => self,

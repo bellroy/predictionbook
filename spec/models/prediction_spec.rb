@@ -105,19 +105,24 @@ describe Prediction do
 
   describe 'with responses' do
     describe 'initial response creation' do
-      it 'should build a response on new' do
+      it 'should build a response before validation' do
         p = Prediction.new
+        p.valid?
         p.responses.should have(1).response
       end
+
+
 
       it 'should assign response user from creator' do
         u = User.new
         p = Prediction.new(:creator => u)
+        p.valid?
         p.responses.first.user.should == u
       end
 
       it 'should assign initial confidence from passed value' do
         p = Prediction.new(:initial_confidence => 50)
+        p.valid?
         p.responses.first.confidence.should == 50
       end
     end
@@ -319,32 +324,6 @@ describe Prediction do
     end
   end
 
-  describe 'private' do
-    describe 'default' do
-      it 'should be false' do
-        Prediction.new.should_not be_private
-      end
-      it 'should be true if creator private_default is' do
-        Prediction.new(:creator => User.new(:private_default => true)).should be_private
-      end
-      it 'should be false if creator private_default is' do
-        Prediction.new(:creator => User.new(:private_default => false)).should_not be_private
-      end
-    end
-    describe 'setting' do
-      describe 'to true' do
-        it 'should be true regardless of user default' do
-          Prediction.new(:private => true, :creator => User.new(:private_default => false)).should be_private
-        end
-      end
-      describe 'to false' do
-        it 'should be false regardless of user default' do
-          Prediction.new(:private => false, :creator => User.new(:private_default => true)).should_not be_private
-        end
-      end
-    end
-  end
-
   describe 'notify creator' do
     describe 'default' do
       describe 'when has creator' do
@@ -403,7 +382,9 @@ describe Prediction do
   end
   describe 'initial deadline notification' do
     it 'should exist when notify creator is true' do
-      Prediction.new(:notify_creator => true).deadline_notifications.should_not be_empty
+      prediction = Prediction.new(:notify_creator => true)
+      prediction.valid?
+      prediction.deadline_notifications.should_not be_empty
     end
 
     it 'should not exist when notify creator is false' do
