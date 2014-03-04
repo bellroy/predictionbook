@@ -14,7 +14,7 @@
   <script type="text/javascript">
 
     var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-10004552-1']);
+    _gaq.push(['_setAccount', '<%= PredictionBook2::Application.config.credentials.google_analytics_id %>']);
     _gaq.push(['_trackPageview']);
 
     (function() {
