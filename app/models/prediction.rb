@@ -63,16 +63,14 @@ class Prediction < ActiveRecord::Base
   end
 
   after_initialize do
-    begin
+    if has_attribute?(:uuid)
       self.uuid ||= UUID.random_create.to_s
-    rescue ActiveRecord::MissingAttributeError
-      # this should only happen on Model.exists?() call. It can be safely ignored.
     end
   end
 
   before_validation(:on => :create) do
 
-    @initial_response = self.responses.build(
+    @initial_response ||= self.responses.build(
       :prediction => self,
       :confidence => initial_confidence,
       :user => creator
