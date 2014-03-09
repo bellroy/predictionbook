@@ -5,7 +5,7 @@ class CredenceGame < ActiveRecord::Base
   end
 
   def new_question()
-    @current_question = CredenceQuestion.new
+    @current_question = CredenceQuestion.pick_random
   end
 
   attr_reader :current_question

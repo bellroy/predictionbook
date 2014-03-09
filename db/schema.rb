@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140213203106) do
+ActiveRecord::Schema.define(:version => 20140227231232) do
 
   create_table "credence_answers", :force => true do |t|
     t.integer  "credence_question_generator_id"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(:version => 20140213203106) do
     t.string   "type"
     t.integer  "adjacentWithin"
     t.float    "weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "credence_questions", :force => true do |t|
+    t.integer  "credence_question_generator_id"
+    t.integer  "answer0_id"
+    t.integer  "answer1_id"
+    t.boolean  "answer0_correct"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
