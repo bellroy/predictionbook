@@ -2,24 +2,26 @@ class CredenceController < ApplicationController
   def go
     @title = "Credence game"
     @game = CredenceGame.new
-    session[:game] = @game
+    @game.save
+    current_user.credence_game = @game
     @question = @game.current_question
   end
 
   def answer
     @title = "Credence game"
-    @game = session[:game]
+    @game = current_user.credence_game
 
     question = @game.current_question
     given_answer = params.has_key?('submit-0') ? 0 : 1
     submit_name = "submit-#{given_answer}"
     credence = params[submit_name].to_i
 
-    @correct = given_answer == question.correct_index
+    @correct = (given_answer == 0) && question.answer0_correct
     @score = question.score_answer(given_answer, credence)
     @game.score += @score
 
     @game.new_question
+    @game.save
     @question = @game.current_question
   end
 end

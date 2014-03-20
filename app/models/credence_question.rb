@@ -1,7 +1,7 @@
 class CredenceQuestion < ActiveRecord::Base
   belongs_to :credence_question_generator
-  has_one :answer0, class_name: 'CredenceAnswer'
-  has_one :answer1, class_name: 'CredenceAnswer'
+  belongs_to :answer0, class_name: 'CredenceAnswer'
+  belongs_to :answer1, class_name: 'CredenceAnswer'
 
   def self.pick_random
     # XXX This doesn't take gen.weight into account.
@@ -12,7 +12,7 @@ class CredenceQuestion < ActiveRecord::Base
 
     answers = [ CredenceAnswer.find(answer_ids[0]),
                 CredenceAnswer.find(answer_ids[1]) ]
-    which = answers[0].real_val > answers[1].real_val ? 0 : 1
+    which = answers[0].real_val > answers[1].real_val
 
     # XXX This should check whether this question already exists.
     self.create(credence_question_generator: gen,

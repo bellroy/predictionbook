@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
     :order => 'responses.updated_at DESC'
   has_many :deadline_notifications
   has_many :response_notifications
+  has_one :credence_game
 
   nillify_blank :email, :name
 
