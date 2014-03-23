@@ -18,7 +18,7 @@ class CredenceController < ApplicationController
     submit_name = "submit-#{given_answer}"
     credence = params[submit_name].to_i
 
-    @correct = (given_answer == 0) && question.answer0_correct
+    @correct = given_answer == question.correct_index
     @score = question.score_answer(given_answer, credence)
     @game.score += @score
 

@@ -12,13 +12,13 @@ class CredenceQuestion < ActiveRecord::Base
 
     answers = [ CredenceAnswer.find(answer_ids[0]),
                 CredenceAnswer.find(answer_ids[1]) ]
-    which = answers[0].real_val > answers[1].real_val
+    which = answers[0].real_val > answers[1].real_val ? 0 : 1
 
     # XXX This should check whether this question already exists.
     self.create(credence_question_generator: gen,
                 answer0: answers[0],
                 answer1: answers[1],
-                answer0_correct: which)
+                correct_index: which)
   end
 
   def text
@@ -32,7 +32,7 @@ class CredenceQuestion < ActiveRecord::Base
   # Check whether n is the correct answer, and scores according to credence.
   # credence is a _percentage_, i.e. in the range (0, 100). ***UNTESTED***
   def score_answer(n, credence)
-    truth_credence = (n == 0 && self.answer0_correct) ? credence : 100 - credence
+    truth_credence = (n == self.correct_index) ? credence : 100 - credence
     (Math.log(2* truth_credence.to_f/100.0, 2) * 100).round
   end
 end
