@@ -5,6 +5,8 @@ class CredenceController < ApplicationController
     @game.save
     current_user.credence_game = @game
     @question = @game.current_question
+
+    @gave_answer = false
   end
 
   def answer
@@ -23,5 +25,8 @@ class CredenceController < ApplicationController
     @game.new_question
     @game.save
     @question = @game.current_question
+
+    @gave_answer = true
+    render "go"
   end
 end
