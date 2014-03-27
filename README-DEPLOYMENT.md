@@ -34,11 +34,11 @@ This repository contains additional deployment and setup information **(that can
 ### Pull changes from the public repository
 
 * Fetch changes from public repository
-  
+
   `git fetch public`
 
 * Merge changes from public repository
-  
+
   `git merge public/master --no-ff`
 
 * Push changes to deploy repository
@@ -50,5 +50,7 @@ This repository contains additional deployment and setup information **(that can
 	git checkout stable
 
 	git merge master --no-ff
+
+    git push origin stable
 
 	cap production deploy
