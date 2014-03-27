@@ -6,8 +6,13 @@ class ResponsesController < ApplicationController
   end
   
   def create
-    prediction.responses.create!(params[:response].merge(:user => current_user))
-    redirect_to prediction_path(prediction)
+    if params[:response][:comment].blank?
+      flash[:error] = "Reponse must be not empty"
+      redirect_to prediction_path(prediction)
+    else
+      prediction.responses.create!(params[:response].merge(:user => current_user))
+      redirect_to prediction_path(prediction)
+    end
   rescue ActiveRecord::RecordInvalid => invalid
     @prediction_response = invalid.record
     @events = @prediction.events
