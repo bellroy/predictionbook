@@ -51,4 +51,6 @@ This repository contains additional deployment and setup information **(that can
 
 	git merge master --no-ff
 
+    git push origin stable
+
 	cap production deploy
