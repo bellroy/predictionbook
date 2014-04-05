@@ -1,15 +1,20 @@
 class CredenceController < ApplicationController
-  def go
+  def show
     @title = "Credence game"
-    @game = CredenceGame.new
-    @game.save
-    current_user.credence_game = @game
-    @question = @game.current_question
 
+    if current_user.credence_game.nil?
+      @game = CredenceGame.new
+      @game.save
+      current_user.credence_game = @game
+    else
+      @game = current_user.credence_game
+    end
+
+    @question = @game.current_question
     @gave_answer = false
   end
 
-  def answer
+  def update
     @title = "Credence game"
     @game = current_user.credence_game
 
@@ -27,6 +32,6 @@ class CredenceController < ApplicationController
     @question = @game.current_question
 
     @gave_answer = true
-    render "go"
+    render "show"
   end
 end

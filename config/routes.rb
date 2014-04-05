@@ -1,8 +1,5 @@
 PredictionBook2::Application.routes.draw do
 
-  get '/credence' => 'credence#go', :as => :credence
-  post '/credence' => 'credence#answer', :as => :credence_answer
-
   match '/logout' => 'sessions#destroy', :as => :logout
   match '/login' => 'sessions#new', :as => :login
 
@@ -46,6 +43,8 @@ PredictionBook2::Application.routes.draw do
   end
 
   match '/happenstance' => 'predictions#happenstance', :as=> :happenstance
+
+  resource :credence, :controller => 'credence', :only => [:show, :update]
 
   root :to => 'predictions#home'
 
