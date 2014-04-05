@@ -17,3 +17,8 @@
   <% end %>
   </ul>
 <% end %>
+
+<%# We'll want to hide this when we go live. %>
+<%= form_tag({controller: 'credence', action: 'destroy'}, method: 'delete') do %>
+  <%= submit_tag('Delete progress', name: 'delete') %>
+<% end %>

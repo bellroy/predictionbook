@@ -44,7 +44,9 @@ PredictionBook2::Application.routes.draw do
 
   match '/happenstance' => 'predictions#happenstance', :as=> :happenstance
 
-  resource :credence, :controller => 'credence', :only => [:show, :update]
+  resource :credence,
+    :controller => 'credence',
+    :only => [:show, :update, :destroy]
 
   root :to => 'predictions#home'
 

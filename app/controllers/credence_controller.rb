@@ -34,4 +34,9 @@ class CredenceController < ApplicationController
     @gave_answer = true
     render "show"
   end
+
+  def destroy
+    current_user.credence_game = nil
+    redirect_to action: 'show'
+  end
 end
