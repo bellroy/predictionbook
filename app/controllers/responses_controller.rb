@@ -6,16 +6,12 @@ class ResponsesController < ApplicationController
   end
 
   def create
-    if params[:response][:comment].blank?
-      flash[:error] = "Reponse must be not empty"
-    else
-      prediction.responses.create!(params[:response].merge(:user => current_user))
+    build_resource              # try to create a new response
+
+    unless @resource.save       # creation failed
+      flash[:error] = "Response creation failed, please make your comment is not empty."
     end
     redirect_to prediction_path(prediction)
-  rescue ActiveRecord::RecordInvalid => invalid
-    @prediction_response = invalid.record
-    @events = @prediction.events
-    render :template => 'predictions/show', :status => :unprocessable_entity
   end
 
   def preview
@@ -26,6 +22,10 @@ class ResponsesController < ApplicationController
 private
   def prediction
     @prediction ||= Prediction.find(params[:prediction_id])
+  end
+
+  def build_resource
+    @resource = prediction.responses.new(params[:response].merge(:user => current_user))
   end
 
 end
