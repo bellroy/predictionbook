@@ -11,7 +11,8 @@ describe ResponsesController do
   
   describe 'creating a new response' do
     before(:each) do
-      @wagers = mock('responses', :create! => nil)
+      @wager = mock_model(Response, :save => true)
+      @wagers = mock('responses', :new => @wager)
       @prediction = mock_model(Prediction,
        :to_param => '1',
        :responses => @wagers
@@ -27,19 +28,19 @@ describe ResponsesController do
     end
     
     it 'should create a response on the prediction' do
-      @wagers.should_receive(:create!)
+      @wagers.should_receive(:new)
       post_response
     end
     
     it 'should create the response with the posted params' do
-      @wagers.should_receive(:create!).with(hash_including(:params => 'this is them'))
+      @wagers.should_receive(:new).with(hash_including(:params => 'this is them'))
       post_response({:params => 'this is them'})
     end
     
     it 'should use the current user as the user' do
       user = mock_model(User)
       controller.stub!(:current_user).and_return(user)
-      @prediction.responses.should_receive(:create!).with(hash_including(:user => user))
+      @prediction.responses.should_receive(:new).with(hash_including(:user => user))
       post_response({})
     end
     
@@ -50,22 +51,13 @@ describe ResponsesController do
     
     describe 'when the params are invalid' do
       before(:each) do
-        wager = mock_model(Response, :errors => mock('errors', :full_messages => []))
-        @wagers.stub!(:create!).and_raise(ActiveRecord::RecordInvalid.new(wager))
+        @wager.stub!(:save => false)
       end
+
       it 'should respond with an http unprocesseable entity status' do
         post_response
-        response.response_code.should == 422
-      end
-      
-      it 'should render "show" form' do
-        post_response
-        response.should render_template('predictions/show')
-      end
-      
-      it 'should assign the prediction' do
-        post_response
-        assigns[:prediction].should_not be_nil
+        response.should redirect_to(prediction_path('1'))
+        flash[:error].should == "You must enter an estimate or comment"
       end
     end
   end

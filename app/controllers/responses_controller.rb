@@ -6,10 +6,10 @@ class ResponsesController < ApplicationController
   end
 
   def create
-    build_resource              # try to create a new response
+    @prediction_response = prediction.responses.new(params[:response].merge(:user => current_user))
 
-    unless @resource.save       # creation failed
-      flash[:error] = "Response creation failed, please make your comment is not empty."
+    if !@prediction_response.save       # creation failed
+      flash[:error] = "You must enter an estimate or comment"
     end
     redirect_to prediction_path(prediction)
   end
@@ -22,10 +22,6 @@ class ResponsesController < ApplicationController
 private
   def prediction
     @prediction ||= Prediction.find(params[:prediction_id])
-  end
-
-  def build_resource
-    @resource = prediction.responses.new(params[:response].merge(:user => current_user))
   end
 
 end
