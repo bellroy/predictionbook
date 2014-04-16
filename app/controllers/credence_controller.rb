@@ -22,8 +22,7 @@ class CredenceController < ApplicationController
     submit_name = "submit-#{given_answer}"
     credence = params[submit_name].to_i
 
-    correct = given_answer == question.correct_index
-    score = question.score_answer(given_answer, credence)
+    correct, score = question.score_answer(given_answer, credence)
     game.score += score
 
     game.new_question
@@ -31,6 +30,7 @@ class CredenceController < ApplicationController
 
     flash[:correct] = correct
     flash[:score] = score
+    flash[:message] = question.answer_message(given_answer)
 
     redirect_to action: 'show'
   end

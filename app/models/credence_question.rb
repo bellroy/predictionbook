@@ -29,10 +29,34 @@ class CredenceQuestion < ActiveRecord::Base
     [ self.answer0, self.answer1 ]
   end
 
-  # Check whether n is the correct answer, and scores according to credence.
-  # credence is a _percentage_, i.e. in the range (0, 100). ***UNTESTED***
-  def score_answer(n, credence)
-    truth_credence = (n == self.correct_index) ? credence : 100 - credence
-    (Math.log(2* truth_credence.to_f/100.0, 2) * 100).round
+  def answer_correct?(ans)
+    ans == self.correct_index
+  end
+
+  # Check whether ans is the correct answer, and scores according to credence.
+  # credence is a _percentage_, i.e. in the range (0, 100).
+  def score_answer(ans, credence)
+    correct = self.answer_correct? ans
+    truth_credence = correct ? credence : 100 - credence
+    score = (Math.log(2* truth_credence.to_f/100.0, 2) * 100).round
+    return correct, score
+  end
+
+  def answer_message(ans)
+    correct = self.answer_correct? ans
+    if correct
+      t = self.answers[ans].text
+      "Correct! The answer is #{t}."
+    else
+      def fmt (a)
+        gen = self.credence_question_generator
+        "#{a.text} (#{gen.prefix}#{a.display_val}#{gen.suffix})"
+      end
+
+      ga = self.answers[1-ans]
+      ba = self.answers[ans]
+
+      "Incorrect. The right answer is #{fmt(ga)} versus #{fmt(ba)}."
+    end
   end
 end

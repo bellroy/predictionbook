@@ -1,7 +1,7 @@
 <h1>The Credence Game</h1>
 
 <% if flash[:score] %>
-  <p><%= flash[:correct] ? 'Correct!' : 'Wrong!' %> <%= flash[:score] %> points.</p>
+  <p><%= flash[:score] %> points: <%= flash[:message] %></p>
 <% end %>
 <p>You currently have <%= @game.score %> points.</p>
 <p><%= @question.text %></p>
