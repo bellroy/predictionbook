@@ -15,24 +15,24 @@ class CredenceController < ApplicationController
   end
 
   def update
-    @title = "Credence game"
-    @game = current_user.credence_game
+    game = current_user.credence_game
+    question = game.current_question
 
-    question = @game.current_question
     given_answer = params.has_key?('submit-0') ? 0 : 1
     submit_name = "submit-#{given_answer}"
     credence = params[submit_name].to_i
 
-    @correct = given_answer == question.correct_index
-    @score = question.score_answer(given_answer, credence)
-    @game.score += @score
+    correct = given_answer == question.correct_index
+    score = question.score_answer(given_answer, credence)
+    game.score += score
 
-    @game.new_question
-    @game.save
-    @question = @game.current_question
+    game.new_question
+    game.save
 
-    @gave_answer = true
-    render "show"
+    flash[:correct] = correct
+    flash[:score] = score
+
+    redirect_to action: 'show'
   end
 
   def destroy
