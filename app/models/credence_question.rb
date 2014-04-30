@@ -43,20 +43,23 @@ class CredenceQuestion < ActiveRecord::Base
   end
 
   def answer_message(ans)
-    correct = self.answer_correct? ans
-    if correct
-      t = self.answers[ans].text
-      "Correct! The answer is #{t}."
+    # In the original game, you got a different message if you guessed 50%
+    # (which gave you no points). If 50% becomes a valid guess, we'll want to do
+    # the same here.
+
+    def fmt (a)
+      # Would be nice to format the text in bold.
+      gen = self.credence_question_generator
+      "#{a.text} (#{gen.prefix}#{a.display_val}#{gen.suffix})"
+    end
+
+    right = fmt(self.answers[self.correct_index])
+    wrong = fmt(self.answers[1 - self.correct_index])
+
+    if self.answer_correct? ans
+      "Correct! The answer is #{right} versus #{wrong}."
     else
-      def fmt (a)
-        gen = self.credence_question_generator
-        "#{a.text} (#{gen.prefix}#{a.display_val}#{gen.suffix})"
-      end
-
-      ga = self.answers[1-ans]
-      ba = self.answers[ans]
-
-      "Incorrect. The right answer is #{fmt(ga)} versus #{fmt(ba)}."
+      "Incorrect. The right answer is #{right} versus #{wrong}."
     end
   end
 end
