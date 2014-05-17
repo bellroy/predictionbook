@@ -12,7 +12,7 @@ class CredenceQuestion < ActiveRecord::Base
 
     answers = [ CredenceAnswer.find(answer_ids[0]),
                 CredenceAnswer.find(answer_ids[1]) ]
-    which = answers[0].real_val > answers[1].real_val ? 0 : 1
+    which = answers[0].rank < answers[1].rank ? 0 : 1
 
     # XXX This should check whether this question already exists.
     self.create(credence_question_generator: gen,
@@ -50,7 +50,7 @@ class CredenceQuestion < ActiveRecord::Base
     def fmt (a)
       # Would be nice to format the text in bold.
       gen = self.credence_question_generator
-      "#{a.text} (#{gen.prefix}#{a.display_val}#{gen.suffix})"
+      "#{a.text} (#{gen.prefix}#{a.value}#{gen.suffix})"
     end
 
     right = fmt(self.answers[self.correct_index])

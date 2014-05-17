@@ -16,10 +16,10 @@ task :import_credence_questions => :environment do
 
     # This real_val is wrong. It breaks silently on things like "8,800" and
     # "12/3/1999" which show up in the question list.
-    gen.search('Answer').each do |ans|
+    gen.search('Answer').each_with_index do |ans,i|
       cq.credence_answers.create(:text => ans['Text'],
-                                 :display_val => ans['Value'].to_s,
-                                 :real_val => ans['Value'].to_s.to_f)
+                                 :value => ans['Value'].to_s,
+                                 :rank => i)
     end
   end
 end

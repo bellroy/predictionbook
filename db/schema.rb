@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140323232305) do
+ActiveRecord::Schema.define(:version => 20140430202641) do
 
   create_table "credence_answers", :force => true do |t|
     t.integer  "credence_question_generator_id"
     t.text     "text"
-    t.float    "real_val"
-    t.text     "display_val"
+    t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "rank"
   end
 
   create_table "credence_games", :force => true do |t|
