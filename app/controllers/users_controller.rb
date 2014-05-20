@@ -56,7 +56,6 @@ class UsersController < ApplicationController
   def due_for_judgement
     @title = "Predictions by #{@user} due for judgement"
     @predictions = @user.predictions
-    @predictions = @predictions.not_withdrawn
     @predictions = @predictions.not_private unless current_user == @user
     @predictions = @predictions.select { |x| x.due_for_judgement? }
   end
@@ -71,4 +70,3 @@ protected
     access_forbidden unless current_user == @user
   end
 end
-

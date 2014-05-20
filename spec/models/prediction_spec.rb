@@ -444,6 +444,12 @@ describe Prediction do
       prediction.stub!(:outcome).and_return(true)
       prediction.should_not be_due_for_judgement
     end
+    it 'should be false when withdrawn' do
+      prediction = Prediction.new(:deadline => 10.minutes.ago)
+      prediction.stub!(:outcome).and_return(nil)
+      prediction.stub!(:withdrawn?).and_return(true)
+      prediction.should_not be_due_for_judgement
+    end
   end
 
   describe 'outcome' do
