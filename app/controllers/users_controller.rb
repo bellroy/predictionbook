@@ -70,4 +70,3 @@ protected
     access_forbidden unless current_user == @user
   end
 end
-
