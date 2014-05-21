@@ -157,7 +157,7 @@ class Prediction < ActiveRecord::Base
   end
 
   def due_for_judgement?
-    overdue? && unknown?
+    !withdrawn? && overdue? && unknown?
   end
 
   def overdue?
