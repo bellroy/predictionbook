@@ -86,7 +86,7 @@ describe Statistics::Interval do
       it 'should equal the percentage of correct wagers' do
         @i50.accuracy.should == (6.0/13*100).round
         @i60.accuracy.should == (7.0/13*100).round
-        @i100.accuracy.should == 100
+        @i100.accuracy.should == 0
       end
     end
   end
