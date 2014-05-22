@@ -4,7 +4,7 @@ describe Statistics do
   include WagersFactory
   describe 'iteration' do
     it 'should iterate over Statistic::Inverval objects' do
-      # This now needs to use WagersFactroy in order to avoid having the outcome prediction be undefined, which would
+      # This now needs to use WagersFactory in order to avoid having the outcome prediction be undefined, which would
       # mess up the scoring code that rightly expects that each prediction is either true, false, or unknown.
       stats = Statistics.new(build_wagers [[50, nil]]) 
       stats.each do |stat|
