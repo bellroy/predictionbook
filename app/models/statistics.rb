@@ -3,10 +3,34 @@ class Statistics
   
   def initialize(wagers)
     setup_intervals
+    @score = 0
     wagers = wagers.prefetch_joins if wagers.respond_to?(:prefetch_joins)
     wagers.each do |wager|
       interval_for(wager.relative_confidence).add(wager)
+      
+      if !wager.unknown?
+        confidence = wager.relative_confidence/100.0
+        if confidence == 1
+          # 100% is 1-epsilon. In this case, we will take epsilon=0.5%. This is to avoid the negative infinite points which
+          # would be the outcome of assuming a wrong prediction of 100% really means 100%.
+          confidence = 0.995
+        end
+        if wager.correct?
+          @score += Math.log confidence
+        else
+          @score += Math.log (1-confidence)
+        end
+      end
     end
+    
+    number_of_wagers = wagers.reject {|w| w.unknown? }.size
+    
+    if number_of_wagers == 0 # When no wagers have been made, we want the neutral score (that is, 1) rather than a division by 0.
+      @score = 1
+    else
+      @score = ((Math.log 0.5) * number_of_wagers) / @score
+    end
+    
     self
   end
   
@@ -23,6 +47,10 @@ class Statistics
   
   def size
     sizes.sum
+  end
+
+  def score
+    @score.round 2
   end
   
   def accuracies
