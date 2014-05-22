@@ -5,8 +5,8 @@ module WagersFactory
     if outcome.nil? || confidence >= 50
       response.stub!(:correct?).and_return(outcome)
     else
-      # correct? needs to return the relative outcome (in other worrd, whether or not the outcame came out what the predictor
-      # expected, while we take as input the absolute outcome.
+      # correct? needs to return the relative outcome (in other words, whether or not the outcome was what the predictor
+      # expected), while we take as input the absolute outcome.
       response.stub!(:correct?).and_return(!outcome)
     end
     response
