@@ -59,18 +59,10 @@ describe Statistics do
 end
 
 describe Statistics::Interval do
+  include WagersFactory
   describe 'ranges' do
     before(:each) do
-      wagers = []
-      outcomes = [true, false, nil]
-      (0..100).each do |c|
-        response = Response.new(:confidence => c)
-        response.stub!(:correct?).and_return(outcomes.first)
-        response.stub!(:unknown?).and_return(outcomes.first.nil?)
-        wagers << response
-        # cycle outcomes
-        outcomes.unshift(outcomes.pop)
-      end
+      wagers = build_wagers (0..100).zip [true, nil, false]*34
       @i50,@i60,@i70,@i80,@i90,@i100 = Statistics.new(wagers).map { |interval| interval }
     end
 
