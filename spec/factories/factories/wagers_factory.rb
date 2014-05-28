@@ -1,5 +1,5 @@
 module WagersFactory
-  def wager confidence, outcome
+  def wager(confidence, outcome)
     response = Response.new({:confidence => confidence})
     response.stub!(:unknown?).and_return(outcome.nil?)
     if outcome.nil? || confidence >= 50
@@ -11,8 +11,8 @@ module WagersFactory
     end
     response
   end
-  
-  def build_wagers wagers_list
+
+  def build_wagers(wagers_list)
       wagers = []
       wagers_list.each do |confidence, outcome|
         wagers.push wager confidence, outcome

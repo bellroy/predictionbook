@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Statistics do  
+describe Statistics do
   include WagersFactory
   describe 'iteration' do
     it 'should iterate over Statistic::Inverval objects' do
       # This now needs to use WagersFactory in order to avoid having the outcome prediction be undefined, which would
       # mess up the scoring code that rightly expects that each prediction is either true, false, or unknown.
-      stats = Statistics.new(build_wagers [[50, nil]]) 
+      stats = Statistics.new(build_wagers [[50, nil]])
       stats.each do |stat|
         stat.should be_kind_of(Statistics::Interval)
       end
@@ -51,7 +51,7 @@ describe Statistics do
       Statistics.new(build_wagers [[90,false],[70,true],[30, false]]).score.should == 0.69
     end
     it "should be 1.58 when given the data from Gwern's Nootropics essay." do
-      wagers = build_wagers [[95, true], [30, false], [85, true], [75, true], [50, false], [25, false], [60, false], 
+      wagers = build_wagers [[95, true], [30, false], [85, true], [75, true], [50, false], [25, false], [60, false],
              [70, true], [65, true], [60, true], [30, false], [50, true], [90, true], [40, true]]
       Statistics.new(wagers).score.should == 1.58
     end

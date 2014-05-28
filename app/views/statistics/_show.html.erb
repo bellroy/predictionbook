@@ -19,11 +19,11 @@
         <%- end -%>
         <td>&nbsp;</td>
         <td
-        <%- if (Float statistics.score) > 1 -%>
+          <%- if Float(statistics.score) > 1 -%>
 			class="goodscore"
-        <%- elsif (Float statistics.score) < 1 -%>
-			class="badscore"
-        <%- end -%>
+          <%- elsif Float(statistics.score) < 1 -%>
+            class="badscore"
+          <%- end -%>
         ><%= statistics.score %></td>
       </tr>
       <tr>
