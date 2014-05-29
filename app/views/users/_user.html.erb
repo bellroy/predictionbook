@@ -1,0 +1,19 @@
+<li class="user">
+    <div class="description">
+        <%= show_user(user.login) %>
+        <span class="score">
+            (Score: <span
+            <% if user.statistics.score > 1 %>
+                class="goodscore"
+            <% elsif user.statistics.score < 1 %>
+                class="badscore"
+            <% end %>
+            ><%= user.statistics.score %></span>)
+        </span>
+    </div>
+    <p class="predictions">
+        <%= user.responses.size %> wagers;
+        <%= user.number_of_known_responses %> judged and
+        <%= user.responses.size - user.number_of_known_responses %> outstanding.
+    </p>
+</li>

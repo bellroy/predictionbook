@@ -269,3 +269,24 @@ span.wrong {
 	word-wrap: break-word;
 }
 
+
+.user {
+  font-size: 110%;
+}
+
+.user .description .score .goodscore {
+	color: green;
+}
+
+.user .description .score .badscore {
+	color: red;
+}
+
+.user .predictions { 
+  padding-left:1.5em;
+  color: gray;
+}
+
+.leaderboard-info {
+	color: blue;
+}
