@@ -119,6 +119,9 @@ li.response, li.change, .comment {
 .statistics table td { text-align: center; }
 .statistics table th.narrow { width: 40px; }
 
+.statistics table td.goodscore { color: green; }
+.statistics table td.badscore { color: red; }
+
 .statistics {float: right; text-align: right;}
 .statistics table tbody th { border: none; text-align: right; vertical-align: middle; }
 .statistics table th {border-bottom: 1px solid #000; }
