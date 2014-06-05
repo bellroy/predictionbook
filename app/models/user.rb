@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
     responses.select {|response| !response.unknown?}.size
   end
 
-  def eligible_for_leaderboard
+  def eligible_for_leaderboard?
     number_of_known_responses >= 10
   end
 end

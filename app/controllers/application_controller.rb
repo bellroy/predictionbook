@@ -16,7 +16,13 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
-  
+
+  def leaderboard
+    @title = "Leaderboard"
+    @users = User.limit(100).sort_by {|user| user.statistics.score}.reverse
+    @users.select! {|user| user.eligible_for_leaderboard?}
+  end
+
   private
   def set_timezone
     if logged_in? && !current_user.timezone.blank?
