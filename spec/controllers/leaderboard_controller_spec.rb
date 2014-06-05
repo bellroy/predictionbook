@@ -8,7 +8,7 @@ describe LeaderboardController do
     end
     it 'should render the leaderboard template' do
       get :leaderboard
-      response.should render_template('application/leaderboard')
+      response.should render_template('leaderboard/leaderboard')
     end
     it 'should find the list of users for the view' do
       users = mock(:users).as_null_object
