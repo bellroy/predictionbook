@@ -60,12 +60,6 @@ class UsersController < ApplicationController
     @predictions = @predictions.select { |x| x.due_for_judgement? }
   end
 
-  def leaderboard
-    @title = "Leaderboard"
-    @users = User.limit(100).sort_by {|user| user.statistics.score}.reverse
-    @users.select! {|user| user.eligible_for_leaderboard}
-  end
-
 protected
 
   def lookup_user

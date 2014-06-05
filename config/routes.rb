@@ -44,7 +44,7 @@ PredictionBook2::Application.routes.draw do
 
   match '/happenstance' => 'predictions#happenstance', :as=> :happenstance
 
-  match '/leaderboard' => 'users#leaderboard', :as=> :leaderboard
+  match '/leaderboard' => 'application#leaderboard', :as=> :leaderboard
 
   root :to => 'predictions#home'
 
