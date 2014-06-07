@@ -47,14 +47,8 @@ class CredenceQuestion < ActiveRecord::Base
     # (which gave you no points). If 50% becomes a valid guess, we'll want to do
     # the same here.
 
-    def fmt (a)
-      # Would be nice to format the text in bold.
-      gen = self.credence_question_generator
-      "#{a.text} (#{gen.prefix}#{a.value}#{gen.suffix})"
-    end
-
-    right = fmt(self.answers[self.correct_index])
-    wrong = fmt(self.answers[1 - self.correct_index])
+    right = self.answers[self.correct_index].format
+    wrong = self.answers[1 - self.correct_index].format
 
     if self.answer_correct? ans
       "Correct! The answer is #{right} versus #{wrong}."
