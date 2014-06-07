@@ -2,14 +2,7 @@ class CredenceController < ApplicationController
   def show
     @title = "Credence game"
 
-    if current_user.credence_game.nil?
-      @game = CredenceGame.new
-      @game.save
-      current_user.credence_game = @game
-    else
-      @game = current_user.credence_game
-    end
-
+    @game = CredenceGame.find_or_create_by_user_id current_user.id
     @question = @game.current_question
     @gave_answer = false
   end
