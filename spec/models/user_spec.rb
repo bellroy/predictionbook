@@ -21,19 +21,22 @@ describe User do
 
   describe 'with lookup by username' do
     it 'should find a user by login' do
-      User.should_receive(:find_by_login).with('login_name').and_return(:user)
+      User.should_receive(:find_by_login!).with('login_name').and_return(:user)
       User['login_name'].should == :user
     end
 
     it 'should replace [dot] in the username with a . when looking up a user' do
       u = User.new(:login => "login.name")
-      User.should_receive(:find_by_login).with("login.name").and_return(u)
+      User.should_receive(:find_by_login!).with("login.name").and_return(u)
       User["login[dot]name"].should == u
     end
 
     it 'should raise RecordNotFound exception if no user found' do
-      User.should_receive(:find_by_login).with('login_name').and_return(nil)
       lambda { User["login_name"] }.should raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it 'should raise RecordNotFound exception if login is blank' do
+      lambda { User[nil] }.should raise_error(ActiveRecord::RecordNotFound)
     end
   end
 
@@ -114,4 +117,3 @@ describe User do
     end
   end
 end
-
