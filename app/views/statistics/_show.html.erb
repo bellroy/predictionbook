@@ -8,7 +8,6 @@
         <th><%= certainty_heading(stat.heading) %></th>
         <%- end -%>
         <th>Total</th>
-        <th><a href="http://en.wikipedia.org/wiki/Proper_scoring_rule#Logarithmic_scoring_rule">Score</a></th>
       </tr>
     </thead>
     <tbody>
@@ -18,13 +17,6 @@
           <td><%= stat.accuracy %>%</td>
         <%- end -%>
         <td>&nbsp;</td>
-        <td
-          <%- if Float(statistics.score) > 1 -%>
-			class="goodscore"
-          <%- elsif Float(statistics.score) < 1 -%>
-            class="badscore"
-          <%- end -%>
-        ><%= statistics.score %></td>
       </tr>
       <tr>
         <th class="narrow">Sample Size</th>
