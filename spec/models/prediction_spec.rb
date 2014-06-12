@@ -49,6 +49,18 @@ describe Prediction do
         prediction.valid?
         prediction.should have(1).error_on(:deadline)
       end
+      it 'should not accept a deadline too far in the past to store' do
+        date = 300000.years.ago
+        prediction = Prediction.new(:deadline => date)
+        prediction.valid?
+        prediction.should have(1).error_on(:deadline)
+      end
+      it 'should not accept an invalid deadline even after being created' do
+        prediction = Prediction.new(:deadline => 2.months.from_now)
+        prediction.should have(0).error_on(:deadline)
+        prediction.deadline = 300000.years.from_now
+        prediction.should have(1).error_on(:deadline)
+      end
     end
   end
 

@@ -56,7 +56,7 @@ class Prediction < ActiveRecord::Base
   validates_presence_of :description, :message => 'What are you predicting?'
   validates_presence_of :initial_confidence, :message => 'How sure are you?', :on => :create
   validate :confidence_on_response, :on => :create
-  validate :maximum_deadline, :on => :create
+  validate :bound_deadline
 
   after_validation do
     errors.add(:deadline_text, errors[:deadline])
@@ -186,9 +186,11 @@ class Prediction < ActiveRecord::Base
     end
   end
 
-  def maximum_deadline
+  def bound_deadline
     if !deadline.nil? && deadline.year > 9999
       errors.add(:deadline, "Please consider creating a time capsule to record this prediction.")
+    elsif !deadline.nil? && deadline.year < 1
+      errors.add(:deadline, "If it was known that long ago, it's not exactly a prediction, is it?")
     end
   end
 end
