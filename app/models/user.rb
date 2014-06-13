@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
@@ -41,8 +42,8 @@ class User < ActiveRecord::Base
 
   # find by login
   def self.[](login)
-    return if login.blank?
-    find_by_login(login.gsub("[dot]",".")) || raise(ActiveRecord::RecordNotFound, "Couldn't find user with login '#{login}'")
+    raise(ActiveRecord::RecordNotFound, "Login is blank") if login.blank?
+    find_by_login!(login.gsub("[dot]","."))
   end
 
   delegate :statistics, :to => :wagers
@@ -102,4 +103,3 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 end
-
