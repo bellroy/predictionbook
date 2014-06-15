@@ -11,9 +11,8 @@ class CredenceController < ApplicationController
     game = current_user.credence_game
     question = game.current_question
 
-    given_answer = params.has_key?('submit-0') ? 0 : 1
-    submit_name = "submit-#{given_answer}"
-    credence = params[submit_name].to_i
+    given_answer = params[:answer_index].to_i
+    credence = params[:credence].to_i
 
     correct, score = question.score_answer(given_answer, credence)
     game.score += score

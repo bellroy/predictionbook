@@ -5,18 +5,22 @@
 <% end %>
 <p>You currently have <%= @game.score %> points.</p>
 <p><%= @question.text %></p>
-<%= form_tag({controller: 'credence', action: 'update'}, method: 'put') do %>
-  <ul>
-  <% @question.answers.each_with_index do |answer, i| %>
-    <li>
-      <%= answer.text %> (<%= answer.value %>)
-      <% for pct in [51, 60, 70, 80, 90, 99] %>
-        <%= submit_tag("#{pct}%", name: "submit-#{i}") %>
+<table>
+<% @question.answers.each_with_index do |answer, i| %>
+  <tr>
+    <td><%= answer.text %> (<%= answer.value %>)</td>
+    <% for pct in [51, 60, 70, 80, 90, 99] %>
+      <td>
+      <%= form_tag({controller: 'credence', action: 'update'}, method: 'put') do %>
+        <%= hidden_field_tag "credence", pct %>
+        <%= hidden_field_tag "answer_index", i %>
+        <%= submit_tag "#{pct}%" %>
       <% end %>
-    </li>
-  <% end %>
-  </ul>
+      </td>
+    <% end %>
+  </tr>
 <% end %>
+</table>
 
 <%# We'll want to hide this when we go live. %>
 <%= form_tag({controller: 'credence', action: 'destroy'}, method: 'delete') do %>
