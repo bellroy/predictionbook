@@ -1,4 +1,5 @@
 class CredenceQuestion < ActiveRecord::Base
+  belongs_to :credence_game
   belongs_to :credence_question_generator
   belongs_to :answer0, class_name: 'CredenceAnswer'
   belongs_to :answer1, class_name: 'CredenceAnswer'
