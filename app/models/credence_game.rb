@@ -15,6 +15,12 @@ class CredenceGame < ActiveRecord::Base
     # asking it? If so, we'll need to not set 'asked_at' here.
     self.current_question = CredenceQuestion.pick_random
     self.current_question.asked_at = Time.now
+    self.current_question.credence_game = self
     self.current_question.save
+  end
+
+  def num_answered()
+    # TODO: just make this a db column.
+    self.credence_questions.select { |q| q.answered_at }.length
   end
 end
