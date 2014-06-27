@@ -3,7 +3,7 @@
 <% if flash[:score] %>
   <p><%= flash[:score] %> points: <%= flash[:message] %></p>
 <% end %>
-<p>You currently have <%= @game.score %> points from <%= @game.num_answered %> questions.</p>
+<p>You currently have <%= @game.score %> points from <%= @game.num_answered %> questions. Your recent score is <%= @game.recent_score(10) %>.</p>
 <p><%= @question.text %></p>
 <table>
 <% @question.answers.each_with_index do |answer, i| %>

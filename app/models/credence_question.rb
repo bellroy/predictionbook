@@ -43,6 +43,12 @@ class CredenceQuestion < ActiveRecord::Base
     return correct, score
   end
 
+  def score
+    ans = self.answered_correctly ? self.correct_index : 1 - self.correct_index
+    _, s = self.score_answer(ans, self.answer_credence)
+    s
+  end
+
   def answer_message(ans)
     # In the original game, you got a different message if you guessed 50%
     # (which gave you no points). If 50% becomes a valid guess, we'll want to do

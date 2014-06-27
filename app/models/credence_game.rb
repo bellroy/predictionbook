@@ -19,8 +19,20 @@ class CredenceGame < ActiveRecord::Base
     self.current_question.save
   end
 
+  def answered_questions()
+    self.credence_questions.select(&:answered_at)
+  end
+
   def num_answered()
     # TODO: just make this a db column.
-    self.credence_questions.select { |q| q.answered_at }.length
+    self.answered_questions.length
+  end
+
+  def most_recently_answered(n)
+    self.answered_questions.sort_by(&:answered_at).reverse.take(n)
+  end
+
+  def recent_score(n)
+    self.most_recently_answered(n).map(&:score).reduce(&:+)
   end
 end
