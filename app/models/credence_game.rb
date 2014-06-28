@@ -28,11 +28,21 @@ class CredenceGame < ActiveRecord::Base
     self.answered_questions.length
   end
 
+  def average_score()
+    a = self.score.to_f / self.num_answered
+    a.finite? ? a : 0
+  end
+
   def most_recently_answered(n)
     self.answered_questions.sort_by(&:answered_at).reverse.take(n)
   end
 
   def recent_score(n)
     self.most_recently_answered(n).map(&:score).reduce(&:+)
+  end
+
+  def recent_average(n)
+    a = self.recent_score(n).to_f / self.most_recently_answered(n).length
+    a.finite? ? a : 0
   end
 end
