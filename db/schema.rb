@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140623103345) do
+ActiveRecord::Schema.define(:version => 20140628203520) do
 
   create_table "credence_answers", :force => true do |t|
     t.integer  "credence_question_generator_id"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(:version => 20140623103345) do
     t.datetime "asked_at"
     t.datetime "answered_at"
     t.integer  "answer_credence"
-    t.boolean  "answered_correctly"
+    t.integer  "given_answer"
   end
 
   create_table "judgements", :force => true do |t|

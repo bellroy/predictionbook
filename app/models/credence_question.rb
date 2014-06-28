@@ -44,8 +44,7 @@ class CredenceQuestion < ActiveRecord::Base
   end
 
   def score
-    ans = self.answered_correctly ? self.correct_index : 1 - self.correct_index
-    _, s = self.score_answer(ans, self.answer_credence)
+    _, s = self.score_answer(self.given_answer, self.answer_credence)
     s
   end
 

@@ -15,7 +15,7 @@ class CredenceController < ApplicationController
     credence = params[:credence].to_i
     correct, score = question.score_answer(given_answer, credence)
 
-    question.answered_correctly = correct
+    question.given_answer = given_answer
     question.answer_credence = credence
     question.answered_at = Time.now
     question.save
