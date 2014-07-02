@@ -1,6 +1,14 @@
 desc "Import credence questions."
 task :import_credence_questions => :environment do
-  doc = Nokogiri::XML(open('db/questions/OfficialCfarQuestions.xml'))
+  file = ENV['REPOSITORY']
+  if file.nil?
+    puts "You must supply a repository:\n" \
+      "    rake import_credence_questions REPOSITORY=path/to/file.xml\n" \
+      "Some repositories can be found in db/questions."
+    next
+  end
+
+  doc = Nokogiri::XML(open(file))
   doc.search('QuestionGenerator').each do |gen|
     next if gen['Type'] != 'Sorted'
 
@@ -14,8 +22,6 @@ task :import_credence_questions => :environment do
       :weight => gen['Weight'].to_s.to_f)
     cq.save
 
-    # This real_val is wrong. It breaks silently on things like "8,800" and
-    # "12/3/1999" which show up in the question list.
     gen.search('Answer').each_with_index do |ans,i|
       cq.credence_answers.create(:text => ans['Text'],
                                  :value => ans['Value'].to_s,
