@@ -14,8 +14,9 @@
 *** How does the original game do it?
 
 * Graphs
-** I want to do this with D3.js, but should check with Wes about this - PB already has graphs, he might want them done similarly.
 ** Probably make the user take explicit action to view them.
+** Unless/until there's a reason to deviate, they should probably look the same as the existing ones.
+*** Rendered with google chart API, see app/models/statistics.rb
 
 * How do you create db indexes in rails?
 ** N.B. An index on (A, B) can be used to search for A or A,B, but not B. So credence_questions should probably have an index on (credence_game_id, asked_at).
