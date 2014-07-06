@@ -23,11 +23,6 @@ class CredenceGame < ActiveRecord::Base
     self.credence_questions.select(&:answered_at)
   end
 
-  def num_answered()
-    # TODO: just make this a db column.
-    self.answered_questions.length
-  end
-
   def average_score()
     a = self.score.to_f / self.num_answered
     a.finite? ? a : 0

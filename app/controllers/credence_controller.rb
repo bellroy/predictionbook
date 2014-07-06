@@ -21,6 +21,7 @@ class CredenceController < ApplicationController
     question.save
 
     game.score += score
+    game.num_answered += 1
     game.new_question
     game.save
 
