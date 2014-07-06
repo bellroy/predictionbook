@@ -45,6 +45,50 @@ module ModelFactory
     }.merge(attributes))
   end
 
+  def valid_credence_question_generator(attributes={})
+    CredenceQuestionGenerator.new({
+      text: "Which thing comes sooner?",
+      prefix: "The ",
+      suffix: " thing"
+    }.merge(attributes))
+  end
+
+  def valid_credence_answer(attributes={})
+    CredenceAnswer.new({
+      credence_question_generator: valid_credence_question_generator
+    }.merge(attributes))
+  end
+
+  def valid_credence_question(attributes={})
+    CredenceQuestion.new({
+      credence_question_generator: valid_credence_question_generator,
+      answer0: valid_credence_answer(text: "B", rank: 0, value: "first"),
+      answer1: valid_credence_answer(text: "A", rank: 1, value: "second"),
+      correct_index: 0,
+      asked_at: '2014-01-01 12:00:00'
+    }.merge(attributes))
+  end
+
+  def valid_answered_credence_question(attributes={})
+    valid_credence_question(answered_at: '2014-01-01 12:00:01',
+                            given_answer: 0,
+                            answer_credence: 60)
+  end
+
+  def valid_credence_game(attributes={})
+    g = CredenceGame.new({
+      score: 0,
+      num_answered: 0,
+      current_question: valid_credence_question
+    }.merge(attributes))
+
+    if not g.current_question.nil?
+      g.current_question.credence_game = g
+    end
+
+    g
+  end
+
   def self.produced_models
     instance_methods.grep(/^valid_/).collect{|method| method.to_s.gsub(/^valid_/,'')}
   end
