@@ -14,7 +14,7 @@ describe FeedbackController do
     end
     describe 'failed parsing' do
       it 'should return a error 400' do
-        Chronic.stub!(:parse).and_return(nil)
+        Chronic.stub(:parse).and_return(nil)
         get :show, :date => 'fumanchoo'
         response.response_code.should == 400
       end

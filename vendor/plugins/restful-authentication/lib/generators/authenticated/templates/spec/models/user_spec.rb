@@ -126,7 +126,7 @@ describe User do
      ].each do |name_str|
       it "'#{name_str}'" do
         lambda do
-          u = create_user(:name => name_str) 
+          u = create_user(:name => name_str)
           u.errors.get(:name).should_not be_nil
         end.should_not change(User, :count)
       end
@@ -198,7 +198,7 @@ describe User do
     after = 1.week.from_now.utc
     users(:quentin).remember_token.should_not be_nil
     users(:quentin).remember_token_expires_at.should_not be_nil
-    users(:quentin).remember_token_expires_at.between?(before, after).should be_true
+    users(:quentin).remember_token_expires_at.between?(before, after).should be true
   end
 
   it 'remembers me until one week' do
@@ -215,7 +215,7 @@ describe User do
     after = 2.weeks.from_now.utc
     users(:quentin).remember_token.should_not be_nil
     users(:quentin).remember_token_expires_at.should_not be_nil
-    users(:quentin).remember_token_expires_at.between?(before, after).should be_true
+    users(:quentin).remember_token_expires_at.between?(before, after).should be true
   end
 
 protected

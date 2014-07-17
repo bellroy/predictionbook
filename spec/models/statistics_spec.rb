@@ -28,8 +28,8 @@ describe Statistics::Interval do
       outcomes = [true, false, nil]
       (0..100).each do |c|
         response = Response.new(:confidence => c)
-        response.stub!(:correct?).and_return(outcomes.first)
-        response.stub!(:unknown?).and_return(outcomes.first.nil?)
+        response.stub(:correct?).and_return(outcomes.first)
+        response.stub(:unknown?).and_return(outcomes.first.nil?)
         wagers << response
         # cycle outcomes
         outcomes.unshift(outcomes.pop)

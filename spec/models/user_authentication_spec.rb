@@ -9,17 +9,18 @@ describe User do
     it 'requires login' do
       lambda do
         u = create_user(:login => nil)
-        u.errors_on(:login).should_not be_empty
+        u.errors[:login].should_not be_empty
       end.should_not change(User, :count)
     end
 
     describe 'allows legitimate logins:' do
-      ['123', '1234567890_234567890_234567890_234567890', 
+      ['123', '1234567890_234567890_234567890_234567890',
        'hello.-_there@funnychar.com'].each do |login_str|
         it "'#{login_str}'" do
           lambda do
             u = create_user(:login => login_str)
-            u.should have(:no).errors_on(:login)
+            u.valid?
+            expect(u.errors[:login]).to be_empty
           end.should change(User, :count).by(1)
         end
       end
@@ -29,7 +30,8 @@ describe User do
         it "'#{login_str}'" do
           lambda do
             u = create_user(:login => login_str)
-            u.should have(1).errors_on(:login)
+            u.valid?
+            expect(u.errors[:login].length).to eq 1
           end.should_not change(User, :count)
         end
       end
@@ -38,14 +40,16 @@ describe User do
     it 'requires password' do
       lambda do
         u = create_user(:password => nil)
-        u.errors_on(:password).should_not be_empty
+        u.valid?
+        expect(u.errors[:password]).to_not be_empty
       end.should_not change(User, :count)
     end
 
     it 'requires password confirmation' do
       lambda do
         u = create_user(:password_confirmation => nil)
-        u.should have(1).errors_on(:password_confirmation)
+        u.valid?
+        expect(u.errors[:password_confirmation].length).to eq 1
       end.should_not change(User, :count)
     end
 
@@ -53,12 +57,13 @@ describe User do
       ['', nil, 'foo@bar.com', 'foo@newskool-tld.museum', 'foo@twoletter-tld.de', 'foo@nonexistant-tld.qq',
        'r@a.wk', '1234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890@gmail.com',
        'hello.-_there@funnychar.com', 'uucp%addr@gmail.com', 'hello+routing-str@gmail.com',
-       'domain@can.haz.many.sub.doma.in', 
+       'domain@can.haz.many.sub.doma.in',
       ].each do |email_str|
         it "'#{email_str}'" do
           lambda do
             u = create_user(:email => email_str)
-            u.should have(:no).errors_on(:email)
+            u.valid?
+            expect(u.errors[:email]).to be_empty
           end.should change(User, :count).by(1)
         end
       end
@@ -72,20 +77,22 @@ describe User do
         it "'#{email_str}'" do
           lambda do
             u = create_user(:email => email_str)
-            u.errors_on(:email).should_not be_empty
+            u.valid?
+            expect(u.errors[:email]).to_not be_empty
           end.should_not change(User, :count)
         end
       end
     end
 
     describe 'allows legitimate names:' do
-      [ '', nil, 'Andre The Giant (7\'4", 520 lb.) -- has a posse', 
+      [ '', nil, 'Andre The Giant (7\'4", 520 lb.) -- has a posse',
        '', '1234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890',
       ].each do |name_str|
         it "'#{name_str}'" do
           lambda do
             u = create_user(:name => name_str)
-            u.should have(:no).errors_on(:name)
+            u.valid?
+            expect(u.errors[:name]).to be_empty
           end.should change(User, :count).by(1)
         end
       end
@@ -95,7 +102,8 @@ describe User do
         it "'#{name_str}'" do
           lambda do
             u = create_user(:name => name_str)
-            u.should have(1).errors_on(:name)
+            u.valid?
+            expect(u.errors[:name].length).to eq 1
           end.should_not change(User, :count)
         end
       end
@@ -157,7 +165,7 @@ describe User do
       after = 1.week.from_now.utc
       @user.remember_token.should_not be_nil
       @user.remember_token_expires_at.should_not be_nil
-      @user.remember_token_expires_at.between?(before, after).should be_true
+      @user.remember_token_expires_at.between?(before, after).should be true
     end
 
     it 'remembers me until one week' do
@@ -174,7 +182,7 @@ describe User do
       after = 2.years.from_now.utc
       @user.remember_token.should_not be_nil
       @user.remember_token_expires_at.should_not be_nil
-      @user.remember_token_expires_at.between?(before, after).should be_true
+      @user.remember_token_expires_at.between?(before, after).should be true
     end
   end
 
