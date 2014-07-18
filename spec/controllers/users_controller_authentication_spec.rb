@@ -5,88 +5,79 @@ require 'spec_helper'
 include AuthenticatedTestHelper
 
 describe UsersController do
+  let(:user) {
+    post :create, :user => {
+      :login => 'quire',
+      :email => 'quire@example.com',
+      :password => 'quire69',
+      :password_confirmation => 'quire69'
+    }.merge(@options)
+    assigns[:user]
+  }
+  let(:errors) { user.valid?; user.errors }
 
   it 'allows signup' do
-    lambda do
-      create_user
-      response.should be_redirect
-    end.should change(User, :count).by(1)
+    @options = {}
+    expect { user; response.should be_redirect }.to change(User, :count).by(1)
   end
 
   it 'requires login on signup' do
-    lambda do
-      create_user(:login => nil)
-      user = assigns[:user]
-      user.valid?
-      user.errors[:login].should_not be_nil
+    @options = { login: nil }
+    expect do
+      errors[:login].should_not be_nil
       response.should be_success
-    end.should_not change(User, :count)
+    end.not_to change(User, :count)
   end
 
   it 'requires password on signup' do
-    lambda do
-      create_user(:password => nil)
-      user = assigns[:user]
-      user.valid?
-      user.errors[:password].should_not be_nil
+    @options = { password: nil }
+    expect do
+      errors[:password].should_not be_nil
       response.should be_success
-    end.should_not change(User, :count)
+    end.not_to change(User, :count)
   end
 
   it 'requires password confirmation on signup' do
-    lambda do
-      create_user(:password_confirmation => nil)
-      user = assigns[:user]
-      user.valid?
-      user.errors[:password_confirmation].should_not be_nil
+    @options = { password_confirmation: nil }
+    expect do
+      errors[:password_confirmation].should_not be_nil
       response.should be_success
-    end.should_not change(User, :count)
+    end.not_to change(User, :count)
   end
 
   describe 'email on signup' do
     it 'should allow nil' do
-      lambda do
-        create_user(:email => nil)
-        user = assigns[:user]
-        user.valid?
-        user.errors[:email].should be_empty
+      @options = { email: nil }
+      expect do
+        errors[:email].should be_empty
         response.should be_redirect
-      end.should change(User, :count)
+      end.to change(User, :count)
     end
+
     it 'should allow empty string' do
-      lambda do
-        create_user(:email => '')
-        user = assigns[:user]
-        user.valid?
-        user.errors[:email].should be_empty
+      @options = { email: '' }
+      expect do
+        errors[:email].should be_empty
         response.should be_redirect
-      end.should change(User, :count)
+      end.to change(User, :count)
     end
   end
 
   describe 'name on signup' do
     it 'should allow nil' do
-      lambda do
-        create_user(:name => nil)
-        user = assigns[:user]
-        user.valid?
-        user.errors[:name].should be_empty
+      @options = { name: nil }
+      expect do
+        errors[:name].should be_empty
         response.should be_redirect
-      end.should change(User, :count)
+      end.to change(User, :count)
     end
-    it 'should allow empty string' do
-      lambda do
-        create_user(:name => '')
-        user = assigns[:user]
-        user.valid?
-        user.errors[:name].should be_empty
-        response.should be_redirect
-      end.should change(User, :count)
-    end
-  end
 
-  def create_user(options = {})
-    post :create, :user => { :login => 'quire', :email => 'quire@example.com',
-      :password => 'quire69', :password_confirmation => 'quire69' }.merge(options)
+    it 'should allow empty string' do
+      @options = { name: "" }
+      expect do
+        errors[:name].should be_empty
+        response.should be_redirect
+      end.to change(User, :count)
+    end
   end
 end

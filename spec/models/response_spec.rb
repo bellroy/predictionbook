@@ -190,76 +190,69 @@ describe Response do
   end
 
   describe 'validations' do
+    let(:response) { valid_response(@attributes) }
+    let(:errors) { response.valid?; response.errors }
 
     it 'should validate belong to a prediction' do
-      response = valid_response(:prediction => nil)
-      response.valid?
-      expect(response.errors[:prediction].length).to eq 1
+      @attributes = { prediction: nil }
+      expect(errors[:prediction].length).to eq 1
     end
 
     it 'should require a name' do
-      response = valid_response(:user => nil)
-      response.valid?
-      expect(response.errors[:user].length).to eq 1
+      @attributes = { user: nil }
+      expect(errors[:user].length).to eq 1
     end
 
     it 'should not require a confidence' do
-      response = valid_response(:confidence => nil)
-      response.valid?
-      expect(response.errors[:confidence]).to be_empty
+      @attributes = { confidence: nil }
+      expect(errors[:confidence]).to be_empty
     end
 
     it 'should require the prediction have an unknown outcome when submitting confidence' do
-      response = valid_response
+      @attributes = {}
       response.prediction = mock_model(Prediction, :unknown? => false)
-      response.valid?
-      expect(response.errors[:prediction].length).to eq 1
+      expect(errors[:prediction].length).to eq 1
     end
 
     it 'should require the confidence to be <= 100' do
-      response = valid_response(:confidence => '101')
-      response.valid?
-      expect(response.errors[:confidence].length).to eq 1
+      @attributes =  { confidence: '101' }
+      expect(errors[:confidence].length).to eq 1
     end
 
     it 'should require the confidence to be >= 0' do
-      response = valid_response(:confidence => '-4')
-      response.valid?
-      expect(response.errors[:confidence].length).to eq 1
+      @attributes = { :confidence => '-4' }
+      expect(errors[:confidence].length).to eq 1
     end
 
     it 'should have no error on prediction if prediciton has unknown outcome' do
-      response = valid_response
+      @attributes = {}
       response.prediction = mock_model(Prediction, :unknown? => true)
-      response.valid?
-      expect(response.errors[:prediction]).to be_empty
+      expect(errors[:prediction]).to be_empty
     end
 
     it 'should have no error on prediction when submitting comment only' do
-      response = valid_response(:confidence => nil)
+      @attributes = { confidence: nil }
       response.prediction = mock_model(Prediction, :unknown? => false)
       response.should be_valid
     end
 
     it 'should limit comments to 250 characters' do
-      response = valid_response(:comment => ("A" * 251))
-      response.valid?
-      expect(response.errors[:comment].length).to eq 1
+      @attributes = { comment: "A" * 251 }
+      expect(errors[:comment].length).to eq 1
     end
 
     it 'should allow html that would still display less than 250 characters' do
-      response = valid_response(:comment => (%Q{A "link":http://www.google.com/#{'a' * 251}}))
-      response.valid?
-      expect(response.errors[:comment]).to be_empty
+      @attributes = { comment: %Q{A "link":http://www.google.com/#{'a' * 251}} }
+      expect(errors[:comment]).to be_empty
     end
 
     it 'should require either a confidence or a comment' do
-      response = valid_response(:comment => nil, :confidence => nil)
+      @attributes = {comment: nil, confidence: nil}
       response.should_not be_valid
     end
 
     it 'should allow nil comments' do
-      response = valid_response(:comment => nil)
+      @attributes = { comment: nil }
       response.should be_valid
     end
   end
