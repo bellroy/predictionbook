@@ -60,11 +60,15 @@ module ModelFactory
   end
 
   def valid_credence_question(attributes={})
+    ci = attributes[:correct_index] || 0
+    rank0 = ci
+    rank1 = 1 - ci
+
     CredenceQuestion.new({
       credence_question_generator: valid_credence_question_generator,
-      answer0: valid_credence_answer(text: "B", rank: 0, value: "first"),
-      answer1: valid_credence_answer(text: "A", rank: 1, value: "second"),
-      correct_index: 0,
+      answer0: valid_credence_answer(text: "B", rank: rank0, value: "this"),
+      answer1: valid_credence_answer(text: "A", rank: rank1, value: "that"),
+      correct_index: ci,
       asked_at: '2014-01-01 12:00:00'
     }.merge(attributes))
   end

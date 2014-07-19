@@ -2,23 +2,17 @@ require 'spec_helper'
 
 describe CredenceQuestion do
   it 'should know right from wrong' do
-    gen = CredenceQuestionGenerator.new(enabled: true, text: "a or b")
-    a0 = CredenceAnswer.new(text: "a", value: "A")
-    a1 = CredenceAnswer.new(text: "b", value: "B")
-    q = CredenceQuestion.new(credence_question_generator: gen,
-                             answer0: a0, answer1: a1,
-                             correct_index: 1)
-    q.answer_correct?(1).should == true
-    q.answer_correct?(0).should == false
+    q1 = create_valid_credence_question(correct_index: 0)
+    q1.answer_correct?(1).should == false
+    q1.answer_correct?(0).should == true
+
+    q2 = create_valid_credence_question(correct_index: 1)
+    q2.answer_correct?(1).should == true
+    q2.answer_correct?(0).should == false
   end
 
   it 'should give correct scores to specific credences' do
-    gen = CredenceQuestionGenerator.new(enabled: true, text: "a or b")
-    a0 = CredenceAnswer.new(text: "a", value: "A")
-    a1 = CredenceAnswer.new(text: "b", value: "B")
-    q = CredenceQuestion.new(credence_question_generator: gen,
-                             answer0: a0, answer1: a1,
-                             correct_index: 1)
+    q = create_valid_credence_question(correct_index: 1)
 
     right_scores = { 50 => 0, 51 => 3, 60 => 26, 70 => 49,
                      80 => 68, 90 => 85, 99 => 99 }
