@@ -9,17 +9,7 @@ class CredenceQuestion < ActiveRecord::Base
     num_gens = CredenceQuestionGenerator.count
     gen = CredenceQuestionGenerator.first(offset: rand(num_gens))
 
-    answer_ids = gen.credence_answer_ids.shuffle.slice(0,2)
-
-    answers = [ CredenceAnswer.find(answer_ids[0]),
-                CredenceAnswer.find(answer_ids[1]) ]
-    which = answers[0].rank < answers[1].rank ? 0 : 1
-
-    # XXX This should check whether this question already exists.
-    self.create(credence_question_generator: gen,
-                answer0: answers[0],
-                answer1: answers[1],
-                correct_index: which)
+    gen.create_random_question
   end
 
   def text
