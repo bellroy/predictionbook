@@ -13,7 +13,7 @@ describe LabelledFormBuilder do
 
   before(:each) do
     @errors = {}
-    @record = mock('record', :errors => @errors)
+    @record = double('record', :errors => @errors)
     @template = BogusTemplate.new
     @builder = LabelledFormBuilder.new('record_name', @record, @template, {}, nil)
   end
@@ -34,7 +34,7 @@ describe LabelledFormBuilder do
   end
 
   it 'should render trailing content after the text field inside the p tag' do
-    @template.stub!(:text_field).and_return('textfield')
+    @template.stub(:text_field).and_return('textfield')
     @builder.text_field(:name, :trailing_content => '#end').should =~ %r{textfield#end</p>$}
   end
 end

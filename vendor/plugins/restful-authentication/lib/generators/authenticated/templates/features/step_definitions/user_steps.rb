@@ -62,11 +62,11 @@ Then "$actor should be invited to sign in" do |_|
 end
 
 Then "$actor should not be logged in" do |_|
-  controller.logged_in?.should_not be_true
+  controller.logged_in?.should_not be true
 end
 
 Then "$login should be logged in" do |login|
-  controller.logged_in?.should be_true
+  controller.logged_in?.should be true
   controller.current_user.should === @user
   controller.current_user.login.should == login
 end
