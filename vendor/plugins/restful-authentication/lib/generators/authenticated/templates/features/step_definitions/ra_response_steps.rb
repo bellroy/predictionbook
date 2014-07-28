@@ -54,18 +54,18 @@ end
 #
 Then "$actor $token cookie should include $attrlist" do |_, token, attrlist|
   attrlist = attrlist.to_array_from_story
-  cookies.include?(token).should be_true
+  cookies.include?(token).should be true
   attrlist.each do |val|
-    cookies[token].include?(val).should be_true
+    cookies[token].include?(val).should be true
   end
 end
 
 Then "$actor $token cookie should exist but not include $attrlist" do |_, token, attrlist|
   attrlist = attrlist.to_array_from_story
-  cookies.include?(token).should be_true
+  cookies.include?(token).should be true
   puts [cookies, attrlist, token].to_yaml
   attrlist.each do |val|
-    cookies[token].include?(val).should_not be_true
+    cookies[token].include?(val).should_not be true
   end
 end
 
@@ -101,7 +101,7 @@ end
 Then "$actor session store should not have $attrlist" do |_, attrlist|
   attrlist = attrlist.to_array_from_story
   attrlist.each do |attr|
-    session[attr.to_sym].blank?.should be_true
+    session[attr.to_sym].blank?.should be true
   end
 end
 

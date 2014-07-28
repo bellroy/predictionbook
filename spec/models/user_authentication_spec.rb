@@ -5,64 +5,57 @@ require 'spec_helper'
 include AuthenticatedTestHelper
 
 describe User do
+  let(:user) { create_user(@attributes) }
+  let(:errors) { user.valid?; user.errors }
+
   describe 'validations' do
     it 'requires login' do
-      lambda do
-        u = create_user(:login => nil)
-        u.errors_on(:login).should_not be_empty
-      end.should_not change(User, :count)
+      @attributes = { login: nil }
+      expect { errors[:login].should_not be_empty }.to_not change(User, :count)
     end
 
     describe 'allows legitimate logins:' do
-      ['123', '1234567890_234567890_234567890_234567890', 
+      ['123', '1234567890_234567890_234567890_234567890',
        'hello.-_there@funnychar.com'].each do |login_str|
         it "'#{login_str}'" do
-          lambda do
-            u = create_user(:login => login_str)
-            u.should have(:no).errors_on(:login)
-          end.should change(User, :count).by(1)
+          @attributes = { login: login_str }
+          expect { expect(errors[:login]).to be_empty }.to change(User, :count).by(1)
         end
       end
     end
+
     describe 'disallows illegitimate logins:' do
       ["tab\t", "newline\n"].each do |login_str|
         it "'#{login_str}'" do
-          lambda do
-            u = create_user(:login => login_str)
-            u.should have(1).errors_on(:login)
-          end.should_not change(User, :count)
+          @attributes = { login: login_str }
+          expect { expect(errors[:login].length).to eq 1 }.to_not change(User, :count)
         end
       end
     end
 
     it 'requires password' do
-      lambda do
-        u = create_user(:password => nil)
-        u.errors_on(:password).should_not be_empty
-      end.should_not change(User, :count)
+      @attributes = { password: nil }
+      expect { expect(errors[:password]).to_not be_empty }.to_not change(User, :count)
     end
 
     it 'requires password confirmation' do
-      lambda do
-        u = create_user(:password_confirmation => nil)
-        u.should have(1).errors_on(:password_confirmation)
-      end.should_not change(User, :count)
+      @attributes = { password_confirmation: nil }
+      expect { expect(errors[:password_confirmation].length).to eq 1 }.to_not change(User, :count)
     end
 
     describe 'allows legitimate emails:' do
       ['', nil, 'foo@bar.com', 'foo@newskool-tld.museum', 'foo@twoletter-tld.de', 'foo@nonexistant-tld.qq',
        'r@a.wk', '1234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890@gmail.com',
        'hello.-_there@funnychar.com', 'uucp%addr@gmail.com', 'hello+routing-str@gmail.com',
-       'domain@can.haz.many.sub.doma.in', 
+       'domain@can.haz.many.sub.doma.in',
       ].each do |email_str|
         it "'#{email_str}'" do
-          lambda do
-            u = create_user(:email => email_str)
-            u.should have(:no).errors_on(:email)
-          end.should change(User, :count).by(1)
+          @attributes = { email: email_str }
+          expect { expect(errors[:email]).to be_empty }.to change(User, :count).by(1)
         end
       end
     end
+
     describe 'disallows illegitimate emails' do
       ['!!@nobadchars.com', "tab\t", "newline\n",
        'r@.wk', '1234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890@gmail2.com',
@@ -70,33 +63,27 @@ describe User do
        'uucp!addr@gmail.com', 'semicolon;@gmail.com', 'quote"@gmail.com', 'tick\'@gmail.com', 'backtick`@gmail.com', 'space @gmail.com', 'bracket<@gmail.com', 'bracket>@gmail.com'
       ].each do |email_str|
         it "'#{email_str}'" do
-          lambda do
-            u = create_user(:email => email_str)
-            u.errors_on(:email).should_not be_empty
-          end.should_not change(User, :count)
+          @attributes = { email: email_str }
+          expect { expect(errors[:email]).to_not be_empty }.to_not change(User, :count)
         end
       end
     end
 
     describe 'allows legitimate names:' do
-      [ '', nil, 'Andre The Giant (7\'4", 520 lb.) -- has a posse', 
+      [ '', nil, 'Andre The Giant (7\'4", 520 lb.) -- has a posse',
        '', '1234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890',
       ].each do |name_str|
         it "'#{name_str}'" do
-          lambda do
-            u = create_user(:name => name_str)
-            u.should have(:no).errors_on(:name)
-          end.should change(User, :count).by(1)
+          @attributes = { name: name_str }
+          expect { expect(errors[:name]).to be_empty }.to change(User, :count).by(1)
         end
       end
     end
     describe "disallows illegitimate names" do
       ["tab\t", "newline\n"].each do |name_str|
         it "'#{name_str}'" do
-          lambda do
-            u = create_user(:name => name_str)
-            u.should have(1).errors_on(:name)
-          end.should_not change(User, :count)
+          @attributes = { name: name_str }
+          expect { expect(errors[:name].length).to eq 1 }.to_not change(User, :count)
         end
       end
     end
@@ -157,7 +144,7 @@ describe User do
       after = 1.week.from_now.utc
       @user.remember_token.should_not be_nil
       @user.remember_token_expires_at.should_not be_nil
-      @user.remember_token_expires_at.between?(before, after).should be_true
+      @user.remember_token_expires_at.between?(before, after).should be true
     end
 
     it 'remembers me until one week' do
@@ -174,7 +161,7 @@ describe User do
       after = 2.years.from_now.utc
       @user.remember_token.should_not be_nil
       @user.remember_token_expires_at.should_not be_nil
-      @user.remember_token_expires_at.between?(before, after).should be_true
+      @user.remember_token_expires_at.between?(before, after).should be true
     end
   end
 

@@ -5,9 +5,9 @@ describe "prediction list" do
   before do
     assign(:predictions, [])
     assign(:statistics, Statistics.new([]))
-    view.stub!(:statistics).and_return(Statistics.new([]))
-    view.stub!(:show_statistics?).and_return(false)
-    view.stub!(:current_user).and_return User.new
+    view.stub(:statistics).and_return(Statistics.new([]))
+    view.stub(:show_statistics?).and_return(false)
+    view.stub(:current_user).and_return User.new
   end
 
   def render_view
@@ -17,12 +17,12 @@ describe "prediction list" do
   describe 'when showing statistics' do
 
     before(:each) do
-      view.stub!(:show_statistics?).and_return(true)
-      view.stub!(:global_statistics_cache_key).and_return("foo")
+      view.stub(:show_statistics?).and_return(true)
+      view.stub(:global_statistics_cache_key).and_return("foo")
     end
 
     it 'should render the statistics partial if show_statistics? is true' do
-      view.stub!(:cache).and_yield
+      view.stub(:cache).and_yield
       render_view
       view.should render_template(:partial => 'statistics/_show')
     end
@@ -55,16 +55,16 @@ describe "prediction list" do
     end
 
     describe "when not logged in" do
-    
+
       before do
-        view.stub!(:current_user).and_return nil
+        view.stub(:current_user).and_return nil
       end
 
       it "should show a message if there are no predictions" do
         render_view
         rendered.should have_css('p', :text=> 'No predictions to show')
       end
-    
+
     end
 
   end
