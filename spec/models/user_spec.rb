@@ -7,7 +7,7 @@ describe User do
   end
 
   it 'should have a private_default field which defaults to false' do
-    User.new.private_default.should be_false
+    User.new.private_default.should be false
   end
 
   it 'should have an email with name' do
@@ -43,9 +43,9 @@ describe User do
   describe 'with statistics' do
     it 'should delegate statistics to wagers' do
       user = User.new
-      wagers = mock('wagers')
+      wagers = double('wagers')
       wagers.should_receive(:statistics)
-      user.stub!(:wagers).and_return(wagers)
+      user.stub(:wagers).and_return(wagers)
 
       user.statistics
     end
@@ -90,7 +90,7 @@ describe User do
     end
     it "should be true for admins" do
       @user = User.new
-      @user.stub!(:admin? => true)
+      @user.stub(:admin? => true)
       @user2 = User.new
       @prediction = @user.predictions.build(:creator => @user2)
       @user.authorized_for(@prediction).should == true
