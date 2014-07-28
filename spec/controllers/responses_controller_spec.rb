@@ -6,23 +6,23 @@ describe ResponsesController do
   end
 
   before(:each) do
-    controller.stub!(:set_timezone)
+    controller.stub(:set_timezone)
   end
 
   describe 'creating a new response' do
     before(:each) do
       @wager = mock_model(Response, :save => true)
-      @wagers = mock('responses', :new => @wager)
+      @wagers = double('responses', :new => @wager)
       @prediction = mock_model(Prediction,
        :to_param => '1',
        :responses => @wagers
       ).as_null_object
-      Prediction.stub!(:find).and_return(@prediction)
-      controller.stub!(:logged_in?).and_return(true)
+      Prediction.stub(:find).and_return(@prediction)
+      controller.stub(:logged_in?).and_return(true)
     end
 
     it 'should require the user to be logged in' do
-      controller.stub!(:logged_in?).and_return(false)
+      controller.stub(:logged_in?).and_return(false)
       post_response
       response.should redirect_to(login_path)
     end
@@ -39,7 +39,7 @@ describe ResponsesController do
 
     it 'should use the current user as the user' do
       user = mock_model(User)
-      controller.stub!(:current_user).and_return(user)
+      controller.stub(:current_user).and_return(user)
       @prediction.responses.should_receive(:new).with(hash_including(:user => user))
       post_response({})
     end
@@ -51,7 +51,7 @@ describe ResponsesController do
 
     describe 'when the params are invalid' do
       before(:each) do
-        @wager.stub!(:save => false)
+        @wager.stub(:save => false)
       end
 
       it 'should respond with an http unprocesseable entity status' do
@@ -64,8 +64,8 @@ describe ResponsesController do
 
   describe 'comment preview' do
     before(:each) do
-      controller.stub!(:login_required)
-      controller.stub!(:render_template).with(:partial => 'responses/_preview')
+      controller.stub(:login_required)
+      controller.stub(:render_template).with(:partial => 'responses/_preview')
     end
     def get_preview
       get :preview, :response => { :comment => 'some text' }
@@ -89,7 +89,7 @@ describe ResponsesController do
     end
 
     it "should not save the comment" do
-      Response.stub!(:new).and_return(response = mock_model(Response).as_null_object)
+      Response.stub(:new).and_return(response = mock_model(Response).as_null_object)
       response.should_not_receive(:save!)
       get_preview
     end
