@@ -7,14 +7,13 @@
 **** If so, should it keep your progress if you then create an account, or log in having not played the game while logged in?
 ***** (That's definitely not MVP worthy.)
 **** Probably don't bother for first iteration.
-** Some answers have the same value. They shouldn't both be selected.
-*** If we do this by rejecting the second answer in pick_random, then we need to swap answer0 and answer1 half the time. Otherwise the distribution isn't uniform: answer0 is more likely to be one with multiple equal-valued answers.
-*** Work out how to test for this before fixing it.
 ** CredenceQuestion.pick_random doesn't consider CredenceQuestionGenerator.weight
 *** How does the original game do it?
 ** If you click an answer twice (or two different answers quickly), both count - the first answers the question you were given, and the second answers the next question, that you didn't see yet.
 *** Probably the way to solve this, is to have a hidden 'question id' field. If the submitted id isn't the same as the current question id, ignore the submission.
 **** Do we need to worry about persisting the flash?
+** It's possible for a user to get asked the same question twice.
+*** There are enough questions that this isn't a big deal.
 
 * Graphs
 ** Probably make the user take explicit action to view them.

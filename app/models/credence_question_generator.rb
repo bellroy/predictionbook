@@ -2,16 +2,27 @@ class CredenceQuestionGenerator < ActiveRecord::Base
   has_many :credence_answers
 
   def create_random_question
-    answer_ids = self.credence_answer_ids.shuffle.slice(0,2)
+    answer_ids = self.credence_answer_ids.shuffle
 
-    answers = [ CredenceAnswer.find(answer_ids[0]),
-                CredenceAnswer.find(answer_ids[1]) ]
-    which = answers[0].rank < answers[1].rank ? 0 : 1
+    ans0 = CredenceAnswer.find(answer_ids.pop)
+    ans1 = CredenceAnswer.find(answer_ids.pop)
 
-    # XXX This should check whether this question already exists.
+    while ans0.rank == ans1.rank do
+      ans1 = CredenceAnswer.find(answer_ids.pop)
+    end
+
+    # If a generator has two answers of the same rank, those are more likely to
+    # be ans0 here than ans1. We randomly swap them, to ensure questions are
+    # uniformly distributed.
+    if rand < 0.5
+      ans0, ans1 = ans1, ans0
+    end
+
+    which = ans0.rank < ans1.rank ? 0 : 1
+
     CredenceQuestion.create(credence_question_generator: self,
-                            answer0: answers[0],
-                            answer1: answers[1],
+                            answer0: ans0,
+                            answer1: ans1,
                             correct_index: which)
   end
 end
