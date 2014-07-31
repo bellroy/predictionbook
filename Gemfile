@@ -25,7 +25,7 @@ gem "typus"
 gem 'honeypot-captcha'
 
 group :development do
-  gem "capistrano"
+  gem "capistrano", '~>2.9.0'
   gem "capistrano-ext"
 end
 
@@ -74,4 +74,3 @@ end
 
 #restful-authentication needs to be installed as a plugin or it doesn't work
 #rspec-caching-test-plugin is quite old and is not available as a gem
-
