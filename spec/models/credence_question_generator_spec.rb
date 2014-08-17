@@ -24,6 +24,13 @@ describe CredenceQuestionGenerator do
   end
 
   it 'should uniformly distribute questions in aswer-space' do
+    pending "work out a good test to use"
+
+    # gen.create_random_question is sufficiently slow that we don't want to do
+    # it loads of times. But if we don't do it enough, our test will be prone to
+    # failing randomly.
+    #   Is it possible to only have this test run if we request it explicitly?
+
     gen = create_valid_credence_question_generator
     [1, 1, 2].each do |rank|
       create_valid_credence_answer(credence_question_generator: gen, rank: rank)
@@ -35,7 +42,7 @@ describe CredenceQuestionGenerator do
       key = [q.answer0.id, q.answer1.id]
       counts[key] += 1
     end
-    #puts counts
-    pending "work out a good test to use"
+
+    # What tests do we apply to counts?
   end
 end
