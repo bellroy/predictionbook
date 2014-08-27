@@ -1,0 +1,14 @@
+#credence-scores { margin-bottom: 10px; }
+
+#credence-scores td {
+    text-align: center;
+    font-size: 3em;
+    font-weight: bold;
+}
+
+#credence-scores th {
+    padding: 1px 5px;
+    vertical-align: top;
+    font-weight: normal;
+    line-height: 120%;
+}

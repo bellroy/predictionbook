@@ -3,19 +3,22 @@
 <% if flash[:score] %>
   <p><%= flash[:score] %> points: <%= flash[:message] %></p>
 <% end %>
-<table>
-  <tr>
-    <th>Average score</th>
-    <th>Last 10 average</th>
-    <th>Total score (<%= @game.num_answered %> answers)</th>
-  </tr>
+<table id="credence-scores">
   <tr>
     <td><%= @game.average_score.round(1).to_s.chomp('.0') %></td>
     <td><%= @game.recent_average(10).round(1).to_s.chomp('.0') %></td>
     <td><%= @game.score %></td>
   </tr>
+  <tr>
+    <th><strong>Average score</strong></th>
+    <th><strong>Last 10 average</strong></th>
+    <th><strong>Total score</strong><br>(<%= @game.num_answered %> answers)</th>
+  </tr>
 </table>
-<p><%= @question.text %></p>
+
+<p><strong>Question <%= @game.num_answered + 1 %>:</strong>
+   <%= @question.text %></p>
+
 <table>
 <% @question.answers.each_with_index do |answer, i| %>
   <tr>
