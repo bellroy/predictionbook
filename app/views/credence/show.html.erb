@@ -23,6 +23,7 @@
     <% for pct in [51, 60, 70, 80, 90, 99] %>
       <td>
       <%= form_tag({controller: 'credence', action: 'update'}, method: 'put') do %>
+        <%= hidden_field_tag "question_id", @question.id %>
         <%= hidden_field_tag "credence", pct %>
         <%= hidden_field_tag "answer_index", i %>
         <%= submit_tag "#{pct}%" %>
