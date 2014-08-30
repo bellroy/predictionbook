@@ -22,7 +22,7 @@
 <table>
 <% @question.answers.each_with_index do |answer, i| %>
   <tr>
-    <td><%= answer.text %> (<%= answer.value %>)</td>
+    <td><%= answer.text %> <% if @game.debug %>(<%= answer.value %>)<% end %></td>
     <% for pct in [51, 60, 70, 80, 90, 99] %>
       <td>
       <%= form_tag({controller: 'credence', action: 'update'}, method: 'put') do %>
@@ -37,7 +37,8 @@
 <% end %>
 </table>
 
-<%# We'll want to hide this when we go live. %>
-<%= form_tag({controller: 'credence', action: 'destroy'}, method: 'delete') do %>
-  <%= submit_tag('Delete progress', name: 'delete') %>
+<% if @game.debug %>
+  <%= form_tag({controller: 'credence', action: 'destroy'}, method: 'delete') do %>
+    <%= submit_tag('Delete progress', name: 'delete') %>
+  <% end %>
 <% end %>

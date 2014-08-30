@@ -30,6 +30,6 @@ is ambiguous. I think it's asking: of people commuting to work, how many do it b
 
 * Scores should be in a DL, not a TABLE, if I can style it properly.
 
-* Add debug flag to CredenceGame - if not enabled, make 'delete progress' harder to find, and don't show answers with a question.
+* Add way to delete credence game data, possibly from settings page.
 
 * Put a link on the main page.
