@@ -17,11 +17,6 @@
 ** Unless/until there's a reason to deviate, they should probably look the same as the existing ones.
 *** Rendered with google chart API, see app/models/statistics.rb
 
-* How do you create db indexes in rails?
-** N.B. An index on (A, B) can be used to search for A or A,B, but not B. So credence_questions should probably have an index on (credence_game_id, asked_at).
-** http://stackoverflow.com/questions/6242304/best-way-to-add-index-to-database
-*** Multi-column indexes: replace `:col` with `[:col1, :col2]`.
-
 * This question:
 
 	Which US state had a higher percentage of adults commuting to work by public transportation in 2010?

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140830223118) do
+ActiveRecord::Schema.define(:version => 20140830224038) do
 
   create_table "credence_answers", :force => true do |t|
     t.integer  "credence_question_generator_id"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(:version => 20140830223118) do
     t.integer  "answer_credence"
     t.integer  "given_answer"
   end
+
+  add_index "credence_questions", ["credence_game_id", "asked_at"], :name => "index_credence_questions_on_credence_game_id_and_asked_at"
 
   create_table "judgements", :force => true do |t|
     t.integer  "prediction_id"
