@@ -29,7 +29,10 @@ class CredenceGame < ActiveRecord::Base
   end
 
   def most_recently_answered(n)
-    self.answered_questions.sort_by(&:answered_at).reverse.take(n)
+    self.credence_questions
+      .limit(10)
+      .order('answered_at desc')
+      .select(&:answered_at)
   end
 
   def recent_score(n)
