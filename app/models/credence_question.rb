@@ -52,4 +52,35 @@ class CredenceQuestion < ActiveRecord::Base
       "Incorrect. The right answer is #{right} versus #{wrong}."
     end
   end
+
+  def to_wager
+    # Return an object suitable for passing to the Statistics class.
+    wager = Class.new do
+      define_method :initialize do |q|
+        @q = q
+      end
+
+      define_method :unknown? do
+        @q.given_answer.nil?
+      end
+
+      define_method :correct? do
+        if self.unknown?
+          nil
+        else
+          @q.answer_correct? @q.given_answer
+        end
+      end
+
+      define_method :relative_confidence do
+        # Kind of hacky: the graphs lump 99% and 90% together, which we don't
+        # want for the credence game. Pretend those are all 100%. If we allow
+        # users to enter arbitrary credences, we'll need to rethink this.
+        cred = @q.answer_credence
+        cred == 99 ? 100 : cred
+      end
+    end
+
+    wager.new(self)
+  end
 end

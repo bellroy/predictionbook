@@ -43,4 +43,8 @@ class CredenceGame < ActiveRecord::Base
     a = self.recent_score(n).to_f / self.most_recently_answered(n).length
     a.finite? ? a : 0
   end
+
+  def calibration_graph
+    Statistics.new(self.answered_questions.map &:to_wager)
+  end
 end

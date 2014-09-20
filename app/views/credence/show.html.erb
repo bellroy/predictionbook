@@ -37,6 +37,8 @@
 <% end %>
 </table>
 
+<img src="<%= @game.calibration_graph.image_url %>">
+
 <% if @game.debug %>
   <%= form_tag({controller: 'credence', action: 'destroy'}, method: 'delete') do %>
     <%= submit_tag('Delete progress', name: 'delete') %>

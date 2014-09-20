@@ -14,8 +14,6 @@
 
 * Graphs
 ** Probably make the user take explicit action to view them.
-** Unless/until there's a reason to deviate, they should probably look the same as the existing ones.
-*** Rendered with google chart API, see app/models/statistics.rb
 
 * This question:
 
