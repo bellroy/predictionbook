@@ -1,10 +1,11 @@
 class CredenceController < ApplicationController
+  before_filter :login_required
+
   def show
     @title = "Credence game"
 
     @game = CredenceGame.find_or_create_by_user_id current_user.id
     @question = @game.current_question
-    @gave_answer = false
   end
 
   def update
