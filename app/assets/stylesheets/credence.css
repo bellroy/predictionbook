@@ -12,3 +12,7 @@
     font-weight: normal;
     line-height: 120%;
 }
+
+#credence-graph {
+    display: none;
+}

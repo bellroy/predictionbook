@@ -12,9 +12,6 @@
 ** It's possible for a user to get asked the same question twice.
 *** There are enough questions that this isn't a big deal.
 
-* Graphs
-** Probably make the user take explicit action to view them.
-
 * This question:
 
 	Which US state had a higher percentage of adults commuting to work by public transportation in 2010?

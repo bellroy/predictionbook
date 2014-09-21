@@ -37,7 +37,13 @@
 <% end %>
 </table>
 
-<img src="<%= @game.calibration_graph.image_url %>">
+<div id="credence-graph-container">
+  <p><a href="#">Show calibration graph</a></p>
+  <div id="credence-graph">
+    <p>Be careful: looking at this graph too often can be bad for your score. If you find yourself giving low-confidence answers to questions that you know very well, consider looking less often.</p>
+    <img src="<%= @game.calibration_graph.image_url %>">
+  </div>
+</div>
 
 <% if @game.debug %>
   <%= form_tag({controller: 'credence', action: 'destroy'}, method: 'delete') do %>
