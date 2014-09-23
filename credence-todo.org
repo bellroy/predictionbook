@@ -7,6 +7,13 @@
 * Bugs
 ** CredenceQuestion.pick_random doesn't consider CredenceQuestionGenerator.weight
 *** How does the original game do it?
+**** Look at Assets/Scripts/QuestionsScript.cs
+
+  It looks like it shuffles the generators, then loops through them. When it gets to a generator, it skips it with probability (1-weight). So if there are five generators with a weight of 0.2, on average you'll see one of them each time through the list.
+
+***** This has the nice property that you almost never see the same generator twice in a row. But we can't easily replicate it.
+****** For MVP: just skip generators with probability (1-weight). Future development: look at the previous generators used, exclude the last n from consideration.
+
 ** It's possible for a user to get asked the same question twice.
 *** There are enough questions that this isn't a big deal.
 
