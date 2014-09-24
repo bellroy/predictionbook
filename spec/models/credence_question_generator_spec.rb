@@ -8,7 +8,7 @@ describe CredenceQuestionGenerator do
     end
 
     q = gen.create_random_question
-    q.class.should == CredenceQuestion
+    expect(q.class).to eq CredenceQuestion
   end
 
   it 'should not create a question where both answers have the same rank' do
@@ -19,12 +19,13 @@ describe CredenceQuestionGenerator do
 
     100.times do
       q = gen.create_random_question
-      q.answer0.rank.should_not == q.answer1.rank
+      expect(q.answer0.rank).to_not eq q.answer1.rank
     end
   end
 
   it 'should uniformly distribute questions in aswer-space' do
     pending "work out a good test to use"
+    raise "not yet implemented"
 
     # gen.create_random_question is sufficiently slow that we don't want to do
     # it loads of times. But if we don't do it enough, our test will be prone to

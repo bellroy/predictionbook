@@ -3,12 +3,12 @@ require 'spec_helper'
 describe CredenceQuestion do
   it 'should know right from wrong' do
     q1 = create_valid_credence_question(correct_index: 0)
-    q1.answer_correct?(1).should == false
-    q1.answer_correct?(0).should == true
+    expect(q1.answer_correct?(1)).to eq false
+    expect(q1.answer_correct?(0)).to eq true
 
     q2 = create_valid_credence_question(correct_index: 1)
-    q2.answer_correct?(1).should == true
-    q2.answer_correct?(0).should == false
+    expect(q2.answer_correct?(1)).to eq true
+    expect(q2.answer_correct?(0)).to eq false
   end
 
   it 'should give correct scores to specific credences' do
@@ -20,15 +20,16 @@ describe CredenceQuestion do
                      80 => -132, 90 => -232, 99 => -564 }
 
     right_scores.each do |cred, score|
-      q.score_answer(1, cred).should == [true, score]
+      expect(q.score_answer(1, cred)).to eq [true, score]
     end
 
     wrong_scores.each do |cred, score|
-      q.score_answer(0, cred).should == [false, score]
+      expect(q.score_answer(0, cred)).to eq [false, score]
     end
   end
 
   it 'should create random questions' do
     pending "Can I test this without a db?"
+    raise "not yet implemented"
   end
 end
