@@ -1,8 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.1.11'
+gem 'rails', '~> 3.2.1'
 gem 'jquery-rails'
-
 #Models
 gem 'chronic'
 gem "version_fu", "~> 1.0.1"
@@ -31,28 +30,30 @@ group :development do
 end
 
 group :test, :development do
-  gem 'rspec-rails', '~> 2.6'
-  gem 'debugger'
+  gem 'rspec-rails'
+  gem 'rspec-activemodel-mocks'
+  gem "pry"
   gem 'hirb'
   gem 'wirble'
   gem 'awesome_print'
 end
 
 group :cucumber, :development do
+  gem 'launchy'
+  gem 'gherkin'
+  gem 'cucumber-rails'
+  gem 'cucumber'
+end
+
+group :cucumber, :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'launchy'
-  gem 'gherkin', '~> 2.7.1'
-  gem 'cucumber-rails', '~> 1.2.0'
-  gem 'cucumber', '~> 1.1.4'
 end
 
 group :test do
   gem 'factory_girl'
-  gem 'database_cleaner'
   gem 'ffaker'
   gem 'shoulda-matchers'
-  gem 'capybara'
   gem "guard-rspec"
   gem 'email_spec'
 end

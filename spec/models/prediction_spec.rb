@@ -30,15 +30,18 @@ describe Prediction do
       end
 
       it 'should require a creator' do
-        @prediction.should have(1).error_on(:creator)
+        @prediction.valid?
+        expect(@prediction.errors[:creator].length).to eq 1
       end
 
       it 'should require a deadline' do
-        @prediction.should have(1).error_on(:deadline)
+        @prediction.valid?
+        expect(@prediction.errors[:deadline].length).to eq 1
       end
 
       it 'should require a description' do
-        @prediction.should have(1).error_on(:description)
+        @prediction.valid?
+        expect(@prediction.errors[:description].length).to eq 1
       end
     end
 
@@ -47,7 +50,23 @@ describe Prediction do
         date = 300000.years.from_now
         prediction = Prediction.new(:deadline => date)
         prediction.valid?
-        prediction.should have(1).error_on(:deadline)
+        prediction.valid?
+        expect(prediction.errors[:deadline].length).to eq 1
+      end
+      it 'should not accept a deadline too far in the past to store' do
+        date = 300000.years.ago
+        prediction = Prediction.new(:deadline => date)
+        prediction.valid?
+        prediction.valid?
+        expect(prediction.errors[:deadline].length).to eq 1
+      end
+      it 'should not accept an invalid deadline even after being created' do
+        prediction = Prediction.new(:deadline => 2.months.from_now)
+        prediction.valid?
+        expect(prediction.errors[:deadline].length).to eq 0
+        prediction.deadline = 300000.years.from_now
+        prediction.valid?
+        expect(prediction.errors[:deadline].length).to eq 1
       end
     end
   end
@@ -59,7 +78,7 @@ describe Prediction do
 
     def stub_uuid_create(string)
       uuid = UUID.parse(string)
-      UUID.stub!(:random_create).and_return(uuid)
+      UUID.stub(:random_create).and_return(uuid)
     end
 
     it 'should set the UUID for a new record' do
@@ -105,19 +124,24 @@ describe Prediction do
 
   describe 'with responses' do
     describe 'initial response creation' do
-      it 'should build a response on new' do
+      it 'should build a response before validation' do
         p = Prediction.new
-        p.responses.should have(1).response
+        p.valid?
+        p.responses.length.should eq 1
       end
+
+
 
       it 'should assign response user from creator' do
         u = User.new
         p = Prediction.new(:creator => u)
+        p.valid?
         p.responses.first.user.should == u
       end
 
       it 'should assign initial confidence from passed value' do
         p = Prediction.new(:initial_confidence => 50)
+        p.valid?
         p.responses.first.confidence.should == 50
       end
     end
@@ -141,7 +165,7 @@ describe Prediction do
       prediction = create_valid_prediction
 
       judged_at = 15.minutes.from_now
-      Time.stub!(:now).and_return(judged_at)
+      Time.stub(:now).and_return(judged_at)
       prediction.judge!(:right)
 
       prediction.judged_at.should == judged_at
@@ -203,7 +227,7 @@ describe Prediction do
 
         first.judge!(:right)
         future = 10.minutes.from_now.time
-        Time.stub!(:now).and_return(future)
+        Time.stub(:now).and_return(future)
         last.judge!(:right)
 
         Prediction.judged.should == [last, first]
@@ -319,32 +343,6 @@ describe Prediction do
     end
   end
 
-  describe 'private' do
-    describe 'default' do
-      it 'should be false' do
-        Prediction.new.should_not be_private
-      end
-      it 'should be true if creator private_default is' do
-        Prediction.new(:creator => User.new(:private_default => true)).should be_private
-      end
-      it 'should be false if creator private_default is' do
-        Prediction.new(:creator => User.new(:private_default => false)).should_not be_private
-      end
-    end
-    describe 'setting' do
-      describe 'to true' do
-        it 'should be true regardless of user default' do
-          Prediction.new(:private => true, :creator => User.new(:private_default => false)).should be_private
-        end
-      end
-      describe 'to false' do
-        it 'should be false regardless of user default' do
-          Prediction.new(:private => false, :creator => User.new(:private_default => true)).should_not be_private
-        end
-      end
-    end
-  end
-
   describe 'notify creator' do
     describe 'default' do
       describe 'when has creator' do
@@ -353,12 +351,12 @@ describe Prediction do
           @prediction = Prediction.new(:creator => @user)
         end
         it 'should be true if user has email' do
-          @user.stub!(:notify_on_overdue?).and_return true
-          @prediction.notify_creator.should be_true
+          @user.stub(:notify_on_overdue?).and_return true
+          @prediction.notify_creator.should be true
         end
         it 'should be false if creator does not have email' do
-          @user.stub!(:notify_on_overdue?).and_return false
-          @prediction.notify_creator.should be_false
+          @user.stub(:notify_on_overdue?).and_return false
+          @prediction.notify_creator.should be false
         end
       end
       describe 'when has creator and notify creator' do
@@ -368,12 +366,12 @@ describe Prediction do
             @prediction = Prediction.new(:creator => @user, :notify_creator => false)
           end
           it 'should be false even if user has email' do
-            @user.stub!(:notify_on_overdue?).and_return true
-            @prediction.notify_creator.should be_false
+            @user.stub(:notify_on_overdue?).and_return true
+            @prediction.notify_creator.should be false
           end
           it 'should be false even if does not have email' do
-            @user.stub!(:notify_on_overdue?).and_return false
-            @prediction.notify_creator.should be_false
+            @user.stub(:notify_on_overdue?).and_return false
+            @prediction.notify_creator.should be false
           end
         end
         describe 'is true' do
@@ -382,28 +380,30 @@ describe Prediction do
             @prediction = Prediction.new(:creator => @user, :notify_creator => true)
           end
           it 'should be true even if user has email' do
-            @user.stub!(:notify_on_overdue?).and_return true
-            @prediction.notify_creator.should be_true
+            @user.stub(:notify_on_overdue?).and_return true
+            @prediction.notify_creator.should be true
           end
           it 'should be true even if does not have email' do
-            @user.stub!(:notify_on_overdue?).and_return false
-            @prediction.notify_creator.should be_true
+            @user.stub(:notify_on_overdue?).and_return false
+            @prediction.notify_creator.should be true
           end
         end
       end
     end
     it 'should be assignable' do
-      Prediction.new(:notify_creator => true).notify_creator.should be_true
-      Prediction.new(:notify_creator => false).notify_creator.should be_false
+      Prediction.new(:notify_creator => true).notify_creator.should be true
+      Prediction.new(:notify_creator => false).notify_creator.should be false
     end
     it 'should accept checkbox form values' do
-      Prediction.new(:notify_creator => "1").notify_creator.should be_true
-      Prediction.new(:notify_creator => "0").notify_creator.should be_false
+      Prediction.new(:notify_creator => "1").notify_creator.should be true
+      Prediction.new(:notify_creator => "0").notify_creator.should be false
     end
   end
   describe 'initial deadline notification' do
     it 'should exist when notify creator is true' do
-      Prediction.new(:notify_creator => true).deadline_notifications.should_not be_empty
+      prediction = Prediction.new(:notify_creator => true)
+      prediction.valid?
+      prediction.deadline_notifications.should_not be_empty
     end
 
     it 'should not exist when notify creator is false' do
@@ -445,22 +445,28 @@ describe Prediction do
   describe 'due for judgement?' do
     it 'should be true when outcome unknown and past deadline' do
       prediction = Prediction.new(:deadline => 10.minutes.ago)
-      prediction.stub!(:outcome).and_return(nil)
+      prediction.stub(:outcome).and_return(nil)
       prediction.should be_due_for_judgement
     end
     it 'should be false when outcome known and past deadline' do
       prediction = Prediction.new(:deadline => 10.minutes.ago)
-      prediction.stub!(:outcome).and_return(true)
+      prediction.stub(:outcome).and_return(true)
       prediction.should_not be_due_for_judgement
     end
     it 'should be false when outcome unknown and not past deadline' do
       prediction = Prediction.new(:deadline => 10.minutes.from_now)
-      prediction.stub!(:outcome).and_return(nil)
+      prediction.stub(:outcome).and_return(nil)
       prediction.should_not be_due_for_judgement
     end
     it 'should be false when outcome known and not past deadline' do
       prediction = Prediction.new(:deadline => 10.minutes.from_now)
-      prediction.stub!(:outcome).and_return(true)
+      prediction.stub(:outcome).and_return(true)
+      prediction.should_not be_due_for_judgement
+    end
+    it 'should be false when withdrawn' do
+      prediction = Prediction.new(:deadline => 10.minutes.ago)
+      prediction.stub(:outcome).and_return(nil)
+      prediction.stub(:withdrawn?).and_return(true)
       prediction.should_not be_due_for_judgement
     end
   end
@@ -478,7 +484,7 @@ describe Prediction do
       describe 'delegate' do
         it 'should delegate outcome to judgement' do
           prediction = Prediction.new
-          prediction.stub!(:judgement).and_return(mock('judgement', :outcome => true))
+          prediction.stub(:judgement).and_return(mock_model(Judgement, :outcome => true))
           prediction.outcome.should == true
         end
         it 'should return nil if unjudged' do
@@ -530,7 +536,7 @@ describe Prediction do
       end
 
       it 'should not withdraw if the prediction is not open' do
-        @prediction.stub!(:open?).and_return(false)
+        @prediction.stub(:open?).and_return(false)
         lambda { @prediction.withdraw! }.should raise_error(ArgumentError)
       end
     end
@@ -541,30 +547,30 @@ describe Prediction do
       end
 
       it 'should return true for right? when outcome is true' do
-        @prediction.stub!(:outcome).and_return(true)
-        @prediction.right?.should be_true
+        @prediction.stub(:outcome).and_return(true)
+        @prediction.right?.should be true
       end
       it 'should return true for wrong? when outcome is false' do
-        @prediction.stub!(:outcome).and_return(false)
-        @prediction.wrong?.should be_true
+        @prediction.stub(:outcome).and_return(false)
+        @prediction.wrong?.should be true
       end
       it 'should return true for unknown? when outcome is nil' do
-        @prediction.stub!(:outcome).and_return(nil)
-        @prediction.unknown?.should be_true
+        @prediction.stub(:outcome).and_return(nil)
+        @prediction.unknown?.should be true
       end
 
       describe 'open' do
         it 'should be true when outcome is unknown and not withdrawn?' do
-          @prediction.stub!(:withdrawn?).and_return(false)
-          @prediction.stub!(:unknown?).and_return(true)
+          @prediction.stub(:withdrawn?).and_return(false)
+          @prediction.stub(:unknown?).and_return(true)
           @prediction.should be_open
         end
         it 'should be false when withdrawn?' do
-          @prediction.stub!(:withdrawn?).and_return(true)
+          @prediction.stub(:withdrawn?).and_return(true)
           @prediction.should_not be_open
         end
         it 'should be false when outcome is known' do
-          @prediction.stub!(:unknown?).and_return(false)
+          @prediction.stub(:unknown?).and_return(false)
           @prediction.should_not be_open
         end
       end
@@ -573,8 +579,8 @@ describe Prediction do
     describe 'accessor for readable outcome' do
       it 'should delegate to the judgement' do
         prediction = Prediction.new
-        judgement = mock('judgement')
-        prediction.stub!(:judgement).and_return(judgement)
+        judgement = mock_model(Judgement)
+        prediction.stub(:judgement).and_return(judgement)
         judgement.should_receive(:outcome_in_words)
         prediction.readable_outcome
       end
@@ -583,7 +589,7 @@ describe Prediction do
       end
       it 'should return withdrawn if so' do
         p = Prediction.new
-        p.stub!(:withdrawn?).and_return(true)
+        p.stub(:withdrawn?).and_return(true)
         p.readable_outcome.should == 'withdrawn'
       end
     end
@@ -592,8 +598,8 @@ describe Prediction do
   describe 'confidence aggregation' do
     it 'should delegate to wagers' do
       prediction = Prediction.new
-      wagers = mock('wagers')
-      prediction.stub!(:wagers).and_return(wagers)
+      wagers = double('wagers')
+      prediction.stub(:wagers).and_return(wagers)
       wagers.should_receive(:mean_confidence).and_return(:mean_confidence)
       prediction.mean_confidence.should == :mean_confidence
     end
@@ -602,16 +608,16 @@ describe Prediction do
   describe 'events collection' do
     before(:each) do
       @prediction = Prediction.new
-      @r1 = mock('', :created_at => 10.days.ago)
-      @v1 = mock('', :created_at => 10.days.ago)
-      @j1 = mock('', :created_at => 6.days.ago)
-      @v2 = mock('', :created_at => 5.days.ago)
-      @j2 = mock('', :created_at => 4.days.ago)
-      @v3 = mock('', :created_at => 3.days.ago)
-      @r2 = mock('', :created_at => 1.day.ago)
-      @prediction.stub!(:responses).and_return([@r1, @r2])
-      @prediction.stub!(:versions).and_return([@v1, @v2, @v3])
-      @prediction.stub!(:judgements).and_return([@j1, @j2])
+      @r1 = double('', :created_at => 10.days.ago)
+      @v1 = double('', :created_at => 10.days.ago)
+      @j1 = double('', :created_at => 6.days.ago)
+      @v2 = double('', :created_at => 5.days.ago)
+      @j2 = double('', :created_at => 4.days.ago)
+      @v3 = double('', :created_at => 3.days.ago)
+      @r2 = double('', :created_at => 1.day.ago)
+      @prediction.stub(:responses).and_return([@r1, @r2])
+      @prediction.stub(:versions).and_return([@v1, @v2, @v3])
+      @prediction.stub(:judgements).and_return([@j1, @j2])
     end
 
     it 'should return all responses' do

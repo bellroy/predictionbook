@@ -7,7 +7,7 @@ describe User do
   end
 
   it 'should have a private_default field which defaults to false' do
-    User.new.private_default.should be_false
+    User.new.private_default.should be false
   end
 
   it 'should have an email with name' do
@@ -21,28 +21,31 @@ describe User do
 
   describe 'with lookup by username' do
     it 'should find a user by login' do
-      User.should_receive(:find_by_login).with('login_name').and_return(:user)
+      User.should_receive(:find_by_login!).with('login_name').and_return(:user)
       User['login_name'].should == :user
     end
 
     it 'should replace [dot] in the username with a . when looking up a user' do
       u = User.new(:login => "login.name")
-      User.should_receive(:find_by_login).with("login.name").and_return(u)
+      User.should_receive(:find_by_login!).with("login.name").and_return(u)
       User["login[dot]name"].should == u
     end
 
     it 'should raise RecordNotFound exception if no user found' do
-      User.should_receive(:find_by_login).with('login_name').and_return(nil)
       lambda { User["login_name"] }.should raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it 'should raise RecordNotFound exception if login is blank' do
+      lambda { User[nil] }.should raise_error(ActiveRecord::RecordNotFound)
     end
   end
 
   describe 'with statistics' do
     it 'should delegate statistics to wagers' do
       user = User.new
-      wagers = mock('wagers')
+      wagers = double('wagers')
       wagers.should_receive(:statistics)
-      user.stub!(:wagers).and_return(wagers)
+      user.stub(:wagers).and_return(wagers)
 
       user.statistics
     end
@@ -87,7 +90,7 @@ describe User do
     end
     it "should be true for admins" do
       @user = User.new
-      @user.stub!(:admin? => true)
+      @user.stub(:admin? => true)
       @user2 = User.new
       @prediction = @user.predictions.build(:creator => @user2)
       @user.authorized_for(@prediction).should == true
@@ -114,4 +117,3 @@ describe User do
     end
   end
 end
-

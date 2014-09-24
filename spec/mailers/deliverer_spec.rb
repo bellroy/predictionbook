@@ -34,9 +34,9 @@ describe Deliverer do
   end
 
   describe "response notification" do
-    before :all do 
+    before do
       @response_notification = valid_response_notification
-      @response_notification .save
+      @response_notification.save
       @deliverer = Deliverer.response_notification(@response_notification )
     end
 

@@ -39,8 +39,12 @@ class Notification < ActiveRecord::Base
   end
 
   def self.send_all!
-    sendable.each do |notification|
-      notification.deliver!
+    # `includes(:prediction, :user)`, eager loading, used to increase efficiency
+    # `find_each`, loading records in batches, used to reduce RAM consumption
+    unsent.enabled.includes(:prediction, :user).find_each do |notification|
+      if notification.sendable?
+        notification.deliver!
+      end
     end
   end
   

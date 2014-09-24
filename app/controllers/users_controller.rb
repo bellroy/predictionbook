@@ -5,6 +5,18 @@ class UsersController < ApplicationController
 
   helper_method :statistics
 
+
+  # On the sign-up page, fill in an existing user name and click "Sign
+  # Up". Then switch to the sign-in page, fill in your credentials and click
+  # "Log In". You will be redirected to /users, a page that doesn't exist.
+  #
+  # See https://github.com/tricycle/predictionbook/issues/58
+  #
+  # Redirects /users to the root path to resolve this issue
+  def index
+    redirect_to root_path
+  end
+
   def show
     @title       = "Most recent predictions by #{@user}"
     @predictions = @user.predictions.limit(100)
@@ -70,4 +82,3 @@ protected
     access_forbidden unless current_user == @user
   end
 end
-

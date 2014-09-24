@@ -8,7 +8,7 @@ Background:
 Scenario: Making a new prediction
   When I fill in "What do you think will (or won't) happen?" with "Desc"
   And I fill in "What's your estimate of this happening?" with "55"
-  And I fill in "When will you know?" with "in 24 hours"
+  And I fill in "When will you know?" with "1 day from now"
   And I press "Lock it in!"
   Then I should see "Desc"
   And I should see "known in 1 day"
