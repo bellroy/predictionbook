@@ -5,9 +5,11 @@ class CredenceQuestion < ActiveRecord::Base
   belongs_to :answer1, class_name: 'CredenceAnswer'
 
   def self.pick_random
-    # XXX This doesn't take gen.weight into account.
     num_gens = CredenceQuestionGenerator.count
     gen = CredenceQuestionGenerator.first(offset: rand(num_gens))
+    while gen.weight < rand
+      gen = CredenceQuestionGenerator.first(offset: rand(num_gens))
+    end
 
     gen.create_random_question
   end

@@ -1,35 +1,36 @@
 * Testing
 ** Unit tests
 *** How do I test the controller?
+*** Do we run statistical tests on the random elements? (Currently pending.) What tests?
+**** Need to trade off rate of errors (false +ve and false -ve) against running time.
 ** Cucumber tests
 *** How do I create these?
 
 * Bugs
-** CredenceQuestion.pick_random doesn't consider CredenceQuestionGenerator.weight
-*** How does the original game do it?
-**** Look at Assets/Scripts/QuestionsScript.cs
-
-  It looks like it shuffles the generators, then loops through them. When it gets to a generator, it skips it with probability (1-weight). So if there are five generators with a weight of 0.2, on average you'll see one of them each time through the list.
-
-***** This has the nice property that you almost never see the same generator twice in a row. But we can't easily replicate it.
-****** For MVP: just skip generators with probability (1-weight). Future development: look at the previous generators used, exclude the last n from consideration.
-
 ** It's possible for a user to get asked the same question twice.
 *** There are enough questions that this isn't a big deal.
 
-* This question:
+* We don't treat weight/question generation quite like the original game.
+
+  Look at Assets/Scripts/QuestionsScript.cs. It looks like it shuffles the generators, then loops through them to create questions. When it gets to a generator, it skips it with probability (1-weight). So if there are five generators with a weight of 0.2, on average you'll see one of them each time through the list.
+
+  This has the nice property that you almost never see the same generator twice in a row. But we can't easily replicate it. Currently we just skip generators with probability (1-weight) if they get selected, but there's nothing to stop the same generator coming up three times in a row. Future development: look at the previous generators used, exclude the last n from consideration.
+
+* Does the charset in the .xml files (which is currently not utf-8) affect the encoding in the db (which I don't know what it is)?
+** It looks like everything from the first non-ASCII character gets cut off, which is pretty bad. (E.g. there are answers in "south american rivers" that get cut off after a single letter.)
+
+* Merge master into credence game.
+
+* Add way to delete credence game data, possibly from settings page.
+
+* Qustions:
+** This question:
 
 	Which US state had a higher percentage of adults commuting to work by public transportation in 2010?
 
 is ambiguous. I think it's asking: of people commuting to work, how many do it by public transportation? The answer is given in "% of commuting workers", which fits. But the reference class isn't obvious from the question, and sounds like it should just be "adults".
 
-* Typo:
+** Typo:
 
       Each of the following European rivers is among the 175 longest in the
         world. Which one s [sic] longer?
-
-* Does the charset in the .xml files (which is currently not utf-8) affect the encoding in the db (which I don't know what it is)?
-
-* Merge master into credence game.
-
-* Add way to delete credence game data, possibly from settings page.

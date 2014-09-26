@@ -49,7 +49,8 @@ module ModelFactory
     CredenceQuestionGenerator.new({
       text: "Which thing comes sooner?",
       prefix: "The ",
-      suffix: " thing"
+      suffix: " thing",
+      weight: 1
     }.merge(attributes))
   end
 

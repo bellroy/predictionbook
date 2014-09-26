@@ -29,7 +29,14 @@ describe CredenceQuestion do
   end
 
   it 'should create random questions' do
-    pending "Can I test this without a db?"
+    gen = create_valid_credence_question_generator
+    a1 = create_valid_credence_answer(credence_question_generator: gen, rank: 0)
+    a2 = create_valid_credence_answer(credence_question_generator: gen, rank: 1)
+    q = CredenceQuestion.pick_random
+  end
+
+  it 'should consider generators according to their weight' do
+    pending "work out a good test to use"
     raise "not yet implemented"
   end
 end
