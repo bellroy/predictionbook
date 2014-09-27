@@ -730,20 +730,20 @@
 		<Answer Text="Mexico" Value="6.4" />
 	</QuestionGenerator>
 	<QuestionGenerator Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Hot 100 hits was #1 for longer in 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
-		<Answer Text="&quot;We Found Love&quot; – Rihanna feat. Calvin Harris" Value="8 weeks" />
-		<Answer Text="&quot;Rolling in the Deep&quot; – Adele" Value="7 weeks" />
+		<Answer Text="&quot;We Found Love&quot; â€“ Rihanna feat. Calvin Harris" Value="8 weeks" />
+		<Answer Text="&quot;Rolling in the Deep&quot; â€“ Adele" Value="7 weeks" />
 		<Answer Text="&quot;Born This Way&quot;- Lady Gaga" Value="6 weeks" />
-		<Answer Text="&quot;Party Rock Anthem&quot; – LMFAO feat. Lauren Bennett, and GoonRock" Value="6 weeks" />
-		<Answer Text="&quot;E.T.&quot; – Katy Perry feat. Kanye West" Value="5 weeks" />
-		<Answer Text="&quot;Someone Like You&quot; – Adele" Value="5 weeks" />
-		<Answer Text="&quot;Grenade&quot; – Bruno Mars" Value="4 weeks" />
-		<Answer Text="&quot;Moves Like Jagger&quot; – Maroon 5 feat. Christina Aguilera" Value="4 weeks" />
-		<Answer Text="&quot;Firework&quot; – Katy Perry" Value="2 weeks" />
-		<Answer Text="&quot;Last Friday Night T.G.I.F.&quot; – Katy Perry" Value="2 weeks" />
-		<Answer Text="&quot;Hold It Against Me&quot; – Britney Spears" Value="1 week" />
-		<Answer Text="&quot;Black and Yellow&quot; – Wiz Khalifa" Value="1 week" />
-		<Answer Text="&quot;S&amp;M&quot; – Rihanna" Value="1 week" />
-		<Answer Text="&quot;Give Me Everything&quot; – Pitbull feat. Ne-Yo, Afrojack, and Nayer" Value="1 week" />
+		<Answer Text="&quot;Party Rock Anthem&quot; â€“ LMFAO feat. Lauren Bennett, and GoonRock" Value="6 weeks" />
+		<Answer Text="&quot;E.T.&quot; â€“ Katy Perry feat. Kanye West" Value="5 weeks" />
+		<Answer Text="&quot;Someone Like You&quot; â€“ Adele" Value="5 weeks" />
+		<Answer Text="&quot;Grenade&quot; â€“ Bruno Mars" Value="4 weeks" />
+		<Answer Text="&quot;Moves Like Jagger&quot; â€“ Maroon 5 feat. Christina Aguilera" Value="4 weeks" />
+		<Answer Text="&quot;Firework&quot; â€“ Katy Perry" Value="2 weeks" />
+		<Answer Text="&quot;Last Friday Night T.G.I.F.&quot; â€“ Katy Perry" Value="2 weeks" />
+		<Answer Text="&quot;Hold It Against Me&quot; â€“ Britney Spears" Value="1 week" />
+		<Answer Text="&quot;Black and Yellow&quot; â€“ Wiz Khalifa" Value="1 week" />
+		<Answer Text="&quot;S&amp;M&quot; â€“ Rihanna" Value="1 week" />
+		<Answer Text="&quot;Give Me Everything&quot; â€“ Pitbull feat. Ne-Yo, Afrojack, and Nayer" Value="1 week" />
 	</QuestionGenerator>
 	<QuestionGenerator Tags="Science::Astronomy" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these planets has a higher density?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" g/cm^3">
 		<Answer Text="Earth" Value="5.515" />
@@ -1128,13 +1128,13 @@
 		<Answer Text="Bhutan" Value="Thimphu" />
 		<Answer Text="Bosnia and Herzegovina" Value="Sarajevo" />
 		<Answer Text="Botswana" Value="Gaborone" />
-		<Answer Text="Brazil" Value="Brasília" />
+		<Answer Text="Brazil" Value="BrasÃ­lia" />
 		<Answer Text="British Virgin Islands" Value="Road Town" />
 		<Answer Text="Bulgaria" Value="Sofia" />
 		<Answer Text="Burkina Faso" Value="Ouagadougou" />
 		<Answer Text="Burundi" Value="Bujumbura" />
 		<Answer Text="Cambodia" Value="Phnom Penh" />
-		<Answer Text="Cameroon" Value="Yaoundé" />
+		<Answer Text="Cameroon" Value="YaoundÃ©" />
 		<Answer Text="Canada" Value="Ottawa" />
 		<Answer Text="Cape Verde" Value="Praia" />
 		<Answer Text="Cayman Islands" Value="George Town" />
@@ -1143,13 +1143,13 @@
 		<Answer Text="Chile" Value="Santiago" />
 		<Answer Text="Christmas Island" Value="Flying Fish Cove" />
 		<Answer Text="Cocos (Keeling) Islands" Value="West Island" />
-		<Answer Text="Colombia" Value="Bogotá" />
+		<Answer Text="Colombia" Value="BogotÃ¡" />
 		<Answer Text="Comoros" Value="Moroni" />
 		<Answer Text="Cook Islands" Value="Avarua" />
-		<Answer Text="Costa Rica" Value="San José" />
+		<Answer Text="Costa Rica" Value="San JosÃ©" />
 		<Answer Text="Croatia" Value="Zagreb" />
 		<Answer Text="Cuba" Value="Havana" />
-		<Answer Text="Curaçao" Value="Willemstad" />
+		<Answer Text="CuraÃ§ao" Value="Willemstad" />
 		<Answer Text="Cyprus" Value="Nicosia" />
 		<Answer Text="Czech Republic" Value="Prague" />
 		<Answer Text="the Democratic Republic of the Congo" Value="Kinshasa" />
@@ -1167,7 +1167,7 @@
 		<Answer Text="Estonia" Value="Tallinn" />
 		<Answer Text="Ethiopia" Value="Addis Ababa" />
 		<Answer Text="Falkland Islands" Value="Stanley" />
-		<Answer Text="Faroe Islands" Value="Tórshavn" />
+		<Answer Text="Faroe Islands" Value="TÃ³rshavn" />
 		<Answer Text="the  Federated States of Micronesia" Value="Palikir" />
 		<Answer Text="Fiji" Value="Suva" />
 		<Answer Text="Finland" Value="Helsinki" />
@@ -1183,7 +1183,7 @@
 		<Answer Text="Greece" Value="Athens" />
 		<Answer Text="Greenland" Value="Nuuk" />
 		<Answer Text="Grenada" Value="St. George's" />
-		<Answer Text="Guam" Value="Hagåtña" />
+		<Answer Text="Guam" Value="HagÃ¥tÃ±a" />
 		<Answer Text="Guatemala" Value="Guatemala City" />
 		<Answer Text="Guernsey" Value="St. Peter Port" />
 		<Answer Text="Guinea" Value="Conakry" />
@@ -1192,7 +1192,7 @@
 		<Answer Text="Haiti" Value="Port-au-Prince" />
 		<Answer Text="Honduras" Value="Tegucigalpa" />
 		<Answer Text="Hungary" Value="Budapest" />
-		<Answer Text="Iceland" Value="Reykjavík" />
+		<Answer Text="Iceland" Value="ReykjavÃ­k" />
 		<Answer Text="India" Value="New Delhi" />
 		<Answer Text="Indonesia" Value="Jakarta" />
 		<Answer Text="Iran" Value="Tehran" />
@@ -1223,7 +1223,7 @@
 		<Answer Text="Madagascar" Value="Antananarivo" />
 		<Answer Text="Malawi" Value="Lilongwe" />
 		<Answer Text="Malaysia (official)" Value="Kuala Lumpur" />
-		<Answer Text="Maldives" Value="Malé" />
+		<Answer Text="Maldives" Value="MalÃ©" />
 		<Answer Text="Mali" Value="Bamako" />
 		<Answer Text="Malta" Value="Valletta" />
 		<Answer Text="Marshall Islands" Value="Majuro" />
@@ -1240,7 +1240,7 @@
 		<Answer Text="Namibia" Value="Windhoek" />
 		<Answer Text="Nauru" Value="Yaren (de facto)" />
 		<Answer Text="Nepal" Value="Kathmandu" />
-		<Answer Text="New Caledonia" Value="Nouméa" />
+		<Answer Text="New Caledonia" Value="NoumÃ©a" />
 		<Answer Text="New Zealand" Value="Wellington" />
 		<Answer Text="Nicaragua" Value="Managua" />
 		<Answer Text="Niger" Value="Niamey" />
@@ -1257,7 +1257,7 @@
 		<Answer Text="Palau" Value="Melekeok" />
 		<Answer Text="Panama" Value="Panama City" />
 		<Answer Text="Papua New Guinea" Value="Port Moresby" />
-		<Answer Text="Paraguay" Value="Asunción" />
+		<Answer Text="Paraguay" Value="AsunciÃ³n" />
 		<Answer Text="Peru" Value="Lima" />
 		<Answer Text="Philippines" Value="Manila" />
 		<Answer Text="Pitcairn Islands" Value="Adamstown" />
@@ -1269,7 +1269,7 @@
 		<Answer Text="Romania" Value="Bucharest" />
 		<Answer Text="Russia" Value="Moscow" />
 		<Answer Text="Rwanda" Value="Kigali" />
-		<Answer Text="Saint Barthélemy" Value="Gustavia" />
+		<Answer Text="Saint BarthÃ©lemy" Value="Gustavia" />
 		<Answer Text="Saint Helena" Value="Jamestown" />
 		<Answer Text="Saint Kitts and Nevis" Value="Basseterre" />
 		<Answer Text="Saint Lucia" Value="Castries" />
@@ -1299,10 +1299,10 @@
 		<Answer Text="Sweden" Value="Stockholm" />
 		<Answer Text="Switzerland" Value="Bern" />
 		<Answer Text="Syria" Value="Damascus" />
-		<Answer Text="São Tomé and Príncipe" Value="São Tomé" />
+		<Answer Text="SÃ£o TomÃ© and PrÃ­ncipe" Value="SÃ£o TomÃ©" />
 		<Answer Text="Tajikistan" Value="Dushanbe" />
 		<Answer Text="Thailand" Value="Bangkok" />
-		<Answer Text="Togo" Value="Lomé" />
+		<Answer Text="Togo" Value="LomÃ©" />
 		<Answer Text="Tonga" Value="Nuku?alofa" />
 		<Answer Text="Transnistria" Value="Tiraspol" />
 		<Answer Text="Trinidad and Tobago" Value="Port of Spain" />
@@ -1324,7 +1324,7 @@
 		<Answer Text="Vietnam" Value="Hanoi" />
 		<Answer Text="Wales" Value="Cardiff" />
 		<Answer Text="Wallis and Futuna" Value="Mata-Utu" />
-		<Answer Text="Yemen" Value="Sanaá" />
+		<Answer Text="Yemen" Value="SanaÃ¡" />
 		<Answer Text="Zambia" Value="Lusaka" />
 		<Answer Text="Zimbabwe" Value="Harare" />
 	</QuestionGenerator>
@@ -1637,7 +1637,7 @@
 	<QuestionGenerator Tags="International;People" Used="y" Type="Sorted" Weight="1" QuestionText="In 2006, each of these people was ranked by Forbes as one of the ten richest billionaires in the world.  Who was ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" billion USD">
 		<Answer Text="Bill Gates" Value="52" />
 		<Answer Text="Warren Buffett" Value="42" />
-		<Answer Text="Carlos Slim Helú" Value="30" />
+		<Answer Text="Carlos Slim HelÃº" Value="30" />
 		<Answer Text="Ingvar Kamprad" Value="28" />
 		<Answer Text="Lakshmi Mittal" Value="23.5" />
 		<Answer Text="Paul Allen" Value="22" />
@@ -1699,10 +1699,10 @@
 		<Answer Text="Paths of Glory (1957)" Value="50" />
 		<Answer Text="The Pianist (2002)" Value="51" />
 		<Answer Text="Modern Times (1936)" Value="52" />
-		<Answer Text="Amélie (2001)" Value="53" />
+		<Answer Text="AmÃ©lie (2001)" Value="53" />
 		<Answer Text="The Departed (2006)" Value="54" />
 		<Answer Text="Double Indemnity (1944)" Value="55" />
-		<Answer Text="WALL·E (2008)" Value="56" />
+		<Answer Text="WALLÂ·E (2008)" Value="56" />
 		<Answer Text="The Lives of Others (2006)" Value="57" />
 		<Answer Text="Aliens (1986)" Value="58" />
 		<Answer Text="A Clockwork Orange (1971)" Value="59" />
@@ -1885,7 +1885,7 @@
 		<Answer Text="Albert" Value="280" />
 		<Answer Text="Athabasca" Value="204" />
 		<Answer Text="Turkana" Value="204" />
-		<Answer Text="Vänern" Value="153" />
+		<Answer Text="VÃ¤nern" Value="153" />
 		<Answer Text="Nicaragua" Value="108" />
 	</QuestionGenerator>
 	<QuestionGenerator Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Hot 100 Hits from 2011 was #1 for longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" weeks">
@@ -2007,7 +2007,7 @@
 		<Answer Text="Todd Helton" Value="$151,590,000" />
 		<Answer Text="Roger Clemens" Value="$150,601,000" />
 		<Answer Text="Carlos Delgado" Value="$146,299,000" />
-		<Answer Text="Pedro Martínez" Value="$146,259,585" />
+		<Answer Text="Pedro MartÃ­nez" Value="$146,259,585" />
 		<Answer Text="Mike Mussina" Value="$144,533,619" />
 		<Answer Text="Mariano Rivera" Value="$144,441,825" />
 		<Answer Text="Jim Thome" Value="$141,461,667" />
@@ -2290,7 +2290,7 @@
 		<Answer Text="China Construction Bank" Value="$20.5" />
 		<Answer Text="Vale" Value="$20.3" />
 		<Answer Text="Ford Motor" Value="$20.2" />
-		<Answer Text="Petrobras-Petróleo Brasil" Value="$20.1" />
+		<Answer Text="Petrobras-PetrÃ³leo Brasil" Value="$20.1" />
 		<Answer Text="China Mobile" Value="$19.5" />
 		<Answer Text="JPMorgan Chase" Value="$19" />
 		<Answer Text="American Intl Group" Value="$17.8" />
@@ -2312,7 +2312,7 @@
 		<Answer Text="Citigroup" Value="$11.1" />
 		<Answer Text="Lukoil" Value="$10.4" />
 		<Answer Text="Berkshire Hathaway" Value="$10.3" />
-		<Answer Text="Nestlé" Value="$10.1" />
+		<Answer Text="NestlÃ©" Value="$10.1" />
 		<Answer Text="Procter &amp; Gamble" Value="$10.1" />
 		<Answer Text="Roche Holding" Value="$10" />
 		<Answer Text="Pfizer" Value="$10" />
@@ -2336,7 +2336,7 @@
 		<Answer Text="Portugal Telecom" Value="$7.6" />
 		<Answer Text="ING Group" Value="$7.5" />
 		<Answer Text="Sanofi" Value="$7.4" />
-		<Answer Text="Itaú Unibanco Holding" Value="$7.4" />
+		<Answer Text="ItaÃº Unibanco Holding" Value="$7.4" />
 		<Answer Text="China Shenhua Energy" Value="$7.3" />
 		<Answer Text="Daimler" Value="$7.3" />
 		<Answer Text="Westpac Banking Group" Value="$7.2" />
@@ -2485,7 +2485,7 @@
 		<Answer Text="Gibraltar" Value="38,800.00" />
 		<Answer Text="Greenland" Value="37,500.00" />
 		<Answer Text="Italy" Value="36,800.00" />
-		<Answer Text="Curaçao" Value="36,200.00" />
+		<Answer Text="CuraÃ§ao" Value="36,200.00" />
 		<Answer Text="European Union" Value="35,200.00" />
 		<Answer Text="Isle of Man" Value="34,200.00" />
 		<Answer Text="Hong Kong" Value="34,000.00" />
@@ -2734,37 +2734,37 @@
 		<Answer Text="Gila River" Value="1015" />
 	</QuestionGenerator>
 	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following South American rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
-		<Answer Text="Amazon River - Ucayali River - Apurímac River" Value="6400" />
-		<Answer Text="Paraná River - Río de la Plata" Value="4880" />
+		<Answer Text="Amazon River - Ucayali River - ApurÃ­mac River" Value="6400" />
+		<Answer Text="ParanÃ¡ River - RÃ­o de la Plata" Value="4880" />
 		<Answer Text="Tocantins River - Araguaia River" Value="3650" />
-		<Answer Text="Madeira River - Mamoré River - Río Grande (Bolivia) - Caine River - Rocha" Value="3380" />
+		<Answer Text="Madeira River - MamorÃ© River - RÃ­o Grande (Bolivia) - Caine River - Rocha" Value="3380" />
 		<Answer Text="Purus" Value="3211" />
-		<Answer Text="São Francisco River" Value="3180" />
+		<Answer Text="SÃ£o Francisco River" Value="3180" />
 		<Answer Text="Araguaia River" Value="2627" />
-		<Answer Text="Japurá River" Value="2615" />
+		<Answer Text="JapurÃ¡ River" Value="2615" />
 		<Answer Text="River Paraguay" Value="2549" />
 		<Answer Text="Pilcomayo River" Value="2500" />
-		<Answer Text="Juruá" Value="2410" />
+		<Answer Text="JuruÃ¡" Value="2410" />
 		<Answer Text="Rio Negro (Amazon)" Value="2250" />
 		<Answer Text="Orinoco" Value="2101" />
 		<Answer Text="Xingu River" Value="2100" />
 		<Answer Text="Salado River" Value="2010" />
-		<Answer Text="Tapajós" Value="1900" />
-		<Answer Text="Guaporé" Value="1749" />
+		<Answer Text="TapajÃ³s" Value="1900" />
+		<Answer Text="GuaporÃ©" Value="1749" />
 		<Answer Text="Uruguay River" Value="1610" />
 		<Answer Text="Beni River" Value="1599" />
-		<Answer Text="Içá River" Value="1575" />
+		<Answer Text="IÃ§Ã¡ River" Value="1575" />
 		<Answer Text="Magdalena River" Value="1550" />
-		<Answer Text="Río Grande (Bolivia)" Value="1438" />
-		<Answer Text="Marañón River (Peru)" Value="1415" />
+		<Answer Text="RÃ­o Grande (Bolivia)" Value="1438" />
+		<Answer Text="MaraÃ±Ã³n River (Peru)" Value="1415" />
 		<Answer Text="Grande River" Value="1360" />
 		<Answer Text="Cauca River" Value="1350" />
 		<Answer Text="Iguassu River" Value="1320" />
 		<Answer Text="Iriri River" Value="1300" />
 		<Answer Text="Juruena River" Value="1240" />
 		<Answer Text="Madre de Dios River" Value="1130" />
-		<Answer Text="Tietê River" Value="1130" />
-		<Answer Text="Paraíba do Sul River" Value="1120" />
+		<Answer Text="TietÃª River" Value="1130" />
+		<Answer Text="ParaÃ­ba do Sul River" Value="1120" />
 		<Answer Text="Huallaga River" Value="1100" />
 		<Answer Text="Bermejo River" Value="1050" />
 		<Answer Text="Guaviare River" Value="1050" />
@@ -2938,7 +2938,7 @@
 		<Answer Text="Tim Sylvia" Value="2/28/2003" />
 		<Answer Text="Frank Mir" Value="6/19/2004" />
 		<Answer Text="Andrei Arlovski" Value="2/5/2005" />
-		<Answer Text="Antônio Rodrigo Nogueira" Value="2/2/2008" />
+		<Answer Text="AntÃ´nio Rodrigo Nogueira" Value="2/2/2008" />
 		<Answer Text="Brock Lesnar" Value="11/15/2008" />
 		<Answer Text="Shane Carwin" Value="3/27/2010" />
 		<Answer Text="Cain Velasquez" Value="10/23/2010" />

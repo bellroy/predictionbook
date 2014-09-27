@@ -9,15 +9,13 @@
 * Bugs
 ** It's possible for a user to get asked the same question twice.
 *** There are enough questions that this isn't a big deal.
+** We don't pay attention to generator.enabled.
 
 * We don't treat weight/question generation quite like the original game.
 
   Look at Assets/Scripts/QuestionsScript.cs. It looks like it shuffles the generators, then loops through them to create questions. When it gets to a generator, it skips it with probability (1-weight). So if there are five generators with a weight of 0.2, on average you'll see one of them each time through the list.
 
   This has the nice property that you almost never see the same generator twice in a row. But we can't easily replicate it. Currently we just skip generators with probability (1-weight) if they get selected, but there's nothing to stop the same generator coming up three times in a row. Future development: look at the previous generators used, exclude the last n from consideration.
-
-* Does the charset in the .xml files (which is currently not utf-8) affect the encoding in the db (which I don't know what it is)?
-** It looks like everything from the first non-ASCII character gets cut off, which is pretty bad. (E.g. there are answers in "south american rivers" that get cut off after a single letter.)
 
 * Merge master into credence game.
 
