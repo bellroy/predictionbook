@@ -104,7 +104,7 @@
 		<Answer Text="Wyoming" Value="5.8" />
 		<Answer Text="Alaska" Value="1.2" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Transportation" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher percentage of adults commuting to work by public transportation in 2010?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" of commuting workers">
+	<QuestionGenerator Tags="U.S.A.;Transportation" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher percentage of adults commuting to work by public transportation in 2010, out of all commuting workers?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" of commuting workers">
 		<Answer Text="New York" Value="26.7%" />
 		<Answer Text="New Jersey" Value="10.8%" />
 		<Answer Text="Massachusetts" Value="9.1%" />
@@ -2672,7 +2672,7 @@
 		<Answer Text="Cooper Creek - Barcoo River" Value="1420" />
 		<Answer Text="Warburton Creek - Georgina River" Value="1400" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following European rivers is among the 175 longest in the world. Which one s longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
+	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following European rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
 		<Answer Text="Volga" Value="3645" />
 		<Answer Text="Danube - Breg River" Value="2888" />
 		<Answer Text="Ural River" Value="2428" />
