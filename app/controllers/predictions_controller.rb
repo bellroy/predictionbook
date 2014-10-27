@@ -4,11 +4,11 @@ class PredictionsController < ApplicationController
   before_filter :login_required, :only => [:new, :create, :judge, :withdraw, :edit, :update]
   before_filter :find_prediction, :only => [:judge, :show, :withdraw, :edit, :update]
   before_filter :must_be_authorized_for_prediction, :only => [:withdraw, :edit, :update]
-  
+
   helper_method :statistics, :show_statistics?
-  
+
   cache_sweeper :statistics_sweeper, :only => :judge
-  
+
   def new
     @title = "Make a Prediction"
     @statistics = current_user.statistics if current_user
@@ -18,7 +18,7 @@ class PredictionsController < ApplicationController
     end
     @prediction = Prediction.new(:creator => current_user, :private => privacy)
   end
-  
+
   def create
     begin
       prediction_params = params[:prediction]
@@ -32,11 +32,11 @@ class PredictionsController < ApplicationController
     @prediction = invalid.record
     render :action => 'new', :status => :unprocessable_entity
   end
-  
+
   def edit
     @title = "Editing: “#{@prediction.description}”"
   end
-  
+
   def update
     @prediction.update_attributes!(params[:prediction])
     redirect_to prediction_path(@prediction)
@@ -44,7 +44,7 @@ class PredictionsController < ApplicationController
     @prediction = invalid.record
     render :action => 'edit', :status => :unprocessable_entity
   end
-  
+
   def home
     privacy = false
     if current_user
@@ -57,19 +57,19 @@ class PredictionsController < ApplicationController
     @predictions = Prediction.limit(5).popular
     @show_statistics = false
   end
-  
+
   def recent
     #TODO: remove this in a month or so
     redirect_to predictions_path, :status=>:moved_permanently
   end
-  
+
   def index
     @title = "Recent Predictions"
     @filter = 'recent'
     @predictions = Prediction.limit(100).recent
     @show_statistics = true
   end
-  
+
   def show
     if @prediction.private?
       access_forbidden and return unless current_user && current_user.authorized_for(@prediction)
@@ -83,7 +83,7 @@ class PredictionsController < ApplicationController
     @events = @prediction.events
     @title = @prediction.description
   end
-  
+
   def judged
     @title = "Judged Predictions"
     @filter = 'judged'
@@ -98,7 +98,7 @@ class PredictionsController < ApplicationController
     @predictions = Prediction.limit(100).unjudged
     render :action => 'index'
   end
-  
+
   def future
     @title = "Upcoming Predictions"
     @filter = 'future'
@@ -113,32 +113,32 @@ class PredictionsController < ApplicationController
     @recent = Prediction.limit(5).recent
     @responses = Response.limit(25).recent
   end
-  
+
   def judge
     @prediction.judge!(params[:outcome], current_user)
     flash[:judged] = 'judged'
     redirect_to @prediction
   end
-  
+
   def withdraw
     @prediction.withdraw!
     redirect_to @prediction
   end
-    
+
   def statistics
     @statistics ||= Response.wagers.statistics
   end
-  
+
   def show_statistics?
     @show_statistics
   end
-  
+
 
 private
   def must_be_authorized_for_prediction
     access_forbidden unless current_user && current_user.authorized_for(@prediction)
   end
-  
+
   def find_prediction
     @prediction = Prediction.find(params[:id])
   end

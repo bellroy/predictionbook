@@ -6,34 +6,38 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 puts "SEEDING!"
+
 first_user = User.new({:login => "Test", :password => "blahblah", :password_confirmation =>"blahblah"})
-
-first_user.save
-
-
-prediction = first_user.predictions.build(:deadline => 24.days.from_now, :initial_confidence => 24, :creator => User.first, :description => "this event will come true")
-prediction.save
-
+first_user.save!
 
 second_user = User.new({:login => "Second", :password => "jajaja", :password_confirmation => "jajaja"})
-second_user.save
+second_user.save!
 
-first_response = prediction.responses.build({:user => second_user, :confidence => 10})
-first_response.save()
+100.times do
+  prediction = first_user.predictions.build(:deadline => 24.days.from_now, :initial_confidence => 24, :creator => User.first, :description => "this event will come true")
+  prediction.save!
 
+  first_response = prediction.responses.build({:user => second_user, :confidence => 10})
+  first_response.save!
+end
 
-unjudged = second_user.predictions.build({:deadline => 24.days.ago, :initial_confidence => 33, :description => "this event has came past", :creator => second_user})
-unjudged.save
+100.times do
+  unjudged = second_user.predictions.build({:deadline => 24.days.ago, :initial_confidence => 33, :description => "this event has came past", :creator => second_user})
+  unjudged.save!
+end
 
+100.times do
+  judged = first_user.predictions.build({:deadline => 3.days.ago, :initial_confidence => 44, :description => "this event is judged", :creator => first_user})
+  judged.save!
 
-judged = first_user.predictions.build({:deadline => 3.days.ago, :initial_confidence => 44, :description => "this event is judged", :creator => first_user})
-judged.save
+  judgement = Judgement.new({:user_id => second_user.id, :prediction_id => judged.id,:outcome => 0})
+  judgement.save!
+end
 
-judgement = Judgement.new({:user_id => second_user.id, :prediction_id => judged.id,:outcome => 0})
-judgement.save()
 
 commented = first_user.predictions.build({:deadline => 3.days.from_now, :initial_confidence => 77, :description => "commented prediction", :creator => first_user})
-commented.save
+commented.save!
+
 commented.responses.create(:user => second_user, :confidence => 44, :comment => "No way this will happen!")
 
 puts "END SEEDING"

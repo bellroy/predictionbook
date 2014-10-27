@@ -11,25 +11,27 @@ class Prediction < ActiveRecord::Base
   scope :not_withdrawn, :conditions => { :withdrawn => false }
   # if you change the implementation of 'public', also change this scope in response
   scope :not_private, :conditions => { :private => false }
+
+  DEFAULT_INCLUDES = [:judgements, :responses, :creator]
   def self.unjudged
-    not_private.not_withdrawn.all(:include => :judgements,
+    not_private.not_withdrawn.all(:include => DEFAULT_INCLUDES,
       :conditions => '(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NULL AND deadline < UTC_TIMESTAMP()').
       rsort(:deadline)
   end
   def self.judged
-    not_private.not_withdrawn.all(:include => :judgements,
+    not_private.not_withdrawn.all(:include => DEFAULT_INCLUDES,
       :conditions => '(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NOT NULL',
       :order => 'judgements.created_at DESC')
   end
   def self.future
-    sort(:deadline).not_private.not_withdrawn.all(:include => :judgements, :conditions => "judgements.outcome IS NULL AND deadline > UTC_TIMESTAMP()")
+    sort(:deadline).not_private.not_withdrawn.includes(DEFAULT_INCLUDES).where("judgements.outcome IS NULL AND deadline > UTC_TIMESTAMP()")
   end
   def self.recent
-    rsort.not_private.not_withdrawn(:include => [:judgements, :responses, :creator])
+    rsort.not_private.not_withdrawn(:include => DEFAULT_INCLUDES)
   end
   def self.popular
     opts = {
-      :include => :responses, # Eager loading of :judgements breaks judgement and unknown?
+      :include => [:responses, :creator], # Eager loading of :judgements breaks judgement and unknown?
       :conditions => [
         'predictions.deadline > UTC_TIMESTAMP() AND predictions.created_at > ?', 2.weeks.ago
       ],
@@ -48,8 +50,6 @@ class Prediction < ActiveRecord::Base
 
   delegate :wagers, :to => :responses
   delegate :comments, :to => :responses
-
-  delegate :mean_confidence, :to => :wagers
 
   validates_presence_of :deadline, :message => "When will you know you're right?"
   validates_presence_of :creator, :message => 'Who are you?'
@@ -96,9 +96,27 @@ class Prediction < ActiveRecord::Base
   def deadline_text
     @deadline_text || (deadline ? deadline.localtime.to_s(:db) : "")
   end
+
   def deadline_text=(new_deadline)
     self[:deadline] = self.class.parse_deadline(new_deadline)
     @deadline_text = new_deadline
+  end
+
+  def preloaded_wagers
+    responses.select(&:confidence)
+  end
+
+  def preloaded_comments
+    responses.select(&:comment)
+  end
+
+  def mean_confidence
+    if preloaded_wagers.length > 0
+      total = preloaded_wagers.map(&:confidence).inject(0, &:+)
+      (total / preloaded_wagers.length).round
+    else
+      0
+    end
   end
 
   def events

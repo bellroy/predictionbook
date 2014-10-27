@@ -59,6 +59,7 @@ describe Response do
       it 'should call rsort and public scopes' do
         Response.should_receive(:rsort).and_return(@rs)
         Response.should_receive(:not_private).and_return(@rs)
+        Response.should_receive(:prefetch_joins ).and_return(@rs)
         Response.recent.should == @rs
       end
     end
