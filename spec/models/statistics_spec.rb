@@ -1,63 +1,62 @@
 require 'spec_helper'
 
 describe Statistics do
-  describe 'iteration' do
-    it 'should iterate over Statistic::Inverval objects' do
-      stats = Statistics.new([Response.new(:confidence => 50)])
-      stats.each do |stat|
-        stat.should be_kind_of(Statistics::Interval)
-      end
+  describe 'initialization' do
+    let(:stats) { Statistics.new }
+
+    before :each do
+      first_response = valid_response(confidence: 50)
+      first_response.save!
+      valid_judgement(prediction: first_response.prediction, outcome: 0).save!
+      second_response = valid_response(confidence: 40)
+      second_response.save!
+      valid_judgement(prediction: second_response.prediction, outcome: 0).save!
+      third_response = valid_response(confidence: 70)
+      third_response.save!
+      valid_judgement(prediction: third_response.prediction, outcome: 1).save!
+      fourth_response = valid_response(confidence: nil)
+      fourth_response.save!
+      valid_judgement(prediction: first_response.prediction, outcome: 1).save!
+      fifth_response = valid_response(confidence: 80)
+      fifth_response.save!
     end
-  end
-  describe 'prefetch joins' do
-    it 'should happen if it is supported' do
-      stats = []
-      stats.should_receive(:prefetch_joins).and_return(stats)
-      Statistics.new(stats)
+
+    it 'should create all intervals' do
+      expect(stats.headings).to eq ["50%", "60%", "70%", "80%", "90%", "100%"]
     end
-    it 'should not happen if not supported' do
-      Statistics.new([])
+
+    it "should have correct accuracies" do
+      expect(stats.accuracies).to eq [100, 100, 100, 0, 0, 67]
+    end
+
+    it "should have correct sample sizes" do
+      expect(stats.sizes).to eq [1, 1, 1, 0, 0, 3]
     end
   end
 end
 
 describe Statistics::Interval do
-  describe 'ranges' do
+  describe 'initialization and update' do
+    let(:interval) { Statistics::Interval.new(80) }
+
     before(:each) do
-      wagers = []
-      outcomes = [true, false, nil]
-      (0..100).each do |c|
-        response = Response.new(:confidence => c)
-        response.stub(:correct?).and_return(outcomes.first)
-        response.stub(:unknown?).and_return(outcomes.first.nil?)
-        wagers << response
-        # cycle outcomes
-        outcomes.unshift(outcomes.pop)
-      end
-      @i50,@i60,@i70,@i80,@i90,@i100 = Statistics.new(wagers).map { |interval| interval }
+      interval.update([80, 491, 0.4921])
     end
 
     describe 'heading' do
       it 'should be descriptive of the range' do
-        @i50.heading.should == '50'
-      end
-      it 'should be == 100 for 100' do
-        @i100.heading.should == '100'
+        interval.heading.should == '80%'
       end
     end
     describe 'count' do
       #TODO: make these not depend on indecipherable setup code
-      it 'should equal the number of wagers' do
-        @i50.count.should == 13
-        @i60.count.should == 13
-        @i100.count.should == 1
+      it 'should equal the argument' do
+        interval.count.should == 491
       end
     end
     describe 'accuracy' do
-      it 'should equal the percentage of correct wagers' do
-        @i50.accuracy.should == (6.0/13*100).round
-        @i60.accuracy.should == (7.0/13*100).round
-        @i100.accuracy.should == 100
+      it 'should equal the argument' do
+        interval.accuracy.should == 49
       end
     end
   end

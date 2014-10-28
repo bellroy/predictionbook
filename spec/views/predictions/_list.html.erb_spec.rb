@@ -4,8 +4,8 @@ describe "prediction list" do
 
   before do
     assign(:predictions, [])
-    assign(:statistics, Statistics.new([]))
-    view.stub(:statistics).and_return(Statistics.new([]))
+    assign(:statistics, Statistics.new)
+    view.stub(:statistics).and_return(Statistics.new)
     view.stub(:show_statistics?).and_return(false)
     view.stub(:current_user).and_return User.new
   end

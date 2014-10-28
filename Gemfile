@@ -36,6 +36,7 @@ group :test, :development do
   gem 'hirb'
   gem 'wirble'
   gem 'awesome_print'
+  gem 'simplecov'
 end
 
 group :cucumber, :development do

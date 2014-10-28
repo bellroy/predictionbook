@@ -4,7 +4,7 @@ describe 'predictions/index.html.erb' do
 
   before do
     assign(:predictions, [])
-    assign(:statistics, Statistics.new([]))
+    assign(:statistics, Statistics.new)
     view.stub(:show_statistics?).and_return(false)
     view.stub(:current_user).and_return User.new
   end

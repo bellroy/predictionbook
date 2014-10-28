@@ -46,7 +46,9 @@ class User < ActiveRecord::Base
     find_by_login!(login.gsub("[dot]","."))
   end
 
-  delegate :statistics, :to => :wagers
+  def statistics
+    Statistics.new("r.user_id = #{id}")
+  end
 
   def statistics_image_url
     statistics.image_url

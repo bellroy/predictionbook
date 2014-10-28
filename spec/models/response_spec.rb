@@ -59,6 +59,7 @@ describe Response do
       it 'should call rsort and public scopes' do
         Response.should_receive(:rsort).and_return(@rs)
         Response.should_receive(:not_private).and_return(@rs)
+        Response.should_receive(:prefetch_joins ).and_return(@rs)
         Response.recent.should == @rs
       end
     end
@@ -104,26 +105,6 @@ describe Response do
             @wagers.stub(:average).and_return(51.8)
             @wagers.mean_confidence.should == 52
           end
-        end
-      end
-
-      describe 'statistics' do
-        it 'should have a "statistics" collection' do
-          #HACK: respond_to? bug workaraound, fix in rails > August 13, 2008
-          # Response.wagers.should respond_to(:statistics)
-          expect {Response.wagers.statistics}.not_to raise_error
-        end
-        it 'should be a conversion of wagers into Statistics' do
-          wagers = Response.wagers
-          Statistics.should_receive(:new).with(wagers)
-
-          wagers.statistics
-        end
-        it 'should return the new Statistics collection' do
-          stats = double('statistics')
-          Statistics.stub(:new).and_return(stats)
-
-          Response.wagers.statistics.should ==  stats
         end
       end
     end
