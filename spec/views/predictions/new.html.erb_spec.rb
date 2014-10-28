@@ -6,7 +6,7 @@ describe 'predictions/new' do
     assign(:prediction, @prediction)
     view.stub(:logged_in?).and_return(true)
     view.stub(:user_statistics_cache_key).and_return "stats"
-    view.stub(:statistics).and_return(Statistics.new([]))
+    view.stub(:statistics).and_return(Statistics.new)
     @user = mock_model(User, :has_email? => false)
     @user.stub(:to_param).and_return "username"
     view.stub(:current_user).and_return(@user)

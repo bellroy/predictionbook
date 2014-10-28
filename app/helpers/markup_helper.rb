@@ -59,9 +59,9 @@ module MarkupHelper
   def certainty_heading(heading)
     case heading
     when "100"
-      link_to "#{heading}%", 'http://en.wikipedia.org/wiki/Almost_surely', :class => 'egg', :title => 'Almost surely'
+      link_to heading, 'http://en.wikipedia.org/wiki/Almost_surely', :class => 'egg', :title => 'Almost surely'
     else
-      "#{heading}%"
+      heading
     end
   end
 
