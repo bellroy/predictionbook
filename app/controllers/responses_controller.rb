@@ -2,7 +2,7 @@ class ResponsesController < ApplicationController
   before_filter :login_required, :except => :index
 
   def index
-    @responses = Response.recent.limit(50)
+    @responses = Response.limit(50).recent
   end
 
   def create
