@@ -596,12 +596,13 @@ describe Prediction do
   end
 
   describe 'confidence aggregation' do
-    it 'should delegate to wagers' do
-      prediction = Prediction.new
-      wagers = double('wagers')
-      prediction.stub(:wagers).and_return(wagers)
-      wagers.should_receive(:mean_confidence).and_return(:mean_confidence)
-      prediction.mean_confidence.should == :mean_confidence
+    it 'should calculate correctly' do
+      prediction = valid_prediction
+      prediction.save!
+      prediction.responses.first.update_attributes(confidence: 50)
+      valid_response(prediction: prediction, confidence: 56).save!
+      valid_response(prediction: prediction, confidence: 83).save!
+      expect(prediction.mean_confidence).to eq 63
     end
   end
 
