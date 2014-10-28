@@ -8,23 +8,23 @@ class Notification < ActiveRecord::Base
 
   validates_presence_of :user
   validates_presence_of :prediction
-  
+
   validates_uniqueness_of :user_id, :scope => [:prediction_id, :type]
-  
+
   scope :unsent, :conditions => {:sent => false}
   scope :sent,   :conditions => {:sent => true}
   scope :enabled,   :conditions => {:enabled => true}
   scope :disabled,  :conditions => {:enabled => false}
-  
+
   def initialize(attrs = {}, options = {})
     super
     self.uuid ||= UUID.random_create.to_s
   end
-  
+
   def use_token!
     update_attribute(:token_used, true)
   end
-  
+
   def self.use_token!(token)
     if dn = find_by_uuid(token)
       unless dn.token_used?
@@ -33,7 +33,7 @@ class Notification < ActiveRecord::Base
       end
     end
   end
-  
+
   def self.sendable
     unsent.select(&:sendable?)
   end
@@ -41,17 +41,18 @@ class Notification < ActiveRecord::Base
   def self.send_all!
     # `includes(:prediction, :user)`, eager loading, used to increase efficiency
     # `find_each`, loading records in batches, used to reduce RAM consumption
-    unsent.enabled.includes(:prediction, :user).find_each do |notification|
+    default_includes = [{:prediction => [:judgements, :creator]}, :user]
+    unsent.enabled.includes(default_includes).find_each do |notification|
       if notification.sendable?
         notification.deliver!
       end
     end
   end
-  
+
   def sendable?
     false
   end
-  
+
   def deliver!
     deliver
     update_attribute(:sent, true)
