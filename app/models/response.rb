@@ -25,9 +25,6 @@ class Response < ActiveRecord::Base
     def predictions
       collect(&:prediction).uniq
     end
-    def statistics
-      Statistics.new(self)
-    end
     def mean_confidence
       average(:confidence).round unless empty?
     end

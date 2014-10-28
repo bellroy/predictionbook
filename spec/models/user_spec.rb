@@ -43,11 +43,10 @@ describe User do
   describe 'with statistics' do
     it 'should delegate statistics to wagers' do
       user = User.new
-      wagers = double('wagers')
-      wagers.should_receive(:statistics)
-      user.stub(:wagers).and_return(wagers)
-
-      user.statistics
+      user.id = 123
+      stats = double(Statistics)
+      Statistics.should_receive(:new).with("r.user_id = 123").and_return(stats)
+      user.statistics.should eq stats
     end
   end
 

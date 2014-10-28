@@ -5,7 +5,25 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+def random_future_day
+  random_int.days.from_now
+end
+
+def random_past_day
+  random_int.days.ago
+end
+
+def random_int
+  Random.rand(100)
+end
+
 puts "SEEDING!"
+
+User.delete_all
+Prediction.delete_all
+Judgement.delete_all
+Response.delete_all
 
 first_user = User.new({:login => "Test", :password => "blahblah", :password_confirmation =>"blahblah"})
 first_user.save!
@@ -13,31 +31,63 @@ first_user.save!
 second_user = User.new({:login => "Second", :password => "jajaja", :password_confirmation => "jajaja"})
 second_user.save!
 
-100.times do
-  prediction = first_user.predictions.build(:deadline => 24.days.from_now, :initial_confidence => 24, :creator => User.first, :description => "this event will come true")
+DATA_SIZE = 1000
+
+puts "creating future unjudged"
+DATA_SIZE.times do
+  prediction = first_user.predictions.build(
+    :deadline => random_future_day,
+    :initial_confidence => random_int,
+    :creator => User.first,
+    :description => "this event will come true"
+  )
   prediction.save!
-
-  first_response = prediction.responses.build({:user => second_user, :confidence => 10})
-  first_response.save!
+  prediction.responses.create!(:user => second_user, :confidence => random_int)
 end
 
-100.times do
-  unjudged = second_user.predictions.build({:deadline => 24.days.ago, :initial_confidence => 33, :description => "this event has came past", :creator => second_user})
-  unjudged.save!
+puts "creating past unjudged"
+DATA_SIZE.times do
+  prediction = second_user.predictions.build(
+    :deadline => random_past_day,
+    :initial_confidence => random_int,
+    :description => "this event has came past",
+    :creator => second_user
+  )
+  prediction.save!
 end
 
-100.times do
-  judged = first_user.predictions.build({:deadline => 3.days.ago, :initial_confidence => 44, :description => "this event is judged", :creator => first_user})
+puts "creating past judged"
+DATA_SIZE.times do
+  judged = first_user.predictions.build(
+    :deadline => random_past_day,
+    :initial_confidence => random_int,
+    :description => "this event is judged",
+    :creator => first_user
+  )
   judged.save!
 
-  judgement = Judgement.new({:user_id => second_user.id, :prediction_id => judged.id,:outcome => 0})
-  judgement.save!
+  Judgement.create!(
+    :user => second_user,
+    :prediction => judged,
+    :outcome => random_int % 2
+  )
 end
 
+puts "creating future commented"
+DATA_SIZE.times do
+  commented = first_user.predictions.build(
+    :deadline => random_future_day,
+    :initial_confidence => random_int,
+    :description => "commented prediction",
+    :creator => first_user
+  )
+  commented.save!
 
-commented = first_user.predictions.build({:deadline => 3.days.from_now, :initial_confidence => 77, :description => "commented prediction", :creator => first_user})
-commented.save!
-
-commented.responses.create(:user => second_user, :confidence => 44, :comment => "No way this will happen!")
+  commented.responses.create!(
+    :user => second_user,
+    :confidence => random_int,
+    :comment => "No way this will happen!"
+  )
+end
 
 puts "END SEEDING"

@@ -126,7 +126,7 @@ class PredictionsController < ApplicationController
   end
 
   def statistics
-    @statistics ||= Response.wagers.statistics
+    @statistics ||= Statistics.new
   end
 
   def show_statistics?
