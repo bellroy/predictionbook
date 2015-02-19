@@ -5,7 +5,7 @@
 Something like:
 [source,shell]
 --------------------
-$ git clone git://github.com/tricycle/predictionbook-public.git
+$ git clone git://github.com/tricycle/predictionbook.git
 $ cd predictionbook-public
 $ cp config/database.yml.example config/database.yml # update db user / password / database names if necessary
 $ cp config/credentials.yml.example config/credentials.yml
