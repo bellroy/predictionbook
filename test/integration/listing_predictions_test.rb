@@ -12,12 +12,12 @@ class ListingPredictionsTest < ActionDispatch::IntegrationTest
 
 
   test 'valid username and password' do
-    get 'api/predictions', {}, { 'Authorization' => 'Basic TW9yaXR6U2NobGljazp2ZXJpZmllZA==' }
+    get "/api/predictions?username=MoritzSchlick&password=verified"
     assert_equal 200, response.status
   end
 
   test 'missing credentials' do
-    get 'api/predictions', {}, {}
+    get '/api/predictions'
     assert_equal 401, response.status
   end
 
