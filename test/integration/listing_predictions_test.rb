@@ -1,6 +1,15 @@
+require 'test_helper'
+
 class ListingPredictionsTest < ActionDispatch::IntegrationTest
 
-  setup { @user = User.create!(login: "MoritzSchlick", password: "verified") }
+  setup do
+    @user = User.create!(
+      login: "MoritzSchlick",
+      password: "verified",
+      password_confirmation: "verified"
+    )
+  end
+
 
   test 'valid username and password' do
     get 'api/predictions', {}, { 'Authorization' => 'Basic TW9yaXR6U2NobGljazp2ZXJpZmllZA==' }

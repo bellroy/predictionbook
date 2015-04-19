@@ -9,5 +9,9 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :all
 
+  def encode_credentials(username, password)
+    ActionController::HttpAuthentication::Basic.encode_credentials(username, password)
+  end
+
   # Add more helper methods to be used by all tests here...
 end
