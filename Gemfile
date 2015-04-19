@@ -75,4 +75,3 @@ end
 
 #restful-authentication needs to be installed as a plugin or it doesn't work
 #rspec-caching-test-plugin is quite old and is not available as a gem
-
