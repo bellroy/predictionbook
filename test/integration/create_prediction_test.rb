@@ -1,13 +1,12 @@
 require 'test_helper'
 
 class CreatePredictionTest < ActionDispatch::IntegrationTest
-
   setup do
     @user = User.create!(valid_user_params)
   end
 
   test 'create valid prediction' do
-    post "/api/predictions" + valid_query_string, valid_prediction_params
+    post '/api/predictions' + valid_query_string, valid_prediction_params
     assert_equal 200, response.status
   end
 
@@ -20,5 +19,4 @@ class CreatePredictionTest < ActionDispatch::IntegrationTest
     post '/api/predictions', valid_prediction_params
     assert_equal 401, response.status
   end
-
 end
