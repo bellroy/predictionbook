@@ -9,8 +9,26 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :all
 
-  def encode_credentials(username, password)
-    ActionController::HttpAuthentication::Basic.encode_credentials(username, password)
+  def valid_prediction_params
+    { :prediction => {
+        :deadline => Random.rand(100).days.from_now,
+        :initial_confidence => Random.rand(100),
+        :creator => User.first,
+        :description => "this event won't come true"
+      }
+    }
+  end
+
+  def invalid_prediction_params
+
+  end
+
+  def valid_user_params
+    {:login => "Test", :password => "blahblah", :password_confirmation =>"blahblah"}
+  end
+
+  def valid_query_string
+    "?username=#{valid_user_params[:login]}&password=#{valid_user_params[:password]}"
   end
 
   # Add more helper methods to be used by all tests here...

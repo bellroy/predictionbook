@@ -8,11 +8,30 @@ class Api::PredictionsController < ApplicationController
     render json: @predictions, status: 200
   end
 
-  protected
+  def create
+    @prediction = build_prediction
+    if @prediction.save
+      render json: @prediction, status: 200
+    else
+      render json: @prediction.errors, status: 422
+    end
+  end
+
+  private
 
   def authenticate
     @user = User.authenticate(params[:username], params[:password])
     render json: invalid_message, status: 401 unless @user
+  end
+
+  def build_prediction
+    prediction_params = params[:prediction] || {}
+
+    unless prediction_params[:private]
+      prediction_params[:private] = @user.private_default
+    end
+
+    Prediction.new(prediction_params.merge(:creator => @user))
   end
 
   def invalid_message
