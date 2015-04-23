@@ -13,22 +13,27 @@ class Prediction < ActiveRecord::Base
   scope :not_private, :conditions => { :private => false }
 
   DEFAULT_INCLUDES = [:judgements, :responses, :creator]
+
   def self.unjudged
     not_private.not_withdrawn.all(:include => DEFAULT_INCLUDES,
       :conditions => '(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NULL AND deadline < UTC_TIMESTAMP()').
       rsort(:deadline)
   end
+
   def self.judged
     not_private.not_withdrawn.all(:include => DEFAULT_INCLUDES,
       :conditions => '(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NOT NULL',
       :order => 'judgements.created_at DESC')
   end
+
   def self.future
     sort(:deadline).not_private.not_withdrawn.includes(DEFAULT_INCLUDES).where("judgements.outcome IS NULL AND deadline > UTC_TIMESTAMP()")
   end
+
   def self.recent
     rsort.not_private.not_withdrawn.all(:include => DEFAULT_INCLUDES)
   end
+
   def self.popular
     opts = {
       :include => [:responses, :creator], # Eager loading of :judgements breaks judgement and unknown?
@@ -205,10 +210,29 @@ class Prediction < ActiveRecord::Base
   end
 
   def bound_deadline
-    if !deadline.nil? && deadline.year > 9999
+    if too_futuristic?
       errors.add(:deadline, "Please consider creating a time capsule to record this prediction.")
-    elsif !deadline.nil? && deadline.year < 1
+    elsif before_christ?
       errors.add(:deadline, "If it was known that long ago, it's not exactly a prediction, is it?")
+    elsif retrodiction?
+      errors.add(:deadline, "Please don't make 'predictions' about the past. This isn't 'RetrodictionBook'.")
     end
+  end
+
+  private
+
+  def too_futuristic?
+    return deadline.year > 9999 unless deadline.nil?
+    false
+  end
+
+  def before_christ?
+    return deadline.year < 1 unless deadline.nil?
+    false
+  end
+
+  def retrodiction?
+    return deadline < Time.now - 15.days unless deadline.nil?
+    false
   end
 end
