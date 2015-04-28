@@ -5,8 +5,8 @@
 Something like:
 [source,shell]
 --------------------
-$ git clone git://github.com/tricycle/predictionbook-public.git
-$ cd predictionbook-public
+$ git clone git://github.com/tricycle/predictionbook.git
+$ cd predictionbook
 $ cp config/database.yml.example config/database.yml # update db user / password / database names if necessary
 $ cp config/credentials.yml.example config/credentials.yml
 $ bundle install
