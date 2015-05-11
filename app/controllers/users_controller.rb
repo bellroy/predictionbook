@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :lookup_user, :only => [:show, :update, :settings, :due_for_judgement]
-  before_filter :login_required, :only => [:settings, :update]
-  before_filter :user_is_current_user, :only => [:settings, :update]
+  before_filter :lookup_user, :only => [:show, :update, :settings, :due_for_judgement, :generate_api_token]
+  before_filter :login_required, :only => [:settings, :update, :generate_api_token]
+  before_filter :user_is_current_user, :only => [:settings, :update, :generate_api_token]
 
   helper_method :statistics
 
@@ -70,6 +70,15 @@ class UsersController < ApplicationController
     @predictions = @user.predictions
     @predictions = @predictions.not_private unless current_user == @user
     @predictions = @predictions.select { |x| x.due_for_judgement? }
+  end
+
+  def generate_api_token
+    if @user.reset_api_token!
+      flash[:notice] = "Your API token has been reset."
+    else
+      flash[:error] = "Your API token could not be reset, sorry."
+    end
+    redirect_to @user
   end
 
 protected
