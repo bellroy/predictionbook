@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
-  before_filter :lookup_user, :only => [:show, :update, :settings, :due_for_judgement, :generate_api_token]
-  before_filter :login_required, :only => [:settings, :update, :generate_api_token]
-  before_filter :user_is_current_user, :only => [:settings, :update, :generate_api_token]
+  before_filter :lookup_user, only: [:show, :update, :settings, :due_for_judgement, :generate_api_token]
+  before_filter :login_required, only: [:settings, :update, :generate_api_token]
+  before_filter :user_is_current_user, only: [:settings, :update, :generate_api_token]
 
   helper_method :statistics
-
 
   # On the sign-up page, fill in an existing user name and click "Sign
   # Up". Then switch to the sign-in page, fill in your credentials and click
@@ -24,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    @title = "Signup"
+    @title = 'Signup'
     @user = User.new
   end
 
@@ -32,10 +31,10 @@ class UsersController < ApplicationController
     @user.update_attributes(params[:user])
     if @user.valid?
       show
-      render :action => :show
+      render action: :show
     else
       settings
-      render :action => :settings
+      render action: :settings
     end
   end
 
@@ -54,10 +53,10 @@ class UsersController < ApplicationController
       # reset session
       self.current_user = @user # !! now logged in
       redirect_back_or_default('/')
-      flash[:notice] = "Thanks for signing up!"
+      flash[:notice] = 'Thanks for signing up!'
     else
       flash[:error]  = "We couldn't set up that account, sorry."
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
@@ -69,19 +68,19 @@ class UsersController < ApplicationController
     @title = "Predictions by #{@user} due for judgement"
     @predictions = @user.predictions
     @predictions = @predictions.not_private unless current_user == @user
-    @predictions = @predictions.select { |x| x.due_for_judgement? }
+    @predictions = @predictions.select(&:due_for_judgement?)
   end
 
   def generate_api_token
     if @user.reset_api_token!
-      flash[:notice] = "Your API token has been reset."
+      flash[:notice] = 'Your API token has been reset.'
     else
-      flash[:error] = "Your API token could not be reset, sorry."
+      flash[:error] = 'Your API token could not be reset, sorry.'
     end
     redirect_to @user
   end
 
-protected
+  protected
 
   def lookup_user
     @user = User[params[:id]]
