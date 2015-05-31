@@ -2813,12 +2813,13 @@
 	</QuestionGenerator>
 	<QuestionGenerator Tags="International;Sports::Soccer" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these countries was earlier in their first winning of the World Cup?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Uruguay" Value="1930" />
-		<Answer Text="Italy" Value="1938" />
-		<Answer Text="West Germany" Value="1958" />
-		<Answer Text="Brazil" Value="1962" />
-		<Answer Text="England" Value="1970" />
-		<Answer Text="Argentina" Value="1982" />
-		<Answer Text="France" Value="2002" />
+		<Answer Text="Italy" Value="1934" />
+		<Answer Text="West Germany" Value="1954" />
+		<Answer Text="Brazil" Value="1958" />
+		<Answer Text="England" Value="1966" />
+		<Answer Text="Argentina" Value="1978" />
+		<Answer Text="France" Value="1998" />
+		<Answer Text="Spain" Value="2010" />
 	</QuestionGenerator>
 	<QuestionGenerator Tags="U.S.A.;Sports::Football" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these Superbowl MVPs was earlier in first winning the title?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Bart Starr" Value="1967" />
