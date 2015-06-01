@@ -25,10 +25,13 @@ class ActiveSupport::TestCase
   end
 
   def valid_user_params
-    { login: 'Test', password: 'blahblah', password_confirmation: 'blahblah' }
+    { login: 'Test',
+      password: 'blahblah',
+      password_confirmation: 'blahblah'
+    }
   end
 
-  def valid_query_string
-    "?username=#{valid_user_params[:login]}&password=#{valid_user_params[:password]}"
+  def valid_query_string(token)
+    "?api_token=#{token}"
   end
 end
