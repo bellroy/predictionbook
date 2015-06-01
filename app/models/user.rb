@@ -111,6 +111,6 @@ class User < ActiveRecord::Base
 
   def reset_api_token!
     self.api_token = generate_api_token
-    self.save
+    save
   end
 end
