@@ -2,37 +2,37 @@ source 'http://rubygems.org'
 
 gem 'rails', '~> 3.2.1'
 gem 'jquery-rails'
-#Models
+# Models
 gem 'chronic'
-gem "version_fu", "~> 1.0.1"
+gem 'version_fu', '~> 1.0.1'
 gem 'uuidtools', '~> 1.0.0'
 
-#Views
+# Views
 gem 'RedCloth', '~>4.2.7'
 gem 'formatize'
 gem 'htmlentities'
 
-#Servers
-gem "mysql2", '~> 0.3'
+# Servers
+gem 'mysql2', '~> 0.3'
 gem 'thin'
 
-#App housekeeping
+# App housekeeping
 gem 'exception_notification'
-gem "whenever"
-gem "typus"
+gem 'whenever'
+gem 'typus'
 
-#Misc
+# Misc
 gem 'honeypot-captcha'
 
 group :development do
-  gem "capistrano"
-  gem "capistrano-ext"
+  gem 'capistrano'
+  gem 'capistrano-ext'
 end
 
 group :test, :development do
   gem 'rspec-rails'
   gem 'rspec-activemodel-mocks'
-  gem "pry"
+  gem 'pry'
   gem 'hirb'
   gem 'wirble'
   gem 'awesome_print'
@@ -55,7 +55,7 @@ group :test do
   gem 'factory_girl'
   gem 'ffaker'
   gem 'shoulda-matchers'
-  gem "guard-rspec"
+  gem 'guard-rspec'
   gem 'email_spec'
 end
 
@@ -69,10 +69,8 @@ group :linux, :production do
 end
 
 group :darwin do
-  gem 'rb-fsevent', :require => false #OSX specific
+  gem 'rb-fsevent', require: false # OSX specific
 end
 
-
-#restful-authentication needs to be installed as a plugin or it doesn't work
-#rspec-caching-test-plugin is quite old and is not available as a gem
-
+# restful-authentication needs to be installed as a plugin or it doesn't work
+# rspec-caching-test-plugin is quite old and is not available as a gem

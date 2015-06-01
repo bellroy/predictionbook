@@ -15,6 +15,7 @@ $ rake db:create
 $ rake db:schema:load
 $ rake spec # run specs
 $ rake cucumber # run cucumber features
+$ rake test # test API
 $ script/server
 $ ^Z # ctrl+z
 $ bg
