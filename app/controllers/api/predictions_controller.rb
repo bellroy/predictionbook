@@ -5,6 +5,7 @@ module Api
 
     def index
       @predictions = Prediction.limit(100).recent
+
       render json: @predictions, status: 200
     end
 
@@ -21,7 +22,7 @@ module Api
     private
 
     def authenticate
-      @user = User.authenticate(params[:username], params[:password])
+      @user = User.find_by_api_token(params[:api_token])
       render json: invalid_message, status: 401 unless @user
     end
 
@@ -36,7 +37,7 @@ module Api
     end
 
     def invalid_message
-      { error: 'invalid username, password, or both', status: 401 }
+      { error: 'invalid API token', status: 401 }
     end
   end
 end
