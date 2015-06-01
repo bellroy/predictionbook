@@ -2,4 +2,5 @@
 - [X] Create API controller and move authorization logic into it
 - [X] Change authentication to expect API token in request
 - [ ] Rewrite tests in RSpec and check basic structure of responses
+- [ ] Add API token display and generate buttons to user show page
 - [ ] Add API documentation to README
