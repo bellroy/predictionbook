@@ -47,5 +47,9 @@ PredictionBook2::Application.routes.draw do
   root :to => 'predictions#home'
 
   match '/healthcheck' => 'content#healthcheck'
+  
+  namespace :api do
+ 	  resources :predictions
+  end
 end
 

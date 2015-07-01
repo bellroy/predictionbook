@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
   end
   
   def generate_api_token
-   SecureRandom.urlsafe_base64
+    SecureRandom.urlsafe_base64
   end
 
   def reset_api_token!
