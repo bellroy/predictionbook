@@ -104,4 +104,13 @@ class User < ActiveRecord::Base
 
     UserMailer.password_reset(self).deliver
   end
+  
+  def generate_api_token
+   SecureRandom.urlsafe_base64
+  end
+
+  def reset_api_token!
+    self.api_token = generate_api_token
+    save
+  end
 end
