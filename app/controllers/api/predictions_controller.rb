@@ -1,17 +1,13 @@
 module Api
   class PredictionsController < ApplicationController
     PREDICTIONS_LIMIT = 1000
-    
+
     before_filter :authenticate_by_api_token
     before_filter :must_be_authorized_for_prediction, only: [:withdraw, :update]
-    before_filter :predictions, only: [:index]
+    before_filter :build_predictions, only: [:index]
 
     def index
-      if @user && params[:api_token]
-        render json: @predictions, status: 200
-      else
-        render json: invalid_message, status: 401
-      end
+      render json: @predictions, status: 200
     end
 
     def create
@@ -25,10 +21,11 @@ module Api
     private
 
     def authenticate_by_api_token
+      render json: invalid_message, status: 401 if params[:api_token].nil?
       @user = User.find_by_api_token(params[:api_token]) rescue nil
     end
 
-    def build_prediction
+    def build_new_prediction
       prediction_params = params[:prediction] || {}
 
       unless prediction_params[:private]
@@ -38,7 +35,7 @@ module Api
       Prediction.new(prediction_params.merge(creator: @user))
     end
 
-    def predictions
+    def build_predictions
       if params[:limit] && params[:limit] < PREDICTIONS_LIMIT
         @predictions = Prediction.limit(params[:limit]).recent
       else
