@@ -1,5 +1,7 @@
 module Api
   class PredictionsController < ApplicationController
+    PREDICTIONS_LIMIT = 1000
+    
     before_filter :authenticate_by_api_token
     before_filter :must_be_authorized_for_prediction, only: [:withdraw, :update]
     before_filter :predictions, only: [:index]
@@ -37,8 +39,11 @@ module Api
     end
 
     def predictions
-      requested_limit = params[:limit] || 100
-      @predictions = Prediction.limit(requested_limit).recent
+      if params[:limit] && params[:limit] < PREDICTIONS_LIMIT
+        @predictions = Prediction.limit(params[:limit]).recent
+      else
+        @predictions = Prediction.limit(100).recent
+      end
     end
 
     def invalid_message
