@@ -31,6 +31,12 @@ module ModelFactory
     User.new({:login => 'zippy', :password => password, :password_confirmation => password_confirmation}.merge(attributes))
   end
   
+  def valid_user_params(attributes = {})
+    password = attributes.delete(:password) || '123456'
+    password_confirmation = attributes.delete(:password_confirmation) || password
+    {:login => 'zippy', :password => password, :password_confirmation => password_confirmation}.merge(attributes)
+  end
+  
   def valid_deadline_notification(attributes={})
     DeadlineNotification.new({
       :user=> valid_user(:email=> 'zippy@predictionbook.com'),

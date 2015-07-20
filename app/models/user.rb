@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
   ## eg. User.new(:foo => 'bar') # will not assign foo
   attr_accessible :login, :email, :name, :password, :password_confirmation, :timezone, :private_default
   attr_accessible :login, :email, :name, :admin, :as => :admin
+  attr_reader :api_token
 
   def self.authenticate(login, password)
     u = find_by_login(login) # need to get the salt
@@ -104,13 +105,17 @@ class User < ActiveRecord::Base
 
     UserMailer.password_reset(self).deliver
   end
-  
-  def generate_api_token
-    SecureRandom.urlsafe_base64
-  end
 
   def reset_api_token!
     self.api_token = generate_api_token
     save
+  end
+  
+  private
+  
+  attr_writer :api_token
+  
+  def generate_api_token
+    SecureRandom.urlsafe_base64
   end
 end
