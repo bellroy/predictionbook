@@ -1,14 +1,11 @@
-
-
 module Api
   class PredictionsController < ApplicationController
     before_filter :authenticate_by_api_token
     before_filter :must_be_authorized_for_prediction, only: [:withdraw, :update]
+    before_filter :predictions, only: [:index]
 
     def index
-      @predictions = Prediction.limit(100).recent
-
-      if @user 
+      if @user && params[:api_token]
         render json: @predictions, status: 200
       else
         render json: invalid_message, status: 401
@@ -39,12 +36,16 @@ module Api
       Prediction.new(prediction_params.merge(creator: @user))
     end
 
+    def predictions
+      requested_limit = params[:limit] || 100
+      @predictions = Prediction.limit(requested_limit).recent
+    end
+
     def invalid_message
       { error: 'invalid API token', status: 401 }
     end
-    
+
     def must_be_authorized_for_prediction
-      
     end
   end
 end
