@@ -10,9 +10,7 @@ module Api
     end
 
     def create
-      @prediction = build_prediction
-
-      if @prediction.save
+      if build_prediction.save
         render json: @prediction, status: 200
       else
         render json: @prediction.errors, status: 422
@@ -23,6 +21,7 @@ module Api
 
     def authenticate
       @user = User.find_by_api_token(params[:api_token])
+      
       render json: invalid_message, status: 401 unless @user
     end
 
