@@ -31,6 +31,11 @@ describe Api::PredictionsController, type: :controller do
         response.response_code == :success
       end
       
+      it 'should respond with JSON content type' do
+        get :index, api_token: @user.api_token
+        response.content_type == Mime::JSON
+      end
+      
       it 'should respond with predictions' do
         get :index, api_token: @user.api_token
         response.body.should == @recent.to_json
@@ -41,6 +46,11 @@ describe Api::PredictionsController, type: :controller do
       it 'should respond with HTTP failure' do
         get :index
         response.response_code.should == 401
+      end
+      
+      it 'should respond with JSON content type' do
+        get :index
+        response.content_type == Mime::JSON
       end
     end
   end
