@@ -11,7 +11,9 @@ module Api
     end
 
     def create
-      if build_prediction.save
+      @prediction = build_new_prediction
+      
+      if @prediction.save
         render json: @prediction, status: 200
       else
         render json: @prediction.errors, status: 422
@@ -21,18 +23,21 @@ module Api
     private
 
     def authenticate_by_api_token
-      render json: invalid_message, status: 401 if params[:api_token].nil?
       @user = User.find_by_api_token(params[:api_token]) rescue nil
+      
+      if @user.nil? || params[:api_token].nil?
+        render json: invalid_message, status: 401
+      end
     end
 
     def build_new_prediction
       prediction_params = params[:prediction] || {}
 
-      unless prediction_params[:private]
+      unless prediction_params[:private] && @user
         prediction_params[:private] = @user.private_default
       end
 
-      Prediction.new(prediction_params.merge(creator: @user))
+      @prediction = Prediction.new(prediction_params.merge(creator: @user))
     end
 
     def build_predictions

@@ -54,63 +54,46 @@ describe Api::PredictionsController, type: :controller do
       end
     end
   end
-  # context 'with valid API token' do
-  #   it 'should respond with HTTP failure' do
-  #     get :index
-  #     response.response_code.should == 401
-  #   end
-  # end
-  # 
-  # context 'with invalid API token' do
-  #   describe 'index' do
-  #     it 'should respond with HTTP failure' do
-  #       get :index
-  #       response.response_code.should == 401
-  #     end
-  #   end
-  #   
-  # describe 'Getting a list of all predictions' do
-  #   describe 'index of predictions' do
-  #     it 'should assign recent predictions for the view' do
-  #       recent = double(:recent_predictions).as_null_object
-  #       Prediction.should_receive(:limit).with(100).and_return(double(:collection, :recent=> recent))
-  #       get :index
-  #       assigns[:predictions].should == recent
-  #     end
-  #   end
-  # 
-  #   it 'should respond with http success status' do
-  #     get :index
-  #     response.response_code.should == 200
-  #   end
-  # 
-  #   describe 'recent predictions index' do
-  #     it 'should render' do
-  #       get :index
-  #       response.response_code.should == 200
-  #     end
-  # 
-  #     it 'should assign the title' do
-  #       get :index
-  #       assigns[:title].should_not be_nil
-  #     end
-  #     describe 'collection' do
-  #       before do
-  #         @collection = []
-  #         Prediction.stub(:recent).and_return(@collection)
-  #       end
-  #       it 'should assign the collection' do
-  #         @collection.stub(:prefetch_joins).and_return(@collection)
-  #         get :index
-  #         assigns[:predictions].should == @collection
-  #       end
-  #     end
-  #     it 'should assign the filter' do
-  #       get :index
-  #       assigns[:filter].should == 'recent'
-  #     end
-  #   end
-  # end
+
+  describe 'create' do
+    
+    context 'with valid API token' do
+      before(:each) do
+        @user = build(:user_with_email)
+        @user.reset_api_token!
+        @prediction = {
+          :description => 'The world will end tomorrow!',
+          :deadline => 1.day.ago,
+          :initial_confidence => '100'
+        }
+      end
+      
+      it 'should create a new prediction' do
+        post :create, prediction: @prediction, api_token: @user.api_token
+        response.body.should == @prediction.to_json
+      end
+    end
+
+    context 'with invalid API token' do
+      before(:each) do
+        @prediction = {
+          :description => 'The world will end tomorrow!',
+          :deadline => 1.day.ago,
+          :initial_confidence => '100'
+        }
+      end
+      
+      it 'should not create a new prediction' do
+        post :create, prediction: @prediction
+        response.body.should_not == @prediction
+      end
+      
+      it 'should respond with HTTP failure' do
+        post :create, prediction: @prediction
+        response.response_code.should == 401
+      end
+    end
+  end
 
   # describe 'Creating a new prediction' do
   #   def post_prediction(params={})
