@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :lookup_user, :only => [:show, :update, :settings, :due_for_judgement, :generate_api_token]
-  before_filter :login_required, :only => [:settings, :update]
-  before_filter :user_is_current_user, :only => [:settings, :update]
+  before_filter :login_required, :only => [:settings, :update, :generate_api_token]
+  before_filter :user_is_current_user, :only => [:settings, :update, :generate_api_token]
 
   helper_method :statistics
 
