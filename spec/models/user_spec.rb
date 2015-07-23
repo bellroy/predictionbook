@@ -5,6 +5,14 @@ describe User do
     User.new.should respond_to(:name)
     User.new.should respond_to(:name=)
   end
+  
+  it 'should have an API token' do
+    User.new.should respond_to(:api_token)
+  end
+  
+  it 'should default to having a nil API token' do
+    User.new.api_token.should be_nil
+  end
 
   it 'should have a private_default field which defaults to false' do
     User.new.private_default.should be false
