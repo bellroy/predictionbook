@@ -32,9 +32,10 @@ class User < ActiveRecord::Base
 
   #NOTE: You can't set anything via mass assignment that is not in this list
   ## eg. User.new(:foo => 'bar') # will not assign foo
-  attr_accessible :login, :email, :name, :password, :password_confirmation, :timezone, :private_default, :api_token
-  attr_accessible :login, :email, :name, :admin, :api_token, :as => :admin
-
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :timezone, :private_default
+  attr_accessible :login, :email, :name, :admin, :as => :admin
+  attr_accessible :api_token
+  
   def self.authenticate(login, password)
     u = find_by_login(login) # need to get the salt
     u && u.authenticated?(password) ? u : nil
@@ -104,11 +105,6 @@ class User < ActiveRecord::Base
 
     UserMailer.password_reset(self).deliver
   end
-
-  # def reset_api_token!
-  #   self.update_attributes(api_token: generate_api_token)
-  #   self.save!
-  # end
   
   def User.generate_api_token
     SecureRandom.urlsafe_base64
