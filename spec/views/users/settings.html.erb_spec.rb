@@ -22,5 +22,10 @@ describe 'users/settings' do
       render
       rendered.should have_unchecked_field('user[private_default]')
     end
+    it 'should display API token' do
+      @user.stub(:private_default).and_return(false)
+      render
+      rendered.should have_content('token')
+    end
   end
 end
