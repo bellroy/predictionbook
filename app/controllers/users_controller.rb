@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :lookup_user, :only => [:show, :update, :settings, :due_for_judgement, :generate_api_token]
-  before_filter :login_required, :only => [:settings, :update, :generate_api_token]
-  before_filter :user_is_current_user, :only => [:settings, :update, :generate_api_token]
+  before_filter :lookup_user, :only => [:show, :update, :settings, :due_for_judgement]
+  before_filter :login_required, :only => [:settings, :update]
+  before_filter :user_is_current_user, :only => [:settings, :update]
 
   helper_method :statistics
 
@@ -73,15 +73,15 @@ class UsersController < ApplicationController
   end
   
   def generate_api_token
-    @user.reset_api_token!
+    @user = User.find_by_login(params[:login])
     
-    if @user.errors.empty?
+    if @user && @user.update_attributes(api_token: User.generate_api_token)
       flash[:notice] = "Generated a new API token!"
     else
       flash[:error]  = "We couldn't generate a new API token, sorry."
     end
     
-    redirect_back_or_default('/')
+    redirect_to settings_user_url(@user)
   end
 
 protected

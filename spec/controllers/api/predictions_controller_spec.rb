@@ -16,7 +16,8 @@ describe Api::PredictionsController, type: :controller do
     context 'with valid API token' do
       before(:each) do
         @user = build(:user_with_email)
-        @user.reset_api_token!
+        @user.should_receive(:api_token)
+          .and_return("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         User.should_receive(:find_by_api_token)
           .with(@user.api_token)
           .and_return(@user)

@@ -11,7 +11,7 @@ PredictionBook2::Application.routes.draw do
   resources :users do
     get :settings, :on=> :member
     get :due_for_judgement, :on => :member
-    get :generate_api_token, :on => :member
+    post :generate_api_token, :on => :member
     resources :deadline_notifications
   end
 
