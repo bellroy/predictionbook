@@ -22,11 +22,12 @@ module Api
     private
 
     def authenticate_by_api_token
-      @user = User.find_by_api_token(params[:api_token]) rescue nil
-
-      if @user.nil? || params[:api_token].nil?
-        render json: invalid_message, status: 401
-      end
+      @user = User.find_by_api_token(params[:api_token])
+      render json: invalid_message, status: 401 unless valid_user_found?
+    end
+    
+    def valid_user_found?
+      params[:api_token] && @user
     end
 
     def build_new_prediction

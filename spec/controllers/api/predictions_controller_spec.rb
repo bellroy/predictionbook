@@ -16,11 +16,8 @@ describe Api::PredictionsController, type: :controller do
     context 'with valid API token' do
       before(:each) do
         @user = build(:user_with_email)
-        @user.stub(:api_token)
-          .and_return("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-        User.should_receive(:find_by_api_token)
-          .with(@user.api_token)
-          .and_return(@user)
+        @user.stub(:api_token).and_return("token")
+        User.stub(:find_by_api_token).and_return(@user)
         @recent = double(:recent_predictions)
         Prediction.should_receive(:limit)
           .with(100)
@@ -44,6 +41,10 @@ describe Api::PredictionsController, type: :controller do
     end
 
     context 'with invalid API token' do
+      before(:each) do
+        User.stub(:find_by_api_token).and_return(nil)
+      end
+      
       it 'should respond with HTTP failure' do
         get :index
         response.response_code.should == 401
@@ -60,8 +61,8 @@ describe Api::PredictionsController, type: :controller do
     context 'with valid API token' do
       before(:each) do
         @user = build(:user_with_email)
-        @user.stub(:api_token).and_return("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-        User.should_receive(:find_by_api_token)
+        @user.stub(:api_token).and_return("token")
+        User.stub(:find_by_api_token)
           .with(@user.api_token)
           .and_return(@user)
         @prediction = {
@@ -79,6 +80,7 @@ describe Api::PredictionsController, type: :controller do
 
     context 'with invalid API token' do
       before(:each) do
+        User.stub(:find_by_api_token).and_return(nil)
         @prediction = {
           description: 'The world will end tomorrow!',
           deadline: 1.day.ago,
