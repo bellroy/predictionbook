@@ -48,7 +48,7 @@ module Api
       if (1..MAXIMUM_PREDICTIONS_LIMIT).include?(params[:limit].to_i)
         @predictions = Prediction.limit(params[:limit].to_i).recent
       else
-        @predictions = Prediction.limit(100).recent
+        @predictions = Prediction.limit(DEFAULT_PREDICTIONS_LIMIT).recent
       end
     end
 
