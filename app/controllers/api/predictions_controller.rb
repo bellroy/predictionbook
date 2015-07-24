@@ -1,6 +1,7 @@
 module Api
   class PredictionsController < ApplicationController
-    PREDICTIONS_LIMIT = 1000
+    MAXIMUM_PREDICTIONS_LIMIT = 1000
+    DEFAULT_PREDICTIONS_LIMIT = 100
 
     before_filter :authenticate_by_api_token
     before_filter :build_predictions, only: [:index]
@@ -44,7 +45,7 @@ module Api
     end
 
     def build_predictions
-      if params[:limit] && params[:limit].to_i <= PREDICTIONS_LIMIT
+      if (1..MAXIMUM_PREDICTIONS_LIMIT).include?(params[:limit].to_i)
         @predictions = Prediction.limit(params[:limit].to_i).recent
       else
         @predictions = Prediction.limit(100).recent
