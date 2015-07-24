@@ -24,12 +24,12 @@ module Api
 
     def authenticate_by_api_token
       @user = User.find_by_api_token(params[:api_token])
-      
+
       unless valid_params_and_user?
         render json: invalid_message, status: :unauthorized
       end
     end
-    
+
     def valid_params_and_user?
       params[:api_token] && @user
     end

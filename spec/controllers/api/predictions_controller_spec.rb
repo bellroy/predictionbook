@@ -16,7 +16,7 @@ describe Api::PredictionsController, type: :controller do
     context 'with valid API token' do
       before(:each) do
         @user = build(:user_with_email)
-        @user.stub(:api_token).and_return("token")
+        @user.stub(:api_token).and_return('token')
         User.stub(:find_by_api_token).and_return(@user)
         @recent = double(:recent_predictions)
         Prediction.should_receive(:limit)
@@ -44,7 +44,7 @@ describe Api::PredictionsController, type: :controller do
       before(:each) do
         User.stub(:find_by_api_token).and_return(nil)
       end
-      
+
       it 'should respond with HTTP failure' do
         get :index
         response.response_code.should == 401
@@ -61,7 +61,7 @@ describe Api::PredictionsController, type: :controller do
     context 'with valid API token' do
       before(:each) do
         @user = build(:user_with_email)
-        @user.stub(:api_token).and_return("token")
+        @user.stub(:api_token).and_return('token')
         User.stub(:find_by_api_token)
           .with(@user.api_token)
           .and_return(@user)
@@ -76,20 +76,20 @@ describe Api::PredictionsController, type: :controller do
         post :create, prediction: @prediction, api_token: @user.api_token
         response.body.should include(@prediction[:description])
       end
-      
+
       context 'with a malformed prediction' do
         before(:each) do
           @prediction[:initial_confidence] = 9000
         end
-        
+
         it 'should respond with HTTP failure' do
           post :create, prediction: @prediction, api_token: @user.api_token
           response.response_code.should == 422
         end
-        
+
         it 'should respond with error messages' do
           post :create, prediction: @prediction, api_token: @user.api_token
-          response.body.should include("a probability is between 0 and 100%")
+          response.body.should include('a probability is between 0 and 100%')
         end
       end
     end
