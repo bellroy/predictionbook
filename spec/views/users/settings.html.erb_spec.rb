@@ -5,6 +5,8 @@ describe 'users/settings' do
     before do
       assigns[:user] = @user = valid_user
       view.stub(:current_user).and_return(@user)
+      @user.stub(:api_token).and_return("token")
+      @user.stub(:id).and_return(1)
     end
     it 'should exist' do
       render
@@ -12,13 +14,11 @@ describe 'users/settings' do
     end
     it 'should be checked if the user wishes it' do
       @user.stub(:private_default).and_return(true)
-      @user.stub(:api_token).and_return(nil)
       render
       rendered.should have_checked_field('user[private_default]')
     end
     it 'should not be checked if the user does not wish it' do
       @user.stub(:private_default).and_return(false)
-      @user.stub(:api_token).and_return(nil)
       render
       rendered.should have_unchecked_field('user[private_default]')
     end
