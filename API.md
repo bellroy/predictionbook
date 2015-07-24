@@ -10,7 +10,7 @@ limit          | integer | The maximum number of predictions that will be return
 POST  http://predictionbook.com/api/predictions
 
 Parameter name                | Value   | Description
-------------------------------| --------|----
+------------------------------| --------|------------
 api_token                     | string  | A token that identifies a unique user
 prediction[description]       | string  | Your prediction statement
 prediction[deadline]          | date    | when it will/won't have happened
