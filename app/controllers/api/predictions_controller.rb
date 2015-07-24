@@ -40,8 +40,8 @@ module Api
     end
 
     def build_predictions
-      if params[:limit] && params[:limit] <= PREDICTIONS_LIMIT
-        @predictions = Prediction.limit(params[:limit]).recent
+      if params[:limit] && params[:limit].to_i <= PREDICTIONS_LIMIT
+        @predictions = Prediction.limit(params[:limit].to_i).recent
       else
         @predictions = Prediction.limit(100).recent
       end
