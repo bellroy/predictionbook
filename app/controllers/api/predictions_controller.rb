@@ -13,7 +13,7 @@ module Api
       @prediction = build_new_prediction
 
       if @prediction.save
-        render json: @prediction, status: 200
+        render json: @prediction
       else
         render json: @prediction.errors, status: 422
       end
