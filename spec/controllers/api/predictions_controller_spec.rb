@@ -76,6 +76,22 @@ describe Api::PredictionsController, type: :controller do
         post :create, prediction: @prediction, api_token: @user.api_token
         response.body.should include(@prediction[:description])
       end
+      
+      context 'with a malformed prediction' do
+        before(:each) do
+          @prediction[:initial_confidence] = 9000
+        end
+        
+        it 'should respond with HTTP failure' do
+          post :create, prediction: @prediction, api_token: @user.api_token
+          response.response_code.should == 422
+        end
+        
+        it 'should respond with error messages' do
+          post :create, prediction: @prediction, api_token: @user.api_token
+          response.body.should include("a probability is between 0 and 100%")
+        end
+      end
     end
 
     context 'with invalid API token' do
