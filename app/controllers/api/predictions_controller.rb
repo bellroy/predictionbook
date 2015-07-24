@@ -6,7 +6,7 @@ module Api
     before_filter :build_predictions, only: [:index]
 
     def index
-      render json: @predictions, status: 200
+      render json: @predictions
     end
 
     def create
@@ -15,7 +15,7 @@ module Api
       if @prediction.save
         render json: @prediction
       else
-        render json: @prediction.errors, status: 422
+        render json: @prediction.errors, status: :unprocessable_entity
       end
     end
 
@@ -23,10 +23,13 @@ module Api
 
     def authenticate_by_api_token
       @user = User.find_by_api_token(params[:api_token])
-      render json: invalid_message, status: 401 unless valid_user_found?
+      
+      unless valid_params_and_user?
+        render json: invalid_message, status: :unauthorized
+      end
     end
     
-    def valid_user_found?
+    def valid_params_and_user?
       params[:api_token] && @user
     end
 
@@ -49,7 +52,7 @@ module Api
     end
 
     def invalid_message
-      { error: 'invalid API token', status: 401 }
+      { error: 'invalid API token', status: :unauthorized }
     end
   end
 end
