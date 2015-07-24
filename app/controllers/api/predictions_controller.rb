@@ -3,7 +3,6 @@ module Api
     PREDICTIONS_LIMIT = 1000
 
     before_filter :authenticate_by_api_token
-    before_filter :must_be_authorized_for_prediction, only: [:withdraw, :update]
     before_filter :build_predictions, only: [:index]
 
     def index
@@ -12,7 +11,7 @@ module Api
 
     def create
       @prediction = build_new_prediction
-      
+
       if @prediction.save
         render json: @prediction, status: 200
       else
@@ -24,7 +23,7 @@ module Api
 
     def authenticate_by_api_token
       @user = User.find_by_api_token(params[:api_token]) rescue nil
-      
+
       if @user.nil? || params[:api_token].nil?
         render json: invalid_message, status: 401
       end
@@ -41,7 +40,7 @@ module Api
     end
 
     def build_predictions
-      if params[:limit] && params[:limit] < PREDICTIONS_LIMIT
+      if params[:limit] && params[:limit] <= PREDICTIONS_LIMIT
         @predictions = Prediction.limit(params[:limit]).recent
       else
         @predictions = Prediction.limit(100).recent
@@ -50,9 +49,6 @@ module Api
 
     def invalid_message
       { error: 'invalid API token', status: 401 }
-    end
-
-    def must_be_authorized_for_prediction
     end
   end
 end
