@@ -36,7 +36,7 @@ module Api
         prediction_params[:private] = @user.private_default
       end
 
-      @prediction = Prediction.new(prediction_params.merge(creator: @user))
+      Prediction.new(prediction_params.merge(creator: @user))
     end
 
     def build_predictions
