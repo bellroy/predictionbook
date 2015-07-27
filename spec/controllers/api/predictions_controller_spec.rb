@@ -15,7 +15,7 @@ describe Api::PredictionsController, type: :controller do
 
     context 'with valid API token' do
       before(:each) do
-        @user = valid_user()
+        @user = valid_user
         @user.api_token = 'token'
         User.stub(:find_by_api_token).and_return(@user)
         @recent = double(:recent_predictions)
