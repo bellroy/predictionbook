@@ -41,17 +41,13 @@ describe Api::PredictionsController, type: :controller do
     end
 
     context 'with invalid API token' do
-      before(:each) do
-        User.stub(:find_by_api_token).and_return(nil)
-      end
-
       it 'should respond with HTTP failure' do
-        get :index
+        get :index, api_token: 'fake-token'
         response.response_code.should == 401
       end
 
       it 'should respond with JSON content type' do
-        get :index
+        get :index, api_token: 'fake-token'
         response.content_type == Mime::JSON
       end
     end
@@ -96,7 +92,6 @@ describe Api::PredictionsController, type: :controller do
 
     context 'with invalid API token' do
       before(:each) do
-        User.stub(:find_by_api_token).and_return(nil)
         @prediction = {
           description: 'The world will end tomorrow!',
           deadline: 1.day.ago,
@@ -105,12 +100,12 @@ describe Api::PredictionsController, type: :controller do
       end
 
       it 'should not create a new prediction' do
-        post :create, prediction: @prediction
+        post :create, api_token: 'fake-token', prediction: @prediction
         response.body.should_not include(@prediction[:description])
       end
 
       it 'should respond with HTTP failure' do
-        post :create, prediction: @prediction
+        post :create, api_token: 'fake-token', prediction: @prediction
         response.response_code.should == 401
       end
     end
