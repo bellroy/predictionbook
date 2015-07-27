@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
     raise(ActiveRecord::RecordNotFound, "Login is blank") if login.blank?
     find_by_login!(login.gsub("[dot]","."))
   end
+  
+  def self.generate_api_token
+    SecureRandom.urlsafe_base64
+  end
 
   def statistics
     Statistics.new("r.user_id = #{id}")
@@ -104,9 +108,5 @@ class User < ActiveRecord::Base
     self.save!
 
     UserMailer.password_reset(self).deliver
-  end
-  
-  def User.generate_api_token
-    SecureRandom.urlsafe_base64
   end
 end
