@@ -18,5 +18,5 @@
 <% if @user.api_token.present? %>
   <h2>API Token: <%= @user.api_token %></h2>
 <% else %>
-  <%= button_to("Generate API Token", generate_api_token_user_url(login: @user.login)) %>
+  <%= button_to("Generate API Token", generate_api_token_user_path) %>
 <% end %>
