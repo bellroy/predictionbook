@@ -15,8 +15,8 @@ describe Api::PredictionsController, type: :controller do
 
     context 'with valid API token' do
       before(:each) do
-        @user = build(:user_with_email)
-        @user.stub(:api_token).and_return('token')
+        @user = valid_user()
+        @user.api_token = 'token'
         User.stub(:find_by_api_token).and_return(@user)
         @recent = double(:recent_predictions)
         Prediction.should_receive(:limit)
@@ -61,7 +61,7 @@ describe Api::PredictionsController, type: :controller do
     context 'with valid API token' do
       before(:each) do
         @user = build(:user_with_email)
-        @user.stub(:api_token).and_return('token')
+        @user.api_token = 'token'
         User.stub(:find_by_api_token)
           .with(@user.api_token)
           .and_return(@user)
