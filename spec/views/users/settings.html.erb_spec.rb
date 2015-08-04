@@ -5,6 +5,8 @@ describe 'users/settings' do
     before do
       assigns[:user] = @user = valid_user
       view.stub(:current_user).and_return(@user)
+      @user.stub(:api_token).and_return("token")
+      @user.stub(:id).and_return(1)
     end
     it 'should exist' do
       render
@@ -19,6 +21,11 @@ describe 'users/settings' do
       @user.stub(:private_default).and_return(false)
       render
       rendered.should have_unchecked_field('user[private_default]')
+    end
+    it 'should display API token' do
+      @user.stub(:private_default).and_return(false)
+      render
+      rendered.should have_content('token')
     end
   end
 end
