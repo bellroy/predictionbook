@@ -14,3 +14,10 @@
 <%= f.submit 'Change password' %>
 <% end -%>
 <h2><%= link_to 'View notifications', [@user,:deadline_notifications] %></h2>
+<br>
+<% if @user.api_token.present? %>
+<h2>API Token: <%= @user.api_token %></h2>
+<%= button_to("Regenerate API Token", generate_api_token_user_path(@user)) %>
+<% else %>
+<%= button_to("Generate API Token", generate_api_token_user_path(@user)) %>
+<% end %>

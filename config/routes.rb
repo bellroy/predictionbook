@@ -11,6 +11,7 @@ PredictionBook2::Application.routes.draw do
   resources :users do
     get :settings, :on=> :member
     get :due_for_judgement, :on => :member
+    post :generate_api_token, :on => :member
     resources :deadline_notifications
   end
 
@@ -47,5 +48,9 @@ PredictionBook2::Application.routes.draw do
   root :to => 'predictions#home'
 
   match '/healthcheck' => 'content#healthcheck'
+  
+  namespace :api do
+    resources :predictions
+  end
 end
 

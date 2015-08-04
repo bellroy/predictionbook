@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120507034756) do
+ActiveRecord::Schema.define(:version => 20150701042203) do
 
   create_table "judgements", :force => true do |t|
     t.integer  "prediction_id"
@@ -93,8 +93,10 @@ ActiveRecord::Schema.define(:version => 20120507034756) do
     t.string   "timezone"
     t.boolean  "private_default",                         :default => false
     t.boolean  "admin",                                   :default => false, :null => false
+    t.string   "api_token"
   end
 
+  add_index "users", ["api_token"], :name => "index_users_on_api_token"
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
 
   create_table "wagers", :force => true do |t|
