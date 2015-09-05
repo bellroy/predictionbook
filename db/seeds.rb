@@ -11,7 +11,7 @@ def random_future_day
 end
 
 def random_past_day
-  random_int.days.ago
+  Random.rand(15).days.ago
 end
 
 def random_int
