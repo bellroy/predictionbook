@@ -6,6 +6,9 @@ class CredenceController < ApplicationController
 
     @game = CredenceGame.find_or_create_by_user_id current_user.id
     @question = @game.current_question
+
+    @question_number = @game.num_answered + 1
+    @show_graph = @question_number > 10 && @question_number % 10 == 0
   end
 
   def update
@@ -29,7 +32,7 @@ class CredenceController < ApplicationController
 
       flash[:correct] = correct
       flash[:score] = score
-      flash[:message] = question.answer_message(given_answer)
+      flash[:message] = question.answer_message(given_answer, score)
     else
       # If the ids don't match, assume that the user submitted the form multiple
       # times. Since we use CookieStore, the flash doesn't get set properly, so
@@ -41,7 +44,7 @@ class CredenceController < ApplicationController
 
       flash[:correct] = correct
       flash[:score] = score
-      flash[:message] = question.answer_message(given_answer)
+      flash[:message] = question.answer_message(given_answer, score)
     end
 
     redirect_to action: 'show'

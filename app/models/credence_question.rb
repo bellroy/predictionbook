@@ -40,7 +40,7 @@ class CredenceQuestion < ActiveRecord::Base
     s
   end
 
-  def answer_message(ans)
+  def answer_message(ans, score)
     # In the original game, you got a different message if you guessed 50%
     # (which gave you no points). If 50% becomes a valid guess, we'll want to do
     # the same here.
@@ -49,9 +49,13 @@ class CredenceQuestion < ActiveRecord::Base
     wrong = self.answers[1 - self.correct_index].format
 
     if self.answer_correct? ans
-      "Correct! The answer is #{right} versus #{wrong}."
+      %Q{<span class="credence-result"><strong>Correct!</strong>
+          +#{score} points.</span><br>}.html_safe +
+        " The answer is #{right} versus #{wrong}."
     else
-      "Incorrect. The right answer is #{right} versus #{wrong}."
+      %Q{<span class="credence-result"><strong>Incorrect.</strong>
+          #{score} points.</span><br>}.html_safe +
+        " The right answer is #{right} versus #{wrong}."
     end
   end
 

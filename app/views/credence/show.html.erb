@@ -1,8 +1,9 @@
 <h1>The Credence Game</h1>
 
 <% if flash[:score] %>
-  <p><%= flash[:score] %> points: <%= flash[:message] %></p>
+<p><%= flash[:message] %></p>
 <% end %>
+
 <table id="credence-scores">
   <tr>
     <td><%= @game.average_score.round(1).to_s.chomp('.0') %></td>
@@ -18,7 +19,7 @@
 
 <hr>
 
-<p><strong>Question <%= @game.num_answered + 1 %>:</strong>
+<p><strong>Question <%= @question_number %>:</strong>
    <%= @question.text %></p>
 
 <table>
@@ -39,13 +40,23 @@
 <% end %>
 </table>
 
+<% if @question_number > 1 %>
 <div id="credence-graph-container">
-  <p><a href="#">Show calibration graph</a></p>
-  <div id="credence-graph">
-    <p>Be careful: looking at this graph too often can be bad for your score. If you find yourself giving low-confidence answers to questions that you know very well, consider looking less often.</p>
+<% if @show_graph %>
+  <div id="credence-graph" class="show">
     <img src="<%= @game.calibration_graph.image_url %>">
   </div>
+<% else %>
+  <p><a href="#">Show calibration graph</a></p>
+  <div id="credence-graph">
+    <p>Be careful: looking at this graph too often can be bad for your score. If
+      you find yourself giving low-confidence answers to questions that you know
+      very well, consider looking less often.</p>
+    <img src="<%= @game.calibration_graph.image_url %>">
+  </div>
+<% end %>
 </div>
+<% end %>
 
 <% if @game.debug %>
   <%= form_tag({controller: 'credence', action: 'destroy'}, method: 'delete') do %>

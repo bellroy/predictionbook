@@ -1,8 +1,10 @@
+.credence-result strong { font-size: 1.5em; padding-right: 3px; }
+
 #credence-scores { margin-bottom: 10px; }
 
 #credence-scores td {
     text-align: center;
-    font-size: 3em;
+    font-size: 2em;
     font-weight: bold;
 }
 
@@ -13,6 +15,6 @@
     line-height: 120%;
 }
 
-#credence-graph {
+#credence-graph:not(.show) {
     display: none;
 }

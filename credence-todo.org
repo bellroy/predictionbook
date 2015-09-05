@@ -28,11 +28,3 @@ It looks like they act exactly the same as Sorted questions in the original game
 * Possible feature: try to give users questions such that they end up with a reasonable distribution of reported credences.
 
 This is more complicated than just trying to give questions in categories they say they like. The two can presumably be combined.
-
-* Correct/incorrect message should be more prominant
-
-It's the relevant immediate feedback. Reduce scores to normal size or a bit bigger.
-
-* Auto-show credence graph sometimes.
-
-Keep the ability to show it whenever, but also show it automatically sometimes, so people don't need to worry about what a good interval is. E.g. after 20 questions and then every 10 after that.
