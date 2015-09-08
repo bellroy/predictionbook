@@ -35,7 +35,8 @@ class User < ActiveRecord::Base
   ## eg. User.new(:foo => 'bar') # will not assign foo
   attr_accessible :login, :email, :name, :password, :password_confirmation, :timezone, :private_default
   attr_accessible :login, :email, :name, :admin, :as => :admin
-
+  attr_accessible :api_token
+  
   def self.authenticate(login, password)
     u = find_by_login(login) # need to get the salt
     u && u.authenticated?(password) ? u : nil
@@ -46,8 +47,14 @@ class User < ActiveRecord::Base
     raise(ActiveRecord::RecordNotFound, "Login is blank") if login.blank?
     find_by_login!(login.gsub("[dot]","."))
   end
+  
+  def self.generate_api_token
+    SecureRandom.urlsafe_base64
+  end
 
-  delegate :statistics, :to => :wagers
+  def statistics
+    Statistics.new("r.user_id = #{id}")
+  end
 
   def statistics_image_url
     statistics.image_url

@@ -76,10 +76,9 @@ describe PredictionsController do
       end
 
       it 'should delegate statistics to the wagers collection' do
-        wagers = double('wagers')
-        Response.stub(:wagers).and_return(wagers)
-        wagers.stub(:statistics).and_return(:statistics)
-        controller.statistics.should == :statistics
+        stats = double(Statistics)
+        Statistics.stub(:new).and_return(stats)
+        controller.statistics.should == stats
       end
     end
 

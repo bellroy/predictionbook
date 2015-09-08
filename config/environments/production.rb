@@ -64,7 +64,9 @@ PredictionBook2::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.middleware.use ExceptionNotifier, :email_prefix => "[Prediction Book] ",
-                                           :sender_address => %{"Exception Notifier" <system@predictionbook.com>},
-                                           :exception_recipients => %w{predictionbook.production.errors@trikeapps.com}
+  config.middleware.use ExceptionNotification::Rack, :email => {
+    :email_prefix => "[Prediction Book] ",
+    :sender_address => %{"Exception Notifier" <system@predictionbook.com>},
+    :exception_recipients => %w{predictionbook.production.errors@trikeapps.com}
+  }
 end
