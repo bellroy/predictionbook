@@ -17,16 +17,16 @@ ActiveRecord::Schema.define(:version => 20150701042203) do
     t.integer  "credence_question_generator_id"
     t.text     "text"
     t.text     "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "rank"
   end
 
   create_table "credence_games", :force => true do |t|
     t.integer  "current_question_id"
     t.integer  "score",               :default => 0,     :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.integer  "user_id"
     t.integer  "num_answered",        :default => 0,     :null => false
     t.boolean  "debug",               :default => false, :null => false
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(:version => 20150701042203) do
     t.string   "type"
     t.integer  "adjacentWithin"
     t.float    "weight"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "credence_questions", :force => true do |t|
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(:version => 20150701042203) do
     t.integer  "answer0_id"
     t.integer  "answer1_id"
     t.integer  "correct_index"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "credence_game_id"
     t.datetime "asked_at"
     t.datetime "answered_at"
@@ -126,16 +126,6 @@ ActiveRecord::Schema.define(:version => 20150701042203) do
 
   add_index "responses", ["prediction_id"], :name => "index_responses_on_prediction_id"
   add_index "responses", ["user_id"], :name => "index_responses_on_user_id"
-
-  create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
-    t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
-  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
     t.string   "login"
