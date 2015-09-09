@@ -45,6 +45,6 @@ class CredenceGame < ActiveRecord::Base
   end
 
   def calibration_graph
-    Statistics.new(self.answered_questions.map &:to_wager)
+    CredenceStatistics.new(self.answered_questions)
   end
 end
