@@ -7,8 +7,7 @@ class CredenceController < ApplicationController
     @game = CredenceGame.find_or_create_by_user_id current_user.id
     @question = @game.current_question
 
-    @question_number = @game.num_answered + 1
-    @show_graph = @question_number > 10 && @question_number % 10 == 0
+    @show_graph = @game.num_answered > 10 && @game.num_answered % 10 == 0
   end
 
   def update

@@ -19,7 +19,7 @@
 
 <hr>
 
-<p><strong>Question <%= @question_number %>:</strong>
+<p><strong>Question <%= @game.num_answered + 1 %>:</strong>
    <%= @question.text %></p>
 
 <table>
@@ -40,7 +40,7 @@
 <% end %>
 </table>
 
-<% if @question_number > 1 %>
+<% if @game.num_answered > 0 %>
 <div id="credence-graph-container">
 <% if @show_graph %>
   <div id="credence-graph" class="show">
