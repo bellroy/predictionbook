@@ -1,42 +1,49 @@
 require 'spec_helper'
 
 describe CredenceQuestion do
-  it 'should know right from wrong' do
-    q1 = create_valid_credence_question(correct_index: 0)
-    expect(q1.answer_correct?(1)).to eq false
-    expect(q1.answer_correct?(0)).to eq true
-
-    q2 = create_valid_credence_question(correct_index: 1)
-    expect(q2.answer_correct?(1)).to eq true
-    expect(q2.answer_correct?(0)).to eq false
-  end
-
-  it 'should give correct scores to specific credences' do
-    q = create_valid_credence_question(correct_index: 1)
-
-    right_scores = { 50 => 0, 51 => 3, 60 => 26, 70 => 49,
-                     80 => 68, 90 => 85, 99 => 99 }
-    wrong_scores = { 50 => 0, 51 => -3, 60 => -32, 70 => -74,
-                     80 => -132, 90 => -232, 99 => -564 }
-
-    right_scores.each do |cred, score|
-      expect(q.score_answer(1, cred)).to eq [true, score]
+  it 'should be able to create random questions' do
+    gen = create_valid_credence_question
+    as = (0..9).map do |rank|
+      create_valid_credence_answer(credence_question: gen, rank: rank)
     end
 
-    wrong_scores.each do |cred, score|
-      expect(q.score_answer(0, cred)).to eq [false, score]
+    q = gen.create_random_question
+    expect(q.class).to eq CredenceGameResponse
+  end
+
+  it 'should not create a question where both answers have the same rank' do
+    gen = create_valid_credence_question
+    [1, 1, 1, 1, 2].each do |rank|
+      create_valid_credence_answer(credence_question: gen, rank: rank)
+    end
+
+    100.times do
+      q = gen.create_random_question
+      expect(q.first_answer.rank).to_not eq q.second_answer.rank
     end
   end
 
-  it 'should create random questions' do
-    gen = create_valid_credence_question_generator
-    a1 = create_valid_credence_answer(credence_question_generator: gen, rank: 0)
-    a2 = create_valid_credence_answer(credence_question_generator: gen, rank: 1)
-    q = CredenceQuestion.pick_random
-  end
-
-  it 'should consider generators according to their weight' do
+  it 'should uniformly distribute questions in aswer-space' do
     pending "work out a good test to use"
     raise "not yet implemented"
+
+    # gen.create_random_question is sufficiently slow that we don't want to do
+    # it loads of times. But if we don't do it enough, our test will be prone to
+    # failing randomly.
+    #   Is it possible to only have this test run if we request it explicitly?
+
+    gen = create_valid_credence_question
+    [1, 1, 2].each do |rank|
+      create_valid_credence_answer(credence_question: gen, rank: rank)
+    end
+
+    counts = Hash.new(0)
+    400.times do
+      q = gen.create_random_question
+      key = [q.first_answer.id, q.second_answer.id]
+      counts[key] += 1
+    end
+
+    # What tests do we apply to counts?
   end
 end

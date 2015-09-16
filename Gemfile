@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.1'
+gem 'rails', '~> 3.0'
 gem 'jquery-rails'
 #Models
 gem 'chronic'
@@ -13,7 +13,7 @@ gem 'formatize'
 gem 'htmlentities'
 
 #Servers
-gem "mysql2", '~> 0.3'
+gem "mysql2", "~> 0.3.0"
 gem 'thin'
 
 #App housekeeping
@@ -37,9 +37,10 @@ group :test, :development do
   gem 'wirble'
   gem 'awesome_print'
   gem 'simplecov'
+  gem 'test-unit'
 end
 
-group :cucumber, :development do
+group :cucumber, :development, :test do
   gem 'launchy'
   gem 'gherkin'
   gem 'cucumber-rails'

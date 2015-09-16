@@ -16,7 +16,7 @@ describe CredenceGame do
   it 'should find answered questions' do
     g = create_valid_credence_game
     q1 = valid_answered_credence_question(credence_game: g)
-    g.credence_questions = [g.current_question, q1]
+    g.credence_game_responses = [g.current_response, q1]
     expect(g.answered_questions.length).to eq 1
   end
 end

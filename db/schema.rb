@@ -14,16 +14,32 @@
 ActiveRecord::Schema.define(:version => 20150701042203) do
 
   create_table "credence_answers", :force => true do |t|
-    t.integer  "credence_question_generator_id"
+    t.integer  "credence_question_id"
     t.text     "text"
     t.text     "value"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.integer  "rank"
   end
 
+  create_table "credence_game_responses", :force => true do |t|
+    t.integer  "credence_question_id"
+    t.integer  "first_answer_id"
+    t.integer  "second_answer_id"
+    t.integer  "correct_index"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.integer  "credence_game_id"
+    t.datetime "asked_at"
+    t.datetime "answered_at"
+    t.integer  "answer_credence"
+    t.integer  "given_answer"
+  end
+
+  add_index "credence_game_responses", ["credence_game_id", "asked_at"], :name => "index_credence_game_responses_on_credence_game_id_and_asked_at"
+
   create_table "credence_games", :force => true do |t|
-    t.integer  "current_question_id"
+    t.integer  "current_response_id"
     t.integer  "score",               :default => 0,     :null => false
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
@@ -32,33 +48,17 @@ ActiveRecord::Schema.define(:version => 20150701042203) do
     t.boolean  "debug",               :default => false, :null => false
   end
 
-  create_table "credence_question_generators", :force => true do |t|
+  create_table "credence_questions", :force => true do |t|
     t.boolean  "enabled"
     t.string   "text"
     t.string   "prefix"
     t.string   "suffix"
     t.string   "type"
-    t.integer  "adjacentWithin"
+    t.integer  "adjacent_within"
     t.float    "weight"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
-
-  create_table "credence_questions", :force => true do |t|
-    t.integer  "credence_question_generator_id"
-    t.integer  "answer0_id"
-    t.integer  "answer1_id"
-    t.integer  "correct_index"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.integer  "credence_game_id"
-    t.datetime "asked_at"
-    t.datetime "answered_at"
-    t.integer  "answer_credence"
-    t.integer  "given_answer"
-  end
-
-  add_index "credence_questions", ["credence_game_id", "asked_at"], :name => "index_credence_questions_on_credence_game_id_and_asked_at"
 
   create_table "judgements", :force => true do |t|
     t.integer  "prediction_id"

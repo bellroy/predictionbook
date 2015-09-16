@@ -39,20 +39,18 @@ PredictionBook2::Application.routes.draw do
     end
 
     resources :responses do
-      get :preview, :on=> :collection
+      get :preview, :on => :collection
     end
   end
 
   match '/happenstance' => 'predictions#happenstance', :as=> :happenstance
 
-  resource :credence,
-    :controller => 'credence',
-    :only => [:show, :update, :destroy]
+  resources :credence_games, :only => [:index, :update, :destroy]
 
   root :to => 'predictions#home'
 
   match '/healthcheck' => 'content#healthcheck'
-  
+
   namespace :api do
     resources :predictions
   end
