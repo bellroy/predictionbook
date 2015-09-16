@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Questions>
+	<QuestionGenerator Tags="Apples" Used="y" Type="Sorted" Weight="1" QuestionText="Which number of apples is greater?" AdjacentWithin="1" InfoPrefix="exactly " InfoSuffix=" apples">
+		<Answer Text="Dozen" Value="12" />
+		<Answer Text="Eight" Value="8" />
+		<Answer Text="Six" Value="6" />
+		<Answer Text="Three" Value="3" />
+		<Answer Text="Two" Value="2" />
+	</QuestionGenerator>
+</Questions>
