@@ -40,12 +40,11 @@ ActiveRecord::Schema.define(:version => 20150701042203) do
 
   create_table "credence_games", :force => true do |t|
     t.integer  "current_response_id"
-    t.integer  "score",               :default => 0,     :null => false
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.integer  "score",               :default => 0, :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "user_id"
-    t.integer  "num_answered",        :default => 0,     :null => false
-    t.boolean  "debug",               :default => false, :null => false
+    t.integer  "num_answered",        :default => 0, :null => false
   end
 
   create_table "credence_questions", :force => true do |t|
