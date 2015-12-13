@@ -39,7 +39,6 @@ describe 'credence_games/index' do
       @show_graph = true
       @game.num_answered = 1
       render
-      puts rendered
       expect(rendered).to have_css('div#credence-graph.show')
     end
 
@@ -47,7 +46,6 @@ describe 'credence_games/index' do
       @show_graph = false
       @game.num_answered = 1
       render
-      puts rendered
       expect(rendered).to have_css('div#credence-graph:not(.show)')
     end
   end
