@@ -6,6 +6,6 @@ describe "ArrayMatchers" do
   end
 
   it 'should check the matcher catches a proper fail' do
-    lambda { [5,3,2,1].should contain_in_order([1,2]) }.should raise_error
+    lambda { [5,3,2,1].should contain_in_order([1,2]) }.should raise_error RSpec::Expectations::ExpectationNotMetError
   end
 end
