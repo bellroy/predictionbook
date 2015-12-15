@@ -27,7 +27,7 @@ gem 'test-unit'
 gem 'honeypot-captcha'
 
 group :development do
-  gem "capistrano"
+  gem "capistrano", "~> 2.0"
   gem "capistrano-ext"
 end
 
