@@ -25,6 +25,7 @@ gem 'test-unit'
 
 #Misc
 gem 'honeypot-captcha'
+gem 'httparty'
 
 group :development do
   gem "capistrano", "~> 2.0"
