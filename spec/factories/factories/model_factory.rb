@@ -1,5 +1,5 @@
 module ModelFactory
-  
+
   def valid_prediction(attributes={})
     p = Prediction.new({
       :creator => valid_user(:name => 'predictor'),
@@ -8,7 +8,7 @@ module ModelFactory
       :initial_confidence => '100'
     }.merge(attributes))
   end
-  
+
   def valid_response(attributes = {})
     Response.new({
       :prediction => valid_prediction,
@@ -17,20 +17,20 @@ module ModelFactory
       :comment => "Yehar."
     }.merge(attributes))
   end
-  
+
   def valid_judgement(attributes = {})
     Judgement.new({
       :prediction => valid_prediction,
       :user => valid_user,
     }.merge(attributes))
   end
-  
+
   def valid_user(attributes = {})
     password = attributes.delete(:password) || '123456'
     password_confirmation = attributes.delete(:password_confirmation) || password
     User.new({:login => 'zippy', :password => password, :password_confirmation => password_confirmation}.merge(attributes))
   end
-  
+
   def valid_deadline_notification(attributes={})
     DeadlineNotification.new({
       :user=> valid_user(:email=> 'zippy@predictionbook.com'),
@@ -48,7 +48,7 @@ module ModelFactory
   def self.produced_models
     instance_methods.grep(/^valid_/).collect{|method| method.to_s.gsub(/^valid_/,'')}
   end
-  
+
   produced_models.each do |model_name|
     define_method "create_valid_#{model_name}" do |*args|
       attributes = args.first || {}
@@ -57,10 +57,10 @@ module ModelFactory
       model
     end
   end
-  
+
   # For shared example groups
   def create_described_type(attrs={})
     send("create_valid_#{described_type.to_s.underscore}", attrs)
   end
-  
+
 end
