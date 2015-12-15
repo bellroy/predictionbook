@@ -13,13 +13,15 @@ gem 'formatize'
 gem 'htmlentities'
 
 #Servers
-gem "mysql2", '~> 0.3'
+gem "mysql2", '~> 0.3.0'
 gem 'thin'
 
 #App housekeeping
 gem 'exception_notification'
 gem "whenever"
 gem "typus"
+
+gem 'test-unit'
 
 #Misc
 gem 'honeypot-captcha'
