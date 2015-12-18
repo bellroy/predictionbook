@@ -109,4 +109,12 @@ class User < ActiveRecord::Base
 
     UserMailer.password_reset(self).deliver
   end
+
+  def number_of_known_responses
+    responses.select {|response| !response.unknown?}.size
+  end
+
+  def eligible_for_leaderboard?
+    number_of_known_responses >= 10
+  end
 end

@@ -45,6 +45,8 @@ PredictionBook2::Application.routes.draw do
 
   match '/happenstance' => 'predictions#happenstance', :as=> :happenstance
 
+  match '/leaderboard' => 'leaderboard#leaderboard', :as=> :leaderboard
+
   root :to => 'predictions#home'
 
   match '/healthcheck' => 'content#healthcheck'
