@@ -27,8 +27,15 @@ class CredenceGameResponse < ActiveRecord::Base
   end
 
   # Check whether ans is the correct answer, and scores according to credence.
-  # credence is a _percentage_, i.e. in the range (0, 100).
+  # credence is a _percentage_, i.e. in the range [1, 99].
   def score_answer(ans, credence)
+    # A certain-but-wrong answer gives an error anyway, but a certain-and-right
+    # answer just scores 100. We have to reject both, or players can guess with
+    # no consequences.
+    if credence < 1 or credence > 99
+      raise ArgumentError, 'Credence must be between 1 and 99'
+    end
+
     correct = self.answer_correct? ans
     truth_credence = correct ? credence : 100 - credence
     score = (Math.log(2* truth_credence.to_f/100.0, 2) * 100).round

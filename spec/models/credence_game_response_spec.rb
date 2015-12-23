@@ -28,6 +28,14 @@ describe CredenceGameResponse do
     end
   end
 
+  it 'should reject certainty in predictions' do
+    q = create_valid_credence_game_response
+    expect { q.score_answer(0, 0) }.to raise_error ArgumentError
+    expect { q.score_answer(0, 100) }.to raise_error ArgumentError
+    expect { q.score_answer(1, 0) }.to raise_error ArgumentError
+    expect { q.score_answer(1, 100) }.to raise_error ArgumentError
+  end
+
   it 'should create random questions' do
     gen = create_valid_credence_question
     a1 = create_valid_credence_answer(credence_question: gen, rank: 0)
