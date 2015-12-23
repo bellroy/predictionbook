@@ -31,10 +31,6 @@ class CredenceGamesController < ApplicationController
       game.num_answered += 1
       game.new_question
       game.save
-
-      flash[:correct] = correct
-      flash[:score] = score
-      flash[:message] = question.answer_message(given_answer, score)
     else
       # If the ids don't match, assume that the user submitted the form multiple
       # times. Since we use CookieStore, the flash doesn't get set properly, so
@@ -43,11 +39,11 @@ class CredenceGamesController < ApplicationController
       given_answer = question.given_answer
       credence = question.answer_credence
       correct, score = question.score_answer(given_answer, credence)
-
-      flash[:correct] = correct
-      flash[:score] = score
-      flash[:message] = question.answer_message(given_answer, score)
     end
+
+    flash[:correct] = correct
+    flash[:score] = score
+    flash[:message] = question.answer_message(given_answer, score)
 
     redirect_to credence_games_path
   end
