@@ -23,11 +23,19 @@ task import_credence_questions: :environment do
     )
     cq.save!
 
-    gen.search('Answer').each_with_index do |ans,i|
+    rank = -1
+    last_val = nil
+    gen.search('Answer').each do |ans|
+      cur_val = ans['Value'].to_s
+      if last_val != cur_val
+        rank += 1
+        last_val = cur_val
+      end
+
       cq.credence_answers.create!(
         text: ans['Text'],
-        value: ans['Value'].to_s,
-        rank: i
+        value: cur_val,
+        rank: rank
       )
     end
     puts "Created question with #{cq.credence_answers.count} answers: #{cq.text}"
