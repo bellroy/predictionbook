@@ -10,34 +10,9 @@ task import_credence_questions: :environment do
 
   doc = Nokogiri::XML(open(file))
   doc.search('QuestionGenerator').each do |gen|
-    next if gen['Type'] != 'Sorted'
-
-    cq = CredenceQuestion.new(
-      enabled: gen['Used'].to_s == 'y',
-      type: gen['Type'].to_s,
-      text: gen['QuestionText'].to_s,
-      prefix: gen['InfoPrefix'].to_s,
-      suffix: gen['InfoSuffix'].to_s,
-      adjacent_within: gen['AdjacentWithin'].to_s.to_i,
-      weight: gen['Weight'].to_s.to_f
-    )
-    cq.save!
-
-    rank = -1
-    last_val = nil
-    gen.search('Answer').each do |ans|
-      cur_val = ans['Value'].to_s
-      if last_val != cur_val
-        rank += 1
-        last_val = cur_val
-      end
-
-      cq.credence_answers.create!(
-        text: ans['Text'],
-        value: cur_val,
-        rank: rank
-      )
+    cq = CredenceQuestion.create_from_element!(gen)
+    if cq
+      puts "Created question with #{cq.credence_answers.count} answers: #{cq.text}"
     end
-    puts "Created question with #{cq.credence_answers.count} answers: #{cq.text}"
   end
 end

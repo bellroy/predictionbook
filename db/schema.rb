@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150701042203) do
+ActiveRecord::Schema.define(:version => 20160101210733) do
 
   create_table "credence_answers", :force => true do |t|
     t.integer  "credence_question_id"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20150701042203) do
     t.string   "text"
     t.string   "prefix"
     t.string   "suffix"
-    t.string   "type"
+    t.string   "question_type"
     t.integer  "adjacent_within"
     t.float    "weight"
     t.datetime "created_at",      :null => false

@@ -46,4 +46,46 @@ describe CredenceQuestion do
 
     # What tests do we apply to counts?
   end
+
+  it 'should create questions from parsed XML' do
+    parsed = Nokogiri::XML(<<-XML).root
+      <QuestionGenerator Tags="" Used="y" Type="Sorted" Weight="0.5" QuestionText="question" AdjacentWithin="-1" InfoPrefix="prefix" InfoSuffix="suffix">
+        <Answer Text="first" Value="B" />
+        <Answer Text="second" Value="A" />
+      </QuestionGenerator>
+    XML
+    cq = CredenceQuestion.create_from_element!(parsed)
+
+    expect(cq.enabled).to eq true
+    expect(cq.question_type).to eq "Sorted"
+    expect(cq.text).to eq "question"
+    expect(cq.prefix).to eq "prefix"
+    expect(cq.suffix).to eq "suffix"
+    expect(cq.adjacent_within).to eq -1
+    expect(cq.weight).to eq 0.5
+
+    a0 = cq.credence_answers[0]
+    expect(a0.rank).to eq 0
+    expect(a0.text).to eq "first"
+    expect(a0.value).to eq "B"
+
+    a1 = cq.credence_answers[1]
+    expect(a1.rank).to eq 1
+    expect(a1.text).to eq "second"
+    expect(a1.value).to eq "A"
+  end
+
+  it 'should assign adjacent answers equal ranks when they have equal value' do
+    parsed = Nokogiri::XML(<<-XML).root
+      <QuestionGenerator Tags="" Used="y" Type="Sorted" Weight="0.5" QuestionText="question" AdjacentWithin="-1" InfoPrefix="prefix" InfoSuffix="suffix">
+        <Answer Text="first" Value="A" />
+        <Answer Text="second" Value="A" />
+        <Answer Text="third" Value="B" />
+        <Answer Text="fourth" Value="A" />
+      </QuestionGenerator>
+    XML
+    cq = CredenceQuestion.create_from_element!(parsed)
+
+    expect(cq.credence_answers.map(&:rank)).to eq [0, 0, 1, 2]
+  end
 end
