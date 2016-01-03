@@ -57,6 +57,7 @@ module ModelFactory
 
   def valid_credence_question(attributes={})
     merged = {
+      enabled: true,
       text: "Which thing comes sooner?",
       prefix: "The ",
       suffix: " thing",

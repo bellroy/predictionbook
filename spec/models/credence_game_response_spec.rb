@@ -43,6 +43,23 @@ describe CredenceGameResponse do
     q = CredenceGameResponse.pick_random
   end
 
+  it 'should not randomly create questions that have been disabled' do
+    def mkgen (e=false)
+      gen = create_valid_credence_question(enabled: e)
+      a1 = create_valid_credence_answer(credence_question: gen, rank: 0)
+      a2 = create_valid_credence_answer(credence_question: gen, rank: 1)
+      gen
+    end
+
+    gen = mkgen(true)
+    mkgen; mkgen; mkgen; mkgen
+
+    10.times do
+      q = CredenceGameResponse.pick_random
+      expect(q.credence_question).to eq gen
+    end
+  end
+
   it 'should consider generators according to their weight' do
     pending "work out a good test to use"
     raise "not yet implemented"

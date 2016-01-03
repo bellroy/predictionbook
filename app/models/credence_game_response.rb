@@ -7,7 +7,7 @@ class CredenceGameResponse < ActiveRecord::Base
   def self.pick_random
     num_gens = CredenceQuestion.count
     gen = CredenceQuestion.first(offset: rand(num_gens))
-    while gen.weight < rand
+    while !gen.enabled || gen.weight < rand
       gen = CredenceQuestion.first(offset: rand(num_gens))
     end
 
