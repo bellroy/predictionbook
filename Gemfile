@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.0'
+gem 'rails', '~> 3.2.1'
 gem 'jquery-rails'
 #Models
 gem 'chronic'
@@ -13,7 +13,7 @@ gem 'formatize'
 gem 'htmlentities'
 
 #Servers
-gem "mysql2", "~> 0.3.0"
+gem "mysql2", '~> 0.3.0'
 gem 'thin'
 
 #App housekeeping
@@ -21,11 +21,13 @@ gem 'exception_notification'
 gem "whenever"
 gem "typus"
 
+gem 'test-unit'
+
 #Misc
 gem 'honeypot-captcha'
 
 group :development do
-  gem "capistrano"
+  gem "capistrano", "~> 2.0"
   gem "capistrano-ext"
 end
 
@@ -37,10 +39,9 @@ group :test, :development do
   gem 'wirble'
   gem 'awesome_print'
   gem 'simplecov'
-  gem 'test-unit'
 end
 
-group :cucumber, :development, :test do
+group :cucumber, :development do
   gem 'launchy'
   gem 'gherkin'
   gem 'cucumber-rails'
