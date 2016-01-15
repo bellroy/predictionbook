@@ -6,10 +6,6 @@ describe Api::PredictionsController, type: :controller do
   let(:prediction) { build(:prediction) }
   let(:predicitons) { [prediction] }
 
-  before do
-    controller.stub(:set_timezone)
-  end
-
   describe 'GET /predictions' do
     context 'with valid API token' do
       let(:user_with_token) do
@@ -19,10 +15,9 @@ describe Api::PredictionsController, type: :controller do
       let(:recent) { double(:recent_predictions) }
 
       before do
-        User.stub(:find_by_api_token).and_return(user_with_token)
+        allow(User).to receive(:find_by_api_token).and_return(user_with_token)
 
-        Prediction.should_receive(:limit)
-          .with(100)
+        allow(Prediction).to receive(:limit).with(100)
           .and_return(double(:collection, recent: recent))
 
         get :index, api_token: user_with_token.api_token
@@ -55,7 +50,8 @@ describe Api::PredictionsController, type: :controller do
       let(:user_with_email) { build(:user_with_email, api_token: token) }
 
       before do
-        User.stub(:find_by_api_token).with(token).and_return(user_with_email)
+        allow(User).to receive(:find_by_api_token)
+          .with(token).and_return(user_with_email)
       end
 
       it 'should create a new prediction' do
