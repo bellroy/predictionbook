@@ -3,15 +3,15 @@ require 'spec_helper'
 
 describe Api::PredictionsController, type: :controller do
   let(:user) { valid_user }
+  let(:user_with_token) do
+    user.api_token = 'token'
+    user
+  end
   let(:prediction) { build(:prediction) }
   let(:predicitons) { [prediction] }
 
   describe 'GET /predictions' do
     context 'with valid API token' do
-      let(:user_with_token) do
-        user.api_token = 'token'
-        user
-      end
       let(:recent) { double(:recent_predictions) }
 
       before do
@@ -30,6 +30,37 @@ describe Api::PredictionsController, type: :controller do
 
     context 'with invalid API token' do
       before { get :index, api_token: 'fake-token' }
+
+      specify { expect(response).to_not be_success }
+      specify { expect(response.content_type).to eq(Mime::JSON) }
+    end
+  end
+
+  describe 'GET /predictions/:id' do
+    context 'with valid API token' do
+      before do
+        allow(User).to receive(:find_by_api_token).and_return(user_with_token)
+
+        allow(Prediction).to receive(:find).with(prediction.id)
+          .and_return(prediction)
+
+        get :show, id: prediction.id, api_token: user_with_token.api_token
+      end
+
+      specify { expect(response).to be_success }
+      specify { expect(response.content_type).to eq(Mime::JSON) }
+      specify { expect(response.body).to_not be_empty }
+    end
+
+    context 'with invalid API token' do
+      before { get :show, id: prediction.id, api_token: 'fake-token' }
+
+      specify { expect(response).to_not be_success }
+      specify { expect(response.content_type).to eq(Mime::JSON) }
+    end
+
+    context 'with non-existent id' do
+      before { get :show, id: 999, api_token: 'fake-token' }
 
       specify { expect(response).to_not be_success }
       specify { expect(response.content_type).to eq(Mime::JSON) }

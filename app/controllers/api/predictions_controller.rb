@@ -5,10 +5,7 @@ module Api
 
     before_filter :authenticate_by_api_token
     before_filter :build_predictions, only: [:index]
-
-    def index
-      render json: @predictions
-    end
+    before_filter :find_prediction, only: [:show]
 
     def create
       @prediction = build_new_prediction
@@ -20,18 +17,26 @@ module Api
       end
     end
 
+    def index
+      render json: @predictions
+    end
+
+    def show
+      if user_is_authorized_for_prediction
+        render json: @prediction
+      else
+        render json: unauthorized_user_message, status: :unauthorized
+      end
+    end
+
     private
 
     def authenticate_by_api_token
       @user = User.find_by_api_token(params[:api_token])
 
       unless valid_params_and_user?
-        render json: invalid_message, status: :unauthorized
+        render json: invalid_api_message, status: :unauthorized
       end
-    end
-
-    def valid_params_and_user?
-      params[:api_token] && @user
     end
 
     def build_new_prediction
@@ -52,8 +57,28 @@ module Api
       end
     end
 
-    def invalid_message
+    def find_prediction
+      @prediction = Prediction.find(params[:id])
+    end
+
+    def invalid_api_message
       { error: 'invalid API token', status: :unauthorized }
+    end
+
+    def unauthorized_user_message
+      {
+        error: 'user is unauthorized to view this private prediction',
+        status: :unauthorized
+      }
+    end
+
+    def user_is_authorized_for_prediction
+      return true unless @prediction.private?
+      @user.authorized_for(@prediction)
+    end
+
+    def valid_params_and_user?
+      params[:api_token] && @user
     end
   end
 end
