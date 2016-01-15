@@ -5,7 +5,7 @@ module Api
 
     before_filter :authenticate_by_api_token
     before_filter :build_predictions, only: [:index]
-    before_filter :find_prediction, only: [:show]
+    before_filter :find_prediction, only: [:show, :update]
 
     def create
       @prediction = build_new_prediction
@@ -22,10 +22,18 @@ module Api
     end
 
     def show
-      if user_is_authorized_for_prediction
+      if authorized_to_view_prediction?
         render json: @prediction
       else
         render json: unauthorized_user_message, status: :unauthorized
+      end
+    end
+
+    def update
+      if successfully_updated?
+        render json: @prediction
+      else
+        render json: @prediction.errors, status: :unprocessable_entity
       end
     end
 
@@ -37,6 +45,11 @@ module Api
       unless valid_params_and_user?
         render json: invalid_api_message, status: :unauthorized
       end
+    end
+
+    def authorized_to_view_prediction?
+      return true unless @prediction.private?
+      @user.authorized_for(@prediction)
     end
 
     def build_new_prediction
@@ -72,9 +85,9 @@ module Api
       }
     end
 
-    def user_is_authorized_for_prediction
-      return true unless @prediction.private?
-      @user.authorized_for(@prediction)
+    def successfully_updated?
+      return false unless @user.authorized_for(@prediction)
+      @prediction.update_attributes(params[:prediction])
     end
 
     def valid_params_and_user?

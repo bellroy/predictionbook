@@ -9,6 +9,7 @@ describe Api::PredictionsController, type: :controller do
   end
   let(:prediction) { build(:prediction) }
   let(:predicitons) { [prediction] }
+  let(:token) { 'real-token' }
 
   describe 'GET /predictions' do
     context 'with valid API token' do
@@ -77,7 +78,6 @@ describe Api::PredictionsController, type: :controller do
     end
 
     context 'with valid API token' do
-      let(:token) { 'real-token' }
       let(:user_with_email) { build(:user_with_email, api_token: token) }
 
       before do
@@ -111,6 +111,64 @@ describe Api::PredictionsController, type: :controller do
         expect(response.body).to_not include(prediction_params[:description])
       end
       specify { expect(response).to_not be_success }
+    end
+  end
+
+  describe 'PUT /predictions/:id' do
+    let(:new_prediction_params) do
+      { description: 'The world definitely will not end tomorrow!' }
+    end
+
+    before do
+      @user = valid_user(api_token: token)
+      @user.save
+      @prediction = valid_prediction(creator: @user)
+      @prediction.save
+    end
+
+    context 'with valid API token' do
+      context 'authorized user' do
+        before do
+          put :update,
+              api_token: @user.api_token,
+              id: @prediction.id,
+              prediction: new_prediction_params
+        end
+
+        specify { expect(response).to be_success }
+        specify { expect(response.content_type).to eq(Mime::JSON) }
+
+        it 'updates the existing prediction' do
+          description = new_prediction_params[:description]
+          @prediction.reload
+
+          expect(@prediction.description).to eq(description)
+        end
+      end
+
+      context 'unauthorized user' do
+        before do
+          put :update,
+              api_token: 'fake-token',
+              id: @prediction.id,
+              prediction: new_prediction_params
+        end
+
+        specify { expect(response).to_not be_success }
+        specify { expect(response.content_type).to eq(Mime::JSON) }
+      end
+    end
+
+    context 'with invalid API token' do
+      before do
+        put :update,
+            api_token: 'fake-token',
+            id: @prediction.id,
+            prediction: new_prediction_params
+      end
+
+      specify { expect(response).to_not be_success }
+      specify { expect(response.content_type).to eq(Mime::JSON) }
     end
   end
 end
