@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Questions>
+<Questions IdPrefix="Berlin">
 
 <QuestionGenerator Tags="Science" Used="y" Type="Match" Weight="1" QuestionText="What (SI) unit is __ measured in?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="" Source="">
   <Answer Text="length" Value="meter (m)"/>
@@ -28,7 +28,7 @@
   <Answer Text="catalytic activity" Value="katal (kat = mol s^-1)"/>
 </QuestionGenerator>
 
-<QuestionGenerator Tags="Science::Astronomy" Used="y" Type="Sorted" Weight="1"
+<QuestionGenerator Id="solarsyst-close" Tags="Science::Astronomy" Used="y" Type="Sorted" Weight="1"
 QuestionText="Each of the following solar systems is among the 10 closest to the sun. Which one is closer?"
 AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" lightyears" Source="http://en.wikipedia.org/wiki/Closest_stars">
   <Answer Text="Alpha Centauri" Value="4.3"/>
@@ -43,7 +43,7 @@ AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" lightyears" Source="http://en.wik
   <Answer Text="Lacaille 9352" Value="10.7"/>
 </QuestionGenerator>
 
-<QuestionGenerator Tags="International;Population" Used="y" Type="Sorted" Weight="1"
+<QuestionGenerator Id="country-population" Tags="International;Population" Used="y" Type="Sorted" Weight="1"
 QuestionText="Each of the following countries is among the 10 most populous according to the 2012 estimates by the United Nations Department of Economic and Social Affairs. Which one has more people?"
 AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people" Source="http://en.wikipedia.org/wiki/List_of_countries_by_population">
   <Answer Text="China" Value="1,347,350,000"/>
@@ -58,7 +58,7 @@ AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people" Source="http://en.wikiped
   <Answer Text="Japan" Value="127,530,000"/>
 </QuestionGenerator>
 
-<QuestionGenerator Tags="International" Used="y" Type="Sorted" Weight="1"
+<QuestionGenerator Id="country-electricity" Tags="International" Used="y" Type="Sorted" Weight="1"
 QuestionText="Each of the following countries is among the 10 with the highest electricity production according to the 2010 data of the BP Workbook of historical data 1965-2010. Which produced more electricity?"
 AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" GWh" Source="http://en.wikipedia.org/wiki/List_of_countries_by_electricity_production">
   <Answer Text="United States" Value="4,325,900"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Questions>
-	<QuestionGenerator Tags="U.S.A.;Population" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher population in 2010?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people">
+<Questions IdPrefix="CFAR">
+	<QuestionGenerator Id="state-pop" Tags="U.S.A.;Population" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher population in 2010?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people">
 		<Answer Text="California" Value="37,253,956.00" />
 		<Answer Text="Texas" Value="25,145,561.00" />
 		<Answer Text="New York" Value="19,378,102.00" />
@@ -52,59 +52,7 @@
 		<Answer Text="Vermont" Value="625,741.00" />
 		<Answer Text="Wyoming" Value="563,626.00" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Population" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher population density in 2010?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people">
-		<Answer Text="New Jersey" Value="1195.5" />
-		<Answer Text="Rhode Island" Value="1018.1" />
-		<Answer Text="Massachusetts" Value="839.4" />
-		<Answer Text="Connecticut" Value="738.1" />
-		<Answer Text="Maryland" Value="594.8" />
-		<Answer Text="Delaware" Value="460.8" />
-		<Answer Text="New York" Value="411.2" />
-		<Answer Text="Florida" Value="350.6" />
-		<Answer Text="Pennsylvania" Value="283.9" />
-		<Answer Text="Ohio" Value="282.3" />
-		<Answer Text="California" Value="239.1" />
-		<Answer Text="Illinois" Value="231.1" />
-		<Answer Text="Hawaii" Value="211.8" />
-		<Answer Text="Virginia" Value="202.6" />
-		<Answer Text="North Carolina" Value="196.1" />
-		<Answer Text="Indiana" Value="181" />
-		<Answer Text="Michigan" Value="174.8" />
-		<Answer Text="Georgia" Value="168.4" />
-		<Answer Text="South Carolina" Value="153.9" />
-		<Answer Text="Tennessee" Value="153.9" />
-		<Answer Text="New Hampshire" Value="147" />
-		<Answer Text="Kentucky" Value="109.9" />
-		<Answer Text="Wisconsin" Value="105" />
-		<Answer Text="Louisiana" Value="104.9" />
-		<Answer Text="Washington" Value="101.2" />
-		<Answer Text="Texas" Value="96.3" />
-		<Answer Text="Alabama" Value="94.4" />
-		<Answer Text="Missouri" Value="87.1" />
-		<Answer Text="West Virginia" Value="77.1" />
-		<Answer Text="Vermont" Value="67.9" />
-		<Answer Text="Minnesota" Value="66.6" />
-		<Answer Text="Mississippi" Value="63.2" />
-		<Answer Text="Arizona" Value="56.3" />
-		<Answer Text="Arkansas" Value="56" />
-		<Answer Text="Oklahoma" Value="54.7" />
-		<Answer Text="Iowa" Value="54.5" />
-		<Answer Text="Colorado" Value="48.5" />
-		<Answer Text="Maine" Value="43.1" />
-		<Answer Text="Oregon" Value="39.9" />
-		<Answer Text="Kansas" Value="34.9" />
-		<Answer Text="Utah" Value="33.6" />
-		<Answer Text="Nevada" Value="24.6" />
-		<Answer Text="Nebraska" Value="23.8" />
-		<Answer Text="Idaho" Value="19" />
-		<Answer Text="New Mexico" Value="17" />
-		<Answer Text="South Dakota" Value="10.7" />
-		<Answer Text="North Dakota" Value="9.7" />
-		<Answer Text="Montana" Value="6.8" />
-		<Answer Text="Wyoming" Value="5.8" />
-		<Answer Text="Alaska" Value="1.2" />
-	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Transportation" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher percentage of adults commuting to work by public transportation in 2010, out of all commuting workers?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" of commuting workers">
+	<QuestionGenerator Id="state-commuters" Tags="U.S.A.;Transportation" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher percentage of adults commuting to work by public transportation in 2010, out of all commuting workers?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" of commuting workers">
 		<Answer Text="New York" Value="26.7%" />
 		<Answer Text="New Jersey" Value="10.8%" />
 		<Answer Text="Massachusetts" Value="9.1%" />
@@ -157,7 +105,7 @@
 		<Answer Text="Alabama" Value="0.4%" />
 		<Answer Text="Mississippi" Value="0.4%" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Area" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a larger total area in 2010?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" square miles">
+	<QuestionGenerator Id="state-area" Tags="U.S.A.;Area" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a larger total area in 2010?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" square miles">
 		<Answer Text="Alaska" Value="663,267.26" />
 		<Answer Text="Texas" Value="268,580.82" />
 		<Answer Text="California" Value="163,695.57" />
@@ -209,7 +157,7 @@
 		<Answer Text="Delaware" Value="2,489.27" />
 		<Answer Text="Rhode Island" Value="1,545.05" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Chemistry" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these chemical elements has a higher boiling point?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" Kelvin">
+	<QuestionGenerator Id="chem-boiling" Tags="Science::Chemistry" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these chemical elements has a higher boiling point?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" Kelvin">
 		<Answer Text="Rhenium" Value="5869" />
 		<Answer Text="Tungsten" Value="5828" />
 		<Answer Text="Tantalum" Value="5731" />
@@ -276,7 +224,7 @@
 		<Answer Text="Thallium" Value="1746" />
 		<Answer Text="Strontium" Value="1655" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Chemistry" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these chemical elements has a higher atomic weight?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="chem-weight" Tags="Science::Chemistry" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these chemical elements has a higher atomic weight?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Ununseptium" Value="294" />
 		<Answer Text="Ununhexium" Value="293" />
 		<Answer Text="Ununquadium" Value="289" />
@@ -343,7 +291,7 @@
 		<Answer Text="Xenon" Value="131.293" />
 		<Answer Text="Tellurium" Value="127.6" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="International;Area" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these countries has more inland area as of 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" km^2">
+	<QuestionGenerator Id="country-area" Tags="International;Area" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these countries has more inland area as of 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" km^2">
 		<Answer Text="Russia" Value="17,098,242.00" />
 		<Answer Text="Canada" Value="9,984,670.00" />
 		<Answer Text="United States" Value="9,826,675.00" />
@@ -410,7 +358,7 @@
 		<Answer Text="Republic of the Congo" Value="342,000.00" />
 		<Answer Text="Finland" Value="338,424.00" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Geology" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these geological eras started first?" AdjacentWithin="-1" InfoPrefix="about " InfoSuffix=" million years ago">
+	<QuestionGenerator Id="geo-era" Tags="Science::Geology" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these geological eras started first?" AdjacentWithin="-1" InfoPrefix="about " InfoSuffix=" million years ago">
 		<Answer Text="Cryptic" Value="4570" />
 		<Answer Text="Basin Groups" Value="4150" />
 		<Answer Text="Nectarian" Value="3920" />
@@ -426,7 +374,7 @@
 		<Answer Text="Mesozoic" Value="251" />
 		<Answer Text="Cenozoic" Value="65.5" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;History" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US Presidents served first?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="us-president-first" Tags="U.S.A.;History" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US Presidents served first?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="George Washington" Value="1st" />
 		<Answer Text="John Adams" Value="2nd" />
 		<Answer Text="Thomas Jefferson" Value="3rd" />
@@ -471,7 +419,7 @@
 		<Answer Text="George W. Bush" Value="43rd" />
 		<Answer Text="Barack Obama" Value="44th" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;History" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US Vice Presidents served first?" AdjacentWithin="-1" InfoPrefix="began in " InfoSuffix="">
+	<QuestionGenerator Id="us-vicepres-first" Tags="U.S.A.;History" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US Vice Presidents served first?" AdjacentWithin="-1" InfoPrefix="began in " InfoSuffix="">
 		<Answer Text="John Adams" Value="1789" />
 		<Answer Text="Thomas Jefferson" Value="1797" />
 		<Answer Text="Aaron Burr, Jr." Value="1801" />
@@ -520,7 +468,7 @@
 		<Answer Text="Dick Cheney" Value="2001" />
 		<Answer Text="Joe Biden" Value="2009" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;History" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US Presidents was President for a longer time?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" days">
+	<QuestionGenerator Id="us-president-longer" Tags="U.S.A.;History" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US Presidents was President for a longer time?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" days">
 		<Answer Text="Franklin D. Roosevelt" Value="4422" />
 		<Answer Text="Grover Cleveland" Value="2922" />
 		<Answer Text="Thomas Jefferson" Value="2922" />
@@ -564,7 +512,7 @@
 		<Answer Text="James A. Garfield" Value="199" />
 		<Answer Text="William Henry Harrison" Value="31" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;History" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US Postmaster Generals served first?" AdjacentWithin="-1" InfoPrefix="began on " InfoSuffix="">
+	<QuestionGenerator Id="us-postmaster-first" Tags="U.S.A.;History" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US Postmaster Generals served first?" AdjacentWithin="-1" InfoPrefix="began on " InfoSuffix="">
 		<Answer Text="Benjamin Franklin" Value="7/26/1775" />
 		<Answer Text="Richard Bache" Value="11/7/1776" />
 		<Answer Text="Ebenezer Hazard" Value="1/28/1782" />
@@ -631,7 +579,7 @@
 		<Answer Text="E. T. Klassen" Value="1/1/1972" />
 		<Answer Text="Benjamin F. Bailar" Value="2/16/1975" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these countries had a higher (total) GDP in 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" million USD">
+	<QuestionGenerator Id="country-gdp" Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these countries had a higher (total) GDP in 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" million USD">
 		<Answer Text="United States" Value="15,094,025" />
 		<Answer Text="China" Value="7,298,147" />
 		<Answer Text="Japan" Value="5,869,471" />
@@ -698,7 +646,7 @@
 		<Answer Text="Oman" Value="71,888" />
 		<Answer Text="Ecuador" Value="66,381" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these OECD countries spent a higher percentage of their total GDP on healthcare in 2009?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="%">
+	<QuestionGenerator Id="country-gdp-healthcare" Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these OECD countries spent a higher percentage of their total GDP on healthcare in 2009?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="%">
 		<Answer Text="United States" Value="17.4" />
 		<Answer Text="Netherlands" Value="12" />
 		<Answer Text="France" Value="11.8" />
@@ -729,7 +677,7 @@
 		<Answer Text="Czech Republic" Value="6.8" />
 		<Answer Text="Mexico" Value="6.4" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Hot 100 hits was #1 for longer in 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="music-no1-longer-2011" Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Hot 100 hits was #1 for longer in 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="&quot;We Found Love&quot; – Rihanna feat. Calvin Harris" Value="8 weeks" />
 		<Answer Text="&quot;Rolling in the Deep&quot; – Adele" Value="7 weeks" />
 		<Answer Text="&quot;Born This Way&quot;- Lady Gaga" Value="6 weeks" />
@@ -745,7 +693,7 @@
 		<Answer Text="&quot;S&amp;M&quot; – Rihanna" Value="1 week" />
 		<Answer Text="&quot;Give Me Everything&quot; – Pitbull feat. Ne-Yo, Afrojack, and Nayer" Value="1 week" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Astronomy" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these planets has a higher density?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" g/cm^3">
+	<QuestionGenerator Id="planet-density" Tags="Science::Astronomy" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these planets has a higher density?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" g/cm^3">
 		<Answer Text="Earth" Value="5.515" />
 		<Answer Text="Mercury" Value="5.43" />
 		<Answer Text="Venus" Value="5.24" />
@@ -755,7 +703,7 @@
 		<Answer Text="Uranus" Value="1.3" />
 		<Answer Text="Saturn" Value="0.7" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Population" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher population density in 2010?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people/sq.mi.">
+	<QuestionGenerator Id="state-pop-density" Tags="U.S.A.;Population" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher population density in 2010?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people/sq.mi.">
 		<Answer Text="New Jersey" Value="1195.5" />
 		<Answer Text="Rhode Island" Value="1018.1" />
 		<Answer Text="Massachusetts" Value="839.4" />
@@ -807,7 +755,7 @@
 		<Answer Text="Wyoming" Value="5.8" />
 		<Answer Text="Alaska" Value="1.2" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Science::Geography" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state has a higher peak elevation?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" ft">
+	<QuestionGenerator Id="state-peak-elevation" Tags="U.S.A.;Science::Geography" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state has a higher peak elevation?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" ft">
 		<Answer Text="Alaska" Value="20,320.00" />
 		<Answer Text="California" Value="14,505.00" />
 		<Answer Text="Colorado" Value="14,440.00" />
@@ -860,7 +808,7 @@
 		<Answer Text="Delaware" Value="447" />
 		<Answer Text="Florida" Value="345" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Transportation" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US states has more road vehicles per capita?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" vehicles per 1000 people">
+	<QuestionGenerator Id="state-vehicles-percap" Tags="U.S.A.;Transportation" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US states has more road vehicles per capita?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" vehicles per 1000 people">
 		<Answer Text="Wyoming" Value="1140" />
 		<Answer Text="Montana" Value="1120" />
 		<Answer Text="North Dakota" Value="1080" />
@@ -912,7 +860,7 @@
 		<Answer Text="Nevada" Value="500" />
 		<Answer Text="Colorado" Value="340" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Chemistry" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these elements has a higher specific heat capacity?  (Each has a known specific capacity.)" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" J/gK">
+	<QuestionGenerator Id="chem-heatcap" Tags="Science::Chemistry" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these elements has a higher specific heat capacity?  (Each has a known specific capacity.)" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" J/gK">
 		<Answer Text="Hydrogen" Value="14.304" />
 		<Answer Text="Helium" Value="5.193" />
 		<Answer Text="Lithium" Value="3.582" />
@@ -979,7 +927,7 @@
 		<Answer Text="Erbium" Value="0.168" />
 		<Answer Text="Holmium" Value="0.165" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Chemistry" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these elements, each present in the Earth's crust at more than 0.1 mg/kg, is more abundant there?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" mg/kg">
+	<QuestionGenerator Id="chem-abundant" Tags="Science::Chemistry" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these elements, each present in the Earth's crust at more than 0.1 mg/kg, is more abundant there?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" mg/kg">
 		<Answer Text="Oxygen" Value="461,000.00" />
 		<Answer Text="Silicon" Value="282,000.00" />
 		<Answer Text="Aluminium" Value="82,300.00" />
@@ -1046,7 +994,7 @@
 		<Answer Text="Indium" Value="0.25" />
 		<Answer Text="Antimony" Value="0.2" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher rate of unemployment for the month of March, 2012?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="%">
+	<QuestionGenerator Id="state-unemployment" Tags="U.S.A.;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher rate of unemployment for the month of March, 2012?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="%">
 		<Answer Text="Nevada" Value="12" />
 		<Answer Text="Rhode Island" Value="11.1" />
 		<Answer Text="California" Value="11" />
@@ -1586,7 +1534,7 @@
 		<Answer Text="Wisconsin" Value="Madison" />
 		<Answer Text="Wyoming" Value="Cheyenne" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Zoology" Used="y" Type="Sorted" Weight="1" QuestionText="By average mass, each of the following is one of the 10 largest living species of reptile.  Which one is larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="kg">
+	<QuestionGenerator Id="reptile-largest" Tags="Science::Zoology" Used="y" Type="Sorted" Weight="1" QuestionText="By average mass, each of the following is one of the 10 largest living species of reptile.  Which one is larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="kg">
 		<Answer Text="Saltwater crocodile" Value="454" />
 		<Answer Text="Nile crocodile" Value="382" />
 		<Answer Text="Leatherback sea turtle" Value="364" />
@@ -1598,7 +1546,7 @@
 		<Answer Text="Gharial" Value="200" />
 		<Answer Text="Galapagos tortoise" Value="175" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Zoology" Used="y" Type="Sorted" Weight="1" QuestionText="By average mass, each of the following is one of the 10 largest living animal species.  Which one is larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="animal-largest" Tags="Science::Zoology" Used="y" Type="Sorted" Weight="1" QuestionText="By average mass, each of the following is one of the 10 largest living animal species.  Which one is larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Blue Whale" Value="110,000 kg" />
 		<Answer Text="North Pacific Right Whale" Value="60,000 kg" />
 		<Answer Text="Southern Right Whale" Value="58,000 kg" />
@@ -1610,7 +1558,7 @@
 		<Answer Text="Sei Whale" Value="22,500 kg" />
 		<Answer Text="Gray Whale" Value="19,500 kg" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Zoology" Used="y" Type="Sorted" Weight="1" QuestionText="By average mass, each of the following is one of the 10 largest living species of terrestrial animals.  Which one is larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="animal-terrestrial-largest" Tags="Science::Zoology" Used="y" Type="Sorted" Weight="1" QuestionText="By average mass, each of the following is one of the 10 largest living species of terrestrial animals.  Which one is larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="African Bush Elephant" Value="4,900 kg" />
 		<Answer Text="Asian Elephant" Value="4,150 kg" />
 		<Answer Text="African Forest Elephant" Value="2,800 kg" />
@@ -1622,7 +1570,7 @@
 		<Answer Text="Giraffe" Value="1,015 kg" />
 		<Answer Text="Walrus" Value="944 kg" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="International;People" Used="y" Type="Sorted" Weight="1" QuestionText="In 2011, each of these people was ranked by Forbes as one of the ten richest billionaires in the world.  Who was ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" billion USD">
+	<QuestionGenerator Id="people-richest-2011" Tags="International;People" Used="y" Type="Sorted" Weight="1" QuestionText="In 2011, each of these people was ranked by Forbes as one of the ten richest billionaires in the world.  Who was ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" billion USD">
 		<Answer Text="Carlos Slim" Value="69" />
 		<Answer Text="Bill Gates" Value="61" />
 		<Answer Text="Warren Buffett" Value="44" />
@@ -1634,7 +1582,7 @@
 		<Answer Text="Li Ka-shing" Value="25.5" />
 		<Answer Text="Karl Albrecht" Value="25.4" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="International;People" Used="y" Type="Sorted" Weight="1" QuestionText="In 2006, each of these people was ranked by Forbes as one of the ten richest billionaires in the world.  Who was ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" billion USD">
+	<QuestionGenerator Id="people-richest-2006" Tags="International;People" Used="y" Type="Sorted" Weight="1" QuestionText="In 2006, each of these people was ranked by Forbes as one of the ten richest billionaires in the world.  Who was ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" billion USD">
 		<Answer Text="Bill Gates" Value="52" />
 		<Answer Text="Warren Buffett" Value="42" />
 		<Answer Text="Carlos Slim Helú" Value="30" />
@@ -1646,7 +1594,7 @@
 		<Answer Text="Kenneth Thomson" Value="19.6" />
 		<Answer Text="Li Ka Shing" Value="18.8" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Film" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these IMDB Top 250 films of all time was ranked higher by the end of 2011?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
+	<QuestionGenerator Id="film-imdb-higher" Tags="U.S.A.;Film" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these IMDB Top 250 films of all time was ranked higher by the end of 2011?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
 		<Answer Text="The Shawshank Redemption (1994)" Value="1" />
 		<Answer Text="The Godfather (1972)" Value="2" />
 		<Answer Text="The Godfather: Part II (1974)" Value="3" />
@@ -1713,7 +1661,7 @@
 		<Answer Text="Das Boot (1981)" Value="64" />
 		<Answer Text="Requiem for a Dream (2000)" Value="65" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Film" Used="y" Type="Sorted" Weight="1" QuestionText="Without adjusting for inflation, each of these is one of the 40 most expensive film productions of all time.  Which one cost more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="film-expense-noadj" Tags="U.S.A.;Film" Used="y" Type="Sorted" Weight="1" QuestionText="Without adjusting for inflation, each of these is one of the 40 most expensive film productions of all time.  Which one cost more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Pirates of the Caribbean: At World's End" Value="$300m" />
 		<Answer Text="Tangled" Value="$260m" />
 		<Answer Text="Spider-Man 3" Value="$258m" />
@@ -1759,7 +1707,7 @@
 		<Answer Text="Shrek the Third" Value="$160m" />
 		<Answer Text="Inception" Value="$160m" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Film" Used="y" Type="Sorted" Weight="1" QuestionText="Adjusting for inflation, each of these is one of the 30 most expensive film productions of all time.  Which one cost more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="million">
+	<QuestionGenerator Id="film-expense-adj" Tags="U.S.A.;Film" Used="y" Type="Sorted" Weight="1" QuestionText="Adjusting for inflation, each of these is one of the 30 most expensive film productions of all time.  Which one cost more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="million">
 		<Answer Text="Pirates of the Caribbean: At World's End" Value="$336" />
 		<Answer Text="Titanic" Value="$290" />
 		<Answer Text="Spider-Man 3" Value="$289" />
@@ -1791,14 +1739,14 @@
 		<Answer Text="Green Lantern" Value="$207" />
 		<Answer Text="Cars 2" Value="$207" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these islands is one of the five largest in the world.  Which one is bigger? " AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" km^2">
+	<QuestionGenerator Id="island-size" Tags="Science::Geography" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these islands is one of the five largest in the world.  Which one is bigger? " AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" km^2">
 		<Answer Text="Greenland" Value="2,130,800.00" />
 		<Answer Text="New Guinea" Value="785,753.00" />
 		<Answer Text="Borneo" Value="748,168.00" />
 		<Answer Text="Madagascar" Value="587,713.00" />
 		<Answer Text="Baffin Island" Value="507,451.00" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Population" Used="y" Type="Sorted" Weight="1" QuestionText="By population in 2011, each of these was one of the 100 largest US cities.  Which one was larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people">
+	<QuestionGenerator Id="us-city-population" Tags="U.S.A.;Population" Used="y" Type="Sorted" Weight="1" QuestionText="By population in 2011, each of these was one of the 100 largest US cities.  Which one was larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people">
 		<Answer Text="New York" Value="8,175,133.00" />
 		<Answer Text="Los Angeles" Value="3,792,621.00" />
 		<Answer Text="Chicago" Value="2,695,598.00" />
@@ -1865,7 +1813,7 @@
 		<Answer Text="Anchorage" Value="291,826.00" />
 		<Answer Text="Stockton" Value="291,707.00" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="1" QuestionText="By volume, each of these is one of the world's 20 largest lakes.  Which one is larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km^3">
+	<QuestionGenerator Id="lakes-largest-volume" Tags="Science::Geography" Used="y" Type="Sorted" Weight="1" QuestionText="By volume, each of these is one of the world's 20 largest lakes.  Which one is larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km^3">
 		<Answer Text="Baikal" Value="23,600.00" />
 		<Answer Text="Tanganyika" Value="18,900.00" />
 		<Answer Text="Superior" Value="12,100.00" />
@@ -1888,22 +1836,7 @@
 		<Answer Text="Vänern" Value="153" />
 		<Answer Text="Nicaragua" Value="108" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Hot 100 Hits from 2011 was #1 for longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" weeks">
-		<Answer Text="We Found Love" Value="10" />
-		<Answer Text="Rolling in the Deep" Value="7" />
-		<Answer Text="Born This Way" Value="6" />
-		<Answer Text="Party Rock Anthem" Value="6" />
-		<Answer Text="E.T." Value="5" />
-		<Answer Text="Someone Like You" Value="5" />
-		<Answer Text="Grenade" Value="4" />
-		<Answer Text="Moves Like Jagger" Value="4" />
-		<Answer Text="Last Friday Night (T.G.I.F.)" Value="2" />
-		<Answer Text="Hold It Against Me" Value="1" />
-		<Answer Text="Black and Yellow" Value="1" />
-		<Answer Text="S&amp;M" Value="1" />
-		<Answer Text="Give Me Everything" Value="1" />
-	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Top 10 Artists from 2011 was ranked higher?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
+	<QuestionGenerator Id="music-artist-2011" Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Top 10 Artists from 2011 was ranked higher?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
 		<Answer Text="Adele" Value="1" />
 		<Answer Text="Rihanna" Value="2" />
 		<Answer Text="Katy Perry" Value="3" />
@@ -1915,7 +1848,7 @@
 		<Answer Text="Justin Bieber" Value="9" />
 		<Answer Text="Chris Brown" Value="10" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="International;Health" Used="y" Type="Sorted" Weight="1" QuestionText="Which of the following causes of death, each among 70 causes surveyed by the World Health Organization, was the ultimate cause of more deaths in 2002?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="% of deaths worldwide">
+	<QuestionGenerator Id="cause-of-death" Tags="International;Health" Used="y" Type="Sorted" Weight="1" QuestionText="Which of the following causes of death, each among 70 causes surveyed by the World Health Organization, was the ultimate cause of more deaths in 2002?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="% of deaths worldwide">
 		<Answer Text="Cardiovascular diseases" Value="29.34" />
 		<Answer Text="Infectious and parasitic diseases" Value="23.04" />
 		<Answer Text="Ischemic heart disease" Value="12.64" />
@@ -1982,7 +1915,7 @@
 		<Answer Text="Iron deficiency anemia" Value="0.24" />
 		<Answer Text="Tropical diseases excluding malaria" Value="0.23" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;TV" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these top 10 longest running US television series ran longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="tv-longer" Tags="U.S.A.;TV" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these top 10 longest running US television series ran longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Meet the Press" Value="64 years" />
 		<Answer Text="CBS Evening News" Value="63 years" />
 		<Answer Text="Hallmark Hall of Fame (ABC)" Value="60 years" />
@@ -1994,7 +1927,7 @@
 		<Answer Text="Candid Camera (CBS)" Value="55 years" />
 		<Answer Text="As the World Turns (CBS)" Value="54 years" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Sports::Baseball" Used="y" Type="Sorted" Weight="1" QuestionText="In terms of total career earnings prior to 2011, each of these people is among the 20 highest paid Major League Baseball players of all time.  Who was paid more in total?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-mlb-payment" Tags="U.S.A.;Sports::Baseball" Used="y" Type="Sorted" Weight="1" QuestionText="In terms of total career earnings prior to 2011, each of these people is among the 20 highest paid Major League Baseball players of all time.  Who was paid more in total?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Alex Rodriguez" Value="$296,416,252" />
 		<Answer Text="Derek Jeter" Value="$220,159,364" />
 		<Answer Text="Manny Ramirez" Value="$204,807,069" />
@@ -2016,7 +1949,7 @@
 		<Answer Text="Magglio Ordonez" Value="$133,470,746" />
 		<Answer Text="Jason Giambi" Value="$131,808,996" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="By 2008, which of these artists had more weeks with a #1 hit on the Billboard Hot 100?  (Each is among the top 10 artists of all time by this ranking.)" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" weeks">
+	<QuestionGenerator Id="music-artist-weeks" Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="By 2008, which of these artists had more weeks with a #1 hit on the Billboard Hot 100?  (Each is among the top 10 artists of all time by this ranking.)" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" weeks">
 		<Answer Text="Mariah Carey" Value="79" />
 		<Answer Text="The Beatles" Value="59" />
 		<Answer Text="Boyz II Men" Value="50" />
@@ -2028,7 +1961,7 @@
 		<Answer Text="Madonna" Value="32" />
 		<Answer Text="Whitney Houston" Value="31" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="By their number of Billboard Hot 100 hits prior to 2008, each of these musicians or groups ranks among the 10 most popular of all time.  Who ranks higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" Hot 100 hits">
+	<QuestionGenerator Id="music-artist-alltime" Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="By their number of Billboard Hot 100 hits prior to 2008, each of these musicians or groups ranks among the 10 most popular of all time.  Who ranks higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" Hot 100 hits">
 		<Answer Text="Elvis Presley" Value="108" />
 		<Answer Text="James Brown" Value="89" />
 		<Answer Text="Ray Charles" Value="73" />
@@ -2040,7 +1973,7 @@
 		<Answer Text="Marvin Gaye" Value="56" />
 		<Answer Text="Frankie Valli &amp; The 4 Seasons" Value="56" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Cars" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these was among the 10 most sold motor vehicles in the USA in 2011.  Which one sold more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" thousand">
+	<QuestionGenerator Id="us-cars-sold" Tags="U.S.A.;Cars" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these was among the 10 most sold motor vehicles in the USA in 2011.  Which one sold more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" thousand">
 		<Answer Text="Ford F-Series" Value="585" />
 		<Answer Text="Chevrolet Silverado" Value="415" />
 		<Answer Text="Toyota Camry" Value="309" />
@@ -2052,7 +1985,7 @@
 		<Answer Text="Honda Accord" Value="236" />
 		<Answer Text="Chevrolet Cruze" Value="232" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Education" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these was among the 20 largest US colleges by total enrollment in fall 2010.  Which one had a higher enrollment?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" students">
+	<QuestionGenerator Id="us-college-enrollment" Tags="U.S.A.;Education" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these was among the 20 largest US colleges by total enrollment in fall 2010.  Which one had a higher enrollment?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" students">
 		<Answer Text="University of Phoenix" Value="532,672.00" />
 		<Answer Text="Community College of the Air Force" Value="324,573.00" />
 		<Answer Text="Kaplan University" Value="96,166.00" />
@@ -2074,7 +2007,7 @@
 		<Answer Text="Pima Community College" Value="57,924.00" />
 		<Answer Text="East Los Angeles College" Value="57,340.00" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="By income per capita in 2000, each of these was among the 100 richest US towns or cities with at least 1000 households.   Which one had a higher income per capita?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="us-city-income-per-capita" Tags="U.S.A.;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="By income per capita in 2000, each of these was among the 100 richest US towns or cities with at least 1000 households.   Which one had a higher income per capita?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Palm Beach, Florida" Value="$109,219" />
 		<Answer Text="Bloomfield Hills, Michigan" Value="$104,920" />
 		<Answer Text="Belle Meade, Tennessee" Value="$104,908" />
@@ -2141,7 +2074,7 @@
 		<Answer Text="Inverness, Illinois" Value="$73,271" />
 		<Answer Text="Harding Township, New Jersey" Value="$72,689" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="By dollar-value of exports in 2011, each of these was among the 100 most export productive countries in the world.  Which one ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="country-export-value" Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="By dollar-value of exports in 2011, each of these was among the 100 most export productive countries in the world.  Which one ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="People's Republic of China" Value="$1,898,000,000,000" />
 		<Answer Text="United States" Value="$1,511,000,000,000" />
 		<Answer Text="Germany" Value="$1,408,000,000,000" />
@@ -2208,7 +2141,7 @@
 		<Answer Text="Greece" Value="$26,640,000,000" />
 		<Answer Text="Lithuania" Value="$26,530,000,000" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Education" Used="y" Type="Sorted" Weight="1" QuestionText="In 2011, Forbes Magazine ranked each of the following among the best 100 colleges in the United States.  Which one did they rank higher?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
+	<QuestionGenerator Id="us-college-rank" Tags="U.S.A.;Education" Used="y" Type="Sorted" Weight="1" QuestionText="In 2011, Forbes Magazine ranked each of the following among the best 100 colleges in the United States.  Which one did they rank higher?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
 		<Answer Text="Williams College" Value="1" />
 		<Answer Text="Princeton University" Value="2" />
 		<Answer Text="West Point United States Military Academy" Value="3" />
@@ -2275,7 +2208,7 @@
 		<Answer Text="St Lawrence University" Value="64" />
 		<Answer Text="Virginia Military Institute" Value="65" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these was ranked by Forbes as one of the world's 100 most profitable companies for the 2011 fiscal year.  Which one earned more profit?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" billion">
+	<QuestionGenerator Id="company-profit" Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these was ranked by Forbes as one of the world's 100 most profitable companies for the 2011 fiscal year.  Which one earned more profit?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" billion">
 		<Answer Text="Exxon Mobil" Value="$41.1" />
 		<Answer Text="Apple" Value="$33" />
 		<Answer Text="Gazprom" Value="$31.7" />
@@ -2342,7 +2275,7 @@
 		<Answer Text="Westpac Banking Group" Value="$7.2" />
 		<Answer Text="Cisco Systems" Value="$7" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;People" Used="y" Type="Sorted" Weight="1" QuestionText="In a 1999 survey by Gallup, each of these individuals was ranked among the 10 people in the world most admired by US Americans for their actions in the 20th century.  Who was ranked higher?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
+	<QuestionGenerator Id="people-admired" Tags="U.S.A.;People" Used="y" Type="Sorted" Weight="1" QuestionText="In a 1999 survey by Gallup, each of these individuals was ranked among the 10 people in the world most admired by US Americans for their actions in the 20th century.  Who was ranked higher?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
 		<Answer Text="Mother Teresa" Value="1" />
 		<Answer Text="Martin Luther King, Jr." Value="2" />
 		<Answer Text="John F. Kennedy" Value="3" />
@@ -2354,7 +2287,7 @@
 		<Answer Text="Eleanor Roosevelt" Value="9" />
 		<Answer Text="Winston Churchill" Value="10" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Sports::Hockey" Used="y" Type="Sorted" Weight="1" QuestionText="Which hockey team had more apperances in the Stanley Cup finals, as of 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" appearances for the Cup">
+	<QuestionGenerator Id="sports-hockey-finals" Tags="Sports::Hockey" Used="y" Type="Sorted" Weight="1" QuestionText="Which hockey team had more apperances in the Stanley Cup finals, as of 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" appearances for the Cup">
 		<Answer Text="Montreal Canadiens" Value="34" />
 		<Answer Text="Detroit Red Wings" Value="24" />
 		<Answer Text="Toronto Maple Leafs" Value="21" />
@@ -2380,7 +2313,7 @@
 		<Answer Text="Ottawa Senators" Value="1" />
 		<Answer Text="Washington Capitals" Value="1" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Linguistics" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these is among the 100 most common written words in the Oxford English Corpus.  Which word is more common?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
+	<QuestionGenerator Id="common-words" Tags="Science::Linguistics" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these is among the 100 most common written words in the Oxford English Corpus.  Which word is more common?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
 		<Answer Text="the" Value="1" />
 		<Answer Text="be" Value="2" />
 		<Answer Text="to" Value="3" />
@@ -2447,7 +2380,7 @@
 		<Answer Text="your" Value="64" />
 		<Answer Text="good" Value="65" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="By GDP per capita, each of these was among the world's 100 richest countries in 2011.  Which one ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" USD">
+	<QuestionGenerator Id="country-richest" Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="By GDP per capita, each of these was among the world's 100 richest countries in 2011.  Which one ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" USD">
 		<Answer Text="Monaco" Value="178,800.00" />
 		<Answer Text="Liechtenstein" Value="125,600.00" />
 		<Answer Text="Luxembourg" Value="125,000.00" />
@@ -2514,7 +2447,7 @@
 		<Answer Text="Estonia" Value="17,500.00" />
 		<Answer Text="Barbados" Value="15,300.00" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;People" Used="y" Type="Sorted" Weight="1" QuestionText="Each of the following was one of the 10 most commonly given names to male babies born in 2007 in the USA.  Which one was more common?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" most common">
+	<QuestionGenerator Id="us-names-male" Tags="U.S.A.;People" Used="y" Type="Sorted" Weight="1" QuestionText="Each of the following was one of the 10 most commonly given names to male babies born in 2007 in the USA.  Which one was more common?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" most common">
 		<Answer Text="Jacob" Value="1st" />
 		<Answer Text="Michael" Value="2nd" />
 		<Answer Text="Ethan" Value="3rd" />
@@ -2526,7 +2459,7 @@
 		<Answer Text="Matthew" Value="9th" />
 		<Answer Text="Andrew" Value="10th" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;People" Used="y" Type="Sorted" Weight="1" QuestionText="Each of the following was one of the 10 most commonly given names to female babies born in 2007 in the USA.  Which one was more common?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" most common">
+	<QuestionGenerator Id="us-names-female" Tags="U.S.A.;People" Used="y" Type="Sorted" Weight="1" QuestionText="Each of the following was one of the 10 most commonly given names to female babies born in 2007 in the USA.  Which one was more common?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" most common">
 		<Answer Text="Emily" Value="1st" />
 		<Answer Text="Isabella" Value="2nd" />
 		<Answer Text="Emma" Value="3rd" />
@@ -2538,7 +2471,7 @@
 		<Answer Text="Hannah" Value="9th" />
 		<Answer Text="Elizabeth" Value="10th" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="International" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these cities ranks among the top 50 in the world by their number of buildings taller than 100m.  Which one has more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" buildings over 100m">
+	<QuestionGenerator Id="city-tall-buildings" Tags="International" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these cities ranks among the top 50 in the world by their number of buildings taller than 100m.  Which one has more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" buildings over 100m">
 		<Answer Text="Hong Kong" Value="2354" />
 		<Answer Text="New York City" Value="794" />
 		<Answer Text="Tokyo" Value="556" />
@@ -2590,7 +2523,7 @@
 		<Answer Text="Vienna" Value="10" />
 		<Answer Text="Naples" Value="8" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Hot 100 Hits from 2001 was #1 for longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" weeks">
+	<QuestionGenerator Id="music-no1-longer-2001" Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Hot 100 Hits from 2001 was #1 for longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" weeks">
 		<Answer Text="All For You" Value="7" />
 		<Answer Text="Fallin'" Value="6" />
 		<Answer Text="Family Affair" Value="6" />
@@ -2606,7 +2539,7 @@
 		<Answer Text="Ms Jackson" Value="1" />
 		<Answer Text="Angel" Value="1" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following African rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
+	<QuestionGenerator Id="river-longer-africa" Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following African rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
 		<Answer Text="Nile - Kagera River" Value="6650" />
 		<Answer Text="Congo River - Chambeshi River" Value="4700" />
 		<Answer Text="Niger River" Value="4200" />
@@ -2630,7 +2563,7 @@
 		<Answer Text="Gambia River" Value="1094" />
 		<Answer Text="Aruwimi" Value="1030" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following Asian rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
+	<QuestionGenerator Id="river-longer-asia" Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following Asian rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
 		<Answer Text="Yangtze River" Value="6300" />
 		<Answer Text="Yenisei River - Angara River - Selenge River" Value="5539" />
 		<Answer Text="Yellow River" Value="5464" />
@@ -2666,13 +2599,13 @@
 		<Answer Text="Yenisei River - Little Yenisei River" Value="1480" />
 		<Answer Text="Godavari River" Value="1465" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following Australian rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
+	<QuestionGenerator Id="river-longer-australia" Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following Australian rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
 		<Answer Text="Murray River - Darling River" Value="3672" />
 		<Answer Text="Murrumbidgee River" Value="1600" />
 		<Answer Text="Cooper Creek - Barcoo River" Value="1420" />
 		<Answer Text="Warburton Creek - Georgina River" Value="1400" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following European rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
+	<QuestionGenerator Id="river-longer-europe" Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following European rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
 		<Answer Text="Volga" Value="3645" />
 		<Answer Text="Danube - Breg River" Value="2888" />
 		<Answer Text="Ural River" Value="2428" />
@@ -2697,7 +2630,7 @@
 		<Answer Text="Khoper River" Value="1010" />
 		<Answer Text="Tagus" Value="1006" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following North American rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
+	<QuestionGenerator Id="river-longer-na" Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following North American rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
 		<Answer Text="Mississippi River - Missouri River - Jefferson River" Value="6275" />
 		<Answer Text="Mackenzie River - Peace River (Canada) - Finlay River" Value="4241" />
 		<Answer Text="Yukon River" Value="3185" />
@@ -2733,7 +2666,7 @@
 		<Answer Text="Tennessee River" Value="1049" />
 		<Answer Text="Gila River" Value="1015" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following South American rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
+	<QuestionGenerator Id="river-longer-sa" Tags="Science::Geography" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of the following South American rivers is among the 175 longest in the world. Which one is longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km">
 		<Answer Text="Amazon River - Ucayali River - Apurímac River" Value="6400" />
 		<Answer Text="Paraná River - Río de la Plata" Value="4880" />
 		<Answer Text="Tocantins River - Araguaia River" Value="3650" />
@@ -2769,7 +2702,7 @@
 		<Answer Text="Bermejo River" Value="1050" />
 		<Answer Text="Guaviare River" Value="1050" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Sports::Football" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these teams was earlier in their first winning of the Superbowl?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-superbowl-first" Tags="U.S.A.;Sports::Football" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these teams was earlier in their first winning of the Superbowl?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Green Bay Packers" Value="1/15/1967" />
 		<Answer Text="New York Jets" Value="1/12/1969" />
 		<Answer Text="Kansas City Chiefs" Value="1/11/1970" />
@@ -2791,7 +2724,7 @@
 		<Answer Text="Indianapolis Colts" Value="2/4/2007" />
 		<Answer Text="New Orleans Saints" Value="2/7/2010" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Sports::Baseball" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these teams was earlier in their first winning of the World Series?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-worldseries-first" Tags="U.S.A.;Sports::Baseball" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these teams was earlier in their first winning of the World Series?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Boston Americans" Value="1903" />
 		<Answer Text="New York Giants" Value="1905" />
 		<Answer Text="Chicago White Sox" Value="1906" />
@@ -2811,7 +2744,7 @@
 		<Answer Text="Los Angeles Dodgers" Value="1959" />
 		<Answer Text="Baltimore Orioles" Value="1966" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="International;Sports::Soccer" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these countries was earlier in their first winning of the World Cup?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-worldcup-first" Tags="International;Sports::Soccer" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these countries was earlier in their first winning of the World Cup?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Uruguay" Value="1930" />
 		<Answer Text="Italy" Value="1934" />
 		<Answer Text="West Germany" Value="1954" />
@@ -2821,7 +2754,7 @@
 		<Answer Text="France" Value="1998" />
 		<Answer Text="Spain" Value="2010" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Sports::Football" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these Superbowl MVPs was earlier in first winning the title?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-superbowl-mvp-first" Tags="U.S.A.;Sports::Football" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these Superbowl MVPs was earlier in first winning the title?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Bart Starr" Value="1967" />
 		<Answer Text="Joe Namath" Value="1969" />
 		<Answer Text="Len Dawson" Value="1970" />
@@ -2864,7 +2797,7 @@
 		<Answer Text="Drew Brees" Value="2010" />
 		<Answer Text="Aaron Rodgers" Value="2011" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Sports::Hockey" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these hockey teams was earlier in their first Stanley Cup victory?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-hockey-first" Tags="Sports::Hockey" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these hockey teams was earlier in their first Stanley Cup victory?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Montreal Hockey Club" Value="3/17/1893" />
 		<Answer Text="Montreal Victorias" Value="3/8/1895" />
 		<Answer Text="Winnipeg Victorias" Value="3/17/1893" />
@@ -2876,7 +2809,7 @@
 		<Answer Text="Quebec Bulldogs" Value="3/12/1910" />
 		<Answer Text="Toronto Hockey Club" Value="3/5/1912" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Sports::Boxing" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Each of these people is a heavyweight boxing champion according to at least one recognizing body.  Who was earlier in their first reign as champion?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-boxing-first" Tags="Sports::Boxing" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Each of these people is a heavyweight boxing champion according to at least one recognizing body.  Who was earlier in their first reign as champion?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="John L. Sullivan" Value="8/29/1882" />
 		<Answer Text="James J. Corbett" Value="9/7/1892" />
 		<Answer Text="Bob Fitzsimmons" Value="3/17/1897" />
@@ -2928,7 +2861,7 @@
 		<Answer Text="Ray Mercer" Value="1/11/1991" />
 		<Answer Text="Michael Moorer" Value="5/15/1992" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="Sports::Martial Arts" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these fighters was earlier in their first UFC Heavyweight championship victory?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-ufc-first" Tags="Sports::Martial Arts" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these fighters was earlier in their first UFC Heavyweight championship victory?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Mark Coleman" Value="2/7/1997" />
 		<Answer Text="Maurice Smith" Value="7/27/1997" />
 		<Answer Text="Randy Couture" Value="12/21/1997" />
@@ -2945,7 +2878,7 @@
 		<Answer Text="Cain Velasquez" Value="10/23/2010" />
 		<Answer Text="Junior dos Santos" Value="11/12/2011" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Sports::Basketball" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these teams was earlier in their first winning of the NBA Championship?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-nba-first" Tags="U.S.A.;Sports::Basketball" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these teams was earlier in their first winning of the NBA Championship?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Minneapolis Lakers" Value="1950" />
 		<Answer Text="Rochester Royals" Value="1951" />
 		<Answer Text="Syracuse Nationals" Value="1955" />

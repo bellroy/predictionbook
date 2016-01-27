@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160101210733) do
+ActiveRecord::Schema.define(:version => 20160126231512) do
 
   create_table "credence_answers", :force => true do |t|
     t.integer  "credence_question_id"
@@ -55,9 +55,12 @@ ActiveRecord::Schema.define(:version => 20160101210733) do
     t.string   "question_type"
     t.integer  "adjacent_within"
     t.float    "weight"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.string   "text_id",         :limit => 50
   end
+
+  add_index "credence_questions", ["text_id"], :name => "index_credence_questions_on_text_id", :unique => true
 
   create_table "judgements", :force => true do |t|
     t.integer  "prediction_id"

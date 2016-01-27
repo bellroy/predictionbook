@@ -49,14 +49,15 @@ describe CredenceQuestion do
 
   it 'should create questions from parsed XML' do
     parsed = Nokogiri::XML(<<-XML).root
-      <QuestionGenerator Tags="" Used="y" Type="Sorted" Weight="0.5" QuestionText="question" AdjacentWithin="-1" InfoPrefix="prefix" InfoSuffix="suffix">
+      <QuestionGenerator Id="text-id" Tags="" Used="y" Type="Sorted" Weight="0.5" QuestionText="question" AdjacentWithin="-1" InfoPrefix="prefix" InfoSuffix="suffix">
         <Answer Text="first" Value="B" />
         <Answer Text="second" Value="A" />
       </QuestionGenerator>
     XML
-    cq = CredenceQuestion.create_from_element!(parsed)
+    cq = CredenceQuestion.create_from_element!(parsed, "id-prefix")
 
     expect(cq.enabled).to eq true
+    expect(cq.text_id).to eq "id-prefix:text-id"
     expect(cq.question_type).to eq "Sorted"
     expect(cq.text).to eq "question"
     expect(cq.prefix).to eq "prefix"
@@ -84,7 +85,7 @@ describe CredenceQuestion do
         <Answer Text="fourth" Value="A" />
       </QuestionGenerator>
     XML
-    cq = CredenceQuestion.create_from_element!(parsed)
+    cq = CredenceQuestion.create_from_element!(parsed, "id-prefix")
 
     expect(cq.credence_answers.map(&:rank)).to eq [0, 0, 1, 2]
   end

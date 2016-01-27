@@ -26,11 +26,12 @@ class CredenceQuestion < ActiveRecord::Base
                                 correct_index: which)
   end
 
-  def self.create_from_element! (gen)
+  def self.create_from_element! (gen, id_prefix)
     return if gen['Type'] != 'Sorted'
 
     cq = CredenceQuestion.new(
       enabled: gen['Used'].to_s == 'y',
+      text_id: "#{id_prefix}:#{gen['Id']}",
       question_type: gen['Type'].to_s,
       text: gen['QuestionText'].to_s,
       prefix: gen['InfoPrefix'].to_s,
