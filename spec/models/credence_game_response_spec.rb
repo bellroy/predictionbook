@@ -44,15 +44,17 @@ describe CredenceGameResponse do
   end
 
   it 'should not randomly create questions that have been disabled' do
-    def mkgen (e=false)
+    def make_generator (e=false)
       gen = create_valid_credence_question(enabled: e)
       a1 = create_valid_credence_answer(credence_question: gen, rank: 0)
       a2 = create_valid_credence_answer(credence_question: gen, rank: 1)
       gen
     end
 
-    gen = mkgen(true)
-    mkgen; mkgen; mkgen; mkgen
+    gen = make_generator(true)
+    4.times do
+      make_generator
+    end
 
     10.times do
       q = CredenceGameResponse.pick_random

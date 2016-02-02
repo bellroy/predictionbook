@@ -10,7 +10,7 @@ describe CredenceGamesController do
   end
 
   it 'should not error if the db has not been initialized' do
-    get :index
+    expect { get :index }.not_to raise_error
   end
 
   describe 'Receiving a question' do
@@ -22,7 +22,7 @@ describe CredenceGamesController do
     end
 
     it 'should index' do
-      get :index
+      expect { get :index }.not_to raise_error
     end
 
     it 'should assign @game and @question' do
@@ -55,7 +55,6 @@ describe CredenceGamesController do
       expect(flash[:correct]).to eq correct
       expect(flash[:score]).to eq (correct ? 3 : -3)
       expect(flash[:message]).to be_kind_of(String)
-      expect(flash[:message]).to be_truthy
     end
 
     before(:each) do
