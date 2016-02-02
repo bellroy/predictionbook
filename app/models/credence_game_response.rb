@@ -5,10 +5,12 @@ class CredenceGameResponse < ActiveRecord::Base
   belongs_to :second_answer, class_name: 'CredenceAnswer'
 
   def self.pick_random
-    num_gens = CredenceQuestion.count
-    gen = CredenceQuestion.first(offset: rand(num_gens))
+    enabled_gens = CredenceQuestion.where(enabled: true)
+    num_enabled = enabled_gens.count
+
+    gen = enabled_gens.first(offset: rand(num_enabled))
     while !gen.enabled || gen.weight < rand
-      gen = CredenceQuestion.first(offset: rand(num_gens))
+      gen = enabled_gens.first(offset: rand(num_enabled))
     end
 
     gen.create_random_question
