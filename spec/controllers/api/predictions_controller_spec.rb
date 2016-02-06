@@ -118,20 +118,16 @@ describe Api::PredictionsController, type: :controller do
     let(:new_prediction_params) do
       { description: 'The world definitely will not end tomorrow!' }
     end
-
-    before do
-      @user = valid_user(api_token: token)
-      @user.save
-      @prediction = valid_prediction(creator: @user)
-      @prediction.save
-    end
+    let(:user) { valid_user(api_token: token) }
+    let(:prediction) { valid_prediction(creator: user) }
+    before { prediction.save }
 
     context 'with valid API token' do
       context 'authorized user' do
         before do
           put :update,
-              api_token: @user.api_token,
-              id: @prediction.id,
+              api_token: user.api_token,
+              id: prediction.id,
               prediction: new_prediction_params
         end
 
@@ -140,9 +136,9 @@ describe Api::PredictionsController, type: :controller do
 
         it 'updates the existing prediction' do
           description = new_prediction_params[:description]
-          @prediction.reload
+          prediction.reload
 
-          expect(@prediction.description).to eq(description)
+          expect(prediction.description).to eq(description)
         end
       end
 
@@ -150,7 +146,7 @@ describe Api::PredictionsController, type: :controller do
         before do
           put :update,
               api_token: 'fake-token',
-              id: @prediction.id,
+              id: prediction.id,
               prediction: new_prediction_params
         end
 
@@ -163,7 +159,7 @@ describe Api::PredictionsController, type: :controller do
       before do
         put :update,
             api_token: 'fake-token',
-            id: @prediction.id,
+            id: prediction.id,
             prediction: new_prediction_params
       end
 
