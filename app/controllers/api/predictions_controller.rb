@@ -5,11 +5,12 @@ module Api
 
     before_filter :authenticate_by_api_token
     before_filter :build_predictions, only: [:index]
+    before_filter :build_new_prediction, only: [:create]
     before_filter :find_prediction, only: [:show, :update]
+    before_filter :authorize_to_see_prediction, only: [:show]
+    before_filter :authorize_to_update_prediction, only: [:update]
 
     def create
-      @prediction = build_new_prediction
-
       if @prediction.save
         render json: @prediction
       else
@@ -22,15 +23,11 @@ module Api
     end
 
     def show
-      if authorized_to_view_prediction?
-        render json: @prediction
-      else
-        render json: unauthorized_user_message, status: :unauthorized
-      end
+      render json: @prediction
     end
 
     def update
-      if successfully_updated?
+      if @prediction.update_attributes(params[:prediction])
         render json: @prediction
       else
         render json: @prediction.errors, status: :unprocessable_entity
@@ -47,9 +44,16 @@ module Api
       end
     end
 
-    def authorized_to_view_prediction?
-      return true unless @prediction.private?
-      @user.authorized_for(@prediction)
+    def authorize_to_see_prediction
+      unless @prediction.public? || @user.authorized_for(@prediction)
+        render json: unauthorized_user_message, status: :unauthorized
+      end
+    end
+
+    def authorize_to_update_prediction
+      unless @user.authorized_for(@prediction)
+        render json: unauthorized_user_message, status: :unauthorized
+      end
     end
 
     def build_new_prediction
@@ -59,7 +63,7 @@ module Api
         prediction_params[:private] = @user.private_default
       end
 
-      Prediction.new(prediction_params.merge(creator: @user))
+      @prediction = Prediction.new(prediction_params.merge(creator: @user))
     end
 
     def build_predictions
@@ -80,14 +84,9 @@ module Api
 
     def unauthorized_user_message
       {
-        error: 'user is unauthorized to view this private prediction',
+        error: 'user is unauthorized for this prediction',
         status: :unauthorized
       }
-    end
-
-    def successfully_updated?
-      return false unless @user.authorized_for(@prediction)
-      @prediction.update_attributes(params[:prediction])
     end
 
     def valid_params_and_user?
