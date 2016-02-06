@@ -46,14 +46,12 @@ module Api
 
     def authorize_to_see_prediction
       unless @prediction.public? || @user.authorized_for(@prediction)
-        render json: unauthorized_user_message, status: :unauthorized
+        raise UnauthorizedRequest
       end
     end
 
     def authorize_to_update_prediction
-      unless @user.authorized_for(@prediction)
-        render json: unauthorized_user_message, status: :unauthorized
-      end
+      raise UnauthorizedRequest unless @user.authorized_for(@prediction)
     end
 
     def build_new_prediction
@@ -80,13 +78,6 @@ module Api
 
     def invalid_api_message
       { error: 'invalid API token', status: :unauthorized }
-    end
-
-    def unauthorized_user_message
-      {
-        error: 'user is unauthorized for this prediction',
-        status: :unauthorized
-      }
     end
 
     def valid_params_and_user?
