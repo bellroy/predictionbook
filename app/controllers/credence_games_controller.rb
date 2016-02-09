@@ -20,6 +20,13 @@ class CredenceGamesController < ApplicationController
     if params[:question_id].to_i == question.id
       given_answer = params[:answer_index].to_i
       credence = params[:credence].to_i
+
+      if credence < 1 or credence > 99
+        flash[:error] = "Credence scores must be between 1 and 99, inclusive."
+        redirect_to credence_games_path
+        return
+      end
+
       correct, score = question.score_answer(given_answer, credence)
 
       question.given_answer = given_answer

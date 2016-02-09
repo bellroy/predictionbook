@@ -123,10 +123,11 @@ describe CredenceGamesController do
     end
 
     it 'should give a helpful error for credences outside [1, 99]' do
-      # Not critical - the model rejects them, so they can't be used to cheat,
-      # and there's no supported way to pass them.
-      pending 'Not yet implemented'
-      raise 'Not yet implemented'
+      post :update, :question_id => 1, :answer_index => 0, :credence => 100
+      expect(flash[:error]).not_to be_empty
+
+      post :update, :question_id => 1, :answer_index => 0, :credence => 0
+      expect(flash[:error]).not_to be_empty
     end
   end
 end
