@@ -677,7 +677,7 @@
 		<Answer Text="Czech Republic" Value="6.8" />
 		<Answer Text="Mexico" Value="6.4" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="music-no1-longer-2011" Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Hot 100 hits was #1 for longer in 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="music-no1-longer-2011" Tags="U.S.A.;Entertainment::Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Hot 100 hits was #1 for longer in 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="&quot;We Found Love&quot; – Rihanna feat. Calvin Harris" Value="8 weeks" />
 		<Answer Text="&quot;Rolling in the Deep&quot; – Adele" Value="7 weeks" />
 		<Answer Text="&quot;Born This Way&quot;- Lady Gaga" Value="6 weeks" />
@@ -1276,7 +1276,7 @@
 		<Answer Text="Zambia" Value="Lusaka" />
 		<Answer Text="Zimbabwe" Value="Harare" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Film" Used="y" Type="Match" Weight="1" QuestionText="Which of these winners of the Academy Award for Best Picture was the winner in __?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Tags="U.S.A.;Entertainment::Film" Used="y" Type="Match" Weight="1" QuestionText="Which of these winners of the Academy Award for Best Picture was the winner in __?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="1928" Value="Wings" />
 		<Answer Text="1929" Value="The Broadway Melody" />
 		<Answer Text="1930" Value="All Quiet on the Western Front" />
@@ -1594,7 +1594,7 @@
 		<Answer Text="Kenneth Thomson" Value="19.6" />
 		<Answer Text="Li Ka Shing" Value="18.8" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="film-imdb-higher" Tags="U.S.A.;Film" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these IMDB Top 250 films of all time was ranked higher by the end of 2011?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
+	<QuestionGenerator Id="film-imdb-higher" Tags="U.S.A.;Entertainment::Film" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these IMDB Top 250 films of all time was ranked higher by the end of 2011?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
 		<Answer Text="The Shawshank Redemption (1994)" Value="1" />
 		<Answer Text="The Godfather (1972)" Value="2" />
 		<Answer Text="The Godfather: Part II (1974)" Value="3" />
@@ -1661,7 +1661,7 @@
 		<Answer Text="Das Boot (1981)" Value="64" />
 		<Answer Text="Requiem for a Dream (2000)" Value="65" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="film-expense-noadj" Tags="U.S.A.;Film" Used="y" Type="Sorted" Weight="1" QuestionText="Without adjusting for inflation, each of these is one of the 40 most expensive film productions of all time.  Which one cost more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="film-expense-noadj" Tags="U.S.A.;Entertainment::Film" Used="y" Type="Sorted" Weight="1" QuestionText="Without adjusting for inflation, each of these is one of the 40 most expensive film productions of all time.  Which one cost more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Pirates of the Caribbean: At World's End" Value="$300m" />
 		<Answer Text="Tangled" Value="$260m" />
 		<Answer Text="Spider-Man 3" Value="$258m" />
@@ -1707,7 +1707,7 @@
 		<Answer Text="Shrek the Third" Value="$160m" />
 		<Answer Text="Inception" Value="$160m" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="film-expense-adj" Tags="U.S.A.;Film" Used="y" Type="Sorted" Weight="1" QuestionText="Adjusting for inflation, each of these is one of the 30 most expensive film productions of all time.  Which one cost more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="million">
+	<QuestionGenerator Id="film-expense-adj" Tags="U.S.A.;Entertainment::Film" Used="y" Type="Sorted" Weight="1" QuestionText="Adjusting for inflation, each of these is one of the 30 most expensive film productions of all time.  Which one cost more?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="million">
 		<Answer Text="Pirates of the Caribbean: At World's End" Value="$336" />
 		<Answer Text="Titanic" Value="$290" />
 		<Answer Text="Spider-Man 3" Value="$289" />
@@ -1836,7 +1836,7 @@
 		<Answer Text="Vänern" Value="153" />
 		<Answer Text="Nicaragua" Value="108" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="music-artist-2011" Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Top 10 Artists from 2011 was ranked higher?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
+	<QuestionGenerator Id="music-artist-2011" Tags="U.S.A.;Entertainment::Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Top 10 Artists from 2011 was ranked higher?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
 		<Answer Text="Adele" Value="1" />
 		<Answer Text="Rihanna" Value="2" />
 		<Answer Text="Katy Perry" Value="3" />
@@ -1949,7 +1949,7 @@
 		<Answer Text="Magglio Ordonez" Value="$133,470,746" />
 		<Answer Text="Jason Giambi" Value="$131,808,996" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="music-artist-weeks" Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="By 2008, which of these artists had more weeks with a #1 hit on the Billboard Hot 100?  (Each is among the top 10 artists of all time by this ranking.)" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" weeks">
+	<QuestionGenerator Id="music-artist-weeks" Tags="U.S.A.;Entertainment::Music" Used="y" Type="Sorted" Weight="1" QuestionText="By 2008, which of these artists had more weeks with a #1 hit on the Billboard Hot 100?  (Each is among the top 10 artists of all time by this ranking.)" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" weeks">
 		<Answer Text="Mariah Carey" Value="79" />
 		<Answer Text="The Beatles" Value="59" />
 		<Answer Text="Boyz II Men" Value="50" />
@@ -1961,7 +1961,7 @@
 		<Answer Text="Madonna" Value="32" />
 		<Answer Text="Whitney Houston" Value="31" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="music-artist-alltime" Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="By their number of Billboard Hot 100 hits prior to 2008, each of these musicians or groups ranks among the 10 most popular of all time.  Who ranks higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" Hot 100 hits">
+	<QuestionGenerator Id="music-artist-alltime" Tags="U.S.A.;Entertainment::Music" Used="y" Type="Sorted" Weight="1" QuestionText="By their number of Billboard Hot 100 hits prior to 2008, each of these musicians or groups ranks among the 10 most popular of all time.  Who ranks higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" Hot 100 hits">
 		<Answer Text="Elvis Presley" Value="108" />
 		<Answer Text="James Brown" Value="89" />
 		<Answer Text="Ray Charles" Value="73" />
@@ -2523,7 +2523,7 @@
 		<Answer Text="Vienna" Value="10" />
 		<Answer Text="Naples" Value="8" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="music-no1-longer-2001" Tags="U.S.A.;Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Hot 100 Hits from 2001 was #1 for longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" weeks">
+	<QuestionGenerator Id="music-no1-longer-2001" Tags="U.S.A.;Entertainment::Music" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these Billboard Hot 100 Hits from 2001 was #1 for longer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" weeks">
 		<Answer Text="All For You" Value="7" />
 		<Answer Text="Fallin'" Value="6" />
 		<Answer Text="Family Affair" Value="6" />
@@ -2899,5 +2899,51 @@
 		<Answer Text="San Antonio Spurs" Value="1999" />
 		<Answer Text="Miami Heat" Value="2006" />
 		<Answer Text="Dallas Mavericks" Value="2011" />
+	</QuestionGenerator>
+	<QuestionGenerator Id="country-pop" Tags="International;Population" Used="y" Type="Sorted" Weight="1" QuestionText="As of 2015, each of these countries was one of the twenty most populous in the world. Which had a higher population?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people" Source="United Nations - World Population Prospects">
+		<Answer Text="China" Value="1,376,049,000" />
+		<Answer Text="India" Value="1,311,051,000" />
+		<Answer Text="United States of America" Value="321,774,000" />
+		<Answer Text="Indonesia" Value="257,564,000" />
+		<Answer Text="Brazil" Value="207,848,000" />
+		<Answer Text="Pakistan" Value="188,925,000" />
+		<Answer Text="Nigeria" Value="182,202,000" />
+		<Answer Text="Bangladesh" Value="160,996,000" />
+		<Answer Text="Russian Federation" Value="143,457,000" />
+		<Answer Text="Mexico" Value="127,017,000" />
+		<Answer Text="Japan" Value="126,573,000" />
+		<Answer Text="Philippines" Value="100,699,000" />
+		<Answer Text="Ethiopia" Value="99,391,000" />
+		<Answer Text="Vietnam" Value="93,448,000" />
+		<Answer Text="Egypt" Value="91,508,000" />
+		<Answer Text="Germany" Value="80,689,000" />
+		<Answer Text="Iran" Value="79,109,000" />
+		<Answer Text="Turkey" Value="78,666,000" />
+		<Answer Text="Democratic Republic of the Congo" Value="77,267,000" />
+		<Answer Text="Thailand" Value="67,959,000" />
+	</QuestionGenerator>
+	<QuestionGenerator Id="country-electricity" Tags="International" Used="y" Type="Sorted" Weight="1" QuestionText="Each of the following countries is among the 10 with the highest electricity production according to the 2010 data of the BP Workbook of historical data 1965-2010. Which produced more electricity?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" GWh" Source="http://en.wikipedia.org/wiki/List_of_countries_by_electricity_production">
+		<Answer Text="United States" Value="4,325,900"/>
+		<Answer Text="China" Value="4,206,500"/>
+		<Answer Text="Japan" Value="1,145,300"/>
+		<Answer Text="Russia" Value="1,036,800"/>
+		<Answer Text="India" Value="922,200"/>
+		<Answer Text="Canada" Value="629,900"/>
+		<Answer Text="Germany" Value="621,000"/>
+		<Answer Text="France" Value="573,200"/>
+		<Answer Text="Korea, South" Value="497,200"/>
+		<Answer Text="Brazil" Value="484,800"/>
+	</QuestionGenerator>
+	<QuestionGenerator Id="solarsyst-close" Tags="Science::Astronomy" Used="y" Type="Sorted" Weight="1" QuestionText="Each of the following solar systems is among the 10 closest to the sun. Which one is closer?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" lightyears" Source="http://en.wikipedia.org/wiki/Closest_stars">
+		<Answer Text="Alpha Centauri" Value="4.3"/>
+		<Answer Text="Barnard's Star" Value="6.0"/>
+		<Answer Text="Wolf 359" Value="7.8"/>
+		<Answer Text="Lalande 21185" Value="8.3"/>
+		<Answer Text="Sirius" Value="8.6"/>
+		<Answer Text="Luyten 726-8" Value="8.7"/>
+		<Answer Text="Ross 154" Value="9.7"/>
+		<Answer Text="Ross 248" Value="10.3"/>
+		<Answer Text="Epsilon Eridani" Value="10.5"/>
+		<Answer Text="Lacaille 9352" Value="10.7"/>
 	</QuestionGenerator>
 </Questions>
