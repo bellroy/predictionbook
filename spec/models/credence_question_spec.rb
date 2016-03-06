@@ -2,24 +2,24 @@ require 'spec_helper'
 
 describe CredenceQuestion do
   it 'should be able to create random questions' do
-    gen = create_valid_credence_question
-    as = (0..9).map do |rank|
-      create_valid_credence_answer(credence_question: gen, rank: rank)
+    question = create_valid_credence_question
+    (0..9).each do |rank|
+      create_valid_credence_answer(credence_question: question, rank: rank)
     end
 
-    q = gen.create_random_question
-    expect(q.class).to eq CredenceGameResponse
+    response = question.create_random_question
+    expect(response.class).to eq CredenceGameResponse
   end
 
   it 'should not create a question where both answers have the same rank' do
-    gen = create_valid_credence_question
+    question = create_valid_credence_question
     [1, 1, 1, 1, 2].each do |rank|
-      create_valid_credence_answer(credence_question: gen, rank: rank)
+      create_valid_credence_answer(credence_question: question, rank: rank)
     end
 
     100.times do
-      q = gen.create_random_question
-      expect(q.first_answer.rank).to_not eq q.second_answer.rank
+      response = question.create_random_question
+      expect(response.first_answer.rank).to_not eq response.second_answer.rank
     end
   end
 
@@ -32,15 +32,15 @@ describe CredenceQuestion do
     # failing randomly.
     #   Is it possible to only have this test run if we request it explicitly?
 
-    gen = create_valid_credence_question
+    question = create_valid_credence_question
     [1, 1, 2].each do |rank|
-      create_valid_credence_answer(credence_question: gen, rank: rank)
+      create_valid_credence_answer(credence_question: question, rank: rank)
     end
 
     counts = Hash.new(0)
     400.times do
-      q = gen.create_random_question
-      key = [q.first_answer.id, q.second_answer.id]
+      response = question.create_random_question
+      key = [response.first_answer.id, response.second_answer.id]
       counts[key] += 1
     end
 
@@ -54,26 +54,26 @@ describe CredenceQuestion do
         <Answer Text="second" Value="A" />
       </QuestionGenerator>
     XML
-    cq = CredenceQuestion.create_from_element!(parsed, "id-prefix")
+    question = CredenceQuestion.create_from_xml_element!(parsed, "id-prefix")
 
-    expect(cq.enabled).to eq true
-    expect(cq.text_id).to eq "id-prefix:text-id"
-    expect(cq.question_type).to eq "Sorted"
-    expect(cq.text).to eq "question"
-    expect(cq.prefix).to eq "prefix"
-    expect(cq.suffix).to eq "suffix"
-    expect(cq.adjacent_within).to eq -1
-    expect(cq.weight).to eq 0.5
+    expect(question.enabled).to eq true
+    expect(question.text_id).to eq "id-prefix:text-id"
+    expect(question.question_type).to eq "Sorted"
+    expect(question.text).to eq "question"
+    expect(question.prefix).to eq "prefix"
+    expect(question.suffix).to eq "suffix"
+    expect(question.adjacent_within).to eq -1
+    expect(question.weight).to eq 0.5
 
-    a0 = cq.credence_answers[0]
-    expect(a0.rank).to eq 0
-    expect(a0.text).to eq "first"
-    expect(a0.value).to eq "B"
+    answer_0 = question.credence_answers[0]
+    expect(answer_0.rank).to eq 0
+    expect(answer_0.text).to eq "first"
+    expect(answer_0.value).to eq "B"
 
-    a1 = cq.credence_answers[1]
-    expect(a1.rank).to eq 1
-    expect(a1.text).to eq "second"
-    expect(a1.value).to eq "A"
+    answer_1 = question.credence_answers[1]
+    expect(answer_1.rank).to eq 1
+    expect(answer_1.text).to eq "second"
+    expect(answer_1.value).to eq "A"
   end
 
   it 'should assign adjacent answers equal ranks when they have equal value' do
@@ -85,8 +85,8 @@ describe CredenceQuestion do
         <Answer Text="fourth" Value="A" />
       </QuestionGenerator>
     XML
-    cq = CredenceQuestion.create_from_element!(parsed, "id-prefix")
+    question = CredenceQuestion.create_from_xml_element!(parsed, "id-prefix")
 
-    expect(cq.credence_answers.map(&:rank)).to eq [0, 0, 1, 2]
+    expect(question.credence_answers.map(&:rank)).to eq [0, 0, 1, 2]
   end
 end

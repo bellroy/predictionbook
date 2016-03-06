@@ -1,13 +1,13 @@
 class CredenceStatistics < BaseStatistics
-  def initialize(questions)
+  def initialize(responses)
     groups = Hash.new { |h,k| h[k] = GroupedWagers.new }
 
-    questions.each { |q|
-      groups[q.answer_credence].add(q.answer_correct? q.given_answer)
+    responses.each { |response|
+      groups[response.answer_credence].add(response.answer_correct? response.given_answer)
     }
 
-    @intervals = Hash[ groups.map { |cred, group|
-      [ cred, Interval.new(cred, group.count, group.accuracy) ]
+    @intervals = Hash[ groups.map { |credence, group|
+      [ credence, Interval.new(credence, group.count, group.accuracy) ]
     } ]
   end
 

@@ -26,37 +26,37 @@ class CredenceQuestion < ActiveRecord::Base
                                 correct_index: which)
   end
 
-  def self.create_from_element! (gen, id_prefix)
-    return if gen['Type'] != 'Sorted'
+  def self.create_from_xml_element! (generator, id_prefix)
+    return if generator['Type'] != 'Sorted'
 
-    cq = CredenceQuestion.new(
-      enabled: gen['Used'].to_s == 'y',
-      text_id: "#{id_prefix}:#{gen['Id']}",
-      question_type: gen['Type'].to_s,
-      text: gen['QuestionText'].to_s,
-      prefix: gen['InfoPrefix'].to_s,
-      suffix: gen['InfoSuffix'].to_s,
-      adjacent_within: gen['AdjacentWithin'].to_s.to_i,
-      weight: gen['Weight'].to_s.to_f
+    question = CredenceQuestion.new(
+      enabled: generator['Used'].to_s == 'y',
+      text_id: "#{id_prefix}:#{generator['Id']}",
+      question_type: generator['Type'].to_s,
+      text: generator['QuestionText'].to_s,
+      prefix: generator['InfoPrefix'].to_s,
+      suffix: generator['InfoSuffix'].to_s,
+      adjacent_within: generator['AdjacentWithin'].to_s.to_i,
+      weight: generator['Weight'].to_s.to_f
     )
-    cq.save!
+    question.save!
 
     rank = -1
-    last_val = nil
-    gen.search('Answer').each do |ans|
-      cur_val = ans['Value'].to_s
-      if last_val != cur_val
+    last_value = nil
+    generator.search('Answer').each do |answer|
+      current_value = answer['Value'].to_s
+      if last_value != current_value
         rank += 1
-        last_val = cur_val
+        last_value = current_value
       end
 
-      cq.credence_answers.create!(
-        text: ans['Text'],
-        value: cur_val,
+      question.credence_answers.create!(
+        text: answer['Text'],
+        value: current_value,
         rank: rank
       )
     end
 
-    return cq
+    return question
   end
 end

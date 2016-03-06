@@ -10,10 +10,11 @@ task import_credence_questions: :environment do
 
   doc = Nokogiri::XML(open(file))
   id_prefix = doc.at('Questions')['IdPrefix']
-  doc.search('QuestionGenerator').each do |gen|
-    cq = CredenceQuestion.create_from_element!(gen, id_prefix)
-    if cq
-      puts "Created question with #{cq.credence_answers.count} answers: #{cq.text}"
+  doc.search('QuestionGenerator').each do |generator|
+    question = CredenceQuestion.create_from_xml_element!(generator, id_prefix)
+    if question
+      puts "Created question with #{question.credence_answers.count} " \
+           "answers: #{question.text}"
     end
   end
 end
