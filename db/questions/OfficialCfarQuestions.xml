@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Questions IdPrefix="CFAR">
 	<QuestionGenerator Id="state-pop" Tags="U.S.A.;Population" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher population in 2010?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people">
-		<Answer Text="California" Value="37,253,956.00" />
-		<Answer Text="Texas" Value="25,145,561.00" />
-		<Answer Text="New York" Value="19,378,102.00" />
-		<Answer Text="Florida" Value="18,801,310.00" />
-		<Answer Text="Illinois" Value="12,830,632.00" />
-		<Answer Text="Pennsylvania" Value="12,702,379.00" />
-		<Answer Text="Ohio" Value="11,536,504.00" />
-		<Answer Text="Michigan" Value="9,883,640.00" />
-		<Answer Text="Georgia" Value="9,687,653.00" />
-		<Answer Text="North Carolina" Value="9,535,483.00" />
-		<Answer Text="New Jersey" Value="8,791,894.00" />
-		<Answer Text="Virginia" Value="8,001,024.00" />
-		<Answer Text="Washington" Value="6,724,540.00" />
-		<Answer Text="Massachusetts" Value="6,547,629.00" />
-		<Answer Text="Indiana" Value="6,483,802.00" />
-		<Answer Text="Arizona" Value="6,392,017.00" />
-		<Answer Text="Tennessee" Value="6,346,105.00" />
-		<Answer Text="Missouri" Value="5,988,927.00" />
-		<Answer Text="Maryland" Value="5,773,552.00" />
-		<Answer Text="Wisconsin" Value="5,686,986.00" />
-		<Answer Text="Minnesota" Value="5,303,925.00" />
-		<Answer Text="Colorado" Value="5,029,196.00" />
-		<Answer Text="Alabama" Value="4,779,736.00" />
-		<Answer Text="South Carolina" Value="4,625,364.00" />
-		<Answer Text="Louisiana" Value="4,533,372.00" />
-		<Answer Text="Kentucky" Value="4,339,367.00" />
-		<Answer Text="Oregon" Value="3,831,074.00" />
-		<Answer Text="Oklahoma" Value="3,751,351.00" />
-		<Answer Text="Connecticut" Value="3,574,097.00" />
-		<Answer Text="Iowa" Value="3,046,355.00" />
-		<Answer Text="Mississippi" Value="2,967,297.00" />
-		<Answer Text="Arkansas" Value="2,915,918.00" />
-		<Answer Text="Kansas" Value="2,853,118.00" />
-		<Answer Text="Utah" Value="2,763,885.00" />
-		<Answer Text="Nevada" Value="2,700,551.00" />
-		<Answer Text="New Mexico" Value="2,059,179.00" />
-		<Answer Text="West Virginia" Value="1,852,994.00" />
-		<Answer Text="Nebraska" Value="1,826,341.00" />
-		<Answer Text="Idaho" Value="1,567,582.00" />
-		<Answer Text="Hawaii" Value="1,360,301.00" />
-		<Answer Text="Maine" Value="1,328,361.00" />
-		<Answer Text="New Hampshire" Value="1,316,470.00" />
-		<Answer Text="Rhode Island" Value="1,052,567.00" />
-		<Answer Text="Montana" Value="989,415.00" />
-		<Answer Text="Delaware" Value="897,934.00" />
-		<Answer Text="South Dakota" Value="814,180.00" />
-		<Answer Text="Alaska" Value="710,231.00" />
-		<Answer Text="North Dakota" Value="672,591.00" />
-		<Answer Text="Vermont" Value="625,741.00" />
-		<Answer Text="Wyoming" Value="563,626.00" />
+		<Answer Text="California" Value="37,253,956" />
+		<Answer Text="Texas" Value="25,145,561" />
+		<Answer Text="New York" Value="19,378,102" />
+		<Answer Text="Florida" Value="18,801,310" />
+		<Answer Text="Illinois" Value="12,830,632" />
+		<Answer Text="Pennsylvania" Value="12,702,379" />
+		<Answer Text="Ohio" Value="11,536,504" />
+		<Answer Text="Michigan" Value="9,883,640" />
+		<Answer Text="Georgia" Value="9,687,653" />
+		<Answer Text="North Carolina" Value="9,535,483" />
+		<Answer Text="New Jersey" Value="8,791,894" />
+		<Answer Text="Virginia" Value="8,001,024" />
+		<Answer Text="Washington" Value="6,724,540" />
+		<Answer Text="Massachusetts" Value="6,547,629" />
+		<Answer Text="Indiana" Value="6,483,802" />
+		<Answer Text="Arizona" Value="6,392,017" />
+		<Answer Text="Tennessee" Value="6,346,105" />
+		<Answer Text="Missouri" Value="5,988,927" />
+		<Answer Text="Maryland" Value="5,773,552" />
+		<Answer Text="Wisconsin" Value="5,686,986" />
+		<Answer Text="Minnesota" Value="5,303,925" />
+		<Answer Text="Colorado" Value="5,029,196" />
+		<Answer Text="Alabama" Value="4,779,736" />
+		<Answer Text="South Carolina" Value="4,625,364" />
+		<Answer Text="Louisiana" Value="4,533,372" />
+		<Answer Text="Kentucky" Value="4,339,367" />
+		<Answer Text="Oregon" Value="3,831,074" />
+		<Answer Text="Oklahoma" Value="3,751,351" />
+		<Answer Text="Connecticut" Value="3,574,097" />
+		<Answer Text="Iowa" Value="3,046,355" />
+		<Answer Text="Mississippi" Value="2,967,297" />
+		<Answer Text="Arkansas" Value="2,915,918" />
+		<Answer Text="Kansas" Value="2,853,118" />
+		<Answer Text="Utah" Value="2,763,885" />
+		<Answer Text="Nevada" Value="2,700,551" />
+		<Answer Text="New Mexico" Value="2,059,179" />
+		<Answer Text="West Virginia" Value="1,852,994" />
+		<Answer Text="Nebraska" Value="1,826,341" />
+		<Answer Text="Idaho" Value="1,567,582" />
+		<Answer Text="Hawaii" Value="1,360,301" />
+		<Answer Text="Maine" Value="1,328,361" />
+		<Answer Text="New Hampshire" Value="1,316,470" />
+		<Answer Text="Rhode Island" Value="1,052,567" />
+		<Answer Text="Montana" Value="989,415" />
+		<Answer Text="Delaware" Value="897,934" />
+		<Answer Text="South Dakota" Value="814,180" />
+		<Answer Text="Alaska" Value="710,231" />
+		<Answer Text="North Dakota" Value="672,591" />
+		<Answer Text="Vermont" Value="625,741" />
+		<Answer Text="Wyoming" Value="563,626" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="state-commuters" Tags="U.S.A.;Transportation" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state had a higher percentage of adults commuting to work by public transportation in 2010, out of all commuting workers?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" of commuting workers">
 		<Answer Text="New York" Value="26.7%" />
@@ -292,71 +292,71 @@
 		<Answer Text="Tellurium" Value="127.6" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="country-area" Tags="International;Area" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these countries has more inland area as of 2011?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" km^2">
-		<Answer Text="Russia" Value="17,098,242.00" />
-		<Answer Text="Canada" Value="9,984,670.00" />
-		<Answer Text="United States" Value="9,826,675.00" />
-		<Answer Text="China" Value="9,640,005.00" />
-		<Answer Text="Brazil" Value="8,514,877.00" />
-		<Answer Text="Australia" Value="7,692,024.00" />
-		<Answer Text="India" Value="3,166,414.00" />
-		<Answer Text="Argentina" Value="2,780,400.00" />
-		<Answer Text="Kazakhstan" Value="2,724,900.00" />
-		<Answer Text="Algeria" Value="2,381,741.00" />
-		<Answer Text="Democratic Republic of the Congo" Value="2,344,858.00" />
-		<Answer Text="Saudi Arabia" Value="2,250,000.00" />
-		<Answer Text="Greenland" Value="2,166,086.00" />
-		<Answer Text="Mexico" Value="1,964,375.00" />
-		<Answer Text="Indonesia" Value="1,910,931.00" />
-		<Answer Text="Sudan" Value="1,861,484.00" />
-		<Answer Text="Libya" Value="1,759,540.00" />
-		<Answer Text="Iran" Value="1,648,195.00" />
-		<Answer Text="Mongolia" Value="1,564,110.00" />
-		<Answer Text="Peru" Value="1,285,216.00" />
-		<Answer Text="Chad" Value="1,284,000.00" />
-		<Answer Text="Niger" Value="1,267,000.00" />
-		<Answer Text="Angola" Value="1,246,700.00" />
-		<Answer Text="Mali" Value="1,240,192.00" />
-		<Answer Text="South Africa" Value="1,221,037.00" />
-		<Answer Text="Colombia" Value="1,141,748.00" />
-		<Answer Text="Ethiopia" Value="1,104,300.00" />
-		<Answer Text="Bolivia" Value="1,098,581.00" />
-		<Answer Text="Mauritania" Value="1,025,520.00" />
-		<Answer Text="Egypt" Value="1,002,000.00" />
-		<Answer Text="Tanzania" Value="945,087.00" />
-		<Answer Text="Nigeria" Value="923,768.00" />
-		<Answer Text="Venezuela" Value="912,050.00" />
-		<Answer Text="Namibia" Value="824,268.00" />
-		<Answer Text="Mozambique" Value="801,590.00" />
-		<Answer Text="Pakistan" Value="796,095.00" />
-		<Answer Text="Turkey" Value="783,562.00" />
-		<Answer Text="Chile" Value="756,102.00" />
-		<Answer Text="Zambia" Value="752,612.00" />
-		<Answer Text="Burma" Value="676,578.00" />
-		<Answer Text="Afghanistan" Value="652,230.00" />
-		<Answer Text="Somalia" Value="637,657.00" />
-		<Answer Text="Central African Republic" Value="622,984.00" />
-		<Answer Text="South Sudan" Value="619,745.00" />
-		<Answer Text="Ukraine" Value="603,500.00" />
-		<Answer Text="Madagascar" Value="587,041.00" />
-		<Answer Text="Botswana" Value="582,000.00" />
-		<Answer Text="Kenya" Value="580,367.00" />
-		<Answer Text="France" Value="551,500.00" />
-		<Answer Text="Yemen" Value="527,968.00" />
-		<Answer Text="Thailand" Value="513,120.00" />
-		<Answer Text="Spain" Value="505,370.00" />
-		<Answer Text="Turkmenistan" Value="488,100.00" />
-		<Answer Text="Cameroon" Value="475,442.00" />
-		<Answer Text="Papua New Guinea" Value="462,840.00" />
-		<Answer Text="Sweden" Value="450,295.00" />
-		<Answer Text="Uzbekistan" Value="447,400.00" />
-		<Answer Text="Morocco" Value="446,550.00" />
-		<Answer Text="Iraq" Value="438,317.00" />
-		<Answer Text="Paraguay" Value="406,752.00" />
-		<Answer Text="Zimbabwe" Value="390,757.00" />
-		<Answer Text="Japan" Value="377,930.00" />
-		<Answer Text="Germany" Value="357,114.00" />
-		<Answer Text="Republic of the Congo" Value="342,000.00" />
-		<Answer Text="Finland" Value="338,424.00" />
+		<Answer Text="Russia" Value="17,098,242" />
+		<Answer Text="Canada" Value="9,984,670" />
+		<Answer Text="United States" Value="9,826,675" />
+		<Answer Text="China" Value="9,640,005" />
+		<Answer Text="Brazil" Value="8,514,877" />
+		<Answer Text="Australia" Value="7,692,024" />
+		<Answer Text="India" Value="3,166,414" />
+		<Answer Text="Argentina" Value="2,780,400" />
+		<Answer Text="Kazakhstan" Value="2,724,900" />
+		<Answer Text="Algeria" Value="2,381,741" />
+		<Answer Text="Democratic Republic of the Congo" Value="2,344,858" />
+		<Answer Text="Saudi Arabia" Value="2,250,000" />
+		<Answer Text="Greenland" Value="2,166,086" />
+		<Answer Text="Mexico" Value="1,964,375" />
+		<Answer Text="Indonesia" Value="1,910,931" />
+		<Answer Text="Sudan" Value="1,861,484" />
+		<Answer Text="Libya" Value="1,759,540" />
+		<Answer Text="Iran" Value="1,648,195" />
+		<Answer Text="Mongolia" Value="1,564,110" />
+		<Answer Text="Peru" Value="1,285,216" />
+		<Answer Text="Chad" Value="1,284,000" />
+		<Answer Text="Niger" Value="1,267,000" />
+		<Answer Text="Angola" Value="1,246,700" />
+		<Answer Text="Mali" Value="1,240,192" />
+		<Answer Text="South Africa" Value="1,221,037" />
+		<Answer Text="Colombia" Value="1,141,748" />
+		<Answer Text="Ethiopia" Value="1,104,300" />
+		<Answer Text="Bolivia" Value="1,098,581" />
+		<Answer Text="Mauritania" Value="1,025,520" />
+		<Answer Text="Egypt" Value="1,002,000" />
+		<Answer Text="Tanzania" Value="945,087" />
+		<Answer Text="Nigeria" Value="923,768" />
+		<Answer Text="Venezuela" Value="912,050" />
+		<Answer Text="Namibia" Value="824,268" />
+		<Answer Text="Mozambique" Value="801,590" />
+		<Answer Text="Pakistan" Value="796,095" />
+		<Answer Text="Turkey" Value="783,562" />
+		<Answer Text="Chile" Value="756,102" />
+		<Answer Text="Zambia" Value="752,612" />
+		<Answer Text="Burma" Value="676,578" />
+		<Answer Text="Afghanistan" Value="652,230" />
+		<Answer Text="Somalia" Value="637,657" />
+		<Answer Text="Central African Republic" Value="622,984" />
+		<Answer Text="South Sudan" Value="619,745" />
+		<Answer Text="Ukraine" Value="603,500" />
+		<Answer Text="Madagascar" Value="587,041" />
+		<Answer Text="Botswana" Value="582,000" />
+		<Answer Text="Kenya" Value="580,367" />
+		<Answer Text="France" Value="551,500" />
+		<Answer Text="Yemen" Value="527,968" />
+		<Answer Text="Thailand" Value="513,120" />
+		<Answer Text="Spain" Value="505,370" />
+		<Answer Text="Turkmenistan" Value="488,100" />
+		<Answer Text="Cameroon" Value="475,442" />
+		<Answer Text="Papua New Guinea" Value="462,840" />
+		<Answer Text="Sweden" Value="450,295" />
+		<Answer Text="Uzbekistan" Value="447,400" />
+		<Answer Text="Morocco" Value="446,550" />
+		<Answer Text="Iraq" Value="438,317" />
+		<Answer Text="Paraguay" Value="406,752" />
+		<Answer Text="Zimbabwe" Value="390,757" />
+		<Answer Text="Japan" Value="377,930" />
+		<Answer Text="Germany" Value="357,114" />
+		<Answer Text="Republic of the Congo" Value="342,000" />
+		<Answer Text="Finland" Value="338,424" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="geo-era" Tags="Science::Geology" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these geological eras started first?" AdjacentWithin="-1" InfoPrefix="about " InfoSuffix=" million years ago">
 		<Answer Text="Cryptic" Value="4570" />
@@ -756,51 +756,51 @@
 		<Answer Text="Alaska" Value="1.2" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="state-peak-elevation" Tags="U.S.A.;Science::Geography" Used="y" Type="Sorted" Weight="1" QuestionText="Which US state has a higher peak elevation?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" ft">
-		<Answer Text="Alaska" Value="20,320.00" />
-		<Answer Text="California" Value="14,505.00" />
-		<Answer Text="Colorado" Value="14,440.00" />
-		<Answer Text="Washington" Value="14,417.00" />
-		<Answer Text="Wyoming" Value="13,809.00" />
-		<Answer Text="Hawai?i" Value="13,803.00" />
-		<Answer Text="Utah" Value="13,518.00" />
-		<Answer Text="New Mexico" Value="13,167.00" />
-		<Answer Text="Nevada" Value="13,147.00" />
-		<Answer Text="Montana" Value="12,807.00" />
-		<Answer Text="Idaho" Value="12,668.00" />
-		<Answer Text="Arizona" Value="12,637.00" />
-		<Answer Text="Oregon" Value="11,249.00" />
-		<Answer Text="Texas" Value="8751" />
-		<Answer Text="South Dakota" Value="7244" />
-		<Answer Text="North Carolina" Value="6684" />
-		<Answer Text="Tennessee" Value="6643" />
-		<Answer Text="New Hampshire" Value="6288" />
-		<Answer Text="Virginia" Value="5729" />
-		<Answer Text="Nebraska" Value="5427" />
-		<Answer Text="New York" Value="5343" />
-		<Answer Text="Maine" Value="5270" />
-		<Answer Text="Oklahoma" Value="4975" />
-		<Answer Text="West Virginia" Value="4862" />
-		<Answer Text="Georgia" Value="4784" />
-		<Answer Text="Vermont" Value="4395" />
-		<Answer Text="Kentucky" Value="4145" />
-		<Answer Text="Kansas" Value="4041" />
-		<Answer Text="South Carolina" Value="3560" />
-		<Answer Text="North Dakota" Value="3508" />
-		<Answer Text="Massachusetts" Value="3489" />
-		<Answer Text="Maryland" Value="3360" />
-		<Answer Text="Pennsylvania" Value="3213" />
-		<Answer Text="Arkansas" Value="2753" />
-		<Answer Text="Alabama" Value="2413" />
-		<Answer Text="Connecticut" Value="2379" />
-		<Answer Text="Minnesota" Value="2302" />
-		<Answer Text="Michigan" Value="1979" />
-		<Answer Text="Wisconsin" Value="1951" />
-		<Answer Text="New Jersey" Value="1802" />
-		<Answer Text="Missouri" Value="1772" />
-		<Answer Text="Iowa" Value="1671" />
-		<Answer Text="Ohio" Value="1549" />
-		<Answer Text="Indiana" Value="1257" />
-		<Answer Text="Illinois" Value="1235" />
+		<Answer Text="Alaska" Value="20,320" />
+		<Answer Text="California" Value="14,505" />
+		<Answer Text="Colorado" Value="14,440" />
+		<Answer Text="Washington" Value="14,417" />
+		<Answer Text="Wyoming" Value="13,809" />
+		<Answer Text="Hawai?i" Value="13,803" />
+		<Answer Text="Utah" Value="13,518" />
+		<Answer Text="New Mexico" Value="13,167" />
+		<Answer Text="Nevada" Value="13,147" />
+		<Answer Text="Montana" Value="12,807" />
+		<Answer Text="Idaho" Value="12,668" />
+		<Answer Text="Arizona" Value="12,637" />
+		<Answer Text="Oregon" Value="11,249" />
+		<Answer Text="Texas" Value="8,751" />
+		<Answer Text="South Dakota" Value="7,244" />
+		<Answer Text="North Carolina" Value="6,684" />
+		<Answer Text="Tennessee" Value="6,643" />
+		<Answer Text="New Hampshire" Value="6,288" />
+		<Answer Text="Virginia" Value="5,729" />
+		<Answer Text="Nebraska" Value="5,427" />
+		<Answer Text="New York" Value="5,343" />
+		<Answer Text="Maine" Value="5,270" />
+		<Answer Text="Oklahoma" Value="4,975" />
+		<Answer Text="West Virginia" Value="4,862" />
+		<Answer Text="Georgia" Value="4,784" />
+		<Answer Text="Vermont" Value="4,395" />
+		<Answer Text="Kentucky" Value="4,145" />
+		<Answer Text="Kansas" Value="4,041" />
+		<Answer Text="South Carolina" Value="3,560" />
+		<Answer Text="North Dakota" Value="3,508" />
+		<Answer Text="Massachusetts" Value="3,489" />
+		<Answer Text="Maryland" Value="3,360" />
+		<Answer Text="Pennsylvania" Value="3,213" />
+		<Answer Text="Arkansas" Value="2,753" />
+		<Answer Text="Alabama" Value="2,413" />
+		<Answer Text="Connecticut" Value="2,379" />
+		<Answer Text="Minnesota" Value="2,302" />
+		<Answer Text="Michigan" Value="1,979" />
+		<Answer Text="Wisconsin" Value="1,951" />
+		<Answer Text="New Jersey" Value="1,802" />
+		<Answer Text="Missouri" Value="1,772" />
+		<Answer Text="Iowa" Value="1,671" />
+		<Answer Text="Ohio" Value="1,549" />
+		<Answer Text="Indiana" Value="1,257" />
+		<Answer Text="Illinois" Value="1,235" />
 		<Answer Text="Rhode Island" Value="811" />
 		<Answer Text="Mississippi" Value="807" />
 		<Answer Text="Louisiana" Value="535" />
@@ -809,12 +809,12 @@
 		<Answer Text="Florida" Value="345" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="state-vehicles-percap" Tags="U.S.A.;Transportation" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these US states has more road vehicles per capita?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" vehicles per 1000 people">
-		<Answer Text="Wyoming" Value="1140" />
-		<Answer Text="Montana" Value="1120" />
-		<Answer Text="North Dakota" Value="1080" />
-		<Answer Text="Iowa" Value="1050" />
-		<Answer Text="Alabama" Value="1030" />
-		<Answer Text="Nebraska" Value="1000" />
+		<Answer Text="Wyoming" Value="1,140" />
+		<Answer Text="Montana" Value="1,120" />
+		<Answer Text="North Dakota" Value="1,080" />
+		<Answer Text="Iowa" Value="1,050" />
+		<Answer Text="Alabama" Value="1,030" />
+		<Answer Text="Nebraska" Value="1,000" />
 		<Answer Text="Alaska" Value="960" />
 		<Answer Text="Delaware" Value="950" />
 		<Answer Text="South Dakota" Value="950" />
@@ -928,17 +928,17 @@
 		<Answer Text="Holmium" Value="0.165" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="chem-abundant" Tags="Science::Chemistry" Used="y" Type="Sorted" Weight="1" QuestionText="Which of these elements, each present in the Earth's crust at more than 0.1 mg/kg, is more abundant there?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" mg/kg">
-		<Answer Text="Oxygen" Value="461,000.00" />
-		<Answer Text="Silicon" Value="282,000.00" />
-		<Answer Text="Aluminium" Value="82,300.00" />
-		<Answer Text="Iron" Value="56,300.00" />
-		<Answer Text="Calcium" Value="41,500.00" />
-		<Answer Text="Sodium" Value="23,600.00" />
-		<Answer Text="Magnesium" Value="23,300.00" />
-		<Answer Text="Potassium" Value="20,900.00" />
-		<Answer Text="Titanium" Value="5650" />
-		<Answer Text="Hydrogen" Value="1400" />
-		<Answer Text="Phosphorus" Value="1050" />
+		<Answer Text="Oxygen" Value="461,000" />
+		<Answer Text="Silicon" Value="282,000" />
+		<Answer Text="Aluminium" Value="82,300" />
+		<Answer Text="Iron" Value="56,300" />
+		<Answer Text="Calcium" Value="41,500" />
+		<Answer Text="Sodium" Value="23,600" />
+		<Answer Text="Magnesium" Value="23,300" />
+		<Answer Text="Potassium" Value="20,900" />
+		<Answer Text="Titanium" Value="5,650" />
+		<Answer Text="Hydrogen" Value="1,400" />
+		<Answer Text="Phosphorus" Value="1,050" />
 		<Answer Text="Manganese" Value="950" />
 		<Answer Text="Fluorine" Value="585" />
 		<Answer Text="Barium" Value="425" />
@@ -1740,91 +1740,91 @@
 		<Answer Text="Cars 2" Value="$207" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="island-size" Tags="Science::Geography" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these islands is one of the five largest in the world.  Which one is bigger? " AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" km^2">
-		<Answer Text="Greenland" Value="2,130,800.00" />
-		<Answer Text="New Guinea" Value="785,753.00" />
-		<Answer Text="Borneo" Value="748,168.00" />
-		<Answer Text="Madagascar" Value="587,713.00" />
-		<Answer Text="Baffin Island" Value="507,451.00" />
+		<Answer Text="Greenland" Value="2,130,800" />
+		<Answer Text="New Guinea" Value="785,753" />
+		<Answer Text="Borneo" Value="748,168" />
+		<Answer Text="Madagascar" Value="587,713" />
+		<Answer Text="Baffin Island" Value="507,451" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="us-city-population" Tags="U.S.A.;Population" Used="y" Type="Sorted" Weight="1" QuestionText="By population in 2011, each of these was one of the 100 largest US cities.  Which one was larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" people">
-		<Answer Text="New York" Value="8,175,133.00" />
-		<Answer Text="Los Angeles" Value="3,792,621.00" />
-		<Answer Text="Chicago" Value="2,695,598.00" />
-		<Answer Text="Houston" Value="2,099,451.00" />
-		<Answer Text="Philadelphia" Value="1,526,006.00" />
-		<Answer Text="Phoenix" Value="1,445,632.00" />
-		<Answer Text="San Antonio" Value="1,327,407.00" />
-		<Answer Text="San Diego" Value="1,307,402.00" />
-		<Answer Text="Dallas" Value="1,197,816.00" />
-		<Answer Text="San Jose" Value="945,942.00" />
-		<Answer Text="Jacksonville" Value="821,784.00" />
-		<Answer Text="Indianapolis" Value="820,445.00" />
-		<Answer Text="San Francisco" Value="805,235.00" />
-		<Answer Text="Austin" Value="790,390.00" />
-		<Answer Text="Columbus" Value="787,033.00" />
-		<Answer Text="Fort Worth" Value="741,206.00" />
-		<Answer Text="Charlotte" Value="731,424.00" />
-		<Answer Text="Detroit" Value="713,777.00" />
-		<Answer Text="El Paso" Value="649,121.00" />
-		<Answer Text="Memphis" Value="646,889.00" />
-		<Answer Text="Baltimore" Value="620,961.00" />
-		<Answer Text="Boston" Value="617,594.00" />
-		<Answer Text="Seattle" Value="608,660.00" />
-		<Answer Text="Washington" Value="601,723.00" />
-		<Answer Text="Nashville" Value="601,222.00" />
-		<Answer Text="Denver" Value="600,158.00" />
-		<Answer Text="Louisville" Value="597,337.00" />
-		<Answer Text="Milwaukee" Value="594,833.00" />
-		<Answer Text="Portland" Value="583,776.00" />
-		<Answer Text="Las Vegas" Value="583,756.00" />
-		<Answer Text="Oklahoma City" Value="579,999.00" />
-		<Answer Text="Albuquerque" Value="545,852.00" />
-		<Answer Text="Tucson" Value="520,116.00" />
-		<Answer Text="Fresno" Value="494,665.00" />
-		<Answer Text="Sacramento" Value="466,488.00" />
-		<Answer Text="Long Beach" Value="462,257.00" />
-		<Answer Text="Kansas City" Value="459,787.00" />
-		<Answer Text="Mesa" Value="439,041.00" />
-		<Answer Text="Virginia Beach" Value="437,994.00" />
-		<Answer Text="Atlanta" Value="420,003.00" />
-		<Answer Text="Colorado Springs" Value="416,427.00" />
-		<Answer Text="Omaha" Value="408,958.00" />
-		<Answer Text="Raleigh" Value="403,892.00" />
-		<Answer Text="Miami" Value="399,457.00" />
-		<Answer Text="Cleveland" Value="396,815.00" />
-		<Answer Text="Tulsa" Value="391,906.00" />
-		<Answer Text="Oakland" Value="390,724.00" />
-		<Answer Text="Minneapolis" Value="382,578.00" />
-		<Answer Text="Wichita" Value="382,368.00" />
-		<Answer Text="Arlington" Value="365,438.00" />
-		<Answer Text="Bakersfield" Value="347,483.00" />
-		<Answer Text="New Orleans" Value="343,829.00" />
-		<Answer Text="Honolulu" Value="337,256.00" />
-		<Answer Text="Anaheim" Value="336,265.00" />
-		<Answer Text="Tampa" Value="335,709.00" />
-		<Answer Text="Aurora" Value="325,078.00" />
-		<Answer Text="Santa Ana" Value="324,528.00" />
-		<Answer Text="St. Louis" Value="319,294.00" />
-		<Answer Text="Pittsburgh" Value="305,704.00" />
-		<Answer Text="Corpus Christi" Value="305,215.00" />
-		<Answer Text="Riverside" Value="303,871.00" />
-		<Answer Text="Cincinnati" Value="296,943.00" />
-		<Answer Text="Lexington" Value="295,803.00" />
-		<Answer Text="Anchorage" Value="291,826.00" />
-		<Answer Text="Stockton" Value="291,707.00" />
+		<Answer Text="New York" Value="8,175,133" />
+		<Answer Text="Los Angeles" Value="3,792,621" />
+		<Answer Text="Chicago" Value="2,695,598" />
+		<Answer Text="Houston" Value="2,099,451" />
+		<Answer Text="Philadelphia" Value="1,526,006" />
+		<Answer Text="Phoenix" Value="1,445,632" />
+		<Answer Text="San Antonio" Value="1,327,407" />
+		<Answer Text="San Diego" Value="1,307,402" />
+		<Answer Text="Dallas" Value="1,197,816" />
+		<Answer Text="San Jose" Value="945,942" />
+		<Answer Text="Jacksonville" Value="821,784" />
+		<Answer Text="Indianapolis" Value="820,445" />
+		<Answer Text="San Francisco" Value="805,235" />
+		<Answer Text="Austin" Value="790,390" />
+		<Answer Text="Columbus" Value="787,033" />
+		<Answer Text="Fort Worth" Value="741,206" />
+		<Answer Text="Charlotte" Value="731,424" />
+		<Answer Text="Detroit" Value="713,777" />
+		<Answer Text="El Paso" Value="649,121" />
+		<Answer Text="Memphis" Value="646,889" />
+		<Answer Text="Baltimore" Value="620,961" />
+		<Answer Text="Boston" Value="617,594" />
+		<Answer Text="Seattle" Value="608,660" />
+		<Answer Text="Washington" Value="601,723" />
+		<Answer Text="Nashville" Value="601,222" />
+		<Answer Text="Denver" Value="600,158" />
+		<Answer Text="Louisville" Value="597,337" />
+		<Answer Text="Milwaukee" Value="594,833" />
+		<Answer Text="Portland" Value="583,776" />
+		<Answer Text="Las Vegas" Value="583,756" />
+		<Answer Text="Oklahoma City" Value="579,999" />
+		<Answer Text="Albuquerque" Value="545,852" />
+		<Answer Text="Tucson" Value="520,116" />
+		<Answer Text="Fresno" Value="494,665" />
+		<Answer Text="Sacramento" Value="466,488" />
+		<Answer Text="Long Beach" Value="462,257" />
+		<Answer Text="Kansas City" Value="459,787" />
+		<Answer Text="Mesa" Value="439,041" />
+		<Answer Text="Virginia Beach" Value="437,994" />
+		<Answer Text="Atlanta" Value="420,003" />
+		<Answer Text="Colorado Springs" Value="416,427" />
+		<Answer Text="Omaha" Value="408,958" />
+		<Answer Text="Raleigh" Value="403,892" />
+		<Answer Text="Miami" Value="399,457" />
+		<Answer Text="Cleveland" Value="396,815" />
+		<Answer Text="Tulsa" Value="391,906" />
+		<Answer Text="Oakland" Value="390,724" />
+		<Answer Text="Minneapolis" Value="382,578" />
+		<Answer Text="Wichita" Value="382,368" />
+		<Answer Text="Arlington" Value="365,438" />
+		<Answer Text="Bakersfield" Value="347,483" />
+		<Answer Text="New Orleans" Value="343,829" />
+		<Answer Text="Honolulu" Value="337,256" />
+		<Answer Text="Anaheim" Value="336,265" />
+		<Answer Text="Tampa" Value="335,709" />
+		<Answer Text="Aurora" Value="325,078" />
+		<Answer Text="Santa Ana" Value="324,528" />
+		<Answer Text="St. Louis" Value="319,294" />
+		<Answer Text="Pittsburgh" Value="305,704" />
+		<Answer Text="Corpus Christi" Value="305,215" />
+		<Answer Text="Riverside" Value="303,871" />
+		<Answer Text="Cincinnati" Value="296,943" />
+		<Answer Text="Lexington" Value="295,803" />
+		<Answer Text="Anchorage" Value="291,826" />
+		<Answer Text="Stockton" Value="291,707" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="lakes-largest-volume" Tags="Science::Geography" Used="y" Type="Sorted" Weight="1" QuestionText="By volume, each of these is one of the world's 20 largest lakes.  Which one is larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="km^3">
-		<Answer Text="Baikal" Value="23,600.00" />
-		<Answer Text="Tanganyika" Value="18,900.00" />
-		<Answer Text="Superior" Value="12,100.00" />
-		<Answer Text="Michigan-Huron" Value="8458" />
-		<Answer Text="Malawi" Value="8400" />
-		<Answer Text="Vostok" Value="5400" />
-		<Answer Text="Victoria" Value="2750" />
-		<Answer Text="Great Bear Lake" Value="2236" />
-		<Answer Text="Great Slave Lake" Value="2090" />
-		<Answer Text="Issyk-Kul" Value="1738" />
-		<Answer Text="Ontario" Value="1639" />
+		<Answer Text="Baikal" Value="23,600" />
+		<Answer Text="Tanganyika" Value="18,900" />
+		<Answer Text="Superior" Value="12,100" />
+		<Answer Text="Michigan-Huron" Value="8,458" />
+		<Answer Text="Malawi" Value="8,400" />
+		<Answer Text="Vostok" Value="5,400" />
+		<Answer Text="Victoria" Value="2,750" />
+		<Answer Text="Great Bear Lake" Value="2,236" />
+		<Answer Text="Great Slave Lake" Value="2,090" />
+		<Answer Text="Issyk-Kul" Value="1,738" />
+		<Answer Text="Ontario" Value="1,639" />
 		<Answer Text="Ladoga" Value="908" />
 		<Answer Text="Titicaca" Value="893" />
 		<Answer Text="Erie" Value="489" />
@@ -1986,26 +1986,26 @@
 		<Answer Text="Chevrolet Cruze" Value="232" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="us-college-enrollment" Tags="U.S.A.;Education" Used="y" Type="Sorted" Weight="1" QuestionText="Each of these was among the 20 largest US colleges by total enrollment in fall 2010.  Which one had a higher enrollment?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" students">
-		<Answer Text="University of Phoenix" Value="532,672.00" />
-		<Answer Text="Community College of the Air Force" Value="324,573.00" />
-		<Answer Text="Kaplan University" Value="96,166.00" />
-		<Answer Text="Miami Dade College" Value="96,123.00" />
-		<Answer Text="Houston Community College" Value="78,780.00" />
-		<Answer Text="Ashford University" Value="78,353.00" />
-		<Answer Text="Arizona State University" Value="75,341.00" />
-		<Answer Text="Strayer University" Value="74,713.00" />
-		<Answer Text="Lone Star College System" Value="69,340.00" />
-		<Answer Text="Northern Virginia Community College" Value="67,175.00" />
-		<Answer Text="University of Minnesota, Twin Cities" Value="65,006.00" />
-		<Answer Text="Austin Community College District" Value="64,276.00" />
-		<Answer Text="The Ohio State University" Value="60,035.00" />
-		<Answer Text="Tarrant County College District" Value="62,488.00" />
-		<Answer Text="College of Southern Nevada" Value="59,691.00" />
-		<Answer Text="University of Florida" Value="59,614.00" />
-		<Answer Text="University of Central Florida" Value="59,360.00" />
-		<Answer Text="American River College" Value="57,959.00" />
-		<Answer Text="Pima Community College" Value="57,924.00" />
-		<Answer Text="East Los Angeles College" Value="57,340.00" />
+		<Answer Text="University of Phoenix" Value="532,672" />
+		<Answer Text="Community College of the Air Force" Value="324,573" />
+		<Answer Text="Kaplan University" Value="96,166" />
+		<Answer Text="Miami Dade College" Value="96,123" />
+		<Answer Text="Houston Community College" Value="78,780" />
+		<Answer Text="Ashford University" Value="78,353" />
+		<Answer Text="Arizona State University" Value="75,341" />
+		<Answer Text="Strayer University" Value="74,713" />
+		<Answer Text="Lone Star College System" Value="69,340" />
+		<Answer Text="Northern Virginia Community College" Value="67,175" />
+		<Answer Text="University of Minnesota, Twin Cities" Value="65,006" />
+		<Answer Text="Austin Community College District" Value="64,276" />
+		<Answer Text="The Ohio State University" Value="60,035" />
+		<Answer Text="Tarrant County College District" Value="62,488" />
+		<Answer Text="College of Southern Nevada" Value="59,691" />
+		<Answer Text="University of Florida" Value="59,614" />
+		<Answer Text="University of Central Florida" Value="59,360" />
+		<Answer Text="American River College" Value="57,959" />
+		<Answer Text="Pima Community College" Value="57,924" />
+		<Answer Text="East Los Angeles College" Value="57,340" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="us-city-income-per-capita" Tags="U.S.A.;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="By income per capita in 2000, each of these was among the 100 richest US towns or cities with at least 1000 households.   Which one had a higher income per capita?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Palm Beach, Florida" Value="$109,219" />
@@ -2074,72 +2074,72 @@
 		<Answer Text="Inverness, Illinois" Value="$73,271" />
 		<Answer Text="Harding Township, New Jersey" Value="$72,689" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="country-export-value" Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="By dollar-value of exports in 2011, each of these was among the 100 most export productive countries in the world.  Which one ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
-		<Answer Text="People's Republic of China" Value="$1,898,000,000,000" />
-		<Answer Text="United States" Value="$1,511,000,000,000" />
-		<Answer Text="Germany" Value="$1,408,000,000,000" />
-		<Answer Text="Japan" Value="$800,800,000,000" />
-		<Answer Text="France" Value="$578,400,000,000" />
-		<Answer Text="Netherlands" Value="$576,900,000,000" />
-		<Answer Text="South Korea" Value="$556,500,000,000" />
-		<Answer Text="Italy" Value="$522,000,000,000" />
-		<Answer Text="Russia" Value="$498,600,000,000" />
-		<Answer Text="United Kingdom" Value="$495,400,000,000" />
-		<Answer Text="Canada" Value="$450,600,000,000" />
-		<Answer Text="Hong Kong" Value="$427,900,000,000" />
-		<Answer Text="Singapore" Value="$409,200,000,000" />
-		<Answer Text="Saudi Arabia" Value="$350,700,000,000" />
-		<Answer Text="Mexico" Value="$336,300,000,000" />
-		<Answer Text="Belgium" Value="$332,000,000,000" />
-		<Answer Text="Spain" Value="$330,600,000,000" />
-		<Answer Text="Taiwan" Value="$325,100,000,000" />
-		<Answer Text="Switzerland" Value="$308,300,000,000" />
-		<Answer Text="India" Value="$303,700,000,000" />
-		<Answer Text="Australia" Value="$266,000,000,000" />
-		<Answer Text="United Arab Emirates" Value="$265,300,000,000" />
-		<Answer Text="Brazil" Value="$250,800,000,000" />
-		<Answer Text="Thailand" Value="$244,400,000,000" />
-		<Answer Text="Malaysia" Value="$212,700,000,000" />
-		<Answer Text="Indonesia" Value="$208,900,000,000" />
-		<Answer Text="Sweden" Value="$204,200,000,000" />
-		<Answer Text="Poland" Value="$197,100,000,000" />
-		<Answer Text="Austria" Value="$180,700,000,000" />
-		<Answer Text="Norway" Value="$159,800,000,000" />
-		<Answer Text="Czech Republic" Value="$146,700,000,000" />
-		<Answer Text="Turkey" Value="$133,000,000,000" />
-		<Answer Text="Iran" Value="$131,800,000,000" />
-		<Answer Text="Ireland" Value="$124,300,000,000" />
-		<Answer Text="Denmark" Value="$111,100,000,000" />
-		<Answer Text="Qatar" Value="$104,300,000,000" />
-		<Answer Text="Hungary" Value="$103,100,000,000" />
-		<Answer Text="Nigeria" Value="$101,100,000,000" />
-		<Answer Text="Vietnam" Value="$96,300,000,000" />
-		<Answer Text="Kuwait" Value="$94,470,000,000" />
-		<Answer Text="South Africa" Value="$94,210,000,000" />
-		<Answer Text="Venezuela" Value="$92,600,000,000" />
-		<Answer Text="Kazakhstan" Value="$88,890,000,000" />
-		<Answer Text="Chile" Value="$86,130,000,000" />
-		<Answer Text="Finland" Value="$85,400,000,000" />
-		<Answer Text="Argentina" Value="$83,710,000,000" />
-		<Answer Text="Algeria" Value="$78,510,000,000" />
-		<Answer Text="Iraq" Value="$78,380,000,000" />
-		<Answer Text="Puerto Rico" Value="$75,574,000,000" />
-		<Answer Text="Slovakia" Value="$75,300,000,000" />
-		<Answer Text="Angola" Value="$65,630,000,000" />
-		<Answer Text="Romania" Value="$62,500,000,000" />
-		<Answer Text="Israel" Value="$62,500,000,000" />
-		<Answer Text="Ukraine" Value="$60,670,000,000" />
-		<Answer Text="Colombia" Value="$56,500,000,000" />
-		<Answer Text="Portugal" Value="$55,800,000,000" />
-		<Answer Text="Philippines" Value="$54,170,000,000" />
-		<Answer Text="Peru" Value="$46,270,000,000" />
-		<Answer Text="Oman" Value="$43,530,000,000" />
-		<Answer Text="New Zealand" Value="$40,920,000,000" />
-		<Answer Text="Belarus" Value="$40,000,000,000" />
-		<Answer Text="Slovenia" Value="$28,960,000,000" />
-		<Answer Text="Egypt" Value="$27,960,000,000" />
-		<Answer Text="Greece" Value="$26,640,000,000" />
-		<Answer Text="Lithuania" Value="$26,530,000,000" />
+	<QuestionGenerator Id="country-export-value" Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="By dollar-value of exports in 2011, each of these was among the 100 most export productive countries in the world.  Which one ranked higher?" AdjacentWithin="-1" InfoPrefix="$" InfoSuffix=" million">
+		<Answer Text="People's Republic of China" Value="1,898,000" />
+		<Answer Text="United States" Value="1,511,000" />
+		<Answer Text="Germany" Value="1,408,000" />
+		<Answer Text="Japan" Value="800,800" />
+		<Answer Text="France" Value="578,400" />
+		<Answer Text="Netherlands" Value="576,900" />
+		<Answer Text="South Korea" Value="556,500" />
+		<Answer Text="Italy" Value="522,000" />
+		<Answer Text="Russia" Value="498,600" />
+		<Answer Text="United Kingdom" Value="495,400" />
+		<Answer Text="Canada" Value="450,600" />
+		<Answer Text="Hong Kong" Value="427,900" />
+		<Answer Text="Singapore" Value="409,200" />
+		<Answer Text="Saudi Arabia" Value="350,700" />
+		<Answer Text="Mexico" Value="336,300" />
+		<Answer Text="Belgium" Value="332,000" />
+		<Answer Text="Spain" Value="330,600" />
+		<Answer Text="Taiwan" Value="325,100" />
+		<Answer Text="Switzerland" Value="308,300" />
+		<Answer Text="India" Value="303,700" />
+		<Answer Text="Australia" Value="266,000" />
+		<Answer Text="United Arab Emirates" Value="265,300" />
+		<Answer Text="Brazil" Value="250,800" />
+		<Answer Text="Thailand" Value="244,400" />
+		<Answer Text="Malaysia" Value="212,700" />
+		<Answer Text="Indonesia" Value="208,900" />
+		<Answer Text="Sweden" Value="204,200" />
+		<Answer Text="Poland" Value="197,100" />
+		<Answer Text="Austria" Value="180,700" />
+		<Answer Text="Norway" Value="159,800" />
+		<Answer Text="Czech Republic" Value="146,700" />
+		<Answer Text="Turkey" Value="133,000" />
+		<Answer Text="Iran" Value="131,800" />
+		<Answer Text="Ireland" Value="124,300" />
+		<Answer Text="Denmark" Value="111,100" />
+		<Answer Text="Qatar" Value="104,300" />
+		<Answer Text="Hungary" Value="103,100" />
+		<Answer Text="Nigeria" Value="101,100" />
+		<Answer Text="Vietnam" Value="96,300" />
+		<Answer Text="Kuwait" Value="94,470" />
+		<Answer Text="South Africa" Value="94,210" />
+		<Answer Text="Venezuela" Value="92,600" />
+		<Answer Text="Kazakhstan" Value="88,890" />
+		<Answer Text="Chile" Value="86,130" />
+		<Answer Text="Finland" Value="85,400" />
+		<Answer Text="Argentina" Value="83,710" />
+		<Answer Text="Algeria" Value="78,510" />
+		<Answer Text="Iraq" Value="78,380" />
+		<Answer Text="Puerto Rico" Value="75,574" />
+		<Answer Text="Slovakia" Value="75,300" />
+		<Answer Text="Angola" Value="65,630" />
+		<Answer Text="Romania" Value="62,500" />
+		<Answer Text="Israel" Value="62,500" />
+		<Answer Text="Ukraine" Value="60,670" />
+		<Answer Text="Colombia" Value="56,500" />
+		<Answer Text="Portugal" Value="55,800" />
+		<Answer Text="Philippines" Value="54,170" />
+		<Answer Text="Peru" Value="46,270" />
+		<Answer Text="Oman" Value="43,530" />
+		<Answer Text="New Zealand" Value="40,920" />
+		<Answer Text="Belarus" Value="40,000" />
+		<Answer Text="Slovenia" Value="28,960" />
+		<Answer Text="Egypt" Value="27,960" />
+		<Answer Text="Greece" Value="26,640" />
+		<Answer Text="Lithuania" Value="26,530" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="us-college-rank" Tags="U.S.A.;Education" Used="y" Type="Sorted" Weight="1" QuestionText="In 2011, Forbes Magazine ranked each of the following among the best 100 colleges in the United States.  Which one did they rank higher?" AdjacentWithin="-1" InfoPrefix="ranked #" InfoSuffix="">
 		<Answer Text="Williams College" Value="1" />
@@ -2381,71 +2381,71 @@
 		<Answer Text="good" Value="65" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="country-richest" Tags="International;Economy" Used="y" Type="Sorted" Weight="1" QuestionText="By GDP per capita, each of these was among the world's 100 richest countries in 2011.  Which one ranked higher?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" USD">
-		<Answer Text="Monaco" Value="178,800.00" />
-		<Answer Text="Liechtenstein" Value="125,600.00" />
-		<Answer Text="Luxembourg" Value="125,000.00" />
-		<Answer Text="Norway" Value="102,200.00" />
-		<Answer Text="Qatar" Value="93,700.00" />
-		<Answer Text="Switzerland" Value="87,200.00" />
-		<Answer Text="United Arab Emirates" Value="69,600.00" />
-		<Answer Text="Australia" Value="69,200.00" />
-		<Answer Text="Kuwait" Value="65,900.00" />
-		<Answer Text="Sweden" Value="62,900.00" />
-		<Answer Text="Denmark" Value="59,800.00" />
-		<Answer Text="Jersey" Value="57,600.00" />
-		<Answer Text="Falkland Islands" Value="53,000.00" />
-		<Answer Text="Austria" Value="51,700.00" />
-		<Answer Text="Canada" Value="51,700.00" />
-		<Answer Text="Finland" Value="51,500.00" />
-		<Answer Text="Netherlands" Value="51,500.00" />
-		<Answer Text="Singapore" Value="50,800.00" />
-		<Answer Text="Belgium" Value="50,700.00" />
-		<Answer Text="San Marino" Value="50,600.00" />
-		<Answer Text="United States" Value="48,400.00" />
-		<Answer Text="Ireland" Value="47,500.00" />
-		<Answer Text="Cayman Islands" Value="47,000.00" />
-		<Answer Text="Japan" Value="45,900.00" />
-		<Answer Text="Faroe Islands" Value="45,300.00" />
-		<Answer Text="Iceland" Value="45,300.00" />
-		<Answer Text="Germany" Value="44,500.00" />
-		<Answer Text="Guernsey" Value="43,400.00" />
-		<Answer Text="France" Value="43,100.00" />
-		<Answer Text="United Kingdom" Value="39,600.00" />
-		<Answer Text="Macau" Value="39,500.00" />
-		<Answer Text="New Zealand" Value="39,300.00" />
-		<Answer Text="Virgin Islands, British" Value="38,900.00" />
-		<Answer Text="Brunei" Value="38,800.00" />
-		<Answer Text="Gibraltar" Value="38,800.00" />
-		<Answer Text="Greenland" Value="37,500.00" />
-		<Answer Text="Italy" Value="36,800.00" />
-		<Answer Text="Curaçao" Value="36,200.00" />
-		<Answer Text="European Union" Value="35,200.00" />
-		<Answer Text="Isle of Man" Value="34,200.00" />
-		<Answer Text="Hong Kong" Value="34,000.00" />
-		<Answer Text="Spain" Value="32,900.00" />
-		<Answer Text="Israel" Value="32,800.00" />
-		<Answer Text="Greece" Value="29,000.00" />
-		<Answer Text="Equatorial Guinea" Value="29,000.00" />
-		<Answer Text="Slovenia" Value="26,200.00" />
-		<Answer Text="Bahamas, The" Value="25,900.00" />
-		<Answer Text="French Polynesia" Value="24,300.00" />
-		<Answer Text="Korea, South" Value="23,900.00" />
-		<Answer Text="Puerto Rico" Value="23,500.00" />
-		<Answer Text="Aruba" Value="23,300.00" />
-		<Answer Text="Cyprus" Value="22,900.00" />
-		<Answer Text="Portugal" Value="22,500.00" />
-		<Answer Text="Oman" Value="22,100.00" />
-		<Answer Text="Sint Maarten" Value="21,900.00" />
-		<Answer Text="Taiwan" Value="21,900.00" />
-		<Answer Text="Bahrain" Value="21,700.00" />
-		<Answer Text="Czech Republic" Value="21,600.00" />
-		<Answer Text="Saudi Arabia" Value="21,400.00" />
-		<Answer Text="Malta" Value="21,300.00" />
-		<Answer Text="Trinidad and Tobago" Value="18,000.00" />
-		<Answer Text="Slovakia" Value="17,700.00" />
-		<Answer Text="Guam" Value="17,500.00" />
-		<Answer Text="Estonia" Value="17,500.00" />
-		<Answer Text="Barbados" Value="15,300.00" />
+		<Answer Text="Monaco" Value="178,800" />
+		<Answer Text="Liechtenstein" Value="125,600" />
+		<Answer Text="Luxembourg" Value="125,000" />
+		<Answer Text="Norway" Value="102,200" />
+		<Answer Text="Qatar" Value="93,700" />
+		<Answer Text="Switzerland" Value="87,200" />
+		<Answer Text="United Arab Emirates" Value="69,600" />
+		<Answer Text="Australia" Value="69,200" />
+		<Answer Text="Kuwait" Value="65,900" />
+		<Answer Text="Sweden" Value="62,900" />
+		<Answer Text="Denmark" Value="59,800" />
+		<Answer Text="Jersey" Value="57,600" />
+		<Answer Text="Falkland Islands" Value="53,000" />
+		<Answer Text="Austria" Value="51,700" />
+		<Answer Text="Canada" Value="51,700" />
+		<Answer Text="Finland" Value="51,500" />
+		<Answer Text="Netherlands" Value="51,500" />
+		<Answer Text="Singapore" Value="50,800" />
+		<Answer Text="Belgium" Value="50,700" />
+		<Answer Text="San Marino" Value="50,600" />
+		<Answer Text="United States" Value="48,400" />
+		<Answer Text="Ireland" Value="47,500" />
+		<Answer Text="Cayman Islands" Value="47,000" />
+		<Answer Text="Japan" Value="45,900" />
+		<Answer Text="Faroe Islands" Value="45,300" />
+		<Answer Text="Iceland" Value="45,300" />
+		<Answer Text="Germany" Value="44,500" />
+		<Answer Text="Guernsey" Value="43,400" />
+		<Answer Text="France" Value="43,100" />
+		<Answer Text="United Kingdom" Value="39,600" />
+		<Answer Text="Macau" Value="39,500" />
+		<Answer Text="New Zealand" Value="39,300" />
+		<Answer Text="Virgin Islands, British" Value="38,900" />
+		<Answer Text="Brunei" Value="38,800" />
+		<Answer Text="Gibraltar" Value="38,800" />
+		<Answer Text="Greenland" Value="37,500" />
+		<Answer Text="Italy" Value="36,800" />
+		<Answer Text="Curaçao" Value="36,200" />
+		<Answer Text="European Union" Value="35,200" />
+		<Answer Text="Isle of Man" Value="34,200" />
+		<Answer Text="Hong Kong" Value="34,000" />
+		<Answer Text="Spain" Value="32,900" />
+		<Answer Text="Israel" Value="32,800" />
+		<Answer Text="Greece" Value="29,000" />
+		<Answer Text="Equatorial Guinea" Value="29,000" />
+		<Answer Text="Slovenia" Value="26,200" />
+		<Answer Text="Bahamas, The" Value="25,900" />
+		<Answer Text="French Polynesia" Value="24,300" />
+		<Answer Text="Korea, South" Value="23,900" />
+		<Answer Text="Puerto Rico" Value="23,500" />
+		<Answer Text="Aruba" Value="23,300" />
+		<Answer Text="Cyprus" Value="22,900" />
+		<Answer Text="Portugal" Value="22,500" />
+		<Answer Text="Oman" Value="22,100" />
+		<Answer Text="Sint Maarten" Value="21,900" />
+		<Answer Text="Taiwan" Value="21,900" />
+		<Answer Text="Bahrain" Value="21,700" />
+		<Answer Text="Czech Republic" Value="21,600" />
+		<Answer Text="Saudi Arabia" Value="21,400" />
+		<Answer Text="Malta" Value="21,300" />
+		<Answer Text="Trinidad and Tobago" Value="18,000" />
+		<Answer Text="Slovakia" Value="17,700" />
+		<Answer Text="Guam" Value="17,500" />
+		<Answer Text="Estonia" Value="17,500" />
+		<Answer Text="Barbados" Value="15,300" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="us-names-male" Tags="U.S.A.;People" Used="y" Type="Sorted" Weight="1" QuestionText="Each of the following was one of the 10 most commonly given names to male babies born in 2007 in the USA.  Which one was more common?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix=" most common">
 		<Answer Text="Jacob" Value="1st" />
