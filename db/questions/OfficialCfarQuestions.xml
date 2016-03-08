@@ -1047,492 +1047,95 @@
 		<Answer Text="Nebraska" Value="4" />
 		<Answer Text="North Dakota" Value="3" />
 	</QuestionGenerator>
-	<QuestionGenerator Tags="International;Science::Geography" Used="y" Type="Match" Weight="1" QuestionText="Which of these country capitals is the capital of __ as of April 2012?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
-		<Answer Text="Abkhazia" Value="Sukhumi" />
-		<Answer Text="Afghanistan" Value="Kabul" />
-		<Answer Text="Akrotiri and Dhekelia" Value="Episkopi Cantonment" />
-		<Answer Text="Albania" Value="Tirana" />
-		<Answer Text="Algeria" Value="Algiers" />
-		<Answer Text="American Samoa" Value="Pago Pago" />
-		<Answer Text="Andorra" Value="Andorra la Vella" />
-		<Answer Text="Angola" Value="Luanda" />
-		<Answer Text="Anguilla" Value="The Valley" />
-		<Answer Text="Antigua and Barbuda" Value="St. John's" />
-		<Answer Text="Argentina" Value="Buenos Aires" />
-		<Answer Text="Armenia" Value="Yerevan" />
-		<Answer Text="Aruba" Value="Oranjestad" />
-		<Answer Text="Ascension Island" Value="Georgetown" />
-		<Answer Text="Australia" Value="Canberra" />
-		<Answer Text="Austria" Value="Vienna" />
-		<Answer Text="Azerbaijan" Value="Baku" />
-		<Answer Text="Bahamas" Value="Nassau" />
-		<Answer Text="Bahrain" Value="Manama" />
-		<Answer Text="Bangladesh" Value="Dhaka" />
-		<Answer Text="Barbados" Value="Bridgetown" />
-		<Answer Text="Belarus" Value="Minsk" />
-		<Answer Text="Belgium" Value="Brussels" />
-		<Answer Text="Belize" Value="Belmopan" />
-		<Answer Text="Bermuda" Value="Hamilton" />
-		<Answer Text="Bhutan" Value="Thimphu" />
-		<Answer Text="Bosnia and Herzegovina" Value="Sarajevo" />
-		<Answer Text="Botswana" Value="Gaborone" />
-		<Answer Text="Brazil" Value="Brasília" />
-		<Answer Text="British Virgin Islands" Value="Road Town" />
-		<Answer Text="Bulgaria" Value="Sofia" />
-		<Answer Text="Burkina Faso" Value="Ouagadougou" />
-		<Answer Text="Burundi" Value="Bujumbura" />
-		<Answer Text="Cambodia" Value="Phnom Penh" />
-		<Answer Text="Cameroon" Value="Yaoundé" />
-		<Answer Text="Canada" Value="Ottawa" />
-		<Answer Text="Cape Verde" Value="Praia" />
-		<Answer Text="Cayman Islands" Value="George Town" />
-		<Answer Text="Central African Republic" Value="Bangui" />
-		<Answer Text="Chad" Value="N'Djamena" />
-		<Answer Text="Chile" Value="Santiago" />
-		<Answer Text="Christmas Island" Value="Flying Fish Cove" />
-		<Answer Text="Cocos (Keeling) Islands" Value="West Island" />
-		<Answer Text="Colombia" Value="Bogotá" />
-		<Answer Text="Comoros" Value="Moroni" />
-		<Answer Text="Cook Islands" Value="Avarua" />
-		<Answer Text="Costa Rica" Value="San José" />
-		<Answer Text="Croatia" Value="Zagreb" />
-		<Answer Text="Cuba" Value="Havana" />
-		<Answer Text="Curaçao" Value="Willemstad" />
-		<Answer Text="Cyprus" Value="Nicosia" />
-		<Answer Text="Czech Republic" Value="Prague" />
-		<Answer Text="the Democratic Republic of the Congo" Value="Kinshasa" />
-		<Answer Text="Denmark" Value="Copenhagen" />
-		<Answer Text="Djibouti" Value="Djibouti" />
-		<Answer Text="Dominica" Value="Roseau" />
-		<Answer Text="Dominican Republic" Value="Santo Domingo" />
-		<Answer Text="East Timor (Timor-Leste)" Value="Dili" />
-		<Answer Text="Easter Island" Value="Hanga Roa" />
-		<Answer Text="Ecuador" Value="Quito" />
-		<Answer Text="Egypt" Value="Cairo" />
-		<Answer Text="El Salvador" Value="San Salvador" />
-		<Answer Text="Equatorial Guinea" Value="Malabo" />
-		<Answer Text="Eritrea" Value="Asmara" />
-		<Answer Text="Estonia" Value="Tallinn" />
-		<Answer Text="Ethiopia" Value="Addis Ababa" />
-		<Answer Text="Falkland Islands" Value="Stanley" />
-		<Answer Text="Faroe Islands" Value="Tórshavn" />
-		<Answer Text="the  Federated States of Micronesia" Value="Palikir" />
-		<Answer Text="Fiji" Value="Suva" />
-		<Answer Text="Finland" Value="Helsinki" />
-		<Answer Text="France" Value="Paris" />
-		<Answer Text="French Guiana" Value="Cayenne" />
-		<Answer Text="French Polynesia" Value="Papeete" />
-		<Answer Text="Gabon" Value="Libreville" />
-		<Answer Text="Gambia" Value="Banjul" />
-		<Answer Text="Georgia" Value="Tbilisi" />
-		<Answer Text="Germany" Value="Berlin" />
-		<Answer Text="Ghana" Value="Accra" />
-		<Answer Text="Gibraltar" Value="Gibraltar" />
-		<Answer Text="Greece" Value="Athens" />
-		<Answer Text="Greenland" Value="Nuuk" />
-		<Answer Text="Grenada" Value="St. George's" />
-		<Answer Text="Guam" Value="Hagåtña" />
-		<Answer Text="Guatemala" Value="Guatemala City" />
-		<Answer Text="Guernsey" Value="St. Peter Port" />
-		<Answer Text="Guinea" Value="Conakry" />
-		<Answer Text="Guinea-Bissau" Value="Bissau" />
-		<Answer Text="Guyana" Value="Georgetown" />
-		<Answer Text="Haiti" Value="Port-au-Prince" />
-		<Answer Text="Honduras" Value="Tegucigalpa" />
-		<Answer Text="Hungary" Value="Budapest" />
-		<Answer Text="Iceland" Value="Reykjavík" />
-		<Answer Text="India" Value="New Delhi" />
-		<Answer Text="Indonesia" Value="Jakarta" />
-		<Answer Text="Iran" Value="Tehran" />
-		<Answer Text="Iraq" Value="Baghdad" />
-		<Answer Text="Ireland" Value="Dublin" />
-		<Answer Text="Isle of Man" Value="Douglas" />
-		<Answer Text="Italy" Value="Rome" />
-		<Answer Text="Jamaica" Value="Kingston" />
-		<Answer Text="Japan" Value="Tokyo" />
-		<Answer Text="Jersey" Value="St. Helier" />
-		<Answer Text="Jordan" Value="Amman" />
-		<Answer Text="Kazakhstan" Value="Astana" />
-		<Answer Text="Kenya" Value="Nairobi" />
-		<Answer Text="Kiribati" Value="Tarawa" />
-		<Answer Text="Kosovo[j]" Value="Pristina" />
-		<Answer Text="Kuwait" Value="Kuwait City" />
-		<Answer Text="Kyrgyzstan" Value="Bishkek" />
-		<Answer Text="Laos" Value="Vientiane" />
-		<Answer Text="Latvia" Value="Riga" />
-		<Answer Text="Lebanon" Value="Beirut" />
-		<Answer Text="Lesotho" Value="Maseru" />
-		<Answer Text="Liberia" Value="Monrovia" />
-		<Answer Text="Libya" Value="Tripoli" />
-		<Answer Text="Liechtenstein" Value="Vaduz" />
-		<Answer Text="Lithuania" Value="Vilnius" />
-		<Answer Text="Luxembourg" Value="Luxembourg" />
-		<Answer Text="Macedonia" Value="Skopje" />
-		<Answer Text="Madagascar" Value="Antananarivo" />
-		<Answer Text="Malawi" Value="Lilongwe" />
-		<Answer Text="Malaysia (official)" Value="Kuala Lumpur" />
-		<Answer Text="Maldives" Value="Malé" />
-		<Answer Text="Mali" Value="Bamako" />
-		<Answer Text="Malta" Value="Valletta" />
-		<Answer Text="Marshall Islands" Value="Majuro" />
-		<Answer Text="Mauritania" Value="Nouakchott" />
-		<Answer Text="Mauritius" Value="Port Louis" />
-		<Answer Text="Moldova" Value="Chisinau" />
-		<Answer Text="Monaco" Value="Monaco" />
-		<Answer Text="Mongolia" Value="Ulan Bator" />
-		<Answer Text="Montenegro" Value="Podgorica" />
-		<Answer Text="Morocco" Value="Rabat" />
-		<Answer Text="Mozambique" Value="Maputo" />
-		<Answer Text="Myanmar" Value="Naypyidaw" />
-		<Answer Text="Nagorno-Karabakh Republic" Value="Stepanakert" />
-		<Answer Text="Namibia" Value="Windhoek" />
-		<Answer Text="Nauru" Value="Yaren (de facto)" />
-		<Answer Text="Nepal" Value="Kathmandu" />
-		<Answer Text="New Caledonia" Value="Nouméa" />
-		<Answer Text="New Zealand" Value="Wellington" />
-		<Answer Text="Nicaragua" Value="Managua" />
-		<Answer Text="Niger" Value="Niamey" />
-		<Answer Text="Nigeria" Value="Abuja" />
-		<Answer Text="Niue" Value="Alofi" />
-		<Answer Text="Norfolk Island" Value="Kingston" />
-		<Answer Text="North Korea" Value="Pyongyang" />
-		<Answer Text="Northern Cyprus" Value="Nicosia" />
-		<Answer Text="the United Kingdom Northern Ireland" Value="Belfast" />
-		<Answer Text="Northern Mariana Islands" Value="Saipan" />
-		<Answer Text="Norway" Value="Oslo" />
-		<Answer Text="Oman" Value="Muscat" />
-		<Answer Text="Pakistan" Value="Islamabad" />
-		<Answer Text="Palau" Value="Melekeok" />
-		<Answer Text="Panama" Value="Panama City" />
-		<Answer Text="Papua New Guinea" Value="Port Moresby" />
-		<Answer Text="Paraguay" Value="Asunción" />
-		<Answer Text="Peru" Value="Lima" />
-		<Answer Text="Philippines" Value="Manila" />
-		<Answer Text="Pitcairn Islands" Value="Adamstown" />
-		<Answer Text="Poland" Value="Warsaw" />
-		<Answer Text="Portugal" Value="Lisbon" />
-		<Answer Text="Puerto Rico" Value="San Juan" />
-		<Answer Text="Qatar" Value="Doha" />
-		<Answer Text="the  Republic of the Congo" Value="Brazzaville" />
-		<Answer Text="Romania" Value="Bucharest" />
-		<Answer Text="Russia" Value="Moscow" />
-		<Answer Text="Rwanda" Value="Kigali" />
-		<Answer Text="Saint Barthélemy" Value="Gustavia" />
-		<Answer Text="Saint Helena" Value="Jamestown" />
-		<Answer Text="Saint Kitts and Nevis" Value="Basseterre" />
-		<Answer Text="Saint Lucia" Value="Castries" />
-		<Answer Text="Saint Martin" Value="Marigot" />
-		<Answer Text="Saint Pierre and Miquelon" Value="St. Pierre" />
-		<Answer Text="Saint Vincent and the Grenadines" Value="Kingstown" />
-		<Answer Text="Samoa" Value="Apia" />
-		<Answer Text="San Marino" Value="San Marino" />
-		<Answer Text="Saudi Arabia" Value="Riyadh" />
-		<Answer Text="Scotland" Value="Edinburgh" />
-		<Answer Text="Senegal" Value="Dakar" />
-		<Answer Text="Serbia" Value="Belgrade" />
-		<Answer Text="Seychelles" Value="Victoria" />
-		<Answer Text="Sierra Leone" Value="Freetown" />
-		<Answer Text="Singapore" Value="Singapore" />
-		<Answer Text="Sint Maarten" Value="Philipsburg" />
-		<Answer Text="Slovakia" Value="Bratislava" />
-		<Answer Text="Slovenia" Value="Ljubljana" />
-		<Answer Text="Solomon Islands" Value="Honiara" />
-		<Answer Text="Somalia" Value="Mogadishu" />
-		<Answer Text="South Korea" Value="Seoul" />
-		<Answer Text="South Ossetia" Value="Tskhinvali" />
-		<Answer Text="South Sudan" Value="Juba" />
-		<Answer Text="Spain" Value="Madrid" />
-		<Answer Text="Sudan" Value="Khartoum" />
-		<Answer Text="Suriname" Value="Paramaribo" />
-		<Answer Text="Sweden" Value="Stockholm" />
-		<Answer Text="Switzerland" Value="Bern" />
-		<Answer Text="Syria" Value="Damascus" />
-		<Answer Text="São Tomé and Príncipe" Value="São Tomé" />
-		<Answer Text="Tajikistan" Value="Dushanbe" />
-		<Answer Text="Thailand" Value="Bangkok" />
-		<Answer Text="Togo" Value="Lomé" />
-		<Answer Text="Tonga" Value="Nuku?alofa" />
-		<Answer Text="Transnistria" Value="Tiraspol" />
-		<Answer Text="Trinidad and Tobago" Value="Port of Spain" />
-		<Answer Text="Tristan da Cunha" Value="Edinburgh of the Seven Seas" />
-		<Answer Text="Tunisia" Value="Tunis" />
-		<Answer Text="Turkey" Value="Ankara" />
-		<Answer Text="Turkmenistan" Value="Ashgabat" />
-		<Answer Text="Turks and Caicos Islands" Value="Cockburn Town" />
-		<Answer Text="Tuvalu" Value="Funafuti" />
-		<Answer Text="Uganda" Value="Kampala" />
-		<Answer Text="Ukraine" Value="Kiev" />
-		<Answer Text="United Arab Emirates" Value="Abu Dhabi" />
-		<Answer Text="United States" Value="Washington, D.C." />
-		<Answer Text="United States Virgin Islands" Value="Charlotte Amalie" />
-		<Answer Text="Uruguay" Value="Montevideo" />
-		<Answer Text="Uzbekistan" Value="Tashkent" />
-		<Answer Text="Vanuatu" Value="Port Vila" />
-		<Answer Text="Venezuela" Value="Caracas" />
-		<Answer Text="Vietnam" Value="Hanoi" />
-		<Answer Text="Wales" Value="Cardiff" />
-		<Answer Text="Wallis and Futuna" Value="Mata-Utu" />
-		<Answer Text="Yemen" Value="Sanaá" />
-		<Answer Text="Zambia" Value="Lusaka" />
-		<Answer Text="Zimbabwe" Value="Harare" />
-	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Entertainment::Film" Used="y" Type="Match" Weight="1" QuestionText="Which of these winners of the Academy Award for Best Picture was the winner in __?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
-		<Answer Text="1928" Value="Wings" />
-		<Answer Text="1929" Value="The Broadway Melody" />
-		<Answer Text="1930" Value="All Quiet on the Western Front" />
-		<Answer Text="1931" Value="Cimarron" />
-		<Answer Text="1932" Value="Grand Hotel" />
-		<Answer Text="1933" Value="Cavalcade" />
-		<Answer Text="1934" Value="It Happened One Night" />
-		<Answer Text="1935" Value="Mutiny on the Bounty" />
-		<Answer Text="1936" Value="The Great Ziegfeld" />
-		<Answer Text="1937" Value="The Life of Emile Zola" />
-		<Answer Text="1938" Value="You Can't Take It With You" />
-		<Answer Text="1939" Value="Gone with the Wind" />
-		<Answer Text="1940" Value="Rebecca" />
-		<Answer Text="1941" Value="How Green Was My Valley" />
-		<Answer Text="1942" Value="Mrs. Miniver" />
-		<Answer Text="1943" Value="Casablanca" />
-		<Answer Text="1944" Value="Going My Way" />
-		<Answer Text="1945" Value="The Lost Weekend" />
-		<Answer Text="1946" Value="The Best Years of Our Lives" />
-		<Answer Text="1947" Value="Gentleman's Agreement" />
-		<Answer Text="1948" Value="Hamlet" />
-		<Answer Text="1949" Value="All the King's Men" />
-		<Answer Text="1950" Value="All About Eve" />
-		<Answer Text="1951" Value="An American in Paris" />
-		<Answer Text="1952" Value="The Greatest Show on Earth" />
-		<Answer Text="1953" Value="From Here to Eternity" />
-		<Answer Text="1954" Value="On the Waterfront" />
-		<Answer Text="1955" Value="Marty" />
-		<Answer Text="1956" Value="Around the World in 80 Days" />
-		<Answer Text="1957" Value="The Bridge on the River Kwai" />
-		<Answer Text="1958" Value="Gigi" />
-		<Answer Text="1959" Value="Ben-Hur" />
-		<Answer Text="1960" Value="The Apartment" />
-		<Answer Text="1961" Value="West Side Story" />
-		<Answer Text="1962" Value="Lawrence of Arabia" />
-		<Answer Text="1963" Value="Tom Jones" />
-		<Answer Text="1964" Value="My Fair Lady" />
-		<Answer Text="1965" Value="The Sound of Music" />
-		<Answer Text="1966" Value="A Man for All Seasons" />
-		<Answer Text="1967" Value="In the Heat of the Night" />
-		<Answer Text="1968" Value="Oliver!" />
-		<Answer Text="1969" Value="Midnight Cowboy" />
-		<Answer Text="1970" Value="Patton" />
-		<Answer Text="1971" Value="The French Connection" />
-		<Answer Text="1972" Value="The Godfather" />
-		<Answer Text="1973" Value="The Sting" />
-		<Answer Text="1974" Value="The Godfather Part II" />
-		<Answer Text="1975" Value="One Flew Over the Cuckoo's Nest" />
-		<Answer Text="1976" Value="Rocky" />
-		<Answer Text="1977" Value="Annie Hall" />
-		<Answer Text="1978" Value="The Deer Hunter" />
-		<Answer Text="1979" Value="Kramer vs. Kramer" />
-		<Answer Text="1980" Value="Ordinary People" />
-		<Answer Text="1981" Value="Chariots of Fire" />
-		<Answer Text="1982" Value="Gandhi" />
-		<Answer Text="1983" Value="Terms of Endearment" />
-		<Answer Text="1984" Value="Amadeus" />
-		<Answer Text="1985" Value="Out of Africa" />
-		<Answer Text="1986" Value="Platoon" />
-		<Answer Text="1987" Value="The Last Emperor[" />
-		<Answer Text="1988" Value="Rain Man" />
-		<Answer Text="1989" Value="Driving Miss Daisy" />
-		<Answer Text="1990" Value="Dances with Wolves" />
-		<Answer Text="1991" Value="The Silence of the Lambs" />
-		<Answer Text="1992" Value="Unforgiven" />
-		<Answer Text="1993" Value="Schindler's List" />
-		<Answer Text="1994" Value="Forrest Gump" />
-		<Answer Text="1995" Value="Braveheart" />
-		<Answer Text="1996" Value="The English Patient" />
-		<Answer Text="1997" Value="Titanic" />
-		<Answer Text="1998" Value="Shakespeare in Love" />
-		<Answer Text="1999" Value="American Beauty" />
-		<Answer Text="2000" Value="Gladiator" />
-		<Answer Text="2001" Value="A Beautiful Mind" />
-		<Answer Text="2002" Value="Chicago" />
-		<Answer Text="2003" Value="The Lord of the Rings: The Return of the King" />
-		<Answer Text="2004" Value="Million Dollar Baby" />
-		<Answer Text="2005" Value="Crash" />
-		<Answer Text="2006" Value="The Departed" />
-		<Answer Text="2007" Value="No Country for Old Men" />
-		<Answer Text="2008" Value="Slumdog Millionaire" />
-		<Answer Text="2009" Value="The Hurt Locker" />
-		<Answer Text="2010" Value="The King's Speech" />
-		<Answer Text="2011" Value="The Artist" />
-	</QuestionGenerator>
-	<QuestionGenerator Tags="Science::Chemistry" Used="y" Type="Match" Weight="1" QuestionText="Which of these is the chemical symbol for __?" AdjacentWithin="1" InfoPrefix="" InfoSuffix="">
-		<Answer Text="Actinium" Value="Ac" />
-		<Answer Text="Aluminium (Aluminum)" Value="Al" />
-		<Answer Text="Americium" Value="Am" />
-		<Answer Text="Antimony" Value="Sb" />
-		<Answer Text="Argon" Value="Ar" />
-		<Answer Text="Arsenic" Value="As" />
-		<Answer Text="Astatine" Value="At" />
-		<Answer Text="Barium" Value="Ba" />
-		<Answer Text="Berkelium" Value="Bk" />
-		<Answer Text="Beryllium" Value="Be" />
-		<Answer Text="Bismuth" Value="Bi" />
-		<Answer Text="Bohrium" Value="Bh" />
-		<Answer Text="Boron" Value="B" />
-		<Answer Text="Bromine" Value="Br" />
-		<Answer Text="Cadmium" Value="Cd" />
-		<Answer Text="Caesium (Cesium)" Value="Cs" />
-		<Answer Text="Calcium" Value="Ca" />
-		<Answer Text="Californium" Value="Cf" />
-		<Answer Text="Carbon" Value="C" />
-		<Answer Text="Cerium" Value="Ce" />
-		<Answer Text="Chlorine" Value="Cl" />
-		<Answer Text="Chromium" Value="Cr" />
-		<Answer Text="Cobalt" Value="Co" />
-		<Answer Text="Copernicium" Value="Cn" />
-		<Answer Text="Copper" Value="Cu" />
-		<Answer Text="Curium" Value="Cm" />
-		<Answer Text="Darmstadtium" Value="Ds" />
-		<Answer Text="Dubnium" Value="Db" />
-		<Answer Text="Dysprosium" Value="Dy" />
-		<Answer Text="Einsteinium" Value="Es" />
-		<Answer Text="Erbium" Value="Er" />
-		<Answer Text="Europium" Value="Eu" />
-		<Answer Text="Fermium" Value="Fm" />
-		<Answer Text="Fluorine" Value="F" />
-		<Answer Text="Francium" Value="Fr" />
-		<Answer Text="Gadolinium" Value="Gd" />
-		<Answer Text="Gallium" Value="Ga" />
-		<Answer Text="Germanium" Value="Ge" />
-		<Answer Text="Gold" Value="Au" />
-		<Answer Text="Hafnium" Value="Hf" />
-		<Answer Text="Hassium" Value="Hs" />
-		<Answer Text="Helium" Value="He" />
-		<Answer Text="Holmium" Value="Ho" />
-		<Answer Text="Hydrogen" Value="H" />
-		<Answer Text="Indium" Value="In" />
-		<Answer Text="Iodine" Value="I" />
-		<Answer Text="Iridium" Value="Ir" />
-		<Answer Text="Iron" Value="Fe" />
-		<Answer Text="Krypton" Value="Kr" />
-		<Answer Text="Lanthanum" Value="La" />
-		<Answer Text="Lawrencium" Value="Lr" />
-		<Answer Text="Lead" Value="Pb" />
-		<Answer Text="Lithium" Value="Li" />
-		<Answer Text="Lutetium" Value="Lu" />
-		<Answer Text="Magnesium" Value="Mg" />
-		<Answer Text="Manganese" Value="Mn" />
-		<Answer Text="Meitnerium" Value="Mt" />
-		<Answer Text="Mendelevium" Value="Md" />
-		<Answer Text="Mercury" Value="Hg" />
-		<Answer Text="Molybdenum" Value="Mo" />
-		<Answer Text="Neodymium" Value="Nd" />
-		<Answer Text="Neon" Value="Ne" />
-		<Answer Text="Neptunium" Value="Np" />
-		<Answer Text="Nickel" Value="Ni" />
-		<Answer Text="Niobium" Value="Nb" />
-		<Answer Text="Nitrogen" Value="N" />
-		<Answer Text="Nobelium" Value="No" />
-		<Answer Text="Osmium" Value="Os" />
-		<Answer Text="Oxygen" Value="O" />
-		<Answer Text="Palladium" Value="Pd" />
-		<Answer Text="Phosphorus" Value="P" />
-		<Answer Text="Platinum" Value="Pt" />
-		<Answer Text="Plutonium" Value="Pu" />
-		<Answer Text="Polonium" Value="Po" />
-		<Answer Text="Potassium" Value="K" />
-		<Answer Text="Praseodymium" Value="Pr" />
-		<Answer Text="Promethium" Value="Pm" />
-		<Answer Text="Protactinium" Value="Pa" />
-		<Answer Text="Radium" Value="Ra" />
-		<Answer Text="Radon" Value="Rn" />
-		<Answer Text="Rhenium" Value="Re" />
-		<Answer Text="Rhodium" Value="Rh" />
-		<Answer Text="Roentgenium" Value="Rg" />
-		<Answer Text="Rubidium" Value="Rb" />
-		<Answer Text="Ruthenium" Value="Ru" />
-		<Answer Text="Rutherfordium" Value="Rf" />
-		<Answer Text="Samarium" Value="Sm" />
-		<Answer Text="Scandium" Value="Sc" />
-		<Answer Text="Seaborgium" Value="Sg" />
-		<Answer Text="Selenium" Value="Se" />
-		<Answer Text="Silicon" Value="Si" />
-		<Answer Text="Silver" Value="Ag" />
-		<Answer Text="Sodium" Value="Na" />
-		<Answer Text="Strontium" Value="Sr" />
-		<Answer Text="Sulfur (Sulphur)" Value="S" />
-		<Answer Text="Tantalum" Value="Ta" />
-		<Answer Text="Technetium" Value="Tc" />
-		<Answer Text="Tellurium" Value="Te" />
-		<Answer Text="Terbium" Value="Tb" />
-		<Answer Text="Thallium" Value="Tl" />
-		<Answer Text="Thorium" Value="Th" />
-		<Answer Text="Thulium" Value="Tm" />
-		<Answer Text="Tin" Value="Sn" />
-		<Answer Text="Titanium" Value="Ti" />
-		<Answer Text="Tungsten" Value="W" />
-		<Answer Text="Ununhexium" Value="Uuh" />
-		<Answer Text="Ununoctium" Value="Uuo" />
-		<Answer Text="Ununpentium" Value="Uup" />
-		<Answer Text="Ununquadium" Value="Uuq" />
-		<Answer Text="Ununseptium" Value="Uus" />
-		<Answer Text="Ununtrium" Value="Uut" />
-		<Answer Text="Uranium" Value="U" />
-		<Answer Text="Vanadium" Value="V" />
-		<Answer Text="Xenon" Value="Xe" />
-		<Answer Text="Ytterbium" Value="Yb" />
-		<Answer Text="Yttrium" Value="Y" />
-		<Answer Text="Zinc" Value="Zn" />
-		<Answer Text="Zirconium" Value="Zr" />
-	</QuestionGenerator>
-	<QuestionGenerator Tags="U.S.A.;Science::Geography" Used="y" Type="Match" Weight="1" QuestionText="Which of these USA state capitals is the captial of __, as of 2012?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
-		<Answer Text="Alabama" Value="Montgomery" />
-		<Answer Text="Alaska" Value="Juneau" />
-		<Answer Text="Arizona" Value="Phoenix" />
-		<Answer Text="Arkansas" Value="Little Rock" />
-		<Answer Text="California" Value="Sacramento" />
-		<Answer Text="Colorado" Value="Denver" />
-		<Answer Text="Connecticut" Value="Hartford" />
-		<Answer Text="Delaware" Value="Dover" />
-		<Answer Text="Florida" Value="Tallahassee" />
-		<Answer Text="Georgia" Value="Atlanta" />
-		<Answer Text="Hawaii" Value="Honolulu" />
-		<Answer Text="Idaho" Value="Boise" />
-		<Answer Text="Illinois" Value="Springfield" />
-		<Answer Text="Indiana" Value="Indianapolis" />
-		<Answer Text="Iowa" Value="Des Moines" />
-		<Answer Text="Kansas" Value="Topeka" />
-		<Answer Text="Kentucky" Value="Frankfort" />
-		<Answer Text="Louisiana" Value="Baton Rouge" />
-		<Answer Text="Maine" Value="Augusta" />
-		<Answer Text="Maryland" Value="Annapolis" />
-		<Answer Text="Massachusetts" Value="Boston" />
-		<Answer Text="Michigan" Value="Lansing" />
-		<Answer Text="Minnesota" Value="Saint Paul" />
-		<Answer Text="Mississippi" Value="Jackson" />
-		<Answer Text="Missouri" Value="Jefferson City" />
-		<Answer Text="Montana" Value="Helena" />
-		<Answer Text="Nebraska" Value="Lincoln" />
-		<Answer Text="Nevada" Value="Carson City" />
-		<Answer Text="New Hampshire" Value="Concord" />
-		<Answer Text="New Jersey" Value="Trenton" />
-		<Answer Text="New Mexico" Value="Santa Fe" />
-		<Answer Text="New York" Value="Albany" />
-		<Answer Text="North Carolina" Value="Raleigh" />
-		<Answer Text="North Dakota" Value="Bismarck" />
-		<Answer Text="Ohio" Value="Columbus" />
-		<Answer Text="Oklahoma" Value="Oklahoma City" />
-		<Answer Text="Oregon" Value="Salem" />
-		<Answer Text="Pennsylvania" Value="Harrisburg" />
-		<Answer Text="Rhode Island" Value="Providence" />
-		<Answer Text="South Carolina" Value="Columbia" />
-		<Answer Text="South Dakota" Value="Pierre" />
-		<Answer Text="Tennessee" Value="Nashville" />
-		<Answer Text="Texas" Value="Austin" />
-		<Answer Text="Utah" Value="Salt Lake City" />
-		<Answer Text="Vermont" Value="Montpelier" />
-		<Answer Text="Virginia" Value="Richmond" />
-		<Answer Text="Washington" Value="Olympia" />
-		<Answer Text="West Virginia" Value="Charleston" />
-		<Answer Text="Wisconsin" Value="Madison" />
-		<Answer Text="Wyoming" Value="Cheyenne" />
+	<QuestionGenerator Tags="U.S.A.;Entertainment::Film" Used="y" Type="Match" Weight="1" QuestionText="Which of these winners of the Academy Award for Best Picture won the award first?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="" Source="https://en.wikipedia.org/wiki/Academy_Award_for_Best_Picture">
+		<Answer Value="1928" Text="Wings" />
+		<Answer Value="1929" Text="The Broadway Melody" />
+		<Answer Value="1930" Text="All Quiet on the Western Front" />
+		<Answer Value="1931" Text="Cimarron" />
+		<Answer Value="1932" Text="Grand Hotel" />
+		<Answer Value="1933" Text="Cavalcade" />
+		<Answer Value="1934" Text="It Happened One Night" />
+		<Answer Value="1935" Text="Mutiny on the Bounty" />
+		<Answer Value="1936" Text="The Great Ziegfeld" />
+		<Answer Value="1937" Text="The Life of Emile Zola" />
+		<Answer Value="1938" Text="You Can't Take It With You" />
+		<Answer Value="1939" Text="Gone with the Wind" />
+		<Answer Value="1940" Text="Rebecca" />
+		<Answer Value="1941" Text="How Green Was My Valley" />
+		<Answer Value="1942" Text="Mrs. Miniver" />
+		<Answer Value="1943" Text="Casablanca" />
+		<Answer Value="1944" Text="Going My Way" />
+		<Answer Value="1945" Text="The Lost Weekend" />
+		<Answer Value="1946" Text="The Best Years of Our Lives" />
+		<Answer Value="1947" Text="Gentleman's Agreement" />
+		<Answer Value="1948" Text="Hamlet" />
+		<Answer Value="1949" Text="All the King's Men" />
+		<Answer Value="1950" Text="All About Eve" />
+		<Answer Value="1951" Text="An American in Paris" />
+		<Answer Value="1952" Text="The Greatest Show on Earth" />
+		<Answer Value="1953" Text="From Here to Eternity" />
+		<Answer Value="1954" Text="On the Waterfront" />
+		<Answer Value="1955" Text="Marty" />
+		<Answer Value="1956" Text="Around the World in 80 Days" />
+		<Answer Value="1957" Text="The Bridge on the River Kwai" />
+		<Answer Value="1958" Text="Gigi" />
+		<Answer Value="1959" Text="Ben-Hur" />
+		<Answer Value="1960" Text="The Apartment" />
+		<Answer Value="1961" Text="West Side Story" />
+		<Answer Value="1962" Text="Lawrence of Arabia" />
+		<Answer Value="1963" Text="Tom Jones" />
+		<Answer Value="1964" Text="My Fair Lady" />
+		<Answer Value="1965" Text="The Sound of Music" />
+		<Answer Value="1966" Text="A Man for All Seasons" />
+		<Answer Value="1967" Text="In the Heat of the Night" />
+		<Answer Value="1968" Text="Oliver!" />
+		<Answer Value="1969" Text="Midnight Cowboy" />
+		<Answer Value="1970" Text="Patton" />
+		<Answer Value="1971" Text="The French Connection" />
+		<Answer Value="1972" Text="The Godfather" />
+		<Answer Value="1973" Text="The Sting" />
+		<Answer Value="1974" Text="The Godfather Part II" />
+		<Answer Value="1975" Text="One Flew Over the Cuckoo's Nest" />
+		<Answer Value="1976" Text="Rocky" />
+		<Answer Value="1977" Text="Annie Hall" />
+		<Answer Value="1978" Text="The Deer Hunter" />
+		<Answer Value="1979" Text="Kramer vs. Kramer" />
+		<Answer Value="1980" Text="Ordinary People" />
+		<Answer Value="1981" Text="Chariots of Fire" />
+		<Answer Value="1982" Text="Gandhi" />
+		<Answer Value="1983" Text="Terms of Endearment" />
+		<Answer Value="1984" Text="Amadeus" />
+		<Answer Value="1985" Text="Out of Africa" />
+		<Answer Value="1986" Text="Platoon" />
+		<Answer Value="1987" Text="The Last Emperor" />
+		<Answer Value="1988" Text="Rain Man" />
+		<Answer Value="1989" Text="Driving Miss Daisy" />
+		<Answer Value="1990" Text="Dances with Wolves" />
+		<Answer Value="1991" Text="The Silence of the Lambs" />
+		<Answer Value="1992" Text="Unforgiven" />
+		<Answer Value="1993" Text="Schindler's List" />
+		<Answer Value="1994" Text="Forrest Gump" />
+		<Answer Value="1995" Text="Braveheart" />
+		<Answer Value="1996" Text="The English Patient" />
+		<Answer Value="1997" Text="Titanic" />
+		<Answer Value="1998" Text="Shakespeare in Love" />
+		<Answer Value="1999" Text="American Beauty" />
+		<Answer Value="2000" Text="Gladiator" />
+		<Answer Value="2001" Text="A Beautiful Mind" />
+		<Answer Value="2002" Text="Chicago" />
+		<Answer Value="2003" Text="The Lord of the Rings: The Return of the King" />
+		<Answer Value="2004" Text="Million Dollar Baby" />
+		<Answer Value="2005" Text="Crash" />
+		<Answer Value="2006" Text="The Departed" />
+		<Answer Value="2007" Text="No Country for Old Men" />
+		<Answer Value="2008" Text="Slumdog Millionaire" />
+		<Answer Value="2009" Text="The Hurt Locker" />
+		<Answer Value="2010" Text="The King's Speech" />
+		<Answer Value="2011" Text="The Artist" />
+		<Answer Value="2012" Text="Argo" />
+		<Answer Value="2013" Text="12 Years a Slave" />
+		<Answer Value="2014" Text="Birdman or (The Unexpected Virtue of Ignorance)" />
+		<Answer Value="2015" Text="Spotlight" />
 	</QuestionGenerator>
 	<QuestionGenerator Id="reptile-largest" Tags="Science::Zoology" Used="y" Type="Sorted" Weight="1" QuestionText="By average mass, each of the following is one of the 10 largest living species of reptile.  Which one is larger?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="kg">
 		<Answer Text="Saltwater crocodile" Value="454" />
