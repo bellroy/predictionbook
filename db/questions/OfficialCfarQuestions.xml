@@ -2702,7 +2702,7 @@
 		<Answer Text="Bermejo River" Value="1050" />
 		<Answer Text="Guaviare River" Value="1050" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="sports-superbowl-first" Tags="U.S.A.;Sports::Football" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these teams was earlier in their first winning of the Superbowl?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-superbowl-first" Tags="U.S.A.;Sports::Football" Used="y" Type="Sorted" Weight="0.2" QuestionText="Which of these teams was earlier in their first winning of the Superbowl?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Green Bay Packers" Value="1/15/1967" />
 		<Answer Text="New York Jets" Value="1/12/1969" />
 		<Answer Text="Kansas City Chiefs" Value="1/11/1970" />
@@ -2724,7 +2724,7 @@
 		<Answer Text="Indianapolis Colts" Value="2/4/2007" />
 		<Answer Text="New Orleans Saints" Value="2/7/2010" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="sports-worldseries-first" Tags="U.S.A.;Sports::Baseball" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these teams was earlier in their first winning of the World Series?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-worldseries-first" Tags="U.S.A.;Sports::Baseball" Used="y" Type="Sorted" Weight="0.2" QuestionText="Which of these teams was earlier in their first winning of the World Series?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Boston Americans" Value="1903" />
 		<Answer Text="New York Giants" Value="1905" />
 		<Answer Text="Chicago White Sox" Value="1906" />
@@ -2744,7 +2744,7 @@
 		<Answer Text="Los Angeles Dodgers" Value="1959" />
 		<Answer Text="Baltimore Orioles" Value="1966" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="sports-worldcup-first" Tags="International;Sports::Soccer" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these countries was earlier in their first winning of the World Cup?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-worldcup-first" Tags="International;Sports::Soccer" Used="y" Type="Sorted" Weight="0.2" QuestionText="Which of these countries was earlier in their first winning of the World Cup?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Uruguay" Value="1930" />
 		<Answer Text="Italy" Value="1934" />
 		<Answer Text="West Germany" Value="1954" />
@@ -2754,7 +2754,7 @@
 		<Answer Text="France" Value="1998" />
 		<Answer Text="Spain" Value="2010" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="sports-superbowl-mvp-first" Tags="U.S.A.;Sports::Football" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these Superbowl MVPs was earlier in first winning the title?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-superbowl-mvp-first" Tags="U.S.A.;Sports::Football" Used="y" Type="Sorted" Weight="0.2" QuestionText="Which of these Superbowl MVPs was earlier in first winning the title?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Bart Starr" Value="1967" />
 		<Answer Text="Joe Namath" Value="1969" />
 		<Answer Text="Len Dawson" Value="1970" />
@@ -2797,19 +2797,20 @@
 		<Answer Text="Drew Brees" Value="2010" />
 		<Answer Text="Aaron Rodgers" Value="2011" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="sports-hockey-first" Tags="Sports::Hockey" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these hockey teams was earlier in their first Stanley Cup victory?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<!-- Disabling this because it used to have incorrect values, but I don't trust the current values to be correct either (the Stanley Cup confuses me.) -->
+	<QuestionGenerator Id="sports-hockey-first" Tags="Sports::Hockey" Used="n" Type="Sorted" Weight="0.2" QuestionText="Which of these hockey teams was earlier in their first Stanley Cup victory?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="" Source="https://en.wikipedia.org/wiki/List_of_Stanley_Cup_champions">
 		<Answer Text="Montreal Hockey Club" Value="3/17/1893" />
 		<Answer Text="Montreal Victorias" Value="3/8/1895" />
-		<Answer Text="Winnipeg Victorias" Value="3/17/1893" />
-		<Answer Text="Montreal Shamrocks" Value="3/6/1897" />
-		<Answer Text="Montreal HC" Value="1/29/1901" />
-		<Answer Text="Ottawa HC" Value="1/21/1902" />
-		<Answer Text="Montreal Wanderers" Value="3/3/1905" />
-		<Answer Text="Kenora Thistles" Value="2/27/1906" />
-		<Answer Text="Quebec Bulldogs" Value="3/12/1910" />
-		<Answer Text="Toronto Hockey Club" Value="3/5/1912" />
+		<Answer Text="Winnipeg Victorias" Value="2/14/1896" />
+		<Answer Text="Montreal Shamrocks" Value="4/3/1899" />
+		<Answer Text="Montreal HC" Value="3/13/1902" />
+		<Answer Text="Ottawa HC" Value="3/7/1903" />
+		<Answer Text="Montreal Wanderers" Value="3/14/1906" />
+		<Answer Text="Kenora Thistles" Value="1/21/1907" />
+		<Answer Text="Quebec Bulldogs" Value="3/5/1912" />
+		<Answer Text="Toronto Hockey Club" Value="3/7/1914" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="sports-boxing-first" Tags="Sports::Boxing" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Each of these people is a heavyweight boxing champion according to at least one recognizing body.  Who was earlier in their first reign as champion?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-boxing-first" Tags="Sports::Boxing" Used="y" Type="Sorted" Weight="0.2" QuestionText="Each of these people is a heavyweight boxing champion according to at least one recognizing body.  Who was earlier in their first reign as champion?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="John L. Sullivan" Value="8/29/1882" />
 		<Answer Text="James J. Corbett" Value="9/7/1892" />
 		<Answer Text="Bob Fitzsimmons" Value="3/17/1897" />
@@ -2861,7 +2862,7 @@
 		<Answer Text="Ray Mercer" Value="1/11/1991" />
 		<Answer Text="Michael Moorer" Value="5/15/1992" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="sports-ufc-first" Tags="Sports::Martial Arts" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these fighters was earlier in their first UFC Heavyweight championship victory?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-ufc-first" Tags="Sports::Martial Arts" Used="y" Type="Sorted" Weight="0.2" QuestionText="Which of these fighters was earlier in their first UFC Heavyweight championship victory?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Mark Coleman" Value="2/7/1997" />
 		<Answer Text="Maurice Smith" Value="7/27/1997" />
 		<Answer Text="Randy Couture" Value="12/21/1997" />
@@ -2878,7 +2879,7 @@
 		<Answer Text="Cain Velasquez" Value="10/23/2010" />
 		<Answer Text="Junior dos Santos" Value="11/12/2011" />
 	</QuestionGenerator>
-	<QuestionGenerator Id="sports-nba-first" Tags="U.S.A.;Sports::Basketball" Used="y" Type="SortedMultiset" Weight="1" QuestionText="Which of these teams was earlier in their first winning of the NBA Championship?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
+	<QuestionGenerator Id="sports-nba-first" Tags="U.S.A.;Sports::Basketball" Used="y" Type="Sorted" Weight="0.2" QuestionText="Which of these teams was earlier in their first winning of the NBA Championship?" AdjacentWithin="-1" InfoPrefix="" InfoSuffix="">
 		<Answer Text="Minneapolis Lakers" Value="1950" />
 		<Answer Text="Rochester Royals" Value="1951" />
 		<Answer Text="Syracuse Nationals" Value="1955" />
