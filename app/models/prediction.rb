@@ -216,6 +216,10 @@ class Prediction < ActiveRecord::Base
     end
   end
 
+  def public?
+    not private?
+  end
+
   private
 
   def too_futuristic?

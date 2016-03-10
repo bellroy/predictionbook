@@ -5,15 +5,29 @@ module Api
 
     before_filter :authenticate_by_api_token
     before_filter :build_predictions, only: [:index]
+    before_filter :build_new_prediction, only: [:create]
+    before_filter :find_prediction, only: [:show, :update]
+    before_filter :authorize_to_see_prediction, only: [:show]
+    before_filter :authorize_to_update_prediction, only: [:update]
+
+    def create
+      if @prediction.save
+        render json: @prediction
+      else
+        render json: @prediction.errors, status: :unprocessable_entity
+      end
+    end
 
     def index
       render json: @predictions
     end
 
-    def create
-      @prediction = build_new_prediction
+    def show
+      render json: @prediction
+    end
 
-      if @prediction.save
+    def update
+      if @prediction.update_attributes(params[:prediction])
         render json: @prediction
       else
         render json: @prediction.errors, status: :unprocessable_entity
@@ -26,12 +40,18 @@ module Api
       @user = User.find_by_api_token(params[:api_token])
 
       unless valid_params_and_user?
-        render json: invalid_message, status: :unauthorized
+        render json: invalid_api_message, status: :unauthorized
       end
     end
 
-    def valid_params_and_user?
-      params[:api_token] && @user
+    def authorize_to_see_prediction
+      unless @prediction.public? || @user.authorized_for(@prediction)
+        raise UnauthorizedRequest
+      end
+    end
+
+    def authorize_to_update_prediction
+      raise UnauthorizedRequest unless @user.authorized_for(@prediction)
     end
 
     def build_new_prediction
@@ -41,7 +61,7 @@ module Api
         prediction_params[:private] = @user.private_default
       end
 
-      Prediction.new(prediction_params.merge(creator: @user))
+      @prediction = Prediction.new(prediction_params.merge(creator: @user))
     end
 
     def build_predictions
@@ -52,8 +72,16 @@ module Api
       end
     end
 
-    def invalid_message
+    def find_prediction
+      @prediction = Prediction.find(params[:id])
+    end
+
+    def invalid_api_message
       { error: 'invalid API token', status: :unauthorized }
+    end
+
+    def valid_params_and_user?
+      params[:api_token] && @user
     end
   end
 end
