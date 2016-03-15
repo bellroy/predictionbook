@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160315212436) do
+ActiveRecord::Schema.define(:version => 20160315215637) do
 
   create_table "credence_answers", :force => true do |t|
     t.integer  "credence_question_id"
@@ -29,13 +29,13 @@ ActiveRecord::Schema.define(:version => 20160315212436) do
     t.integer  "first_answer_id"
     t.integer  "second_answer_id"
     t.integer  "correct_index"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
     t.integer  "credence_game_id"
     t.datetime "asked_at"
     t.datetime "answered_at"
     t.integer  "answer_credence"
     t.integer  "given_answer"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   add_index "credence_game_responses", ["credence_game_id", "asked_at"], :name => "index_credence_game_responses_on_credence_game_id_and_asked_at"
@@ -44,13 +44,13 @@ ActiveRecord::Schema.define(:version => 20160315212436) do
   create_table "credence_games", :force => true do |t|
     t.integer  "current_response_id"
     t.integer  "score",               :default => 0, :null => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
     t.integer  "user_id"
     t.integer  "num_answered",        :default => 0, :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
-  add_index "credence_games", ["user_id"], :name => "index_credence_games_on_user_id"
+  add_index "credence_games", ["user_id"], :name => "index_credence_games_on_user_id", :unique => true
 
   create_table "credence_questions", :force => true do |t|
     t.boolean  "enabled"
@@ -60,9 +60,9 @@ ActiveRecord::Schema.define(:version => 20160315212436) do
     t.string   "question_type"
     t.integer  "adjacent_within"
     t.float    "weight"
+    t.string   "text_id",         :limit => 50
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
-    t.string   "text_id",         :limit => 50
   end
 
   add_index "credence_questions", ["text_id"], :name => "index_credence_questions_on_text_id", :unique => true
