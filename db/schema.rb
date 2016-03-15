@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160126231512) do
+ActiveRecord::Schema.define(:version => 20160315212436) do
 
   create_table "credence_answers", :force => true do |t|
     t.integer  "credence_question_id"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20160126231512) do
     t.datetime "updated_at",           :null => false
     t.integer  "rank"
   end
+
+  add_index "credence_answers", ["credence_question_id"], :name => "index_credence_answers_on_credence_question_id"
 
   create_table "credence_game_responses", :force => true do |t|
     t.integer  "credence_question_id"
@@ -37,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20160126231512) do
   end
 
   add_index "credence_game_responses", ["credence_game_id", "asked_at"], :name => "index_credence_game_responses_on_credence_game_id_and_asked_at"
+  add_index "credence_game_responses", ["credence_question_id"], :name => "index_credence_game_responses_on_credence_question_id"
 
   create_table "credence_games", :force => true do |t|
     t.integer  "current_response_id"
@@ -46,6 +49,8 @@ ActiveRecord::Schema.define(:version => 20160126231512) do
     t.integer  "user_id"
     t.integer  "num_answered",        :default => 0, :null => false
   end
+
+  add_index "credence_games", ["user_id"], :name => "index_credence_games_on_user_id"
 
   create_table "credence_questions", :force => true do |t|
     t.boolean  "enabled"
