@@ -24,8 +24,7 @@ describe CredenceQuestion do
   end
 
   it 'should uniformly distribute questions in aswer-space' do
-    pending "work out a good test to use"
-    raise "not yet implemented"
+    t = Time.now
 
     # gen.create_random_question is sufficiently slow that we don't want to do
     # it loads of times. But if we don't do it enough, our test will be prone to
@@ -33,18 +32,42 @@ describe CredenceQuestion do
     #   Is it possible to only have this test run if we request it explicitly?
 
     question = create_valid_credence_question
-    [1, 1, 2].each do |rank|
+
+    answers = [1, 1, 2].map do |rank|
       create_valid_credence_answer(credence_question: question, rank: rank)
     end
 
-    counts = Hash.new(0)
-    400.times do
-      response = question.create_random_question
-      key = [response.first_answer.id, response.second_answer.id]
-      counts[key] += 1
+    question.stub(:credence_answer_ids).and_return([0, 1, 2])
+    CredenceAnswer.stub(:find) do |id|
+      answers[id]
+    end
+    CredenceGameResponse.stub(:create) do |args|
+      [args[:first_answer].id, args[:second_answer].id]
     end
 
-    # What tests do we apply to counts?
+    counts = Hash.new(0)
+    10000.times do
+      response = question.create_random_question
+      counts[response] += 1
+    end
+
+    # If the questions are uniformly distributed, then the number of entries in
+    # the first bucket follows a Binomial(10000, 0.25) distribution. This will
+    # almost certainly fall within the range [2095, 2919] (probability less than
+    # 10^-21 of falling out on each end).
+
+    # The probability that the count in *any* bucket falls outside this range is
+    # less than four times the probability of the first bucket falling outside;
+    # thus, less than 8 * 10^-21, or less than 10^-20.
+
+    # If that happens, we can be confident that the distribution isn't uniform.
+
+    lower_bound = 2095
+    upper_bound = 2919
+
+    counts.each do |k,v|
+      expect(v).to be_between(lower_bound, upper_bound), "Expected question counts between #{lower_bound} and #{upper_bound}, inclusive. Actual counts: #{counts}."
+    end
   end
 
   it 'should create questions from parsed XML' do
