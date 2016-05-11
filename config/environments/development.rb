@@ -1,7 +1,7 @@
 PredictionBook2::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
-  config.action_controller.cache_store = :file_store, "cache/fragments"
+  config.action_controller.cache_store = :file_store, 'cache/fragments'
 
   # In the development environment your application's code is reloaded on
   # every request.  This slows down response time but is perfect for development
@@ -31,5 +31,7 @@ PredictionBook2::Application.configure do
   config.assets.debug = true
 
   # Set default host for mailer
-  config.action_mailer.default_url_options = { :host => 'localhost', :port=> '3000' }
+  config.action_mailer.default_url_options = { host: 'localhost', port: '3000' }
+
+  config.eager_load = false
 end

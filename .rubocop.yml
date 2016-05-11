@@ -1,0 +1,33 @@
+Rails:
+  Enabled: true
+
+AllCops:
+  TargetRubyVersion: 2.2
+  Include:
+    - 'app/**/*.rb'
+    - 'lib/**/*.rb'
+    - 'spec/**/*.rb'
+  Exclude:
+    - 'app/assets/**/*'
+    - 'bin/**/*'
+    - 'client/node_modules/**/*'
+    - 'config/**/*'
+    - 'coverage/**/*'
+    - 'data/**/*'
+    - 'db/**/*'
+    - 'log/**/*'
+    - 'phrase/**/*'
+    - 'public/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+  TargetRubyVersion: 2.2
+
+Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 100
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%w': '[]'
