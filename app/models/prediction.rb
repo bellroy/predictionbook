@@ -1,7 +1,8 @@
 class Prediction < ActiveRecord::Base
   version_fu
+
   class DuplicateRecord < ActiveRecord::RecordInvalid; end
-  include CommonScopes
+
   belongs_to :creator, class_name: 'User'
 
   def self.parse_deadline(date)
@@ -15,35 +16,43 @@ class Prediction < ActiveRecord::Base
   DEFAULT_INCLUDES = [:judgements, :responses, :creator].freeze
 
   def self.unjudged
-    not_private.not_withdrawn.all(include: DEFAULT_INCLUDES,
-                                  conditions: '(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NULL AND deadline < UTC_TIMESTAMP()')
-               .rsort(:deadline)
+    not_private
+      .not_withdrawn
+      .includes(DEFAULT_INCLUDES)
+      .where('(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NULL AND deadline < UTC_TIMESTAMP()')
+      .order(deadline: :desc)
   end
 
   def self.judged
-    not_private.not_withdrawn.all(include: DEFAULT_INCLUDES,
-                                  conditions: '(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NOT NULL',
-                                  order: 'judgements.created_at DESC')
+    not_private
+      .not_withdrawn
+      .includes(DEFAULT_INCLUDES)
+      .joins(:judgements)
+      .where('(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NOT NULL')
+      .order('judgements.created_at DESC')
   end
 
   def self.future
-    sort(:deadline).not_private.not_withdrawn.includes(DEFAULT_INCLUDES).where('judgements.outcome IS NULL AND deadline > UTC_TIMESTAMP()')
+    not_private
+      .not_withdrawn
+      .includes(DEFAULT_INCLUDES)
+      .where('(id NOT IN (SELECT prediction_id FROM judgements) OR id IN (SELECT prediction_id FROM judgements WHERE outcome IS NULL)) AND deadline > UTC_TIMESTAMP()')
+      .order(:deadline)
   end
 
   def self.recent
-    rsort.not_private.not_withdrawn.all(include: DEFAULT_INCLUDES)
+    order(created_at: :desc).not_private.not_withdrawn.includes(DEFAULT_INCLUDES)
   end
 
   def self.popular
-    opts = {
-      include: [:responses, :creator], # Eager loading of :judgements breaks judgement and unknown?
-      conditions: [
-        'predictions.deadline > UTC_TIMESTAMP() AND predictions.created_at > ?', 2.weeks.ago
-      ],
-      order: 'count(responses.prediction_id) DESC, predictions.deadline ASC',
-      group: 'predictions.id'
-    }
-    not_private.not_withdrawn.all(opts).select(&:unknown?)
+    not_private
+      .not_withdrawn
+      .includes(:responses, :creator)
+      .joins(:responses)
+      .where('predictions.deadline > UTC_TIMESTAMP() AND predictions.created_at > ?', 2.weeks.ago)
+      .order('count(responses.prediction_id) DESC, predictions.deadline ASC')
+      .group('predictions.id')
+      .select(&:unknown?)
   end
 
   belongs_to :creator, class_name: 'User'
@@ -68,7 +77,7 @@ class Prediction < ActiveRecord::Base
   end
 
   after_initialize do
-    self.uuid ||= UUID.random_create.to_s if has_attribute?(:uuid)
+    self.uuid ||= UUIDTools::UUID.random_create.to_s if has_attribute?(:uuid)
   end
 
   before_validation(on: :create) do

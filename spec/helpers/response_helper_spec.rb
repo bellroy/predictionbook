@@ -8,7 +8,7 @@ describe ResponseHelper do
       @response = Response.new
     end
 
-    it 'should ask the response if it has a comment' do
+    it 'asks the response if it has a comment' do
       @response.should_receive(:comment?).and_return(false)
 
       comment_for(@response)
@@ -27,18 +27,18 @@ describe ResponseHelper do
         @response.stub(:comment).and_return(@comment)
         stub(:markup).and_return("comment")
       end
-      it 'should get the responses comment' do
+      it 'gets the responses comment' do
         @response.should_receive(:comment).at_least(:once).and_return(@comment)
 
         comment_for(@response)
       end
       describe 'action comment' do
-        it 'should ask if it is one' do
+        it 'asks if it is one' do
           @response.should_receive(:action_comment?).and_return(false)
 
           comment_for(@response)
         end
-        it 'should return comment without \me' do
+        it 'returns comment without \me' do
           @response.stub(:action_comment?).and_return(true)
           @response.stub(:action_comment).and_return('shakes head')
 

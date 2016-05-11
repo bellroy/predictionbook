@@ -42,7 +42,7 @@ describe 'Prediction responses partial' do
       @wager.stub(:comment).and_return(@comment = double('comment'))
       @wager.stub(:action_comment?).and_return(false)
     end
-    it 'should use the markup helper to render any supplied comment' do
+    it 'uses the markup helper to render any supplied comment' do
       view.should_receive(:markup).with(@comment).and_return("comment")
       render_partial
     end

@@ -1,42 +1,42 @@
 require 'spec_helper'
 
 describe User do
-  it 'should have a name accessor' do
-    User.new.should respond_to(:name)
-    User.new.should respond_to(:name=)
+  it 'has a name accessor' do
+    expect(User.new).to respond_to(:name)
+    expect(User.new).to respond_to(:name=)
   end
 
-  it 'should have a private_default field which defaults to false' do
-    User.new.private_default.should be false
+  it 'has a private_default field which defaults to false' do
+    expect(User.new.private_default).to be false
   end
 
-  it 'should have an email with name' do
-    u = User.new(:name => "Tester", :email => "test@test.com")
-    u.email_with_name.should == '"Tester" <test@test.com>'
+  it 'has an email with name' do
+    u = User.new(name: 'Tester', email: 'test@test.com')
+    expect(u.email_with_name).to eq '"Tester" <test@test.com>'
   end
 
-  it "should escape dots in the username with [dot]" do
-    User.new(:login => "login.name").to_param.should == "login[dot]name"
+  it 'should escape dots in the username with [dot]' do
+    expect(User.new(login: 'login.name').to_param).to eq 'login[dot]name'
   end
 
   describe 'with lookup by username' do
-    it 'should find a user by login' do
-      User.should_receive(:find_by_login!).with('login_name').and_return(:user)
-      User['login_name'].should == :user
+    it 'finds a user by login' do
+      expect(User).to receive(:find_by_login!).with('login_name').and_return(:user)
+      expect(User['login_name']).to eq :user
     end
 
     it 'should replace [dot] in the username with a . when looking up a user' do
-      u = User.new(:login => "login.name")
-      User.should_receive(:find_by_login!).with("login.name").and_return(u)
-      User["login[dot]name"].should == u
+      u = User.new(login: 'login.name')
+      expect(User).to receive(:find_by_login!).with('login.name').and_return(u)
+      expect(User['login[dot]name']).to eq u
     end
 
     it 'should raise RecordNotFound exception if no user found' do
-      lambda { User["login_name"] }.should raise_error(ActiveRecord::RecordNotFound)
+      expect { User['login_name'] }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it 'should raise RecordNotFound exception if login is blank' do
-      lambda { User[nil] }.should raise_error(ActiveRecord::RecordNotFound)
+      expect { User[nil] }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 
@@ -45,8 +45,8 @@ describe User do
       user = User.new
       user.id = 123
       stats = double(Statistics)
-      Statistics.should_receive(:new).with("r.user_id = 123").and_return(stats)
-      user.statistics.should eq stats
+      expect(Statistics).to receive(:new).with('r.user_id = 123').and_return(stats)
+      expect(user.statistics).to eq stats
     end
   end
 
@@ -67,52 +67,32 @@ describe User do
     end
     it 'should store empty name as nil' do
       @user.name = " \t \n "
-      @user.name.should be_nil
+      expect(@user.name).to be_nil
     end
     it 'should store email as nil' do
       @user.email = ''
-      @user.email.should be_nil
+      expect(@user.email).to be_nil
     end
   end
 
-  describe "authorized_for" do
-    it "should be true for predictions created by self" do
+  describe 'authorized_for' do
+    it 'is true for predictions created by self' do
       @user = User.new
-      @prediction = @user.predictions.build(:creator => @user)
-      @user.authorized_for(@prediction).should == true
+      @prediction = @user.predictions.build(creator: @user)
+      expect(@user.authorized_for(@prediction)).to eq true
     end
-    it "should be false for predictions not created by self" do
+    it 'is false for predictions not created by self' do
       @user = User.new
       @user2 = User.new
-      @prediction = @user2.predictions.build(:creator => @user2)
-      @user.authorized_for(@prediction).should == false
+      @prediction = @user2.predictions.build(creator: @user2)
+      expect(@user.authorized_for(@prediction)).to eq false
     end
-    it "should be true for admins" do
+    it 'is true for admins' do
       @user = User.new
-      @user.stub(:admin? => true)
+      expect(@user).to receive(:admin?).and_return(true)
       @user2 = User.new
-      @prediction = @user.predictions.build(:creator => @user2)
-      @user.authorized_for(@prediction).should == true
-    end
-  end
-
-  describe "reset password" do
-    before do
-      @user = User.create!(
-        :login                  => "test1",
-        :email                  => "test@example.com",
-        :password               => "test123",
-        :password_confirmation  => "test123"
-      )
-
-      UserMailer.stub_chain [:reset_password, :deliver]
-    end
-
-    it "should assign a random password" do
-      User.authenticate("test1", "test123").should be
-
-      @user.reset_password
-      User.authenticate("test1", "test123").should_not be
+      @prediction = @user.predictions.build(creator: @user2)
+      expect(@user.authorized_for(@prediction)).to eq true
     end
   end
 end

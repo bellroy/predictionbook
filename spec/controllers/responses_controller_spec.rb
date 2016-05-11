@@ -21,30 +21,30 @@ describe ResponsesController do
       controller.stub(:logged_in?).and_return(true)
     end
 
-    it 'should require the user to be logged in' do
+    it 'requires the user to be logged in' do
       controller.stub(:logged_in?).and_return(false)
       post_response
       response.should redirect_to(login_path)
     end
 
-    it 'should create a response on the prediction' do
+    it 'creates a response on the prediction' do
       @wagers.should_receive(:new)
       post_response
     end
 
-    it 'should create the response with the posted params' do
+    it 'creates the response with the posted params' do
       @wagers.should_receive(:new).with(hash_including(:params => 'this is them'))
       post_response({:params => 'this is them'})
     end
 
-    it 'should use the current user as the user' do
+    it 'uses the current user as the user' do
       user = mock_model(User)
       controller.stub(:current_user).and_return(user)
       @prediction.responses.should_receive(:new).with(hash_including(:user => user))
       post_response({})
     end
 
-    it 'should redirect to the prediction show' do
+    it 'redirects to the prediction show' do
       post_response
       response.should redirect_to(prediction_path('1'))
     end
@@ -54,7 +54,7 @@ describe ResponsesController do
         @wager.stub(:save => false)
       end
 
-      it 'should respond with an http unprocesseable entity status' do
+      it 'responds with an http unprocesseable entity status' do
         post_response
         response.should redirect_to(prediction_path('1'))
         flash[:error].should == "You must enter an estimate or comment"
@@ -71,12 +71,12 @@ describe ResponsesController do
       get :preview, :response => { :comment => 'some text' }
     end
 
-    it 'should respond to preview action' do
+    it 'responds to preview action' do
       get_preview
       response.should be_success
     end
 
-    it 'should render the preview comment partial' do
+    it 'renders the preview comment partial' do
       get_preview
       response.should render_template('responses/_preview')
     end

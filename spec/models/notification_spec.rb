@@ -30,7 +30,7 @@ describe Notification do
       @dn = Notification.new
       @dn.stub(:valid?).and_return(true)
     end
-    it 'should be a uuid' do
+    it 'is a uuid' do
       @dn.uuid.should_not be_blank
     end
     it 'should persist over saves' do
@@ -43,16 +43,16 @@ describe Notification do
     before(:each) do
       @dn = Notification.new
     end
-    it 'should lookup by uuid' do
+    it 'looks up by uuid' do
       Notification.should_receive(:find_by_uuid).with('token')
       Notification.use_token!('token')
     end
-    it 'should yield if token unused' do
+    it 'yields if token unused' do
       Notification.should_receive(:find_by_uuid).and_return(@dn)
       (b = double('block test')).should_receive(:called!)
       Notification.use_token!(:token) { |dn| b.called! }
     end
-    it 'should yield the deadline notification' do
+    it 'yields the deadline notification' do
       Notification.should_receive(:find_by_uuid).and_return(@dn)
       Notification.use_token!(:token) { |dn| dn.should == @dn }
     end
@@ -78,10 +78,10 @@ describe Notification do
     before(:each) do
       @dn = Notification.new
     end
-    it 'should be false by default' do
+    it 'is false by default' do
       @dn.token_used?.should be false
     end
-    it 'should be set to true once marked as used' do
+    it 'is set to true once marked as used' do
       @dn.use_token!
       @dn.token_used?.should be true
     end
@@ -121,7 +121,7 @@ describe Notification do
       @dn = Notification.new
       @dn.stub(:valid?).and_return(true)
     end
-    it 'should be a uuid' do
+    it 'is a uuid' do
       @dn.uuid.should_not be_blank
     end
     it 'should persist over saves' do
@@ -134,16 +134,16 @@ describe Notification do
     before(:each) do
       @dn = Notification.new
     end
-    it 'should lookup by uuid' do
+    it 'looks up by uuid' do
       Notification.should_receive(:find_by_uuid).with('token')
       Notification.use_token!('token')
     end
-    it 'should yield if token unused' do
+    it 'yields if token unused' do
       Notification.should_receive(:find_by_uuid).and_return(@dn)
       (b = double('block test')).should_receive(:called!)
       Notification.use_token!(:token) { |dn| b.called! }
     end
-    it 'should yield the deadline notification' do
+    it 'yields the deadline notification' do
       Notification.should_receive(:find_by_uuid).and_return(@dn)
       Notification.use_token!(:token) { |dn| dn.should == @dn }
     end
@@ -169,10 +169,10 @@ describe Notification do
     before(:each) do
       @dn = Notification.new
     end
-    it 'should be false by default' do
+    it 'is false by default' do
       @dn.token_used?.should be false
     end
-    it 'should be set to true once marked as used' do
+    it 'is set to true once marked as used' do
       @dn.use_token!
       @dn.token_used?.should be true
     end

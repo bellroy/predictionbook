@@ -7,13 +7,13 @@ describe FeedbackController do
       get :show, :date => 'a date string'
     end
     describe 'successful parsing' do
-      it 'should render text with the parsed date' do
+      it 'renders text with the parsed date' do
         get :show, :date => 'in 2 hours'
         response.body.should match(/in about 2 hours/)
       end
     end
     describe 'failed parsing' do
-      it 'should return a error 400' do
+      it 'returns a error 400' do
         Chronic.stub(:parse).and_return(nil)
         get :show, :date => 'fumanchoo'
         response.response_code.should == 400

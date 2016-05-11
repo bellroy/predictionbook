@@ -12,7 +12,7 @@ describe 'users/settings' do
       render
       rendered.should have_field('user[private_default]')
     end
-    it 'should be checked if the user wishes it' do
+    it 'is checked if the user wishes it' do
       @user.stub(:private_default).and_return(true)
       render
       rendered.should have_checked_field('user[private_default]')

@@ -7,8 +7,8 @@ class Notification < ActiveRecord::Base
   belongs_to :prediction
   belongs_to :user
 
-  validates :prediction_id, presence: true
-  validates :user_id, presence: true, uniqueness: { scope: [:prediction_id, :type] }
+  validates :prediction, presence: true
+  validates :user, presence: true, uniqueness: { scope: [:prediction, :type] }
 
   scope :unsent, -> { where(sent: false) }
   scope :sent, -> { where(sent: true) }
@@ -17,7 +17,7 @@ class Notification < ActiveRecord::Base
 
   def initialize(attrs = {}, options = {})
     super
-    self.uuid ||= UUID.random_create.to_s
+    self.uuid ||= UUIDTools::UUID.random_create.to_s
   end
 
   def use_token!

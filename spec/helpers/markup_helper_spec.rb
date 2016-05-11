@@ -4,12 +4,12 @@ describe MarkupHelper do
   include MarkupHelper
 
   describe '#confidence_and_count' do
-    it 'should return the number of wagers of a prediction' do
+    it 'returns the number of wagers of a prediction' do
       prediction = double(Prediction, :wager_count=> 20).as_null_object
       confidence_and_count(prediction).should =~ /20/
     end
 
-    it 'should return the mean confidence of a prediction' do
+    it 'returns the mean confidence of a prediction' do
       prediction = double(Prediction, :mean_confidence => '13').as_null_object
       confidence_and_count(prediction).should =~ /13/
     end
@@ -35,7 +35,7 @@ describe MarkupHelper do
       classes('one', 'two').should == 'one two'
     end
 
-    it 'should filter out nils' do
+    it 'filters out nils' do
       classes('test', nil, 'val').should == 'test val'
     end
 

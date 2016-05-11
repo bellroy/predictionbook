@@ -47,7 +47,7 @@ describe CleanCloth do
       it 'should markup images as links' do
         markup("!2girls1cup.jpg!").should == '<a href="2girls1cup.jpg" rel="nofollow">2girls1cup.jpg [pic]</a>'
       end
-      it 'should use the title as the link text' do
+      it 'uses the title as the link text' do
         markup("!image(title)!").should == '<a href="image" rel="nofollow">title [pic]</a>'
       end
     end

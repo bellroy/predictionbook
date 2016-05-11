@@ -21,7 +21,7 @@ describe "prediction list" do
       view.stub(:global_statistics_cache_key).and_return("foo")
     end
 
-    it 'should render the statistics partial if show_statistics? is true' do
+    it 'renders the statistics partial if show_statistics? is true' do
       view.stub(:cache).and_yield
       render_view
       view.should render_template(:partial => 'statistics/_show')

@@ -9,12 +9,12 @@ describe 'predictions/index.html.erb' do
     view.stub(:current_user).and_return User.new
   end
 
-  it 'should render without errors' do
+  it 'renders without errors' do
     render
     rendered.should_not be_blank
   end
 
-  it 'should render predictions' do
+  it 'renders predictions' do
     prediction = create_valid_prediction
     assign(:predictions, [prediction])
 
