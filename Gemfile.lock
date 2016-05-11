@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/typus/typus.git
+  revision: 85e5f67a6ae96898c84eed0794dd7f0a1339e27d
+  specs:
+    typus (4.0.0.beta1)
+      bcrypt (~> 3.1.11)
+      rails (~> 4.2.6)
+
+GIT
   remote: https://github.com/januszm/formatize
   revision: 0f2f138bc3069dd7a80e05d9bf28d98cc69f411d
   specs:
@@ -49,7 +57,7 @@ GEM
     addressable (2.4.0)
     arel (6.0.3)
     awesome_print (1.6.1)
-    bcrypt-ruby (3.0.1)
+    bcrypt (3.1.11)
     bluecloth (2.2.0)
     builder (3.2.2)
     capistrano (2.15.7)
@@ -259,10 +267,6 @@ GEM
       rack (~> 1.0)
     thor (0.19.1)
     thread_safe (0.3.5)
-    typus (3.1.10)
-      bcrypt-ruby (~> 3.0.0)
-      jquery-rails
-      rails (>= 3.1.3)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -312,7 +316,7 @@ DEPENDENCIES
   test-unit
   therubyracer
   thin
-  typus
+  typus!
   uglifier
   uuidtools
   version_fu

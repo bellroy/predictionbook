@@ -8,38 +8,30 @@ class Response < ActiveRecord::Base
 
   MAX_COMMENT_LENGTH = 250
 
-  validates_presence_of :prediction
-  validates_presence_of :user, :message => 'Who are you?'
-  validates_inclusion_of :confidence, :in => 0..100, :allow_nil => true, :message => 'a probability is between 0 and 100%'
-  validate :length_of_comment_maximum, :if => lambda { |response| response.comment? }
+  validates :prediction, presence: true
+  validates :user, presence: { message: 'Who are you?' }
+  validates :confidence, inclusion: { in: 0..100, message: 'a probability is between 0 and 100%' },
+                         allow_nil: true
+  validate :length_of_comment_maximum, if: ->(response) { response.comment? }
   validate :presence_of_either_confidence_or_comment
   validate :prediction_accepting_confidences
 
-  delegate :unknown?, :to => :prediction
-  scope :comments, :conditions => "comment is not null"
+  delegate :unknown?, to: :prediction
+  scope :comments, -> { where('comment is not null') }
 
   nillify_blank :comment
 
-  WAGER_CONDITION = "confidence is not null"
-  scope :wagers, :conditions => WAGER_CONDITION do
-    def predictions
-      collect(&:prediction).uniq
-    end
-    def mean_confidence
-      average(:confidence).round unless empty?
-    end
-  end
+  WAGER_CONDITION = 'confidence is not null'.freeze
+  scope :wagers, -> { where(WAGER_CONDITION) }
 
-  scope :not_private,
-    :joins => :prediction,
-    :conditions => {'predictions.private' => false}
+  scope :not_private, -> { where(prediction: { private: false }) }
 
   def self.recent
     rsort.not_private.prefetch_joins
   end
 
   def self.prefetch_joins
-    all(:include => [:user, :prediction => [:judgements, :responses]])
+    all(include: [:user, prediction: [:judgements, :responses]])
   end
 
   def agree?
@@ -51,11 +43,9 @@ class Response < ActiveRecord::Base
   end
 
   def correct?
-    if unknown?
-      return
-    else
-      (prediction.right? and agree?) or (!prediction.right? and !agree?)
-    end
+    return if unknown?
+    correct_prediction = prediction.right?
+    (correct_prediction && agree?) || (!correct_prediction && !agree?)
   end
 
   def comment
@@ -67,26 +57,28 @@ class Response < ActiveRecord::Base
   end
 
   def action_comment
-    comment.sub(/^\/me /,'').strip() if comment?
+    comment.sub(/^\/me /, '').strip if comment?
   end
 
   def text_only_comment
-    comment? ? sanitize(comment.to_html, :tags => []) : ""
+    comment? ? sanitize(comment.to_html, tags: []) : ''
   end
 
   def characters_left
     MAX_COMMENT_LENGTH - text_only_comment.length
   end
 
-private
+  private
+
   def length_of_comment_maximum
-    errors.add(:comment, "must be less than #{MAX_COMMENT_LENGTH} characters") unless characters_left > 0
+    errors.add(:comment,
+               "must be less than #{MAX_COMMENT_LENGTH} characters") unless characters_left > 0
   end
 
   def presence_of_either_confidence_or_comment
     if confidence.blank? && comment.blank?
-      errors.add(:confidence, "confidence or comment is required")
-      errors.add(:comment, "comment or confidence is required")
+      errors.add(:confidence, 'confidence or comment is required')
+      errors.add(:comment, 'comment or confidence is required')
     end
   end
 

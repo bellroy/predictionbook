@@ -1,5 +1,5 @@
 require 'spec_helper'
-  # Be sure to include AuthenticatedTestHelper in spec/spec_helper.rb instead
+# Be sure to include AuthenticatedTestHelper in spec/spec_helper.rb instead
 # Then, you can remove it from this and the units test.
 include AuthenticatedTestHelper
 
@@ -7,21 +7,22 @@ include AuthenticatedTestHelper
 # A test controller with and without access controls
 #
 class AccessControlTestController < ApplicationController
-  before_filter :login_required, :only => :login_is_required
+  before_filter :login_required, only: :login_is_required
   def login_is_required
     respond_to do |format|
-      @foo = { 'success' => params[:format]||'no fmt given'}
-      format.html do render :text => "success"             end
-      format.xml  do render :xml  => @foo, :status => :ok  end
-      format.json do render :json => @foo, :status => :ok  end
+      @foo = { 'success' => params[:format] || 'no fmt given' }
+      format.html { render text: 'success'             }
+      format.xml  { render xml: @foo, status: :ok }
+      format.json { render json: @foo, status: :ok }
     end
   end
+
   def login_not_required
     respond_to do |format|
-      @foo = { 'success' => params[:format]||'no fmt given'}
-      format.html do render :text => "success"             end
-      format.xml  do render :xml  => @foo, :status => :ok  end
-      format.json do render :json => @foo, :status => :ok  end
+      @foo = { 'success' => params[:format] || 'no fmt given' }
+      format.html { render text: 'success'             }
+      format.xml  { render xml: @foo, status: :ok }
+      format.json { render json: @foo, status: :ok }
     end
   end
 end
@@ -31,15 +32,15 @@ end
 #
 
 ACCESS_CONTROL_FORMATS = [
-  ['html',     "success"],
+  %w(html success),
   ['xml',  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<hash>\n  <success>xml</success>\n</hash>\n"],
-  ['json', "{\"success\":\"json\"}"],]
+  ['json', '{"success":"json"}']].freeze
 ACCESS_CONTROL_AM_I_LOGGED_IN = [
   [:i_am_logged_in,     :quentin],
-  [:i_am_not_logged_in, nil],]
+  [:i_am_not_logged_in, nil]].freeze
 ACCESS_CONTROL_IS_LOGIN_REQD = [
   :login_not_required,
-  :login_is_required,]
+  :login_is_required].freeze
 
 describe AccessControlTestController do
   render_views
@@ -47,9 +48,9 @@ describe AccessControlTestController do
   before do
     # is there a better way to do this?
     Rails.application.routes.draw do
-      match '/login_is_required' => 'access_control_test#login_is_required'
-      match '/login_not_required' => 'access_control_test#login_not_required'
-      match '/login' => 'sessions#new', :as => :login
+      get '/login_is_required' => 'access_control_test#login_is_required'
+      get '/login_not_required' => 'access_control_test#login_not_required'
+      get '/login' => 'sessions#new', :as => :login
     end
   end
 
@@ -57,26 +58,25 @@ describe AccessControlTestController do
     Rails.application.reload_routes!
   end
 
-
   ACCESS_CONTROL_FORMATS.each do |format, success_text|
     ACCESS_CONTROL_AM_I_LOGGED_IN.each do |logged_in_status, user_login|
       ACCESS_CONTROL_IS_LOGIN_REQD.each do |login_reqd_status|
         describe "requesting #{format.blank? ? 'html' : format}; #{logged_in_status.to_s.humanize} and #{login_reqd_status.to_s.humanize}" do
           before do
             @user = format.blank? ? login_as(user_login) : authorize_as(user_login)
-            get login_reqd_status.to_s, :format => format
+            get login_reqd_status.to_s, format: format
           end
 
-          if ((login_reqd_status == :login_not_required) ||
-              (login_reqd_status == :login_is_required && logged_in_status == :i_am_logged_in))
-            it "succeeds" do
+          if (login_reqd_status == :login_not_required) ||
+             (login_reqd_status == :login_is_required && logged_in_status == :i_am_logged_in)
+            it 'succeeds' do
               response.body.should == success_text
               response.code.to_s.should == '200'
             end
 
-          elsif (login_reqd_status == :login_is_required && logged_in_status == :i_am_not_logged_in)
+          elsif login_reqd_status == :login_is_required && logged_in_status == :i_am_not_logged_in
             if ['html', ''].include? format
-              it "redirects me to the log in page" do
+              it 'redirects me to the log in page' do
                 response.should redirect_to(login_path)
               end
             else
@@ -90,9 +90,7 @@ describe AccessControlTestController do
             warn "Oops no case for #{format} and #{logged_in_status.to_s.humanize} and #{login_reqd_status.to_s.humanize}"
           end
         end # describe
-
       end
     end
   end # cases
-
 end
