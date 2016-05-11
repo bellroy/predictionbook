@@ -1,6 +1,4 @@
 class Response < ActiveRecord::Base
-  include CommonScopes
-
   include ActionView::Helpers::SanitizeHelper
 
   belongs_to :prediction
@@ -27,11 +25,19 @@ class Response < ActiveRecord::Base
   scope :not_private, -> { where(prediction: { private: false }) }
 
   def self.recent
-    rsort.not_private.prefetch_joins
+    order(created_at: :desc).not_private.prefetch_joins
   end
 
   def self.prefetch_joins
-    all(include: [:user, prediction: [:judgements, :responses]])
+    includes(user: { prediction: [:judgements, :responses]})
+  end
+
+  def self.predictions
+    collect(&:prediction).uniq
+  end
+
+  def self.mean_confidence
+    average(:confidence).round unless count == 0
   end
 
   def agree?

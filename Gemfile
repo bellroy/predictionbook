@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rails'
 gem 'rails-observers'
 gem 'jquery-rails'
+gem 'devise'
 # Models
 gem 'chronic'
 gem 'version_fu'
@@ -22,8 +23,6 @@ gem 'exception_notification'
 gem 'whenever'
 gem 'typus', github: 'typus/typus'
 
-gem 'test-unit'
-
 # Misc
 gem 'honeypot-captcha'
 
@@ -42,24 +41,24 @@ group :test, :development do
   gem 'simplecov'
 end
 
-group :cucumber, :development do
-  gem 'launchy'
-  gem 'gherkin'
-  gem 'cucumber-rails'
-  gem 'cucumber'
-end
-
 group :cucumber, :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'trike-code-metrics', git: 'git@github.com:tricycle/trike-code-metrics'
 end
 
 group :test do
+  gem 'launchy'
+  gem 'gherkin'
+  gem 'cucumber-rails', require: false
+  gem 'cucumber'
   gem 'factory_girl'
   gem 'ffaker'
   gem 'shoulda-matchers'
   gem 'guard-rspec'
   gem 'email_spec'
+  gem 'terminal-notifier-guard', require: false
+  gem 'terminal-notifier'
 end
 
 group :assets do

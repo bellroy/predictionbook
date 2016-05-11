@@ -12,11 +12,11 @@ describe UsersController do
     def show
       get :show, :id => 'adam'
     end
-    it 'should lookup the user by [] lookup' do
+    it 'looks up the user by [] lookup' do
       User.should_receive(:[]).and_return(@user)
       show
     end
-    it 'should get all the recent predictions by user name' do
+    it 'gets all the recent predictions by user name' do
       @user.should_receive(:predictions).and_return double(Array, :limit => double(Array, :not_private => []))
       show
     end
@@ -35,12 +35,12 @@ describe UsersController do
       show
       assigns[:predictions].should == predictions
     end
-    it 'should assign the predictions' do
+    it 'assigns the predictions' do
       @user.stub(:predictions).and_return(double(Array, :limit => predictions = []))
       show
       assigns[:predictions].should == predictions
     end
-    it 'should assign the user' do
+    it 'assigns the user' do
       show
       assigns[:user].should == @user
     end
@@ -59,7 +59,7 @@ describe UsersController do
       controller.statistics
     end
 
-    it 'should return the statistics from the user' do
+    it 'returns the statistics from the user' do
       @user.stub(:statistics).and_return(:stats)
       controller.statistics.should == :stats
     end
@@ -72,7 +72,7 @@ describe UsersController do
     def show
       get :settings, :id => 'adam'
     end
-    it 'should require the user to be logged in' do
+    it 'requires the user to be logged in' do
       controller.stub(:logged_in?).and_return(false)
       show
       response.should redirect_to(login_path)
@@ -82,12 +82,12 @@ describe UsersController do
       show
       response.response_code.should == 403
     end
-    it 'should render if passed authentication' do
+    it 'renders if passed authentication' do
       controller.stub(:current_user).and_return(@user)
       show
       response.should be_success
     end
-    it 'should assign user' do
+    it 'assigns user' do
       show
       assigns[:user].should == @user
     end

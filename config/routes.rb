@@ -1,20 +1,10 @@
 PredictionBook2::Application.routes.draw do
-  delete '/logout' => 'sessions#destroy', as: :logout
-  get '/login' => 'sessions#new', as: :login
-
-  resource :session
-
-  put '/register' => 'users#create', as: :register
-  get '/signup' => 'users#new', as: :signup
-
-  resources :users do
+  devise_for :users do
     get :settings, on: :member
     get :due_for_judgement, on: :member
     post :generate_api_token, on: :member
     resources :deadline_notifications
   end
-
-  resources :passwords, only: [:new, :create]
 
   resources :deadline_notifications
   resources :response_notifications

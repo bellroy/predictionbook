@@ -16,7 +16,7 @@ describe 'predictions/show.html.erb' do
     view.stub(:logged_in?).and_return(true)
   end
 
-  it 'should have a heading of the predicitons description' do
+  it 'has a heading of the predicitons description' do
     @prediction.stub(:description).and_return('Prediction Heading')
     render
     rendered.should have_css('h1', :text=> 'Prediction Heading')
@@ -58,7 +58,7 @@ describe 'predictions/show.html.erb' do
     end
   end
 
-  it 'should render the events partial' do
+  it 'renders the events partial' do
     render
     view.should render_template(:partial => 'predictions/_events')
   end
@@ -92,19 +92,19 @@ describe 'predictions/show.html.erb' do
           before(:each) do
             render
           end
-          it 'should have a form tag that submits to outcome' do
+          it 'has a form tag that submits to outcome' do
             rendered.should have_selector('form[method="post"][action="/predictions/1/judge"]')
           end
 
-          it 'should have a right button' do
+          it 'has a right button' do
             rendered.should have_selector('input[type="submit"][name="outcome"][value="Right"]')
           end
 
-          it 'should have a wrong button' do
+          it 'has a wrong button' do
             rendered.should have_selector('input[type="submit"][name="outcome"][value="Wrong"]')
           end
 
-          it 'should have a unknown button' do
+          it 'has a unknown button' do
             rendered.should have_selector('input[type="submit"][name="outcome"][value="Unknown"]')
           end
         end
@@ -145,7 +145,7 @@ describe 'predictions/show.html.erb' do
   end
 
   describe 'response form' do
-    it 'should ask if logged in' do
+    it 'asks if logged in' do
       view.should_receive(:logged_in?).at_least(:once).and_return(false)
       render
     end
@@ -187,17 +187,17 @@ describe 'predictions/show.html.erb' do
             rendered.should have_css("form.single-checkbox-form")
           end
 
-          it 'should have a hidden field for prediction_id' do
+          it 'has a hidden field for prediction_id' do
             render
             rendered.should have_selector("input[type='hidden'][name='#{form_name}[prediction_id]']")
           end
 
-          it 'should have a submit button' do
+          it 'has a submit button' do
             render
             rendered.should have_css("form#new_#{form_name} input[type='submit']")
           end
 
-          it 'should have a enabled checkbox' do
+          it 'has a enabled checkbox' do
             render
             rendered.should have_checked_field("#{form_name}[enabled]")
           end
@@ -211,23 +211,23 @@ describe 'predictions/show.html.erb' do
         view.stub(:logged_in?).and_return(true)
       end
 
-      it 'should have a form that submits to predictions/:id/responses' do
+      it 'has a form that submits to predictions/:id/responses' do
         @prediction.stub(:to_param).and_return('6')
         render
         rendered.should have_selector("form[action='/predictions/6/responses']")
       end
 
-      it 'should have a form with id new_response' do
+      it 'has a form with id new_response' do
         render
         rendered.should have_css('form#new_response')
       end
 
-      it 'should have a textarea for comment' do
+      it 'has a textarea for comment' do
         render
         rendered.should have_selector("textarea[name='response[comment]']")
       end
 
-      it 'should have a field for confidence' do
+      it 'has a field for confidence' do
         render
         rendered.should have_field('response[confidence]')
       end
@@ -238,7 +238,7 @@ describe 'predictions/show.html.erb' do
         rendered.should_not have_field('response[confidence]')
       end
 
-      it 'should have a submit button' do
+      it 'has a submit button' do
         render
         rendered.should have_selector('form#new_response input[type="submit"]')
       end

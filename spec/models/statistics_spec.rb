@@ -21,7 +21,7 @@ describe Statistics do
       fifth_response.save!
     end
 
-    it 'should create all intervals' do
+    it 'creates all intervals' do
       expect(stats.headings).to eq ["50%", "60%", "70%", "80%", "90%", "100%"]
     end
 
@@ -44,7 +44,7 @@ describe Statistics::Interval do
     end
 
     describe 'heading' do
-      it 'should be descriptive of the range' do
+      it 'is descriptive of the range' do
         interval.heading.should == '80%'
       end
     end

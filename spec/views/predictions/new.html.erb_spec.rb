@@ -23,34 +23,34 @@ describe 'predictions/new' do
     }.should cache_fragment("views/stats")
   end
 
-  it 'should have a form that POSTs to the prediction collection' do
+  it 'has a form that POSTs to the prediction collection' do
     render
     rendered.should have_selector("form[method='post'][action='/predictions']")
   end
 
-  it 'should have a hidden field with the predictions UUID' do
+  it 'has a hidden field with the predictions UUID' do
     @prediction.stub(:uuid).and_return('0d027d60-7b04-11dd-92d8-001f5b80f5b2')
     render
     rendered.should have_selector("input[type='hidden'][name='prediction[uuid]'][value='0d027d60-7b04-11dd-92d8-001f5b80f5b2']")
   end
 
-  it 'should have an input field for prediction description' do
+  it 'has an input field for prediction description' do
     render
     rendered.should have_selector("textarea[name='prediction[description]']")
   end
 
-  it 'should have an input field for the initial confidence' do
+  it 'has an input field for the initial confidence' do
     render
     rendered.should have_selector("input[type='text'][name='prediction[initial_confidence]']")
   end
 
   describe '(check box for the notify creator)' do
-    it 'should be present and checked when user has an email' do
+    it 'is present and checked when user has an email' do
       @prediction.stub(:notify_creator).and_return true
       render
       rendered.should have_checked_field('prediction[notify_creator]')
     end
-    it 'should be unchecked if user does not have email' do
+    it 'is unchecked if user does not have email' do
       @prediction.stub(:notify_creator).and_return false
       render
       rendered.should_not have_checked_field('prediction[notify_creator]')
@@ -58,11 +58,11 @@ describe 'predictions/new' do
   end
 
   describe '(check box for private)' do
-    it 'should be present' do
+    it 'is present' do
       render
       rendered.should have_field('prediction[private]')
     end
-    it 'should be checked when user private_default is true' do
+    it 'is checked when user private_default is true' do
       @prediction.stub(:private).and_return true
       render
       rendered.should have_checked_field('prediction[private]')
@@ -74,12 +74,12 @@ describe 'predictions/new' do
     end
   end
 
-  it 'should have an input field for the result' do
+  it 'has an input field for the result' do
     render
     rendered.should have_selector("input[type='text'][name='prediction[deadline_text]']")
   end
 
-  it 'should have a submit button' do
+  it 'has a submit button' do
     render
     rendered.should have_css('input[type="submit"]')
   end

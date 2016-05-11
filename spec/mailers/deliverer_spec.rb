@@ -3,11 +3,10 @@
 require 'spec_helper'
 
 describe Deliverer do
-  include ModelFactory
   include Rails.application.routes.url_helpers
 
-  describe "deadline notification" do
-    before :each do 
+  describe 'deadline notification' do
+    before :each do
       @deadline_notification = valid_deadline_notification
       @deadline_notification.save
       @deliverer = Deliverer.deadline_notification(@deadline_notification)
@@ -22,22 +21,22 @@ describe Deliverer do
 
     it { should be_multipart }
 
-    context "html part" do
+    context 'html part' do
       subject { @deliverer.html_part.body.to_s }
-      it { should include(prediction_url(@deadline_notification.prediction, :token=> @deadline_notification.uuid)) }
+      it { should include(prediction_url(@deadline_notification.prediction, token: @deadline_notification.uuid)) }
     end
 
-    context "text part" do
+    context 'text part' do
       subject { @deliverer.html_part.body.to_s }
-      it { should include(prediction_url(@deadline_notification.prediction, :token=> @deadline_notification.uuid)) }
+      it { should include(prediction_url(@deadline_notification.prediction, token: @deadline_notification.uuid)) }
     end
   end
 
-  describe "response notification" do
+  describe 'response notification' do
     before do
       @response_notification = valid_response_notification
       @response_notification.save
-      @deliverer = Deliverer.response_notification(@response_notification )
+      @deliverer = Deliverer.response_notification(@response_notification)
     end
 
     subject { @deliverer }
@@ -49,15 +48,14 @@ describe Deliverer do
 
     it { should be_multipart }
 
-    context "html part" do
+    context 'html part' do
       subject { @deliverer.html_part.body.to_s }
-      it { should include(prediction_url(@response_notification.prediction, :token=> @response_notification.uuid)) }
+      it { should include(prediction_url(@response_notification.prediction, token: @response_notification.uuid)) }
     end
 
-    context "text part" do
+    context 'text part' do
       subject { @deliverer.html_part.body.to_s }
-      it { should include(prediction_url(@response_notification.prediction, :token=> @response_notification.uuid)) }
+      it { should include(prediction_url(@response_notification.prediction, token: @response_notification.uuid)) }
     end
   end
-
 end

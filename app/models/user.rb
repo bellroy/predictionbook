@@ -1,35 +1,33 @@
 # -*- coding: utf-8 -*-
-require 'digest/sha1'
-
 class User < ActiveRecord::Base
-  # include Authentication
-  # include Authentication::ByPassword
-  # include Authentication::ByCookieToken
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
   has_many :responses
   delegate :wagers, to: :responses
-  has_many :predictions, through: :wagers
+  has_many :predictions, through: :responses
   has_many :deadline_notifications
   has_many :response_notifications
 
   nillify_blank :email, :name
 
-  validates_presence_of     :login
-  validates_length_of       :login,    maximum: 255
-  validates_uniqueness_of   :login,    case_sensitive: false
-  # validates_format_of       :login,    with: Authentication.login_regex, message: 'Readable characters only please'
+  delegate :image_url, to: :statistics, prefix: true
 
-  validates_length_of       :name,     maximum: 255, allow_nil: true
-  # validates_format_of       :name,     with: Authentication.name_regex, message: 'Readable characters only please'
-
-  validates_length_of       :email,    within: 6..100, allow_nil: true # r@a.wk
-  validates_uniqueness_of   :email,    case_sensitive: false, allow_nil: true
-  # validates_format_of       :email,    with: /\A#{Authentication.email_name_regex}@[-A-Z0-9\._]+\z/i, message: Authentication.bad_email_message, allow_nil: true
-
-  def self.authenticate(login, password)
-    u = find_by_login(login) # need to get the salt
-    u && u.authenticated?(password) ? u : nil
-  end
+  validates :login, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false },
+                    format: {
+                      with: /\A\w[\w\.\-_@]+\z/, message: 'Readable characters only please'
+                    }
+  validates :name, length: { maximum: 255, allow_nil: true },
+                   format: {
+                     with: /\A[^[:cntrl:]\\<>\/&]*\z/, message: 'Readable characters only please'
+                   }
+  validates :email, length: { within: 6..100, allow_nil: true },
+                    uniqueness: { case_sensitive: false, allow_nil: true },
+                    format: {
+                      with: /\A[\w\.%\+\-]+@[-A-Z0-9\._]+\z/i,
+                      message: 'does not look like an email address.',
+                      allow_nil: true
+                    }
 
   # find by login
   def self.[](login)
@@ -43,10 +41,6 @@ class User < ActiveRecord::Base
 
   def statistics
     Statistics.new("r.user_id = #{id}")
-  end
-
-  def statistics_image_url
-    statistics.image_url
   end
 
   def email_with_name
@@ -70,15 +64,12 @@ class User < ActiveRecord::Base
   end
 
   def authorized_for(prediction)
-    if prediction.private?
-      self == prediction.creator
-    else
-      admin? || self == prediction.creator
-    end
+    is_creator = self == prediction.creator
+    is_creator || (!prediction.private? && admin?)
   end
 
   def admin?
-    %w(matt gwern).include?(login) # I can imagine this method being slightly more complicated…
+    %w[matt gwern].include?(login)
   end
 
   def to_param
@@ -98,5 +89,12 @@ class User < ActiveRecord::Base
     save!
 
     UserMailer.password_reset(self).deliver
+  end
+
+  protected
+
+  # This overrides a Devise method to allow nil emails
+  def email_required?
+    false
   end
 end

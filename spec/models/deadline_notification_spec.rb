@@ -5,7 +5,7 @@ describe DeadlineNotification do
     describe 'named routes' do
       # have to hit the DB, named_routes rely on SQL
       describe 'unsent' do
-        it 'should find all unsent' do
+        it 'finds all unsent' do
           unsent = DeadlineNotification.new(:sent => false)
           unsent.save(:validate=> false)
           DeadlineNotification.new(:sent => true).save(:validate=> false)
@@ -14,7 +14,7 @@ describe DeadlineNotification do
         end
       end
       describe 'sendable' do
-        it 'should filter to having email and judgement due' do
+        it 'filters to having email and judgement due' do
           dns = double('dns').as_null_object
           dns.should_recieve(:sendable?)
           DeadlineNotification.should_receive(:unsent).and_return(dns)
@@ -50,7 +50,7 @@ describe DeadlineNotification do
       @dn = DeadlineNotification.new
     end
     describe 'deliver!' do
-      it 'should call deliver and update sent' do
+      it 'calls deliver and update sent' do
         @dn.should_receive(:deliver)
         @dn.should_receive(:update_attribute).with(:sent, true)
         @dn.deliver!
@@ -72,34 +72,34 @@ describe DeadlineNotification do
           :enabled? => true,
           :withdrawn? => false)
       end
-      it 'should be true when has email, is due and is enabled' do
+      it 'is true when has email, is due and is enabled' do
         @dn.should be_sendable
       end
-      it 'should be false when has no email, is due and is enabled' do
+      it 'is false when has no email, is due and is enabled' do
         @dn.stub(:has_email? => false)
         @dn.should_not be_sendable
       end
-      it 'should be false when has email, is not due and is enabled' do
+      it 'is false when has email, is not due and is enabled' do
         @dn.stub(:due_for_judgement? => false)
         @dn.should_not be_sendable
       end
-      it 'should be false when has no email, is due and is not enabled' do
+      it 'is false when has no email, is due and is not enabled' do
         @dn.stub(:has_email? => false, :enabled? => false)
         @dn.should_not be_sendable
       end
-      it 'should be false when has email, is not due and is not enabled' do
+      it 'is false when has email, is not due and is not enabled' do
         @dn.stub(:due_for_judgement? => false, :enabled? => false)
         @dn.should_not be_sendable
       end
-      it 'should be false when has no email, is not due and is enabled' do
+      it 'is false when has no email, is not due and is enabled' do
         @dn.stub(:has_email? => false, :due_for_judgement? => false)
         @dn.should_not be_sendable
       end
-      it 'should be false when has no email, not due, and disabled' do
+      it 'is false when has no email, not due, and disabled' do
         @dn.stub(:has_email? => false, :due_for_judgement? => false, :enabled? => false)
         @dn.should_not be_sendable
       end
-      it 'should be false when withdrawn' do
+      it 'is false when withdrawn' do
         @dn.stub(:withdrawn? => true)
         @dn.should_not be_sendable
       end

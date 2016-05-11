@@ -17,7 +17,7 @@ describe DatetimeDescriptionHelper do
       time_in_words_with_context(time).should == 'time ago'
     end
 
-    it 'should use distance_of_time_in_words to englishificate the datetime' do
+    it 'uses distance_of_time_in_words to englishificate the datetime' do
       should_receive(:time_ago_in_words).and_return('time')
       time_in_words_with_context(Time.now)
     end

@@ -33,7 +33,7 @@ describe LabelledFormBuilder do
     @builder.text_field(:name).should =~ /error_message/
   end
 
-  it 'should render trailing content after the text field inside the p tag' do
+  it 'renders trailing content after the text field inside the p tag' do
     @template.stub(:text_field).and_return('textfield')
     @builder.text_field(:name, :trailing_content => '#end').should =~ %r{textfield#end</p>$}
   end
