@@ -20,7 +20,7 @@ gem 'thin'
 # App housekeeping
 gem 'exception_notification'
 gem 'whenever'
-gem 'typus'
+gem 'typus', github: 'typus/typus'
 
 gem 'test-unit'
 

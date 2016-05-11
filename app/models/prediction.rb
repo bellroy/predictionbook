@@ -8,16 +8,16 @@ class Prediction < ActiveRecord::Base
     Chronic.parse(date, context: :future)
   end
 
-  scope :not_withdrawn, conditions: { withdrawn: false }
+  scope :not_withdrawn, -> { where(withdrawn: false) }
   # if you change the implementation of 'public', also change this scope in response
-  scope :not_private, conditions: { private: false }
+  scope :not_private, -> { where(private: false) }
 
-  DEFAULT_INCLUDES = [:judgements, :responses, :creator]
+  DEFAULT_INCLUDES = [:judgements, :responses, :creator].freeze
 
   def self.unjudged
     not_private.not_withdrawn.all(include: DEFAULT_INCLUDES,
                                   conditions: '(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NULL AND deadline < UTC_TIMESTAMP()')
-      .rsort(:deadline)
+               .rsort(:deadline)
   end
 
   def self.judged
@@ -113,7 +113,7 @@ class Prediction < ActiveRecord::Base
   end
 
   def mean_confidence
-    if preloaded_wagers.length > 0
+    if !preloaded_wagers.empty?
       total = preloaded_wagers.map(&:confidence).inject(0, &:+)
       (total / preloaded_wagers.length).round
     else
@@ -158,7 +158,7 @@ class Prediction < ActiveRecord::Base
   end
 
   def withdraw!
-    fail ArgumentError, 'Prediction must be open to be withdrawn' unless open?
+    raise ArgumentError, 'Prediction must be open to be withdrawn' unless open?
     update_attribute(:withdrawn, true)
   end
 
@@ -217,7 +217,7 @@ class Prediction < ActiveRecord::Base
   end
 
   def public?
-    not private?
+    !private?
   end
 
   private
