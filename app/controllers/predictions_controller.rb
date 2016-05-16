@@ -1,9 +1,9 @@
 # encoding: utf-8
 
 class PredictionsController < ApplicationController
-  before_filter :authenticate_user!, only: [:new, :create, :judge, :withdraw, :edit, :update]
-  before_filter :find_prediction, only: [:judge, :show, :withdraw, :edit, :update]
-  before_filter :must_be_authorized_for_prediction, only: [:withdraw, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :judge, :withdraw, :edit, :update]
+  before_action :find_prediction, only: [:judge, :show, :withdraw, :edit, :update]
+  before_action :must_be_authorized_for_prediction, only: [:withdraw, :edit, :update, :show]
 
   helper_method :statistics, :show_statistics?
 
@@ -11,17 +11,14 @@ class PredictionsController < ApplicationController
 
   def new
     @title = 'Make a Prediction'
-    @statistics = current_user.statistics if current_user
-    privacy = false
-    privacy = current_user.private_default if current_user
+    @statistics = current_user.try(:statistics)
+    privacy = current_user.try(:private_default) || false
     @prediction = Prediction.new(creator: current_user, private: privacy)
   end
 
   def create
     begin
-      prediction_params = params[:prediction]
-      prediction_params[:private] = current_user.private_default unless prediction_params.key?(:private)
-      @prediction = Prediction.create!(prediction_params.merge(creator: current_user))
+      @prediction = Prediction.create!(prediction_params)
     rescue Prediction::DuplicateRecord => duplicate
       @prediction = duplicate.record
     end
@@ -36,7 +33,7 @@ class PredictionsController < ApplicationController
   end
 
   def update
-    @prediction.update_attributes!(params[:prediction])
+    @prediction.update_attributes!(prediction_params)
     redirect_to prediction_path(@prediction)
   rescue ActiveRecord::RecordInvalid => invalid
     @prediction = invalid.record
@@ -47,10 +44,10 @@ class PredictionsController < ApplicationController
     privacy = false
     privacy = current_user.private_default if current_user
     @prediction = Prediction.new(creator: current_user, private: privacy)
-    @responses = Response.limit(25).recent
+    @responses = Response.recent.limit(25)
     @title = 'How sure are you?'
     @filter = 'popular'
-    @predictions = Prediction.limit(5).popular
+    @predictions = Prediction.popular(limit: 5)
     @show_statistics = false
   end
 
@@ -62,14 +59,12 @@ class PredictionsController < ApplicationController
   def index
     @title = 'Recent Predictions'
     @filter = 'recent'
-    @predictions = Prediction.limit(100).recent
+    @predictions = Prediction.recent(limit: 100)
     @show_statistics = true
   end
 
   def show
-    render status: :forbidden unless current_user && current_user.authorized_for(@prediction)
-
-    if logged_in?
+    if current_user.present?
       @prediction_response = Response.new(user: current_user)
       @deadline_notification = @prediction.deadline_notification_for_user(current_user)
       @response_notification = @prediction.response_notification_for_user(current_user)
@@ -83,7 +78,7 @@ class PredictionsController < ApplicationController
   def judged
     @title = 'Judged Predictions'
     @filter = 'judged'
-    @predictions = Prediction.limit(100).judged
+    @predictions = Prediction.judged(limit: 100)
     @show_statistics = true
     render action: 'index'
   end
@@ -91,22 +86,22 @@ class PredictionsController < ApplicationController
   def unjudged
     @title = 'Unjudged Predictions'
     @filter = 'unjudged'
-    @predictions = Prediction.limit(100).unjudged
+    @predictions = Prediction.unjudged(limit: 100)
     render action: 'index'
   end
 
   def future
     @title = 'Upcoming Predictions'
     @filter = 'future'
-    @predictions = Prediction.limit(100).future
+    @predictions = Prediction.future(limit: 100)
     render action: 'index'
   end
 
   def happenstance
     @title = 'Recent Happenstance'
-    @unjudged = Prediction.limit(5).unjudged
-    @judged = Prediction.limit(5).judged
-    @recent = Prediction.limit(5).recent
+    @unjudged = Prediction.unjudged(limit: 5)
+    @judged = Prediction.judged(limit: 5)
+    @recent = Prediction.recent(limit: 5)
     @responses = Response.limit(25).recent
   end
 
@@ -132,10 +127,20 @@ class PredictionsController < ApplicationController
   private
 
   def must_be_authorized_for_prediction
-    render status: :forbidden unless current_user && current_user.authorized_for(@prediction)
+    authorized = current_user && current_user.authorized_for(@prediction)
+    render status: :forbidden, action: 'new' unless authorized
   end
 
   def find_prediction
     @prediction = Prediction.find(params[:id])
+  end
+
+  def prediction_params
+    result = params.require(:prediction).permit!
+    if @prediction.nil?
+      result[:private] = current_user.private_default unless result.key?(:private)
+      result[:creator_id] = current_user.id
+    end
+    result
   end
 end

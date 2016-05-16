@@ -3,17 +3,22 @@
 require 'spec_helper'
 
 describe PredictionsController do
+  let(:logged_in_user) { FactoryGirl.create(:user) }
+  let(:creator) { FactoryGirl.create(:user) }
+  let(:prediction) { FactoryGirl.create(:prediction, creator: creator) }
+
+  before { sign_in(logged_in_user) if logged_in_user.present? }
+
   describe 'getting the homepage' do
     it 'assigns a new prediction' do
-      Prediction.stub(:new).and_return(:new_prediction)
       get :home
-      expect(assigns[:prediction]).to eq :new_prediction
+      expect(assigns[:prediction]).to be_a Prediction
+      expect(assigns[:prediction]).to be_new_record
     end
 
     it 'assigns some responses' do
-      Response.stub(:limit).and_return(double('responses', recent: :responses))
       get :home
-      expect(assigns[:responses]).to eq :responses
+      expect(assigns[:responses]).not_to be_nil
     end
 
     it 'returns http sucess status response' do
@@ -24,7 +29,7 @@ describe PredictionsController do
 
   describe 'getting the "unjudged" page' do
     it 'assigns the unjudged predictions' do
-      Prediction.should_receive(:unjudged).and_return(:unjudged)
+      expect(Prediction).to receive(:unjudged).and_return(:unjudged)
       get :unjudged
       expect(assigns[:predictions]).to eq :unjudged
     end
@@ -36,7 +41,7 @@ describe PredictionsController do
 
     it 'renders index template' do
       get :unjudged
-      response.should render_template('predictions/index')
+      expect(response).to render_template('predictions/index')
     end
   end
 
@@ -46,10 +51,11 @@ describe PredictionsController do
       judged = double(:judged).as_null_object
       recent = double(:recent).as_null_object
       responses = double(:responses).as_null_object
-      Prediction.should_receive(:limit).with(5).and_return(double(:collection, unjudged: unjudged))
-      Prediction.should_receive(:limit).with(5).and_return(double(:collection, judged: judged))
-      Prediction.should_receive(:limit).with(5).and_return(double(:collection, recent: recent))
-      Response.should_receive(:limit).with(25).and_return(double(:collection, recent: responses))
+      expect(Prediction).to receive(:unjudged).and_return(unjudged)
+      expect(Prediction).to receive(:judged).and_return(judged)
+      expect(Prediction).to receive(:recent).and_return(recent)
+      expect(Response).to receive(:limit)
+        .with(25).and_return(double(:collection, recent: responses))
       get :happenstance
 
       expect(assigns[:unjudged]).to eq unjudged
@@ -63,7 +69,7 @@ describe PredictionsController do
     describe 'index of predictions' do
       it 'assigns recent predictions for the view' do
         recent = double(:recent_predictions).as_null_object
-        Prediction.should_receive(:limit).with(100).and_return(double(:collection, recent: recent))
+        expect(Prediction).to receive(:recent).and_return(recent)
         get :index
         expect(assigns[:predictions]).to eq recent
       end
@@ -71,12 +77,12 @@ describe PredictionsController do
 
     describe 'statistics' do
       it 'provides a statistics accessor for the view' do
-        controller.should respond_to(:statistics)
+        expect(controller).to respond_to(:statistics)
       end
 
       it 'delegates statistics to the wagers collection' do
         stats = double(Statistics)
-        Statistics.stub(:new).and_return(stats)
+        expect(Statistics).to receive(:new).and_return(stats)
         expect(controller.statistics).to eq stats
       end
     end
@@ -88,7 +94,7 @@ describe PredictionsController do
 
     it 'renders index template' do
       get :index
-      response.should render_template('predictions/index')
+      expect(response).to render_template('predictions/index')
     end
 
     describe 'recent predictions index' do
@@ -99,17 +105,16 @@ describe PredictionsController do
 
       it 'assigns the title' do
         get :index
-        assigns[:title].should_not be_nil
+        expect(assigns[:title]).not_to be_nil
       end
 
       describe 'collection' do
         before do
           @collection = []
-          Prediction.stub(:recent).and_return(@collection)
+          expect(Prediction).to receive(:recent).and_return(@collection)
         end
 
         it 'assigns the collection' do
-          @collection.stub(:prefetch_joins).and_return(@collection)
           get :index
           expect(assigns[:predictions]).to eq @collection
         end
@@ -123,31 +128,32 @@ describe PredictionsController do
   end
 
   describe 'Getting a form for a new Prediction' do
-    it 'redirects to the login page if not logged in' do
-      get :new
-      response.should redirect_to(new_user_session_path)
+    context 'user logged in' do
+      let(:logged_in_user) { nil }
+      it 'redirects to the login page if not logged in' do
+        get :new
+        expect(response).to redirect_to(new_user_session_path)
+      end
     end
 
     context 'user logged in' do
-      before { sign_in FactoryGirl.create(:user) }
-
       it 'responds with http success status' do
         get :new
-        response.should be_success
+        expect(response).to be_success
       end
 
       it 'renders new template' do
         get :new
-        response.should render_template('predictions/new')
+        expect(response).to render_template('predictions/new')
       end
 
       it 'instantiates a new Prediction object' do
-        Prediction.should_receive(:new)
+        expect(Prediction).to receive(:new)
         get :new
       end
 
       it 'assigns new prediction object for the view' do
-        Prediction.stub(:new).and_return(:prediction)
+        expect(Prediction).to receive(:new).and_return(:prediction)
         get :new
         expect(assigns[:prediction]).to eq :prediction
       end
@@ -155,321 +161,287 @@ describe PredictionsController do
   end
 
   describe 'Creating a new prediction' do
-    def post_prediction(params = {})
-      post :create, 'prediction' => params
-    end
+    let(:params) { FactoryGirl.build(:prediction).attributes }
 
-    before(:each) do
-      @prediction = FactoryGirl.create(:prediction)
-      Prediction.stub(:create!)
-      Prediction.stub(:recent)
-      controller.stub(:logged_in?).and_return(true)
-      @user = build(:user)
-      controller.stub(:current_user).and_return(@user)
-    end
+    subject(:create) { post :create, prediction: params }
 
     describe 'privacy' do
       before do
-        @user.private_default = true
-        Prediction.stub(:create!).and_return(@prediction)
+        logged_in_user.update_attributes(private_default: true)
       end
 
       describe 'when creator private default is true ' do
-        it 'is false when prediction privacy is false' do
-          Prediction.should_receive(:create!).with(hash_including('private' => '0'))
-          post_prediction('private' => '0')
+        context 'creating public prediction' do
+          let(:params) { { private: '0' } }
+          it 'is false when prediction privacy is false' do
+            create
+            expect(assigns[:prediction].private?).to be false
+          end
         end
 
-        it 'is true when prediction privacy is true ' do
-          Prediction.should_receive(:create!).with(hash_including('private' => '1'))
-          post_prediction('private' => '1')
+        context 'when prediction privacy is true' do
+          let(:params) { { private: prediction.id } }
+
+          specify do
+            expect(Prediction).to receive(:create!)
+              .with(hash_including('private' => prediction.id.to_s)).and_return(prediction)
+            create
+          end
         end
 
-        it 'is true when prediction privacy is not provided' do
-          Prediction.should_receive(:create!).with(hash_including('private' => @user.private_default))
-          post_prediction
+        context 'when prediction privacy is not provided' do
+          let(:params) { { private: logged_in_user.private_default } }
+
+          it 'is true when prediction privacy is not provided' do
+            expect(Prediction).to receive(:create!)
+              .with(hash_including('private' => logged_in_user.private_default))
+              .and_return(prediction)
+            create
+          end
         end
       end
 
       describe 'when creator private default is false' do
         before do
-          @user.private_default = false
+          logged_in_user.update_attributes(private_default: false)
         end
 
-        it 'is false when prediction privacy is false' do
-          Prediction.should_receive(:create!).with(hash_including('private' => '0'))
-          post_prediction('private' => '0')
+        context 'prediction privacy is false' do
+          let(:params) { { private: '0' } }
+
+          specify do
+            expect(Prediction).to receive(:create!)
+              .with(hash_including('private' => '0')).and_return(prediction)
+            create
+          end
         end
 
-        it 'is true when prediction privacy is true ' do
-          Prediction.should_receive(:create!).with(hash_including('private' => '1'))
-          post_prediction('private' => '1')
+        context 'when prediction privacy is true' do
+          let(:params) { { private: prediction.id } }
+
+          it 'is true when prediction privacy is true ' do
+            expect(Prediction).to receive(:create!)
+              .with(hash_including('private' => prediction.id.to_s)).and_return(prediction)
+            create
+          end
         end
 
         it 'is false when prediction privacy is not provided' do
-          Prediction.should_receive(:create!).with(hash_including('private' => @user.private_default))
-          post_prediction
+          expect(Prediction).to receive(:create!)
+            .with(hash_including('private' => logged_in_user.private_default))
+            .and_return(prediction)
+          create
         end
       end
     end
 
-    it 'redirects to the login page if not logged in' do
-      controller.stub(:logged_in?).and_return(false)
-      post_prediction
-      response.should redirect_to(new_user_session_path)
+    context 'not logged in' do
+      let(:logged_in_user) { nil }
+      it 'redirects to the login page if not logged in' do
+        create
+        expect(response).to redirect_to(new_user_session_path)
+      end
     end
 
     it 'uses the current_user as the creator' do
-      u = mock_model(User)
-      controller.stub(:current_user).and_return(u)
-      Prediction.should_receive(:create!).with(hash_including(creator: u)).and_return(@prediction)
-      post_prediction
-    end
-
-    it 'creates a new prediction with the POSTed params' do
-      Prediction.should_receive(:create!).with(hash_including(description: 'foobar')).and_return(@prediction)
-      post_prediction(description: 'foobar')
+      expect(Prediction).to receive(:create!)
+        .with(hash_including(creator_id: logged_in_user.id)).and_return(prediction)
+      create
     end
 
     describe 'redirect' do
       it 'redirects to the prediction view page' do
-        Prediction.stub(:create!).and_return(@prediction)
-        post_prediction
+        expect(Prediction).to receive(:create!).and_return(prediction)
+        create
 
-        response.should redirect_to(prediction_path(@prediction))
+        expect(response).to redirect_to(prediction_path(prediction))
       end
       it 'goes to the index predictions view if there was a duplicate submit' do
-        Prediction.stub(:create!).and_raise(Prediction::DuplicateRecord.new(@prediction))
-        post_prediction
+        expect(Prediction).to receive(:create!)
+          .and_raise(Prediction::DuplicateRecord.new(prediction))
+        create
 
-        response.should redirect_to(prediction_path(@prediction))
+        expect(response).to redirect_to(prediction_path(prediction))
       end
     end
 
     it 'sets the Time.zone to users preference' do
-      Prediction.stub(:create!).and_return(@prediction)
-      controller.should_receive(:set_timezone).at_least(:once) # before filters suck in spec-land
-      post_prediction
+      expect(Prediction).to receive(:create!).and_return(prediction)
+      expect(controller).to receive(:set_timezone).at_least(:once)
+      create
     end
 
     describe 'when the params are invalid' do
       before(:each) do
-        prediction = mock_model(Prediction, errors: double('errors', full_messages: []))
-        Prediction.stub(:create!).and_raise(ActiveRecord::RecordInvalid.new(prediction))
+        expect(Prediction).to receive(:create!)
+          .and_raise(ActiveRecord::RecordInvalid.new(prediction))
       end
 
       it 'responds with an http unprocesseable entity status' do
-        post_prediction
+        create
         expect(response.response_code).to eq 422
       end
 
       it 'renders "new" form' do
-        post_prediction
-        response.should render_template('predictions/new')
+        create
+        expect(response).to render_template('predictions/new')
       end
 
       it 'assigns the prediction' do
-        post_prediction
-        assigns[:prediction].should_not be_nil
+        create
+        expect(assigns[:prediction]).not_to be_nil
       end
     end
   end
 
   describe 'viewing a prediction' do
-    before do
-      @prediction = FactoryGirl.create(:prediction)
-      Prediction.stub(:find).and_return(@prediction)
-      controller.stub(:logged_in?).and_return(true)
-      controller.stub(:current_user).and_return(mock_model(User))
+    let(:logged_in_user) { creator }
+
+    it 'assigns the prediction' do
+      get :show, id: prediction.id
+      expect(assigns[:prediction]).to eq prediction
     end
 
-    it 'assigns the prediction to prediction' do
-      get :show, id: '1'
-      expect(assigns[:prediction]).to eq @prediction
-    end
-
-    # TODO: Make blackbox (will probably have to hit DB)
-    it 'gets the deadline notifications for the prediction' do
-      dn = @prediction.deadline_notifications
-      @prediction.should_receive(:deadline_notifications).at_least(:once).and_return(dn)
-      get :show, id: '1'
-    end
-
-    # TODO: too long
-    it 'filters the deadline notifications by the current user' do
-      u = User.new
-      controller.stub(:current_user).and_return(u)
-      @prediction.deadline_notifications.should_receive(:find_by_user_id).with(u).and_return(:a_dn)
-      get :show, id: '1'
-
-      expect(assigns[:deadline_notification]).to eq :a_dn
-    end
-
-    it 'finds the prediction based on id' do
-      Prediction.should_receive(:find).with('5').and_return(@prediction)
-      get :show, id: '5'
-    end
-
-    describe 'private predictions' do
-      before(:each) do
-        @prediction.stub(:private?).and_return(true)
-        @prediction.stub(:creator).and_return(@user = User.new)
-      end
-
-      it 'is forbidden when not owned by current user' do
-        controller.stub(:current_user).and_return(User.new)
-        get :show, id: '1'
-        expect(response.response_code).to eq 403
-      end
-
-      it 'is forbidden when not logged in' do
-        controller.stub(:current_user).and_return(nil)
-        controller.stub(:logged_in?).and_return(false)
-        get :show, id: '1'
-        expect(response.response_code).to eq 403
-      end
-
-      it 'is viewable when user is current user' do
-        controller.stub(:current_user).and_return(@user)
-        get :show, id: '1'
-        response.should be_success
-      end
+    it 'assigns the prediction events' do
+      get :show, id: prediction.id
+      expect(assigns[:events]).to eq prediction.events
     end
 
     describe 'response object for commenting or wagering' do
-      before(:each) do
-        Prediction.stub(:find).and_return FactoryGirl.create(:prediction)
-      end
+      before { expect(Prediction).to receive(:find).and_return prediction }
 
       it 'instantiates a new Response object' do
-        Response.should_receive(:new)
-        get :show, id: '6'
+        expect(Response).to receive(:new)
+        get :show, id: prediction.id
       end
 
       it 'assigns new wager object for the view' do
-        Response.stub(:new).and_return :response
-        get :show, id: '6'
+        expect(Response).to receive(:new).and_return :response
+        get :show, id: prediction.id
         expect(assigns[:prediction_response]).to eq :response
       end
 
       it 'assigns the current user to the response' do
-        user = User.new
-        controller.stub(:current_user).and_return(user)
-        Response.should_receive(:new).with(hash_including(user: user))
-        get :show, id: '6'
+        expect(Response).to receive(:new).with(hash_including(user: logged_in_user))
+        get :show, id: prediction.id
+      end
+    end
+
+    it 'filters the deadline notifications by the current user' do
+      get :show, id: prediction.id
+      expect(response).to be_success
+      expect(assigns[:deadline_notification]).to be_a DeadlineNotification
+    end
+
+    describe 'private predictions' do
+      before(:each) do
+        allow_any_instance_of(Prediction).to receive(:private?).and_return(true)
+      end
+
+      context 'not owned by current user' do
+        let(:logged_in_user) { FactoryGirl.create(:user) }
+        it 'is forbidden when not owned by current user' do
+          get :show, id: prediction.id
+          expect(response.response_code).to eq 403
+        end
+      end
+
+      context 'not logged in' do
+        let(:logged_in_user) { nil }
+
+        it 'is forbidden when not logged in' do
+          get :show, id: prediction.id
+          expect(response.response_code).to eq 403
+        end
+      end
+    end
+
+    describe 'response object for commenting or wagering' do
+      it 'instantiates a new Response object' do
+        get :show, id: prediction.id
+        expect(assigns[:prediction_response]).to be_a Response
+        expect(assigns[:prediction_response]).to be_new_record
+        expect(assigns[:prediction_response].user).to eq logged_in_user
       end
     end
   end
 
   describe 'Updating the outcome of a prediction' do
-    before(:each) do
-      @prediction = mock_model(Prediction, to_param: '1') # .as_null_object
-      Prediction.stub(:find).and_return(@prediction)
-      controller.stub(:logged_in?).and_return(true)
-      controller.stub(:current_user)
+    let(:id) { prediction.id }
+    let(:outcome) { '' }
+
+    subject(:judge) { post :judge, id: id, outcome: outcome }
+
+    context 'not logged in' do
+      let(:logged_in_user) { nil }
+
+      it 'requires the user to be logged in' do
+        judge
+        expect(response).to redirect_to(new_user_session_path)
+      end
     end
 
-    def post_outcome(params = {})
-      post :judge, { id: '1', outcome: '' }.merge(params)
-    end
+    context 'outcome is right' do
+      let(:outcome) { 'right' }
 
-    it 'requires the user to be logged in' do
-      controller.stub(:logged_in?).and_return(false)
-      post_outcome
-      response.should redirect_to(new_user_session_path)
-    end
-
-    it 'sets the prediction to the passed outcome on POST to outcome' do
-      @prediction.should_receive(:judge!).with('right', anything)
-      post_outcome outcome: 'right'
+      it 'sets the prediction to the passed outcome on POST to outcome' do
+        allow_any_instance_of(Prediction).to receive(:judge!).with('right', anything)
+        judge
+      end
     end
 
     it 'passes in the user to the judge method' do
-      controller.stub(:current_user).and_return(:mr_user)
-      @prediction.should_receive(:judge!).with(anything, :mr_user)
-      post_outcome
+      allow_any_instance_of(Prediction).to receive(:judge!).with(anything, logged_in_user)
+      judge
     end
 
     it 'finds and assign the prediction based on passed through ID' do
-      Prediction.should_receive(:find).with('444').and_return(@prediction)
-      @prediction.should_receive(:judge!).with(anything, nil)
-      post_outcome id: '444'
-      expect(assigns[:prediction]).to eq @prediction
+      allow_any_instance_of(Prediction).to receive(:judge!).with(anything, logged_in_user)
+      judge
+      expect(assigns[:prediction]).to eq prediction
     end
 
     it 'redirects to prediction page after POST to outcome' do
-      @prediction.stub(:to_param).and_return('33')
-      @prediction.should_receive(:judge!).with(anything, nil)
-      post_outcome id: '33'
-      response.should redirect_to(prediction_path('33'))
+      allow_any_instance_of(Prediction).to receive(:judge!).with(anything, logged_in_user)
+      judge
+      expect(response).to redirect_to(prediction_path(prediction))
     end
 
     it 'sets a flash variable judged to a css class to apply to the judgment view' do
-      @prediction.should_receive(:judge!).with(anything, nil)
-      post_outcome
-      flash[:judged].should_not be_nil
-    end
-
-    describe 'expiring the cached statistics fragments for users' do
-      before(:each) do
-        User.destroy_all
-        @prediction = FactoryGirl.create(:prediction)
-        Prediction.stub(:find).and_return(@prediction)
-        @prediction.stub(:to_param).and_return('zippy')
-      end
-
-      it 'expires fragment for the creator of the prediction' do
-        -> { post_outcome }.should expire_fragment("views/statistics_partial-#{@prediction.creator.to_param}")
-      end
-      it 'expires fragment for other users that have wagered on the prediction' do
-        @prediction.responses.create!(user: valid_user(login: 'mr-meeto'), confidence: '90')
-        -> { post_outcome }.should expire_fragment('views/statistics_partial-mr-meeto')
-      end
-      it "does not expire fragment for other users that haven't wagered on the prediction" do
-        @prediction.stub(:wagers).and_return([])
-        -> { post_outcome }.should_not expire_fragment('views/statistics_partial-not-mee')
-      end
-      it 'expires to application-wide statistics partial' do
-        -> { post_outcome }.should expire_fragment('views/statistics_partial')
-      end
+      allow_any_instance_of(Prediction).to receive(:judge!).with(anything, logged_in_user)
+      judge
+      expect(flash[:judged]).not_to be_nil
     end
   end
 
   describe 'Withdrawing a prediction' do
-    before(:each) do
-      @prediction = mock_model(Prediction, id: '12') # .as_null_object
-      Prediction.stub(:find).and_return(@prediction)
-      controller.stub(:logged_in?).and_return(true)
-    end
-
     describe 'when the current user is the creator of the prediction' do
-      before(:each) do
-        controller.stub(:must_be_authorized_for_prediction)
+      context 'not logged in' do
+        let(:logged_in_user) { nil }
+
+        it 'requires the user to be logged in' do
+          post :withdraw, id: prediction.id
+          expect(response).to redirect_to(new_user_session_path)
+        end
       end
 
-      it 'requires the user to be logged in' do
-        controller.stub(:logged_in?).and_return(false)
-        post :withdraw, id: '12'
-        response.should redirect_to(new_user_session_path)
-      end
+      context 'logged in' do
+        before(:each) do
+          expect(controller).to receive(:must_be_authorized_for_prediction)
+        end
 
-      it 'redirects to prediction page after POST to withdraw' do
-        @prediction.should_receive(:withdraw!)
-        post :withdraw, id: '12'
-        response.should redirect_to(prediction_path('12'))
-      end
-
-      it 'calls the withdraw! method on the prediction' do
-        @prediction.should_receive(:withdraw!)
-        post :withdraw, id: '12'
+        it 'redirects to prediction page after POST to withdraw' do
+          expect_any_instance_of(Prediction).to receive(:withdraw!)
+          post :withdraw, id: prediction.id
+          expect(response).to redirect_to(prediction_path(prediction.id))
+        end
       end
     end
+
     describe 'when the current user is not the creator of the prediction' do
       it 'denies access' do
-        @prediction.stub(:creator).and_return(User.new)
-        @prediction.should_receive(:private?).and_return(false)
-        controller.stub(:current_user).and_return(User.new)
-        post :withdraw, id: '12'
+        allow_any_instance_of(Prediction).to receive(:private?).and_return(false)
+        post :withdraw, id: prediction.id
         expect(response.response_code).to eq 403
       end
     end
@@ -488,10 +460,10 @@ describe PredictionsController do
       end
       it 'assigns the title' do
         get action
-        assigns[:title].should_not be_nil
+        expect(assigns[:title]).not_to be_nil
       end
       it 'assigns the collection' do
-        Prediction.stub(action).and_return(:collection)
+        expect(Prediction).to receive(action).and_return(:collection)
         get action
         expect(assigns[:predictions]).to eq :collection
       end
@@ -502,146 +474,55 @@ describe PredictionsController do
     end
   end
 
-  describe 'viewing a prediction' do
-    before do
-      @prediction = FactoryGirl.create(:prediction)
-      Prediction.stub(:find).and_return(@prediction)
-      controller.stub(:logged_in?).and_return(true)
-      controller.stub(:current_user).and_return(mock_model(User))
-    end
-
-    it 'assigns the prediction to @prediction' do
-      get :show, id: '1'
-      expect(assigns[:prediction]).to eq @prediction
-    end
-
-    it 'assigns the prediction events to @events' do
-      get :show, id: '1'
-      expect(assigns[:events]).to eq @prediction.events
-    end
-
-    # TODO: Make blackbox (will probably have to hit DB)
-    it 'gets the deadline notifications for the prediction' do
-      dn = @prediction.deadline_notifications
-      @prediction.should_receive(:deadline_notifications).at_least(:once).and_return(dn)
-      get :show, id: '1'
-    end
-
-    # TODO: too long
-    it 'filters the deadline notifications by the current user' do
-      u = User.new
-      controller.stub(:current_user).and_return(u)
-      @prediction.deadline_notifications.should_receive(:find_by_user_id).with(u).and_return(:a_dn)
-      get :show, id: '1'
-
-      expect(assigns[:deadline_notification]).to eq :a_dn
-    end
-
-    it 'finds the prediction based on id' do
-      Prediction.should_receive(:find).with('5').and_return(@prediction)
-      get :show, id: '5'
-    end
-
-    describe 'private predictions' do
-      before(:each) do
-        @prediction.stub(:private?).and_return(true)
-        @prediction.stub(:creator).and_return(@user = User.new)
-      end
-
-      it 'is forbidden when not owned by current user' do
-        controller.stub(:current_user).and_return(User.new)
-        get :show, id: '1'
-        expect(response.response_code).to eq 403
-      end
-
-      it 'is forbidden when not logged in' do
-        controller.stub(:current_user).and_return(nil)
-        controller.stub(:logged_in?).and_return(false)
-        get :show, id: '1'
-        expect(response.response_code).to eq 403
-      end
-
-      it 'is viewable when user is current user' do
-        controller.stub(:current_user).and_return(@user)
-        get :show, id: '1'
-        response.should be_success
-      end
-    end
-
-    describe 'response object for commenting or wagering' do
-      before(:each) do
-        Prediction.stub(:find).and_return FactoryGirl.create(:prediction)
-      end
-
-      it 'instantiates a new Response object' do
-        Response.should_receive(:new)
-        get :show, id: '6'
-      end
-
-      it 'assigns new wager object for the view' do
-        Response.stub(:new).and_return :response
-        get :show, id: '6'
-        expect(assigns[:prediction_response]).to eq :response
-      end
-
-      it 'assigns the current user to the response' do
-        user = User.new
-        controller.stub(:current_user).and_return(user)
-        Response.should_receive(:new).with(hash_including(user: user))
-        get :show, id: '6'
-      end
-    end
-  end
-
   describe 'getting the edit form for a prediction' do
-    it 'requires a login' do
-      get :edit, id: '1'
-      response.should redirect_to(new_user_session_path)
+    describe 'not logged in' do
+      let(:logged_in_user) { nil }
+      it 'requires a login' do
+        get :edit, id: prediction.id
+        expect(response).to redirect_to(new_user_session_path)
+      end
     end
 
     describe 'when logged in' do
-      before(:each) do
-        controller.stub(:login_required)
-        @p = FactoryGirl.create(:prediction)
-      end
-
       it 'requires the user to have created the prediction' do
-        controller.stub(:current_user).and_return(User.new)
-        get :edit, id: @p.id
+        get :edit, id: prediction.id
         expect(response.response_code).to eq 403
       end
 
-      it 'assigns the prediction' do
-        controller.stub(:current_user).and_return(@p.creator)
-        get :edit, id: @p.id
-        expect(assigns[:prediction]).to eq @p
+      context 'logged in user is creator' do
+        let(:creator) { logged_in_user }
+
+        it 'assigns the prediction' do
+          get :edit, id: prediction.id
+          expect(assigns[:prediction]).to eq prediction
+        end
       end
     end
   end
 
   describe 'updating a prediction' do
-    it 'requires a login' do
-      put :update, id: '1'
-      response.should redirect_to(new_user_session_path)
+    context 'not logged in' do
+      let(:logged_in_user) { nil }
+
+      it 'requires a login' do
+        put :update, id: prediction.id
+        expect(response).to redirect_to(new_user_session_path)
+      end
     end
 
     describe 'when logged in' do
-      before(:each) do
-        controller.stub(:login_required)
-        @p = FactoryGirl.create(:prediction)
-      end
-
       it 'requires the user to have created the prediction' do
-        controller.stub(:current_user).and_return(User.new)
-        put :update, id: @p.id
+        put :update, id: prediction.id
         expect(response.response_code).to eq 403
       end
 
-      it 'updates the prediction' do
-        Prediction.stub(:find).and_return(@p)
-        @p.should_receive(:update_attributes!).with('prediction_params')
-        controller.stub(:must_be_authorized_for_prediction)
-        put :update, id: @p.id, prediction: :prediction_params
+      context 'logged in user was the creator' do
+        let(:logged_in_user) { creator }
+        
+        it 'updates the prediction' do
+          put :update, id: prediction.id, prediction: { description: 'a new description' }
+          expect(prediction.reload.description).to eq 'a new description'
+        end
       end
     end
   end
