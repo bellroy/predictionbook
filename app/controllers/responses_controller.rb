@@ -2,11 +2,11 @@ class ResponsesController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
-    @responses = Response.limit(50).recent
+    @responses = Response.recent.limit(50)
   end
 
   def create
-    @prediction_response = prediction.responses.new(params[:response].merge(user: current_user))
+    @prediction_response = prediction.responses.new(response_params)
 
     unless @prediction_response.save # creation failed
       flash[:error] = 'You must enter an estimate or comment'
@@ -15,7 +15,7 @@ class ResponsesController < ApplicationController
   end
 
   def preview
-    @response = Response.new(params[:response])
+    @response = Response.new(response_params)
     render partial: 'preview'
   end
 
@@ -23,5 +23,11 @@ class ResponsesController < ApplicationController
 
   def prediction
     @prediction ||= Prediction.find(params[:prediction_id])
+  end
+
+  def response_params
+    result = params.require(:response).permit!
+    result[:user_id] = current_user.id if params[:action] == 'create'
+    result
   end
 end
