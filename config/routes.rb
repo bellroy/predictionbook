@@ -6,6 +6,12 @@ PredictionBook2::Application.routes.draw do
     resources :deadline_notifications
   end
 
+  resources :users, only: :show
+  get '/users/settings' => 'users#settings'
+  get '/users/statistics' => 'users#statistics'
+  get '/users/due_for_judgement' => 'users#due_for_judgement'
+  get '/users/generate_api_token' => 'users#generate_api_token'
+
   resources :deadline_notifications
   resources :response_notifications
 

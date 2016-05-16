@@ -1,95 +1,84 @@
 require 'spec_helper'
 
 describe UsersController do
+  let(:logged_in_user) { FactoryGirl.create(:user) }
+  let(:target_user) { FactoryGirl.create(:user) }
+
   before(:each) do
-    @user = mock_model(User).as_null_object
-    User.stub(:[]).and_return(@user)
-    controller.stub(:set_timezone)
-    controller.stub(:current_user).and_return(@user)
+    sign_in logged_in_user if logged_in_user.present?
+    expect(controller).to receive(:set_timezone)
   end
 
-  describe 'showing a users prediction page (GET:show)' do
-    def show
-      get :show, :id => 'adam'
-    end
-    it 'looks up the user by [] lookup' do
-      User.should_receive(:[]).and_return(@user)
-      show
-    end
-    it 'gets all the recent predictions by user name' do
-      @user.should_receive(:predictions).and_return double(Array, :limit => double(Array, :not_private => []))
-      show
-    end
-    it 'should limit the scope to not_private predictions if not logged in as the user of the page' do
-      controller.stub(:current_user).and_return :eve
-      @user.stub(:predictions).and_return double(Array, :limit => predictions =  [])
-      predictions.should_receive(:not_private).and_return predictions
+  describe '#show' do
+    let(:relation) { class_double(Prediction) }
 
-      show
-      assigns[:predictions].should == predictions
+    before do
+      expect_any_instance_of(User).to receive(:predictions).and_return relation
     end
-    it 'should not limit the scope if current_user is owner of page' do
-      controller.stub(:current_user).and_return @user
-      @user.stub(:predictions).and_return double(Array, :limit => predictions = double(Array))
 
-      show
-      assigns[:predictions].should == predictions
+    subject(:show) { get :show, id: target_user.id }
+
+    context 'logged in user and target user are the same' do
+      let(:target_user) { logged_in_user }
+
+      specify do
+        predictions = instance_double(ActiveRecord::Relation)
+        expect(relation).to receive(:limit).and_return(predictions)
+        show
+        expect(assigns[:predictions]).to eq predictions
+        expect(assigns[:user]).to eq target_user
+      end
     end
-    it 'assigns the predictions' do
-      @user.stub(:predictions).and_return(double(Array, :limit => predictions = []))
-      show
-      assigns[:predictions].should == predictions
-    end
-    it 'assigns the user' do
-      show
-      assigns[:user].should == @user
+
+    context 'logged in user and target user are different' do
+      specify do
+        predictions = instance_double(ActiveRecord::Relation)
+        expect(relation).to receive(:not_private).and_return predictions
+        limited_predictions = instance_double(ActiveRecord::Relation)
+        expect(predictions).to receive(:limit).and_return(limited_predictions)
+
+        show
+        expect(assigns[:predictions]).to eq limited_predictions
+        expect(assigns[:user]).to eq target_user
+      end
     end
   end
 
-  describe 'statistics accessor' do
-    before(:each) do
-      controller.instance_variable_set('@user', @user)
-    end
-    it 'should provide a statistics accessor' do
-      controller.should respond_to(:statistics)
-    end
+  describe '#statistics' do
+    subject(:statistics) { get :statistics, id: target_user.id }
 
-    it 'should delegate to the statistics to the user' do
-      @user.should_receive(:statistics)
-      controller.statistics
-    end
-
-    it 'returns the statistics from the user' do
-      @user.stub(:statistics).and_return(:stats)
-      controller.statistics.should == :stats
+    it 'delegates to the statistics to the user' do
+      expect_any_instance_of(User).to receive(:statistics).and_return(:stats)
+      statistics
+      expect(assigns[:statistics]).to eq :stats
     end
   end
 
   describe 'users setting page' do
-    before(:each) do
-      controller.stub(:logged_in?).and_return(true)
+    subject(:settings) { get :settings, id: target_user.id }
+
+    context 'not logged in' do
+      let(:logged_in_user) { nil }
+
+      specify do
+        settings
+        expect(response).to redirect_to(new_user_session_path)
+      end
     end
-    def show
-      get :settings, :id => 'adam'
+
+    it '403s on user if they are not the described user' do
+      settings
+      expect(response.response_code).to eq 403
     end
-    it 'requires the user to be logged in' do
-      controller.stub(:logged_in?).and_return(false)
-      show
-      response.should redirect_to(login_path)
-    end
-    it 'should 403 on user if they are not the described user' do
-      controller.stub(:current_user).and_return(mock_model(User))
-      show
-      response.response_code.should == 403
-    end
-    it 'renders if passed authentication' do
-      controller.stub(:current_user).and_return(@user)
-      show
-      response.should be_success
-    end
-    it 'assigns user' do
-      show
-      assigns[:user].should == @user
+
+    context 'target user is logged in user' do
+      let(:target_user) { logged_in_user }
+
+      specify do
+        settings
+        expect(response).to be_success
+        expect(assigns[:user]).to eq target_user
+      end
     end
   end
 end
