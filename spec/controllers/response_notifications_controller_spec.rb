@@ -2,60 +2,67 @@ require 'spec_helper'
 
 describe ResponseNotificationsController do
   before(:each) do
-    controller.stub(:set_timezone)
+    expect(controller).to receive(:set_timezone)
   end
+
   describe 'creating a notification' do
     it 'requires the user to be logged in' do
       post :create
-      response.should redirect_to(login_path)
+      expect(response).to redirect_to(new_user_session_path)
     end
+
     describe 'when logged in' do
+      let(:relation) { instance_double(ActiveRecord::Relation) }
+
       before(:each) do
-        controller.stub(:login_required)
-        controller.stub(:notification_collection).and_return(@collection = double('collection'))
+        sign_in FactoryGirl.create(:user)
+        expect_any_instance_of(User).to receive(:response_notifications).and_return(relation)
       end
+
       it 'creates a response notification record' do
-        notification = mock_model(ResponseNotification).as_null_object
-	notification.stub(:prediction).and_return(mock_model(Prediction,:id => 1))
-        @collection.should_receive(:create!).with('prediction_id' => '7').and_return(notification)
-        post :create, :response_notification => {:prediction_id => '7'}
+        notification = instance_double(ResponseNotification).as_null_object
+        expect(notification).to receive(:prediction).and_return(instance_double(Prediction, id: 1))
+        expect(relation).to receive(:create!).with('prediction_id' => '7').and_return(notification)
+        post :create, response_notification: { prediction_id: '7' }
       end
+
       it 'redirects back to the prediction' do
-        @collection.stub(:create!).and_return(mock_model(ResponseNotification, :prediction => mock_model(Prediction, :id => '7')))
+        prediction = instance_double(Prediction, id: '7')
+        response_notification = instance_double(ResponseNotification, prediction: prediction)
+        expect(relation).to receive(:create!).and_return(response_notification)
         post :create
-        response.should redirect_to(prediction_path('7'))
+        expect(response).to redirect_to(prediction_path(prediction))
       end
     end
   end
 
   describe 'updating a notification' do
     it 'requires the user to be logged in' do
-      put :update, :id => 'hai'
-      response.should redirect_to(login_path)
+      put :update, id: 'hai'
+      expect(response).to redirect_to(new_user_session_path)
     end
-    describe 'when logged in' do
-      before(:each) do
-        controller.stub(:login_required)
-        controller.stub(:notification_collection).and_return(collection = double('collection'))
-        collection.stub(:find).and_return(@notification = mock_model(ResponseNotification).as_null_object)
-        @notification.stub(:prediction).and_return(mock_model(Prediction, :id => '7'))
-      end
-      it 'updates a response notification record' do
-        @notification.should_receive(:update_attributes!)
-        put :update, :id => 'hai', :response_notification => {:prediction_id => '7'}
-      end
-      it 'redirects back to the prediction' do
-        put :update, :id => 'hai'
-        response.should redirect_to(prediction_path('7'))
-      end
-    end
-  end
 
-  describe 'notification collection accessor' do
-    it 'asks the current user for its response_notifications' do
-      controller.stub(:current_user).and_return(user = mock_model(User))
-      user.should_receive(:response_notifications)
-      controller.notification_collection
+    describe 'when logged in' do
+      let(:notification) { instance_double(ResponseNotification).as_null_object }
+      let(:relation) { instance_double(ActiveRecord::Relation) }
+      let(:prediction) { instance_double(Prediction, id: '7') }
+
+      before(:each) do
+        sign_in FactoryGirl.create(:user)
+        expect_any_instance_of(User).to receive(:response_notifications).and_return(relation)
+        expect(relation).to receive(:find).and_return(notification)
+        expect(notification).to receive(:prediction).and_return(prediction)
+      end
+
+      it 'updates a response notification record' do
+        expect(notification).to receive(:update_attributes!)
+        put :update, id: 'hai', response_notification: { prediction_id: '7' }
+      end
+
+      it 'redirects back to the prediction' do
+        put :update, id: 'hai'
+        expect(response).to redirect_to(prediction_path(prediction))
+      end
     end
   end
 end
