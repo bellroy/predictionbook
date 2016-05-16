@@ -1,98 +1,66 @@
 require 'spec_helper'
 
 describe ResponsesController do
-  def post_response(params={})
-    post :create, :prediction_id => '1', :response => params
-  end
+  let(:logged_in_user) { FactoryGirl.create(:user) }
 
   before(:each) do
-    controller.stub(:set_timezone)
+    expect(controller).to receive(:set_timezone)
   end
 
-  describe 'creating a new response' do
-    before(:each) do
-      @wager = mock_model(Response, :save => true)
-      @wagers = double('responses', :new => @wager)
-      @prediction = mock_model(Prediction,
-       :to_param => '1',
-       :responses => @wagers
-      ).as_null_object
-      Prediction.stub(:find).and_return(@prediction)
-      controller.stub(:logged_in?).and_return(true)
+  describe '#create' do
+    let(:wager) { instance_double(Response, save: true) }
+    let(:wagers) { instance_double(ActiveRecord::Relation, new: wager) }
+    let(:prediction) do
+      instance_double(Prediction, responses: wagers).as_null_object
     end
+    let(:params) { { comment: 'A sample comment' } }
+
+    subject(:create) { post :create, prediction_id: '1', response: params }
 
     it 'requires the user to be logged in' do
-      controller.stub(:logged_in?).and_return(false)
-      post_response
-      response.should redirect_to(login_path)
+      create
+      expect(response).to redirect_to(new_user_session_path)
     end
 
-    it 'creates a response on the prediction' do
-      @wagers.should_receive(:new)
-      post_response
-    end
-
-    it 'creates the response with the posted params' do
-      @wagers.should_receive(:new).with(hash_including(:params => 'this is them'))
-      post_response({:params => 'this is them'})
-    end
-
-    it 'uses the current user as the user' do
-      user = mock_model(User)
-      controller.stub(:current_user).and_return(user)
-      @prediction.responses.should_receive(:new).with(hash_including(:user => user))
-      post_response({})
-    end
-
-    it 'redirects to the prediction show' do
-      post_response
-      response.should redirect_to(prediction_path('1'))
-    end
-
-    describe 'when the params are invalid' do
-      before(:each) do
-        @wager.stub(:save => false)
+    context 'logged in' do
+      before do
+        sign_in logged_in_user
+        expect(Prediction).to receive(:find).and_return(prediction)
       end
 
-      it 'responds with an http unprocesseable entity status' do
-        post_response
-        response.should redirect_to(prediction_path('1'))
-        flash[:error].should == "You must enter an estimate or comment"
+      it 'creates the response with the posted params and redirects' do
+        expect(wagers).to receive(:new)
+          .with(hash_including(comment: 'A sample comment', user_id: logged_in_user.id))
+        create
+        expect(response).to redirect_to(prediction_path(prediction))
+      end
+
+      describe 'when the params are invalid' do
+        before(:each) do
+          expect(wager).to receive(:save).and_return(false)
+        end
+
+        it 'responds with an http unprocesseable entity status' do
+          create
+          expect(response).to redirect_to(prediction_path(prediction))
+          expect(flash[:error]).to eq 'You must enter an estimate or comment'
+        end
       end
     end
   end
 
-  describe 'comment preview' do
-    before(:each) do
-      controller.stub(:login_required)
-      controller.stub(:render_template).with(:partial => 'responses/_preview')
-    end
-    def get_preview
-      get :preview, :response => { :comment => 'some text' }
-    end
+  describe '#preview' do
+    before { sign_in logged_in_user }
 
-    it 'responds to preview action' do
-      get_preview
-      response.should be_success
-    end
+    subject(:preview) { get :preview, response: { comment: 'some text' } }
 
-    it 'renders the preview comment partial' do
-      get_preview
-      response.should render_template('responses/_preview')
-    end
-
-    it 'should build a new response on the prediction from the params' do
-      Response.should_receive(:new).with('comment' => 'some text').and_return(
-        mock_model(Response).as_null_object
-      )
-      get_preview
-    end
-
-    it "should not save the comment" do
-      Response.stub(:new).and_return(response = mock_model(Response).as_null_object)
-      response.should_not_receive(:save!)
-      get_preview
+    it 'responds to preview action and render partial' do
+      mock_response = instance_double(Response).as_null_object
+      expect(mock_response).not_to receive(:save!)
+      expect(Response).to receive(:new).with('comment' => 'some text').and_return(mock_response)
+      preview
+      expect(response).to be_success
+      expect(response).to render_template('responses/_preview')
     end
   end
-
 end
