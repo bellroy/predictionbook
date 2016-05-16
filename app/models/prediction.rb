@@ -15,36 +15,39 @@ class Prediction < ActiveRecord::Base
 
   DEFAULT_INCLUDES = [:judgements, :responses, :creator].freeze
 
-  def self.unjudged
+  def self.unjudged(limit: 100)
     not_private
       .not_withdrawn
       .includes(DEFAULT_INCLUDES)
       .where('(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NULL AND deadline < UTC_TIMESTAMP()')
       .order(deadline: :desc)
+      .limit(limit)
   end
 
-  def self.judged
+  def self.judged(limit: 100)
     not_private
       .not_withdrawn
       .includes(DEFAULT_INCLUDES)
       .joins(:judgements)
       .where('(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NOT NULL')
       .order('judgements.created_at DESC')
+      .limit(limit)
   end
 
-  def self.future
+  def self.future(limit: 100)
     not_private
       .not_withdrawn
       .includes(DEFAULT_INCLUDES)
       .where('(id NOT IN (SELECT prediction_id FROM judgements) OR id IN (SELECT prediction_id FROM judgements WHERE outcome IS NULL)) AND deadline > UTC_TIMESTAMP()')
       .order(:deadline)
+      .limit(limit)
   end
 
-  def self.recent
-    order(created_at: :desc).not_private.not_withdrawn.includes(DEFAULT_INCLUDES)
+  def self.recent(limit: 100)
+    order(created_at: :desc).not_private.not_withdrawn.includes(DEFAULT_INCLUDES).limit(limit)
   end
 
-  def self.popular
+  def self.popular(limit: 100)
     not_private
       .not_withdrawn
       .includes(:responses, :creator)
@@ -52,6 +55,7 @@ class Prediction < ActiveRecord::Base
       .where('predictions.deadline > UTC_TIMESTAMP() AND predictions.created_at > ?', 2.weeks.ago)
       .order('count(responses.prediction_id) DESC, predictions.deadline ASC')
       .group('predictions.id')
+      .limit(limit)
       .select(&:unknown?)
   end
 
