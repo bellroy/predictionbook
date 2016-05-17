@@ -67,19 +67,19 @@ class BaseStatistics
 
   class Interval
     attr_reader :heading, :count
-    def initialize(band, count=0, acc=0)
+    def initialize(band, count=0, accuracy=0)
       @heading = "#{band}%"
-      @acc = acc
+      @accuracy = accuracy
       @count = count
     end
 
     def update(row)
-      @acc = row[2] || 0
+      @accuracy = row[2] || 0
       @count = row[1] || 0
     end
 
     def accuracy
-      (@acc * 100).round.to_i
+      (@accuracy * 100).round.to_i
     end
   end
 end

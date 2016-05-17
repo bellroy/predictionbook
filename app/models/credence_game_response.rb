@@ -6,11 +6,10 @@ class CredenceGameResponse < ActiveRecord::Base
 
   def self.pick_random
     enabled_questions = CredenceQuestion.where(enabled: true)
-    num_enabled = enabled_questions.count
 
-    question = enabled_questions.first(offset: rand(num_enabled))
+    question = enabled_questions.first(offset: rand(enabled_questions.count))
     while !question.enabled || question.weight < rand
-      question = enabled_questions.first(offset: rand(num_enabled))
+      question = enabled_questions.first(offset: rand(enabled_questions.count))
     end
 
     question.create_random_question
@@ -45,8 +44,8 @@ class CredenceGameResponse < ActiveRecord::Base
   end
 
   def score
-    _, s = self.score_answer(self.given_answer, self.answer_credence)
-    s
+    _, score = self.score_answer(self.given_answer, self.answer_credence)
+    score
   end
 
   def answer_message(answer, score)
