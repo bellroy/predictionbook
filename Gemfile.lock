@@ -290,6 +290,3 @@ DEPENDENCIES
   version_fu (~> 1.0.1)
   whenever
   wirble
-
-BUNDLED WITH
-   1.11.0

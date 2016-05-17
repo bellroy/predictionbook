@@ -89,11 +89,12 @@ module ModelFactory
   end
 
   def valid_answered_credence_question(attributes={})
-    valid_credence_game_response(
+    merged = {
       answered_at: '2014-01-01 12:00:01',
       given_answer: 0,
       answer_credence: 60
-    )
+    }.merge(attributes)
+    valid_credence_game_response(merged)
   end
 
   def valid_credence_game(attributes={})

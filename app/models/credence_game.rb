@@ -31,7 +31,7 @@ class CredenceGame < ActiveRecord::Base
 
   def most_recently_answered(n)
     self.credence_game_responses
-      .limit(10)
+      .limit(n)
       .order('answered_at desc')
       .select(&:answered_at)
   end
