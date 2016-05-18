@@ -21,16 +21,8 @@ module MarkupHelper
     ([[:punct:]]|<|$|)       # trailing text
    }x
 
-  def show_user(user, cls=nil)
-    link_to h(user), user_path(user), :class => classes('user',cls)
-  end
-
-  def show_time(time, cls=nil)
-    content_tag(:span, time_in_words_with_context(time), :title => time.to_s, :class => classes('date',cls))
-  end
-
-  def show_title(text)
-    sanitize textilize_without_paragraph(html_encode(text).gsub('&quot;','"')), :tags => %w(i b em strong u)
+  def show_user(user, cls = nil)
+    link_to h(user), user_path(user), class: classes('user', cls)
   end
 
   def confidence_and_count(prediction)
@@ -39,7 +31,10 @@ module MarkupHelper
 
   def linkify_for_redcloth(text)
     text.gsub(SIMPLER_AUTO_LINK_RE) do
-      all, leading, url, trailing = $&, $1, $2, $3
+      all = $&
+      leading = Regexp.last_match(1)
+      url = Regexp.last_match(2)
+      trailing = Regexp.last_match(3)
       %(#{leading}"#{url}":#{url}#{trailing})
       # The above is slightly wrong because *bold* and _italic_ in
       # "{url}:" portion (the link text, equivalent to the target)
@@ -58,15 +53,15 @@ module MarkupHelper
 
   def certainty_heading(heading)
     case heading
-    when "100"
-      link_to heading, 'http://en.wikipedia.org/wiki/Almost_surely', :class => 'egg', :title => 'Almost surely'
+    when '100'
+      link_to heading, 'http://en.wikipedia.org/wiki/Almost_surely', class: 'egg', title: 'Almost surely'
     else
       heading
     end
   end
 
   def outcome(prediction)
-    content_tag(:span, :title => prediction.readable_outcome) do
+    content_tag(:span, title: prediction.readable_outcome) do
       case prediction.outcome
       when true then '✔'
       when false then '✘'
@@ -77,11 +72,6 @@ module MarkupHelper
 
   def style_for_confidence(confidence)
     # http://www.w3.org/TR/css3-color/#hsl-examples
-    "background-color: hsl(#{(confidence * (200/100.0) - 70)}, 100%, 90%);".html_safe
-  end
-
-  def html_encode(string)
-    # encode tags, not entities
-    HTMLEntities.new.encode(string.html_safe, :basic)
+    "background-color: hsl(#{(confidence * (200 / 100.0) - 70)}, 100%, 90%);".html_safe
   end
 end

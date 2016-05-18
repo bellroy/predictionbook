@@ -5,12 +5,12 @@ describe MarkupHelper do
 
   describe '#confidence_and_count' do
     it 'returns the number of wagers of a prediction' do
-      prediction = double(Prediction, :wager_count=> 20).as_null_object
+      prediction = double(Prediction, wager_count: 20).as_null_object
       confidence_and_count(prediction).should =~ /20/
     end
 
     it 'returns the mean confidence of a prediction' do
-      prediction = double(Prediction, :mean_confidence => '13').as_null_object
+      prediction = double(Prediction, mean_confidence: '13').as_null_object
       confidence_and_count(prediction).should =~ /13/
     end
   end
@@ -25,7 +25,7 @@ describe MarkupHelper do
         @egg = certainty_heading('100')
       end
       it 'should add wiki almost surely article link' do
-        @egg.should have_link('Almost surely', :href=> 'http://en.wikipedia.org/wiki/Almost_surely')
+        @egg.should have_link('Almost surely', href: 'http://en.wikipedia.org/wiki/Almost_surely')
       end
     end
   end
@@ -41,16 +41,6 @@ describe MarkupHelper do
 
     it 'should flatten lists in the argument list' do
       classes('test', %w(two three)).should == 'test two three'
-    end
-  end
-
-  describe "html_encode" do
-    it "encodes html" do
-      html_encode("<a href='http://www.prodictionbook.com'>test</a>").should == "&lt;a href=&apos;http://www.prodictionbook.com&apos;&gt;test&lt;/a&gt;"
-    end
-
-    it "properly preserves entities" do
-      html_encode("Prediction & Book").should == "Prediction &amp; Book"
     end
   end
 end

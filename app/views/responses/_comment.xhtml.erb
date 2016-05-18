@@ -1,2 +1,2 @@
 <%= show_user(comment.user) %> <%= comment_for(comment) %>
-re: <%= link_to show_title(comment.prediction.description), comment.prediction %>
+re: <%= link_to TitleTagPresenter.new(comment.prediction.description).tag, comment.prediction %>
