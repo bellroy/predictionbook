@@ -25,6 +25,7 @@ gem 'typus', github: 'typus/typus'
 
 # Misc
 gem 'honeypot-captcha'
+gem 'hashdiff'
 
 group :development do
   gem 'capistrano', '~> 2.0'

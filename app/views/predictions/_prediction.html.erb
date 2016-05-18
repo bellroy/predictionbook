@@ -5,8 +5,8 @@
    </p>
    <p class='description'>
      Created by <%= show_user(prediction.creator, 'creator') %>
-     <%= show_time(prediction.created_at, 'created_at') %>;
-     <span class='deadline'>known <%= show_time(prediction.deadline) %><%= prediction.judgement? ? ';' : '.' %></span>
+     <%= TimeInContentTagPresenter.new(prediction.created_at, 'created_at').tag %>;
+     <span class='deadline'>known <%= TimeInContentTagPresenter.new(prediction.deadline).tag %><%= prediction.judgement? ? ';' : '.' %></span>
     <%= render :partial => prediction.judgement if prediction.judgement? -%>
   </p>
  </li>

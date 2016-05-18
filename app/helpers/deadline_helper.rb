@@ -8,9 +8,9 @@ module DeadlineHelper
     elsif deadline_notification.due_for_judgement? and deadline_notification.enabled?
       notification_text = "To receive your notifications, #{set_your_email}"
     elsif deadline_notification.deadline < Time.current and deadline_notification.enabled?
-      notification_text = "You would have been notified #{show_time(deadline_notification.deadline)}, but it was already judged."
+      notification_text = "You would have been notified #{TimeInContentTagPresenter.new(deadline_notification.deadline).tag}, but it was already judged."
     else
-      time = show_time(deadline_notification.deadline)
+      time = TimeInContentTagPresenter.new(deadline_notification.deadline).tag
       will_would = deadline_notification.enabled ? 'will be' : 'would be'
       will_would = 'would have been' if deadline_notification.overdue?
       if deadline_notification.has_email?
@@ -21,7 +21,7 @@ module DeadlineHelper
       notification_text.html_safe
     end
   end
-  
+
   def deadline_notification_disabled(deadline_notification)
     content_tag(:em, 'Notification when the outcome should be known') + ' ' +
     if deadline_notification.withdrawn?

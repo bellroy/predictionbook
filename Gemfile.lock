@@ -160,6 +160,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    hashdiff (0.3.0)
     highline (1.7.8)
     hirb (0.7.3)
     honeypot-captcha (0.0.3)
@@ -360,6 +361,7 @@ DEPENDENCIES
   formatize!
   gherkin
   guard-rspec
+  hashdiff
   hirb
   honeypot-captcha
   htmlentities

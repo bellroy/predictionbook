@@ -11,7 +11,7 @@
       <th>Creator</th>
       <th>Prediction</th>
       <th>Known</th>
-      <th>Support</th>      
+      <th>Support</th>
       <th>Outcome</th>
     </tr>
   </thead>
@@ -19,8 +19,8 @@
   <%- predictions.each do |prediction| -%>
     <tr>
       <td><%= show_user(prediction.creator) %></td>
-      <td><%= link_to show_title(prediction.description), prediction_path(prediction) %></td>
-      <td><%= show_time(prediction.deadline) %></td>
+      <td><%= link_to TitleTagPresenter.new(prediction.description).tag, prediction_path(prediction) %></td>
+      <td><%= TimeInContentTagPresenter.new(prediction.deadline).tag %></td>
       <td><%= confidence_and_count(prediction) %></td>
       <td><%= outcome(prediction) %></td>
     </tr>

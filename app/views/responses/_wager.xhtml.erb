@@ -3,12 +3,12 @@ estimated
 <%= content_tag :span, "#{wager.confidence}%", :class => "confidence",
   :style => style_for_confidence(wager.confidence) %>
 on
-<%= content_tag :span, 
-   link_to(show_title(wager.prediction.description), wager.prediction),
+<%= content_tag :span,
+   link_to(TitleTagPresenter.new(wager.prediction.description).tag, wager.prediction),
    :class => (wager.prediction.withdrawn? ? 'withdrawn ' : '') + "break-word" -%>
 <%=  %>
 <abbr title="To be decided (judged)">TBD</abbr>
-<%= show_time(wager.prediction.deadline) -%>
+<%= TimeInContentTagPresenter.new(wager.prediction.deadline).tag -%>
 <% if wager.prediction.open? -%>
 <%   if Time.current > wager.prediction.deadline -%>
 , so <%= link_to 'judge them!', wager.prediction %>
@@ -17,5 +17,5 @@ on
 and was
 <%= content_tag :span, outcome, :class => "outcome #{outcome}" -%>
 <% else %>
-but withdrew the prediction <%= show_time(wager.prediction.updated_at)-%> 
+but withdrew the prediction <%= TimeInContentTagPresenter.new(wager.prediction.updated_at).tag -%>
 <% end -%>

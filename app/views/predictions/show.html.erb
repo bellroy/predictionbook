@@ -1,13 +1,13 @@
 <h1 class="<%= @prediction.readable_outcome %>">
   <% if current_user && current_user.authorized_for(@prediction) %>
     <%= link_to 'Edit', edit_prediction_path(@prediction), :class => 'edit' %>
-  <%= show_title(@prediction.description) %>
+  <%= TitleTagPresenter.new(@prediction.description).tag %>
   <% end %>
 </h1>
 <p>
   Created by <%= show_user(@prediction.creator) %>
-  <%= show_time(@prediction.created_at) %>;
-  known <%= show_time(@prediction.deadline) -%><% if @prediction.judgement %>;
+  <%= TimeInContentTagPresenter.new(@prediction.created_at).tag %>;
+  known <%= TimeInContentTagPresenter.new(@prediction.deadline).tag -%><% if @prediction.judgement %>;
   <%= render :partial => @prediction.judgement %><% end -%>
 </p>
 <%- if @prediction.private? -%>
