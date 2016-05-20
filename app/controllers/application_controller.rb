@@ -34,9 +34,7 @@ class ApplicationController < ActionController::Base
   def login_via_token
     token = params[:token]
     if token.present?
-      DeadlineNotification.use_token!(token) do |dn|
-        self.current_user = dn.user
-      end
+      DeadlineNotification.use_token!(token) { |dn| self.current_user = dn.user }
       redirect_to # get rid of token in url so if it is copied and pasted it's not propagated
     end
   end
