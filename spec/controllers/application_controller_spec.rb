@@ -2,71 +2,79 @@ require 'spec_helper'
 
 describe ApplicationController do
   describe 'clearing return_to' do
-    it 'should clear return_to session variable before_filter' do
+    it 'clears return_to session variable before_filter' do
       session[:return_to] = 'blah.url'
       controller.send(:clear_return_to)
-      session[:return_to].should be_nil
+      expect(session[:return_to]).to be_nil
     end
   end
+
   describe 'setting timezone before_filter' do
-    before(:each) do
-      controller.stub(:logged_in?).and_return(false)
-    end
-    after(:each) do
-      controller.send(:set_timezone)
-    end
     describe 'when logged in' do
-      before(:each) do
-        controller.stub(:logged_in?).and_return(true)
-        controller.stub(:current_user).and_return(@user = mock_model(User))
-      end
+      let(:user) { FactoryGirl.create(:user, timezone: timezone) }
+
+      before { sign_in user if user.present? }
+
       describe 'when user has timezone set' do
+        let(:timezone) { 'Flatland' }
+
         it 'sets Time.zone to current_user.timezone' do
-          @user.stub(:timezone).and_return('Flatland')
-          Time.should_receive(:zone=).with('Flatland')
+          expect(Time).to receive(:zone=).with('Flatland')
+          expect(Chronic).to receive(:time_class=)
+          controller.send(:set_timezone)
         end
       end
+
       describe 'when user has no timezone' do
+        let(:timezone) { nil }
+
         it 'sets Time.zone to "UTC"' do
-          @user.stub(:timezone).and_return(' ')
-          Time.should_receive(:zone=).with('UTC')
+          expect(Time).to receive(:zone=).with('UTC')
+          expect(Chronic).to receive(:time_class=)
+          controller.send(:set_timezone)
         end
       end
     end
+
     describe 'when not logged in' do
+      let(:user) { nil }
+
       it 'sets Time.zone to "UTC"' do
-        controller.stub(:logged_in?).and_return(false)
-        Time.should_receive(:zone=).with('UTC')
+        expect(Time).to receive(:zone=).with('UTC')
+        expect(Chronic).to receive(:time_class=)
+        controller.send(:set_timezone)
       end
-    end
-    it "should set Chronic.time_class to Time.zone" do
-      Time.stub(:zone).and_return(:time_zone)
-      Chronic.should_receive(:time_class=).with(:time_zone)
     end
   end
+
   describe 'login via token before_filter' do
-    before(:each) do
-      controller.stub(:params).and_return({:token => 'uuid-token'})
-      controller.stub(:redirect_to)
+    before { expect(controller).to receive(:params).and_return(params) }
+
+    context 'no token in params' do
+      let(:params) { {} }
+
+      it 'does not lookup if no token in params' do
+        expect(DeadlineNotification).not_to receive(:use_token!)
+        controller.send :login_via_token
+      end
     end
-    after(:each) do
-      controller.send :login_via_token
-    end
-    it 'looks up a DeadlineNotification by uuid' do
-      DeadlineNotification.should_receive(:use_token!).with('uuid-token')
-    end
-    it 'should not lookup if no token in params' do
-      DeadlineNotification.should_not_receive(:use_token!)
-      controller.stub(:params).and_return({})
-    end
-    it 'sets current user to deadline user if found' do
-      dn = mock_model(DeadlineNotification, :user => :lazy_user).as_null_object
-      DeadlineNotification.stub(:use_token!).and_yield(dn)
-      controller.should_receive(:current_user=).with(:lazy_user)
-    end
-    it 'calls redirect_to with no args to get rid of the login token' do
-      DeadlineNotification.stub(:use_token!)
-      controller.should_receive(:redirect_to).with(no_args)
+
+    context 'token in params' do
+      let(:params) { { token: 'uuid-token' } }
+
+      before { expect(controller).to receive(:redirect_to) }
+
+      it 'looks up a DeadlineNotification by uuid' do
+        expect(DeadlineNotification).to receive(:use_token!).with('uuid-token')
+        controller.send :login_via_token
+      end
+
+      it 'sets current user to deadline user if found' do
+        dn = instance_double(DeadlineNotification, user: :lazy_user).as_null_object
+        expect(DeadlineNotification).to receive(:use_token!).and_yield(dn)
+        expect(controller).to receive(:current_user=).with(:lazy_user)
+        controller.send :login_via_token
+      end
     end
   end
 end
