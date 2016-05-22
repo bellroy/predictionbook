@@ -14,7 +14,7 @@ describe 'predictions/index.html.erb' do
   end
 
   it 'renders predictions' do
-    prediction = create_valid_prediction
+    prediction = FactoryGirl.create(:prediction)
     assign(:predictions, [prediction])
 
     render

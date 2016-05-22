@@ -1,12 +1,12 @@
 Given /^there is a prediction created by me$/ do
-  @prediction = create_valid_prediction(creator: @user)
+  @prediction = FactoryGirl.create(:prediction, creator: @user)
 end
 
 Given /^there is a new prediction$/ do
-  @prediction = create_valid_prediction
+  @prediction = FactoryGirl.create(:prediction)
 end
 
 Given /^there is a closed prediction$/ do
-  @prediction = create_valid_prediction
+  @prediction = FactoryGirl.create(:prediction)
   @prediction.judge!(:right, nil)
 end
