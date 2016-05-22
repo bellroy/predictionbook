@@ -113,67 +113,67 @@ When /^I attach the file at "([^\"]*)" to "([^\"]*)"$/ do |path, field|
 end
 
 Then /^I should see "([^\"]*)"$/ do |text|
-  page.should have_content(text)
+  expect(page).to have_content(text)
 end
 
 Then /^I should see "([^\"]*)" within "([^\"]*)"$/ do |text, selector|
   within(selector) do |page|
-    page.should have_content(text)
+    expect(page).to have_content(text)
   end
 end
 
 Then /^I should see \/([^\/]*)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
-  page.should have_content(regexp)
+  expect(page).to have_content(regexp)
 end
 
 Then /^I should see \/([^\/]*)\/ within "([^\"]*)"$/ do |regexp, selector|
   within(selector) do |page|
     regexp = Regexp.new(regexp)
-    page.should have_content(regexp)
+    expect(page).to have_content(regexp)
   end
 end
 
 Then /^I should not see "([^\"]*)"$/ do |text|
-  page.should_not have_content(text)
+  expect(page).to_not have_content(text)
 end
 
 Then /^I should not see "([^\"]*)" within "([^\"]*)"$/ do |text, selector|
   within(selector) do |page|
-    page.should_not have_content(text)
+    expect(page).to_not have_content(text)
   end
 end
 
 Then /^I should not see \/([^\/]*)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
-  page.should_not have_content(regexp)
+  expect(page).to_not have_content(regexp)
 end
 
 Then /^I should not see \/([^\/]*)\/ within "([^\"]*)"$/ do |regexp, selector|
   within(selector) do |page|
     regexp = Regexp.new(regexp)
-    page.should_not have_content(regexp)
+    expect(page).to_not have_content(regexp)
   end
 end
 
 Then /^the "([^\"]*)" field should contain "([^\"]*)"$/ do |field, value|
-  field_labeled(field).value.should =~ /#{value}/
+  expect(field_labeled(field).value).to match(/#{value}/)
 end
 
 Then /^the "([^\"]*)" field should not contain "([^\"]*)"$/ do |field, value|
-  field_labeled(field).value.should_not =~ /#{value}/
+  expect(field_labeled(field).value).not_to match(/#{value}/)
 end
 
 Then /^the "([^\"]*)" checkbox should be checked$/ do |label|
-  field_labeled(label).should be_checked
+  expect(field_labeled(label)).to be_checked
 end
 
 Then /^the "([^\"]*)" checkbox should not be checked$/ do |label|
-  field_labeled(label).should_not be_checked
+  expect(field_labeled(label)).to_not be_checked
 end
 
 Then /^I should be on (.+)$/ do |page_name|
-  URI.parse(current_url).path.should == path_to(page_name)
+  expect(URI.parse(current_url).path).to eq path_to(page_name)
 end
 
 Then /^show me the page$/ do
