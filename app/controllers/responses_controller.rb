@@ -7,10 +7,7 @@ class ResponsesController < ApplicationController
 
   def create
     @prediction_response = prediction.responses.new(response_params)
-
-    unless @prediction_response.save # creation failed
-      flash[:error] = 'You must enter an estimate or comment'
-    end
+    flash[:error] = 'You must enter an estimate or comment' unless @prediction_response.save
     redirect_to prediction_path(prediction)
   end
 
