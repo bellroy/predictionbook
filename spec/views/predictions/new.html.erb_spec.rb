@@ -1,18 +1,18 @@
 require 'spec_helper'
 
 describe 'predictions/new' do
+  let(:prediction) { FactoryGirl.build(:prediction) }
+  let(:user) { instance_double(User, has_email?: false, to_param: 'username') }
+
   before(:each) do
-    @prediction = FactoryGirl.build(:prediction)
-    assign(:prediction, @prediction)
+    assign(:prediction, prediction)
     allow(view).to receive(:user_statistics_cache_key).and_return 'stats'
     allow(view).to receive(:statistics).and_return(Statistics.new)
-    @user = instance_double(User, has_email?: false)
-    allow(@user).to receive(:to_param).and_return 'username'
-    allow(view).to receive(:current_user).and_return(@user)
+    allow(view).to receive(:current_user).and_return(user)
   end
 
   it 'looks up the user cache key for the current user' do
-    expect(view).to receive(:user_statistics_cache_key).with(@user)
+    expect(view).to receive(:user_statistics_cache_key).with(user)
     render
   end
 
@@ -22,11 +22,10 @@ describe 'predictions/new' do
   end
 
   it 'has a hidden field with the predictions UUID' do
-    expect(@prediction).to receive(:uuid).and_return('0d027d60-7b04-11dd-92d8-001f5b80f5b2')
+    expect(prediction.uuid).not_to be_blank
     render
-    selector =
-      "input[type='hidden'][name='prediction[uuid]'][value='0d027d60-7b04-11dd-92d8-001f5b80f5b2']"
-    expect(rendered).to have_selector(selector)
+    expect(rendered).to include '<input type="hidden" ' \
+      "value=\"#{prediction.uuid}\" name=\"prediction[uuid]\" id=\"prediction_uuid\" />"
   end
 
   it 'has an input field for prediction description' do
@@ -41,13 +40,13 @@ describe 'predictions/new' do
 
   describe '(check box for the notify creator)' do
     it 'is present and checked when user has an email' do
-      expect(@prediction).to receive(:notify_creator).and_return true
+      expect(prediction).to receive(:notify_creator).and_return true
       render
       expect(rendered).to have_checked_field('prediction[notify_creator]')
     end
 
     it 'is unchecked if user does not have email' do
-      expect(@prediction).to receive(:notify_creator).and_return false
+      expect(prediction).to receive(:notify_creator).and_return false
       render
       expect(rendered).to_not have_checked_field('prediction[notify_creator]')
     end
@@ -60,13 +59,13 @@ describe 'predictions/new' do
     end
 
     it 'is checked when user private_default is true' do
-      expect(@prediction).to receive(:private).and_return true
+      expect(prediction).to receive(:private).and_return true
       render
       expect(rendered).to have_checked_field('prediction[private]')
     end
 
     it 'is not checked when user private_default is false' do
-      expect(@prediction).to receive(:private).and_return false
+      expect(prediction).to receive(:private).and_return false
       render
       expect(rendered).to_not have_checked_field('prediction[private]')
     end
