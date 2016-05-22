@@ -50,17 +50,6 @@ describe User do
     end
   end
 
-  describe 'predictions' do
-    before do
-      # This will require a lot of stubbing, user, predicitons [sic], responses... Oh my!?
-    end
-    it 'should order by when wager was made, most recent first'
-    it 'should not contain the same prediction twice, even if I have wagered twice'
-    it 'should not contain predictions I have only commented on'
-    it 'should not contain predictions I have no wager on'
-    it 'should include predictions I have wagered on'
-  end
-
   describe 'when given empty string' do
     before(:each) do
       @user = User.new
