@@ -1,40 +1,42 @@
 require 'spec_helper'
 
 describe LabelledFormBuilder do
-
   class BogusTemplate
     include ActionView::Helpers::TagHelper
-    def text_field(*args); end
-    def label(*args); end
-    def capture(*args)
+
+    def text_field(*_args)
+    end
+
+    def label(*_args)
+    end
+
+    def capture(*_args)
       yield.to_s
     end
   end
 
-  before(:each) do
-    @errors = {}
-    @record = double('record', :errors => @errors)
-    @template = BogusTemplate.new
-    @builder = LabelledFormBuilder.new('record_name', @record, @template, {}, nil)
+  let(:errors) { {} }
+  let(:record) { instance_double(ActiveRecord::Base, errors: errors) }
+  let(:template) { BogusTemplate.new }
+  let(:builder) { LabelledFormBuilder.new('record_name', record, template, {}) }
+
+  it 'adds a label to every text field' do
+    expect(template).to receive(:label).with('record_name', :name, anything, anything)
+    builder.text_field(:name)
   end
 
-  it 'should add a label to every text field' do
-    @template.should_receive(:label).with('record_name', :name, anything, anything)
-    @builder.text_field(:name)
+  it 'delegates text field to template' do
+    expect(template).to receive(:text_field).with('record_name', :name, anything)
+    builder.text_field(:name)
   end
 
-  it 'should delegate text field to template' do
-    @template.should_receive(:text_field).with('record_name', :name, anything)
-    @builder.text_field(:name)
-  end
-
-  it 'should add the error message in the generated field if it has an error' do
-    @errors[:name] = 'error_message'
-    @builder.text_field(:name).should =~ /error_message/
+  it 'adds the error message in the generated field if it has an error' do
+    errors[:name] = 'error_message'
+    expect(builder.text_field(:name)).to match(/error_message/)
   end
 
   it 'renders trailing content after the text field inside the p tag' do
-    @template.stub(:text_field).and_return('textfield')
-    @builder.text_field(:name, :trailing_content => '#end').should =~ %r{textfield#end</p>$}
+    expect(template).to receive(:text_field).and_return('textfield')
+    expect(builder.text_field(:name, trailing_content: '#end')).to match(%r{textfield#end</p>$})
   end
 end
