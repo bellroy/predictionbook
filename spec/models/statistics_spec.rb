@@ -5,20 +5,15 @@ describe Statistics do
     let(:stats) { Statistics.new }
 
     before :each do
-      first_response = valid_response(confidence: 50)
-      first_response.save!
-      valid_judgement(prediction: first_response.prediction, outcome: 0).save!
-      second_response = valid_response(confidence: 40)
-      second_response.save!
-      valid_judgement(prediction: second_response.prediction, outcome: 0).save!
-      third_response = valid_response(confidence: 70)
-      third_response.save!
-      valid_judgement(prediction: third_response.prediction, outcome: 1).save!
-      fourth_response = valid_response(confidence: nil)
-      fourth_response.save!
-      valid_judgement(prediction: first_response.prediction, outcome: 1).save!
-      fifth_response = valid_response(confidence: 80)
-      fifth_response.save!
+      first_response = FactoryGirl.create(:response, confidence: 50)
+      FactoryGirl.create(:judgement, prediction: first_response.prediction, outcome: 0)
+      second_response = FactoryGirl.create(:response, confidence: 40)
+      FactoryGirl.create(:judgement, prediction: second_response.prediction, outcome: 0)
+      third_response = FactoryGirl.create(:response, confidence: 70)
+      FactoryGirl.create(:judgement, prediction: third_response.prediction, outcome: 1)
+      FactoryGirl.create(:response, confidence: nil)
+      FactoryGirl.create(:judgement, prediction: first_response.prediction, outcome: 1)
+      FactoryGirl.create(:response, confidence: 80)
     end
 
     it 'creates all intervals' do
@@ -45,18 +40,18 @@ describe Statistics::Interval do
 
     describe 'heading' do
       it 'is descriptive of the range' do
-        interval.heading.should == '80%'
+        expect(interval.heading).to eq '80%'
       end
     end
     describe 'count' do
       # TODO: make these not depend on indecipherable setup code
       it 'should equal the argument' do
-        interval.count.should == 491
+        expect(interval.count).to eq 491
       end
     end
     describe 'accuracy' do
       it 'should equal the argument' do
-        interval.accuracy.should == 49
+        expect(interval.accuracy).to eq 49
       end
     end
   end
