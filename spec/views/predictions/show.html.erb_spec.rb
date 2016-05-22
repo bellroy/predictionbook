@@ -2,16 +2,16 @@ require 'spec_helper'
 
 describe 'predictions/show.html.erb' do
   before(:each) do
-    @user = create_valid_user(name: 'person who created it', login: 'login.name')
-    @prediction = create_valid_prediction(creator: @user)
-    @prediction_response = valid_response(prediction: @prediction, user: @user)
+    @user = FactoryGirl.create(:user, name: 'person who created it', login: 'login.name')
+    @prediction = FactoryGirl.create(:prediction, creator: @user)
+    @prediction_response = FactoryGirl.create(:response, prediction: @prediction, user: @user)
 
     assign(:current_user, @user)
     assign(:prediction, @prediction)
     assign(:events, [])
     assign(:prediction_response, @prediction_response)
-    assign(:deadline_notification, valid_deadline_notification)
-    assign(:response_notification, valid_response_notification)
+    assign(:deadline_notification, FactoryGirl.create(:deadline_notification))
+    assign(:response_notification, FactoryGirl.create(:response_notification))
     view.stub(:current_user).and_return(@user)
     view.stub(:logged_in?).and_return(true)
   end

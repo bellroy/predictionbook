@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'users/settings' do
   describe 'private_default checkbox' do
     before do
-      assigns[:user] = @user = valid_user
+      assigns[:user] = @user = FactoryGirl.create(:user)
       view.stub(:current_user).and_return(@user)
       @user.stub(:api_token).and_return('token')
       @user.stub(:id).and_return(1)
