@@ -22,14 +22,14 @@ describe Statistics do
     end
 
     it 'creates all intervals' do
-      expect(stats.headings).to eq ["50%", "60%", "70%", "80%", "90%", "100%"]
+      expect(stats.headings).to eq ['50%', '60%', '70%', '80%', '90%', '100%']
     end
 
-    it "should have correct accuracies" do
+    it 'should have correct accuracies' do
       expect(stats.accuracies).to eq [100, 100, 100, 0, 0, 67]
     end
 
-    it "should have correct sample sizes" do
+    it 'should have correct sample sizes' do
       expect(stats.sizes).to eq [1, 1, 1, 0, 0, 3]
     end
   end
@@ -49,7 +49,7 @@ describe Statistics::Interval do
       end
     end
     describe 'count' do
-      #TODO: make these not depend on indecipherable setup code
+      # TODO: make these not depend on indecipherable setup code
       it 'should equal the argument' do
         interval.count.should == 491
       end

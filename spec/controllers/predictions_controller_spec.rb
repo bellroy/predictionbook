@@ -518,7 +518,7 @@ describe PredictionsController do
 
       context 'logged in user was the creator' do
         let(:logged_in_user) { creator }
-        
+
         it 'updates the prediction' do
           put :update, id: prediction.id, prediction: { description: 'a new description' }
           expect(prediction.reload.description).to eq 'a new description'

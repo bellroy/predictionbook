@@ -1,5 +1,5 @@
 class PasswordsController < ApplicationController
-  before_filter :not_logged_in_required
+  before_action :not_logged_in_required
 
   def create
     user = User.find_by_login_and_email(params[:login], params[:email])
@@ -19,4 +19,3 @@ class PasswordsController < ApplicationController
     render :new
   end
 end
-

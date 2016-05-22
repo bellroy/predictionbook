@@ -16,12 +16,13 @@ describe Notification do
     end
     it 'must be unique per user and prediction' do
       user = User.new
-      user.save(:validate => false)
+      user.save(validate: false)
       prediction = Prediction.new
-      prediction.save(:validate=> false)
-      Notification.create!(:user => user, :prediction => prediction)
-      lambda { Notification.create!(:user => user, :prediction => prediction)
-      }.should raise_error(ActiveRecord::RecordInvalid, /already been taken/)
+      prediction.save(validate: false)
+      Notification.create!(user: user, prediction: prediction)
+      lambda do
+        Notification.create!(user: user, prediction: prediction)
+      end.should raise_error(ActiveRecord::RecordInvalid, /already been taken/)
     end
   end
 
@@ -50,7 +51,7 @@ describe Notification do
     it 'yields if token unused' do
       Notification.should_receive(:find_by_uuid).and_return(@dn)
       (b = double('block test')).should_receive(:called!)
-      Notification.use_token!(:token) { |dn| b.called! }
+      Notification.use_token!(:token) { |_dn| b.called! }
     end
     it 'yields the deadline notification' do
       Notification.should_receive(:find_by_uuid).and_return(@dn)
@@ -59,18 +60,18 @@ describe Notification do
     it 'should not yield if no token' do
       Notification.should_receive(:find_by_uuid).and_return(nil)
       (b = double('block test')).should_not_receive(:called!)
-      Notification.use_token!(:token) { |dn| b.called! }
+      Notification.use_token!(:token) { |_dn| b.called! }
     end
     it 'should not yield if token already used' do
       Notification.should_receive(:find_by_uuid).and_return(@dn)
       @dn.stub(:token_used?).and_return(true)
       (b = double('block test')).should_not_receive(:called!)
-      Notification.use_token!(:token) { |dn| b.called! }
+      Notification.use_token!(:token) { |_dn| b.called! }
     end
     it 'should mark the token used if yielded' do
       Notification.should_receive(:find_by_uuid).and_return(@dn)
       @dn.should_receive(:use_token!)
-      Notification.use_token!(:token) { |hai| }
+      Notification.use_token!(:token) { |_hai| }
     end
   end
 
@@ -107,12 +108,13 @@ describe Notification do
     end
     it 'must be unique per user and prediction' do
       user = User.new
-      user.save(:validate=> false)
+      user.save(validate: false)
       prediction = Prediction.new
-      prediction.save(:validate=> false)
-      Notification.create!(:user => user, :prediction => prediction)
-      lambda { Notification.create!(:user => user, :prediction => prediction)
-      }.should raise_error(ActiveRecord::RecordInvalid, /already been taken/)
+      prediction.save(validate: false)
+      Notification.create!(user: user, prediction: prediction)
+      lambda do
+        Notification.create!(user: user, prediction: prediction)
+      end.should raise_error(ActiveRecord::RecordInvalid, /already been taken/)
     end
   end
 
@@ -141,7 +143,7 @@ describe Notification do
     it 'yields if token unused' do
       Notification.should_receive(:find_by_uuid).and_return(@dn)
       (b = double('block test')).should_receive(:called!)
-      Notification.use_token!(:token) { |dn| b.called! }
+      Notification.use_token!(:token) { |_dn| b.called! }
     end
     it 'yields the deadline notification' do
       Notification.should_receive(:find_by_uuid).and_return(@dn)
@@ -150,18 +152,18 @@ describe Notification do
     it 'should not yield if no token' do
       Notification.should_receive(:find_by_uuid).and_return(nil)
       (b = double('block test')).should_not_receive(:called!)
-      Notification.use_token!(:token) { |dn| b.called! }
+      Notification.use_token!(:token) { |_dn| b.called! }
     end
     it 'should not yield if token already used' do
       Notification.should_receive(:find_by_uuid).and_return(@dn)
       @dn.stub(:token_used?).and_return(true)
       (b = double('block test')).should_not_receive(:called!)
-      Notification.use_token!(:token) { |dn| b.called! }
+      Notification.use_token!(:token) { |_dn| b.called! }
     end
     it 'should mark the token used if yielded' do
       Notification.should_receive(:find_by_uuid).and_return(@dn)
       @dn.should_receive(:use_token!)
-      Notification.use_token!(:token) { |hai| }
+      Notification.use_token!(:token) { |_hai| }
     end
   end
 
@@ -182,5 +184,4 @@ describe Notification do
       Notification.find(@dn.id).token_used?.should be true
     end
   end
-
 end

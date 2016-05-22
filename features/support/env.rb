@@ -1,9 +1,9 @@
-# It is recommended to regenerate this file in the future when you upgrade to a 
-# newer version of cucumber-rails. Consider adding your own code to a new file 
+# It is recommended to regenerate this file in the future when you upgrade to a
+# newer version of cucumber-rails. Consider adding your own code to a new file
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-ENV["RAILS_ENV"] ||= "cucumber"
+ENV['RAILS_ENV'] ||= 'cucumber'
 require 'cucumber/rails'
 #
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
@@ -13,8 +13,8 @@ require 'cucumber/rails'
 Capybara.default_selector = :css
 
 # By default, any exception happening in your Rails application will bubble up
-# to Cucumber so that your scenario will fail. This is a different from how 
-# your application behaves in the production environment, where an error page will 
+# to Cucumber so that your scenario will fail. This is a different from how
+# your application behaves in the production environment, where an error page will
 # be rendered instead.
 #
 # Sometimes we want to override this default behaviour and allow Rails to rescue
@@ -35,7 +35,7 @@ require Rails.root.join('spec', 'factories', 'factories', 'model_factory')
 begin
   DatabaseCleaner.strategy = :transaction
 rescue NameError
-  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
+  raise 'You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it.'
 end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.

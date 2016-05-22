@@ -5,7 +5,7 @@ describe 'users/settings' do
     before do
       assigns[:user] = @user = valid_user
       view.stub(:current_user).and_return(@user)
-      @user.stub(:api_token).and_return("token")
+      @user.stub(:api_token).and_return('token')
       @user.stub(:id).and_return(1)
     end
     it 'should exist' do

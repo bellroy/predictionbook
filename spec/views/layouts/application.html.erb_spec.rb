@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'layouts/application.html.erb' do
   describe 'when user not logged in' do
     before(:each) do
-      view.stub(:authenticate_with_http_basic => nil)
+      view.stub(authenticate_with_http_basic: nil)
       view.stub(:logged_in?).and_return(false)
       view.stub(:current_user).and_return nil
     end
@@ -15,7 +15,7 @@ describe 'layouts/application.html.erb' do
 
     it 'should not show logout link' do
       render
-      rendered.should_not have_link('Logout', :href=>logout_path)
+      rendered.should_not have_link('Logout', href: logout_path)
     end
   end
 
@@ -37,7 +37,7 @@ describe 'layouts/application.html.erb' do
 
     it 'should show logout link' do
       render
-      rendered.should have_link('Logout', :href=>logout_path)
+      rendered.should have_link('Logout', href: logout_path)
     end
   end
 end

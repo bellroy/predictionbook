@@ -29,7 +29,7 @@ class Response < ActiveRecord::Base
   end
 
   def self.prefetch_joins
-    includes(user: { prediction: [:judgements, :responses]})
+    includes(user: { prediction: [:judgements, :responses] })
   end
 
   def self.predictions

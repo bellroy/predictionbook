@@ -2,25 +2,25 @@ require 'spec_helper'
 
 describe 'predictions/new' do
   before(:each) do
-    @prediction = mock_model(Prediction, :persisted? => false, :errors => {}).as_null_object
+    @prediction = mock_model(Prediction, persisted?: false, errors: {}).as_null_object
     assign(:prediction, @prediction)
     view.stub(:logged_in?).and_return(true)
-    view.stub(:user_statistics_cache_key).and_return "stats"
+    view.stub(:user_statistics_cache_key).and_return 'stats'
     view.stub(:statistics).and_return(Statistics.new)
-    @user = mock_model(User, :has_email? => false)
-    @user.stub(:to_param).and_return "username"
+    @user = mock_model(User, has_email?: false)
+    @user.stub(:to_param).and_return 'username'
     view.stub(:current_user).and_return(@user)
   end
 
-  it "should look up the user cache key for the current user" do
+  it 'should look up the user cache key for the current user' do
     view.should_receive(:user_statistics_cache_key).with(@user)
     render
   end
 
   it 'should cache a fragment for the statistics partial' do
-    lambda {
+    lambda do
       render
-    }.should cache_fragment("views/stats")
+    end.should cache_fragment('views/stats')
   end
 
   it 'has a form that POSTs to the prediction collection' do
