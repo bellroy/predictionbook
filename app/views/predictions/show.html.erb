@@ -16,7 +16,7 @@
 </p>
 <%- end -%>
 <%= render 'predictions/events', :events=> @events %>
-<% if logged_in? -%>
+<% if current_user.present? -%>
 <div id='response'>
   <%= render :partial => 'responses/form' %>
 </div>
@@ -28,7 +28,7 @@
 <% else -%>
 <p><span class='notice'>Please <%= link_to 'log in', new_user_session_path %> to respond to or judge prediction</span></p>
 <% end -%>
-<% if logged_in? && !@prediction.withdrawn? -%>
+<% if current_user.present? && !@prediction.withdrawn? -%>
 <div id="judgement">
   <h2>Judge this prediction</h2>
   <p class="note">Only judge this prediction once its outcome is known.<br />Record your opinion above, <strong>not</strong> here!</p>
