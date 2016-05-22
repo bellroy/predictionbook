@@ -26,7 +26,7 @@
 <div id="response_notification"><%= render :partial => @response_notification %></div>
 </div>
 <% else -%>
-<p><span class='notice'>Please <%= link_to 'log in', login_path %> to respond to or judge prediction</span></p>
+<p><span class='notice'>Please <%= link_to 'log in', new_user_session_path %> to respond to or judge prediction</span></p>
 <% end -%>
 <% if logged_in? && !@prediction.withdrawn? -%>
 <div id="judgement">

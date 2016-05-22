@@ -7,48 +7,56 @@ describe 'Prediction responses partial' do
 
   before(:each) do
     user = mock_model(User).as_null_object
-    @wager = mock_model(Response, created_at: Time.now, user: user).as_null_object
+    @wager = mock_model(Response, created_at: Time.zone.now, user: user).as_null_object
     @events = [@wager]
   end
-  it 'should list the responses' do
+
+  it 'lists the responses' do
     @events = [@wager, @wager]
     render_partial
-    rendered.should have_selector('li', count: 2)
+    expect(rendered).to have_selector('li', count: 2)
   end
-  it 'should show the responses confidence' do
-    @wager.stub(:confidence).and_return(30)
+
+  it 'shows the responses confidence' do
+    expect(@wager).to receive(:confidence).and_return(30)
     render_partial
-    rendered.should =~ /30%/
+    expect(rendered).to match(/30%/)
   end
-  it 'should not show nil relative_confidences' do
-    @wager.should_not_receive(:relative_confidence)
-    @wager.stub(:confidence).and_return(nil)
+
+  it 'does not show nil relative_confidences' do
+    expect(@wager).not_to receive(:relative_confidence)
+    expect(@wager).to receive(:confidence).and_return(nil)
     render_partial
   end
-  it 'should show who made the response' do
-    @wager.stub(:user).and_return(User.new(name: 'Person', login: 'login.name'))
+
+  it 'shows who made the response' do
+    expect(@wager).to receive(:user).and_return(User.new(name: 'Person', login: 'login.name'))
     render_partial
-    rendered.should have_css('.user', text: 'Person')
+    expect(rendered).to have_css('.user', text: 'Person')
   end
-  it 'should show when they made the response' do
-    @wager.stub(:created_at).and_return(3.days.ago)
+
+  it 'shows when they made the response' do
+    expect(@wager).to receive(:created_at).and_return(3.days.ago)
     render_partial
-    rendered.should have_css('span', text: '3 days ago')
+    expect(rendered).to have_css('span', text: '3 days ago')
   end
-  describe 'should include any supplied comments' do
+
+  describe 'includes any supplied comments' do
     before(:each) do
-      @wager.stub(:comment?).and_return(true)
-      @wager.stub(:comment).and_return(@comment = double('comment'))
-      @wager.stub(:action_comment?).and_return(false)
+      expect(@wager).to receive(:comment?).and_return(true)
+      expect(@wager).to receive(:comment).and_return(@comment = double('comment'))
+      expect(@wager).to receive(:action_comment?).and_return(false)
     end
+
     it 'uses the markup helper to render any supplied comment' do
-      view.should_receive(:markup).with(@comment).and_return('comment')
+      expect(view).to receive(:markup).with(@comment).and_return('comment')
       render_partial
     end
-    it 'should include the markup in the response' do
-      view.stub(:markup).and_return('<comment>markup response</comment>')
+
+    it 'includes the markup in the response' do
+      expect(view).to receive(:markup).and_return('<comment>markup response</comment>')
       render_partial
-      rendered.should have_css('.comment', text: 'markup response')
+      expect(rendered).to have_css('.comment', text: 'markup response')
     end
   end
 end
