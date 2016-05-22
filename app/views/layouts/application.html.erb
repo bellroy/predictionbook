@@ -44,7 +44,7 @@
         <li><%= link_to 'Signup', new_user_registration_path %></li>
   		<%- else -%>
   		  <li>Hello, <%= show_user(current_user)  %></li>
-  		  <li><%= link_to 'Settings', users_settings_path %></li>
+  		  <li><%= link_to 'Settings', settings_user_path(current_user) %></li>
   		  <li><%= link_to 'Logout', destroy_user_session_path %></li>
   		<%- end -%>
       </ul>

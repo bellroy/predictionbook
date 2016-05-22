@@ -7,7 +7,7 @@
 		<h2>Find out just how sure you should be, and get better at being only as sure as the facts justify.</h2>
     <%- unless logged_in? -%>
 		<p class="actions clear">
-		  <%= link_to 'Login', login_path, :class => 'button' %>
+		  <%= link_to 'Login', new_user_session_path, :class => 'button' %>
 		  <span>or</span>
 		  <%= link_to 'Sign Up', signup_path, :class => 'button' %>
 	  </p>

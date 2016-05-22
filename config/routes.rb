@@ -1,16 +1,13 @@
 PredictionBook2::Application.routes.draw do
-  devise_for :users do
+  devise_for :users
+
+  resources :users, only: :show do
     get :settings, on: :member
+    get :statistics, on: :member
     get :due_for_judgement, on: :member
     post :generate_api_token, on: :member
     resources :deadline_notifications
   end
-
-  resources :users, only: :show
-  get '/users/settings' => 'users#settings'
-  get '/users/statistics' => 'users#statistics'
-  get '/users/due_for_judgement' => 'users#due_for_judgement'
-  get '/users/generate_api_token' => 'users#generate_api_token'
 
   resources :deadline_notifications
   resources :response_notifications
