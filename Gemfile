@@ -13,6 +13,7 @@ gem 'uuidtools'
 gem 'RedCloth'
 gem 'formatize', git: 'https://github.com/januszm/formatize'
 gem 'htmlentities'
+gem 'sass-rails'
 
 # Servers
 gem 'mysql2'
