@@ -12,6 +12,13 @@ class LabelledFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def email_field(method, options = {})
+    options = add_input_class(options)
+    labelling_surround(method, options) do |sub_method, sub_options|
+      super(sub_method, sub_options)
+    end
+  end
+
   def text_area(method, options = {})
     options = add_input_class(options)
     labelling_surround(method, options) do |sub_method, sub_options|

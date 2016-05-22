@@ -29,10 +29,16 @@ class User < ActiveRecord::Base
                       allow_nil: true
                     }
 
-  # find by login
-  def self.[](login)
-    raise(ActiveRecord::RecordNotFound, 'Login is blank') if login.blank?
-    find_by_login!(login.gsub('[dot]', '.'))
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    login = conditions.delete(:login)
+    conditions_hash = conditions.to_hash
+    if login.present?
+      where(conditions_hash)
+        .find_by(['lower(login) = :value OR lower(email) = :value', { value: login.downcase }])
+    elsif conditions.key?(:login) || conditions.key?(:email)
+      find_by(conditions_hash)
+    end
   end
 
   def self.generate_api_token
@@ -69,7 +75,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    %w[matt gwern].include?(login)
+    %w(matt gwern).include?(login)
   end
 
   def to_param
