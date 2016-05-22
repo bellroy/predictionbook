@@ -1,5 +1,3 @@
-include ModelFactory
-
 Then /^I should see the response form$/ do
   page.should have_selector("form[action='#{prediction_responses_path(@prediction)}']") do |form|
     form.should have_selector "textarea[name='response[comment]']"

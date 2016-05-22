@@ -80,10 +80,6 @@ class User < ActiveRecord::Base
     name || login
   end
 
-  def remember_me
-    remember_me_for 2.years
-  end
-
   def reset_password
     self.password = self.password_confirmation = SecureRandom.hex(6)
     save!
