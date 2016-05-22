@@ -7,17 +7,3 @@ describe 'Time core extensions' do
     end
   end
 end
-
-describe 'Chronic regression test' do
-  describe 'crash on "100 years from now"' do
-    it 'does not raise an exception' do
-      expect { Chronic.parse('100 years from now') }.not_to raise_error
-    end
-
-    it 'returns the date' do
-      now = Time.zone.now
-      future = now.utc + 100.years
-      expect(Chronic.parse('100 years from now').to_s(:db)).to eq future.to_s(:db)
-    end
-  end
-end
