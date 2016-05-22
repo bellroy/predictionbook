@@ -1,7 +1,7 @@
 include ModelFactory
 
 Then /^I should see the response form$/ do
- page.should have_selector("form[action='#{prediction_responses_path(@prediction)}']") do |form|
+  page.should have_selector("form[action='#{prediction_responses_path(@prediction)}']") do |form|
     form.should have_selector "textarea[name='response[comment]']"
   end
 end
@@ -15,7 +15,7 @@ Given /^I take note of the response count$/ do
 end
 
 When /^I submit a confidence$/ do
-  post prediction_responses_path(@prediction), :response => {:confidence => '90'}
+  post prediction_responses_path(@prediction), response: { confidence: '90' }
 end
 
 Then /^The response count should be unchanged$/ do

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'predictions/index.html.erb' do
-
   before do
     assign(:predictions, [])
     assign(:statistics, Statistics.new)
@@ -21,5 +20,4 @@ describe 'predictions/index.html.erb' do
     render
     rendered.should have_selector("a[href='#{prediction_path(prediction)}']")
   end
-
 end

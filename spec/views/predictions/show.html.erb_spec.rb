@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe 'predictions/show.html.erb' do
   before(:each) do
-    @user = create_valid_user(:name => 'person who created it', :login => "login.name")
-    @prediction = create_valid_prediction(:creator=> @user)
-    @prediction_response = valid_response(:prediction=> @prediction, :user=> @user)
+    @user = create_valid_user(name: 'person who created it', login: 'login.name')
+    @prediction = create_valid_prediction(creator: @user)
+    @prediction_response = valid_response(prediction: @prediction, user: @user)
 
     assign(:current_user, @user)
     assign(:prediction, @prediction)
@@ -19,7 +19,7 @@ describe 'predictions/show.html.erb' do
   it 'has a heading of the predicitons description' do
     @prediction.stub(:description).and_return('Prediction Heading')
     render
-    rendered.should have_css('h1', :text=> 'Prediction Heading')
+    rendered.should have_css('h1', text: 'Prediction Heading')
   end
 
   describe 'creation time' do
@@ -29,18 +29,18 @@ describe 'predictions/show.html.erb' do
       render
     end
     it 'should show when it was created' do
-      rendered.should have_css('span', :text=> "3 days ago")
+      rendered.should have_css('span', text: '3 days ago')
     end
 
     it 'should put the complete date in the title attribute of the span' do
-      rendered.should have_selector("span[title='#{@time.to_s}']")
+      rendered.should have_selector("span[title='#{@time}']")
     end
   end
 
   describe 'prediction creator' do
     it 'should show who made the prediction' do
       render
-      rendered.should have_css('.user', :text=> @user.name)
+      rendered.should have_css('.user', text: @user.name)
     end
   end
 
@@ -51,16 +51,16 @@ describe 'predictions/show.html.erb' do
       render
     end
     it 'should show when the outcome will be known' do
-      rendered.should have_css('span', :text=> /10 days/)
+      rendered.should have_css('span', text: /10 days/)
     end
     it 'should put the complete date in the title attribute of the span' do
-      rendered.should have_selector("span[title='#{@time.to_s}']")
+      rendered.should have_selector("span[title='#{@time}']")
     end
   end
 
   it 'renders the events partial' do
     render
-    view.should render_template(:partial => 'predictions/_events')
+    view.should render_template(partial: 'predictions/_events')
   end
 
   describe 'confirming prediction outcome' do
@@ -160,14 +160,13 @@ describe 'predictions/show.html.erb' do
       end
     end
 
-
     describe '(logged in)' do
       before(:each) do
         @prediction.stub(:unknown?).and_return(true)
         view.stub(:logged_in?).and_return(true)
         @prediction.stub(:deadline).and_return 1.hour.from_now
-        assign(:deadline_notification, DeadlineNotification.new(:user => @user, :prediction => @prediction))
-        assign(:response_notification, ResponseNotification.new(:user => @user, :prediction => @prediction))
+        assign(:deadline_notification, DeadlineNotification.new(user: @user, prediction: @prediction))
+        assign(:response_notification, ResponseNotification.new(user: @user, prediction: @prediction))
       end
 
       [:response_notification, :deadline_notification].each do |form_name|
@@ -184,7 +183,7 @@ describe 'predictions/show.html.erb' do
 
           it "should have a class of 'single-checkbox-form' on the form tag" do
             render
-            rendered.should have_css("form.single-checkbox-form")
+            rendered.should have_css('form.single-checkbox-form')
           end
 
           it 'has a hidden field for prediction_id' do
@@ -244,5 +243,4 @@ describe 'predictions/show.html.erb' do
       end
     end
   end
-
 end

@@ -23,7 +23,6 @@ describe ResponseHelper do
       describe 'action comment' do
         let(:comment) { '/me shakes head' }
 
-
         it { is_expected.to have_selector('span[class="action-comment"]', text: 'shakes head') }
       end
     end
