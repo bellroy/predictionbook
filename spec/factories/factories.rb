@@ -1,3 +1,5 @@
+require 'ffaker'
+
 FactoryGirl.define do
   factory :prediction do
     association(:creator, factory: :user)
