@@ -6,10 +6,10 @@ describe VersionHelper do
   describe 'changes' do
     let(:deadline) { Time.zone.now.to_s }
     let(:attributes_before) { { 'deadline' => deadline, 'withdrawn' => 'true' } }
-    let(:first_version) { instance_double(Prediction::Version, attributes: attributes_before) }
+    let(:first_version) { instance_double(PredictionVersion, attributes: attributes_before) }
     let(:attributes_now) { { 'deadline' => deadline, 'withdrawn' => 'false' } }
     let(:second_version) do
-      instance_double(Prediction::Version, previous: first_version, attributes: attributes_now)
+      instance_double(PredictionVersion, previous_version: first_version, attributes: attributes_now)
     end
 
     subject { changes(second_version) }

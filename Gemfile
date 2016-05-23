@@ -6,7 +6,6 @@ gem 'jquery-rails'
 gem 'devise'
 # Models
 gem 'chronic'
-gem 'version_fu'
 gem 'uuidtools'
 
 # Views
@@ -38,6 +37,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'rspec-activemodel-mocks'
   gem 'pry'
+  gem 'pry-byebug'
   gem 'hirb'
   gem 'wirble'
   gem 'awesome_print'

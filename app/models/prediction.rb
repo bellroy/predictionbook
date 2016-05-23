@@ -1,5 +1,12 @@
 class Prediction < ActiveRecord::Base
-  version_fu
+  has_many :versions, autosave: true, class_name: PredictionVersion
+
+  before_save :create_version_if_required
+
+  def create_version_if_required
+    PredictionVersion.create_from_current_prediction_if_required(self)
+    true # Never halt save
+  end
 
   class DuplicateRecord < ActiveRecord::RecordInvalid; end
 
