@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   protected
 
   def lookup_user
-    @user = User.find(params[:id])
+    @user = User.find_by_login(params[:id]) || User.find_by_id(params[:id])
   end
 
   def user_is_current_user?
