@@ -102,7 +102,7 @@ class PredictionsController < ApplicationController
     @unjudged = Prediction.unjudged(limit: 5)
     @judged = Prediction.judged(limit: 5)
     @recent = Prediction.recent(limit: 5)
-    @responses = Response.limit(25).recent
+    @responses = Response.recent(limit: 25)
   end
 
   def judge
