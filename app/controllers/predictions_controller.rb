@@ -127,8 +127,10 @@ class PredictionsController < ApplicationController
   private
 
   def must_be_authorized_for_prediction
-    authorized = current_user && current_user.authorized_for(@prediction)
-    render status: :forbidden, action: 'new' unless authorized
+    authorized = (current_user || User.new).authorized_for(@prediction)
+    showing_public_prediction = (params[:action] == 'show' && !@prediction.private?)
+    notice = 'You are not authorized to perform that action'
+    redirect_to(root_path, notice: notice) unless authorized || showing_public_prediction
   end
 
   def find_prediction

@@ -7,7 +7,7 @@
     <%= f.text_field :deadline_text, :label => 'When will you know?', :trailing_content => link_to('Help', '#date-help', :class => 'help facebox'), :preview => true %>
     <%= f.submit 'Lock it in!' %>
     <%= f.check_box :notify_creator, :label => 'Email me when I should know the outcome' %>
-    <%- unless current_user.has_email? -%>
+    <%- unless !current_user.present? || current_user.has_email? -%>
     <p>(Email will not be sent until you <%= link_to "set your email", settings_user_path(current_user) %>)</p>
     <%- end -%>
     <%= f.check_box :private, :label => 'Keep this prediction private.' %>
