@@ -54,8 +54,7 @@ describe PredictionsController do
       expect(Prediction).to receive(:unjudged).and_return(unjudged)
       expect(Prediction).to receive(:judged).and_return(judged)
       expect(Prediction).to receive(:recent).and_return(recent)
-      expect(Response).to receive(:limit)
-        .with(25).and_return(double(:collection, recent: responses))
+      expect(Response).to receive(:recent).and_return(responses)
       get :happenstance
 
       expect(assigns[:unjudged]).to eq unjudged

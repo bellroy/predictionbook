@@ -33,6 +33,7 @@ describe Response do
         expect(Response).to receive(:order).and_return(@rs)
         expect(Response).to receive(:not_private).and_return(@rs)
         expect(Response).to receive(:prefetch_joins).and_return(@rs)
+        expect(Response).to receive(:limit).and_return(@rs)
         expect(Response.recent).to eq @rs
       end
     end
