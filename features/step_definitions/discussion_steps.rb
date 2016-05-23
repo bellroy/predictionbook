@@ -1,11 +1,11 @@
 Then /^I should see the response form$/ do
-  page.should have_selector("form[action='#{prediction_responses_path(@prediction)}']") do |form|
-    form.should have_selector "textarea[name='response[comment]']"
+  expect(page).to have_selector("form[action='#{prediction_responses_path(@prediction)}']") do |form|
+    expect(form).to have_selector "textarea[name='response[comment]']"
   end
 end
 
 Then /^the form should not have a field for entering a confidence$/ do
-  page.should_not have_selector("form input[name='response[confidence]']")
+  expect(page).not_to have_selector("form input[name='response[confidence]']")
 end
 
 Given /^I take note of the response count$/ do
@@ -17,5 +17,5 @@ When /^I submit a confidence$/ do
 end
 
 Then /^The response count should be unchanged$/ do
-  @prediction.responses.count.should == @response_count
+  expect(@prediction.responses.count).to eq @response_count
 end
