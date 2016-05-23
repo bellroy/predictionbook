@@ -12,6 +12,17 @@ class UsersController < ApplicationController
     @predictions = @predictions.limit(100)
   end
 
+  def update
+    @user.update_attributes(user_params)
+    if @user.valid?
+      show
+      render action: :show
+    else
+      settings
+      render action: :settings
+    end
+  end
+
   def settings
     @title = "Settings for #{current_user}"
   end
@@ -65,8 +76,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    attributes = [:login, :email, :name, :password, :password_confirmation, :timezone,
-                  :private_default, :api_token]
-    attributes << :admin if current_user.admin?
+    params.require(:user).permit(:login, :email, :name, :timezone, :private_default, :api_token)
   end
 end

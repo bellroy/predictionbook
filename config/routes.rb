@@ -1,7 +1,7 @@
 PredictionBook2::Application.routes.draw do
   devise_for :users
 
-  resources :users, only: :show do
+  resources :users, only: [:show, :update] do
     get :settings, on: :member
     get :statistics, on: :member
     get :due_for_judgement, on: :member
