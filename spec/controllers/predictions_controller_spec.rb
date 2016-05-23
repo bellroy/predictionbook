@@ -341,7 +341,7 @@ describe PredictionsController do
         let(:logged_in_user) { FactoryGirl.create(:user) }
         it 'is forbidden when not owned by current user' do
           get :show, id: prediction.id
-          expect(response.response_code).to eq 403
+          expect(response.response_code).to eq 302
         end
       end
 
@@ -350,7 +350,7 @@ describe PredictionsController do
 
         it 'is forbidden when not logged in' do
           get :show, id: prediction.id
-          expect(response.response_code).to eq 403
+          expect(response.response_code).to eq 302
         end
       end
     end
@@ -441,7 +441,7 @@ describe PredictionsController do
       it 'denies access' do
         allow_any_instance_of(Prediction).to receive(:private?).and_return(false)
         post :withdraw, id: prediction.id
-        expect(response.response_code).to eq 403
+        expect(response.response_code).to eq 302
       end
     end
   end
@@ -485,7 +485,7 @@ describe PredictionsController do
     describe 'when logged in' do
       it 'requires the user to have created the prediction' do
         get :edit, id: prediction.id
-        expect(response.response_code).to eq 403
+        expect(response.response_code).to eq 302
       end
 
       context 'logged in user is creator' do
@@ -512,7 +512,7 @@ describe PredictionsController do
     describe 'when logged in' do
       it 'requires the user to have created the prediction' do
         put :update, id: prediction.id
-        expect(response.response_code).to eq 403
+        expect(response.response_code).to eq 302
       end
 
       context 'logged in user was the creator' do

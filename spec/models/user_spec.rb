@@ -19,27 +19,6 @@ describe User do
     expect(User.new(login: 'login.name').to_param).to eq 'login[dot]name'
   end
 
-  describe 'with lookup by username' do
-    it 'finds a user by login' do
-      expect(User).to receive(:find_by_login!).with('login_name').and_return(:user)
-      expect(User['login_name']).to eq :user
-    end
-
-    it 'should replace [dot] in the username with a . when looking up a user' do
-      u = User.new(login: 'login.name')
-      expect(User).to receive(:find_by_login!).with('login.name').and_return(u)
-      expect(User['login[dot]name']).to eq u
-    end
-
-    it 'should raise RecordNotFound exception if no user found' do
-      expect { User['login_name'] }.to raise_error(ActiveRecord::RecordNotFound)
-    end
-
-    it 'should raise RecordNotFound exception if login is blank' do
-      expect { User[nil] }.to raise_error(ActiveRecord::RecordNotFound)
-    end
-  end
-
   describe 'with statistics' do
     it 'should delegate statistics to wagers' do
       user = User.new
