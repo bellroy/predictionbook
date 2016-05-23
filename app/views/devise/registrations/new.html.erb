@@ -7,14 +7,6 @@
     <%= f.text_field :login, autofocus: true %>
   </div>
 
-  <div class="field">
-    <%= f.email_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.text_field :name %>
-  </div>
-
   <% placeholder = "(#{@minimum_password_length} characters minimum)" if @minimum_password_length %>
   <div class="field">
     <%= f.password_field :password, autocomplete: "off", placeholder: placeholder %>
