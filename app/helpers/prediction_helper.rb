@@ -10,7 +10,7 @@ module PredictionHelper
     dir_name = case event
                when Response then 'responses'
                when Judgement then 'judgements'
-               when Prediction::Version then 'predictions/versions'
+               when PredictionVersion then 'predictions/versions'
     end
     render partial: "#{dir_name}/event", locals: { event: event }
   end

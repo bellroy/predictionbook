@@ -2,10 +2,13 @@
 
 module VersionHelper
   def changes(version)
-    checked_attributes = %w[deadline description withdrawn private]
-    previous_attributes = version.previous.attributes
-    patch = HashDiff.patch!(version.attributes, previous_attributes).slice(*checked_attributes)
-    patch.keys.map { |attr| changed_detail(attr, patch[attr], previous_attributes[attr]) }
+    previous_version = version.previous_version
+    return [] if previous_version.nil?
+    prev_attrs = previous_version.attributes
+    columns = PredictionVersion.versioned_prediction_columns.map(&:to_s)
+    raw_diff = HashDiff.diff(prev_attrs, version.attributes)
+    diff = raw_diff.select { |array| columns.include?(array[1]) }
+    diff.map { |array| changed_detail(array[1], array[3], array[2]) }
   end
 
   def changed_detail(field, new_value, old_value)
