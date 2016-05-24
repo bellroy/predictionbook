@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    %w(matt gwern).include?(login)
+    %w[matt gwern].include?(login)
   end
 
   def to_param
