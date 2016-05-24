@@ -12,51 +12,60 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20160524033813) do
+
   create_table "credence_answers", force: :cascade do |t|
     t.integer  "credence_question_id", limit: 4
     t.text     "text",                 limit: 65535
     t.text     "value",                limit: 65535
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "rank",                 limit: 4
   end
+
+  add_index "credence_answers", ["credence_question_id"], name: "index_credence_answers_on_credence_question_id", using: :btree
 
   create_table "credence_game_responses", force: :cascade do |t|
     t.integer  "credence_question_id", limit: 4
     t.integer  "first_answer_id",      limit: 4
     t.integer  "second_answer_id",     limit: 4
     t.integer  "correct_index",        limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
     t.integer  "credence_game_id",     limit: 4
     t.datetime "asked_at"
     t.datetime "answered_at"
     t.integer  "answer_credence",      limit: 4
     t.integer  "given_answer",         limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "credence_game_responses", ["credence_game_id", "asked_at"], name: "index_credence_game_responses_on_credence_game_id_and_asked_at", using: :btree
+  add_index "credence_game_responses", ["credence_question_id"], name: "index_credence_game_responses_on_credence_question_id", using: :btree
 
   create_table "credence_games", force: :cascade do |t|
     t.integer  "current_response_id", limit: 4
     t.integer  "score",               limit: 4, default: 0, null: false
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
     t.integer  "user_id",             limit: 4
     t.integer  "num_answered",        limit: 4, default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "credence_games", ["user_id"], name: "index_credence_games_on_user_id", unique: true, using: :btree
 
   create_table "credence_questions", force: :cascade do |t|
     t.boolean  "enabled"
     t.string   "text",            limit: 255
     t.string   "prefix",          limit: 255
     t.string   "suffix",          limit: 255
-    t.string   "type",            limit: 255
+    t.string   "question_type",   limit: 255
     t.integer  "adjacent_within", limit: 4
     t.float    "weight",          limit: 24
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "text_id",         limit: 50
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "credence_questions", ["text_id"], name: "index_credence_questions_on_text_id", unique: true, using: :btree
 
   create_table "judgements", force: :cascade do |t|
     t.integer  "prediction_id", limit: 4
@@ -160,4 +169,5 @@ ActiveRecord::Schema.define(version: 20160524033813) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
 end
