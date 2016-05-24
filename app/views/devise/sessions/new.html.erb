@@ -1,5 +1,12 @@
 <h2>Log in</h2>
 
+<h3 style='color: darkgreen'>
+  PredictionBook has recently undergone a major upgrade. We have switched to using a different
+  authentication library to verify your password. As a result, all users are required to
+  <%= link_to 'reset their passwords', new_password_path(resource) %>
+  before they can log in again. PredictionBook will be more secure as a result.
+</h3>
+
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.text_field :login, autofocus: true %>
