@@ -166,8 +166,6 @@ describe Prediction do
   end
 
   describe 'finders and scopes' do
-    it_behaves_like 'model class with common scopes'
-
     before do
       Prediction.destroy_all
     end
