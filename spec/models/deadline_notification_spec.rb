@@ -68,6 +68,8 @@ describe DeadlineNotification do
     end
 
     describe 'sendable?' do
+      subject { notification.sendable? }
+
       let(:notification) { DeadlineNotification.new }
       let(:has_email) { true }
       let(:due_for_judgement) { true }
@@ -80,8 +82,6 @@ describe DeadlineNotification do
         allow(notification).to receive(:enabled?).and_return(enabled)
         allow(notification).to receive(:withdrawn?).and_return(withdrawn)
       end
-
-      subject { notification.sendable? }
 
       it { is_expected.to be true }
 
