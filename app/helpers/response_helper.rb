@@ -2,21 +2,19 @@
 
 module ResponseHelper
   def confidence_for(wager)
-    unless wager.confidence.blank?
-      confidence_markup = content_tag(:span, "#{wager.confidence}%", 
-                                      :class => "confidence", 
-                                      :style => style_for_confidence(wager.confidence))
+    confidence = wager.confidence
+    unless confidence.blank?
+      confidence_markup = content_tag(:span, "#{confidence}%",
+                                      class: 'confidence',
+                                      style: style_for_confidence(confidence))
       "estimated #{confidence_markup}".html_safe
     end
   end
 
   def comment_for(wager)
-    if wager.comment?
-      if wager.action_comment?
-        content_tag(:span, h(wager.action_comment), :class => "action-comment")
-      else
-        "said “#{content_tag(:span, markup(wager.comment).html_safe, :class => "comment")}”".html_safe
-      end
-    end
+    return nil unless wager.comment?
+    action_comment = wager.action_comment?
+    return content_tag(:span, h(wager.action_comment), class: 'action-comment') if action_comment
+    "said “#{content_tag(:span, markup(wager.comment).html_safe, class: 'comment')}”".html_safe
   end
 end

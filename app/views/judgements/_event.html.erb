@@ -6,5 +6,5 @@
 <% end %>
 &nbsp; judged this prediction
 <span class='outcome'><%= event.outcome_in_words -%></span>
-<%= show_time(event.created_at, 'created_at') -%>.
+<%= TimeInContentTagPresenter.new(event.created_at, 'created_at').tag -%>.
 <%- end -%>

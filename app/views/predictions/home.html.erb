@@ -5,11 +5,11 @@
   <%= image_tag "title-banner.png", :id => "title", :alt => "How Sure Are You?" %>
 	<div class="content clear">
 		<h2>Find out just how sure you should be, and get better at being only as sure as the facts justify.</h2>
-    <%- unless logged_in? -%>
+    <%- unless current_user.present? -%>
 		<p class="actions clear">
-		  <%= link_to 'Login', login_path, :class => 'button' %>
+		  <%= link_to 'Login', new_user_session_path, :class => 'button' %>
 		  <span>or</span>
-		  <%= link_to 'Sign Up', signup_path, :class => 'button' %>
+		  <%= link_to 'Sign Up', new_user_registration_path, :class => 'button' %>
 	  </p>
 	  <%- end -%>
 	</div>
@@ -27,7 +27,7 @@
     <p>Rather than just recording <strong>what</strong> you think will happen, PredictionBook allows you to record just how sure you are that it will happen. You can distinguish between those things you think will probably occur, and those things you're really really sure will occur. If you're properly calibrated, you'll be able to see that about 60% of the things you're 60% sure will happen, do happen, and 90% of the things you're 90% sure will happen, do happen.</p>
 </div><!-- #intro -->
 <% end -%>
-	
+
 <div id='popular'>
   <%= render :partial => 'list', :locals => { :title => 'Popular Predictions' } %>
 </div>
@@ -40,4 +40,3 @@
   </ul>
 </div>
 <% end -%>
-

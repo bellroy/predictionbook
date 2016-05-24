@@ -3,12 +3,12 @@ module Api
     MAXIMUM_PREDICTIONS_LIMIT = 1000
     DEFAULT_PREDICTIONS_LIMIT = 100
 
-    before_filter :authenticate_by_api_token
-    before_filter :build_predictions, only: [:index]
-    before_filter :build_new_prediction, only: [:create]
-    before_filter :find_prediction, only: [:show, :update]
-    before_filter :authorize_to_see_prediction, only: [:show]
-    before_filter :authorize_to_update_prediction, only: [:update]
+    before_action :authenticate_by_api_token
+    before_action :build_predictions, only: [:index]
+    before_action :build_new_prediction, only: [:create]
+    before_action :find_prediction, only: [:show, :update]
+    before_action :authorize_to_see_prediction, only: [:show]
+    before_action :authorize_to_update_prediction, only: [:update]
 
     def create
       if @prediction.save
@@ -27,7 +27,7 @@ module Api
     end
 
     def update
-      if @prediction.update_attributes(params[:prediction])
+      if @prediction.update_attributes(prediction_params)
         render json: @prediction
       else
         render json: @prediction.errors, status: :unprocessable_entity
@@ -38,16 +38,11 @@ module Api
 
     def authenticate_by_api_token
       @user = User.find_by_api_token(params[:api_token])
-
-      unless valid_params_and_user?
-        render json: invalid_api_message, status: :unauthorized
-      end
+      render json: invalid_api_message, status: :unauthorized unless valid_params_and_user?
     end
 
     def authorize_to_see_prediction
-      unless @prediction.public? || @user.authorized_for(@prediction)
-        raise UnauthorizedRequest
-      end
+      raise UnauthorizedRequest unless @prediction.public? || @user.authorized_for(@prediction)
     end
 
     def authorize_to_update_prediction
@@ -55,8 +50,6 @@ module Api
     end
 
     def build_new_prediction
-      prediction_params = params[:prediction] || {}
-
       unless prediction_params[:private] && @user
         prediction_params[:private] = @user.private_default
       end
@@ -65,11 +58,9 @@ module Api
     end
 
     def build_predictions
-      if (1..MAXIMUM_PREDICTIONS_LIMIT).include?(params[:limit].to_i)
-        @predictions = Prediction.limit(params[:limit].to_i).recent
-      else
-        @predictions = Prediction.limit(DEFAULT_PREDICTIONS_LIMIT).recent
-      end
+      limit = params[:limit].to_i
+      limit = DEFAULT_PREDICTIONS_LIMIT unless (1..MAXIMUM_PREDICTIONS_LIMIT).cover?(limit)
+      @predictions = Prediction.recent(limit: limit)
     end
 
     def find_prediction
@@ -82,6 +73,10 @@ module Api
 
     def valid_params_and_user?
       params[:api_token] && @user
+    end
+
+    def prediction_params
+      params.require(:prediction).permit!
     end
   end
 end

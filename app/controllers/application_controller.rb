@@ -1,26 +1,16 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
-
 class ApplicationController < ActionController::Base
   class UnauthorizedRequest < StandardError
   end
 
   helper :all # include all helpers, all the time
-  unloadable # restful_authentication breaks rails class reloading in dev mode, a fix would be appreciated immensely
-  include AuthenticatedSystem
 
-  before_filter :set_timezone, :clear_return_to, :login_via_token
+  before_action :set_timezone, :clear_return_to, :login_via_token
 
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => 'c4ec086ac06ce802c8f49e28cc1e8943'
-
-  # See ActionController::Base for details
-  # Uncomment this to filter the contents of submitted sensitive data parameters
-  # from your application log (in this case, all fields with names like "password").
-  # filter_parameter_logging :password
-
-  rescue_from UnauthorizedRequest, with: :handle_unauthorised_request
 
   protected
 
@@ -28,14 +18,17 @@ class ApplicationController < ActionController::Base
     render json: unauthorized_user_message, status: :unauthorized
   end
 
+  def configure_permitted_parameters
+    added_attrs = [:name, :login, :email, :password, :password_confirmation, :remember_me]
+    devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
+    devise_parameter_sanitizer.permit :account_update, keys: added_attrs
+  end
+
   private
 
   def set_timezone
-    if logged_in? && !current_user.timezone.blank?
-      Time.zone = current_user.timezone
-    else
-      Time.zone = 'UTC'
-    end
+    user_timezone = current_user.try(:timezone)
+    Time.zone = user_timezone.blank? ? 'UTC' : user_timezone
     Chronic.time_class = Time.zone
   end
 
@@ -44,10 +37,9 @@ class ApplicationController < ActionController::Base
   end
 
   def login_via_token
-    if token = params[:token]
-      DeadlineNotification.use_token!(token) do |dn|
-        self.current_user = dn.user
-      end
+    token = params[:token]
+    if token.present?
+      DeadlineNotification.use_token!(token) { |dn| self.current_user = dn.user }
       redirect_to # get rid of token in url so if it is copied and pasted it's not propagated
     end
   end

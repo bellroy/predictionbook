@@ -2,44 +2,47 @@ require 'spec_helper'
 
 shared_examples_for 'NotificationsController' do
   describe 'redirecting or rendering partial based on xhr? of request' do
+    let(:collection) { double('collection') }
+    let(:notification) { controller.notification_type.new }
+
     before(:each) do
-      controller.stub(:notification_collection).and_return(@collection = double('collection'))
-      controller.stub(:login_required)
+      expect(controller).to receive(:notification_collection).and_return(collection)
+      sign_in FactoryGirl.create(:user)
     end
 
     describe 'creating a notification' do
-      before(:each) do
-        @notification = controller.notification_type.new
-        collection = double('notifications', :create! => @notification)
-        controller.stub(:notification_collection).and_return(collection)
-      end
-      it 'should redirect to the prediction for non xhr request' do
-        @notification.stub(:prediction).and_return(1)
+      let(:collection) { double('notifications', create!: notification) }
+
+      it 'redirects to the prediction for non xhr request' do
+        expect(notification).to receive(:prediction).and_return(1)
         post :create
-        response.should redirect_to(prediction_path(1))
+        expect(response).to redirect_to(prediction_path(1))
       end
-      it 'should render the notification partial for xhr request' do
+
+      it 'renders the notification partial for xhr request' do
         xhr :post, :create
-        response.should render_template("#{controller.notification}s/_#{controller.notification}")
+        underscored_notification_type = controller.underscored_notification_type
+        template_name = "#{underscored_notification_type}s/_#{underscored_notification_type}"
+        expect(response).to render_template(template_name)
       end
     end
 
     describe 'updating a notification' do
-      before(:each) do
-        @notification = controller.notification_type.new
-        @notification.stub(:update_attributes!)
-        collection = double('notifications', :find => @notification)
-        controller.stub(:notification_collection).and_return(collection)
+      let(:collection) { double('notifications', find: notification) }
+
+      before { expect(notification).to receive(:update_attributes!) }
+
+      it 'redirects to the prediction for non xhr request' do
+        expect(notification).to receive(:prediction).and_return(1)
+        put :update, id: '1'
+        expect(response).to redirect_to(prediction_path(1))
       end
 
-      it 'should redirect to the prediction for non xhr request' do
-        @notification.stub(:prediction).and_return(1)
-        put :update, :id => '1'
-        response.should redirect_to(prediction_path(1))
-      end
-      it 'should render the notification partial for xhr request' do
-        xhr :put, :update, :id => '1'
-        response.should render_template("#{controller.notification}s/_#{controller.notification}")
+      it 'renders the notification partial for xhr request' do
+        xhr :put, :update, id: '1'
+        underscored_notification_type = controller.underscored_notification_type
+        template_name = "#{underscored_notification_type}s/_#{underscored_notification_type}"
+        expect(response).to render_template(template_name)
       end
     end
   end

@@ -4,6 +4,6 @@
   <% if judgement.user -%>
     by <%= show_user(judgement.user) -%>
   <% end -%>
-  <%= show_time(judgement.created_at, 'created_at') -%>.
+  <%= TimeInContentTagPresenter.new(judgement.created_at, 'created_at').tag -%>.
 </span>
 <%- end -%>

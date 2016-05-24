@@ -2,31 +2,18 @@
 require 'spec_helper'
 
 describe Api::PredictionsController, type: :controller do
-  let(:user) { valid_user }
-  let(:user_with_token) do
-    user.api_token = 'token'
-    user
-  end
-  let(:prediction) { build(:prediction) }
-  let(:predicitons) { [prediction] }
-  let(:token) { 'real-token' }
+  let!(:user) { FactoryGirl.create(:user, api_token: 'real-token') }
+  let!(:prediction) { FactoryGirl.create(:prediction) }
 
   describe 'GET /predictions' do
     context 'with valid API token' do
-      let(:recent) { double(:recent_predictions) }
-
       before do
-        allow(User).to receive(:find_by_api_token).and_return(user_with_token)
-
-        allow(Prediction).to receive(:limit).with(100)
-          .and_return(double(:collection, recent: recent))
-
-        get :index, api_token: user_with_token.api_token
+        get :index, api_token: user.api_token
       end
 
       specify { expect(response).to be_success }
       specify { expect(response.content_type).to eq(Mime::JSON) }
-      specify { expect(response.body).to eq(recent.to_json) }
+      specify { expect(response.body).to include prediction.description }
     end
 
     context 'with invalid API token' do
@@ -40,12 +27,7 @@ describe Api::PredictionsController, type: :controller do
   describe 'GET /predictions/:id' do
     context 'with valid API token' do
       before do
-        allow(User).to receive(:find_by_api_token).and_return(user_with_token)
-
-        allow(Prediction).to receive(:find).with(prediction.id)
-          .and_return(prediction)
-
-        get :show, id: prediction.id, api_token: user_with_token.api_token
+        get :show, id: prediction.id, api_token: user.api_token
       end
 
       specify { expect(response).to be_success }
@@ -78,23 +60,15 @@ describe Api::PredictionsController, type: :controller do
     end
 
     context 'with valid API token' do
-      let(:user_with_email) { build(:user_with_email, api_token: token) }
-
-      before do
-        allow(User).to receive(:find_by_api_token)
-          .with(token).and_return(user_with_email)
-      end
-
-      it 'should create a new prediction' do
-        post :create, prediction: prediction_params, api_token: token
-
+      it 'creates a new prediction' do
+        post :create, prediction: prediction_params, api_token: user.api_token
         expect(response.body).to include(prediction_params[:description])
       end
 
       context 'with a malformed prediction' do
         before do
           prediction_params[:initial_confidence] = 9000
-          post :create, prediction: prediction_params, api_token: token
+          post :create, prediction: prediction_params, api_token: user.api_token
         end
 
         specify { expect(response).to_not be_success }
@@ -110,6 +84,7 @@ describe Api::PredictionsController, type: :controller do
       specify do
         expect(response.body).to_not include(prediction_params[:description])
       end
+
       specify { expect(response).to_not be_success }
     end
   end
@@ -118,9 +93,7 @@ describe Api::PredictionsController, type: :controller do
     let(:new_prediction_params) do
       { description: 'The world definitely will not end tomorrow!' }
     end
-    let(:user) { valid_user(api_token: token) }
-    let(:prediction) { valid_prediction(creator: user) }
-    before { prediction.save }
+    let(:prediction) { FactoryGirl.create(:prediction, creator: user) }
 
     context 'with valid API token' do
       context 'authorized user' do
