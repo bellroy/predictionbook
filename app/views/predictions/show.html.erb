@@ -38,9 +38,9 @@
     <h2>Judge this prediction</h2>
     <p class="note">Only judge this prediction once its outcome is known.<br />Record your opinion above, <strong>not</strong> here!</p>
     <%= form_tag(judge_prediction_path(@prediction)) do %>
-      <%=  outcome_button 'Unknown' %>
-      <%=  outcome_button 'Right' %>
-      <%=  outcome_button 'Wrong' %>
+      <%= outcome_button 'Unknown' %>
+      <%= outcome_button 'Right' %>
+      <%= outcome_button 'Wrong' %>
     <% end %>
     <% if @prediction.withdrawable_by?(current_user) %>
       <div class="withdraw">
