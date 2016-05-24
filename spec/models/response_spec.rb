@@ -23,8 +23,6 @@ describe Response do
   end
 
   describe 'finders' do
-    it_should_behave_like 'model class with common scopes'
-
     describe 'recent' do
       before do
         @rs = Response
