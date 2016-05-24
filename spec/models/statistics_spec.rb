@@ -17,7 +17,7 @@ describe Statistics do
     end
 
     it 'creates all intervals' do
-      expect(stats.headings).to eq ['50%', '60%', '70%', '80%', '90%', '100%']
+      expect(stats.headings).to eq %w[50% 60% 70% 80% 90% 100%]
     end
 
     it 'should have correct accuracies' do
