@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511055641) do
+ActiveRecord::Schema.define(version: 20160524033813) do
 
   create_table "credence_answers", force: :cascade do |t|
     t.integer  "credence_question_id", limit: 4
@@ -130,8 +130,6 @@ ActiveRecord::Schema.define(version: 20160511055641) do
     t.string   "login",                     limit: 255
     t.string   "name",                      limit: 255
     t.string   "email",                     limit: 255
-    t.string   "crypted_password",          limit: 40
-    t.string   "salt",                      limit: 40
     t.string   "remember_token",            limit: 40
     t.datetime "remember_token_expires_at"
     t.datetime "created_at"
