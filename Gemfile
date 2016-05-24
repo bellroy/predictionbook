@@ -44,7 +44,7 @@ group :test, :development do
   gem 'simplecov'
 end
 
-group :cucumber, :development, :test do
+group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'trike-code-metrics', git: 'git@github.com:tricycle/trike-code-metrics'
@@ -52,9 +52,6 @@ end
 
 group :test do
   gem 'launchy'
-  gem 'gherkin'
-  gem 'cucumber-rails', require: false
-  gem 'cucumber'
   gem 'factory_girl'
   gem 'ffaker'
   gem 'shoulda-matchers'

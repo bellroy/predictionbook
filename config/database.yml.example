@@ -38,6 +38,3 @@ test: &TEST
 production:
   <<: *base
   database: prediction_book2_production
-
-cucumber:
-  <<: *TEST
