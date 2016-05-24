@@ -358,7 +358,6 @@ DEPENDENCIES
   hirb
   honeypot-captcha
   htmlentities
-  httparty
   jquery-rails
   launchy
   mysql2
