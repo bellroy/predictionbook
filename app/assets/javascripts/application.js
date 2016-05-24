@@ -66,7 +66,7 @@ $(document).ready(function() {
 // 2. first element with an error if all full
 // 3. first element if all full and no errors
 $(document).ready(function() {
-  var input = $('form .input[value=]:first');
+  var input = $('form .input[value=\'\']:first');
   if ( input.size() == 0) {
     input = $('.error .input:first');
     if ( input.size() == 0) {
@@ -76,7 +76,7 @@ $(document).ready(function() {
   input.focus();
 })
 
-function single_checkbox_form() {  
+function single_checkbox_form() {
   $(this).find('input[type=checkbox]').click(function() {
     form_container = $(this.form).parent()
     $(form_container).find('p.note').text('Saving…')
@@ -144,4 +144,3 @@ function response_preview(event) {
     });
   }
 }
-

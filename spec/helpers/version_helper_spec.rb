@@ -1,39 +1,60 @@
 require 'spec_helper'
 
 describe VersionHelper do
+  include VersionHelper
+
   describe 'changes' do
-    it 'should compare to versions and return the change details of only the fields that have changed' do
-      v1 = double('version 1', :attributes => { 'deadline' => 'a', 'withdrawn' => 'b'})
-      v2 = double('version 2', :previous => v1, :attributes => { 'deadline' => 'a', 'withdrawn' => 'd' })
-      # rspec stubs don't let you do this, and stub is breaking method existance as of rspec 1.1.8
-      def helper.changed_detail(*args); args.first; end
-      helper.changes(v2).should include('withdrawn')
-      helper.changes(v2).should_not include('deadline')
+    let(:deadline) { Time.zone.now.to_s }
+    let(:attributes_before) { { 'deadline' => deadline, 'withdrawn' => 'true' } }
+    let(:first_version) { instance_double(PredictionVersion, attributes: attributes_before) }
+    let(:attributes_now) { { 'deadline' => deadline, 'withdrawn' => 'false' } }
+    let(:second_version) do
+      instance_double(PredictionVersion, previous_version: first_version, attributes: attributes_now)
     end
+
+    subject { changes(second_version) }
+
+    it { is_expected.to include('withdrew the prediction') }
+    it { is_expected.not_to include('deadline') }
   end
 
   describe 'changed_detail' do
-    it 'should describe a changed description' do
-      helper.stub(:show_title).with('old desc').and_return('title')
-      helper.changed_detail(:description, 'new desc', 'old desc').should =~ /changed their prediction from.*title.*/
+    subject { changed_detail(field, new_value, old_value) }
+
+    context 'changed description' do
+      let(:field) { :description }
+      let(:new_value) { 'new desc' }
+      let(:old_value) { 'old desc' }
+      it { is_expected.to match(/changed their prediction from.*old desc.*/) }
     end
 
-    it 'should describe a changed deadline' do
-      old_time = 40.minutes.ago
-      helper.stub(:show_time).with(old_time).and_return('old time')
-      helper.changed_detail(:deadline, 10.minutes.from_now, old_time).should =~ /changed the deadline from.+old time.*/
+    context 'changed deadline' do
+      let(:field) { :deadline }
+      let(:new_value) { 10.minutes.from_now }
+      let(:old_value) { 40.minutes.ago }
+      it { is_expected.to match(/changed the deadline from.+40 minutes ago.*/) }
     end
 
-    it 'should say the predition was withdrawn' do
-      helper.changed_detail(:withdrawn, true, false).should == 'withdrew the prediction'
+    context 'withdrew prediction' do
+      let(:field) { :withdrawn }
+      let(:new_value) { true }
+      let(:old_value) { false }
+      it { is_expected.to eq 'withdrew the prediction' }
     end
 
-    it 'should say the prediction was made private' do
-      helper.changed_detail(:private, true, false).should == 'made the prediction private'
-    end
+    context 'private is changing' do
+      let(:field) { :private }
+      let(:old_value) { !new_value }
 
-    it 'should say the prediction was made public' do
-      helper.changed_detail(:private, false, true).should == 'made the prediction public'
+      context 'made private' do
+        let(:new_value) { true }
+        it { is_expected.to eq 'made the prediction private' }
+      end
+
+      context 'made public' do
+        let(:new_value) { false }
+        it { is_expected.to eq 'made the prediction public' }
+      end
     end
   end
 end

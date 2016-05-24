@@ -1,1 +1,0 @@
-require 'cache_test' if Rails.env.test?

@@ -5,31 +5,26 @@ describe Statistics do
     let(:stats) { Statistics.new }
 
     before :each do
-      first_response = valid_response(confidence: 50)
-      first_response.save!
-      valid_judgement(prediction: first_response.prediction, outcome: 0).save!
-      second_response = valid_response(confidence: 40)
-      second_response.save!
-      valid_judgement(prediction: second_response.prediction, outcome: 0).save!
-      third_response = valid_response(confidence: 70)
-      third_response.save!
-      valid_judgement(prediction: third_response.prediction, outcome: 1).save!
-      fourth_response = valid_response(confidence: nil)
-      fourth_response.save!
-      valid_judgement(prediction: first_response.prediction, outcome: 1).save!
-      fifth_response = valid_response(confidence: 80)
-      fifth_response.save!
+      first_response = FactoryGirl.create(:response, confidence: 50)
+      FactoryGirl.create(:judgement, prediction: first_response.prediction, outcome: 0)
+      second_response = FactoryGirl.create(:response, confidence: 40)
+      FactoryGirl.create(:judgement, prediction: second_response.prediction, outcome: 0)
+      third_response = FactoryGirl.create(:response, confidence: 70)
+      FactoryGirl.create(:judgement, prediction: third_response.prediction, outcome: 1)
+      FactoryGirl.create(:response, confidence: nil)
+      FactoryGirl.create(:judgement, prediction: first_response.prediction, outcome: 1)
+      FactoryGirl.create(:response, confidence: 80)
     end
 
-    it 'should create all intervals' do
-      expect(stats.headings).to eq ["50%", "60%", "70%", "80%", "90%", "100%"]
+    it 'creates all intervals' do
+      expect(stats.headings).to eq %w[50% 60% 70% 80% 90% 100%]
     end
 
-    it "should have correct accuracies" do
+    it 'should have correct accuracies' do
       expect(stats.accuracies).to eq [100, 100, 100, 0, 0, 67]
     end
 
-    it "should have correct sample sizes" do
+    it 'should have correct sample sizes' do
       expect(stats.sizes).to eq [1, 1, 1, 0, 0, 3]
     end
   end
@@ -44,19 +39,19 @@ describe Statistics::Interval do
     end
 
     describe 'heading' do
-      it 'should be descriptive of the range' do
-        interval.heading.should == '80%'
+      it 'is descriptive of the range' do
+        expect(interval.heading).to eq '80%'
       end
     end
     describe 'count' do
-      #TODO: make these not depend on indecipherable setup code
+      # TODO: make these not depend on indecipherable setup code
       it 'should equal the argument' do
-        interval.count.should == 491
+        expect(interval.count).to eq 491
       end
     end
     describe 'accuracy' do
       it 'should equal the argument' do
-        interval.accuracy.should == 49
+        expect(interval.accuracy).to eq 49
       end
     end
   end

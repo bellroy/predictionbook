@@ -1,24 +1,23 @@
 class Notification < ActiveRecord::Base
-  delegate :email_with_name, :has_email?, :to => :user
-  delegate :description, :deadline, :judged_at, :to => :prediction
-  delegate :open?, :unknown?, :right?, :wrong?, :due_for_judgement?, :overdue?, :withdrawn?, :to => :prediction
+  delegate :email_with_name, :has_email?, to: :user
+  delegate :description, :deadline, :judged_at, to: :prediction
+  delegate :open?, :unknown?, :right?, :wrong?, :due_for_judgement?, :overdue?, :withdrawn?,
+           to: :prediction
 
   belongs_to :prediction
   belongs_to :user
 
-  validates_presence_of :user
-  validates_presence_of :prediction
+  validates :prediction, presence: true
+  validates :user, presence: true, uniqueness: { scope: [:prediction, :type] }
 
-  validates_uniqueness_of :user_id, :scope => [:prediction_id, :type]
-
-  scope :unsent, :conditions => {:sent => false}
-  scope :sent,   :conditions => {:sent => true}
-  scope :enabled,   :conditions => {:enabled => true}
-  scope :disabled,  :conditions => {:enabled => false}
+  scope :unsent, -> { where(sent: false) }
+  scope :sent, -> { where(sent: true) }
+  scope :enabled, -> { where(enabled: true) }
+  scope :disabled, -> { where(enabled: false) }
 
   def initialize(attrs = {}, options = {})
     super
-    self.uuid ||= UUID.random_create.to_s
+    self.uuid ||= UUIDTools::UUID.random_create.to_s
   end
 
   def use_token!
@@ -26,7 +25,8 @@ class Notification < ActiveRecord::Base
   end
 
   def self.use_token!(token)
-    if dn = find_by_uuid(token)
+    dn = find_by_uuid(token)
+    if dn.present?
       unless dn.token_used?
         yield dn
         dn.use_token!
@@ -41,11 +41,9 @@ class Notification < ActiveRecord::Base
   def self.send_all!
     # `includes(:prediction, :user)`, eager loading, used to increase efficiency
     # `find_each`, loading records in batches, used to reduce RAM consumption
-    default_includes = [{:prediction => [:judgements, :creator]}, :user]
+    default_includes = [{ prediction: [:judgements, :creator] }, :user]
     unsent.enabled.includes(default_includes).find_each do |notification|
-      if notification.sendable?
-        notification.deliver!
-      end
+      notification.deliver! if notification.sendable?
     end
   end
 
@@ -57,5 +55,4 @@ class Notification < ActiveRecord::Base
     deliver
     update_attribute(:sent, true)
   end
-
 end

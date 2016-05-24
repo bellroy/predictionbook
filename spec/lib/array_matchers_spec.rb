@@ -1,11 +1,12 @@
 require 'spec_helper'
 
-describe "ArrayMatchers" do
+describe 'ArrayMatchers' do
   it 'should check the ordered containment matcher works' do
-    [10,20,5,11].should contain_in_order([20,5])
+    expect([10, 20, 5, 11]).to contain_in_order([20, 5])
   end
 
   it 'should check the matcher catches a proper fail' do
-    lambda { [5,3,2,1].should contain_in_order([1,2]) }.should raise_error RSpec::Expectations::ExpectationNotMetError
+    error_type = RSpec::Expectations::ExpectationNotMetError
+    expect { expect([5, 3, 2, 1]).to contain_in_order([1, 2]) }.to raise_error error_type
   end
 end

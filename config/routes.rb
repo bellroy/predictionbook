@@ -1,29 +1,21 @@
 PredictionBook2::Application.routes.draw do
+  devise_for :users
 
-  match '/logout' => 'sessions#destroy', :as => :logout
-  match '/login' => 'sessions#new', :as => :login
-
-  resource :session
-
-  match '/register' => 'users#create', :as => :register
-  match '/signup' => 'users#new', :as => :signup
-
-  resources :users do
-    get :settings, :on=> :member
-    get :due_for_judgement, :on => :member
-    post :generate_api_token, :on => :member
+  resources :users, only: [:show, :update] do
+    get :settings, on: :member
+    get :statistics, on: :member
+    get :due_for_judgement, on: :member
+    post :generate_api_token, on: :member
     resources :deadline_notifications
   end
-
-  resources :passwords, :only => [:new, :create]
 
   resources :deadline_notifications
   resources :response_notifications
 
-  resource :feedback, :controller=> 'feedback'
+  resource :feedback, controller: 'feedback'
 
   resources :responses do
-    get :preview, :on=> :collection
+    get :preview, on: :collection
   end
 
   resources :predictions do
@@ -39,20 +31,17 @@ PredictionBook2::Application.routes.draw do
     end
 
     resources :responses do
-      get :preview, :on => :collection
+      get :preview, on: :collection
     end
   end
+  resources :credence_games, only: [:index, :update, :destroy]
 
-  match '/happenstance' => 'predictions#happenstance', :as=> :happenstance
+  get '/happenstance' => 'predictions#happenstance', as: :happenstance
 
-  resources :credence_games, :only => [:index, :update, :destroy]
+  root to: 'predictions#home'
 
-  root :to => 'predictions#home'
-
-  match '/healthcheck' => 'content#healthcheck'
-
+  get '/healthcheck' => 'content#healthcheck'
   namespace :api do
     resources :predictions
   end
 end
-

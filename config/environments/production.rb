@@ -9,7 +9,7 @@ PredictionBook2::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = true
+  config.serve_static_files = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = false
@@ -43,16 +43,13 @@ PredictionBook2::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w[
-    ie6.css
-    ie7.css
-  ]
+  config.assets.precompile += %w[ie6.css ie7.css]
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
   # Set default host for mailer
-  config.action_mailer.default_url_options = { :host => 'predictionbook.com' }
+  config.action_mailer.default_url_options = { host: 'predictionbook.com' }
 
   # Enable threaded mode
   # config.threadsafe!
@@ -64,9 +61,11 @@ PredictionBook2::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.middleware.use ExceptionNotification::Rack, :email => {
-    :email_prefix => "[Prediction Book] ",
-    :sender_address => %{"Exception Notifier" <system@predictionbook.com>},
-    :exception_recipients => %w{predictionbook.production.errors@trikeapps.com}
+  config.middleware.use ExceptionNotification::Rack, email: {
+    email_prefix: '[Prediction Book] ',
+    sender_address: %("Exception Notifier" <system@predictionbook.com>),
+    exception_recipients: %w(predictionbook.production.errors@trikeapps.com)
   }
+
+  config.eager_load = true
 end

@@ -14,7 +14,6 @@ $ rake secret # run twice ; set 'session_secret' / 'rest_auth_site_key' in crede
 $ rake db:create
 $ rake db:schema:load
 $ rake spec # run specs
-$ rake cucumber # run cucumber features
 $ script/server
 $ ^Z # ctrl+z
 $ bg
