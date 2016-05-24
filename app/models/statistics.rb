@@ -1,5 +1,5 @@
 class Statistics < BaseStatistics
-  def initialize(wager_condition=nil)
+  def initialize(wager_condition = nil)
     setup_intervals
     # Sums up the total count and the accuracy into bands
     sql = <<-EOS
