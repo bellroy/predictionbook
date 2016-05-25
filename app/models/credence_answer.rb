@@ -3,7 +3,6 @@ class CredenceAnswer < ActiveRecord::Base
 
   def format
     # Would be nice to format the text in bold.
-    question = credence_question
-    "#{text} (#{question.prefix}#{value}#{question.suffix})"
+    "#{text} (#{credence_question.prefix}#{value}#{credence_question.suffix})"
   end
 end

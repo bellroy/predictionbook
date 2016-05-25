@@ -21,16 +21,15 @@
   <hr>
 
   <p><strong>Question <%= @game.num_answered + 1 %>:</strong>
-     <%= @question.text %></p>
+     <%= @response.text %></p>
 
   <table>
-  <% @question.answers.each_with_index do |answer, i| %>
+  <% @response.answers.each_with_index do |answer, i| %>
     <tr>
       <td><%= answer.text %></td>
       <% for pct in [51, 60, 70, 80, 90, 99] %>
         <td>
-        <%= form_tag(credence_game_path(@game), method: :put) do %>
-          <%= hidden_field_tag "question_id", @question.id %>
+        <%= form_tag(credence_game_response_path(@response), method: :put) do %>
           <%= hidden_field_tag "credence", pct %>
           <%= hidden_field_tag "answer_index", i %>
           <%= submit_tag "#{pct}%" %>

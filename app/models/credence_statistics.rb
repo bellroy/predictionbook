@@ -1,30 +1,48 @@
 class CredenceStatistics < BaseStatistics
+  attr_reader :groups, :intervals
+  
   def initialize(responses)
-    groups = Hash.new { |h,k| h[k] = GroupedWagers.new }
+    self.groups = Hash.new { |hash, key| hash[key] = GroupedWagers.new }
 
-    responses.each { |response|
-      groups[response.answer_credence].add(response.answer_correct? response.given_answer)
-    }
+    responses.each do |response|
+      groups[response.answer_credence].add_figures_for_response(response)
+    end
 
-    @intervals = Hash[ groups.map { |credence, group|
-      [ credence, Interval.new(credence, group.count, group.accuracy) ]
-    } ]
+    create_intervals
+  end
+
+  private
+
+  attr_writer :groups, :intervals
+
+  def create_intervals
+    self.intervals = groups.map do |credence, group|
+      [credence, group.interval(credence)]
+    end.to_h
   end
 
   class GroupedWagers
-    attr_reader :count
-    def initialize()
-      @count = 0
-      @correct = 0
+    def initialize
+      self.count = 0
+      self.correct = 0
     end
 
-    def add(correct)
-      @count += 1
-      @correct += 1 if correct
+    def add_figures_for_response(response)
+      response_correct = response.answer_correct?(response.given_answer)
+      self.count = count + 1
+      self.correct = correct + 1 if response_correct
     end
+
+    def interval(credence)
+      Interval.new(credence, count, accuracy)
+    end
+
+    private
+
+    attr_accessor :count, :correct
 
     def accuracy
-      @count > 0 ? @correct.to_f / @count : 0
+      count > 0 ? (correct.to_f / count) : 0
     end
   end
 end

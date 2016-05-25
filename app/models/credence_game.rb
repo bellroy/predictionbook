@@ -1,51 +1,51 @@
 class CredenceGame < ActiveRecord::Base
   belongs_to :user
-  belongs_to :current_response, class_name: 'CredenceGameResponse'
-  has_many :credence_game_responses
+  belongs_to :current_response, class_name: CredenceGameResponse
+  has_many :responses, class_name: CredenceGameResponse
 
-  after_initialize :ensure_current_response
+  after_create :ensure_current_response
 
-  def ensure_current_response
-    if self.current_response.nil?
-      self.new_question
-    end
-  end
-
-  def new_question
-    # Will we ever want to attach a question to a game without immediately
-    # asking it? If so, we'll need to not set 'asked_at' here.
-    self.current_response = CredenceGameResponse.pick_random
-    self.current_response.asked_at = Time.now
-    self.current_response.credence_game = self
-    self.current_response.save
-  end
-
-  def answered_questions
-    self.credence_game_responses.select(&:answered_at)
+  def responses_selected_by_users
+    responses.answered
   end
 
   def average_score
-    average = self.score.to_f / self.num_answered
+    average = score.to_f / num_answered
     average.finite? ? average : 0
   end
 
-  def most_recently_answered(n)
-    self.credence_game_responses
-      .limit(n)
-      .order('answered_at desc')
-      .select(&:answered_at)
+  def most_recently_answered(limit)
+    responses_selected_by_users.order('answered_at desc').limit(limit)
   end
 
-  def recent_score(n)
-    self.most_recently_answered(n).map(&:score).reduce(&:+)
+  def recent_score(limit)
+    most_recently_answered(limit).map(&:score).reduce(&:+)
   end
 
-  def recent_average(n)
-    average = self.recent_score(n).to_f / self.most_recently_answered(n).length
+  def recent_average(limit)
+    average = recent_score(limit).to_f / most_recently_answered(limit).length
     average.finite? ? average : 0
   end
 
   def calibration_graph
-    CredenceStatistics.new(self.answered_questions)
+    CredenceStatistics.new(responses_selected_by_users)
+  end
+
+  def add_score(new_score)
+    self.score = score + new_score
+    self.num_answered = num_answered + 1
+    create_new_response_to_random_question
+  end
+
+  private
+
+  def ensure_current_response
+    create_new_response_to_random_question if current_response.nil?
+  end
+
+  def create_new_response_to_random_question
+    question = CredenceQuestion.where(enabled: true).order('RAND()').first
+    self.current_response = question.create_random_response(self) if question.present?
+    save! if changed?
   end
 end

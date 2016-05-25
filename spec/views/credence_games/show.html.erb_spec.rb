@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'credence_games/index' do
+describe 'credence_games/show' do
   describe 'without a game' do
     it 'should render without errors' do
       render
@@ -10,14 +10,10 @@ describe 'credence_games/index' do
 
   describe 'with a game' do
     before do
-      @game = valid_credence_game()
-
-      # the form_tag() needs the game to have an id so it can generate the
-      # URL. Should the URL even need the id? What happens if you edit the id?
-      # And why doesn't setting the id in valid_credence_game work?
-      @game.stub(:id).and_return(0)
-
-      @question = valid_credence_game_response
+      question = FactoryGirl.create(:credence_question)
+      FactoryGirl.create_list(:credence_answer, 2, credence_question: question)
+      @game = FactoryGirl.create(:credence_game)
+      @response = @game.current_response
     end
 
     it 'should render without errors' do
