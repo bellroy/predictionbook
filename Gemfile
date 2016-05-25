@@ -47,7 +47,6 @@ end
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'trike-code-metrics', git: 'git@github.com:tricycle/trike-code-metrics'
 end
 
 group :test do
