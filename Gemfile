@@ -29,7 +29,7 @@ gem 'hashdiff'
 gem 'sentry-raven'
 
 group :development do
-  gem 'capistrano', '~> 2.0'
+  gem 'capistrano'
   gem 'capistrano-ext'
 end
 
@@ -47,11 +47,6 @@ end
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
-
-end
-
-group :metrics do
-  gem 'trike-code-metrics', git: 'git@github.com:tricycle/trike-code-metrics'
 end
 
 group :test do
