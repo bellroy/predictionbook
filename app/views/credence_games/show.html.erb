@@ -25,7 +25,7 @@
 
   <table>
   <% @response.answers.each_with_index do |answer, i| %>
-    <tr>
+    <tr class='answer<%= i %>'>
       <td><%= answer.text %></td>
       <% for pct in [51, 60, 70, 80, 90, 99] %>
         <td>
