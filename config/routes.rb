@@ -34,13 +34,14 @@ PredictionBook2::Application.routes.draw do
       get :preview, on: :collection
     end
   end
+  resources :credence_games, only: [:show, :destroy]
+  resources :credence_game_responses, only: :update
 
   get '/happenstance' => 'predictions#happenstance', as: :happenstance
 
   root to: 'predictions#home'
 
   get '/healthcheck' => 'content#healthcheck'
-
   namespace :api do
     resources :predictions
   end

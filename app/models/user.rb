@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :predictions, through: :responses
   has_many :deadline_notifications
   has_many :response_notifications
+  has_one :credence_game
 
   nillify_blank :email, :name
 
@@ -75,7 +76,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    %w(matt gwern).include?(login)
+    %w[matt gwern].include?(login)
   end
 
   def to_param
