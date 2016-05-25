@@ -1,5 +1,6 @@
 PredictionBook
 ==============
+[![Build Status](https://travis-ci.org/tricycle/predictionbook.svg?branch=add-travis-yml)](https://travis-ci.org/tricycle/predictionbook)
 
 [PredictionBook](http://predictionbook.com/) is a site to record and
 track your predictions.

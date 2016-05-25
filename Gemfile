@@ -47,6 +47,10 @@ end
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
+
+end
+
+group :metrics do
   gem 'trike-code-metrics', git: 'git@github.com:tricycle/trike-code-metrics'
 end
 
