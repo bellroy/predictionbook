@@ -37,17 +37,18 @@
         <li><%= link_to 'View predictions', predictions_path %></li>
 			  <li><%= link_to 'Happenstance', happenstance_path %></li>
         <li><%= link_to 'Upcoming predictions', future_predictions_path %></li>
+				<li><%= link_to 'Credence game', credence_game_path('try') %></li>
 			</ul>
 
       <ul id="user-links">
-		  <%- unless current_user.present? -%>
-        <li><%= link_to 'Login', new_user_session_path %></li>
-        <li><%= link_to 'Signup', new_user_registration_path %></li>
-  		<%- else -%>
-  		  <li>Hello, <%= show_user(current_user)  %></li>
-  		  <li><%= link_to 'Settings', settings_user_path(current_user) %></li>
-  		  <li><%= link_to 'Logout', destroy_user_session_path, method: 'delete' %></li>
-  		<%- end -%>
+			  <%- unless current_user.present? -%>
+	        <li><%= link_to 'Login', new_user_session_path %></li>
+	        <li><%= link_to 'Signup', new_user_registration_path %></li>
+	  		<%- else -%>
+	  		  <li>Hello, <%= show_user(current_user)  %></li>
+	  		  <li><%= link_to 'Settings', settings_user_path(current_user) %></li>
+	  		  <li><%= link_to 'Logout', destroy_user_session_path, method: 'delete' %></li>
+	  		<%- end -%>
       </ul>
 
 		</div><!-- #nav -->
@@ -87,6 +88,7 @@
 		  <li><%= link_to 'View predictions', predictions_path %></li>
       <li><%= link_to 'Happenstance', happenstance_path %></li>
       <li><%= link_to 'Upcoming predictions', future_predictions_path %></li>
+      <li><%= link_to 'Credence game', credence_game_path('try') %></li>
       <li><%= link_to 'PredictionBook on GitHub', "https://github.com/tricycle/predictionbook" %></li>
 
       <%# <li><a href="#">Education Centre</a></li>

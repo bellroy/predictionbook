@@ -8,7 +8,7 @@ describe 'users/settings' do
       allow(@user).to receive(:api_token).and_return('token')
       allow(@user).to receive(:id).and_return(1)
     end
-    
+
     it 'exists' do
       render
       expect(rendered).to have_field('user[private_default]')

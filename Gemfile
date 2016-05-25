@@ -29,7 +29,7 @@ gem 'hashdiff'
 gem 'sentry-raven'
 
 group :development do
-  gem 'capistrano', '~> 2.0'
+  gem 'capistrano'
   gem 'capistrano-ext'
 end
 

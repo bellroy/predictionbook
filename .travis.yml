@@ -1,0 +1,34 @@
+language: ruby
+cache:
+  bundler: true
+  apt: true
+
+sudo: required
+dist: trusty
+
+rvm:
+  - 2.3.1
+
+env:
+  global:
+    - RACK_ENV=test
+
+addons:
+  apt:
+    packages:
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
+
+before_install:
+  - cp config/database.yml.example config/database.yml
+  - cp config/credentials.yml.example config/credentials.yml
+  - mkdir -p ./tmp/cache
+
+bundler_args: --without metrics --deployment
+
+before_script:
+  - bundle exec rake db:create db:migrate
+
+script:
+  - bundle exec rspec spec
