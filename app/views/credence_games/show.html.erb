@@ -30,8 +30,8 @@
       <% for pct in [51, 60, 70, 80, 90, 99] %>
         <td>
         <%= form_tag(credence_game_response_path(@response), method: :put) do %>
-          <%= hidden_field_tag "credence", pct %>
-          <%= hidden_field_tag "answer_index", i %>
+          <%= hidden_field_tag "response[answer_credence]", pct %>
+          <%= hidden_field_tag "response[given_answer]", i %>
           <%= submit_tag "#{pct}%" %>
         <% end %>
         </td>
@@ -41,8 +41,9 @@
   </table>
 
   <% if @game.num_answered > 0 %>
-  <div id="credence-graph-container">
+    <div id="credence-graph-container">
   <% if @show_graph %>
+    <p>
     <div id="credence-graph" class="show">
       <img src="<%= @game.calibration_graph.image_url %>">
     </div>

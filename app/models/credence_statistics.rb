@@ -1,6 +1,6 @@
 class CredenceStatistics < BaseStatistics
   attr_reader :groups, :intervals
-  
+
   def initialize(responses)
     self.groups = Hash.new { |hash, key| hash[key] = GroupedWagers.new }
 
@@ -28,13 +28,13 @@ class CredenceStatistics < BaseStatistics
     end
 
     def add_figures_for_response(response)
-      response_correct = response.answer_correct?(response.given_answer)
+      response_correct = response.answer_correct?
       self.count = count + 1
       self.correct = correct + 1 if response_correct
     end
 
     def interval(credence)
-      Interval.new(credence, count, accuracy)
+      BaseStatistics::Interval.new(credence, count, accuracy)
     end
 
     private
