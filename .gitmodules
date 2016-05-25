@@ -1,3 +1,4 @@
-[submodule "config/cap-tasks"]
-	path = config/cap-tasks
+[submodule "lib/capistrano/tasks/trike"]
+	path = lib/capistrano/tasks/trike
 	url = git@git.trikeapps.com:trike/capistrano.git
+	branch = cap3_compatible_tasks
