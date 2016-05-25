@@ -1,16 +1,32 @@
-require 'capistrano/server_definition'
-require 'capistrano/role'
-class Capistrano::Configuration
-  def role_names_for_host(host)
-    roles.map {|role_name, role| role_name if role.include?(host) }.compact || []
-  end
-end
+# Load DSL and Setup Up Stages
+require 'capistrano/setup'
 
-load 'deploy' if respond_to?(:namespace) # cap2 differentiator
+# Includes default deployment tasks
+require 'capistrano/deploy'
+require 'capistrano/rails'
+require 'capistrano/bundler'
+require 'capistrano/git-submodule-strategy'
+require 'whenever/capistrano'
+# require 'capistrano/rvm'
+# Dir.glob('lib/capistrano/tasks/trike/deploy.rake').each { |r| import r }
+import 'lib/capistrano/tasks/trike/common.rb'
+import 'lib/capistrano/tasks/trike/secrets.rake'
+import 'lib/capistrano/tasks/trike/precheck.rake'
+Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
+# Includes tasks from other gems included in your Gemfile
+#
+# For documentation on these, see for example:
+#
+#   https://github.com/capistrano/rvm
+#   https://github.com/capistrano/rbenv
+#   https://github.com/capistrano/chruby
+#   https://github.com/capistrano/bundler
+#   https://github.com/capistrano/rails
+#
+# require 'capistrano/rbenv'
+# require 'capistrano/chruby'
+# require 'capistrano/rvm'
+# require 'capistrano/rails/assets'
+require 'capistrano/rails/migrations'
 
-# Uncomment if you are using Rails' asset pipeline
-# load 'deploy/assets'
-
-Dir['vendor/gems/*/recipes/*.rb','vendor/plugins/*/recipes/*.rb'].each { |plugin| load(plugin) }
-
-load 'config/deploy.rb' # remove this line to skip loading any of the default tasks
+# Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
