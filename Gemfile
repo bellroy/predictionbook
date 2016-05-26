@@ -13,6 +13,7 @@ gem 'RedCloth'
 gem 'formatize', git: 'https://github.com/januszm/formatize'
 gem 'htmlentities'
 gem 'sass-rails'
+gem 'coffee-rails'
 
 # Servers
 gem 'mysql2'

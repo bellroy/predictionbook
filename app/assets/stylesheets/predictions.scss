@@ -63,10 +63,10 @@ li.prediction:before {
   text-align: center;
 }
 li.prediction.right {
-  list-style-image: url(tick.png);
+  list-style-image: image-url('tick.png');
 }
 li.prediction.wrong {
-  list-style-image: url(cross.png);
+  list-style-image: image-url('cross.png');
 }
 .prediction {
   font-size: 130%;

@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-PredictionBook2::Application.load_tasks
+PredictionBook::Application.load_tasks

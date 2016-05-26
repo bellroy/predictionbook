@@ -15,16 +15,16 @@ body {
 	background: none;
 }
 #header {
-	background: url(ie6/header.png) no-repeat top center;
+	background: image-url('ie6/header.png') no-repeat top center;
 }
 #main-wrap {
-	background: url(ie6/content-top.png) no-repeat top center;
+	background: image-url('ie6/content-top.png') no-repeat top center;
 }
 #main-inner {
-	background: url(ie6/content-bottom.png) no-repeat bottom center;
+	background: image-url('ie6/content-bottom.png') no-repeat bottom center;
 }
 #main {
-	background: url(ie6/content-inner.png) repeat-y top center;
+	background: image-url('ie6/content-inner.png') repeat-y top center;
 }
 
 
@@ -41,10 +41,10 @@ a#logo {
 	background-color: transparent !important;
 }
 ul#nav-menu li {
-	background-image: url(ie6/header-tab-purple.png);
+	background-image: image-url('ie6/header-tab-purple.png');
 }
 #user-links {
-	background-image: url(ie6/header-tab-green.png);
+	background-image: image-url('ie6/header-tab-green.png');
 	padding: 0 10px 0 15px;
 }
 #user-links li {
@@ -87,7 +87,7 @@ form div.clear {
 /* Content
 -------------------------------------------------------------------------------------- */
 #feature {
-	background: url(ie6/sky.png) no-repeat top left;
+	background: image-url('ie6/sky.png') no-repeat top left;
 }
 #content ul {
 	margin-left: 20px;
@@ -105,7 +105,7 @@ ul#responses {
 /* Footer
 -------------------------------------------------------------------------------------- */
 #footer {
-	background: url(ie6/footer-shadow.png) no-repeat top center;
+	background: image-url('ie6/footer-shadow.png') no-repeat top center;
 }
 #footer ul.left-links li {
 	border-right-style: expression(this.nextSibling==null?'none':'solid');
