@@ -13,6 +13,7 @@ gem 'RedCloth'
 gem 'formatize', git: 'https://github.com/januszm/formatize'
 gem 'htmlentities'
 gem 'sass-rails'
+gem 'coffee-rails'
 
 # Servers
 gem 'mysql2'
@@ -72,6 +73,3 @@ end
 group :darwin do
   gem 'rb-fsevent', require: false # OSX specific
 end
-
-# restful-authentication needs to be installed as a plugin or it doesn't work
-# rspec-caching-test-plugin is quite old and is not available as a gem

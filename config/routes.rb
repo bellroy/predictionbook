@@ -1,4 +1,4 @@
-PredictionBook2::Application.routes.draw do
+PredictionBook::Application.routes.draw do
   devise_for :users
 
   resources :users, only: [:show, :update] do
