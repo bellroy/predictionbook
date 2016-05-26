@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524033813) do
+ActiveRecord::Schema.define(version: 20160511055641) do
 
   create_table "credence_answers", force: :cascade do |t|
     t.integer  "credence_question_id", limit: 4
     t.text     "text",                 limit: 65535
     t.text     "value",                limit: 65535
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "rank",                 limit: 4
   end
 
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 20160524033813) do
     t.datetime "answered_at"
     t.integer  "answer_credence",      limit: 4
     t.integer  "given_answer",         limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   add_index "credence_game_responses", ["credence_game_id", "asked_at"], name: "index_credence_game_responses_on_credence_game_id_and_asked_at", using: :btree
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 20160524033813) do
     t.integer  "score",               limit: 4, default: 0, null: false
     t.integer  "user_id",             limit: 4
     t.integer  "num_answered",        limit: 4, default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
   end
 
   add_index "credence_games", ["user_id"], name: "index_credence_games_on_user_id", unique: true, using: :btree
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 20160524033813) do
     t.integer  "adjacent_within", limit: 4
     t.float    "weight",          limit: 24
     t.string   "text_id",         limit: 50
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "credence_questions", ["text_id"], name: "index_credence_questions_on_text_id", unique: true, using: :btree
@@ -138,6 +138,8 @@ ActiveRecord::Schema.define(version: 20160524033813) do
     t.string   "login",                     limit: 255
     t.string   "name",                      limit: 255
     t.string   "email",                     limit: 255
+    t.string   "crypted_password",          limit: 40
+    t.string   "salt",                      limit: 40
     t.string   "remember_token",            limit: 40
     t.datetime "remember_token_expires_at"
     t.datetime "created_at"

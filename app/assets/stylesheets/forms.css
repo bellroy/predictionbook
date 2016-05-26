@@ -1,5 +1,6 @@
 input[type="text"],
 input[type="password"],
+input[type="email"],
 textarea {
 	border: 1px solid #ccc;
 	font: 11px Arial, Helvetica, sans-serif;
@@ -55,6 +56,7 @@ form #prediction_description { width: 30em; height: 3.5em; }
 form #response_comment { height: 2.5em; width: 97%; }
 form input[type="text"],
 form input[type="password"],
+input[type="email"],
 form textarea {
   font-size: larger;
 	margin: 0 5px 0 0;

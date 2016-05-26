@@ -7,6 +7,12 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
+  <% if resource.email.nil? %>
+    <div class="field">
+      <%= f.email_field :email, placeholder: 'Please provide an email address' %>
+    </div>
+  <% end %>
+
   <% placeholder = "(#{@minimum_password_length} characters minimum)" if @minimum_password_length %>
   <div class="field">
     <%= f.password_field :password, autocomplete: "off", placeholder: placeholder %>
@@ -19,6 +25,10 @@
   <div class="field">
     <%= f.password_field :current_password, autocomplete: "off", placeholder: 'confirm with your current password' %>
   </div>
+
+  <%- # This is clearing the old password and salt fields %>
+  <%= f.hidden_field :crypted_password, value: '' %>
+  <%= f.hidden_field :salt, value: '' %>
 
   <div class="actions">
     <%= f.submit "Update" %>

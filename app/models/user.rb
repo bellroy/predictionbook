@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
                    format: {
                      with: /\A[^[:cntrl:]\\<>\/&]*\z/, message: 'Readable characters only please'
                    }
-  validates :email, length: { within: 6..100, allow_nil: true },
+  validates :email, presence: true, length: { within: 6..100, allow_nil: true },
                     uniqueness: { case_sensitive: false, allow_nil: true },
                     format: {
                       with: /\A[\w\.%\+\-]+@[-A-Z0-9\._]+\z/i,
@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
 
   def self.generate_api_token
     SecureRandom.urlsafe_base64
+  end
+
+  def devise_password_specified?
+    encrypted_password.present?
   end
 
   def statistics
@@ -87,17 +91,22 @@ class User < ActiveRecord::Base
     name || login
   end
 
-  def reset_password
-    self.password = self.password_confirmation = SecureRandom.hex(6)
-    save!
-
-    UserMailer.password_reset(self).deliver
+  def valid_password?(password)
+    crypted_password.present? && old_password_digest(password, salt) == crypted_password ||
+      Devise::Encryptor.compare(self.class, encrypted_password, password)
   end
 
   protected
 
-  # This overrides a Devise method to allow nil emails
-  def email_required?
-    false
+  def old_password_digest(password, salt)
+    digest = REST_AUTH_SITE_KEY
+    REST_AUTH_DIGEST_STRETCHES.times do
+      digest = old_secure_digest(digest, salt, password, REST_AUTH_SITE_KEY)
+    end
+    digest
+  end
+
+  def old_secure_digest(*args)
+    Digest::SHA1.hexdigest(args.flatten.join('--'))
   end
 end
