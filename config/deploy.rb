@@ -1,6 +1,6 @@
 lock '3.5.0'
 
-set :repo_url,            'git@github.com:tricycle/predictionbook-deploy.gitt'
+set :repo_url,            'git@github.com:tricycle/predictionbook-deploy.git'
 set :secrets_repository,  'git@git.trikeapps.com:settings/predictionbook.git'
 set :linked_dirs,         ['public/assets', 'log']
 set :symlinked_configs,   %w(database.yml credentials.yml)

@@ -30,7 +30,12 @@ gem 'sentry-raven'
 
 group :development do
   gem 'capistrano'
-  gem 'capistrano-ext'
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano-git-submodule-strategy'
+  gem 'cap-deploy-tagger'
+  gem 'capistrano-rails'
+  gem 'httparty'
 end
 
 group :test, :development do
