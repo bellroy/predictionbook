@@ -6,7 +6,7 @@ class CreateCredenceGame < ActiveRecord::Migration
       t.integer  :user_id
       t.integer  :num_answered, default: 0, null: false
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_index :credence_games, :user_id, unique: true
@@ -21,7 +21,7 @@ class CreateCredenceGame < ActiveRecord::Migration
       t.float    :weight
       t.string   :text_id, limit: 50
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_index :credence_questions, :text_id, unique: true
@@ -34,7 +34,7 @@ class CreateCredenceGame < ActiveRecord::Migration
       t.datetime :updated_at,           null: false
       t.integer  :rank
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_index :credence_answers, :credence_question_id
@@ -50,7 +50,7 @@ class CreateCredenceGame < ActiveRecord::Migration
       t.integer  :answer_credence
       t.integer  :given_answer
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_index :credence_game_responses, [:credence_game_id, :asked_at]
