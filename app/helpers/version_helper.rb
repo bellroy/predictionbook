@@ -2,26 +2,25 @@
 
 module VersionHelper
   def changes(version)
-    result = []
-    checked_attributes = %w(deadline description withdrawn private)
-    previous_attributes = version.previous.attributes
-    version.attributes.diff(previous_attributes).slice(*checked_attributes).each do |attr, value|
-      result << changed_detail(attr, value, previous_attributes[attr])
-    end
-    result
+    previous_version = version.previous_version
+    return [] if previous_version.nil?
+    prev_attrs = previous_version.attributes
+    columns = PredictionVersion.versioned_prediction_columns.map(&:to_s)
+    raw_diff = HashDiff.diff(prev_attrs, version.attributes)
+    diff = raw_diff.select { |array| columns.include?(array[1]) }
+    diff.map { |array| changed_detail(array[1], array[3], array[2]) }
   end
-  
+
   def changed_detail(field, new_value, old_value)
     case field.to_sym
     when :deadline then
-      "changed the deadline from “#{show_time(old_value)}”"
+      "changed the deadline from “#{TimeInContentTagPresenter.new(old_value).tag}”"
     when :description then
-      "changed their prediction from “#{show_title(old_value)}”"
+      "changed their prediction from “#{TitleTagPresenter.new(old_value).tag}”"
     when :withdrawn then
-      "#{new_value ? 'withdrew' : 'republished' } the prediction"
+      "#{new_value ? 'withdrew' : 'republished'} the prediction"
     when :private then
       "made the prediction #{new_value ? 'private' : 'public'}"
     end
   end
-  
 end

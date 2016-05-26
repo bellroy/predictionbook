@@ -1,62 +1,35 @@
-trikelibs = Dir['config/cap-tasks/*.rb'].reject{ |file| file =~ /(radiant|aws)/ }
-trikelibs.each { |trikelib| load(trikelib)  }
+lock '3.5.0'
 
-stages_glob = File.join(File.dirname(__FILE__), "deploy", "*.rb")
-stages = Dir[stages_glob].collect { |f| File.basename(f, ".rb") }.sort
-set :stages, stages
-set :default_stage, 'staging'
-require 'capistrano/ext/multistage'
-require 'bundler/capistrano'
-require 'whenever/capistrano'
-load 'deploy/assets'
-
-set :application, "predictionbook"
-# This must be passed as a block, since rails_env is defined in the individual
-# stages later.
-set(:user) { "#{application}-#{rails_env}" }
-
-set :scm, "git"
-set :repository, "git@github.com:tricycle/predictionbook-deploy.git"
-set :repository_cache, 'cached-copy'
-set :git_enable_submodules, 1
-set :deploy_via, :remote_cache
-set :bundle_without, [:development, :test, :cucumber, :darwin, :linux]
-
-set :engine, "passenger"
-
-set :whenever_command, "bundle exec whenever"
-set :whenever_environment, defer { stage }
-
-# Secrets
-set :secrets_repository, "git@git.trikeapps.com:settings/predictionbook.git"
-
-# This must be passed as a block, since rails_env is defined in the individual
-# stages later.
-set(:deploy_to) { "/srv/www/#{application}-#{rails_env}" }
-
-ssh_options[:forward_agent] = true
-
-before "deploy:assets:precompile", "secrets:update_configs",
-                                   "deploy:symlink_remote_db_yaml",
-                                   "deploy:symlink_remote_config_yamls"
-
-after "deploy:symlink",            "deploy:restart"
+set :repo_url,            'git@github.com:tricycle/predictionbook-deploy.git'
+set :secrets_repository,  'git@git.trikeapps.com:settings/predictionbook.git'
+set :linked_dirs,         ['public/assets', 'log']
+set :symlinked_configs,   %w(database.yml credentials.yml)
+set :engine,              'passenger'
+set :deploy_to,           -> { "/srv/www/#{fetch(:application)}" }
+set :format,              :pretty
+set :keep_releases,       5
+set :scm, :git
+set :git_strategy, Capistrano::Git::SubmoduleStrategy
+set :application_label,   'PredictionBook'
+set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 
 namespace :deploy do
-  desc 'Link to a database.yml file stored on the server'
-  task :symlink_remote_db_yaml, :roles => [:app, :db, :worker] do
-    run "ln -sf #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-  end
-
-  desc 'Symlink all remote config yaml files'
-  task :symlink_remote_config_yamls, :roles => [:app, :worker] do
-    %w[credentials].each do |filename|
-      run "ln -sf #{shared_path}/config/#{filename}.yml #{release_path}/config/#{filename}.yml"
+  desc 'Create a symlink in the release path to all _symlinked_configs_'
+  task :symlink_configs do
+    on roles(:app) do
+      fetch(:symlinked_configs).each do |file|
+        execute "ln -sf #{shared_path}/config/#{file} #{release_path}/config/#{file}"
+      end
     end
   end
-  
-  desc "Restart web server"
-  task "restart", :roles => [:app, :worker] do
-    run "touch #{release_path}/tmp/restart.txt"
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute :touch, release_path.join('tmp/restart.txt')
+    end
   end
+
+  after :publishing, :restart
+  after 'deploy:symlink:linked_dirs', :symlink_configs
 end

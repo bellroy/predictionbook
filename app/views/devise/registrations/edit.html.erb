@@ -1,0 +1,38 @@
+<h2>Change password</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <% if resource.email.nil? %>
+    <div class="field">
+      <%= f.email_field :email, placeholder: 'Please provide an email address' %>
+    </div>
+  <% end %>
+
+  <% placeholder = "(#{@minimum_password_length} characters minimum)" if @minimum_password_length %>
+  <div class="field">
+    <%= f.password_field :password, autocomplete: "off", placeholder: placeholder %>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: placeholder %>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :current_password, autocomplete: "off", placeholder: 'confirm with your current password' %>
+  </div>
+
+  <%- # This is clearing the old password and salt fields %>
+  <%= f.hidden_field :crypted_password, value: '' %>
+  <%= f.hidden_field :salt, value: '' %>
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", :back %>

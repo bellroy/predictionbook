@@ -1,5 +1,3 @@
-require File.join(Rails.root, "lib/ext", "typus")
-
 Typus.setup do |config|
 
   # Application name.
@@ -25,7 +23,7 @@ Typus.setup do |config|
 
   # Authentication: +:none+, +:http_basic+
   # Run `rails g typus:migration` if you need an advanced authentication system.
-  config.authentication = :basic
+  config.authentication = :devise
 
   # Define username and password for +:http_basic+ authentication.
   # config.username = "admin"

@@ -4,6 +4,7 @@
   <title>PredictionBook: <%=h @title ? @title : 'How sure are you?' -%></title>
   <meta charset="utf-8" />
   <%= stylesheet_link_tag "application" %>
+	<%= csrf_meta_tag %>
   <% [6,7].each do |ie_version| %>
   <!--[if IE <%= ie_version %>]>
     <%= stylesheet_link_tag "ie#{ie_version}.css" %>
@@ -14,7 +15,7 @@
   <script type="text/javascript">
 
     var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', '<%= PredictionBook2::Application.config.credentials.google_analytics_id %>']);
+    _gaq.push(['_setAccount', '<%= PredictionBook::Application.config.credentials.google_analytics_id %>']);
     _gaq.push(['_trackPageview']);
 
     (function() {
@@ -36,17 +37,18 @@
         <li><%= link_to 'View predictions', predictions_path %></li>
 			  <li><%= link_to 'Happenstance', happenstance_path %></li>
         <li><%= link_to 'Upcoming predictions', future_predictions_path %></li>
+				<li><%= link_to 'Credence game', credence_game_path('try') %></li>
 			</ul>
-      
+
       <ul id="user-links">
-		  <%- unless logged_in? -%>
-        <li><%= link_to 'Login', login_path %></li>
-        <li><%= link_to 'Signup', signup_path %></li>
-  		<%- else -%>
-  		  <li>Hello, <%= show_user(current_user)  %></li>
-  		  <li><%= link_to 'Settings', settings_user_path(current_user) %></li>
-  		  <li><%= link_to 'Logout', logout_path  %></li>
-  		<%- end -%>
+			  <%- unless current_user.present? -%>
+	        <li><%= link_to 'Login', new_user_session_path %></li>
+	        <li><%= link_to 'Signup', new_user_registration_path %></li>
+	  		<%- else -%>
+	  		  <li>Hello, <%= show_user(current_user)  %></li>
+	  		  <li><%= link_to 'Settings', settings_user_path(current_user) %></li>
+	  		  <li><%= link_to 'Logout', destroy_user_session_path, method: 'delete' %></li>
+	  		<%- end -%>
       </ul>
 
 		</div><!-- #nav -->
@@ -61,20 +63,20 @@
 				</div>
 			</form>
 		</div><!-- #header-main -->
-	</div><!-- #header -->			
+	</div><!-- #header -->
 
 	<div id="main-wrap">
 	<div id="main-inner">
 	<div id="main" class="wrapper clear">
 
 		<%= yield :feature %>
-		
+
 		<%= render :partial => 'layouts/messages' %>
 
 		<div id="content" class="clear">
       <%= yield %>
 		</div><!-- #content -->
-		
+
 	</div><!-- #main -->
 	</div><!-- #main-inner -->
 	</div><!-- #main-wrap -->
@@ -86,6 +88,7 @@
 		  <li><%= link_to 'View predictions', predictions_path %></li>
       <li><%= link_to 'Happenstance', happenstance_path %></li>
       <li><%= link_to 'Upcoming predictions', future_predictions_path %></li>
+      <li><%= link_to 'Credence game', credence_game_path('try') %></li>
       <li><%= link_to 'PredictionBook on GitHub', "https://github.com/tricycle/predictionbook" %></li>
 
       <%# <li><a href="#">Education Centre</a></li>

@@ -1,49 +1,69 @@
 class Prediction < ActiveRecord::Base
-  version_fu
+  has_many :versions, autosave: true, class_name: PredictionVersion
+
+  before_save :create_version_if_required
+
+  def create_version_if_required
+    PredictionVersion.create_from_current_prediction_if_required(self)
+    true # Never halt save
+  end
+
   class DuplicateRecord < ActiveRecord::RecordInvalid; end
-  include CommonScopes
+
   belongs_to :creator, class_name: 'User'
 
   def self.parse_deadline(date)
     Chronic.parse(date, context: :future)
   end
 
-  scope :not_withdrawn, conditions: { withdrawn: false }
+  scope :not_withdrawn, -> { where(withdrawn: false) }
   # if you change the implementation of 'public', also change this scope in response
-  scope :not_private, conditions: { private: false }
+  scope :not_private, -> { where(private: false) }
 
-  DEFAULT_INCLUDES = [:judgements, :responses, :creator]
+  DEFAULT_INCLUDES = [:judgements, :responses, :creator].freeze
 
-  def self.unjudged
-    not_private.not_withdrawn.all(include: DEFAULT_INCLUDES,
-                                  conditions: '(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NULL AND deadline < UTC_TIMESTAMP()')
-      .rsort(:deadline)
+  def self.unjudged(limit: 100)
+    not_private
+      .not_withdrawn
+      .includes(DEFAULT_INCLUDES)
+      .where('(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NULL AND deadline < UTC_TIMESTAMP()')
+      .order(deadline: :desc)
+      .limit(limit)
   end
 
-  def self.judged
-    not_private.not_withdrawn.all(include: DEFAULT_INCLUDES,
-                                  conditions: '(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NOT NULL',
-                                  order: 'judgements.created_at DESC')
+  def self.judged(limit: 100)
+    not_private
+      .not_withdrawn
+      .includes(DEFAULT_INCLUDES)
+      .joins(:judgements)
+      .where('(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NOT NULL')
+      .order('judgements.created_at DESC')
+      .limit(limit)
   end
 
-  def self.future
-    sort(:deadline).not_private.not_withdrawn.includes(DEFAULT_INCLUDES).where('judgements.outcome IS NULL AND deadline > UTC_TIMESTAMP()')
+  def self.future(limit: 100)
+    not_private
+      .not_withdrawn
+      .includes(DEFAULT_INCLUDES)
+      .where('(id NOT IN (SELECT prediction_id FROM judgements) OR id IN (SELECT prediction_id FROM judgements WHERE outcome IS NULL)) AND deadline > UTC_TIMESTAMP()')
+      .order(:deadline)
+      .limit(limit)
   end
 
-  def self.recent
-    rsort.not_private.not_withdrawn.all(include: DEFAULT_INCLUDES)
+  def self.recent(limit: 100)
+    order(created_at: :desc).not_private.not_withdrawn.includes(DEFAULT_INCLUDES).limit(limit)
   end
 
-  def self.popular
-    opts = {
-      include: [:responses, :creator], # Eager loading of :judgements breaks judgement and unknown?
-      conditions: [
-        'predictions.deadline > UTC_TIMESTAMP() AND predictions.created_at > ?', 2.weeks.ago
-      ],
-      order: 'count(responses.prediction_id) DESC, predictions.deadline ASC',
-      group: 'predictions.id'
-    }
-    not_private.not_withdrawn.all(opts).select(&:unknown?)
+  def self.popular(limit: 100)
+    not_private
+      .not_withdrawn
+      .includes(:responses, :creator)
+      .joins(:responses)
+      .where('predictions.deadline > UTC_TIMESTAMP() AND predictions.created_at > ?', 2.weeks.ago)
+      .order('count(responses.prediction_id) DESC, predictions.deadline ASC')
+      .group('predictions.id')
+      .limit(limit)
+      .select(&:unknown?)
   end
 
   belongs_to :creator, class_name: 'User'
@@ -68,7 +88,7 @@ class Prediction < ActiveRecord::Base
   end
 
   after_initialize do
-    self.uuid ||= UUID.random_create.to_s if has_attribute?(:uuid)
+    self.uuid ||= UUIDTools::UUID.random_create.to_s if has_attribute?(:uuid)
   end
 
   before_validation(on: :create) do
@@ -113,7 +133,7 @@ class Prediction < ActiveRecord::Base
   end
 
   def mean_confidence
-    if preloaded_wagers.length > 0
+    if !preloaded_wagers.empty?
       total = preloaded_wagers.map(&:confidence).inject(0, &:+)
       (total / preloaded_wagers.length).round
     else
@@ -158,7 +178,7 @@ class Prediction < ActiveRecord::Base
   end
 
   def withdraw!
-    fail ArgumentError, 'Prediction must be open to be withdrawn' unless open?
+    raise ArgumentError, 'Prediction must be open to be withdrawn' unless open?
     update_attribute(:withdrawn, true)
   end
 
@@ -217,7 +237,7 @@ class Prediction < ActiveRecord::Base
   end
 
   def public?
-    not private?
+    !private?
   end
 
   private

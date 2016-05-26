@@ -1,6 +1,4 @@
-class Statistics
-  include Enumerable
-
+class Statistics < BaseStatistics
   def initialize(wager_condition = nil)
     setup_intervals
     # Sums up the total count and the accuracy into bands
@@ -61,8 +59,7 @@ class Statistics
   end
 
   def image_url
-
-    #TODO: refactor (extract and such) and port to http://gchartrb.rubyforge.org/
+    # TODO: refactor (extract and such) and port to http://gchartrb.rubyforge.org/
 
     # http://code.google.com/apis/chart/#shape_markers
     # circle, red, first set, all points, 20px, on top of everything |
@@ -72,23 +69,23 @@ class Statistics
     # line, color, data set, size, priority
     joiner_line = 'D,FFCCCC,0,0,0.5,-1'
     markers = [blob, fifty_line, joiner_line].join('|')
-    intervals = self.headings.join(",").gsub("%", "")
-    accuracies = self.accuracies.join(",")
+    intervals = headings.join(',').delete('%')
+    accuracies = self.accuracies.join(',')
     # Images api uses values 0..100 only
     sizes = self.sizes.join(',')
-    image_size = "355x200"
-    grid_lines = "20,20"
+    image_size = '355x200'
+    grid_lines = '20,20'
     # http://code.google.com/apis/chart/#multiple_axes_labels
     axis = 'x,x,y,y'
     # second axis, start at 50, go to 100
     axis_ranges = '0,50,100|1,0,100'
     # if we specify they are scaled for us
     data_ranges = "50,100,0,100,0,#{self.sizes.max}"
-    axis_labels = "1:|Confidence  (%)|3:|Accuracy"
-    axis_labels_positions = "1,50|3,50"
+    axis_labels = '1:|Confidence  (%)|3:|Accuracy'
+    axis_labels_positions = '1,50|3,50'
 
-    "http://chart.apis.google.com/chart?" + [
-      "cht=s", # scatterplot
+    'http://chart.apis.google.com/chart?' + [
+      'cht=s', # scatterplot
       "chg=#{grid_lines}",
       "chds=#{data_ranges}",
       "chm=#{markers}",
@@ -97,28 +94,14 @@ class Statistics
       "chd=t:#{intervals}|#{accuracies}|#{sizes}",
       "chs=#{image_size}",
       "chxl=#{axis_labels}",
-      "chxp=#{axis_labels_positions}",
+      "chxp=#{axis_labels_positions}"
     ].join('&')
   end
 
   def setup_intervals
     @intervals = {}
-    [50,60,70,80,90,100].each do |band|
+    [50, 60, 70, 80, 90, 100].each do |band|
       @intervals[band] = Interval.new(band)
-    end
-  end
-
-  class Interval
-    attr_reader :heading, :accuracy, :count
-    def initialize(band)
-      @heading = "#{band}%"
-      @accuracy = 0
-      @count = 0
-    end
-
-    def update(row)
-      @accuracy = ((row[2] || 0) * 100).round.to_i
-      @count = row[1] || 0
     end
   end
 end

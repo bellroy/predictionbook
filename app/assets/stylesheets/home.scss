@@ -1,0 +1,63 @@
+/* Feature
+-------------------------------------------------------------------------------------- */
+#feature {
+	background: image-url('sky.png') no-repeat top left;
+	height: 140px;
+	left: 45px;
+	padding: 140px 460px 0 30px;
+	position: absolute;
+	top: 0;
+	width: 410px;
+}
+img#title {
+	display: block;
+	left: -43px;
+	position: absolute;
+	top: 45px;
+	z-index: 5;
+}
+img#illustration {
+	display: block;
+	left: 520px;
+	position: absolute;
+	top: 108px;
+	z-index: 5;
+}
+#feature div.content {
+	position: relative;
+	z-index: 15;
+}
+#feature p.actions a.button {
+	float: left;
+}
+#feature p.actions span {
+	color: #181818;
+	font: bold 15px/25px Tahoma, Arial, Helvetica, sans-serif;
+	float: left;
+	padding: 0 10px;
+}
+
+/* Front Page Content
+-------------------------------------------------------------------------------------- */
+body.home #content {
+	padding-top: 280px;
+}
+
+#intro{
+	float: left;
+	width: 320px;
+}
+
+body.home #new_prediction {
+  float: left;
+  width: 50%;
+}
+
+body.home #responses li {
+  margin: 0 0 0.75em 0.75em;
+}
+
+body.home #popular {
+  width: 48%;
+  float: right;
+}
