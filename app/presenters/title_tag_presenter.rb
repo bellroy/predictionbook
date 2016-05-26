@@ -1,10 +1,13 @@
 class TitleTagPresenter
+  include ActionView::Helpers::SanitizeHelper
+  include ActionView::Helpers::TextHelper
+
   def initialize(text)
     self.text = text
   end
 
   def tag
-    RedCloth.new(html_encoded_text).to_html[3..-5]
+    sanitize textilize_without_paragraph(html_encoded_text), tags: %w[i b em strong u]
   end
 
   private
@@ -13,6 +16,13 @@ class TitleTagPresenter
 
   def html_encoded_text
     # encode tags, not entities
-    HTMLEntities.new.encode(text.html_safe, :basic)
+    HTMLEntities.new.encode(text.html_safe, :basic).gsub('&quot;', '"')
+  end
+
+  def textilize_without_paragraph(text)
+    textiled = textilize(text)
+    textiled = textiled[3..-1] if textiled[0..2] == '<p>'
+    textiled = textiled[0..-5] if textiled[-4..-1] == '</p>'
+    textiled
   end
 end
