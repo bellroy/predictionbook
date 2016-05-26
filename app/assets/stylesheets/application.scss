@@ -14,10 +14,10 @@
 /* General Page Structure
 -------------------------------------------------------------------------------------- */
 html {
-	background: url(bg-tile.gif) repeat top left;
+	background: image-url('bg-tile.gif') repeat top left;
 }
 body {
-	background: transparent url(bg-gradient.png) repeat-x top left;
+	background: transparent image-url('bg-gradient.png') repeat-x top left;
 	margin: 0;
 	padding: 17px 0 20px;
 }
@@ -31,22 +31,22 @@ div.wrapper {
 	width: 900px;
 }
 #header {
-	background: url(header.png) no-repeat top center;
+	background: image-url('header.png') no-repeat top center;
 	height: 104px;
 	padding-bottom: 13px;
 	overflow: hidden;
 }
 #main-wrap {
-	background: url(content-top.png) no-repeat top center;
+	background: image-url('content-top.png') no-repeat top center;
 	padding-top: 40px;
 	position: relative;
 }
 #main-inner {
-	background: url(content-bottom.png) no-repeat bottom center;
+	background: image-url('content-bottom.png') no-repeat bottom center;
 	padding-bottom: 40px;
 }
 #main {
-	background: url(content-inner.png) repeat-y top center;
+	background: image-url('content-inner.png') repeat-y top center;
 }
 
 
@@ -121,7 +121,7 @@ abbr {
 /* Buttons
 -------------------------------------------------------------------------------------- */
 a.button {
-	background: url(button-purple.png) no-repeat top left;
+	background: image-url('button-purple.png') no-repeat top left;
 	color: #fff;
 	display: block;
 	font-size: 11px;
@@ -167,7 +167,7 @@ ul#nav-menu {
 	padding: 0;
 }
 ul#nav-menu li {
-	background: #765b82 url(header-tab-shadow.png) repeat-x bottom left;
+	background: #765b82 image-url('header-tab-shadow.png') repeat-x bottom left;
 	display: block;
 	height: 29px;
 	float: left;
@@ -181,7 +181,7 @@ ul#nav-menu li a {
 	padding: 0 14px;
 }
 #user-links {
-	background: #77ae51 url(header-tab-shadow.png) repeat-x bottom left;
+	background: #77ae51 image-url('header-tab-shadow.png') repeat-x bottom left;
 	float: right;
 	height: 29px;
 	margin: 0 8px 0 0;
@@ -259,11 +259,11 @@ a#logo img {
 
 span.correct {
 	padding-right: 17px;
-	background: url(tick.png) top right no-repeat;
+	background: image-url('tick.png') top right no-repeat;
 }
 span.wrong {
 	padding-right: 14px;
-	background: url(cross.png) bottom right no-repeat;
+	background: image-url('cross.png') bottom right no-repeat;
 }
 
 .break-word {
