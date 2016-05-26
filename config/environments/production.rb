@@ -78,5 +78,5 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { :host => "predictionbook.com" }
 
-  config.middleware.delete Rack::Loc
+  config.middleware.delete Rack::Lock
 end
