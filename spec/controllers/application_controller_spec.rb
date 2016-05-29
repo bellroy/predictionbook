@@ -72,8 +72,8 @@ describe ApplicationController do
       it 'sets current user to deadline user if found' do
         dn = instance_double(DeadlineNotification, user: :lazy_user).as_null_object
         expect(DeadlineNotification).to receive(:use_token!).and_yield(dn)
-        expect(controller).to receive(:current_user=).with(:lazy_user)
         controller.send :login_via_token
+        expect(assigns[:current_user]).to eq :lazy_user
       end
     end
   end

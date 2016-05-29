@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
 
   has_many :responses
   delegate :wagers, to: :responses
-  has_many :predictions, through: :responses
   has_many :deadline_notifications
   has_many :response_notifications
   has_one :credence_game
@@ -44,6 +43,11 @@ class User < ActiveRecord::Base
 
   def self.generate_api_token
     SecureRandom.urlsafe_base64
+  end
+
+  def predictions
+    prediction_ids = wagers.select(:prediction_id).map(&:prediction_id)
+    Prediction.where(id: prediction_ids).order(updated_at: :desc)
   end
 
   def devise_password_specified?
