@@ -22,7 +22,6 @@ gem 'thin'
 # App housekeeping
 gem 'exception_notification'
 gem 'whenever'
-gem 'typus', github: 'typus/typus'
 
 # Misc
 gem 'honeypot-captcha'
