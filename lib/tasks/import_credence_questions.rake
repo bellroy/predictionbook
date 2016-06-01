@@ -1,5 +1,8 @@
 desc 'Import credence questions.'
 task import_credence_questions: :environment do
+  CredenceGame.destroy_all
+  CredenceQuestion.destroy_all
+
   file = ENV['REPOSITORY']
   if file.nil?
     puts "You must supply a repository:\n" \
