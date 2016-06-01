@@ -15,12 +15,12 @@ shared_examples_for 'NotificationsController' do
 
       it 'redirects to the prediction for non xhr request' do
         expect(notification).to receive(:prediction).and_return(1)
-        post :create
+        post :create, notification.class.to_s.underscore => { prediction_id: '1' }
         expect(response).to redirect_to(prediction_path(1))
       end
 
       it 'renders the notification partial for xhr request' do
-        xhr :post, :create
+        xhr :post, :create, notification.class.to_s.underscore => { prediction_id: '1' }
         underscored_notification_type = controller.underscored_notification_type
         template_name = "#{underscored_notification_type}s/_#{underscored_notification_type}"
         expect(response).to render_template(template_name)
@@ -34,12 +34,12 @@ shared_examples_for 'NotificationsController' do
 
       it 'redirects to the prediction for non xhr request' do
         expect(notification).to receive(:prediction).and_return(1)
-        put :update, id: '1'
+        put :update, id: '1', notification.class.to_s.underscore => { prediction_id: '1' }
         expect(response).to redirect_to(prediction_path(1))
       end
 
       it 'renders the notification partial for xhr request' do
-        xhr :put, :update, id: '1'
+        xhr :put, :update, id: '1', notification.class.to_s.underscore => { prediction_id: '1' }
         underscored_notification_type = controller.underscored_notification_type
         template_name = "#{underscored_notification_type}s/_#{underscored_notification_type}"
         expect(response).to render_template(template_name)

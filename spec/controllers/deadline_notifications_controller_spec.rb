@@ -46,7 +46,7 @@ describe DeadlineNotificationsController do
         prediction = mock_model(Prediction, id: '7')
         deadline_notification = mock_model(DeadlineNotification, prediction: prediction)
         expect(@collection).to receive(:create!).and_return(deadline_notification)
-        post :create
+        post :create, deadline_notification: { prediction_id: '7', enabled: '1' }
         expect(response).to redirect_to(prediction_path('7'))
       end
     end
@@ -54,7 +54,7 @@ describe DeadlineNotificationsController do
 
   describe 'update' do
     it 'requires login' do
-      put :update, id: '1'
+      put :update, id: '1', deadline_notification: { enabled: '1' }
       expect(response).to redirect_to(new_user_session_path)
     end
 
@@ -75,7 +75,7 @@ describe DeadlineNotificationsController do
       end
 
       it "redirects to the prediction_path of it's prediction" do
-        put :update, id: '1'
+        put :update, id: '1', deadline_notification: { enabled: '1' }
         expect(response).to redirect_to(prediction_path('7'))
       end
     end
