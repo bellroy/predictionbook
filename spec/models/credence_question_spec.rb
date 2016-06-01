@@ -9,24 +9,24 @@ describe CredenceQuestion do
       FactoryGirl.create(:credence_answer, credence_question: question, rank: rank)
     end
 
-    response = question.create_random_response(game)
+    response = question.build_random_response(game)
     expect(response.class).to eq CredenceGameResponse
   end
 
   it 'should uniformly distribute responses in answer-space' do
-    # gen.create_random_response(game) is sufficiently slow that we don't want to do
+    # gen.build_random_response(game) is sufficiently slow that we don't want to do
     # it loads of times. But if we don't do it enough, our test will be prone to
     # failing randomly.
     #   Is it possible to only have this test run if we request it explicitly?
     puts
-    puts 'Running uniform distribution test for credence games. Usually takes about 30 seconds.'
+    puts 'Running uniform distribution test for credence games. Usually takes about 10 seconds.'
 
     question = FactoryGirl.create(:credence_question)
     FactoryGirl.create_list(:credence_answer, 3, credence_question: question)
 
     counts = Hash.new(0)
     10_000.times do
-      response = question.create_random_response(game)
+      response = question.build_random_response(game)
       counts[response.first_answer_id * 100 + response.second_answer_id] += 1
     end
 

@@ -2,14 +2,14 @@ class CredenceQuestion < ActiveRecord::Base
   has_many :answers, class_name: CredenceAnswer, dependent: :destroy, autosave: true
   has_many :responses, class_name: CredenceGameResponse, dependent: :destroy, autosave: true
 
-  def create_random_response(game)
+  def build_random_response(game)
     randomly_sorted_answers = answers.order('RAND()').first(5)
     raise 'Not enough answers to create a random response' if randomly_sorted_answers.length < 2
     first_answer = randomly_sorted_answers.first
     second_answer = randomly_sorted_answers.find { |answer| answer.value != first_answer.value }
     which = first_answer.rank < second_answer.rank ? 0 : 1
-    responses.create!(credence_game: game, first_answer: first_answer, second_answer: second_answer,
-                      correct_index: which)
+    responses.new(credence_game: game, first_answer: first_answer, second_answer: second_answer,
+                  correct_index: which)
   end
 
   def self.create_from_xml_element!(generator, id_prefix)
