@@ -9,56 +9,31 @@ describe CredenceQuestion do
       FactoryGirl.create(:credence_answer, credence_question: question, rank: rank)
     end
 
-    response = question.create_random_response(game)
+    response = question.build_random_response(game)
     expect(response.class).to eq CredenceGameResponse
   end
 
-  it 'should not create a response where both answers have the same rank' do
-    question = FactoryGirl.create(:credence_question)
-    [1, 1, 1, 1, 2].each do |rank|
-      FactoryGirl.create(:credence_answer, credence_question: question, rank: rank)
-    end
-
-    100.times do
-      response = question.create_random_response(game)
-      expect(response.first_answer.rank).to_not eq response.second_answer.rank
-    end
-  end
-
   it 'should uniformly distribute responses in answer-space' do
-    # gen.create_random_response(game) is sufficiently slow that we don't want to do
+    # gen.build_random_response(game) is sufficiently slow that we don't want to do
     # it loads of times. But if we don't do it enough, our test will be prone to
     # failing randomly.
     #   Is it possible to only have this test run if we request it explicitly?
     puts
-    puts 'Running uniform distribution test for credence games. Usually takes about 30 seconds.'
+    puts 'Running uniform distribution test for credence games. Usually takes about 10 seconds.'
 
     question = FactoryGirl.create(:credence_question)
-
-    [1, 1, 2].map do |rank|
-      FactoryGirl.create(:credence_answer, credence_question: question, rank: rank)
-    end
+    FactoryGirl.create_list(:credence_answer, 3, credence_question: question)
 
     counts = Hash.new(0)
     10_000.times do
-      response = question.create_random_response(game)
+      response = question.build_random_response(game)
       counts[response.first_answer_id * 100 + response.second_answer_id] += 1
     end
 
     # If the responses are uniformly distributed, then the number of entries in
-    # the first bucket follows a Binomial(10000, 0.25) distribution. This will
-    # almost certainly fall within the range [2095, 2919] (probability less than
-    # 10^-21 of falling out on each end).
-
-    # The probability that the count in *any* bucket falls outside this range is
-    # less than four times the probability of the first bucket falling outside;
-    # thus, less than 8 * 10^-21, or less than 10^-20.
-
-    # If that happens, we can be confident that the distribution isn't uniform.
-
-    lower_bound = 2095
-    upper_bound = 2919
-
+    # the first bucket follows a Binomial(10000, 0.25) distribution.
+    lower_bound = 1566
+    upper_bound = 1766
     counts.each do |_k, v|
       expect(v).to be_between(lower_bound, upper_bound), 'Expected question counts between ' \
                                                          "#{lower_bound} and #{upper_bound}, " \
@@ -93,19 +68,5 @@ describe CredenceQuestion do
     expect(answer_1.rank).to eq 1
     expect(answer_1.text).to eq 'second'
     expect(answer_1.value).to eq 'A'
-  end
-
-  it 'should assign adjacent answers equal ranks when they have equal value' do
-    parsed = Nokogiri::XML(<<-XML).root
-      <QuestionGenerator Tags="" Used="y" Type="Sorted" Weight="0.5" QuestionText="question" AdjacentWithin="-1" InfoPrefix="prefix" InfoSuffix="suffix">
-        <Answer Text="first" Value="A" />
-        <Answer Text="second" Value="A" />
-        <Answer Text="third" Value="B" />
-        <Answer Text="fourth" Value="A" />
-      </QuestionGenerator>
-    XML
-    question = CredenceQuestion.create_from_xml_element!(parsed, 'id-prefix')
-
-    expect(question. answers.map(&:rank)).to eq [0, 0, 1, 2]
   end
 end

@@ -91,7 +91,7 @@ FactoryGirl.define do
   factory :credence_answer do
     association(:credence_question)
     text { 'An answer' }
-    value { 'An answer' }
-    rank { Random.rand(1..100) }
+    sequence(:value)
+    sequence(:rank)
   end
 end

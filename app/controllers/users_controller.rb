@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   def statistics
-    @statistics ||= @user.statistics
+    @statistics ||= @user.present? ? @user.statistics : Statistics.new
   end
 
   def due_for_judgement
@@ -52,6 +52,7 @@ class UsersController < ApplicationController
 
   def lookup_user
     @user = User.find_by_login(params[:id]) || User.find_by_id(params[:id])
+    render status: :not_found if @user.nil?
   end
 
   def user_is_current_user?
