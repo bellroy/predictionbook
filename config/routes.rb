@@ -1,4 +1,13 @@
 PredictionBook::Application.routes.draw do
+
+  concern :paginatable do
+    get '(page/:page)', :action => :index, :on => :collection, :as => ''
+  end
+
+  resources :my_resources, :concerns => :paginatable
+
+  get '/predictions(/page/:page)' => 'predictions#index', :as => :predictions, :page => 1
+
   devise_for :users
 
   resources :users, only: [:show, :update] do

@@ -5,6 +5,7 @@
 <%- end -%>
 
 <h2><%= title || 'Predictions' %></h2>
+<%= paginate @predictions %>
 
 <div class="popular">
   <%- if not @predictions.empty? -%>

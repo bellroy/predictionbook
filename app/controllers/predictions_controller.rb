@@ -59,7 +59,7 @@ class PredictionsController < ApplicationController
   def index
     @title = 'Recent Predictions'
     @filter = 'recent'
-    @predictions = Prediction.recent(limit: 100)
+    @predictions = Prediction.recent.page params[:page]
     @show_statistics = true
   end
 
