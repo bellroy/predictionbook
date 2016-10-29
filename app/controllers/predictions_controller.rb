@@ -78,7 +78,7 @@ class PredictionsController < ApplicationController
   def judged
     @title = 'Judged Predictions'
     @filter = 'judged'
-    @predictions = Prediction.judged(limit: 100)
+    @predictions = Prediction.judged.page params[:page]
     @show_statistics = true
     render action: 'index'
   end
@@ -86,14 +86,14 @@ class PredictionsController < ApplicationController
   def unjudged
     @title = 'Unjudged Predictions'
     @filter = 'unjudged'
-    @predictions = Prediction.unjudged(limit: 100)
+    @predictions = Prediction.unjudged.page params[:page]
     render action: 'index'
   end
 
   def future
     @title = 'Upcoming Predictions'
     @filter = 'future'
-    @predictions = Prediction.future(limit: 100)
+    @predictions = Prediction.future.page params[:page]
     render action: 'index'
   end
 

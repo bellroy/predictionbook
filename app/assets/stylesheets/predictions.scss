@@ -33,21 +33,21 @@ ul#responses, #responses ul {
   font-style: italic;
   word-wrap: break-word;
 }
-#judgement .withdraw form { 
-  float: left; 
-  padding: 0; 
+#judgement .withdraw form {
+  float: left;
+  padding: 0;
 }
 
 .prediction .private.status {
   color: black;
 }
 
-li.prediction p, li p.prediction { 
-  margin: 0; 
-  display: inline; 
+li.prediction p, li p.prediction {
+  margin: 0;
+  display: inline;
 }
-li.prediction p.description { 
-  display: block; 
+li.prediction p.description {
+  display: block;
 }
 li.prediction {
   padding-bottom:0.5em;
@@ -126,3 +126,8 @@ li.response, li.change, .comment {
 .statistics table td { text-align: center; padding: 4px 8px; border: 1px dashed #CCC; border-top: none;border-top:none;}
 .statistics table { width: auto; margin:1em 0.5em 1em 18px; font-size:90%; border-collapse:collapse; }
 .statistics img { margin-right:6px; }
+
+.pagination {
+  font-size: 1.2em;
+  text-align: center;
+}
