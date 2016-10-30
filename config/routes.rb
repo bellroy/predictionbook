@@ -7,6 +7,8 @@ PredictionBook::Application.routes.draw do
   resources :my_resources, :concerns => :paginatable
 
   get '/predictions(/page/:page)' => 'predictions#index', :as => :predictions, :page => 1
+  get '/predictions/unjudged(/page/:page)' => 'predictions#unjudged', :as => :unjudged, :page => 1
+  get '/predictions/judged(/page/:page)' => 'predictions#judged', :as => :judged, :page => 1
   get '/users/:id(/page/:page)' => 'users#show', :as => :users, :page => 1
 
   devise_for :users
