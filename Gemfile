@@ -7,6 +7,7 @@ gem 'devise'
 # Models
 gem 'chronic'
 gem 'uuidtools'
+gem 'kaminari'
 
 # Views
 gem 'RedCloth'
