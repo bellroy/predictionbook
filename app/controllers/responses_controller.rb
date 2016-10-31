@@ -2,7 +2,7 @@ class ResponsesController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
-    @responses = Response.recent(limit: 50)
+    @responses = Response.recent.limit(50)
   end
 
   def create

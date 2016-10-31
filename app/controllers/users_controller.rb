@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @title       = "Most recent predictions by #{@user}"
     @predictions = @user.predictions
     @predictions = @predictions.not_private unless user_is_current_user?
-    @predictions = @predictions.page params[:page]
+    @predictions = @predictions.page(params[:page])
   end
 
   def update
