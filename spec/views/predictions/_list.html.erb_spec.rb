@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe 'prediction list' do
   before do
-    assign(:predictions, [])
+    assign(:predictions, double(Prediction, current_page: 1, limit_value: 1, total_pages: 1,
+                                            empty?: true))
     assign(:statistics, Statistics.new)
     allow(view).to receive(:statistics).and_return(Statistics.new)
     allow(view).to receive(:show_statistics?).and_return(false)

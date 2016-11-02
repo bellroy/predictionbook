@@ -23,7 +23,7 @@ describe UsersController do
 
       specify do
         predictions = instance_double(ActiveRecord::Relation)
-        expect(relation).to receive(:limit).and_return(predictions)
+        expect(relation).to receive(:page).and_return(predictions)
         show
         expect(assigns[:predictions]).to eq predictions
         expect(assigns[:user]).to eq target_user
@@ -32,13 +32,13 @@ describe UsersController do
 
     context 'logged in user and target user are different' do
       specify do
-        predictions = instance_double(ActiveRecord::Relation)
+        predictions = class_double(Prediction)
         expect(relation).to receive(:not_private).and_return predictions
-        limited_predictions = instance_double(ActiveRecord::Relation)
-        expect(predictions).to receive(:limit).and_return(limited_predictions)
+        paged_predictions = class_double(Prediction)
+        expect(predictions).to receive(:page).and_return(paged_predictions)
 
         show
-        expect(assigns[:predictions]).to eq limited_predictions
+        expect(assigns[:predictions]).to eq paged_predictions
         expect(assigns[:user]).to eq target_user
       end
     end

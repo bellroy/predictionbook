@@ -60,7 +60,7 @@ module Api
     def build_predictions
       limit = params[:limit].to_i
       limit = DEFAULT_PREDICTIONS_LIMIT unless (1..MAXIMUM_PREDICTIONS_LIMIT).cover?(limit)
-      @predictions = Prediction.recent(limit: limit)
+      @predictions = Prediction.recent.limit(limit)
     end
 
     def find_prediction

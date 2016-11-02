@@ -57,9 +57,9 @@ class Prediction < ActiveRecord::Base
       .includes(:responses, :creator)
       .joins(:responses)
       .where('predictions.deadline > UTC_TIMESTAMP() AND predictions.created_at > ?', 2.weeks.ago)
+      .where('predictions.id NOT IN (SELECT prediction_id FROM judgements WHERE outcome IS NOT NULL)')
       .order('count(responses.prediction_id) DESC, predictions.deadline ASC')
       .group('predictions.id')
-      # .select(&:unknown?) # Commented out because this is causing an error when I take out .limit(limit)
   end
 
   belongs_to :creator, class_name: 'User'
