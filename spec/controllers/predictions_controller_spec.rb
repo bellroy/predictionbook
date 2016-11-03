@@ -10,6 +10,11 @@ describe PredictionsController do
   before { sign_in(logged_in_user) if logged_in_user.present? }
 
   describe 'getting the homepage' do
+    before do
+      relation = class_double(Prediction, limit: [])
+      expect(Prediction).to receive(:popular).and_return(relation)
+    end
+
     it 'assigns a new prediction' do
       get :home
       expect(assigns[:prediction]).to be_a Prediction
@@ -29,7 +34,8 @@ describe PredictionsController do
 
   describe 'getting the "unjudged" page' do
     it 'assigns the unjudged predictions' do
-      expect(Prediction).to receive(:unjudged).and_return(:unjudged)
+      relation = class_double(Prediction, page: :unjudged)
+      expect(Prediction).to receive(:unjudged).and_return(relation)
       get :unjudged
       expect(assigns[:predictions]).to eq :unjudged
     end
@@ -110,7 +116,8 @@ describe PredictionsController do
       describe 'collection' do
         before do
           @collection = []
-          expect(Prediction).to receive(:recent).and_return(@collection)
+          relation = class_double(Prediction, page: @collection)
+          expect(Prediction).to receive(:recent).and_return(relation)
         end
 
         it 'assigns the collection' do
@@ -448,8 +455,12 @@ describe PredictionsController do
 
   [:unjudged, :judged, :future].each do |action|
     describe action.to_s do
+      let(:relation) { class_double(Prediction) }
+
       before :each do
         # touch to instantiate
+        expect(Prediction).to receive(action).and_return(relation)
+        expect(relation).to receive(:page).and_return(:collection)
         controller
       end
 
@@ -462,7 +473,6 @@ describe PredictionsController do
         expect(assigns[:title]).not_to be_nil
       end
       it 'assigns the collection' do
-        expect(Prediction).to receive(action).and_return(:collection)
         get action
         expect(assigns[:predictions]).to eq :collection
       end

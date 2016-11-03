@@ -18,3 +18,7 @@
   </p>
   <%- end %>
 </div>
+
+<%- unless current_page?('/') %>
+<p class="pagination"><%= paginate @predictions %></p>
+<%- end %>
