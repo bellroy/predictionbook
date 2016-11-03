@@ -1,4 +1,5 @@
 PredictionBook::Application.routes.draw do
+
   devise_for :users
 
   resources :users, only: [:show, :update] do
@@ -45,4 +46,17 @@ PredictionBook::Application.routes.draw do
   namespace :api do
     resources :predictions
   end
+
+  concern :paginatable do
+    get '(page/:page)', :action => :index, :on => :collection, :as => ''
+  end
+
+  resources :my_resources, :concerns => :paginatable
+
+  get '/predictions(/page/:page)' => 'predictions#index', :page => 1
+  get '/predictions/unjudged(/page/:page)' => 'predictions#unjudged', :page => 1
+  get '/predictions/judged(/page/:page)' => 'predictions#judged', :page => 1
+  get '/predictions/future(/page/:page)' => 'predictions#future', :page => 1
+  get '/users/:id(/page/:page)' => 'users#show', :page => 1
+
 end
