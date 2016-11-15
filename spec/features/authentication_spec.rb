@@ -11,7 +11,7 @@ feature 'authentication' do
     fill_in 'user_login', with: 'login'
     fill_in 'user_password', with: 'password'
     click_button 'Log in'
-    expect(page).to have_content 'Hello, Bob'
+    expect(page).to have_content 'Bob'
     within 'ul#user-links' do
       click_link 'Logout'
     end
