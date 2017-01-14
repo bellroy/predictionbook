@@ -39,6 +39,8 @@ PredictionBook::Application.routes.draw do
   resources :credence_games, only: [:show, :destroy]
   resources :credence_game_responses, only: :update
 
+  resource :sitemap, only: [:show]
+
   get '/happenstance' => 'predictions#happenstance', as: :happenstance
 
   root to: 'predictions#home'
