@@ -95,6 +95,10 @@ class User < ActiveRecord::Base
     name || login
   end
 
+  def self.find_by_login(val)
+    super(val.to_s.gsub("[dot]", "."))
+  end
+
   def valid_password?(password)
     crypted_password.present? && old_password_digest(password, salt) == crypted_password ||
       Devise::Encryptor.compare(self.class, encrypted_password, password)
