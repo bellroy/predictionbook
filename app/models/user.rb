@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
 
+  def self.find_by_login(val)
+    super(val.to_s.gsub("[dot]", "."))
+  end
+
   def predictions
     prediction_ids = wagers.select(:prediction_id).map(&:prediction_id)
     Prediction.where(id: prediction_ids).order(updated_at: :desc)
@@ -93,10 +97,6 @@ class User < ActiveRecord::Base
 
   def to_s
     name || login
-  end
-
-  def self.find_by_login(val)
-    super(val.to_s.gsub("[dot]", "."))
   end
 
   def valid_password?(password)
