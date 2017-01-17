@@ -56,6 +56,13 @@ class PredictionsController < ApplicationController
     redirect_to predictions_path, status: :moved_permanently
   end
 
+  MAXIMUM_ENTRIES_IN_SITEMAP = 50000
+  def sitemap
+    @page = params[:page]
+    # Grabbing IDs & updated_at of all non-private predictions:
+    @predictions = Prediction.order(created_at: :desc).not_private.page(@page).per(MAXIMUM_ENTRIES_IN_SITEMAP).pluck(:id, :updated_at)
+  end
+
   def index
     @title = 'Recent Predictions'
     @filter = 'recent'
