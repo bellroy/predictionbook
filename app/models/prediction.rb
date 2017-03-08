@@ -205,7 +205,7 @@ class Prediction < ActiveRecord::Base
   end
 
   def count_wagers_by(user)
-    wagers.count(conditions: { user_id: user })
+    wagers.where(user_id: user.id).count
   end
 
   def deadline_notification_for_user(user)

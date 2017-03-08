@@ -11,7 +11,7 @@ gem 'kaminari'
 
 # Views
 gem 'RedCloth'
-gem 'formatize', git: 'https://github.com/januszm/formatize'
+gem 'formatize', git: 'https://github.com/jaredjackson/formatize'
 gem 'htmlentities'
 gem 'sass-rails'
 gem 'coffee-rails'
