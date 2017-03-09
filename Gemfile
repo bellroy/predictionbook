@@ -30,7 +30,7 @@ gem 'hashdiff'
 gem 'sentry-raven'
 
 group :development do
-  gem 'capistrano'
+  gem 'capistrano', '~> 3.5.0'
   gem 'capistrano-ext'
 end
 
