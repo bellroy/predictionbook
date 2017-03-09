@@ -11,7 +11,7 @@ gem 'kaminari'
 
 # Views
 gem 'RedCloth'
-gem 'formatize', git: 'https://github.com/januszm/formatize'
+gem 'formatize', git: 'https://github.com/jaredjackson/formatize'
 gem 'htmlentities'
 gem 'sass-rails'
 gem 'coffee-rails'
@@ -30,7 +30,7 @@ gem 'hashdiff'
 gem 'sentry-raven'
 
 group :development do
-  gem 'capistrano'
+  gem 'capistrano', '~> 3.5.0'
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-git-submodule-strategy'
