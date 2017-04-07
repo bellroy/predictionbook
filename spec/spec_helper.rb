@@ -22,7 +22,7 @@ RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers, type: :views
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include Devise::TestHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :view
   config.include Warden::Test::Helpers
   config.before :suite do
     Warden.test_mode!
