@@ -80,18 +80,6 @@ describe PredictionsController do
       end
     end
 
-    describe 'statistics' do
-      it 'provides a statistics accessor for the view' do
-        expect(controller).to respond_to(:statistics)
-      end
-
-      it 'delegates statistics to the wagers collection' do
-        stats = double(Statistics)
-        expect(Statistics).to receive(:new).and_return(stats)
-        expect(controller.statistics).to eq stats
-      end
-    end
-
     it 'responds with http success status' do
       get :index
       expect(response.response_code).to eq 200

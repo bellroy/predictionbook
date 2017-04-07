@@ -4,8 +4,7 @@ class PredictionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :judge, :withdraw, :edit, :update]
   before_action :find_prediction, only: [:judge, :show, :withdraw, :edit, :update]
   before_action :must_be_authorized_for_prediction, only: [:withdraw, :edit, :update, :show]
-
-  helper_method :statistics, :show_statistics?
+  before_action :ensure_statistics, only: [:index]
 
   cache_sweeper :statistics_sweeper, only: :judge
 
@@ -116,15 +115,11 @@ class PredictionsController < ApplicationController
     redirect_to @prediction
   end
 
-  def statistics
+  private
+
+  def ensure_statistics
     @statistics ||= Statistics.new
   end
-
-  def show_statistics?
-    @show_statistics
-  end
-
-  private
 
   def must_be_authorized_for_prediction
     authorized = (current_user || User.new).authorized_for(@prediction)

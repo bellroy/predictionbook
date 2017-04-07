@@ -6,8 +6,8 @@ describe 'predictions/new' do
 
   before(:each) do
     assign(:prediction, prediction)
+    assign(:statistics, Statistics.new)
     allow(view).to receive(:user_statistics_cache_key).and_return 'stats'
-    allow(view).to receive(:statistics).and_return(Statistics.new)
     allow(view).to receive(:current_user).and_return(user)
   end
 

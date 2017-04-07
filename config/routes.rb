@@ -1,10 +1,9 @@
 PredictionBook::Application.routes.draw do
-
   devise_for :users
 
   resources :users, only: [:show, :update] do
     get :settings, on: :member
-    get :statistics, on: :member
+    get :statistics, on: :member, format: :html
     get :due_for_judgement, on: :member
     post :generate_api_token, on: :member
     resources :deadline_notifications
@@ -59,5 +58,4 @@ PredictionBook::Application.routes.draw do
   get '/predictions/judged(/page/:page)' => 'predictions#judged', :page => 1
   get '/predictions/future(/page/:page)' => 'predictions#future', :page => 1
   get '/users/:id(/page/:page)' => 'users#show', :page => 1
-
 end

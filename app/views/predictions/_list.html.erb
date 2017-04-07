@@ -1,4 +1,4 @@
-<%- if show_statistics? -%>
+<%- if @show_statistics -%>
 	<%- cache(global_statistics_cache_key) do -%>
 		<%= render :partial => 'statistics/show' %>
 	<%- end -%>

@@ -109,24 +109,6 @@ li.response, li.change, .comment {
   font-weight: bold;
 }
 
-.statistics table {
-  width: 65%;
-  margin-right: 1em;
-  margin-bottom: 2em;
-}
-
-.statistics table th { padding: 0 4px; }
-.statistics table td { text-align: center; }
-.statistics table th.narrow { width: 40px; }
-
-.statistics {float: right; text-align: right;}
-.statistics table tbody th { border: none; text-align: right; vertical-align: middle; }
-.statistics table th {border-bottom: 1px solid #000; }
-.statistics table thead th { text-align: center; }
-.statistics table td { text-align: center; padding: 4px 8px; border: 1px dashed #CCC; border-top: none;border-top:none;}
-.statistics table { width: auto; margin:1em 0.5em 1em 18px; font-size:90%; border-collapse:collapse; }
-.statistics img { margin-right:6px; }
-
 .pagination {
   font-size: 1.2em;
   text-align: center;
