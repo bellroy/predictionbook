@@ -15,7 +15,8 @@ describe Api::PredictionJudgementsController, type: :controller do
 
     context 'with valid API token' do
       before do
-        prediction = instance_double(Prediction)
+        judgement = instance_double(Judgement, to_json: 'my new judgement')
+        prediction = instance_double(Prediction, judgements: [judgement])
         expect(Prediction).to receive(:find).with('123').and_return(prediction)
         expect(prediction).to receive(:judge!).with('right', user)
 
@@ -26,6 +27,7 @@ describe Api::PredictionJudgementsController, type: :controller do
       it 'judges the prediction' do
         create
         expect(response).to be_success
+        expect(response.body).to eq 'my new judgement'
       end
     end
 
