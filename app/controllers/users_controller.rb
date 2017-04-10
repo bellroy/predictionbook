@@ -3,11 +3,10 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:settings, :update, :generate_api_token]
   before_action :user_must_be_current_user, only: [:settings, :update]
 
-  helper_method :statistics
-
   def show
     @title       = "Most recent predictions by #{@user}"
     @predictions = @user.predictions
+    @statistics  = @user.statistics
     @predictions = @predictions.not_private unless user_is_current_user?
     @predictions = @predictions.page(params[:page])
   end
@@ -28,7 +27,17 @@ class UsersController < ApplicationController
   end
 
   def statistics
+    @heading = params[:heading] || 'Statistics'
     @statistics ||= @user.present? ? @user.statistics : Statistics.new
+    layout = case params[:layout]
+             when nil
+               'application'
+             when 'none'
+               nil
+             else
+               params['layout']
+             end
+    render :statistics, layout: layout
   end
 
   def due_for_judgement
@@ -50,9 +59,17 @@ class UsersController < ApplicationController
 
   protected
 
+  def ensure_statistics
+    @statistics = Statistics.new
+  end
+
   def lookup_user
-    @user = User.find_by_login(params[:id]) || User.find_by_id(params[:id])
-    render status: :not_found if @user.nil?
+    id_param = params[:id]
+    @user = User.find_by(login: id_param) || User.find_by(id: id_param)
+    if !@user && params[:action] == 'statistics'
+      @user = User.find_by(api_token: id_param)
+    end
+    raise ActiveRecord::RecordNotFound if @user.nil?
   end
 
   def user_is_current_user?
