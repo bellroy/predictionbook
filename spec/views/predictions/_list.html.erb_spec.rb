@@ -5,8 +5,7 @@ describe 'prediction list' do
     assign(:predictions, double(Prediction, current_page: 1, limit_value: 1, total_pages: 1,
                                             empty?: true))
     assign(:statistics, Statistics.new)
-    allow(view).to receive(:statistics).and_return(Statistics.new)
-    allow(view).to receive(:show_statistics?).and_return(false)
+    assign(:show_statistics, false)
     allow(view).to receive(:current_user).and_return User.new
   end
 
@@ -16,7 +15,7 @@ describe 'prediction list' do
 
   describe 'when showing statistics' do
     before(:each) do
-      expect(view).to receive(:show_statistics?).and_return(true)
+      assign(:show_statistics, true)
       expect(view).to receive(:global_statistics_cache_key).and_return('foo')
     end
 

@@ -1,12 +1,11 @@
 module Api
-  class PredictionsController < ApplicationController
+  class PredictionsController < AuthorisedController
     MAXIMUM_PREDICTIONS_LIMIT = 1000
     DEFAULT_PREDICTIONS_LIMIT = 100
 
-    before_action :authenticate_by_api_token
     before_action :build_predictions, only: [:index]
     before_action :build_new_prediction, only: [:create]
-    before_action :find_prediction, only: [:show, :update]
+    before_action :find_prediction, only: %i[show update]
     before_action :authorize_to_see_prediction, only: [:show]
     before_action :authorize_to_update_prediction, only: [:update]
 
@@ -36,11 +35,6 @@ module Api
 
     private
 
-    def authenticate_by_api_token
-      @user = User.find_by_api_token(params[:api_token])
-      render json: invalid_api_message, status: :unauthorized unless valid_params_and_user?
-    end
-
     def authorize_to_see_prediction
       raise UnauthorizedRequest unless @prediction.public? || @user.authorized_for(@prediction)
     end
@@ -65,14 +59,6 @@ module Api
 
     def find_prediction
       @prediction = Prediction.find(params[:id])
-    end
-
-    def invalid_api_message
-      { error: 'invalid API token', status: :unauthorized }
-    end
-
-    def valid_params_and_user?
-      params[:api_token] && @user
     end
 
     def prediction_params
