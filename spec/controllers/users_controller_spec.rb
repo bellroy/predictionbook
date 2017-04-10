@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe UsersController do
-  let(:logged_in_user) { FactoryGirl.create(:user) }
-  let(:target_user) { FactoryGirl.create(:user) }
+  let(:logged_in_user) { FactoryGirl.create(:user, api_token: 'other-real-token') }
+  let(:target_user) { FactoryGirl.create(:user, api_token: 'real-token') }
 
   before(:each) do
     sign_in logged_in_user if logged_in_user.present?
@@ -45,17 +45,31 @@ describe UsersController do
   end
 
   describe '#statistics' do
-    subject(:statistics) { get :statistics, id: target_user.id }
+    subject(:statistics) { get :statistics, id: user_id }
+
+    let(:user_id) { target_user.id }
 
     it 'delegates to the statistics to the user' do
       expect_any_instance_of(User).to receive(:statistics).and_return(:stats)
       statistics
       expect(assigns[:statistics]).to eq :stats
     end
+
+    context 'called with user api token' do
+      let(:user_id) { target_user.api_token }
+
+      it 'delegates to the statistics to the user' do
+        expect_any_instance_of(User).to receive(:statistics).and_return(:stats)
+        statistics
+        expect(assigns[:statistics]).to eq :stats
+      end
+    end
   end
 
   describe 'users setting page' do
-    subject(:settings) { get :settings, id: target_user.id }
+    subject(:settings) { get :settings, id: user_id }
+
+    let(:user_id) { target_user.id }
 
     context 'not logged in' do
       let(:logged_in_user) { nil }
@@ -78,6 +92,14 @@ describe UsersController do
         settings
         expect(response).to be_success
         expect(assigns[:user]).to eq target_user
+      end
+    end
+
+    context 'cannot show settings using api token' do
+      let(:user_id) { logged_in_user.api_token }
+
+      specify do
+        expect { settings }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end

@@ -21,10 +21,12 @@ RSpec.configure do |config|
   config.include(EmailSpec::Matchers)
   config.include Rails.application.routes.url_helpers, type: :views
   config.include FactoryGirl::Syntax::Methods
-  config.include Devise::TestHelpers, type: :controller
-  config.include Devise::TestHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
   config.include Warden::Test::Helpers
   config.before :suite do
     Warden.test_mode!
+    log_path = Rails.root.join('log', 'test.log')
+    system("cat /dev/null > #{log_path}")
   end
 end
