@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412022200) do
+ActiveRecord::Schema.define(version: 20170412071152) do
 
   create_table "credence_answers", force: :cascade do |t|
     t.integer  "credence_question_id", limit: 4
@@ -66,6 +66,13 @@ ActiveRecord::Schema.define(version: 20170412022200) do
   end
 
   add_index "credence_questions", ["text_id"], name: "index_credence_questions_on_text_id", unique: true, using: :btree
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name",          limit: 255, null: false
+    t.string   "email_domains", limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
   create_table "judgements", force: :cascade do |t|
     t.integer  "prediction_id", limit: 4
