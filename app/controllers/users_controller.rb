@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @title       = "Most recent predictions by #{@user}"
     @predictions = @user.predictions
     @statistics  = @user.statistics
-    @predictions = @predictions.not_private unless user_is_current_user?
+    @predictions = @predictions.visible_to_everyone unless user_is_current_user?
     @predictions = @predictions.page(params[:page])
   end
 
@@ -94,6 +94,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:login, :email, :name, :timezone, :private_default, :api_token)
+    params.require(:user).permit(:login, :email, :name, :timezone, :visibility_default, :api_token)
   end
 end

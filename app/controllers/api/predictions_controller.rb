@@ -36,7 +36,7 @@ module Api
     private
 
     def authorize_to_see_prediction
-      raise UnauthorizedRequest unless @prediction.public? || @user.authorized_for(@prediction)
+      raise UnauthorizedRequest unless @prediction.visible_to_everyone? || @user.authorized_for(@prediction)
     end
 
     def authorize_to_update_prediction
@@ -44,8 +44,9 @@ module Api
     end
 
     def build_new_prediction
-      unless prediction_params[:private] && @user
-        prediction_params[:private] = @user.private_default
+      visible_to_creator = Visibility::VALUES[:visible_to_creator]
+      unless prediction_params[:visibility] == visible_to_creator && @user.present?
+        prediction_params[:visibility] = @user.visibility_default
       end
 
       @prediction = Prediction.new(prediction_params.merge(creator: @user))

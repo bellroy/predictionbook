@@ -161,34 +161,34 @@ describe PredictionsController do
 
     describe 'privacy' do
       before do
-        logged_in_user.update_attributes(private_default: true)
+        logged_in_user.update_attributes(visibility_default: Visibility::VALUES[:visible_to_creator])
       end
 
       describe 'when creator private default is true ' do
         context 'creating public prediction' do
-          let(:params) { { private: '0' } }
+          let(:params) { { visibility: 'visible_to_everyone' } }
           it 'is false when prediction privacy is false' do
             create
-            expect(assigns[:prediction].private?).to be false
+            expect(assigns[:prediction].visible_to_everyone?).to be true
           end
         end
 
         context 'when prediction privacy is true' do
-          let(:params) { { private: prediction.id } }
+          let(:params) { { visibility: 'visible_to_creator' } }
 
           specify do
             expect(Prediction).to receive(:create!)
-              .with(hash_including('private' => prediction.id.to_s)).and_return(prediction)
+              .with(hash_including('visibility' => 'visible_to_creator')).and_return(prediction)
             create
           end
         end
 
         context 'when prediction privacy is not provided' do
-          let(:params) { { private: logged_in_user.private_default } }
+          let(:params) { { visibility: logged_in_user.visibility_default } }
 
           it 'is true when prediction privacy is not provided' do
             expect(Prediction).to receive(:create!)
-              .with(hash_including('private' => logged_in_user.private_default))
+              .with(hash_including('visibility' => logged_in_user.visibility_default))
               .and_return(prediction)
             create
           end
@@ -197,32 +197,32 @@ describe PredictionsController do
 
       describe 'when creator private default is false' do
         before do
-          logged_in_user.update_attributes(private_default: false)
+          logged_in_user.update_attributes(visibility_default: Visibility::VALUES[:visible_to_everyone])
         end
 
         context 'prediction privacy is false' do
-          let(:params) { { private: '0' } }
+          let(:params) { { visibility: :visible_to_everyone } }
 
           specify do
             expect(Prediction).to receive(:create!)
-              .with(hash_including('private' => '0')).and_return(prediction)
+              .with(hash_including('visibility' => 'visible_to_everyone')).and_return(prediction)
             create
           end
         end
 
         context 'when prediction privacy is true' do
-          let(:params) { { private: prediction.id } }
+          let(:params) { { visibility: :visible_to_creator } }
 
           it 'is true when prediction privacy is true ' do
             expect(Prediction).to receive(:create!)
-              .with(hash_including('private' => prediction.id.to_s)).and_return(prediction)
+              .with(hash_including('visibility' => 'visible_to_creator')).and_return(prediction)
             create
           end
         end
 
         it 'is false when prediction privacy is not provided' do
           expect(Prediction).to receive(:create!)
-            .with(hash_including('private' => logged_in_user.private_default))
+            .with(hash_including('visibility' => '0')).and_return(prediction)
             .and_return(prediction)
           create
         end
@@ -329,7 +329,8 @@ describe PredictionsController do
 
     describe 'private predictions' do
       before(:each) do
-        allow_any_instance_of(Prediction).to receive(:private?).and_return(true)
+        allow_any_instance_of(Prediction).to receive(:visible_to_everyone?).and_return(false)
+        allow_any_instance_of(Prediction).to receive(:visible_to_creator?).and_return(true)
       end
 
       context 'not owned by current user' do
@@ -498,18 +499,20 @@ describe PredictionsController do
   end
 
   describe 'updating a prediction' do
+    subject(:update) { put :update, id: prediction.id, prediction: { description: 'something' } }
+
     context 'not logged in' do
       let(:logged_in_user) { nil }
 
       it 'requires a login' do
-        put :update, id: prediction.id
+        update
         expect(response).to redirect_to(new_user_session_path)
       end
     end
 
     describe 'when logged in' do
       it 'requires the user to have created the prediction' do
-        put :update, id: prediction.id
+        update
         expect(response.response_code).to eq 302
       end
 
@@ -517,8 +520,8 @@ describe PredictionsController do
         let(:logged_in_user) { creator }
 
         it 'updates the prediction' do
-          put :update, id: prediction.id, prediction: { description: 'a new description' }
-          expect(prediction.reload.description).to eq 'a new description'
+          update
+          expect(prediction.reload.description).to eq 'something'
         end
       end
     end

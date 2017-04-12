@@ -11,8 +11,8 @@ class PredictionsController < ApplicationController
   def new
     @title = 'Make a Prediction'
     @statistics = current_user.try(:statistics)
-    privacy = current_user.try(:private_default) || false
-    @prediction = Prediction.new(creator: current_user, private: privacy)
+    visibility = current_user.try(:visibility_default) || 0
+    @prediction = Prediction.new(creator: current_user, visibility: visibility)
   end
 
   def create
@@ -40,9 +40,8 @@ class PredictionsController < ApplicationController
   end
 
   def home
-    privacy = false
-    privacy = current_user.private_default if current_user
-    @prediction = Prediction.new(creator: current_user, private: privacy)
+    visibility = current_user.try(:visibility_default) || 0
+    @prediction = Prediction.new(creator: current_user, visibility: visibility)
     @responses = Response.recent.limit(25)
     @title = 'How sure are you?'
     @filter = 'popular'
@@ -122,8 +121,8 @@ class PredictionsController < ApplicationController
   end
 
   def must_be_authorized_for_prediction
-    authorized = (current_user || User.new).authorized_for(@prediction)
-    showing_public_prediction = (params[:action] == 'show' && !@prediction.private?)
+    authorized = (current_user || User.new).authorized_for(@prediction, params[:action])
+    showing_public_prediction = (params[:action] == 'show' && @prediction.visible_to_everyone?)
     notice = 'You are not authorized to perform that action'
     redirect_to(root_path, notice: notice) unless authorized || showing_public_prediction
   end
@@ -135,7 +134,7 @@ class PredictionsController < ApplicationController
   def prediction_params
     result = params.require(:prediction).permit!
     if @prediction.nil?
-      result[:private] = current_user.private_default unless result.key?(:private)
+      result[:visibility] = current_user.try(:visibility_default) unless result.key?(:visibility)
       result[:creator_id] = current_user.id
     end
     result

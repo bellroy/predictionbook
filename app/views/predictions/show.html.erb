@@ -12,7 +12,7 @@
   <%= render :partial => @prediction.judgement %><% end -%>
 </p>
 
-<%- if @prediction.private? -%>
+<%- if @prediction.visible_to_creator? -%>
   <p class='note'>
     This prediction is <strong>private</strong>. <%= render :partial => 'predictions/private_note' %>
   </p>

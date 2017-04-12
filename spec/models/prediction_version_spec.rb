@@ -13,8 +13,7 @@ describe PredictionVersion do
       let(:user) { FactoryGirl.create(:user) }
       let!(:prediction) do
         FactoryGirl.build(:prediction, description: 'A description', deadline: Date.yesterday,
-                                       creator: user, uuid: 'uuid1', withdrawn: true,
-                                       private: false)
+                                       creator: user, uuid: 'uuid1', withdrawn: true)
       end
 
       specify do
@@ -25,7 +24,7 @@ describe PredictionVersion do
         expect(version.description).to eq 'A description'
         expect(version.deadline).to eq Date.yesterday
         expect(version.withdrawn).to be true
-        expect(version.private).to be false
+        expect(version.visibility).to eq 'visible_to_everyone'
       end
     end
   end

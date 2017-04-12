@@ -33,7 +33,7 @@ describe UsersController do
     context 'logged in user and target user are different' do
       specify do
         predictions = class_double(Prediction)
-        expect(relation).to receive(:not_private).and_return predictions
+        expect(relation).to receive(:visible_to_everyone).and_return predictions
         paged_predictions = class_double(Prediction)
         expect(predictions).to receive(:page).and_return(paged_predictions)
 

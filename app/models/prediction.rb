@@ -1,6 +1,8 @@
 class Prediction < ActiveRecord::Base
   has_many :versions, autosave: true, class_name: PredictionVersion
 
+  enum visibility: Visibility::VALUES
+
   before_save :create_version_if_required
 
   def create_version_if_required
@@ -17,13 +19,11 @@ class Prediction < ActiveRecord::Base
   end
 
   scope :not_withdrawn, -> { where(withdrawn: false) }
-  # if you change the implementation of 'public', also change this scope in response
-  scope :not_private, -> { where(private: false) }
 
-  DEFAULT_INCLUDES = [:judgements, :responses, :creator].freeze
+  DEFAULT_INCLUDES = %i[judgements responses creator].freeze
 
   def self.unjudged
-    not_private
+    visible_to_everyone
       .not_withdrawn
       .includes(DEFAULT_INCLUDES)
       .where('(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NULL AND deadline < UTC_TIMESTAMP()')
@@ -31,7 +31,7 @@ class Prediction < ActiveRecord::Base
   end
 
   def self.judged
-    not_private
+    visible_to_everyone
       .not_withdrawn
       .includes(DEFAULT_INCLUDES)
       .joins(:judgements)
@@ -40,7 +40,7 @@ class Prediction < ActiveRecord::Base
   end
 
   def self.future
-    not_private
+    visible_to_everyone
       .not_withdrawn
       .includes(DEFAULT_INCLUDES)
       .where('(id NOT IN (SELECT prediction_id FROM judgements) OR id IN (SELECT prediction_id FROM judgements WHERE outcome IS NULL)) AND deadline > UTC_TIMESTAMP()')
@@ -48,11 +48,11 @@ class Prediction < ActiveRecord::Base
   end
 
   def self.recent
-    order(created_at: :desc).not_private.not_withdrawn.includes(DEFAULT_INCLUDES)
+    order(created_at: :desc).visible_to_everyone.not_withdrawn.includes(DEFAULT_INCLUDES)
   end
 
   def self.popular
-    not_private
+    visible_to_everyone
       .not_withdrawn
       .includes(:responses, :creator)
       .joins(:responses)
@@ -100,7 +100,7 @@ class Prediction < ActiveRecord::Base
   def save!
     super
   rescue ActiveRecord::StatementInvalid => error
-    raise DuplicateRecord, Prediction.find_by_uuid(uuid) if error.message =~ /Duplicate entry/
+    raise DuplicateRecord, Prediction.find_by(uuid: uuid) if error.message =~ /Duplicate entry/
     raise
   end
 
@@ -209,11 +209,11 @@ class Prediction < ActiveRecord::Base
   end
 
   def deadline_notification_for_user(user)
-    deadline_notifications.find_by_user_id(user) || deadline_notifications.build(user: user, enabled: false)
+    deadline_notifications.find_by(user_id: user) || deadline_notifications.build(user: user, enabled: false)
   end
 
   def response_notification_for_user(user)
-    response_notifications.find_by_user_id(user) || response_notifications.build(user: user, enabled: false)
+    response_notifications.find_by(user_id: user) || response_notifications.build(user: user, enabled: false)
   end
 
   def confidence_on_response
@@ -230,10 +230,6 @@ class Prediction < ActiveRecord::Base
     elsif retrodiction?
       errors.add(:deadline, "Please don't make 'predictions' about the past. This isn't 'RetrodictionBook'.")
     end
-  end
-
-  def public?
-    !private?
   end
 
   private

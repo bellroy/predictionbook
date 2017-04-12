@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511055641) do
+ActiveRecord::Schema.define(version: 20170412022200) do
 
   create_table "credence_answers", force: :cascade do |t|
     t.integer  "credence_question_id", limit: 4
@@ -102,9 +102,9 @@ ActiveRecord::Schema.define(version: 20160511055641) do
     t.integer  "creator_id",    limit: 4
     t.string   "uuid",          limit: 255
     t.boolean  "withdrawn",                 default: false
-    t.boolean  "private",                   default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "visibility",    limit: 4,   default: 0,     null: false
   end
 
   create_table "predictions", force: :cascade do |t|
@@ -115,8 +115,8 @@ ActiveRecord::Schema.define(version: 20160511055641) do
     t.integer  "creator_id",  limit: 4
     t.string   "uuid",        limit: 255
     t.boolean  "withdrawn",               default: false
-    t.boolean  "private",                 default: false
     t.integer  "version",     limit: 4,   default: 1
+    t.integer  "visibility",  limit: 4,   default: 0,     null: false
   end
 
   add_index "predictions", ["creator_id"], name: "index_predictions_on_creator_id", using: :btree
@@ -145,7 +145,6 @@ ActiveRecord::Schema.define(version: 20160511055641) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "timezone",                  limit: 255
-    t.boolean  "private_default",                       default: false
     t.boolean  "admin",                                 default: false, null: false
     t.string   "api_token",                 limit: 255
     t.string   "encrypted_password",        limit: 255, default: "",    null: false
@@ -157,6 +156,7 @@ ActiveRecord::Schema.define(version: 20160511055641) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",        limit: 255
     t.string   "last_sign_in_ip",           limit: 255
+    t.integer  "visibility_default",        limit: 4,   default: 0,     null: false
   end
 
   add_index "users", ["api_token"], name: "index_users_on_api_token", using: :btree
