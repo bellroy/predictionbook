@@ -3,4 +3,9 @@ class Group < ActiveRecord::Base
   validates :email_domains, format: {
     with: /\A(([a-z]+[a-z\.]+[\.]+[a-z]+),)*([a-z]+[a-z\.]+[\.]+[a-z]+)\z/, allow_nil: true
   }
+
+  def user_is_a_member?(user)
+    domain = Mail::Address.new(user.email).domain
+    (email_domains || '').split(',').include?(domain)
+  end
 end
