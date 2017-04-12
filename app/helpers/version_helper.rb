@@ -19,8 +19,8 @@ module VersionHelper
       "changed their prediction from “#{TitleTagPresenter.new(old_value).tag}”"
     when :withdrawn then
       "#{new_value ? 'withdrew' : 'republished'} the prediction"
-    when :private then
-      "made the prediction #{new_value ? 'private' : 'public'}"
+    when :visibility then
+      "made the prediction #{Visibility::VALUES.key(new_value).to_s.humanize.downcase}"
     end
   end
 end
