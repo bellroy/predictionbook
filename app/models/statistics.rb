@@ -84,7 +84,7 @@ class Statistics < BaseStatistics
     axis_labels = '1:|Confidence  (%)|3:|Accuracy'
     axis_labels_positions = '1,50|3,50'
 
-    'http://chart.apis.google.com/chart?' + [
+    'https://chart.apis.google.com/chart?' + [
       'cht=s', # scatterplot
       "chg=#{grid_lines}",
       "chds=#{data_ranges}",
