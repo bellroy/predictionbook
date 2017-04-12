@@ -3,7 +3,7 @@
   <h2>Edit this Prediction</h2>
   <%= f.text_area :description, :label => 'What do you think will happen?' %>
   <%= f.text_field :deadline_text, :label => 'When you will know?', :preview => true %>
-  <%= f.select_field :visibility, raw(Visibility::VALUES.keys.map { |key| "<option value=\"#{key}\">#{key.to_s.humanize}</option>" }.join), label: 'Visibility' %>
+  <%= f.select_field :visibility, raw(Visibility.select_options_html(@prediction.visibility)), label: 'Visibility' %>
   <p class='note'><%= render :partial => 'private_note' %></p>
   <%= f.submit 'Save changes' %>
 </div>

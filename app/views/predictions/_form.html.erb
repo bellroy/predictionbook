@@ -9,7 +9,7 @@
     <%- unless !current_user.present? || current_user.has_email? -%>
     <p>(Email will not be sent until you <%= link_to "set your email", settings_user_path(current_user) %>)</p>
     <%- end -%>
-    <%= f.select_field :visibility, raw(Visibility::VALUES.map { |key_value_pair| "<option value=\"#{key_value_pair.first}\" #{@prediction.visibility == key_value_pair.first.to_s ? "selected" : ''}>#{key_value_pair.first.to_s.humanize}</option>" }.join), label: 'Visibility' %>
+    <%= f.select_field :visibility, raw(Visibility.select_options_html(@prediction.visibility)), label: 'Visibility' %>
     <p class='note'><%= render :partial => 'private_note' %></p>
     <%= f.submit 'Lock it in!' %>
   </div>

@@ -3,7 +3,7 @@
   <%= f.text_field :name %>
   <%= f.text_field :email %>
   <%= f.timezone_field :timezone %>
-  <%= f.select_field :visibility_default, raw(Visibility::VALUES.map { |key_value_pair| "<option value=\"#{key_value_pair.first}\" #{@user.visibility_default == key_value_pair.first.to_s ? "selected" : ''}>#{key_value_pair.first.to_s.humanize}</option>" }.join), label: 'By default, create predictions that are' %>
+  <%= f.select_field :visibility_default, raw(Visibility.select_options_html(@user.visibility_default)), label: 'By default, create predictions that are' %>
   <p class='note'><%= render :partial => 'predictions/private_note' %></p>
   <%= f.submit 'Change details' %>
 <% end -%>
