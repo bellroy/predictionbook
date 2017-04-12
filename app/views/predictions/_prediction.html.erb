@@ -1,6 +1,7 @@
  <li class="prediction <%= prediction.readable_outcome %>">
    <p>
       <%- if prediction.visible_to_creator? -%><span class='status private'>[private]</span><%- end -%>
+      <%- if prediction.visible_to_group? -%><span class='status private'>[<%= link_to prediction.group.name, group_path(prediction.group) %>]</span><%- end -%>
       <%= render :partial => 'predictions/simple', :locals => {:prediction => prediction} %>
    </p>
    <p class='description'>

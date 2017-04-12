@@ -77,7 +77,7 @@ class UsersController < ApplicationController
   end
 
   def user_must_be_current_user
-    render status: :forbidden unless user_is_current_user?
+    head :forbidden unless user_is_current_user?
   end
 
   private
@@ -94,6 +94,14 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:login, :email, :name, :timezone, :visibility_default, :api_token)
+    permitted_params = params.require(:user).permit(:login, :email, :name, :timezone,
+                                                    :visibility_default, :api_token)
+    visibility_default = permitted_params[:visibility_default]
+    if visibility_default.present?
+      attributes = Visibility.option_to_attributes(visibility_default)
+      permitted_params[:visibility_default] = attributes[:visibility]
+      permitted_params[:group_default_id] = attributes[:group_id]
+    end
+    permitted_params
   end
 end

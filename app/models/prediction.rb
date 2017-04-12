@@ -1,6 +1,8 @@
 class Prediction < ActiveRecord::Base
   has_many :versions, autosave: true, class_name: PredictionVersion
 
+  belongs_to :group
+
   enum visibility: Visibility::VALUES
 
   before_save :create_version_if_required

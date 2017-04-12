@@ -183,6 +183,17 @@ describe PredictionsController do
           end
         end
 
+        context 'when prediction privacy is group' do
+          let(:params) { { visibility: 'visible_to_group_345' } }
+
+          specify do
+            expect(Prediction).to receive(:create!)
+              .with(hash_including('visibility' => 'visible_to_group', 'group_id' => 345))
+              .and_return(prediction)
+            create
+          end
+        end
+
         context 'when prediction privacy is not provided' do
           let(:params) { { visibility: logged_in_user.visibility_default } }
 

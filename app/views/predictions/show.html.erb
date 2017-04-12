@@ -1,5 +1,5 @@
 <h1 class="<%= @prediction.readable_outcome %>">
-  <% if current_user && current_user.authorized_for(@prediction) %>
+  <% if current_user && current_user.authorized_for(@groups, @prediction) %>
     <%= link_to 'Edit', edit_prediction_path(@prediction), :class => 'edit' %>
   <% end %>
   <%= TitleTagPresenter.new(@prediction.description).tag %>
@@ -15,6 +15,11 @@
 <%- if @prediction.visible_to_creator? -%>
   <p class='note'>
     This prediction is <strong>private</strong>. <%= render :partial => 'predictions/private_note' %>
+  </p>
+<%- end -%>
+<%- if @prediction.visible_to_group? -%>
+  <p class='note'>
+    This prediction is only visible to members of the <strong><%= link_to @prediction.group.name, group_path(@prediction.group) %></strong> group.
   </p>
 <%- end -%>
 

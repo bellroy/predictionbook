@@ -80,13 +80,12 @@ class User < ActiveRecord::Base
     !!predictions.index(&:due_for_judgement?)
   end
 
-  def authorized_for(prediction, action = 'show')
+  def authorized_for(user_groups, prediction, action = 'show')
     is_creator = self == prediction.creator
-    if %w[index show].include?(action)
-      prediction.visible_to_everyone? || (is_creator && prediction.visible_to_creator?) || admin?
-    else
-      is_creator
-    end
+    return true if is_creator || admin?
+    return false unless %w[index show].include?(action)
+    prediction.visible_to_everyone? ||
+      (prediction.visible_to_group? && user_groups.include?(prediction.group))
   end
 
   def admin?

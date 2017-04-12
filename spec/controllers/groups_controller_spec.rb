@@ -32,6 +32,7 @@ describe GroupsController do
         specify do
           index
           expect(response).to render_template :index
+          expect(assigns[:groups]).not_to be_nil
         end
       end
     end
@@ -57,6 +58,8 @@ describe GroupsController do
       specify do
         show
         expect(response).to render_template :show
+        expect(assigns[:group]).not_to be_nil
+        expect(assigns[:predictions]).not_to be_nil
       end
 
       context 'email does not match group' do

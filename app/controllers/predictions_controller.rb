@@ -12,7 +12,8 @@ class PredictionsController < ApplicationController
     @title = 'Make a Prediction'
     @statistics = current_user.try(:statistics)
     visibility = current_user.try(:visibility_default) || 0
-    @prediction = Prediction.new(creator: current_user, visibility: visibility)
+    group_id = current_user.try(:group_default_id)
+    @prediction = Prediction.new(creator: current_user, visibility: visibility, group_id: group_id)
   end
 
   def create
@@ -121,7 +122,7 @@ class PredictionsController < ApplicationController
   end
 
   def must_be_authorized_for_prediction
-    authorized = (current_user || User.new).authorized_for(@prediction, params[:action])
+    authorized = (current_user || User.new).authorized_for(@groups, @prediction, params[:action])
     showing_public_prediction = (params[:action] == 'show' && @prediction.visible_to_everyone?)
     notice = 'You are not authorized to perform that action'
     redirect_to(root_path, notice: notice) unless authorized || showing_public_prediction
@@ -133,6 +134,8 @@ class PredictionsController < ApplicationController
 
   def prediction_params
     result = params.require(:prediction).permit!
+    visibility = result[:visibility]
+    result.merge!(Visibility.option_to_attributes(visibility)) if visibility.present?
     if @prediction.nil?
       result[:visibility] = current_user.try(:visibility_default) unless result.key?(:visibility)
       result[:creator_id] = current_user.id
