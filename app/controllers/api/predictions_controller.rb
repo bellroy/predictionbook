@@ -44,9 +44,9 @@ module Api
     end
 
     def build_new_prediction
-      visible_to_creator = Visibility::VALUES[:visible_to_creator]
-      unless prediction_params[:visibility] == visible_to_creator && @user.present?
-        prediction_params[:visibility] = @user.visibility_default
+      permitted_params = prediction_params
+      if permitted_params[:visibility].nil? && @user.present?
+        permitted_params[:visibility] = @user.visibility_default
       end
 
       @prediction = Prediction.new(prediction_params.merge(creator: @user))
@@ -63,7 +63,12 @@ module Api
     end
 
     def prediction_params
-      params.require(:prediction).permit!
+      permitted_params = params.require(:prediction).permit!
+      if permitted_params[:private].present?
+        private_value = permitted_params.delete(:private)
+        permitted_params[:visibility] = 'visible_to_creator' if private_value
+      end
+      permitted_params
     end
   end
 end

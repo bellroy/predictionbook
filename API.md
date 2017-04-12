@@ -22,7 +22,7 @@ api_token                     | string  | A token that identifies a unique user
 prediction[description]       | string  | Your prediction statement
 prediction[deadline]          | date    | when it will/won't have happened
 prediction[initial_confidence]| integer | A probability assignment
-prediction[visibility]        | integer | 0 Public, 1 Private (optional, default public)
+prediction[visibility]        | string  | visible_to_everyone (default), visible_to_creator
 
 PUT http://predictionbook.com/api/predictions/:id
 
@@ -31,4 +31,4 @@ Parameter name                | Value   | Description
 api_token                     | string  | A token that identifies a unique user
 prediction[description]       | string  | Your prediction statement
 prediction[deadline]          | date    | When it will/won't have happened
-prediction[visibility]        | integer | 0 Public, 1 Private (optional, default public)
+prediction[visibility]        | string  | visible_to_everyone (default), visible_to_creator
