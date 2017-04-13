@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412121536) do
+ActiveRecord::Schema.define(version: 20170413060851) do
 
   create_table "credence_answers", force: :cascade do |t|
     t.integer  "credence_question_id", limit: 4
@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(version: 20170412121536) do
     t.string   "last_sign_in_ip",           limit: 255
     t.integer  "visibility_default",        limit: 4,   default: 0,     null: false
     t.integer  "group_default_id",          limit: 4
+    t.float    "score",                     limit: 24,  default: 1.0
   end
 
   add_index "users", ["api_token"], name: "index_users_on_api_token", using: :btree
