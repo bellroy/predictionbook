@@ -22,10 +22,10 @@ class Response < ActiveRecord::Base
   WAGER_CONDITION = 'confidence is not null'.freeze
   scope :wagers, -> { where(WAGER_CONDITION) }
 
-  scope :not_private, -> { joins(:prediction).where(predictions: { private: false }) }
+  scope :visible_to_everyone, -> { where(prediction: Prediction.visible_to_everyone) }
 
   def self.recent(limit: 100)
-    order(created_at: :desc).not_private.prefetch_joins.limit(limit)
+    order(created_at: :desc).visible_to_everyone.prefetch_joins.limit(limit)
   end
 
   def self.prefetch_joins

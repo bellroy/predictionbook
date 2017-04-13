@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   nillify_blank :email, :name
 
+  enum visibility_default: Visibility::VALUES
+
   delegate :image_url, to: :statistics, prefix: true
 
   validates :login, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false },
@@ -71,16 +73,19 @@ class User < ActiveRecord::Base
   end
 
   def has_email?
-    !email.blank?
+    email.present?
   end
 
   def has_overdue_judgements?
     !!predictions.index(&:due_for_judgement?)
   end
 
-  def authorized_for(prediction)
+  def authorized_for(user_groups, prediction, action = 'show')
     is_creator = self == prediction.creator
-    is_creator || (!prediction.private? && admin?)
+    return true if is_creator || admin?
+    return false unless %w[index show].include?(action)
+    prediction.visible_to_everyone? ||
+      (prediction.visible_to_group? && user_groups.include?(prediction.group))
   end
 
   def admin?

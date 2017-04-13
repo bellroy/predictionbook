@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511055641) do
+ActiveRecord::Schema.define(version: 20170412121536) do
 
   create_table "credence_answers", force: :cascade do |t|
     t.integer  "credence_question_id", limit: 4
@@ -67,6 +67,13 @@ ActiveRecord::Schema.define(version: 20160511055641) do
 
   add_index "credence_questions", ["text_id"], name: "index_credence_questions_on_text_id", unique: true, using: :btree
 
+  create_table "groups", force: :cascade do |t|
+    t.string   "name",          limit: 255, null: false
+    t.string   "email_domains", limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
   create_table "judgements", force: :cascade do |t|
     t.integer  "prediction_id", limit: 4
     t.integer  "user_id",       limit: 4
@@ -102,9 +109,9 @@ ActiveRecord::Schema.define(version: 20160511055641) do
     t.integer  "creator_id",    limit: 4
     t.string   "uuid",          limit: 255
     t.boolean  "withdrawn",                 default: false
-    t.boolean  "private",                   default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "visibility",    limit: 4,   default: 0,     null: false
   end
 
   create_table "predictions", force: :cascade do |t|
@@ -115,11 +122,13 @@ ActiveRecord::Schema.define(version: 20160511055641) do
     t.integer  "creator_id",  limit: 4
     t.string   "uuid",        limit: 255
     t.boolean  "withdrawn",               default: false
-    t.boolean  "private",                 default: false
     t.integer  "version",     limit: 4,   default: 1
+    t.integer  "visibility",  limit: 4,   default: 0,     null: false
+    t.integer  "group_id",    limit: 4
   end
 
   add_index "predictions", ["creator_id"], name: "index_predictions_on_creator_id", using: :btree
+  add_index "predictions", ["group_id"], name: "index_predictions_on_group_id", using: :btree
   add_index "predictions", ["uuid"], name: "index_predictions_on_uuid", unique: true, using: :btree
 
   create_table "responses", force: :cascade do |t|
@@ -145,7 +154,6 @@ ActiveRecord::Schema.define(version: 20160511055641) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "timezone",                  limit: 255
-    t.boolean  "private_default",                       default: false
     t.boolean  "admin",                                 default: false, null: false
     t.string   "api_token",                 limit: 255
     t.string   "encrypted_password",        limit: 255, default: "",    null: false
@@ -157,10 +165,13 @@ ActiveRecord::Schema.define(version: 20160511055641) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",        limit: 255
     t.string   "last_sign_in_ip",           limit: 255
+    t.integer  "visibility_default",        limit: 4,   default: 0,     null: false
+    t.integer  "group_default_id",          limit: 4
   end
 
   add_index "users", ["api_token"], name: "index_users_on_api_token", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["group_default_id"], name: "index_users_on_group_default_id", using: :btree
   add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
@@ -172,4 +183,6 @@ ActiveRecord::Schema.define(version: 20160511055641) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "predictions", "groups"
+  add_foreign_key "users", "groups", column: "group_default_id"
 end

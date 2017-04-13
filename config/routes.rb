@@ -9,6 +9,8 @@ PredictionBook::Application.routes.draw do
     resources :deadline_notifications
   end
 
+  resources :groups, only: [:index, :show]
+
   resources :deadline_notifications
   resources :response_notifications
 

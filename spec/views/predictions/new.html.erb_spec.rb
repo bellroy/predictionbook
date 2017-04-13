@@ -7,6 +7,7 @@ describe 'predictions/new' do
   before(:each) do
     assign(:prediction, prediction)
     assign(:statistics, Statistics.new)
+    assign(:groups, [])
     allow(view).to receive(:user_statistics_cache_key).and_return 'stats'
     allow(view).to receive(:current_user).and_return(user)
   end
@@ -52,22 +53,10 @@ describe 'predictions/new' do
     end
   end
 
-  describe '(check box for private)' do
+  describe '(select for visibility)' do
     it 'is present' do
       render
-      expect(rendered).to have_field('prediction[private]')
-    end
-
-    it 'is checked when user private_default is true' do
-      expect(prediction).to receive(:private).and_return true
-      render
-      expect(rendered).to have_checked_field('prediction[private]')
-    end
-
-    it 'is not checked when user private_default is false' do
-      expect(prediction).to receive(:private).and_return false
-      render
-      expect(rendered).to_not have_checked_field('prediction[private]')
+      expect(rendered).to have_field('prediction[visibility]')
     end
   end
 

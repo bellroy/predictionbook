@@ -42,18 +42,18 @@ describe VersionHelper do
       it { is_expected.to eq 'withdrew the prediction' }
     end
 
-    context 'private is changing' do
-      let(:field) { :private }
-      let(:old_value) { !new_value }
+    context 'visibility is changing' do
+      let(:field) { :visibility }
+      let(:old_value) { 0 }
 
       context 'made private' do
-        let(:new_value) { true }
-        it { is_expected.to eq 'made the prediction private' }
+        let(:new_value) { 1 }
+        it { is_expected.to eq 'made the prediction visible to creator' }
       end
 
-      context 'made public' do
-        let(:new_value) { false }
-        it { is_expected.to eq 'made the prediction public' }
+      context 'made visible to group' do
+        let(:new_value) { 2 }
+        it { is_expected.to eq 'made the prediction visible to group' }
       end
     end
   end

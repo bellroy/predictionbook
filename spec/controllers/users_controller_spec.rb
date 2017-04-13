@@ -33,7 +33,7 @@ describe UsersController do
     context 'logged in user and target user are different' do
       specify do
         predictions = class_double(Prediction)
-        expect(relation).to receive(:not_private).and_return predictions
+        expect(relation).to receive(:visible_to_everyone).and_return predictions
         paged_predictions = class_double(Prediction)
         expect(predictions).to receive(:page).and_return(paged_predictions)
 
@@ -100,6 +100,34 @@ describe UsersController do
 
       specify do
         expect { settings }.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+  end
+
+  describe 'PUT update' do
+    subject(:update) { put :update, id: user_id, user: user_params }
+
+    let(:group) { FactoryGirl.create(:group) }
+    let(:user_params) { { visibility_default: "visible_to_group_#{group.id}" } }
+
+    context 'not logged in user' do
+      let(:user_id) { FactoryGirl.create(:user).id }
+
+      specify do
+        update
+        expect(response).to be_forbidden
+      end
+    end
+
+    context 'logged in user' do
+      let(:user_id) { logged_in_user.id }
+
+      specify do
+        update
+        expect(response).to render_template :show
+        logged_in_user.reload
+        expect(logged_in_user.visibility_default).to eq 'visible_to_group'
+        expect(logged_in_user.group_default_id).to eq group.id
       end
     end
   end

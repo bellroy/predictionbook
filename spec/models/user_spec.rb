@@ -7,7 +7,7 @@ describe User do
   end
 
   it 'has a private_default field which defaults to false' do
-    expect(User.new.private_default).to be false
+    expect(User.new.visible_to_everyone?).to be true
   end
 
   it 'has an email with name' do
@@ -44,23 +44,49 @@ describe User do
   end
 
   describe 'authorized_for' do
-    it 'is true for predictions created by self' do
-      @user = User.new
-      @prediction = @user.predictions.build(creator: @user)
-      expect(@user.authorized_for(@prediction)).to eq true
+    subject { user.authorized_for(groups, prediction, action) }
+
+    let(:user) { User.new }
+    let(:creator_user) { user }
+    let(:groups) { [] }
+    let(:action) { 'edit' }
+    let(:prediction) do
+      user.predictions.build(creator: creator_user, visibility: :visible_to_creator)
     end
-    it 'is false for predictions not created by self' do
-      @user = User.new
-      @user2 = User.new
-      @prediction = @user2.predictions.build(creator: @user2)
-      expect(@user.authorized_for(@prediction)).to eq false
-    end
-    it 'is true for admins' do
-      @user = User.new
-      expect(@user).to receive(:admin?).and_return(true)
-      @user2 = User.new
-      @prediction = @user.predictions.build(creator: @user2)
-      expect(@user.authorized_for(@prediction)).to eq true
+
+    it { is_expected.to be true }
+
+    context 'not created by user' do
+      let(:creator_user) { User.new }
+
+      it { is_expected.to be false }
+
+      context 'user is admin' do
+        let(:user) { User.new(login: 'matt') }
+        let(:creator_user) { User.new }
+
+        it { is_expected.to be true }
+      end
+
+      context 'prediction in group' do
+        let(:group) { FactoryGirl.create(:group) }
+        let(:prediction) do
+          user.predictions.build(creator: creator_user, visibility: :visible_to_group, group: group)
+        end
+        let(:action) { 'show' }
+
+        context 'user in group' do
+          let(:groups) { [group] }
+
+          it { is_expected.to be true }
+        end
+
+        context 'user not in group' do
+          let(:groups) { [FactoryGirl.create(:group)] }
+
+          it { is_expected.to be false }
+        end
+      end
     end
   end
 end
