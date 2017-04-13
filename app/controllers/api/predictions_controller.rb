@@ -65,6 +65,7 @@ module Api
 
     def prediction_params
       permitted_params = params.require(:prediction).permit!
+      # Handle previous version of the API that uses a private flag instead of visibility
       if permitted_params[:private].present?
         private_value = permitted_params.delete(:private)
         permitted_params[:visibility] = 'visible_to_creator' if private_value
