@@ -21,7 +21,7 @@ describe Api::PredictionJudgementsController, type: :controller do
         expect(prediction).to receive(:judge!).with('right', user)
 
         expect(User).to receive(:find_by).with(api_token: 'real-token').and_return(user)
-        expect(user).to receive(:authorized_for).with(prediction).and_return(true)
+        expect(user).to receive(:authorized_for).with([], prediction).and_return(true)
       end
 
       it 'judges the prediction' do

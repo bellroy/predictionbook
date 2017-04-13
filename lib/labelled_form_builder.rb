@@ -1,4 +1,11 @@
 class LabelledFormBuilder < ActionView::Helpers::FormBuilder
+  def select_field(method, html_options, options = {})
+    options = add_input_class(options)
+    labelling_surround(method, options) do |sub_method, sub_options|
+      select(sub_method, html_options, sub_options)
+    end
+  end
+
   def check_box(method, options = {})
     labelling_surround(method, options.merge(label_containing: true)) do |sub_method, sub_options|
       super(sub_method, sub_options)

@@ -94,4 +94,9 @@ FactoryGirl.define do
     sequence(:value)
     sequence(:rank)
   end
+
+  factory :group do
+    name { FFaker::Name.name }
+    email_domains { nil }
+  end
 end

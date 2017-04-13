@@ -6,13 +6,16 @@ class PredictionsController < ApplicationController
   before_action :must_be_authorized_for_prediction, only: [:withdraw, :edit, :update, :show]
   before_action :ensure_statistics, only: [:index]
 
+  skip_before_action :assign_groups, only: [:sitemap]
+
   cache_sweeper :statistics_sweeper, only: :judge
 
   def new
     @title = 'Make a Prediction'
     @statistics = current_user.try(:statistics)
-    privacy = current_user.try(:private_default) || false
-    @prediction = Prediction.new(creator: current_user, private: privacy)
+    visibility = current_user.try(:visibility_default) || 0
+    group_id = current_user.try(:group_default_id)
+    @prediction = Prediction.new(creator: current_user, visibility: visibility, group_id: group_id)
   end
 
   def create
@@ -40,9 +43,9 @@ class PredictionsController < ApplicationController
   end
 
   def home
-    privacy = false
-    privacy = current_user.private_default if current_user
-    @prediction = Prediction.new(creator: current_user, private: privacy)
+    visibility = current_user.try(:visibility_default) || 'visible_to_everyone'
+    group_id = current_user.try(:group_default_id)
+    @prediction = Prediction.new(creator: current_user, visibility: visibility, group_id: group_id)
     @responses = Response.recent.limit(25)
     @title = 'How sure are you?'
     @filter = 'popular'
@@ -53,6 +56,15 @@ class PredictionsController < ApplicationController
   def recent
     # TODO: remove this in a month or so
     redirect_to predictions_path, status: :moved_permanently
+  end
+
+  MAXIMUM_ENTRIES_IN_SITEMAP = 50_000
+
+  def sitemap
+    @page = params[:page]
+    # Grabbing IDs & updated_at of all non-private predictions:
+    @predictions = Prediction.order(created_at: :desc).visible_to_everyone.page(@page)
+      .per(MAXIMUM_ENTRIES_IN_SITEMAP).pluck(:id, :updated_at)
   end
 
   def index
@@ -122,8 +134,8 @@ class PredictionsController < ApplicationController
   end
 
   def must_be_authorized_for_prediction
-    authorized = (current_user || User.new).authorized_for(@prediction)
-    showing_public_prediction = (params[:action] == 'show' && !@prediction.private?)
+    authorized = (current_user || User.new).authorized_for(@groups, @prediction, params[:action])
+    showing_public_prediction = (params[:action] == 'show' && @prediction.visible_to_everyone?)
     notice = 'You are not authorized to perform that action'
     redirect_to(root_path, notice: notice) unless authorized || showing_public_prediction
   end
@@ -134,8 +146,10 @@ class PredictionsController < ApplicationController
 
   def prediction_params
     result = params.require(:prediction).permit!
+    visibility = result[:visibility]
+    result.merge!(Visibility.option_to_attributes(visibility)) if visibility.present?
     if @prediction.nil?
-      result[:private] = current_user.private_default unless result.key?(:private)
+      result[:visibility] = current_user.try(:visibility_default) unless result.key?(:visibility)
       result[:creator_id] = current_user.id
     end
     result

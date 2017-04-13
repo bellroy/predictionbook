@@ -9,6 +9,8 @@ PredictionBook::Application.routes.draw do
     resources :deadline_notifications
   end
 
+  resources :groups, only: [:index, :show]
+
   resources :deadline_notifications
   resources :response_notifications
 
@@ -36,6 +38,11 @@ PredictionBook::Application.routes.draw do
   end
   resources :credence_games, only: [:show, :destroy]
   resources :credence_game_responses, only: :update
+
+  # Due to rules around sitemap locations and allowed paths all sitemaps are at the root:
+  resources :sitemaps, only: [:index], path: "sitemap"
+  get "/static-sitemap" => "sitemaps#static", as: :static_sitemap
+  get "/predictions-sitemap:page" => "predictions#sitemap", as: :predictions_sitemap
 
   get '/happenstance' => 'predictions#happenstance', as: :happenstance
 

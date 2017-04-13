@@ -74,6 +74,40 @@ describe Api::PredictionsController, type: :controller do
         specify { expect(response).to_not be_success }
         specify { expect(response.body).to include('a probability is between') }
       end
+
+      context 'with new visibility' do
+        let(:prediction_params) do
+          {
+            description: 'The world will end tomorrow!',
+            deadline: 1.day.ago,
+            initial_confidence: '100',
+            visibility: 'visible_to_creator'
+          }
+        end
+
+        before { post :create, prediction: prediction_params, api_token: user.api_token }
+
+        specify do
+          expect(Prediction.last.visible_to_creator?).to be true
+        end
+      end
+
+      context 'with old private flag' do
+        let(:prediction_params) do
+          {
+            description: 'The world will end tomorrow!',
+            deadline: 1.day.ago,
+            initial_confidence: '100',
+            private: true
+          }
+        end
+
+        before { post :create, prediction: prediction_params, api_token: user.api_token }
+
+        specify do
+          expect(Prediction.last.visible_to_creator?).to be true
+        end
+      end
     end
 
     context 'with invalid API token' do
