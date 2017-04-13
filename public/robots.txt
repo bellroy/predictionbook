@@ -1,2 +1,3 @@
 User-Agent: *
 Disallow: /users/
+Sitemap: http://predictionbook.com/sitemap.xml
