@@ -6,6 +6,8 @@ class PredictionsController < ApplicationController
   before_action :must_be_authorized_for_prediction, only: [:withdraw, :edit, :update, :show]
   before_action :ensure_statistics, only: [:index]
 
+  skip_before_action :assign_groups, only: [:sitemap]
+
   cache_sweeper :statistics_sweeper, only: :judge
 
   def new
@@ -41,8 +43,9 @@ class PredictionsController < ApplicationController
   end
 
   def home
-    visibility = current_user.try(:visibility_default) || 0
-    @prediction = Prediction.new(creator: current_user, visibility: visibility)
+    visibility = current_user.try(:visibility_default) || 'visible_to_everyone'
+    group_id = current_user.try(:group_default_id)
+    @prediction = Prediction.new(creator: current_user, visibility: visibility, group_id: group_id)
     @responses = Response.recent.limit(25)
     @title = 'How sure are you?'
     @filter = 'popular'
@@ -55,11 +58,13 @@ class PredictionsController < ApplicationController
     redirect_to predictions_path, status: :moved_permanently
   end
 
-  MAXIMUM_ENTRIES_IN_SITEMAP = 50000
+  MAXIMUM_ENTRIES_IN_SITEMAP = 50_000
+
   def sitemap
     @page = params[:page]
     # Grabbing IDs & updated_at of all non-private predictions:
-    @predictions = Prediction.order(created_at: :desc).not_private.page(@page).per(MAXIMUM_ENTRIES_IN_SITEMAP).pluck(:id, :updated_at)
+    @predictions = Prediction.order(created_at: :desc).visible_to_everyone.page(@page)
+      .per(MAXIMUM_ENTRIES_IN_SITEMAP).pluck(:id, :updated_at)
   end
 
   def index

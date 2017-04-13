@@ -31,11 +31,12 @@ class ApplicationController < ActionController::Base
   private
 
   def force_change_password
+    return unless current_user.present? && request.format.html?
     notice = 'PredictionBook has recently undergone a major upgrade. As part of the upgrade, our ' \
              'authentication system has changed. We are currently transitioning users across to ' \
              'use the new authentication system. You will need to change your password and ' \
              'provide an email address if you have not already.'
-    force_pwd_change = current_user.present? && !current_user.devise_password_specified?
+    force_pwd_change = !current_user.devise_password_specified?
     redirecting = request.path == edit_user_registration_path
     updating_password = request.path == '/users' && params['_method'] == 'put'
     logging_out = request.path == destroy_user_session_path
