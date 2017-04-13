@@ -36,19 +36,18 @@ module Api
     private
 
     def authorize_to_see_prediction
-      raise UnauthorizedRequest unless @prediction.public? || @user.authorized_for(@prediction)
+      raise UnauthorizedRequest unless @prediction.visible_to_everyone? ||
+                                       @user.authorized_for(@groups, @prediction)
     end
 
     def authorize_to_update_prediction
-      raise UnauthorizedRequest unless @user.authorized_for(@prediction)
+      raise UnauthorizedRequest unless @user.authorized_for(@groups, @prediction)
     end
 
     def build_new_prediction
-      unless prediction_params[:private] && @user
-        prediction_params[:private] = @user.private_default
-      end
-
-      @prediction = Prediction.new(prediction_params.merge(creator: @user))
+      permitted_params = prediction_params
+      permitted_params[:visibility] ||= @user.try(:visibility_default)
+      @prediction = Prediction.new(permitted_params.merge(creator: @user))
     end
 
     def build_predictions
@@ -62,7 +61,13 @@ module Api
     end
 
     def prediction_params
-      params.require(:prediction).permit!
+      permitted_params = params.require(:prediction).permit!
+      # Handle previous version of the API that uses a private flag instead of visibility
+      if permitted_params[:private].present?
+        private_value = permitted_params.delete(:private)
+        permitted_params[:visibility] = 'visible_to_creator' if private_value
+      end
+      permitted_params
     end
   end
 end

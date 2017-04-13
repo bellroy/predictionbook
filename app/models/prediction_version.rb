@@ -1,6 +1,8 @@
 class PredictionVersion < ActiveRecord::Base
   belongs_to :prediction
 
+  enum visibility: Visibility::VALUES
+
   def self.create_from_current_prediction_if_required(prediction)
     return unless new_version_required?(prediction)
     new_version = prediction.versions.build
@@ -13,7 +15,7 @@ class PredictionVersion < ActiveRecord::Base
   end
 
   def self.versioned_prediction_columns
-    [:description, :deadline, :withdrawn, :private]
+    %i[description deadline withdrawn visibility]
   end
 
   def self.new_version_required?(prediction)

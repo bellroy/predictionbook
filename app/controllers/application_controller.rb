@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
 
-  before_action :set_timezone, :clear_return_to, :login_via_token
+  before_action :set_timezone, :clear_return_to, :login_via_token, :assign_groups
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :force_change_password
 
@@ -31,11 +31,12 @@ class ApplicationController < ActionController::Base
   private
 
   def force_change_password
+    return unless current_user.present? && request.format.html?
     notice = 'PredictionBook has recently undergone a major upgrade. As part of the upgrade, our ' \
              'authentication system has changed. We are currently transitioning users across to ' \
              'use the new authentication system. You will need to change your password and ' \
              'provide an email address if you have not already.'
-    force_pwd_change = current_user.present? && !current_user.devise_password_specified?
+    force_pwd_change = !current_user.devise_password_specified?
     redirecting = request.path == edit_user_registration_path
     updating_password = request.path == '/users' && params['_method'] == 'put'
     logging_out = request.path == destroy_user_session_path
@@ -47,6 +48,14 @@ class ApplicationController < ActionController::Base
     user_timezone = current_user.try(:timezone)
     Time.zone = user_timezone.blank? ? 'UTC' : user_timezone
     Chronic.time_class = Time.zone
+  end
+
+  def assign_groups
+    @groups = if current_user.nil?
+                []
+              else
+                Group.all.select { |group| group.user_is_a_member?(current_user) }
+              end
   end
 
   def clear_return_to

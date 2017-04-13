@@ -3,7 +3,7 @@
   <%= f.text_field :name %>
   <%= f.text_field :email %>
   <%= f.timezone_field :timezone %>
-  <%= f.check_box :private_default, :label => 'Keep my predictions private by default' %>
+  <%= f.select_field :visibility_default, raw(Visibility.select_options_html(@groups, @user.visibility_default, @user.group_default_id)), label: 'By default, create predictions that are' %>
   <p class='note'><%= render :partial => 'predictions/private_note' %></p>
   <%= f.submit 'Change details' %>
 <% end -%>
