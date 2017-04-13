@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @group = @groups.find { |group| group.id == params[:id] }
+    @group = @groups.find { |group| group.id == params[:id].to_i }
     raise ActionController::RoutingError, 'Not Found' if @group.nil?
     @predictions = Prediction.where(group: @group).page(params[:page])
   end
