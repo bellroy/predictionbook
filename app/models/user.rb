@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable,
-         :validatable
+         :validatable, :confirmable
 
   has_many :responses
   delegate :wagers, to: :responses

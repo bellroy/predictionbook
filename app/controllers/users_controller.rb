@@ -12,8 +12,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update_attributes(user_params)
+    @user.assign_attributes(user_params)
     if @user.valid?
+      @user.save!
       show
       render action: :show
     else

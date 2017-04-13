@@ -27,6 +27,7 @@ FactoryGirl.define do
     password_confirmation { 'password' }
     api_token { 'api_token' }
     timezone { 'Melbourne' }
+    confirmed_at { 1.day.ago }
   end
 
   factory :deadline_notification do
