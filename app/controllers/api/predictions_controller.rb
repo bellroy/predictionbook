@@ -46,11 +46,8 @@ module Api
 
     def build_new_prediction
       permitted_params = prediction_params
-      if permitted_params[:visibility].nil? && @user.present?
-        permitted_params[:visibility] = @user.visibility_default
-      end
-
-      @prediction = Prediction.new(prediction_params.merge(creator: @user))
+      permitted_params[:visibility] ||= @user.try(:visibility_default)
+      @prediction = Prediction.new(permitted_params.merge(creator: @user))
     end
 
     def build_predictions
