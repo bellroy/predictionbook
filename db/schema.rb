@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413025056) do
+ActiveRecord::Schema.define(version: 20170419231251) do
 
   create_table "credence_answers", force: :cascade do |t|
     t.integer  "credence_question_id", limit: 4
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 20170413025056) do
   add_index "predictions", ["creator_id"], name: "index_predictions_on_creator_id", using: :btree
   add_index "predictions", ["group_id"], name: "index_predictions_on_group_id", using: :btree
   add_index "predictions", ["uuid"], name: "index_predictions_on_uuid", unique: true, using: :btree
+  add_index "predictions", ["visibility"], name: "index_predictions_on_visibility", using: :btree
 
   create_table "responses", force: :cascade do |t|
     t.integer  "prediction_id", limit: 4
