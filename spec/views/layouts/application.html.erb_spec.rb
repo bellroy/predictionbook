@@ -24,8 +24,8 @@ describe 'layouts/application.html.erb' do
     end
 
     it 'should show link to username' do
-      expect(view).to receive(:show_user)
       render
+      expect(rendered).to have_link('Your profile', href: user_path(user))
     end
 
     it 'should show link to settings page' do
