@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   end
 
   def lookup_user
-    id_param = params[:id]
+    id_param = UserLogin.new(params[:id]).to_s
     @user = User.find_by(login: id_param) || User.find_by(id: id_param)
     if !@user && params[:action] == 'statistics'
       @user = User.find_by(api_token: id_param)
