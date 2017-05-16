@@ -1,8 +1,8 @@
 <h1 class="<%= @prediction.readable_outcome %>">
   <% if current_user && current_user.authorized_for(@groups, @prediction) %>
-    <%= link_to 'Edit', edit_prediction_path(@prediction), :class => 'edit' %>
+    <%= link_to 'Edit', @edit_path, :class => 'edit' %>
   <% end %>
-  <%= TitleTagPresenter.new(@prediction.description).tag %>
+  <%= TitleTagPresenter.new(@prediction.description_with_group).tag %>
 </h1>
 
 <p>

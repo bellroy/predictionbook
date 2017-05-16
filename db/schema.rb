@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419231251) do
+ActiveRecord::Schema.define(version: 20170508115333) do
 
   create_table "credence_answers", force: :cascade do |t|
     t.integer  "credence_question_id", limit: 4
@@ -101,6 +101,12 @@ ActiveRecord::Schema.define(version: 20170419231251) do
   add_index "notifications", ["prediction_id"], name: "index_deadline_notifications_on_prediction_id", using: :btree
   add_index "notifications", ["user_id"], name: "index_deadline_notifications_on_user_id", using: :btree
 
+  create_table "prediction_groups", force: :cascade do |t|
+    t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
   create_table "prediction_versions", force: :cascade do |t|
     t.integer  "prediction_id", limit: 4
     t.integer  "version",       limit: 4
@@ -115,20 +121,22 @@ ActiveRecord::Schema.define(version: 20170419231251) do
   end
 
   create_table "predictions", force: :cascade do |t|
-    t.string   "description", limit: 255
+    t.string   "description",         limit: 255
     t.datetime "deadline"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "creator_id",  limit: 4
-    t.string   "uuid",        limit: 255
-    t.boolean  "withdrawn",               default: false
-    t.integer  "version",     limit: 4,   default: 1
-    t.integer  "visibility",  limit: 4,   default: 0,     null: false
-    t.integer  "group_id",    limit: 4
+    t.integer  "creator_id",          limit: 4
+    t.string   "uuid",                limit: 255
+    t.boolean  "withdrawn",                       default: false
+    t.integer  "version",             limit: 4,   default: 1
+    t.integer  "visibility",          limit: 4,   default: 0,     null: false
+    t.integer  "group_id",            limit: 4
+    t.integer  "prediction_group_id", limit: 4
   end
 
   add_index "predictions", ["creator_id"], name: "index_predictions_on_creator_id", using: :btree
   add_index "predictions", ["group_id"], name: "index_predictions_on_group_id", using: :btree
+  add_index "predictions", ["prediction_group_id"], name: "index_predictions_on_prediction_group_id", using: :btree
   add_index "predictions", ["uuid"], name: "index_predictions_on_uuid", unique: true, using: :btree
   add_index "predictions", ["visibility"], name: "index_predictions_on_visibility", using: :btree
 
@@ -190,5 +198,6 @@ ActiveRecord::Schema.define(version: 20170419231251) do
   end
 
   add_foreign_key "predictions", "groups"
+  add_foreign_key "predictions", "prediction_groups"
   add_foreign_key "users", "groups", column: "group_default_id"
 end

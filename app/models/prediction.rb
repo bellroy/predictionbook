@@ -2,10 +2,12 @@ class Prediction < ActiveRecord::Base
   has_many :versions, autosave: true, class_name: PredictionVersion
 
   belongs_to :group
+  belongs_to :prediction_group
 
   enum visibility: Visibility::VALUES
 
   before_save :create_version_if_required
+  after_save :synchronise_group_visibility_and_deadline
 
   def create_version_if_required
     PredictionVersion.create_from_current_prediction_if_required(self)
@@ -22,7 +24,7 @@ class Prediction < ActiveRecord::Base
 
   scope :not_withdrawn, -> { where(withdrawn: false) }
 
-  DEFAULT_INCLUDES = %i[judgements responses creator].freeze
+  DEFAULT_INCLUDES = %i[judgements responses creator prediction_group].freeze
 
   def self.unjudged
     visible_to_everyone
@@ -108,7 +110,13 @@ class Prediction < ActiveRecord::Base
 
   attr_readonly :uuid, :creator_id
 
-  attr_accessor :initial_confidence
+  def initial_confidence
+    @initial_confidence || responses.first.try(:confidence)
+  end
+
+  def initial_confidence=(value)
+    @initial_confidence = value
+  end
 
   boolean_accessor_with_default(:notify_creator) { creator ? creator.notify_on_overdue? : false }
 
@@ -234,6 +242,12 @@ class Prediction < ActiveRecord::Base
     end
   end
 
+  def description_with_group
+    result = ''
+    result << "[#{prediction_group.description}] " if prediction_group_id.present?
+    result << description
+  end
+
   private
 
   def too_futuristic?
@@ -249,5 +263,12 @@ class Prediction < ActiveRecord::Base
   def retrodiction?
     return deadline < Time.now - 15.days unless deadline.nil?
     false
+  end
+
+  def synchronise_group_visibility_and_deadline
+    return if prediction_group_id.blank?
+    vis_int = Visibility::VALUES[visibility.to_sym]
+    predictions_in_group = Prediction.where(prediction_group_id: prediction_group_id)
+    predictions_in_group.update_all(deadline: deadline, visibility: vis_int, group_id: group_id)
   end
 end

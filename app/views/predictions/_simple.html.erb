@@ -1,2 +1,2 @@
-<span class='title'><%= link_to TitleTagPresenter.new(prediction.description).tag, prediction %></span>
+<span class='title'><%= link_to TitleTagPresenter.new(prediction.description_with_group).tag, prediction %></span>
 <%= render :partial => 'predictions/summary', :locals => {:prediction => prediction} -%>

@@ -20,6 +20,7 @@ PredictionBook::Application.routes.draw do
     get :preview, on: :collection
   end
 
+  resources :prediction_groups, only: [:show, :new, :create, :edit, :update]
   resources :predictions do
     collection do
       get :recent
