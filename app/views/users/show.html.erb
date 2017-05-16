@@ -3,6 +3,10 @@
   	<%= render :partial => 'statistics/show' %>
   <%- end -%>
 
+  <div id="score">
+    <h2>Calibration Score: <%= @user.score %></h2>
+  </div>
+
   <div id="predictions">
     <h2>Most recent predictions by <%= show_user(@user) %></h2>
     <ul>

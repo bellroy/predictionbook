@@ -105,6 +105,10 @@ class User < ActiveRecord::Base
       Devise::Encryptor.compare(self.class, encrypted_password, password)
   end
 
+  def reset_score
+    update(score: ScoreCalculator.calculate(wagers))
+  end
+
   protected
 
   def old_password_digest(password, salt)
