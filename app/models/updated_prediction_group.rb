@@ -33,7 +33,12 @@ class UpdatedPredictionGroup
   end
 
   def visibility_attributes
-    Visibility.option_to_attributes(params['visibility'])
+    visibility_params = params['visibility']
+    if visibility_params.present?
+      Visibility.option_to_attributes(visibility_params)
+    else
+      { visibility: creator.visibility_default, group_id: creator.group_default_id }
+    end
   end
 
   def deadline_text

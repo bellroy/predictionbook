@@ -5,6 +5,7 @@ gem 'jquery-rails'
 gem 'rails'
 gem 'rails-observers'
 # Models
+gem 'active_model_serializers'
 gem 'chronic'
 gem 'kaminari'
 gem 'uuidtools'

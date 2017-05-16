@@ -52,6 +52,7 @@ PredictionBook::Application.routes.draw do
   get '/healthcheck' => 'content#healthcheck'
   namespace :api do
     resources :predictions, format: :json
+    resources :prediction_groups, format: :json
     resources :prediction_judgements, only: [:create], format: :json
   end
 

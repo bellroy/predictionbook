@@ -38,7 +38,6 @@ class PredictionGroupsController < ApplicationController
   end
 
   def update
-    prediction_group_params = params[:prediction_group].to_unsafe_h
     @prediction_group = UpdatedPredictionGroup.new(@prediction_group,
                                                    current_user,
                                                    prediction_group_params).prediction_group
