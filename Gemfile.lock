@@ -71,7 +71,10 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    childprocess (0.6.3)
+      ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
+    cliver (0.3.2)
     coderay (1.1.1)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
@@ -176,6 +179,10 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
+    poltergeist (1.14.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      websocket-driver (>= 0.2.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -246,6 +253,7 @@ GEM
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
     ruby_dep (1.5.0)
+    rubyzip (1.2.1)
     sass (3.4.23)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -253,6 +261,10 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    selenium-webdriver (3.4.0)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     sentry-raven (2.4.0)
       faraday (>= 0.7.6, < 1.0)
     shellany (0.0.1)
@@ -293,6 +305,10 @@ GEM
     uuidtools (2.1.5)
     warden (1.2.7)
       rack (>= 1.0)
+    websocket (1.2.4)
+    websocket-driver (0.6.5)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
     whenever (0.9.7)
       chronic (>= 0.6.3)
     wirble (0.1.3)
@@ -326,6 +342,7 @@ DEPENDENCIES
   kaminari
   launchy
   mysql2
+  poltergeist
   pry
   pry-byebug
   rails
@@ -334,6 +351,7 @@ DEPENDENCIES
   rspec-activemodel-mocks
   rspec-rails
   sass-rails
+  selenium-webdriver
   sentry-raven
   shoulda-matchers
   simplecov
@@ -347,4 +365,4 @@ DEPENDENCIES
   wirble
 
 BUNDLED WITH
-   1.14.3
+   1.14.6
