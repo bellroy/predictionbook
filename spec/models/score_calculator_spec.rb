@@ -2,16 +2,19 @@ require 'spec_helper'
 
 describe ScoreCalculator do
   let(:user) { FactoryGirl.create(:user) }
+  let(:calculator) { described_class.new(user) }
 
   describe '.calculate' do
+    subject { calculator.calculate }
+
     context 'without any wagers' do
       let(:wagers) { Response.none }
 
-      it { expect(ScoreCalculator.calculate(wagers)).to eq(1) }
+      it { is_expected.to eq(1) }
     end
 
     context 'with a wager on an unjudged prediction' do
-      let!(:wager) { FactoryGirl.create(:response, confidence: 50) }
+      let!(:wager) { FactoryGirl.create(:response, confidence: 50, user: user) }
       let!(:judgment) do
         FactoryGirl.create(
           :judgement,
@@ -21,11 +24,11 @@ describe ScoreCalculator do
       end
       let!(:wagers) { wager.user.wagers }
 
-      it { expect(ScoreCalculator.calculate(wagers)).to eq(1) }
+      it { is_expected.to eq(1) }
     end
 
     context 'with a wager on a judged prediction' do
-      let!(:wager) { FactoryGirl.create(:response, confidence: 80) }
+      let!(:wager) { FactoryGirl.create(:response, confidence: 80, user: user) }
       let!(:judgment) do
         FactoryGirl.create(
           :judgement,
@@ -35,7 +38,7 @@ describe ScoreCalculator do
       end
       let!(:wagers) { wager.user.wagers }
 
-      it { expect(ScoreCalculator.calculate(wagers)).to eq(3.11) }
+      it { is_expected.to eq(3.11) }
     end
 
     context 'with multiple wagers on judged predictions' do
@@ -72,7 +75,7 @@ describe ScoreCalculator do
       end
       let!(:wagers) { user.wagers }
 
-      it { expect(ScoreCalculator.calculate(wagers)).to eq(0.69) }
+      it { is_expected.to eq(0.69) }
     end
   end
 end

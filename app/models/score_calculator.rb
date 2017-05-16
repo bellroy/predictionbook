@@ -3,40 +3,38 @@ class ScoreCalculator
   DEFAULT_SCORE = 1
   EPISILON = 0.005
 
-  attr_reader :wagers
-
-  def self.calculate(wagers)
-    new(wagers).calculate
+  def self.calculate(user)
+    new(user).calculate
   end
 
-  def initialize(wagers)
-    @wagers = wagers.includes(prediction: [:judgements])
+  def initialize(user)
+    self.user = user
   end
 
   def calculate
-    return DEFAULT_SCORE if scorable_wagers.count.zero?
-    score = 0
-
-    scorable_wagers.each do |wager|
-      if wager.correct?
-        score += Math.log(percent_confidence(wager))
-      else
-        score += Math.log(1 - percent_confidence(wager))
-      end
-    end
-
-    ((Math.log(0.5) * scorable_wagers.count) / score).round(DECIMAL_PLACES)
+    score, count = score_and_count
+    return DEFAULT_SCORE if score.nil? || score == 0.0
+    ((Math.log(0.5) * count) / score).round(DECIMAL_PLACES)
   end
 
   private
 
-  def percent_confidence(wager)
-    percent = wager.relative_confidence / 100.0
-    return 1 - EPISILON if percent == 1
-    percent
-  end
+  attr_accessor :user
 
-  def scorable_wagers
-    @scorable_wagers ||= wagers.reject { |wager| wager.unknown? }
+  def score_and_count
+    sql = <<-EOS
+      SELECT SUM(LOG(IF(j.outcome, (r.confidence / 100), (1 - (r.confidence / 100))))), COUNT(*)
+      FROM responses r
+      INNER JOIN predictions p ON p.id = r.prediction_id
+      INNER JOIN (
+        SELECT prediction_id, MAX(id) judgment_id FROM judgements GROUP BY prediction_id
+      ) most_recent_judgements ON p.id = most_recent_judgements.prediction_id
+      INNER JOIN judgements j ON most_recent_judgements.judgment_id = j.id
+      WHERE r.user_id = #{user.id}
+      AND r.confidence IS NOT NULL
+      AND (p.withdrawn IS NULL OR p.withdrawn = 0)
+    EOS
+
+    ActiveRecord::Base.connection.execute(sql).first
   end
 end

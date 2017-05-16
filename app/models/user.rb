@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
   end
 
   def reset_score
-    update(score: ScoreCalculator.calculate(wagers))
+    update(score: ScoreCalculator.calculate(self))
   end
 
   protected
