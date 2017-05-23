@@ -21,7 +21,7 @@ feature 'creating and modifying prediction groups', js: true do
     fill_in 'prediction_group[deadline_text]', with: '1 year from now'
     click_button 'Lock in your predictions!'
 
-    expect(page).to have_content "known on #{1.year.from_now.strftime('%Y-%m-%d')}"
+    expect(page).to have_content "known on #{1.year.from_now.getlocal.strftime('%Y-%m-%d')}"
 
     expect(page).to have_content '[I will do a thing in] Less than a day'
     expect(page).to have_content '( 1% confidence )'
