@@ -14,6 +14,35 @@ describe Prediction do
     expect(Prediction.new).to respond_to(:initial_confidence=)
   end
 
+  describe 'callbacks' do
+    let(:prediction_group) { FactoryGirl.create(:prediction_group, predictions: 2) }
+    let(:first_prediction) do
+      prediction = prediction_group.predictions.first
+      prediction.update_attributes(deadline: 1.day.ago, visibility: :visible_to_everyone)
+      prediction
+    end
+    let(:second_prediction) do
+      prediction = prediction_group.predictions.first
+      prediction.update_attributes(deadline: 2.days.ago, visibility: :visible_to_creator)
+      prediction
+    end
+
+    before do
+      first_prediction
+      second_prediction
+    end
+
+    it 'synchronises some properties for predictions in the same group' do
+      first_prediction.reload
+      expect(first_prediction.deadline).to be < 25.hours.ago
+      expect(first_prediction).to be_visible_to_creator
+
+      second_prediction.reload
+      expect(second_prediction.deadline).to be < 25.hours.ago
+      expect(second_prediction).to be_visible_to_creator
+    end
+  end
+
   describe 'validations' do
     describe 'with default values' do
       before(:each) do

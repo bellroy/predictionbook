@@ -1,0 +1,9 @@
+<h1>
+  Prediction group -
+  <%= @prediction_group.description %>
+  ...
+</h1>
+
+<% @prediction_group.predictions.each do |prediction| %>
+  <%= render partial: 'predictions/prediction', locals: { prediction: prediction } %>
+<% end %>

@@ -1,4 +1,4 @@
-<h2>Prediction: <%= @prediction.description %></h2>
+<h2>Prediction: <%= @prediction.description_with_group %></h2>
 <%- if @prediction.responses.size > 1 -%>
 <p>
   Since you created this prediction <%= pluralize(@prediction.responses.size - 1, 'other person') %>

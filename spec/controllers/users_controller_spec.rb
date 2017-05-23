@@ -54,16 +54,6 @@ describe UsersController do
       statistics
       expect(assigns[:statistics]).to eq :stats
     end
-
-    context 'called with user api token' do
-      let(:user_id) { target_user.api_token }
-
-      it 'delegates to the statistics to the user' do
-        expect_any_instance_of(User).to receive(:statistics).and_return(:stats)
-        statistics
-        expect(assigns[:statistics]).to eq :stats
-      end
-    end
   end
 
   describe 'users setting page' do
