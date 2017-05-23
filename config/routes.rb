@@ -54,6 +54,7 @@ PredictionBook::Application.routes.draw do
     resources :predictions, format: :json
     resources :prediction_groups, format: :json
     resources :prediction_judgements, only: [:create], format: :json
+    resources :current_users, only: :show
   end
 
   concern :paginatable do
