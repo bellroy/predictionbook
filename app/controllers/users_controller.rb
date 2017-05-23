@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     @statistics  = @user.statistics
     @predictions = @predictions.visible_to_everyone unless user_is_current_user?
     @predictions = @predictions.page(params[:page])
+    @score_calculator = ScoreCalculator.new(@user, start_date: 6.months.ago, interval: 1.month)
   end
 
   def update

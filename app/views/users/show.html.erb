@@ -4,7 +4,10 @@
   <%- end -%>
 
   <div id="score">
-    <h2>Calibration Score: <%= @user.score %></h2>
+    <h2>Calibration</h2>
+    <%- cache(user_calibration_scores_cache_key @user) do -%>
+    	<%= render :partial => 'calibration_scores/show' %>
+    <%- end -%>
   </div>
 
   <div id="predictions">

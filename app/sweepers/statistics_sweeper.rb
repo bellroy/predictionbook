@@ -8,7 +8,7 @@ class StatisticsSweeper < ActionController::Caching::Sweeper
 
     associated_users.each do |user|
       Rails.cache.clear(user_statistics_cache_key(user))
-      user.reset_score
+      Rails.cache.clear(user_calibration_scores_cache_key(user))
     end
 
     Rails.cache.clear(global_statistics_cache_key)

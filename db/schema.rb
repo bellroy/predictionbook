@@ -172,7 +172,6 @@ ActiveRecord::Schema.define(version: 20170419231251) do
     t.string   "unconfirmed_email",         limit: 255
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.float    "score",                     limit: 24,  default: 1.0
   end
 
   add_index "users", ["api_token"], name: "index_users_on_api_token", using: :btree

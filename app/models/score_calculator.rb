@@ -3,26 +3,46 @@ class ScoreCalculator
   DEFAULT_SCORE = 1
   EPISILON = 0.005
 
-  def self.calculate(user)
-    new(user).calculate
-  end
-
-  def initialize(user)
+  def initialize(user, start_date: 1.day.from_now, interval: 1.month)
     self.user = user
+    self.start_date = start_date
+    self.interval = interval
+    self.scores = {}
+    generate_scores
   end
 
-  def calculate
-    score, count = score_and_count
-    return DEFAULT_SCORE if score.nil? || score == 0.0
-    ((Math.log(0.5) * count) / score).round(DECIMAL_PLACES)
+  def score
+    scores.values.last
+  end
+
+  def time_series
+    scores
   end
 
   private
 
-  attr_accessor :user
+  attr_accessor :user, :start_date, :interval, :scores
 
-  def score_and_count
-    sql = <<-EOS
+  def generate_scores
+    end_date = start_date
+    while end_date < Time.zone.now || scores.empty?
+      scores[end_date] = score_for_date(end_date)
+      end_date += interval
+    end
+  end
+
+  def score_for_date(end_date)
+    sql = score_sql(end_date)
+    sum, count = ActiveRecord::Base.connection.execute(sql).first
+    if sum.blank?
+      DEFAULT_SCORE
+    else
+      ((Math.log(0.5) * count) / sum).round(DECIMAL_PLACES)
+    end
+  end
+
+  def score_sql(end_date)
+    <<-EOS
       SELECT SUM(LOG(IF(j.outcome, (r.confidence / 100), (1 - (r.confidence / 100))))), COUNT(*)
       FROM responses r
       INNER JOIN predictions p ON p.id = r.prediction_id
@@ -32,9 +52,8 @@ class ScoreCalculator
       INNER JOIN judgements j ON most_recent_judgements.judgment_id = j.id
       WHERE r.user_id = #{user.id}
       AND r.confidence IS NOT NULL
+      AND r.created_at <= '#{end_date.strftime('%Y-%m-%d')}'
       AND (p.withdrawn IS NULL OR p.withdrawn = 0)
     EOS
-
-    ActiveRecord::Base.connection.execute(sql).first
   end
 end
