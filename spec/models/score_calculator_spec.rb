@@ -184,8 +184,8 @@ describe ScoreCalculator do
         today = Time.zone.today
         expect(time_series).to eq(
           (today - 3.months) => 1,
-          (today - 2.months) => 1,
-          (today - 1.month) => 0.3,
+          (today - 2.months) => 0.3,
+          (today - 1.month) => 0.52,
           today => 0.69
         )
       end
