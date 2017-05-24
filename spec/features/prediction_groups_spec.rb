@@ -4,10 +4,6 @@ feature 'creating and modifying prediction groups', js: true do
   let(:user) { FactoryGirl.create(:user) }
   before { login_as user }
 
-  around do |example|
-    Timecop.travel(Time.utc(2017, 5, 24, 17)) { example.run }
-  end
-
   scenario 'making a new prediction group' do
     visit new_prediction_group_path
     fill_in 'prediction_group[description]', with: 'I will do a thing in'
@@ -25,7 +21,7 @@ feature 'creating and modifying prediction groups', js: true do
     fill_in 'prediction_group[deadline_text]', with: '1 year from now'
     click_button 'Lock in your predictions!'
 
-    expect(page).to have_content "known on #{1.year.from_now.getlocal.strftime('%Y-%m-%d')}"
+    expect(page).to have_content "known on #{1.year.from_now.utc.strftime('%Y-%m-%d')}"
 
     expect(page).to have_content '[I will do a thing in] Less than a day'
     expect(page).to have_content '( 1% confidence )'
