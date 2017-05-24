@@ -5,7 +5,7 @@ feature 'creating and modifying prediction groups', js: true do
   before { login_as user }
 
   around do |example|
-    Timecop.travel(Time.zone.local(2017, 5, 24, 17)) { example.run }
+    Timecop.travel(Time.utc(2017, 5, 24, 17)) { example.run }
   end
 
   scenario 'making a new prediction group' do
