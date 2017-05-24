@@ -73,6 +73,12 @@ GEM
     capistrano-git-submodule-strategy (0.1.23)
       capistrano (>= 3.1.0, < 3.7)
     capistrano-harrow (0.5.3)
+    capistrano-rails (1.2.3)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rvm (0.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
     capybara (2.14.0)
       addressable
       mime-types (>= 1.16)
@@ -142,7 +148,7 @@ GEM
     hirb (0.7.3)
     honeypot-captcha (0.0.3)
     htmlentities (4.3.4)
-    httparty (0.14.0)
+    httparty (0.15.5)
       multi_xml (>= 0.5.2)
     i18n (0.8.1)
     jquery-rails (4.3.1)
@@ -389,4 +395,4 @@ DEPENDENCIES
   wirble
 
 BUNDLED WITH
-   1.14.6
+   1.15.0
