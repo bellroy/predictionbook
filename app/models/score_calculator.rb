@@ -52,7 +52,7 @@ class ScoreCalculator
       INNER JOIN judgements j ON most_recent_judgements.judgment_id = j.id
       WHERE r.user_id = #{user.id}
       AND r.confidence IS NOT NULL
-      AND r.created_at <= '#{end_date.strftime('%Y-%m-%d')}'
+      AND cast(r.created_at as date) <= '#{end_date.strftime('%Y-%m-%d')}'
       AND (p.withdrawn IS NULL OR p.withdrawn = 0)
     EOS
   end
