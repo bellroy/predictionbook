@@ -4,6 +4,10 @@ feature 'creating and modifying prediction groups', js: true do
   let(:user) { FactoryGirl.create(:user) }
   before { login_as user }
 
+  around do |example|
+    Timecop.travel(Time.zone.local(2017, 5, 24, 17)) { example.run }
+  end
+
   scenario 'making a new prediction group' do
     visit new_prediction_group_path
     fill_in 'prediction_group[description]', with: 'I will do a thing in'

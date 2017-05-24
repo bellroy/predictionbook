@@ -51,6 +51,7 @@ end
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'timecop'
 end
 
 group :test do
