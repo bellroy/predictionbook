@@ -1,20 +1,21 @@
 source 'http://rubygems.org'
 
+gem 'devise'
+gem 'jquery-rails'
 gem 'rails'
 gem 'rails-observers'
-gem 'jquery-rails'
-gem 'devise'
 # Models
+gem 'active_model_serializers'
 gem 'chronic'
-gem 'uuidtools'
 gem 'kaminari'
+gem 'uuidtools'
 
 # Views
-gem 'RedCloth'
+gem 'coffee-rails'
 gem 'formatize', git: 'https://github.com/jaredjackson/formatize'
 gem 'htmlentities'
+gem 'RedCloth'
 gem 'sass-rails'
-gem 'coffee-rails'
 
 # Servers
 gem 'mysql2'
@@ -25,8 +26,8 @@ gem 'exception_notification'
 gem 'whenever'
 
 # Misc
-gem 'honeypot-captcha'
 gem 'hashdiff'
+gem 'honeypot-captcha'
 gem 'sentry-raven'
 
 group :development do
@@ -40,30 +41,33 @@ group :development do
 end
 
 group :test, :development do
-  gem 'rspec-rails'
-  gem 'rspec-activemodel-mocks'
+  gem 'awesome_print'
+  gem 'hirb'
+  gem 'poltergeist'
   gem 'pry'
   gem 'pry-byebug'
-  gem 'hirb'
-  gem 'wirble'
-  gem 'awesome_print'
+  gem 'rspec-activemodel-mocks'
+  gem 'rspec-rails'
+  gem 'selenium-webdriver', require: false
   gem 'simplecov'
+  gem 'wirble'
 end
 
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'timecop'
 end
 
 group :test do
-  gem 'launchy'
+  gem 'email_spec'
   gem 'factory_girl'
   gem 'ffaker'
-  gem 'shoulda-matchers'
   gem 'guard-rspec'
-  gem 'email_spec'
-  gem 'terminal-notifier-guard', require: false
+  gem 'launchy'
+  gem 'shoulda-matchers'
   gem 'terminal-notifier'
+  gem 'terminal-notifier-guard', require: false
 end
 
 group :assets do

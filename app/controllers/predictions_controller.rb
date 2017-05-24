@@ -31,7 +31,7 @@ class PredictionsController < ApplicationController
   end
 
   def edit
-    @title = "Editing: “#{@prediction.description}”"
+    @title = "Editing: “#{@prediction.description_with_group}”"
   end
 
   def update
@@ -82,8 +82,14 @@ class PredictionsController < ApplicationController
       @response_notification.viewed!
     end
 
+    @edit_path = if @prediction.prediction_group_id.present?
+                   edit_prediction_group_path(@prediction.prediction_group)
+                 else
+                   edit_prediction_path(@prediction)
+                 end
+
     @events = @prediction.events
-    @title = @prediction.description
+    @title = @prediction.description_with_group
   end
 
   def judged

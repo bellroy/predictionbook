@@ -11,6 +11,7 @@ describe 'predictions/show.html.erb' do
     assign(:prediction_response, prediction_response)
     assign(:deadline_notification, FactoryGirl.create(:deadline_notification))
     assign(:response_notification, FactoryGirl.create(:response_notification))
+    assign(:edit_path, edit_prediction_path(prediction))
 
     allow(view).to receive(:current_user).and_return(user)
   end

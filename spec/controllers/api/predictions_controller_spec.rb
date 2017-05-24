@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 require 'spec_helper'
 
 describe Api::PredictionsController, type: :controller do
@@ -13,7 +14,7 @@ describe Api::PredictionsController, type: :controller do
 
       specify { expect(response).to be_success }
       specify { expect(response.content_type).to eq(Mime::JSON) }
-      specify { expect(response.body).to include prediction.description }
+      specify { expect(response.body).to include prediction.description_with_group }
     end
 
     context 'with invalid API token' do
@@ -145,7 +146,7 @@ describe Api::PredictionsController, type: :controller do
           description = new_prediction_params[:description]
           prediction.reload
 
-          expect(prediction.description).to eq(description)
+          expect(prediction.description_with_group).to eq(description)
         end
       end
 

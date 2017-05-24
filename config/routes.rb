@@ -20,6 +20,7 @@ PredictionBook::Application.routes.draw do
     get :preview, on: :collection
   end
 
+  resources :prediction_groups, only: [:show, :new, :create, :edit, :update]
   resources :predictions do
     collection do
       get :recent
@@ -51,7 +52,9 @@ PredictionBook::Application.routes.draw do
   get '/healthcheck' => 'content#healthcheck'
   namespace :api do
     resources :predictions, format: :json
+    resources :prediction_groups, format: :json
     resources :prediction_judgements, only: [:create], format: :json
+    resources :current_users, only: :show
   end
 
   concern :paginatable do
