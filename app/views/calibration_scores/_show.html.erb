@@ -1,0 +1,38 @@
+<table>
+  <tr>
+    <th class="narrow">Current score</th>
+    <td><%= @score_calculator.score %></td>
+  </tr>
+</table
+
+<div class='calibration_scores'>
+  <div id="chart_div"></div>
+</div>
+
+<script>
+google.charts.load('current', {packages: ['corechart', 'line']});
+google.charts.setOnLoadCallback(drawBasic);
+
+function drawBasic() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('date', 'X');
+      data.addColumn('number', 'Score');
+
+      data.addRows([
+        <% @score_calculator.time_series.each do |key_value| %>
+          <%= "[new Date(#{key_value.first.year}, #{key_value.first.month - 1}, #{key_value.first.day}), #{key_value.last}], ".html_safe %>
+        <% end %>
+      ]);
+
+      var options = {
+        vAxis: {
+          title: 'Score'
+        },
+        legend: { position: 'none' }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+    }
+</script>
