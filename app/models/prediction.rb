@@ -71,7 +71,7 @@ class Prediction < ActiveRecord::Base
   has_many :deadline_notifications, dependent: :destroy
   has_many :response_notifications, dependent: :destroy
   has_many :judgements,             dependent: :destroy
-  has_many :responses,              dependent: :destroy
+  has_many :responses,              dependent: :destroy, autosave: true
 
   delegate :wagers, to: :responses
   delegate :comments, to: :responses
