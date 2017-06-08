@@ -21,13 +21,23 @@ class PredictionGroupPredictionsFromNestedParams
 
   def build_prediction_from_attrs(prediction_attrs)
     prediction = prediction_for_id(prediction_attrs.delete('id'))
-    responses = prediction_attrs.delete('responses')
+    response_hashes = prediction_attrs.delete('responses')
     prediction.assign_attributes(prediction_attrs)
-    responses.each do |response_hash|
-      response_attrs = response_hash['response'].dup
-      response = response_for_id(prediction, response_attrs.delete('id'))
+    response_hashes.each do |response_hash|
+      build_response_from_attrs(prediction, response_hash['response'].dup)
+    end
+  end
+
+  def build_response_from_attrs(prediction, response_attrs)
+    responses = prediction.responses
+    if responses.empty?
+      prediction.initial_confidence = response_attrs['confidence']
+    else
+      response = Response.new(prediction: prediction)
+      response_attrs.delete('id')
       response_attrs.delete('prediction_id')
       response.assign_attributes(response_attrs)
+      responses << response
     end
   end
 
@@ -38,15 +48,5 @@ class PredictionGroupPredictionsFromNestedParams
       predictions << prediction
     end
     prediction
-  end
-
-  def response_for_id(prediction, id)
-    responses = prediction.responses
-    response = responses.find { |resp| resp.id.to_s == id.to_s }
-    if response.nil? || response.id < 1
-      response = Response.new(prediction: prediction)
-      responses << response
-    end
-    response
   end
 end

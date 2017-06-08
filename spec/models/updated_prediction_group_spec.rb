@@ -97,7 +97,7 @@ describe UpdatedPredictionGroup do
         new_group.save!
         expect(PredictionGroup.count).to eq 1
         expect(Prediction.count).to eq 3
-        expect(Response.count).to eq 6
+        expect(Response.count).to eq 3
 
         expect(new_group.description).to eq 'This will happen tomorrow'
         first_prediction = new_group.predictions[0]
@@ -176,18 +176,18 @@ describe UpdatedPredictionGroup do
             .not_to change { [PredictionGroup.first.updated_at, Prediction.maximum(:updated_at)] }
           expect(PredictionGroup.count).to eq 1
           expect(Prediction.count).to eq 3
-          expect(Response.count).to eq 3
+          expect(Response.count).to eq 6
 
           expect(new_group.description).to eq 'This will happen tomorrow'
 
           first_prediction.reload
-          expect(first_prediction.responses.first.confidence).to eq 1
+          expect(first_prediction.responses.last.confidence).to eq 1
 
           second_prediction.reload
-          expect(second_prediction.responses.first.confidence).to eq 15
+          expect(second_prediction.responses.last.confidence).to eq 15
 
           third_prediction.reload
-          expect(third_prediction.responses.first.confidence).to eq 85
+          expect(third_prediction.responses.last.confidence).to eq 85
         end
       end
     end
