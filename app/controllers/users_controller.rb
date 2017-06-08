@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-  before_action :lookup_user, only: [:show, :update, :settings, :due_for_judgement, :statistics]
-  before_action :authenticate_user!, only: [:settings, :update, :generate_api_token]
-  before_action :user_must_be_current_user, only: [:settings, :update]
+  before_action :lookup_user, only: %i[show update settings due_for_judgement statistics]
+  before_action :authenticate_user!, only: %i[settings update generate_api_token]
+  before_action :user_must_be_current_user, only: %i[settings update]
+  before_action :allow_iframe_requests, only: [:statistics]
 
   def show
     @title       = "Most recent predictions by #{@user}"
@@ -102,5 +103,9 @@ class UsersController < ApplicationController
       permitted_params[:group_default_id] = attributes[:group_id]
     end
     permitted_params
+  end
+
+  def allow_iframe_requests
+    response.headers.delete('X-Frame-Options')
   end
 end

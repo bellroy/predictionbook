@@ -25,6 +25,9 @@ gem 'thin'
 gem 'exception_notification'
 gem 'whenever'
 
+# allowing CORS
+gem 'rack-cors'
+
 # Misc
 gem 'hashdiff'
 gem 'honeypot-captcha'
