@@ -17,3 +17,5 @@ secrets
 # Vagrant
 Vagrantfile
 .vagrant
+
+tags*
