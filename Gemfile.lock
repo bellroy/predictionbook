@@ -194,6 +194,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
+    newrelic_rpm (4.2.0.334)
     nokogiri (1.7.2)
       mini_portile2 (~> 2.1.0)
     notiffany (0.1.1)
@@ -372,6 +373,7 @@ DEPENDENCIES
   kaminari
   launchy
   mysql2
+  newrelic_rpm
   poltergeist
   pry
   pry-byebug
@@ -397,4 +399,4 @@ DEPENDENCIES
   wirble
 
 BUNDLED WITH
-   1.15.0
+   1.15.1
