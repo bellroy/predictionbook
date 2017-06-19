@@ -72,6 +72,18 @@ describe Prediction do
     end
 
     describe 'with invalid values' do
+      context 'and a description over 255 characters' do
+        let(:long_string) { 'a' * 256 }
+        let(:prediction) do
+          FactoryGirl.build(:prediction, description: long_string)
+        end
+
+        before { prediction.save }
+
+        it { expect(prediction).to_not be_valid }
+        it { expect(prediction.errors.full_messages).to include(/255/) }
+      end
+
       it 'does not accept a deadline too far into the future to store' do
         date = 300_000.years.from_now
         prediction = Prediction.new(deadline: date)

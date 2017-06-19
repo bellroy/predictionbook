@@ -76,6 +76,7 @@ class Prediction < ActiveRecord::Base
   delegate :wagers, to: :responses
   delegate :comments, to: :responses
 
+  validates_length_of :description, maximum: 255, message: 'Keep your description under 255 characters in length'
   validates_presence_of :deadline, message: "When will you know you're right?"
   validates_presence_of :creator, message: 'Who are you?'
   validates_presence_of :description, message: 'What are you predicting?'
