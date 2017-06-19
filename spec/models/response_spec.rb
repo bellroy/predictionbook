@@ -30,7 +30,6 @@ describe Response do
       it 'calls rsort and public scopes' do
         expect(Response).to receive(:order).and_return(@rs)
         expect(Response).to receive(:visible_to_everyone).and_return(@rs)
-        expect(Response).to receive(:prefetch_joins).and_return(@rs)
         expect(Response).to receive(:limit).and_return(@rs)
         expect(Response.recent).to eq @rs
       end

@@ -24,7 +24,7 @@ class Prediction < ActiveRecord::Base
 
   scope :not_withdrawn, -> { where(withdrawn: false) }
 
-  DEFAULT_INCLUDES = %i[judgements responses creator prediction_group].freeze
+  DEFAULT_INCLUDES = %i[judgements responses creator prediction_group group].freeze
 
   def self.unjudged
     visible_to_everyone
