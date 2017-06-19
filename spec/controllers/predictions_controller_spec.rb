@@ -11,7 +11,9 @@ describe PredictionsController do
 
   describe 'getting the homepage' do
     before do
-      relation = class_double(Prediction, limit: [])
+      relation = instance_double(ActiveRecord::Relation)
+      allow(relation).to receive(:limit).and_return(relation)
+      allow(relation).to receive(:includes).and_return(relation)
       expect(Prediction).to receive(:popular).and_return(relation)
     end
 
