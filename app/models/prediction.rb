@@ -76,11 +76,11 @@ class Prediction < ActiveRecord::Base
   delegate :wagers, to: :responses
   delegate :comments, to: :responses
 
-  validates_length_of :description, maximum: 255, message: 'Keep your description under 255 characters in length'
-  validates_presence_of :deadline, message: "When will you know you're right?"
-  validates_presence_of :creator, message: 'Who are you?'
-  validates_presence_of :description, message: 'What are you predicting?'
-  validates_presence_of :initial_confidence, message: 'How sure are you?', on: :create
+  validates :description, length: { maximum: 255, message: 'Keep your description under 255 characters in length' }
+  validates :deadline, presence: { message: "When will you know you're right?" }
+  validates :creator, presence: { message: 'Who are you?' }
+  validates :description, presence: { message: 'What are you predicting?' }
+  validates :initial_confidence, presence: { message: 'How sure are you?', on: :create }
   validate :confidence_on_response, on: :create
   validate :bound_deadline
 
@@ -115,9 +115,7 @@ class Prediction < ActiveRecord::Base
     @initial_confidence || responses.first.try(:confidence)
   end
 
-  def initial_confidence=(value)
-    @initial_confidence = value
-  end
+  attr_writer :initial_confidence
 
   boolean_accessor_with_default(:notify_creator) { creator ? creator.notify_on_overdue? : false }
 
