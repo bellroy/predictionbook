@@ -25,11 +25,7 @@ class Response < ActiveRecord::Base
   scope :visible_to_everyone, -> { where(prediction: Prediction.visible_to_everyone) }
 
   def self.recent(limit: 100)
-    order(created_at: :desc).visible_to_everyone.prefetch_joins.limit(limit)
-  end
-
-  def self.prefetch_joins
-    includes(user: { responses: { prediction: [:judgements, :responses] } })
+    order(created_at: :desc).visible_to_everyone.limit(limit)
   end
 
   def self.predictions
