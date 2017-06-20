@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170508115333) do
+ActiveRecord::Schema.define(version: 20170620034354) do
 
   create_table "credence_answers", force: :cascade do |t|
     t.integer  "credence_question_id", limit: 4
@@ -67,11 +67,21 @@ ActiveRecord::Schema.define(version: 20170508115333) do
 
   add_index "credence_questions", ["text_id"], name: "index_credence_questions_on_text_id", unique: true, using: :btree
 
+  create_table "group_members", force: :cascade do |t|
+    t.integer  "group_id",   limit: 4
+    t.integer  "user_id",    limit: 4
+    t.integer  "role",       limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "group_members", ["group_id"], name: "index_group_members_on_group_id", using: :btree
+  add_index "group_members", ["user_id"], name: "index_group_members_on_user_id", using: :btree
+
   create_table "groups", force: :cascade do |t|
-    t.string   "name",          limit: 255, null: false
-    t.string   "email_domains", limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "name",       limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "judgements", force: :cascade do |t|
@@ -197,6 +207,8 @@ ActiveRecord::Schema.define(version: 20170508115333) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "group_members", "groups"
+  add_foreign_key "group_members", "users"
   add_foreign_key "predictions", "groups"
   add_foreign_key "predictions", "prediction_groups"
   add_foreign_key "users", "groups", column: "group_default_id"

@@ -1,12 +1,10 @@
 class Group < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
-  # Regex validates comma-delimited list of valid email domains with no spaces
-  validates :email_domains, format: {
-    with: /\A(([a-z]+[a-z\.]+[\.]+[a-z]+),)*([a-z]+[a-z\.]+[\.]+[a-z]+)\z/, allow_nil: true
-  }
 
-  def user_is_a_member?(user)
-    domain = Mail::Address.new(user.email).domain
-    (email_domains || '').split(',').include?(domain)
+  has_many :group_members
+
+  def user_role(user)
+    group_member = group_members.find { |member| member.user_id == user.id }
+    group_member.role if group_member.present?
   end
 end

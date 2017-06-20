@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
     @groups = if current_user.nil?
                 []
               else
-                Group.all.select { |group| group.user_is_a_member?(current_user) }
+                current_user.groups
               end
   end
 
