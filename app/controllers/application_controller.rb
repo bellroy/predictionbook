@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
 
-  before_action :set_timezone, :clear_return_to, :login_via_token, :assign_groups
+  before_action :set_timezone, :clear_return_to, :login_via_token
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :force_change_password
 
@@ -48,14 +48,6 @@ class ApplicationController < ActionController::Base
     user_timezone = current_user.try(:timezone)
     Time.zone = user_timezone.blank? ? 'UTC' : user_timezone
     Chronic.time_class = Time.zone
-  end
-
-  def assign_groups
-    @groups = if current_user.nil?
-                []
-              else
-                current_user.groups
-              end
   end
 
   def clear_return_to
