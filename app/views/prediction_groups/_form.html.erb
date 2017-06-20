@@ -25,7 +25,7 @@
   <%- unless !current_user.present? || current_user.has_email? -%>
     <p>(Email will not be sent until you <%= link_to "set your email", settings_user_path(current_user) %>)</p>
   <%- end -%>
-  <%= f.select_field :visibility, raw(Visibility.select_options_html(@groups, @prediction_group.visibility, @prediction_group.group_id)), label: 'Visibility' %>
+  <%= f.select_field :visibility, raw(Visibility.select_options_html((current_user.try(:groups) || []), @prediction_group.visibility, @prediction_group.group_id)), label: 'Visibility' %>
 
   <p>
 

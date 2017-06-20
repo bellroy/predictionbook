@@ -12,14 +12,16 @@ describe GroupsController do
     end
 
     context 'logged in' do
-      before { sign_in FactoryGirl.create(:user, email: 'bob@trikeapps.com') }
+      before { sign_in user }
+
+      let(:user) { FactoryGirl.create(:user) }
 
       specify do
         expect { index }.to raise_error ActionController::RoutingError
       end
 
       context 'no matching group exists' do
-        before { FactoryGirl.create(:group, email_domains: 'trickapps.com') }
+        before { FactoryGirl.create(:group) }
 
         specify do
           expect { index }.to raise_error ActionController::RoutingError
@@ -27,7 +29,7 @@ describe GroupsController do
       end
 
       context 'matching group exists' do
-        before { FactoryGirl.create(:group, email_domains: 'trikeapps.com') }
+        before { FactoryGirl.create(:group_member, user: user) }
 
         specify do
           index
@@ -41,7 +43,7 @@ describe GroupsController do
   describe 'GET show' do
     subject(:show) { get :show, id: group.id }
 
-    let(:group) { FactoryGirl.create(:group, email_domains: 'trikeapps.com') }
+    let(:group) { FactoryGirl.create(:group) }
 
     context 'not logged in' do
       specify do
@@ -51,11 +53,12 @@ describe GroupsController do
     end
 
     context 'logged in' do
-      before { sign_in FactoryGirl.create(:user, email: email) }
+      before { sign_in user }
 
-      let(:email) { 'bob@trikeapps.com' }
+      let(:user) { FactoryGirl.create(:user) }
 
       specify do
+        FactoryGirl.create(:group_member, user: user, group: group)
         show
         expect(response).to render_template :show
         expect(assigns[:group]).not_to be_nil
@@ -63,8 +66,6 @@ describe GroupsController do
       end
 
       context 'email does not match group' do
-        let(:email) { 'bob@trickapps.com' }
-
         specify do
           expect { show }.to raise_error ActionController::RoutingError
         end

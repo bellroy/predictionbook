@@ -37,11 +37,11 @@ module Api
 
     def authorize_to_see_prediction
       raise UnauthorizedRequest unless @prediction.visible_to_everyone? ||
-                                       @user.authorized_for(@groups, @prediction)
+                                       @user.authorized_for?(@prediction)
     end
 
     def authorize_to_update_prediction
-      raise UnauthorizedRequest unless @user.authorized_for(@groups, @prediction)
+      raise UnauthorizedRequest unless @user.authorized_for?(@prediction)
     end
 
     def build_new_prediction
