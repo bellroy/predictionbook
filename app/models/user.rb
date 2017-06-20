@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
          :validatable, :confirmable
 
   has_many :responses
+  has_many :group_members
+  has_many :groups, through: :group_members
   delegate :wagers, to: :responses
   has_many :deadline_notifications
   has_many :response_notifications
@@ -80,12 +82,13 @@ class User < ActiveRecord::Base
     !!predictions.index(&:due_for_judgement?)
   end
 
-  def authorized_for(user_groups, prediction, action = 'show')
+  def authorized_for?(prediction, action = 'show')
     is_creator = self == prediction.creator
-    return true if is_creator || admin?
+    user_group = groups.find { |ug| ug.id == prediction.group_id }
+    user_group_role = user_group.user_role(self) if user_group.present?
+    return true if is_creator || admin? || user_group_role == 'admin'
     return false unless %w[index show].include?(action)
-    prediction.visible_to_everyone? ||
-      (prediction.visible_to_group? && user_groups.include?(prediction.group))
+    prediction.visible_to_everyone? || (prediction.visible_to_group? && user_group.present?)
   end
 
   def admin?

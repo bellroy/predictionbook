@@ -53,7 +53,7 @@ class PredictionGroupsController < ApplicationController
   def must_be_authorized_for_prediction
     prediction = @prediction_group.predictions.first || Prediction.new
     action = params[:action]
-    authorized = (current_user || User.new).authorized_for(@groups, prediction, action)
+    authorized = (current_user || User.new).authorized_for?(prediction, action)
     showing_public_prediction = (action == 'show' && prediction.visible_to_everyone?)
     notice = 'You are not authorized to perform that action'
     redirect_to(root_path, notice: notice) unless authorized || showing_public_prediction

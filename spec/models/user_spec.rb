@@ -43,12 +43,11 @@ describe User do
     end
   end
 
-  describe 'authorized_for' do
-    subject { user.authorized_for(groups, prediction, action) }
+  describe 'authorized_for?' do
+    subject { user.authorized_for?(prediction, action) }
 
     let(:user) { User.new }
     let(:creator_user) { user }
-    let(:groups) { [] }
     let(:action) { 'edit' }
     let(:prediction) do
       user.predictions.build(creator: creator_user, visibility: :visible_to_creator)
@@ -74,18 +73,36 @@ describe User do
           user.predictions.build(creator: creator_user, visibility: :visible_to_group, group: group)
         end
         let(:action) { 'show' }
+        let(:user) { FactoryGirl.create(:user) }
 
         context 'user in group' do
-          let(:groups) { [group] }
+          before do
+            FactoryGirl.create(:group_member, role, group: group, user: user)
+          end
+
+          let(:role) { :contributor }
 
           it { is_expected.to be true }
+
+          context 'editing' do
+            let(:action) { 'edit' }
+
+            it { is_expected.to be false }
+
+            context 'user is admin' do
+              let(:role) { :admin }
+
+              it { is_expected.to be true }
+            end
+          end
         end
 
         context 'user not in group' do
-          let(:groups) { [FactoryGirl.create(:group)] }
+          before { group }
 
           it { is_expected.to be false }
         end
+
       end
     end
   end

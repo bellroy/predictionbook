@@ -118,6 +118,19 @@ FactoryGirl.define do
 
   factory :group do
     name { FFaker::Name.name }
-    email_domains { nil }
+  end
+
+  factory :group_member do
+    association(:group)
+    association(:user)
+    role { GroupMember::ROLES[:contributor] }
+
+    trait :contributor do
+      role { GroupMember::ROLES[:contributor] }
+    end
+
+    trait :admin do
+      role { GroupMember::ROLES[:admin] }
+    end
   end
 end

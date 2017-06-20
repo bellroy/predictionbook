@@ -44,13 +44,13 @@ module Api
       prediction = prediction_group.try(:predictions).try(:first)
       raise UnauthorizedRequest unless prediction.present? &&
                                        (prediction.visible_to_everyone? ||
-                                        @user.authorized_for(@groups, prediction))
+                                        @user.authorized_for?(prediction))
     end
 
     def authorize_to_update_prediction_group
       prediction_group = find_prediction_group
       prediction = prediction_group.try(:predictions).try(:first)
-      raise UnauthorizedRequest unless @user.authorized_for(@groups, prediction)
+      raise UnauthorizedRequest unless @user.authorized_for?(prediction)
     end
 
     def build_prediction_groups

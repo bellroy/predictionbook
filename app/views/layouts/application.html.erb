@@ -47,7 +47,7 @@
 	        <li><%= link_to 'Signup', new_user_registration_path %></li>
 	  		<%- else -%>
 	  		  <li><%= link_to 'Your profile', user_path(current_user) %></li>
-					<%- if @groups.present? -%>
+					<%- if current_user.try(:groups).present? -%>
 						<li><%= link_to 'Groups', groups_path %></li>
 					<% end %>
 	  		  <li><%= link_to 'Settings', settings_user_path(current_user) %></li>
