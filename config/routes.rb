@@ -9,7 +9,10 @@ PredictionBook::Application.routes.draw do
     resources :deadline_notifications
   end
 
-  resources :groups, only: [:index, :show]
+  resources :groups, format: :html do
+    resources :group_members, format: :html, only: [:index, :new, :create, :update, :destroy]
+  end
+  resources :group_member_invitations, only: :show
 
   resources :deadline_notifications
   resources :response_notifications

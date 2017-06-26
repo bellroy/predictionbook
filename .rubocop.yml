@@ -2,7 +2,7 @@ Rails:
   Enabled: true
 
 AllCops:
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.4
   Include:
     - 'app/**/*.rb'
     - 'lib/**/*.rb'
@@ -20,7 +20,7 @@ AllCops:
     - 'public/**/*'
     - 'tmp/**/*'
     - 'vendor/**/*'
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.4
 
 Documentation:
   Enabled: false

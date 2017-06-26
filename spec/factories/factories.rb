@@ -7,6 +7,20 @@ FactoryGirl.define do
     description { FFaker::Lorem.sentence }
     deadline { 1.day.ago }
     initial_confidence { '100' }
+
+    trait :visible_to_everyone do
+      visibility { Visibility::VALUES[:visible_to_everyone] }
+      group_id { nil }
+    end
+
+    trait :visible_to_creator do
+      visibility { Visibility::VALUES[:visible_to_creator] }
+      group_id { nil }
+    end
+
+    trait :visible_to_group do
+      visibility { Visibility::VALUES[:visible_to_group] }
+    end
   end
 
   factory :prediction_group do
@@ -124,6 +138,10 @@ FactoryGirl.define do
     association(:group)
     association(:user)
     role { GroupMember::ROLES[:contributor] }
+
+    trait :invitee do
+      role { GroupMember::ROLES[:invitee] }
+    end
 
     trait :contributor do
       role { GroupMember::ROLES[:contributor] }
