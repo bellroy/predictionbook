@@ -1,9 +1,7 @@
 # encoding: utf-8
+# frozen_string_literal: true
 
-class UserMailer < ActionMailer::Base
-  default reply_to: proc { no_reply },
-          from: proc { no_reply }
-
+class UserMailer < ApplicationMailer
   def password_reset(user)
     @new_password = user.password
 
@@ -11,11 +9,5 @@ class UserMailer < ActionMailer::Base
       to: user.email,
       subject: '[PredictionBook] Your password was reset'
     )
-  end
-
-  private
-
-  def no_reply
-    %("PredictionBook" <no-reply@#{default_url_options[:host]}>)
   end
 end

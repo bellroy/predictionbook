@@ -10,7 +10,8 @@
     <%- unless !current_user.present? || current_user.has_email? -%>
     <p>(Email will not be sent until you <%= link_to "set your email", settings_user_path(current_user) %>)</p>
     <%- end -%>
-    <%= f.select_field :visibility, raw(Visibility.select_options_html((current_user.try(:groups) || []), @prediction.visibility, @prediction.group_id)), label: 'Visibility' %>
+    <% %>
+    <%= f.select_field :visibility, raw(Visibility.select_options_html((current_user.try(:group_members) || []).reject(&:invitee?).map(&:group), @prediction.visibility, @prediction.group_id)), label: 'Visibility' %>
     <p class='note'><%= render :partial => 'private_note' %></p>
     <%= f.submit 'Lock it in!' %>
   </div>
