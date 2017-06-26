@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'devise'
+gem 'haml-rails'
 gem 'jquery-rails'
 gem 'rails'
 gem 'rails-observers'

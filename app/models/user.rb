@@ -96,7 +96,7 @@ class User < ActiveRecord::Base
   end
 
   def to_param
-    login.gsub('.', '[dot]')
+    (login || '').gsub('.', '[dot]')
   end
 
   def to_s

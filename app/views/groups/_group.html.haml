@@ -1,0 +1,5 @@
+%li.group
+  %p
+    %span.title= link_to TitleTagPresenter.new(group.name).tag, group
+    - group_member = group.group_members.find { |gm| gm.user_id == current_user.id }
+    %span.members= "(#{group.group_members.size} #{"member".pluralize(group.group_members.size)}, #{group_member.role})"
