@@ -73,7 +73,7 @@ class GroupsController < ApplicationController
   end
 
   def add_group_members
-    logins = (params[:invitees] || '').split("\n")
+    logins = (params[:invitees] || '').split("\n").take(20)
     User.where.not(login: [nil, '', current_user.login]).where(login: logins).each do |user|
       add_group_member(user, 'invitee')
     end

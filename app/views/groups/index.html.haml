@@ -1,7 +1,9 @@
 %h2 My groups
 
+%p Predict in the privacy of your own user groups.
+
 .popular
   %ul
-    = render :partial => @groups
+    = render partial: @groups
 
 = button_to "Create a new group", new_group_path, method: :get
