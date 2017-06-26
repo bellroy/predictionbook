@@ -12,6 +12,10 @@ class Group < ActiveRecord::Base
     group_member.role if group_member.present?
   end
 
+  def statistics
+    Statistics.new("p.visibility = #{Visibility::VALUES[:visible_to_group]} AND p.group_id = #{id}")
+  end
+
   private
 
   def make_predictions_private
