@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170620034354) do
+ActiveRecord::Schema.define(version: 20170626055158) do
 
   create_table "credence_answers", force: :cascade do |t|
     t.integer  "credence_question_id", limit: 4
@@ -71,8 +71,9 @@ ActiveRecord::Schema.define(version: 20170620034354) do
     t.integer  "group_id",   limit: 4
     t.integer  "user_id",    limit: 4
     t.integer  "role",       limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "uuid",       limit: 255
   end
 
   add_index "group_members", ["group_id"], name: "index_group_members_on_group_id", using: :btree

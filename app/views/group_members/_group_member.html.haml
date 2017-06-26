@@ -1,0 +1,15 @@
+- if group_member.user.present? && group_member.user.login.present?
+  %li.group_member
+    %p
+      %span.title= link_to TitleTagPresenter.new(group_member.user.login).tag, group_member.user
+      %span.role= group_member.role
+      %span.actions
+        - if @current_user_group_member.admin?
+          - case group_member.role
+          - when 'contributor'
+            = button_to 'Make admin', group_group_member_path(@group, group_member, role: 'admin'), method: :put, data: { confirm: 'Are you sure you want to make this user an administrator of the group?' }
+          - when 'admin'
+            = button_to 'Make contributor', group_group_member_path(@group, group_member, role: 'contributor'), method: :put, data: { confirm: "Are you sure you want to revoke this user's administrator privileges?" }
+          - when 'invitee'
+            = button_to 'Resend invitation', group_group_member_path(@group, group_member), method: :put
+          = button_to 'Remove from group', group_group_member_path(@group, group_member), method: :delete, data: { confirm: 'Are you sure you want to remove this user from the group?' }

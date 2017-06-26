@@ -22,4 +22,20 @@ RSpec.describe Group, type: :model do
       it { is_expected.to eq 'admin' }
     end
   end
+
+  describe 'callbacks' do
+    describe 'before destroy' do
+      let(:group) { FactoryGirl.create(:group) }
+
+      before do
+        FactoryGirl.create_list(:prediction, 2, :visible_to_group, group_id: group.id)
+      end
+
+      specify do
+        group.destroy
+        expect(Prediction.count).to eq 2
+        expect(Prediction.visible_to_creator.where(group_id: nil).count).to eq 2
+      end
+    end
+  end
 end

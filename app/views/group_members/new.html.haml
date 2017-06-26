@@ -1,0 +1,7 @@
+%h2= "Invite another user to the #{@group.name} group"
+
+= form_for([@group, @group_member], html: { honeypot: true }) do |f|
+  = label_tag :login, "Enter the login of the user you wish to invite"
+  = text_field_tag :login, ''
+
+  = f.submit 'Send an invite'
