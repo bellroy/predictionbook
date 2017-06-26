@@ -3,7 +3,7 @@
 class GroupMemberInvitationsController < ApplicationController
   def show
     group_member = GroupMember.includes(:group).find_by(uuid: params[:id])
-    if group_member.nil?
+    if group_member.nil? || !group_member.invitee?
       redirect_to(root_url)
       return
     end
