@@ -1,7 +1,7 @@
 class ScoreCalculator
   DECIMAL_PLACES = 2
   DEFAULT_SCORE = 1
-  EPISILON = 0.005
+  EPSILON = 0.005
 
   def initialize(prediction_scope, start_date: 1.day.from_now, interval: 1.month)
     self.prediction_scope = prediction_scope
@@ -34,10 +34,16 @@ class ScoreCalculator
   def score_for_date(end_date)
     sql = score_sql(end_date)
     sum, count = ActiveRecord::Base.connection.execute(sql).first
-    if sum.blank?
-      DEFAULT_SCORE
+    half_log = Math.log(0.5)
+    if sum.blank? || sum == 0.0
+      if count.zero?
+        DEFAULT_SCORE
+      else
+        # When they're 100% right about 100% predictions or they're 0% right on 0% predictions
+        (half_log / Math.log(1 - EPSILON)).round(DECIMAL_PLACES)
+      end
     else
-      ((Math.log(0.5) * count) / sum).round(DECIMAL_PLACES)
+      ((half_log * count) / sum).round(DECIMAL_PLACES)
     end
   end
 
