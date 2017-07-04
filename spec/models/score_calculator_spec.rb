@@ -45,6 +45,22 @@ describe ScoreCalculator do
       it { is_expected.to eq(3.11) }
     end
 
+    context 'with a 100% wager on a judged prediction' do
+      let!(:wager) do
+        FactoryGirl.create(:response, confidence: 100, user: user, created_at: 1.day.ago)
+      end
+      let!(:judgment) do
+        FactoryGirl.create(
+          :judgement,
+          prediction: wager.prediction,
+          outcome: 'right'
+        )
+      end
+      let!(:wagers) { wager.user.wagers }
+
+      it { is_expected.to eq(138.28) }
+    end
+
     context 'with multiple wagers on judged predictions' do
       let!(:user) { FactoryGirl.create(:user) }
       let!(:first_wager) do
