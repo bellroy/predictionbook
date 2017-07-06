@@ -1,0 +1,13 @@
+- leaderboard = @group.group_members.map { |gm| [gm.user, ScoreCalculator.new(gm.user)] }.sort_by { |array| array.last.score }.reverse
+%table
+  %tr
+    %th.narrow Position
+    %th.narrow Login
+    %th.narrow Score
+  - leaderboard.each_with_index do |array, position|
+    - next nil if array.first.try(:login).nil?
+    %tr
+      %td= position + 1
+      %td= link_to TitleTagPresenter.new(array.first.login).tag, array.first
+      %td= array.last.score
+      %td{class: "chart_div_#{array.first.id}"}
