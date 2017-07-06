@@ -20,9 +20,20 @@
   - @heading = 'Group statistics'
   = render partial: 'statistics/show'
 
+%p
+
 #score
   %h2 Group calibration
   - cache(group_calibration_scores_cache_key @group) do
     = render partial: 'calibration_scores/show'
+
+%p
+
+#leaderboard
+  %h2 Group leaderboard
+  - cache(group_leaderboard_cache_key @group) do
+    = render partial: 'leaderboard/show'
+
+%p
 
 = render partial: 'predictions/list', locals: { title: "Group predictions" }
