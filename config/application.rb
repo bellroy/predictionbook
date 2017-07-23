@@ -8,6 +8,8 @@ require "action_view/railtie"
 require "sprockets/railtie"
 require "rails/observers/activerecord/active_record"
 
+require_relative '../lib/credentials'
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -38,6 +40,10 @@ module PredictionBook
         origins '*'
         resource '/api/*', headers: :any, methods: :any
       end
+    end
+
+    config.before_initialize do
+      Credentials.load_config
     end
   end
 end
