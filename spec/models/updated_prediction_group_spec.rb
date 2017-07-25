@@ -10,6 +10,7 @@ describe UpdatedPredictionGroup do
       description: 'This will happen tomorrow',
       visibility: "visible_to_group_#{group.id}",
       deadline_text: '2 days from now',
+      notify_creator: false,
       prediction_0_description: 'AIDS',
       prediction_0_initial_confidence: 1,
       prediction_1_description: 'War',
@@ -36,6 +37,7 @@ describe UpdatedPredictionGroup do
         expect(first_prediction.deadline).to be > 47.hours.from_now
         expect(first_prediction.visibility).to eq 'visible_to_group'
         expect(first_prediction.group_id).to eq group.id
+        expect(first_prediction.deadline_notifications.count).to eq 0
 
         second_prediction = new_group.predictions[1]
         expect(second_prediction.description_with_group).to eq '[This will happen tomorrow] War'
@@ -43,6 +45,7 @@ describe UpdatedPredictionGroup do
         expect(second_prediction.deadline).to be > 47.hours.from_now
         expect(second_prediction.visibility).to eq 'visible_to_group'
         expect(second_prediction.group_id).to eq group.id
+        expect(second_prediction.deadline_notifications.count).to eq 0
 
         third_prediction = new_group.predictions[2]
         expect(third_prediction.description_with_group).to eq '[This will happen tomorrow] Famine'
@@ -50,6 +53,7 @@ describe UpdatedPredictionGroup do
         expect(third_prediction.deadline).to be > 47.hours.from_now
         expect(third_prediction.visibility).to eq 'visible_to_group'
         expect(third_prediction.group_id).to eq group.id
+        expect(third_prediction.deadline_notifications.count).to eq 0
       end
     end
 
@@ -66,6 +70,7 @@ describe UpdatedPredictionGroup do
                 deadline: 2.days.from_now.strftime('%Y-%m-%d %H:%M'),
                 visibility: Visibility::VALUES[:visible_to_group],
                 group_id: group.id,
+                notify_creator: false,
                 responses: [{ response: { id: '0', confidence: 1, user_id: user.id } }]
               )
             },
@@ -76,6 +81,7 @@ describe UpdatedPredictionGroup do
                 deadline: 2.days.from_now.strftime('%Y-%m-%d %H:%M'),
                 visibility: Visibility::VALUES[:visible_to_group],
                 group_id: group.id,
+                notify_creator: true,
                 responses: [{ response: { id: '0', confidence: 15, user_id: user.id } }]
               )
             },
@@ -86,6 +92,7 @@ describe UpdatedPredictionGroup do
                 deadline: 2.days.from_now.strftime('%Y-%m-%d %H:%M'),
                 visibility: Visibility::VALUES[:visible_to_group],
                 group_id: group.id,
+                notify_creator: true,
                 responses: [{ response: { id: '0', confidence: 85, user_id: user.id } }]
               )
             }
@@ -106,6 +113,7 @@ describe UpdatedPredictionGroup do
         expect(first_prediction.deadline).to be > 47.hours.from_now
         expect(first_prediction.visibility).to eq 'visible_to_group'
         expect(first_prediction.group_id).to eq group.id
+        expect(first_prediction.deadline_notifications.count).to eq 0
 
         second_prediction = new_group.predictions[1]
         expect(second_prediction.description_with_group).to eq '[This will happen tomorrow] War'
@@ -113,6 +121,7 @@ describe UpdatedPredictionGroup do
         expect(second_prediction.deadline).to be > 47.hours.from_now
         expect(second_prediction.visibility).to eq 'visible_to_group'
         expect(second_prediction.group_id).to eq group.id
+        expect(second_prediction.deadline_notifications.count).to eq 1
 
         third_prediction = new_group.predictions[2]
         expect(third_prediction.description_with_group).to eq '[This will happen tomorrow] Famine'
@@ -120,6 +129,7 @@ describe UpdatedPredictionGroup do
         expect(third_prediction.deadline).to be > 47.hours.from_now
         expect(third_prediction.visibility).to eq 'visible_to_group'
         expect(third_prediction.group_id).to eq group.id
+        expect(third_prediction.deadline_notifications.count).to eq 1
       end
 
       context 'updating confidences' do
