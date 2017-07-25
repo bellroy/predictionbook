@@ -65,6 +65,7 @@ class PredictionGroupPredictionsFromFlatParams
       initial_confidence: prediction_initial_confidence(index),
       visibility: visibility_attributes[:visibility],
       group_id: visibility_attributes[:group_id],
+      notify_creator: params[:notify_creator],
       uuid: prediction_uuid(index),
       creator: creator,
       deadline_text: deadline_text
