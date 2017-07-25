@@ -3,6 +3,8 @@ class ScoreCalculator
   DEFAULT_SCORE = 1
   EPSILON = 0.005
 
+  attr_reader :judged_prediction_count
+
   def initialize(prediction_scope, start_date: 1.day.from_now, interval: 1.month)
     self.prediction_scope = prediction_scope
     self.start_date = start_date
@@ -22,6 +24,7 @@ class ScoreCalculator
   private
 
   attr_accessor :prediction_scope, :start_date, :interval, :scores
+  attr_writer :judged_prediction_count
 
   def generate_scores
     end_date = start_date
@@ -34,6 +37,7 @@ class ScoreCalculator
   def score_for_date(end_date)
     sql = score_sql(end_date)
     sum, count = ActiveRecord::Base.connection.execute(sql).first
+    self.judged_prediction_count = count
     half_log = Math.log(0.5)
     if sum.blank? || sum == 0.0
       if count.zero?
