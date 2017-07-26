@@ -7,7 +7,7 @@
 <h2><%= title || 'Predictions' %></h2>
 
 <div class="popular">
-  <%- if not @predictions.empty? -%>
+  <%- if @predictions.present? -%>
   <ul <%= "class='#{@filter}'" if @filter %>>
     <%= render :partial => @predictions  %>
   </ul>
