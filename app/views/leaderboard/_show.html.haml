@@ -1,15 +1,35 @@
-- leaderboard = @group.group_members.map { |gm| [gm.user, ScoreCalculator.new(gm.user)] }.sort_by { |array| array.last.score }.reverse
+- leaderboard = @group.group_members.map { |gm| [gm.user, ScoreCalculator.new(gm.user, start_date: 6.months.ago)] if gm.user.login.present? }.compact.sort_by { |array| array.last.score }.reverse
 %table
   %tr
     %th.narrow.right-aligned Position
     %th.narrow.left-aligned Login
     %th.narrow.right-aligned Score
     %th.narrow.right-aligned Judged predictions
+    %th.narrow.left-aligned Sparkline (6 months)
   - leaderboard.each_with_index do |array, position|
-    - next nil if array.first.try(:login).nil?
     %tr
       %td.right-aligned= position + 1
       %td.left-aligned= link_to TitleTagPresenter.new(array.first.login).tag, array.first
       %td.right-aligned= array.last.score
       %td.right-aligned= array.last.judged_prediction_count
-      %td{class: "chart_div_#{array.first.id}"}
+      %td
+        %div{id: "sparkline_div_#{array.first.id}"}
+
+:javascript
+  google.charts.load('current', {packages: ['corechart', 'line']});
+  google.charts.setOnLoadCallback(drawSparklines);
+
+  function drawSparklines() {
+    #{
+      leaderboard.map { |array|
+        "var data#{array.first.id} = new google.visualization.DataTable();\n" \
+          "data#{array.first.id}.addColumn('date', 'X');\n" \
+          "data#{array.first.id}.addColumn('number', 'Score');\n" \
+          "data#{array.first.id}.addRows([" + array.last.time_series.map { |key_value| "[new Date(#{key_value.first.year}, #{key_value.first.month - 1}, #{key_value.first.day}), #{key_value.last}], " }.join("\n") +
+          "]);\n" \
+          "var options#{array.first.id} = { height: 32, width: 200, hAxis: { baselineColor: '#fff', gridlineColor: '#fff', textPosition: 'none' }, vAxis: { baselineColor: '#fff', gridlineColor: '#fff', textPosition: 'none' }, legend: { position: 'none' } };\n" \
+          "var chart#{array.first.id} = new google.visualization.LineChart(document.getElementById('sparkline_div_#{array.first.id}'));\n" \
+          "chart#{array.first.id}.draw(data#{array.first.id}, options#{array.first.id});"
+      }.join("\n").html_safe
+    }
+  }

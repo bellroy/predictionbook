@@ -24,7 +24,8 @@ class Prediction < ActiveRecord::Base
 
   scope :not_withdrawn, -> { where(withdrawn: false) }
 
-  DEFAULT_INCLUDES = %i[judgements responses creator prediction_group group].freeze
+  DEFAULT_INCLUDES = { judgements: :user, responses: nil, creator: nil, prediction_group: nil,
+                       group: nil }.freeze
 
   def self.unjudged
     visible_to_everyone
@@ -58,7 +59,7 @@ class Prediction < ActiveRecord::Base
   def self.popular
     visible_to_everyone
       .not_withdrawn
-      .includes(:responses, :creator)
+      .includes(DEFAULT_INCLUDES)
       .joins(:responses)
       .where('predictions.deadline > UTC_TIMESTAMP() AND predictions.created_at > ?', 2.weeks.ago)
       .where('predictions.id NOT IN (SELECT prediction_id FROM judgements WHERE outcome IS NOT NULL)')

@@ -49,7 +49,7 @@ class PredictionsController < ApplicationController
     @responses = Response.recent(limit: 25).includes(prediction: :judgements, user: nil)
     @title = 'How sure are you?'
     @filter = 'popular'
-    @predictions = Prediction.popular.limit(5).includes(Prediction::DEFAULT_INCLUDES)
+    @predictions = Prediction.popular.limit(5)
     @show_statistics = false
   end
 
