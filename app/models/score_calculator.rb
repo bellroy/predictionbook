@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ScoreCalculator
   DECIMAL_PLACES = 2
   DEFAULT_SCORE = 1
@@ -14,7 +16,11 @@ class ScoreCalculator
   end
 
   def score
-    scores.values.last
+    scores.values.last[:score]
+  end
+
+  def error
+    scores.values.last[:error]
   end
 
   def time_series
@@ -38,26 +44,19 @@ class ScoreCalculator
     sql = score_sql(end_date)
     sum, count = ActiveRecord::Base.connection.execute(sql).first
     self.judged_prediction_count = count
-    half_log = Math.log(0.5)
-    if sum.blank? || sum == 0.0
-      if count.zero?
-        DEFAULT_SCORE
-      else
-        # When they're 100% right about 100% predictions or they're 0% right on 0% predictions
-        (half_log / Math.log(1 - EPSILON)).round(DECIMAL_PLACES)
-      end
-    else
-      ((half_log * count) / sum).round(DECIMAL_PLACES)
-    end
+    return { score: 1, count: 0, error: 0 } if count.zero?
+    { score: (sum / count).round(4), count: count, error: (1 / Math.sqrt(count)).round(4) }
   end
 
   def score_sql(end_date)
     <<-EOS
-      SELECT SUM(LOG(IF(j.outcome, (r.confidence / 100), (1 - (r.confidence / 100))))), COUNT(*)
+      SELECT SUM(POW(IF(j.outcome, 1.0 - (CAST(r.confidence AS DECIMAL) / 100.0), (CAST(r.confidence AS DECIMAL) / 100.0)), 2)), COUNT(*)
       FROM responses r
       INNER JOIN predictions p ON p.id = r.prediction_id
       INNER JOIN (
-        SELECT prediction_id, MAX(id) judgment_id FROM judgements GROUP BY prediction_id
+        SELECT prediction_id, MAX(id) judgment_id
+        FROM judgements WHERE outcome IS NOT NULL
+        GROUP BY prediction_id
       ) most_recent_judgements ON p.id = most_recent_judgements.prediction_id
       INNER JOIN judgements j ON most_recent_judgements.judgment_id = j.id
       WHERE #{prediction_scope_condition}

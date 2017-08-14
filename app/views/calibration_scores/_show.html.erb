@@ -1,6 +1,6 @@
 <table>
   <tr>
-    <th class="narrow">Current score</th>
+    <th class="narrow">Current Brier score</th>
     <td><%= @score_calculator.score %></td>
   </tr>
 </table>
@@ -20,13 +20,14 @@ function drawBasic() {
 
       data.addRows([
         <% @score_calculator.time_series.each do |key_value| %>
-          <%= "[new Date(#{key_value.first.year}, #{key_value.first.month - 1}, #{key_value.first.day}), #{key_value.last}], ".html_safe %>
+          <%= "[new Date(#{key_value.first.year}, #{key_value.first.month - 1}, #{key_value.first.day}), #{key_value.last[:score]}], ".html_safe %>
         <% end %>
       ]);
 
       var options = {
         vAxis: {
-          title: 'Score'
+          title: 'Brier Score',
+          direction: -1
         },
         legend: { position: 'none' }
       };

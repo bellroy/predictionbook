@@ -1,4 +1,4 @@
-- leaderboard = @group.group_members.map { |gm| [gm.user, ScoreCalculator.new(gm.user, start_date: 6.months.ago)] if gm.user.login.present? }.compact.sort_by { |array| array.last.score }.reverse
+- leaderboard = @group.group_members.map { |gm| [gm.user, ScoreCalculator.new(gm.user, start_date: 6.months.ago)] if gm.user.login.present? }.compact.sort_by { |array| array.last.score + array.last.error }
 %table
   %tr
     %th.narrow.right-aligned Position
@@ -25,9 +25,9 @@
         "var data#{array.first.id} = new google.visualization.DataTable();\n" \
           "data#{array.first.id}.addColumn('date', 'X');\n" \
           "data#{array.first.id}.addColumn('number', 'Score');\n" \
-          "data#{array.first.id}.addRows([" + array.last.time_series.map { |key_value| "[new Date(#{key_value.first.year}, #{key_value.first.month - 1}, #{key_value.first.day}), #{key_value.last}], " }.join("\n") +
+          "data#{array.first.id}.addRows([" + array.last.time_series.map { |key_value| "[new Date(#{key_value.first.year}, #{key_value.first.month - 1}, #{key_value.first.day}), #{key_value.last[:score] + key_value.last[:error]}], " }.join("\n") +
           "]);\n" \
-          "var options#{array.first.id} = { height: 32, width: 200, hAxis: { baselineColor: '#fff', gridlineColor: '#fff', textPosition: 'none' }, vAxis: { baselineColor: '#fff', gridlineColor: '#fff', textPosition: 'none' }, legend: { position: 'none' } };\n" \
+          "var options#{array.first.id} = { height: 32, width: 200, hAxis: { baselineColor: '#fff', gridlineColor: '#fff', textPosition: 'none' }, vAxis: { baselineColor: '#fff', gridlineColor: '#fff', textPosition: 'none', direction: -1 }, legend: { position: 'none' } };\n" \
           "var chart#{array.first.id} = new google.visualization.LineChart(document.getElementById('sparkline_div_#{array.first.id}'));\n" \
           "chart#{array.first.id}.draw(data#{array.first.id}, options#{array.first.id});"
       }.join("\n").html_safe
