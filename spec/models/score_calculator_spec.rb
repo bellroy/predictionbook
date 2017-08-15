@@ -42,7 +42,7 @@ describe ScoreCalculator do
       end
       let!(:wagers) { wager.user.wagers }
 
-      it { is_expected.to eq(3.11) }
+      it { is_expected.to eq(0.04) }
     end
 
     context 'with a 100% wager on a judged prediction' do
@@ -58,7 +58,7 @@ describe ScoreCalculator do
       end
       let!(:wagers) { wager.user.wagers }
 
-      it { is_expected.to eq(138.28) }
+      it { is_expected.to eq(0) }
     end
 
     context 'with multiple wagers on judged predictions' do
@@ -95,7 +95,7 @@ describe ScoreCalculator do
       end
       let!(:wagers) { user.wagers }
 
-      it { is_expected.to eq(0.69) }
+      it { is_expected.to eq(0.33) }
     end
   end
 
@@ -108,10 +108,10 @@ describe ScoreCalculator do
       specify do
         today = Time.zone.today
         expect(time_series).to eq(
-          (today - 3.months) => 1.0,
-          (today - 2.months) => 1.0,
-          (today - 1.month) => 1.0,
-          today => 1.0
+          (today - 3.months) => { score: 1, count: 0, error: 0 },
+          (today - 2.months) => { score: 1, count: 0, error: 0 },
+          (today - 1.month) => { score: 1, count: 0, error: 0 },
+          today => { score: 1, count: 0, error: 0 }
         )
       end
     end
@@ -130,10 +130,10 @@ describe ScoreCalculator do
       specify do
         today = Time.zone.today
         expect(time_series).to eq(
-          (today - 3.months) => 1.0,
-          (today - 2.months) => 1.0,
-          (today - 1.month) => 1.0,
-          today => 1.0
+          (today - 3.months) => { score: 1, count: 0, error: 0 },
+          (today - 2.months) => { score: 1, count: 0, error: 0 },
+          (today - 1.month) => { score: 1, count: 0, error: 0 },
+          today => { score: 1, count: 0, error: 0 }
         )
       end
     end
@@ -154,10 +154,10 @@ describe ScoreCalculator do
       specify do
         today = Time.zone.today
         expect(time_series).to eq(
-          (today - 3.months) => 1.0,
-          (today - 2.months) => 1.0,
-          (today - 1.month) => 1.0,
-          today => 3.11
+          (today - 3.months) => { score: 1, count: 0, error: 0 },
+          (today - 2.months) => { score: 1, count: 0, error: 0 },
+          (today - 1.month) => { score: 1, count: 0, error: 0 },
+          today => { score: 0.04, count: 1, error: 1.0 }
         )
       end
     end
@@ -199,10 +199,10 @@ describe ScoreCalculator do
       specify do
         today = Time.zone.today
         expect(time_series).to eq(
-          (today - 3.months) => 1,
-          (today - 2.months) => 0.3,
-          (today - 1.month) => 0.52,
-          today => 0.69
+          (today - 3.months) => { score: 1, count: 0, error: 0 },
+          (today - 2.months) => { score: 0.81, count: 1, error: 1.0 },
+          (today - 1.month) => { score: 0.45, count: 2, error: 0.7071 },
+          today => { score: 0.33, count: 3, error: 0.5774 }
         )
       end
     end
