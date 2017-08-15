@@ -3,14 +3,14 @@
   %tr
     %th.narrow.right-aligned Position
     %th.narrow.left-aligned Login
-    %th.narrow.right-aligned Score
+    %th.narrow.right-aligned Adjusted Brier score
     %th.narrow.right-aligned Judged predictions
-    %th.narrow.left-aligned Sparkline (6 months)
+    %th.narrow.left-aligned Adjusted Brier Sparkline (6 mths)
   - leaderboard.each_with_index do |array, position|
     %tr
       %td.right-aligned= position + 1
       %td.left-aligned= link_to TitleTagPresenter.new(array.first.login).tag, array.first
-      %td.right-aligned= array.last.score
+      %td.right-aligned= array.last.score + array.last.error
       %td.right-aligned= array.last.judged_prediction_count
       %td
         %div{id: "sparkline_div_#{array.first.id}"}
