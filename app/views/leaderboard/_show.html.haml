@@ -3,7 +3,13 @@
   %tr
     %th.narrow.right-aligned Position
     %th.narrow.left-aligned Login
-    %th.narrow.right-aligned Adjusted Brier score
+    %th.narrow.right-aligned
+      .tooltip
+        Adjusted Brier score
+        .tooltiptext.brier
+          The adjusted Brier score is calculated by adding 1 / sqrt(judged_prediction_count) to
+          your Brier score. This adjustment prevents a user with a single correct, high-probability
+          prediction from out-scoring a well-calibrated long-term user.
     %th.narrow.right-aligned Judged predictions
     %th.narrow.left-aligned Adjusted Brier Sparkline (6 mths)
   - leaderboard.each_with_index do |array, position|
