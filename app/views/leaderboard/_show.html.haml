@@ -16,7 +16,7 @@
     %tr
       %td.right-aligned= position + 1
       %td.left-aligned= link_to TitleTagPresenter.new(array.first.login).tag, array.first
-      %td.right-aligned= array.last.score + array.last.error
+      %td.right-aligned= (array.last.score + array.last.error).round(4)
       %td.right-aligned= array.last.judged_prediction_count
       %td
         %div{id: "sparkline_div_#{array.first.id}"}
