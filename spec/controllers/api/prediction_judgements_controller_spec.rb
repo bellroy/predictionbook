@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 require 'spec_helper'
 
@@ -8,7 +8,7 @@ describe Api::PredictionJudgementsController, type: :controller do
   before { user }
 
   describe 'POST create' do
-    subject(:create) { post :create, params }
+    subject(:create) { post :create, params: params }
 
     let(:api_token) { 'real-token' }
     let(:params) { { prediction_id: 123, outcome: 'right', api_token: api_token } }

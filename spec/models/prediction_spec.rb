@@ -1,6 +1,14 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Prediction do
+  around do |example|
+    Timecop.freeze do
+      example.run
+    end
+  end
+
   it 'has a creator attribute that is initially nil' do
     expect(Prediction.new.creator).to be_nil
   end
@@ -202,7 +210,7 @@ describe Prediction do
       allow(Time).to receive(:now).and_return(judged_at)
       prediction.judge!(:right)
 
-      expect(prediction.judged_at).to eq judged_at
+      expect(prediction.judged_at.strftime('%Y%m%d%H%M%S')).to eq judged_at.strftime('%Y%m%d%H%M%S')
     end
   end
 
@@ -303,7 +311,7 @@ describe Prediction do
       it 'returns currently unjudged predictions with previous judgements' do
         rejudged = FactoryGirl.create(:prediction)
         rejudged.judge!(:right, nil)
-        sleep 1 # second granularity on judgement created_at
+        Timecop.travel(Time.zone.now + 1.second)
         rejudged.judge!(nil, nil)
 
         expect(Prediction.unjudged).to eq [rejudged]
@@ -312,7 +320,7 @@ describe Prediction do
       it 'does not return currently judged predictions with previous unknown judgements' do
         rejudged = FactoryGirl.create(:prediction)
         rejudged.judge!(nil, nil)
-        sleep 1 # second granularity on judgement created_at
+        Timecop.travel(Time.zone.now + 1.second)
         rejudged.judge!(:right, nil)
 
         expect(Prediction.unjudged).to eq []
@@ -347,19 +355,17 @@ describe Prediction do
   describe 'notify creator' do
     describe 'default' do
       describe 'when has creator' do
-        before do
-          @user = User.new
-          @prediction = Prediction.new(creator: @user)
-        end
+        let(:user) { User.new }
+        let(:prediction) { Prediction.new(creator: user) }
 
         it 'is true if user has email' do
-          expect(@user).to receive(:notify_on_overdue?).and_return true
-          expect(@prediction.notify_creator).to be true
+          allow(user).to receive(:notify_on_overdue?).and_return true
+          expect(prediction.notify_creator).to be true
         end
 
         it 'is false if creator does not have email' do
-          expect(@user).to receive(:notify_on_overdue?).and_return false
-          expect(@prediction.notify_creator).to be false
+          allow(user).to receive(:notify_on_overdue?).and_return false
+          expect(prediction.notify_creator).to be false
         end
       end
 

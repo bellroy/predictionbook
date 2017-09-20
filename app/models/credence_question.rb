@@ -1,6 +1,6 @@
 class CredenceQuestion < ActiveRecord::Base
-  has_many :answers, class_name: CredenceAnswer, dependent: :destroy, autosave: true
-  has_many :responses, class_name: CredenceGameResponse, dependent: :destroy, autosave: true
+  has_many :answers, class_name: CredenceAnswer.name, dependent: :destroy, autosave: true
+  has_many :responses, class_name: CredenceGameResponse.name, dependent: :destroy, autosave: true
 
   def build_random_response(game)
     randomly_sorted_answers = answers.order('RAND()').first(5)

@@ -32,7 +32,7 @@ gem 'rack-cors'
 
 # Misc
 gem 'hashdiff'
-gem 'honeypot-captcha'
+gem 'honeypot-captcha', git: 'https://github.com/RandieM/honeypot-captcha'
 gem 'sentry-raven'
 
 group :development do
@@ -70,6 +70,7 @@ group :test do
   gem 'ffaker'
   gem 'guard-rspec'
   gem 'launchy'
+  gem 'rails-controller-testing'
   gem 'shoulda-matchers'
 end
 

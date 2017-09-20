@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 require 'spec_helper'
 
@@ -159,7 +159,7 @@ describe PredictionsController do
   describe 'Creating a new prediction' do
     let(:params) { FactoryGirl.build(:prediction).attributes }
 
-    subject(:create) { post :create, prediction: params }
+    subject(:create) { post :create, params: { prediction: params } }
 
     describe 'privacy' do
       before do
@@ -235,7 +235,7 @@ describe PredictionsController do
 
         it 'is false when prediction privacy is not provided' do
           expect(Prediction).to receive(:create!)
-            .with(hash_including('visibility' => '0')).and_return(prediction)
+            .with(hash_including('visibility' => 'visible_to_everyone'))
             .and_return(prediction)
           create
         end
@@ -304,13 +304,15 @@ describe PredictionsController do
   describe 'viewing a prediction' do
     let(:logged_in_user) { creator }
 
+    subject(:show) { get :show, params: { id: prediction.id } }
+
     it 'assigns the prediction' do
-      get :show, id: prediction.id
+      show
       expect(assigns[:prediction]).to eq prediction
     end
 
     it 'assigns the prediction events' do
-      get :show, id: prediction.id
+      show
       expect(assigns[:events]).to eq prediction.events
     end
 
@@ -319,23 +321,23 @@ describe PredictionsController do
 
       it 'instantiates a new Response object' do
         expect(Response).to receive(:new)
-        get :show, id: prediction.id
+        show
       end
 
       it 'assigns new wager object for the view' do
         expect(Response).to receive(:new).and_return :response
-        get :show, id: prediction.id
+        show
         expect(assigns[:prediction_response]).to eq :response
       end
 
       it 'assigns the current user to the response' do
         expect(Response).to receive(:new).with(hash_including(user: logged_in_user))
-        get :show, id: prediction.id
+        show
       end
     end
 
     it 'filters the deadline notifications by the current user' do
-      get :show, id: prediction.id
+      show
       expect(response).to be_success
       expect(assigns[:deadline_notification]).to be_a DeadlineNotification
     end
@@ -349,7 +351,7 @@ describe PredictionsController do
       context 'not owned by current user' do
         let(:logged_in_user) { FactoryGirl.create(:user) }
         it 'is forbidden when not owned by current user' do
-          get :show, id: prediction.id
+          show
           expect(response.response_code).to eq 302
         end
       end
@@ -358,7 +360,7 @@ describe PredictionsController do
         let(:logged_in_user) { nil }
 
         it 'is forbidden when not logged in' do
-          get :show, id: prediction.id
+          show
           expect(response.response_code).to eq 302
         end
       end
@@ -366,7 +368,7 @@ describe PredictionsController do
 
     describe 'response object for commenting or wagering' do
       it 'instantiates a new Response object' do
-        get :show, id: prediction.id
+        show
         expect(assigns[:prediction_response]).to be_a Response
         expect(assigns[:prediction_response]).to be_new_record
         expect(assigns[:prediction_response].user).to eq logged_in_user
@@ -378,7 +380,7 @@ describe PredictionsController do
     let(:id) { prediction.id }
     let(:outcome) { '' }
 
-    subject(:judge) { post :judge, id: id, outcome: outcome }
+    subject(:judge) { post :judge, params: { id: id, outcome: outcome } }
 
     context 'not logged in' do
       let(:logged_in_user) { nil }
@@ -423,12 +425,14 @@ describe PredictionsController do
   end
 
   describe 'Withdrawing a prediction' do
+    subject(:withdraw) { post :withdraw, params: { id: prediction.id } }
+
     describe 'when the current user is the creator of the prediction' do
       context 'not logged in' do
         let(:logged_in_user) { nil }
 
         it 'requires the user to be logged in' do
-          post :withdraw, id: prediction.id
+          withdraw
           expect(response).to redirect_to(new_user_session_path)
         end
       end
@@ -440,7 +444,7 @@ describe PredictionsController do
 
         it 'redirects to prediction page after POST to withdraw' do
           expect_any_instance_of(Prediction).to receive(:withdraw!)
-          post :withdraw, id: prediction.id
+          withdraw
           expect(response).to redirect_to(prediction_path(prediction.id))
         end
       end
@@ -449,13 +453,13 @@ describe PredictionsController do
     describe 'when the current user is not the creator of the prediction' do
       it 'denies access' do
         allow_any_instance_of(Prediction).to receive(:private?).and_return(false)
-        post :withdraw, id: prediction.id
+        withdraw
         expect(response.response_code).to eq 302
       end
     end
   end
 
-  [:unjudged, :judged, :future].each do |action|
+  %i[unjudged judged future].each do |action|
     describe action.to_s do
       let(:relation) { class_double(Prediction) }
 
@@ -486,17 +490,19 @@ describe PredictionsController do
   end
 
   describe 'getting the edit form for a prediction' do
+    subject(:edit) { get :edit, params: { id: prediction.id } }
+
     describe 'not logged in' do
       let(:logged_in_user) { nil }
       it 'requires a login' do
-        get :edit, id: prediction.id
+        edit
         expect(response).to redirect_to(new_user_session_path)
       end
     end
 
     describe 'when logged in' do
       it 'requires the user to have created the prediction' do
-        get :edit, id: prediction.id
+        edit
         expect(response.response_code).to eq 302
       end
 
@@ -504,7 +510,7 @@ describe PredictionsController do
         let(:creator) { logged_in_user }
 
         it 'assigns the prediction' do
-          get :edit, id: prediction.id
+          edit
           expect(assigns[:prediction]).to eq prediction
         end
       end
@@ -512,7 +518,9 @@ describe PredictionsController do
   end
 
   describe 'updating a prediction' do
-    subject(:update) { put :update, id: prediction.id, prediction: { description: 'something' } }
+    subject(:update) do
+      put :update, params: { id: prediction.id, prediction: { description: 'something' } }
+    end
 
     context 'not logged in' do
       let(:logged_in_user) { nil }

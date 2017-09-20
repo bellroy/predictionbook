@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe CredenceGamesController do
@@ -5,7 +7,7 @@ describe CredenceGamesController do
   before { sign_in user }
 
   describe '#show' do
-    subject(:show) { get :show, id: 'try' }
+    subject(:show) { get :show, params: { id: 'try' } }
 
     it 'should not error if the db has not been initialized' do
       expect { show }.not_to raise_error
@@ -48,9 +50,11 @@ describe CredenceGamesController do
   end
 
   describe '#destroy' do
-    let!(:game) { FactoryGirl.create(:credence_game, user: user) }
+    let(:game) { FactoryGirl.create(:credence_game, user: user) }
 
-    subject(:destroy) { delete :destroy, id: game.id }
+    before { game }
+
+    subject(:destroy) { delete :destroy, params: { id: game.id } }
 
     specify do
       expect { destroy }.to change { CredenceGame.count }.from(1).to(0)

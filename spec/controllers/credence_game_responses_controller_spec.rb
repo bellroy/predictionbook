@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe CredenceGameResponsesController do
@@ -13,7 +15,7 @@ describe CredenceGameResponsesController do
     let(:answer_credence) { 51 }
     let(:response_attributes) { { given_answer: given_answer, answer_credence: answer_credence } }
 
-    subject(:update) { post :update, id: response_id, response: response_attributes }
+    subject(:update) { post :update, params: { id: response_id, response: response_attributes } }
 
     def check_flash(correct, score)
       expect(flash[:correct]).to eq correct

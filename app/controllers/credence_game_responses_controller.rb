@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CredenceGameResponsesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_response
@@ -25,11 +27,14 @@ class CredenceGameResponsesController < ApplicationController
   end
 
   def check_response_for_current_user
-    render status: :forbidden, text: '' if @response.credence_game.user_id != current_user.id
+    head :forbidden if @response.credence_game.user_id != current_user.id
   end
 
   def response_params
-    params.require(:response).permit(:answer_credence, :given_answer).merge(answered_at: Time.zone.now)
+    params
+      .require(:response)
+      .permit(:answer_credence, :given_answer)
+      .merge(answered_at: Time.zone.now)
   end
 
   def set_game

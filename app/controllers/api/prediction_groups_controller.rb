@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   class PredictionGroupsController < AuthorisedController
     MAXIMUM_PREDICTION_GROUPS_LIMIT = 1000

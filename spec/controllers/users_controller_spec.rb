@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe UsersController do
@@ -16,7 +18,7 @@ describe UsersController do
       expect_any_instance_of(User).to receive(:predictions).and_return relation
     end
 
-    subject(:show) { get :show, id: target_user.id }
+    subject(:show) { get :show, params: { id: target_user.id } }
 
     context 'logged in user and target user are the same' do
       let(:target_user) { logged_in_user }
@@ -45,7 +47,7 @@ describe UsersController do
   end
 
   describe '#statistics' do
-    subject(:statistics) { get :statistics, id: user_id }
+    subject(:statistics) { get :statistics, params: { id: user_id } }
 
     let(:user_id) { target_user.id }
 
@@ -57,7 +59,7 @@ describe UsersController do
   end
 
   describe 'users setting page' do
-    subject(:settings) { get :settings, id: user_id }
+    subject(:settings) { get :settings, params: { id: user_id } }
 
     let(:user_id) { target_user.id }
 
@@ -95,7 +97,7 @@ describe UsersController do
   end
 
   describe 'PUT update' do
-    subject(:update) { put :update, id: user_id, user: user_params }
+    subject(:update) { put :update, params: { id: user_id, user: user_params } }
 
     let(:group) { FactoryGirl.create(:group) }
     let(:user_params) { { visibility_default: "visible_to_group_#{group.id}" } }

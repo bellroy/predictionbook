@@ -7,7 +7,7 @@ describe GroupMemberInvitationsController do
   let(:group) { group_member.group }
 
   describe 'GET show' do
-    subject(:show) { get :show, params }
+    subject(:show) { get :show, params: params }
 
     context 'valid group invitation' do
       let(:params) { { id: group_member.uuid } }

@@ -23,8 +23,6 @@ module PredictionBook
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{Rails.root}/app/sweepers #{Rails.root}/app/observers)
 
-    config.active_record.raise_in_transactional_callbacks = true
-
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'UTC'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
@@ -23,9 +25,9 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    added_attrs = [:login, :email, :password, :password_confirmation, :remember_me]
+    added_attrs = %i[login email password password_confirmation remember_me]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
-    devise_parameter_sanitizer.permit :account_update, keys: added_attrs + [:crypted_password, :salt]
+    devise_parameter_sanitizer.permit :account_update, keys: added_attrs + %i[crypted_password salt]
   end
 
   private
