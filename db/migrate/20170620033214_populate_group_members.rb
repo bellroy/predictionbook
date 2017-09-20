@@ -1,4 +1,4 @@
-class PopulateGroupMembers < ActiveRecord::Migration
+class PopulateGroupMembers < ActiveRecord::Migration[4.2]
   def up
     connection = ActiveRecord::Base.connection
 
