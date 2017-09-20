@@ -15,7 +15,7 @@ class Notification < ActiveRecord::Base
   scope :enabled, -> { where(enabled: true) }
   scope :disabled, -> { where(enabled: false) }
 
-  def initialize(attrs = {}, options = {})
+  def initialize(attributes = nil)
     super
     self.uuid ||= UUIDTools::UUID.random_create.to_s
   end

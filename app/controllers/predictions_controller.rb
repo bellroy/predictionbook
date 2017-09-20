@@ -1,12 +1,10 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 class PredictionsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :judge, :withdraw, :edit, :update]
-  before_action :find_prediction, only: [:judge, :show, :withdraw, :edit, :update]
-  before_action :must_be_authorized_for_prediction, only: [:withdraw, :edit, :update, :show]
+  before_action :authenticate_user!, only: %i[new create judge withdraw edit update]
+  before_action :find_prediction, only: %i[judge show withdraw edit update]
+  before_action :must_be_authorized_for_prediction, only: %i[withdraw edit update show]
   before_action :ensure_statistics, only: [:index]
-
-  skip_before_action :assign_groups, only: [:sitemap]
 
   cache_sweeper :statistics_sweeper, only: :judge
 
@@ -64,7 +62,7 @@ class PredictionsController < ApplicationController
     @page = params[:page]
     # Grabbing IDs & updated_at of all non-private predictions:
     @predictions = Prediction.order(created_at: :desc).visible_to_everyone.page(@page)
-      .per(MAXIMUM_ENTRIES_IN_SITEMAP).pluck(:id, :updated_at)
+                             .per(MAXIMUM_ENTRIES_IN_SITEMAP).pluck(:id, :updated_at)
   end
 
   def index

@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 require 'spec_helper'
 
@@ -8,22 +8,22 @@ describe Api::CurrentUsersController, type: :controller do
   describe 'GET show' do
     context 'with valid API token' do
       before do
-        get :show, id: 'me', api_token: user.api_token
+        get :show, params: { id: 'me', api_token: user.api_token }
       end
 
       specify do
         expect(response).to be_success
-        expect(response.content_type).to eq(Mime::JSON)
+        expect(response.content_type).to eq 'application/json'
         expect(response.body).to include user.login
       end
     end
 
     context 'with invalid API token' do
-      before { get :show, id: 'me', api_token: 'fake-token' }
+      before { get :show, params: { id: 'me', api_token: 'fake-token' } }
 
       specify do
         expect(response).to_not be_success
-        expect(response.content_type).to eq(Mime::JSON)
+        expect(response.content_type).to eq 'application/json'
       end
     end
   end

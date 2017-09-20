@@ -1,7 +1,7 @@
 class CredenceGame < ActiveRecord::Base
   belongs_to :user
-  belongs_to :current_response, class_name: CredenceGameResponse, autosave: true
-  has_many :responses, class_name: CredenceGameResponse
+  belongs_to :current_response, class_name: CredenceGameResponse.name, autosave: true
+  has_many :responses, class_name: CredenceGameResponse.name, dependent: :destroy
 
   after_create :ensure_current_response
 
@@ -46,6 +46,6 @@ class CredenceGame < ActiveRecord::Base
   def create_new_response_to_random_question
     question = CredenceQuestion.where(enabled: true).order('RAND()').first
     self.current_response = question.build_random_response(self) if question.present?
-    save! if changed?
+    save! if saved_changes?
   end
 end

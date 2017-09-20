@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :lookup_user, only: %i[show update settings due_for_judgement statistics]
   before_action :authenticate_user!, only: %i[settings update generate_api_token]

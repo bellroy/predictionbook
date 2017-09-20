@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe ResponsesController do
@@ -15,7 +17,7 @@ describe ResponsesController do
     end
     let(:params) { { comment: 'A sample comment' } }
 
-    subject(:create) { post :create, prediction_id: '1', response: params }
+    subject(:create) { post :create, params: { prediction_id: '1', response: params } }
 
     it 'requires the user to be logged in' do
       create
@@ -52,7 +54,7 @@ describe ResponsesController do
   describe '#preview' do
     before { sign_in logged_in_user }
 
-    subject(:preview) { get :preview, response: { comment: 'some text' } }
+    subject(:preview) { get :preview, params: { response: { comment: 'some text' } } }
 
     it 'responds to preview action and render partial' do
       mock_response = instance_double(Response).as_null_object

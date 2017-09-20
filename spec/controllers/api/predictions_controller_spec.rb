@@ -1,53 +1,58 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 require 'spec_helper'
 
 describe Api::PredictionsController, type: :controller do
-  let!(:user) { FactoryGirl.create(:user, api_token: 'real-token') }
-  let!(:prediction) { FactoryGirl.create(:prediction) }
+  let(:user) { FactoryGirl.create(:user, api_token: 'real-token') }
+  let(:prediction) { FactoryGirl.create(:prediction) }
+
+  before do
+    user
+    prediction
+  end
 
   describe 'GET /predictions' do
     context 'with valid API token' do
       before do
-        get :index, api_token: user.api_token
+        get :index, params: { api_token: user.api_token }
       end
 
       specify { expect(response).to be_success }
-      specify { expect(response.content_type).to eq(Mime::JSON) }
+      specify { expect(response.content_type).to eq 'application/json' }
       specify { expect(response.body).to include prediction.description_with_group }
     end
 
     context 'with invalid API token' do
-      before { get :index, api_token: 'fake-token' }
+      before { get :index, params: { api_token: 'fake-token' } }
 
       specify { expect(response).to_not be_success }
-      specify { expect(response.content_type).to eq(Mime::JSON) }
+      specify { expect(response.content_type).to eq 'application/json' }
     end
   end
 
   describe 'GET /predictions/:id' do
     context 'with valid API token' do
       before do
-        get :show, id: prediction.id, api_token: user.api_token
+        get :show, params: { id: prediction.id, api_token: user.api_token }
       end
 
       specify { expect(response).to be_success }
-      specify { expect(response.content_type).to eq(Mime::JSON) }
+      specify { expect(response.content_type).to eq 'application/json' }
       specify { expect(response.body).to_not be_empty }
     end
 
     context 'with invalid API token' do
-      before { get :show, id: prediction.id, api_token: 'fake-token' }
+      before { get :show, params: { id: prediction.id, api_token: 'fake-token' } }
 
       specify { expect(response).to_not be_success }
-      specify { expect(response.content_type).to eq(Mime::JSON) }
+      specify { expect(response.content_type).to eq 'application/json' }
     end
 
     context 'with non-existent id' do
-      before { get :show, id: 999, api_token: 'fake-token' }
+      before { get :show, params: { id: 999, api_token: 'fake-token' } }
 
       specify { expect(response).to_not be_success }
-      specify { expect(response.content_type).to eq(Mime::JSON) }
+      specify { expect(response.content_type).to eq 'application/json' }
     end
   end
 
@@ -62,14 +67,14 @@ describe Api::PredictionsController, type: :controller do
 
     context 'with valid API token' do
       it 'creates a new prediction' do
-        post :create, prediction: prediction_params, api_token: user.api_token
+        post :create, params: { prediction: prediction_params, api_token: user.api_token }
         expect(response.body).to include(prediction_params[:description])
       end
 
       context 'with a malformed prediction' do
         before do
           prediction_params[:initial_confidence] = 9000
-          post :create, prediction: prediction_params, api_token: user.api_token
+          post :create, params: { prediction: prediction_params, api_token: user.api_token }
         end
 
         specify { expect(response).to_not be_success }
@@ -86,7 +91,7 @@ describe Api::PredictionsController, type: :controller do
           }
         end
 
-        before { post :create, prediction: prediction_params, api_token: user.api_token }
+        before { post :create, params: { prediction: prediction_params, api_token: user.api_token } }
 
         specify do
           expect(Prediction.last.visible_to_creator?).to be true
@@ -103,7 +108,7 @@ describe Api::PredictionsController, type: :controller do
           }
         end
 
-        before { post :create, prediction: prediction_params, api_token: user.api_token }
+        before { post :create, params: { prediction: prediction_params, api_token: user.api_token } }
 
         specify do
           expect(Prediction.last.visible_to_creator?).to be true
@@ -113,7 +118,7 @@ describe Api::PredictionsController, type: :controller do
 
     context 'with invalid API token' do
       before do
-        post :create, api_token: 'fake-token', prediction: prediction_params
+        post :create, params: { api_token: 'fake-token', prediction: prediction_params }
       end
 
       specify do
@@ -133,14 +138,13 @@ describe Api::PredictionsController, type: :controller do
     context 'with valid API token' do
       context 'authorized user' do
         before do
-          put :update,
-              api_token: user.api_token,
-              id: prediction.id,
-              prediction: new_prediction_params
+          put :update, params: { api_token: user.api_token,
+                                 id: prediction.id,
+                                 prediction: new_prediction_params }
         end
 
         specify { expect(response).to be_success }
-        specify { expect(response.content_type).to eq(Mime::JSON) }
+        specify { expect(response.content_type).to eq 'application/json' }
 
         it 'updates the existing prediction' do
           description = new_prediction_params[:description]
@@ -152,27 +156,25 @@ describe Api::PredictionsController, type: :controller do
 
       context 'unauthorized user' do
         before do
-          put :update,
-              api_token: 'fake-token',
-              id: prediction.id,
-              prediction: new_prediction_params
+          put :update, params: { api_token: 'fake-token',
+                                 id: prediction.id,
+                                 prediction: new_prediction_params }
         end
 
         specify { expect(response).to_not be_success }
-        specify { expect(response.content_type).to eq(Mime::JSON) }
+        specify { expect(response.content_type).to eq 'application/json' }
       end
     end
 
     context 'with invalid API token' do
       before do
-        put :update,
-            api_token: 'fake-token',
-            id: prediction.id,
-            prediction: new_prediction_params
+        put :update, params: { api_token: 'fake-token',
+                               id: prediction.id,
+                               prediction: new_prediction_params }
       end
 
       specify { expect(response).to_not be_success }
-      specify { expect(response.content_type).to eq(Mime::JSON) }
+      specify { expect(response.content_type).to eq 'application/json' }
     end
   end
 end

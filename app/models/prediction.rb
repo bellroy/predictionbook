@@ -1,5 +1,7 @@
 class Prediction < ActiveRecord::Base
-  has_many :versions, autosave: true, class_name: PredictionVersion
+  attr_reader :notify_creator
+
+  has_many :versions, autosave: true, class_name: PredictionVersion.name, dependent: :destroy
 
   belongs_to :group
   belongs_to :prediction_group
@@ -94,19 +96,28 @@ class Prediction < ActiveRecord::Base
   end
 
   before_validation(on: :create) do
-    @initial_response ||= responses.build(
-      prediction: self,
-      confidence: initial_confidence,
-      user: creator
-    )
+    @initial_response ||= responses.build(prediction: self, confidence: initial_confidence,
+                                          user: creator)
 
     deadline_notifications.build(prediction: self, user: creator) if notify_creator
+  end
+
+  def initialize(attributes = nil)
+    notify_creator_bool = extract_notify_creator_bool(attributes)
+    super
+    assign_notify_creator_with_default(notify_creator_bool)
+  end
+
+  def assign_attributes(attributes)
+    notify_creator_bool = extract_notify_creator_bool(attributes)
+    super
+    assign_notify_creator_with_default(notify_creator_bool)
   end
 
   def save!
     super
   rescue ActiveRecord::StatementInvalid => error
-    raise DuplicateRecord, Prediction.find_by(uuid: uuid) if error.message =~ /Duplicate entry/
+    raise DuplicateRecord, Prediction.find_by(uuid: uuid) if error.message.match?(/Duplicate entry/)
     raise
   end
 
@@ -117,8 +128,6 @@ class Prediction < ActiveRecord::Base
   end
 
   attr_writer :initial_confidence
-
-  boolean_accessor_with_default(:notify_creator) { creator ? creator.notify_on_overdue? : false }
 
   # attr_reader :deadline_text
   def deadline_text
@@ -248,7 +257,15 @@ class Prediction < ActiveRecord::Base
     result << description
   end
 
+  def creator=(value)
+    super
+    assign_notify_creator_with_default(nil) unless notify_creator_set_by_attributes
+  end
+
   private
+
+  attr_writer :notify_creator
+  attr_accessor :notify_creator_set_by_attributes
 
   def too_futuristic?
     return deadline.year > 9999 unless deadline.nil?
@@ -261,7 +278,7 @@ class Prediction < ActiveRecord::Base
   end
 
   def retrodiction?
-    return deadline < Time.now - 15.days unless deadline.nil?
+    return deadline < Time.zone.now - 15.days unless deadline.nil?
     false
   end
 
@@ -270,5 +287,19 @@ class Prediction < ActiveRecord::Base
     vis_int = Visibility::VALUES[visibility.to_sym]
     predictions_in_group = Prediction.where(prediction_group_id: prediction_group_id)
     predictions_in_group.update_all(deadline: deadline, visibility: vis_int, group_id: group_id)
+  end
+
+  def extract_notify_creator_bool(attributes)
+    notify_creator_value = attributes.delete(:notify_creator) if attributes.present?
+    [true, 'true', 1, '1', 't'].include?(notify_creator_value) unless notify_creator_value.nil?
+  end
+
+  def assign_notify_creator_with_default(notify_creator_bool)
+    if notify_creator_bool.nil?
+      self.notify_creator = creator&.notify_on_overdue? || false
+    else
+      self.notify_creator = notify_creator_bool
+      self.notify_creator_set_by_attributes = true
+    end
   end
 end

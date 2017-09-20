@@ -6,7 +6,7 @@ describe GroupMembersController do
   let(:group) { FactoryGirl.create(:group) }
 
   describe 'GET index' do
-    subject(:index) { get :index, group_id: group.id }
+    subject(:index) { get :index, params: { group_id: group.id } }
 
     context 'not logged in' do
       specify do
@@ -62,7 +62,7 @@ describe GroupMembersController do
   end
 
   describe 'GET new' do
-    subject(:new) { get :new, group_id: group.id }
+    subject(:new) { get :new, params: { group_id: group.id } }
 
     context 'not logged in' do
       specify do
@@ -114,7 +114,7 @@ describe GroupMembersController do
   end
 
   describe 'POST create' do
-    subject(:create) { post :create, params }
+    subject(:create) { post :create, params: params }
 
     let(:params) do
       { group_id: group.id, login: other_user.login }
@@ -166,7 +166,7 @@ describe GroupMembersController do
         before { FactoryGirl.create(:group_member, :admin, group: group, user: user) }
 
         specify do
-          expect(GroupMemberMailer).to receive(:invitation).twice.and_call_original
+          expect(GroupMemberMailer).to receive(:invitation).and_call_original
           create
           expect(response).to redirect_to group_group_members_path(group)
           expect(assigns[:group_member]).not_to be_nil
@@ -187,7 +187,7 @@ describe GroupMembersController do
   end
 
   describe 'PUT update' do
-    subject(:update) { put :update, params }
+    subject(:update) { put :update, params: params }
 
     let(:group_member) { FactoryGirl.create(:group_member, :invitee, group: group) }
     let(:params) do
@@ -239,7 +239,7 @@ describe GroupMembersController do
 
         context 'role is nil' do
           specify do
-            expect(GroupMemberMailer).to receive(:invitation).twice.and_call_original
+            expect(GroupMemberMailer).to receive(:invitation).and_call_original
             update
             expect(response).to redirect_to group_group_members_path(group)
             expect(assigns[:group_member]).not_to be_nil
@@ -271,7 +271,7 @@ describe GroupMembersController do
   end
 
   describe 'DELETE destroy' do
-    subject(:destroy) { delete :destroy, group_id: group.id, id: group_member.id }
+    subject(:destroy) { delete :destroy, params: { group_id: group.id, id: group_member.id } }
 
     let(:group_member) { FactoryGirl.create(:group_member, group: group) }
 
@@ -318,7 +318,7 @@ describe GroupMembersController do
         specify do
           group_member
           expect(GroupMember.count).to eq 2
-          expect(GroupMemberMailer).to receive(:ejection).twice.and_call_original
+          expect(GroupMemberMailer).to receive(:ejection).and_call_original
           destroy
           expect(response).to redirect_to group_group_members_path(group)
           expect(GroupMember.count).to eq 1

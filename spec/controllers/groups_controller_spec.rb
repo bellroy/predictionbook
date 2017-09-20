@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe GroupsController do
@@ -49,7 +51,7 @@ describe GroupsController do
   end
 
   describe 'GET show' do
-    subject(:show) { get :show, id: group.id }
+    subject(:show) { get :show, params: { id: group.id } }
 
     let(:group) { FactoryGirl.create(:group) }
 
@@ -112,7 +114,7 @@ describe GroupsController do
   end
 
   describe 'POST create' do
-    subject(:create) { post :create, params }
+    subject(:create) { post :create, params: params }
 
     let(:params) do
       { group: { name: 'my new group' }, invitees: "me\nyou\nhim" }
@@ -135,7 +137,7 @@ describe GroupsController do
       let(:user) { FactoryGirl.create(:user, login: 'admin') }
 
       specify do
-        expect(GroupMemberMailer).to receive(:invitation).exactly(4).times.and_call_original
+        expect(GroupMemberMailer).to receive(:invitation).exactly(2).times.and_call_original
         create
         expect(response).to redirect_to group_path(Group.last)
         expect(assigns[:group].name).to eq 'my new group'
@@ -157,7 +159,7 @@ describe GroupsController do
   end
 
   describe 'GET edit' do
-    subject(:edit) { get :edit, id: group.id }
+    subject(:edit) { get :edit, params: { id: group.id } }
 
     let(:group) { FactoryGirl.create(:group) }
 
@@ -199,7 +201,7 @@ describe GroupsController do
     end
 
     describe 'PUT update' do
-      subject(:update) { put :update, params }
+      subject(:update) { put :update, params: params }
 
       let(:params) do
         { id: group.id, group: { name: 'my new group' }, invitees: 'me@email.com' }
@@ -260,7 +262,7 @@ describe GroupsController do
     end
 
     describe 'DELETE destroy' do
-      subject(:destroy) { delete :destroy, id: group.id }
+      subject(:destroy) { delete :destroy, params: { id: group.id } }
 
       let(:group) { FactoryGirl.create(:group) }
 

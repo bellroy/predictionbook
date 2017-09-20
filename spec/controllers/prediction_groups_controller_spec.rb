@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe PredictionGroupsController do
@@ -17,7 +19,7 @@ describe PredictionGroupsController do
   end
 
   describe 'GET show' do
-    subject(:show) { get :show, id: prediction_group.id }
+    subject(:show) { get :show, params: { id: prediction_group.id } }
 
     context 'private and not author' do
       let(:visibility) { :visible_to_creator }
@@ -55,7 +57,7 @@ describe PredictionGroupsController do
   end
 
   describe 'POST create' do
-    subject(:create) { post :create, params }
+    subject(:create) { post :create, params: params }
 
     let(:params) do
       { prediction_group: { description: 'I believe my face is:' } }
@@ -90,7 +92,7 @@ describe PredictionGroupsController do
   end
 
   describe 'GET edit' do
-    subject(:edit) { get :edit, id: prediction_group.id }
+    subject(:edit) { get :edit, params: { id: prediction_group.id } }
 
     before { prediction }
 
@@ -116,7 +118,7 @@ describe PredictionGroupsController do
   end
 
   describe 'PUT update' do
-    subject(:update) { post :update, params }
+    subject(:update) { post :update, params: params }
 
     let(:params) do
       { id: prediction_group.id, prediction_group: { description: 'I believe my face is:' } }
