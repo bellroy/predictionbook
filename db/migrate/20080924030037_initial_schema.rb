@@ -1,4 +1,4 @@
-class InitialSchema < ActiveRecord::Migration
+class InitialSchema < ActiveRecord::Migration[4.2]
   def self.up
     create_table "judgements", :force => true do |t|
       t.integer  "prediction_id"

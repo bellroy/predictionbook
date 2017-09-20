@@ -1,4 +1,4 @@
-class CreateCredenceGame < ActiveRecord::Migration
+class CreateCredenceGame < ActiveRecord::Migration[4.2]
   def change
     create_table :credence_games do |t|
       t.integer  :current_response_id
