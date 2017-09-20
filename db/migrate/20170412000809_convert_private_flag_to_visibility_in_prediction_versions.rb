@@ -1,4 +1,4 @@
-class ConvertPrivateFlagToVisibilityInPredictionVersions < ActiveRecord::Migration
+class ConvertPrivateFlagToVisibilityInPredictionVersions < ActiveRecord::Migration[4.2]
   def up
     sql = <<-EOS
     UPDATE prediction_versions

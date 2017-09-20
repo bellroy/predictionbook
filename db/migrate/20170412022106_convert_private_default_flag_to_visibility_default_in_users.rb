@@ -1,4 +1,4 @@
-class ConvertPrivateDefaultFlagToVisibilityDefaultInUsers < ActiveRecord::Migration
+class ConvertPrivateDefaultFlagToVisibilityDefaultInUsers < ActiveRecord::Migration[4.2]
   def up
     sql = <<-EOS
     UPDATE users
