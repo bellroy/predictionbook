@@ -23,14 +23,14 @@ describe ResponseNotificationsController do
         notification = instance_double(ResponseNotification).as_null_object
         expect(notification).to receive(:prediction).and_return(instance_double(Prediction, id: 1))
         expect(relation).to receive(:create!).with('prediction_id' => '7').and_return(notification)
-        post :create, response_notification: { prediction_id: '7' }
+        post :create, params: { response_notification: { prediction_id: '7' } }
       end
 
       it 'redirects back to the prediction' do
         prediction = instance_double(Prediction, id: '7')
         response_notification = instance_double(ResponseNotification, prediction: prediction)
         expect(relation).to receive(:create!).and_return(response_notification)
-        post :create, response_notification: { prediction_id: '7' }
+        post :create, params: { response_notification: { prediction_id: '7' } }
         expect(response).to redirect_to(prediction_path(prediction))
       end
     end
@@ -38,7 +38,7 @@ describe ResponseNotificationsController do
 
   describe 'updating a notification' do
     it 'requires the user to be logged in' do
-      put :update, id: 'hai'
+      put :update, params: { id: 'hai' }
       expect(response).to redirect_to(new_user_session_path)
     end
 
@@ -56,11 +56,11 @@ describe ResponseNotificationsController do
 
       it 'updates a response notification record' do
         expect(notification).to receive(:update_attributes!)
-        put :update, id: 'hai', response_notification: { prediction_id: '7' }
+        put :update, params: { id: 'hai', response_notification: { prediction_id: '7' } }
       end
 
       it 'redirects back to the prediction' do
-        put :update, id: 'hai', response_notification: { prediction_id: '7' }
+        put :update, params: { id: 'hai', response_notification: { prediction_id: '7' } }
         expect(response).to redirect_to(prediction_path(prediction))
       end
     end

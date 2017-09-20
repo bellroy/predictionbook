@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdatedPredictionGroup
   attr_reader :prediction_group
 

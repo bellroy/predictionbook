@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   class PredictionsController < AuthorisedController
     MAXIMUM_PREDICTIONS_LIMIT = 1000
