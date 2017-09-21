@@ -1,8 +1,16 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 feature 'creating and modifying prediction groups', js: true do
   let(:user) { FactoryGirl.create(:user) }
   before { login_as user }
+
+  around do |example|
+    Timecop.travel(Time.new(2017, 9, 17, 17).in_time_zone('Melbourne')) do
+      example.run
+    end
+  end
 
   scenario 'making a new prediction group' do
     visit new_prediction_group_path
