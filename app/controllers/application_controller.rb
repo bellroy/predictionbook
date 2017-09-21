@@ -14,9 +14,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :force_change_password
 
-  # See ActionController::RequestForgeryProtection for details
-  # Uncomment the :secret if you're not using the cookie session store
-  protect_from_forgery # :secret => 'c4ec086ac06ce802c8f49e28cc1e8943'
+  protect_from_forgery with: :exception, prepend: true
 
   protected
 
