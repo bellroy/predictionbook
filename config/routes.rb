@@ -56,6 +56,7 @@ PredictionBook::Application.routes.draw do
   namespace :api do
     resources :predictions, format: :json
     resources :prediction_groups, format: :json
+    resources :prediction_group_by_description, only: [:update], format: :json
     resources :prediction_judgements, only: [:create], format: :json
     resources :current_users, only: :show
   end
