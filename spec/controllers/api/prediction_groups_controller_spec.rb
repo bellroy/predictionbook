@@ -14,42 +14,51 @@ module Api
           get :index, params: { api_token: user.api_token }
         end
 
-        specify { expect(response).to be_success }
-        specify { expect(response.content_type).to eq 'application/json' }
-        specify { expect(response.body).to include prediction_group.description }
+        specify do
+          expect(response).to be_success
+          expect(response.content_type).to eq 'application/json'
+          expect(response.body).to include prediction_group.description
+        end
       end
 
       context 'with invalid API token' do
         before { get :index, params: { api_token: 'fake-token' } }
 
-        specify { expect(response).to_not be_success }
-        specify { expect(response.content_type).to eq 'application/json' }
+        specify do
+          expect(response).to_not be_success
+          expect(response.content_type).to eq 'application/json'
+        end
       end
     end
 
     describe 'show' do
-      context 'with valid API token' do
-        before do
-          get :show, params: { id: prediction_group.id, api_token: user.api_token }
-        end
+      subject(:show) { get :show, params: params }
 
-        specify { expect(response).to be_success }
-        specify { expect(response.content_type).to eq 'application/json' }
-        specify { expect(response.body).to_not be_empty }
+      context 'with valid API token' do
+        let(:params) { { id: prediction_group.id, api_token: user.api_token } }
+
+        specify do
+          show
+          expect(response).to be_success
+          expect(response.content_type).to eq 'application/json'
+          expect(response.body).to_not be_empty
+        end
       end
 
       context 'with invalid API token' do
-        before { get :show, params: { id: prediction_group.id, api_token: 'fake-token' } }
+        let(:params) { { id: prediction_group.id, api_token: 'fake-token' } }
 
-        specify { expect(response).to_not be_success }
-        specify { expect(response.content_type).to eq 'application/json' }
+        specify do
+          show
+          expect(response).to_not be_success
+          expect(response.content_type).to eq 'application/json'
+        end
       end
 
       context 'with non-existent id' do
-        before { get :show, params: { id: 999, api_token: 'fake-token' } }
+        let(:params) { { id: 999, api_token: user.api_token } }
 
-        specify { expect(response).to_not be_success }
-        specify { expect(response.content_type).to eq 'application/json' }
+        specify { expect { show }.to raise_error ActiveRecord::RecordNotFound }
       end
     end
 
@@ -84,8 +93,10 @@ module Api
                                     api_token: user.api_token }
           end
 
-          specify { expect(response).to_not be_success }
-          specify { expect(response.body).to include('a probability is between') }
+          specify do
+            expect(response).to_not be_success
+            expect(response.body).to include('a probability is between')
+          end
         end
 
         context 'with new visibility' do
@@ -123,9 +134,9 @@ module Api
 
         specify do
           expect(response.body).to_not include(prediction_group_params[:description])
+          expect(response).to_not be_success
         end
 
-        specify { expect(response).to_not be_success }
       end
     end
 
@@ -145,8 +156,10 @@ module Api
                                    prediction_group: new_prediction_group_params }
           end
 
-          specify { expect(response).to be_success }
-          specify { expect(response.content_type).to eq 'application/json' }
+          specify do
+            expect(response).to be_success
+            expect(response.content_type).to eq 'application/json'
+          end
 
           it 'updates the existing prediction_group' do
             description = new_prediction_group_params[:description]
@@ -163,8 +176,10 @@ module Api
                                    prediction_group: new_prediction_group_params }
           end
 
-          specify { expect(response).to_not be_success }
-          specify { expect(response.content_type).to eq 'application/json' }
+          specify do
+            expect(response).to_not be_success
+            expect(response.content_type).to eq 'application/json'
+          end
         end
       end
 
@@ -175,8 +190,10 @@ module Api
                                  prediction_group: new_prediction_group_params }
         end
 
-        specify { expect(response).to_not be_success }
-        specify { expect(response.content_type).to eq 'application/json' }
+        specify do
+          expect(response).to_not be_success
+          expect(response.content_type).to eq 'application/json'
+        end
       end
     end
   end

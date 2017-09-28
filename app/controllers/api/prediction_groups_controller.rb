@@ -39,6 +39,12 @@ module Api
       end
     end
 
+    protected
+
+    def find_prediction_group
+      PredictionGroup.includes(:predictions).find(params[:id])
+    end
+
     private
 
     def authorize_to_see_prediction_group
@@ -52,6 +58,7 @@ module Api
     def authorize_to_update_prediction_group
       prediction_group = find_prediction_group
       prediction = prediction_group.try(:predictions).try(:first)
+      return if prediction.nil?
       raise UnauthorizedRequest unless @user.authorized_for?(prediction)
     end
 
@@ -63,10 +70,6 @@ module Api
         .includes(:predictions)
         .where(predictions: { visibility: Visibility::VALUES[:visible_to_everyone] })
         .order(id: :desc).limit(limit)
-    end
-
-    def find_prediction_group
-      PredictionGroup.includes(:predictions).find(params[:id])
     end
 
     def prediction_group_params
