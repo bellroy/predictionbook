@@ -3,13 +3,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable,
          :validatable, :confirmable
 
-  has_many :responses
-  has_many :group_members
+  has_many :responses, dependent: :destroy
+  has_many :group_members, dependent: :destroy
   has_many :groups, through: :group_members
   delegate :wagers, to: :responses
-  has_many :deadline_notifications
-  has_many :response_notifications
-  has_one :credence_game
+  has_many :deadline_notifications, dependent: :destroy
+  has_many :response_notifications, dependent: :destroy
+  has_one :credence_game, dependent: :destroy
+  has_many :judgements, dependent: :destroy
+  has_many :predictions, dependent: :destroy, foreign_key: :creator_id
 
   nillify_blank :email, :name
 
