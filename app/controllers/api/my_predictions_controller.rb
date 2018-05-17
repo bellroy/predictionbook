@@ -18,6 +18,7 @@ module Api
       page = params[:page].to_i
       page = DEFAULT_PAGE unless page.positive?
       @predictions = @user.predictions
+                          .not_withdrawn
                           .includes(Prediction::DEFAULT_INCLUDES)
                           .order(created_at: :desc)
                           .page(page)
