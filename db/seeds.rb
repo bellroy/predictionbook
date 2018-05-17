@@ -30,79 +30,94 @@ puts 'SEEDING!'
 
 start_time = Time.current
 
-DATA_SIZE = 1000
+DATA_SIZE = 500
 
 clean_database
 
 first_user = User.create!(
-  login: 'Test',
+  login: 'First',
   password: 'blahblah',
   password_confirmation: 'blahblah',
-  email: 'dude@email.com'
+  email: 'first@example.com'
 )
+first_user.confirm
 
 second_user = User.create!(
   login: 'Second',
   password: 'jajaja',
   password_confirmation: 'jajaja',
-  email: 'mang@email.com'
+  email: 'second@example.com'
 )
+second_user.confirm
 
 puts 'creating future unjudged'
 DATA_SIZE.times do
+  is_private = random_int > 80
+  confidence = random_int
   prediction = Prediction.new(
-    deadline: random_future_day,
-    initial_confidence: random_int,
     creator: first_user,
-    description: 'this event will come true'
+    initial_confidence: confidence,
+    deadline: random_future_day,
+    description: "I'm #{confidence} confident that this #{is_private ? "private " : ""}future event will come true",
+    visibility: is_private ? Visibility::VALUES[:visible_to_creator] : Visibility::VALUES[:visible_to_everyone]
   )
   prediction.save!
-  prediction.responses.create!(user: second_user, confidence: random_int)
+  prediction.responses.create!(user: second_user, confidence: random_int) unless is_private and random_int < 75
 end
 
 puts 'creating past unjudged'
 DATA_SIZE.times do
+  is_private = random_int > 80
+  confidence = random_int
   prediction = Prediction.new(
+    creator: second_user,
+    initial_confidence: confidence,
     deadline: random_past_day,
-    initial_confidence: random_int,
-    description: 'this event has came past',
-    creator: second_user
+    description: "I'm #{confidence} confident that this #{is_private ? "private " : ""}past event will come true",
+    visibility: is_private ? Visibility::VALUES[:visible_to_creator] : Visibility::VALUES[:visible_to_everyone]
   )
   prediction.save!
+  prediction.responses.create!(user: first_user, confidence: random_int) unless is_private and random_int < 75
 end
 
 puts 'creating past judged'
 DATA_SIZE.times do
-  judged = Prediction.new(
+  is_private = random_int > 80
+  confidence = random_int
+  prediction = Prediction.new(
+    creator: first_user,
+    initial_confidence: confidence,
     deadline: random_past_day,
-    initial_confidence: random_int,
-    description: 'this event is judged',
-    creator: first_user
+    description: "I was #{confidence} confident that this #{is_private ? "private " : ""}past event would come true",
+    visibility: is_private ? Visibility::VALUES[:visible_to_creator] : Visibility::VALUES[:visible_to_everyone]
   )
-  judged.save!
+  prediction.save!
+  prediction.responses.create!(user: second_user, confidence: random_int) unless is_private and random_int < 75
 
   Judgement.create!(
-    user: second_user,
-    prediction: judged,
-    outcome: random_int % 2
+    user: is_private ? first_user : second_user,
+    prediction: prediction,
+    outcome: random_int < prediction.initial_confidence
   )
 end
 
 puts 'creating future commented'
 DATA_SIZE.times do
-  commented = Prediction.new(
+  is_private = random_int > 80
+  confidence = random_int
+  prediction = Prediction.new(
+    creator: first_user,
+    initial_confidence: confidence,
     deadline: random_future_day,
-    initial_confidence: random_int,
-    description: 'commented prediction',
-    creator: first_user
+    description: "I'm #{confidence} confident that this #{is_private ? "private " : ""}interesting future event will come true",
+    visibility: is_private ? Visibility::VALUES[:visible_to_creator] : Visibility::VALUES[:visible_to_everyone]
   )
-  commented.save!
+  prediction.save!
 
-  commented.responses.create!(
+  prediction.responses.create!(
     user: second_user,
-    confidence: random_int,
     comment: 'No way this will happen!'
-  )
+  ) unless is_private and random_int < 75
 end
 
 finish_time = Time.current
