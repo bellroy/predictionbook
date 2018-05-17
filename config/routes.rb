@@ -53,12 +53,13 @@ PredictionBook::Application.routes.draw do
   root to: 'predictions#home'
 
   get '/healthcheck' => 'content#healthcheck'
-  namespace :api do
-    resources :predictions, format: :json
-    resources :prediction_groups, format: :json
-    resources :prediction_group_by_description, only: [:update], format: :json
-    resources :prediction_judgements, only: [:create], format: :json
+  namespace :api, format: :json do
     resources :current_users, only: :show
+    resources :my_predictions, only: :index
+    resources :predictions
+    resources :prediction_group_by_description, only: [:update]
+    resources :prediction_groups
+    resources :prediction_judgements, only: [:create]
   end
 
   concern :paginatable do

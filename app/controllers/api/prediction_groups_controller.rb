@@ -42,7 +42,7 @@ module Api
     protected
 
     def find_prediction_group
-      PredictionGroup.includes(:predictions).find(params[:id])
+      PredictionGroup.includes(predictions: Prediction::DEFAULT_INCLUDES).find(params[:id])
     end
 
     private
@@ -66,10 +66,13 @@ module Api
       limit = params[:limit].to_i
       out_of_range = (1..MAXIMUM_PREDICTION_GROUPS_LIMIT).cover?(limit)
       limit = DEFAULT_PREDICTION_GROUPS_LIMIT unless out_of_range
+      visible_to_everyone = Visibility::VALUES[:visible_to_everyone]
+      group_ids = Prediction.where(visibility: visible_to_everyone).select(:prediction_group_id)
       PredictionGroup
-        .includes(:predictions)
-        .where(predictions: { visibility: Visibility::VALUES[:visible_to_everyone] })
-        .order(id: :desc).limit(limit)
+        .includes(predictions: Prediction::DEFAULT_INCLUDES)
+        .where(id: group_ids)
+        .order(id: :desc)
+        .limit(limit)
     end
 
     def prediction_group_params
