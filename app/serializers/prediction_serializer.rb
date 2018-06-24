@@ -4,4 +4,5 @@ class PredictionSerializer < ActiveModel::Serializer
              :outcome, :mean_confidence
 
   has_many :responses
+  belongs_to :creator
 end
