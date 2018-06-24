@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Api::MyPredictionsController, type: :controller do
-  let(:user) { FactoryGirl.create(:user, api_token: 'real-token') }
+  let(:user) { FactoryGirl.create(:user, api_token: 'real-token', name: 'Freddy') }
 
   before do
     user
@@ -12,7 +12,7 @@ describe Api::MyPredictionsController, type: :controller do
   describe 'GET /api/my_predictions' do
     context 'with valid API token' do
       context 'and a public prediction' do
-        let(:my_prediction) { FactoryGirl.create(:prediction, :creator => user) }
+        let(:my_prediction) { FactoryGirl.create(:prediction, creator: user) }
         let(:her_prediction) { FactoryGirl.create(:prediction) }
         before do
           my_prediction
@@ -22,10 +22,13 @@ describe Api::MyPredictionsController, type: :controller do
 
         specify { expect(response).to be_success }
         specify { expect(response.content_type).to eq 'application/json' }
-        it "should include my prediction" do
+        it 'includes my prediction' do
           expect(response.body).to include my_prediction.description_with_group
+          expect(response.body).to include user.name
+          expect(response.body).to include user.login
+          expect(response.body).to include user.email
         end
-        it "should not include someone else's prediction" do
+        it "does not includes someone else's prediction" do
           expect(response.body).to_not include her_prediction.description_with_group
         end
       end
@@ -38,5 +41,4 @@ describe Api::MyPredictionsController, type: :controller do
       specify { expect(response.content_type).to eq 'application/json' }
     end
   end
-
 end
