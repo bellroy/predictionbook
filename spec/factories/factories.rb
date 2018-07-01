@@ -62,6 +62,7 @@ FactoryGirl.define do
     api_token { 'api_token' }
     timezone { 'Melbourne' }
     confirmed_at { 1.day.ago }
+    id { Random.rand(100_000) }
   end
 
   factory :deadline_notification do
