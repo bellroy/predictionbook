@@ -18,7 +18,7 @@ module Api
       page = params[:page].to_i
       page = DEFAULT_PAGE unless page.positive?
       @predictions = {
-        user: { login: @user.login, name: @user.name, email: @user.email },
+        user: { user_id: @user.id, name: @user.name, email: @user.email },
         predictions: @user.predictions
                        .not_withdrawn
                        .includes(Prediction::DEFAULT_INCLUDES)
