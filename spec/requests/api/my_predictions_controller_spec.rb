@@ -26,9 +26,12 @@ describe Api::MyPredictionsController, type: :request do
       it { is_expected.to have_http_status(:ok) }
 
       specify do
-        json_array = JSON.parse(server_response.body)
-        expect(json_array.length).to eq 1
-        expect(json_array.first['description']).to eq prediction.description
+        json_hash = JSON.parse(server_response.body)
+        predictions = json_hash['predictions']
+        actor = json_hash['user']
+        expect(predictions.length).to eq 1
+        expect(predictions.first['description']).to eq prediction.description
+        expect(actor['email']).to eq user.email
       end
     end
 
@@ -51,18 +54,25 @@ describe Api::MyPredictionsController, type: :request do
 
       specify do
         get url, params: params
-        json_array = JSON.parse(response.body)
-        expect(json_array.length).to eq 2
+        json_hash = JSON.parse(response.body)
+        predictions = json_hash['predictions']
+        expect(predictions.length).to eq 2
 
         get url, params: params.merge(page_size: 1, page: 1)
-        json_array = JSON.parse(response.body)
-        expect(json_array.length).to eq 1
-        expect(json_array.first['description']).to eq another_prediction.description
+        json_hash = JSON.parse(response.body)
+        predictions = json_hash['predictions']
+        actor = json_hash['user']
+        expect(predictions.length).to eq 1
+        expect(predictions.first['description']).to eq another_prediction.description
+        expect(actor['email']).to eq user.email
 
         get url, params: params.merge(page_size: 1, page: 2)
-        json_array = JSON.parse(response.body)
-        expect(json_array.length).to eq 1
-        expect(json_array.first['description']).to eq prediction.description
+        json_hash = JSON.parse(response.body)
+        predictions = json_hash['predictions']
+        actor = json_hash['user']
+        expect(predictions.length).to eq 1
+        expect(predictions.first['description']).to eq prediction.description
+        expect(actor['email']).to eq user.email
       end
     end
   end
