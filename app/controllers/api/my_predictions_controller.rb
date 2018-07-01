@@ -17,14 +17,14 @@ module Api
       page_size = DEFAULT_PAGE_SIZE unless (1..MAXIMUM_PAGE_SIZE).cover?(page_size)
       page = params[:page].to_i
       page = DEFAULT_PAGE unless page.positive?
-      @predictions = { 
-        :user => {:login => @user.login, :name => @user.name, :email => @user.email},
-        :predictions => @user.predictions
-                          .not_withdrawn
-                          .includes(Prediction::DEFAULT_INCLUDES)
-                          .order(created_at: :desc)
-                          .page(page)
-                          .per(page_size)
+      @predictions = {
+        user: { login: @user.login, name: @user.name, email: @user.email },
+        predictions: @user.predictions
+                       .not_withdrawn
+                       .includes(Prediction::DEFAULT_INCLUDES)
+                       .order(created_at: :desc)
+                       .page(page)
+                       .per(page_size)
       }
     end
   end
