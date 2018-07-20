@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ScoreCalculator do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
   let(:calculator) do
     described_class.new(user, start_date: Time.zone.today - 3.months, interval: 1.month)
   end
@@ -16,9 +16,9 @@ describe ScoreCalculator do
     end
 
     context 'with a wager on an unjudged prediction' do
-      let!(:wager) { FactoryGirl.create(:response, confidence: 50, user: user) }
+      let!(:wager) { FactoryBot.create(:response, confidence: 50, user: user) }
       let!(:judgment) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :judgement,
           prediction: wager.prediction,
           outcome: nil
@@ -31,10 +31,10 @@ describe ScoreCalculator do
 
     context 'with a wager on a judged prediction' do
       let!(:wager) do
-        FactoryGirl.create(:response, confidence: 80, user: user, created_at: 1.day.ago)
+        FactoryBot.create(:response, confidence: 80, user: user, created_at: 1.day.ago)
       end
       let!(:judgment) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :judgement,
           prediction: wager.prediction,
           outcome: 'right'
@@ -47,10 +47,10 @@ describe ScoreCalculator do
 
     context 'with a 100% wager on a judged prediction' do
       let!(:wager) do
-        FactoryGirl.create(:response, confidence: 100, user: user, created_at: 1.day.ago)
+        FactoryBot.create(:response, confidence: 100, user: user, created_at: 1.day.ago)
       end
       let!(:judgment) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :judgement,
           prediction: wager.prediction,
           outcome: 'right'
@@ -62,32 +62,32 @@ describe ScoreCalculator do
     end
 
     context 'with multiple wagers on judged predictions' do
-      let!(:user) { FactoryGirl.create(:user) }
+      let!(:user) { FactoryBot.create(:user) }
       let!(:first_wager) do
-        FactoryGirl.create(:response, confidence: 90, user: user, created_at: 1.day.ago)
+        FactoryBot.create(:response, confidence: 90, user: user, created_at: 1.day.ago)
       end
       let!(:first_judgment) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :judgement,
           prediction: first_wager.prediction,
           outcome: 'wrong'
         )
       end
       let!(:second_wager) do
-        FactoryGirl.create(:response, confidence: 70, user: user, created_at: 1.day.ago)
+        FactoryBot.create(:response, confidence: 70, user: user, created_at: 1.day.ago)
       end
       let!(:second_judgment) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :judgement,
           prediction: second_wager.prediction,
           outcome: 'right'
         )
       end
       let!(:third_wager) do
-        FactoryGirl.create(:response, confidence: 30, user: user, created_at: 1.day.ago)
+        FactoryBot.create(:response, confidence: 30, user: user, created_at: 1.day.ago)
       end
       let!(:third_judgment) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :judgement,
           prediction: third_wager.prediction,
           outcome: 'wrong'
@@ -117,9 +117,9 @@ describe ScoreCalculator do
     end
 
     context 'with a wager on an unjudged prediction' do
-      let!(:wager) { FactoryGirl.create(:response, confidence: 50, user: user) }
+      let!(:wager) { FactoryBot.create(:response, confidence: 50, user: user) }
       let!(:judgment) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :judgement,
           prediction: wager.prediction,
           outcome: nil
@@ -140,10 +140,10 @@ describe ScoreCalculator do
 
     context 'with a wager on a judged prediction' do
       let!(:wager) do
-        FactoryGirl.create(:response, confidence: 80, user: user, created_at: 1.day.ago)
+        FactoryBot.create(:response, confidence: 80, user: user, created_at: 1.day.ago)
       end
       let!(:judgment) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :judgement,
           prediction: wager.prediction,
           outcome: 'right'
@@ -163,32 +163,32 @@ describe ScoreCalculator do
     end
 
     context 'with multiple wagers on judged predictions' do
-      let!(:user) { FactoryGirl.create(:user) }
+      let!(:user) { FactoryBot.create(:user) }
       let!(:first_wager) do
-        FactoryGirl.create(:response, confidence: 90, user: user, created_at: 2.months.ago)
+        FactoryBot.create(:response, confidence: 90, user: user, created_at: 2.months.ago)
       end
       let!(:first_judgment) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :judgement,
           prediction: first_wager.prediction,
           outcome: 'wrong'
         )
       end
       let!(:second_wager) do
-        FactoryGirl.create(:response, confidence: 70, user: user, created_at: 1.month.ago)
+        FactoryBot.create(:response, confidence: 70, user: user, created_at: 1.month.ago)
       end
       let!(:second_judgment) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :judgement,
           prediction: second_wager.prediction,
           outcome: 'right'
         )
       end
       let!(:third_wager) do
-        FactoryGirl.create(:response, confidence: 30, user: user, created_at: 24.hours.ago)
+        FactoryBot.create(:response, confidence: 30, user: user, created_at: 24.hours.ago)
       end
       let!(:third_judgment) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :judgement,
           prediction: third_wager.prediction,
           outcome: 'wrong'

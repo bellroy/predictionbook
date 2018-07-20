@@ -6,7 +6,7 @@ describe DeadlineNotificationsController do
   it_behaves_like 'NotificationsController'
 
   describe 'index' do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     before { sign_in user }
 
     subject(:get_index) { get :index, params: { user_id: user.id } }
@@ -32,7 +32,7 @@ describe DeadlineNotificationsController do
 
     describe 'logged in' do
       before do
-        sign_in FactoryGirl.create(:user)
+        sign_in FactoryBot.create(:user)
         @collection = double('collection')
         expect(controller).to receive(:notification_collection).and_return(@collection)
       end
@@ -63,7 +63,7 @@ describe DeadlineNotificationsController do
 
     describe 'logged in' do
       before do
-        sign_in FactoryGirl.create(:user)
+        sign_in FactoryBot.create(:user)
         @notification = mock_model(DeadlineNotification).as_null_object
         expect(@notification).to receive(:prediction).and_return(mock_model(Prediction, id: '7'))
         collection = double('collection')
@@ -86,7 +86,7 @@ describe DeadlineNotificationsController do
 
   describe 'notification collection accessor' do
     it 'asks the current user for its deadline_notifications' do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       sign_in user
       expect_any_instance_of(User).to receive(:deadline_notifications)
       controller.notification_collection

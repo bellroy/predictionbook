@@ -6,7 +6,7 @@ describe Deliverer do
   include Rails.application.routes.url_helpers
 
   describe 'deadline notification' do
-    let(:notification) { FactoryGirl.create(:deadline_notification) }
+    let(:notification) { FactoryBot.create(:deadline_notification) }
     let(:deliverer) { Deliverer.deadline_notification(notification) }
 
     subject { deliverer }
@@ -36,7 +36,7 @@ describe Deliverer do
   end
 
   describe 'response notification' do
-    let(:notification) { FactoryGirl.create(:response_notification) }
+    let(:notification) { FactoryBot.create(:response_notification) }
     let(:deliverer) { Deliverer.response_notification(notification) }
 
     subject { deliverer }

@@ -36,13 +36,14 @@ gem 'honeypot-captcha', git: 'https://github.com/RandieM/honeypot-captcha'
 gem 'sentry-raven'
 
 group :development do
+  gem 'cap-deploy-tagger'
   gem 'capistrano', '~> 3.5.0'
   gem 'capistrano-bundler', require: false
-  gem 'capistrano-rvm', require: false
   gem 'capistrano-git-submodule-strategy'
-  gem 'cap-deploy-tagger'
   gem 'capistrano-rails'
+  gem 'capistrano-rvm', require: false
   gem 'httparty'
+  gem 'puma'
 end
 
 group :test, :development do
@@ -66,7 +67,7 @@ end
 
 group :test do
   gem 'email_spec'
-  gem 'factory_girl'
+  gem 'factory_bot'
   gem 'ffaker'
   gem 'guard-rspec'
   gem 'launchy'

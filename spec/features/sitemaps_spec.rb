@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 feature 'Sitemaps' do
-  let(:user) { FactoryGirl.create(:user) }
-  before { FactoryGirl.create_list(:prediction, 5, creator: user) }
+  let(:user) { FactoryBot.create(:user) }
+  before { FactoryBot.create_list(:prediction, 5, creator: user) }
 
   scenario 'Robot visits sitemap index successfully' do
     visit sitemaps_path(format: :xml)

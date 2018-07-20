@@ -10,9 +10,9 @@ describe 'credence_games/show' do
 
   describe 'with a game' do
     before do
-      question = FactoryGirl.create(:credence_question)
-      FactoryGirl.create_list(:credence_answer, 2, credence_question: question)
-      @game = FactoryGirl.create(:credence_game)
+      question = FactoryBot.create(:credence_question)
+      FactoryBot.create_list(:credence_answer, 2, credence_question: question)
+      @game = FactoryBot.create(:credence_game)
       @response = @game.current_response
     end
 

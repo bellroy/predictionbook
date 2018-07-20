@@ -3,9 +3,9 @@
 require 'spec_helper'
 
 describe PredictionsController do
-  let(:logged_in_user) { FactoryGirl.create(:user) }
-  let(:creator) { FactoryGirl.create(:user) }
-  let(:prediction) { FactoryGirl.create(:prediction, creator: creator) }
+  let(:logged_in_user) { FactoryBot.create(:user) }
+  let(:creator) { FactoryBot.create(:user) }
+  let(:prediction) { FactoryBot.create(:prediction, creator: creator) }
 
   before { sign_in(logged_in_user) if logged_in_user.present? }
 
@@ -157,7 +157,7 @@ describe PredictionsController do
   end
 
   describe 'Creating a new prediction' do
-    let(:params) { FactoryGirl.build(:prediction).attributes }
+    let(:params) { FactoryBot.build(:prediction).attributes }
 
     subject(:create) { post :create, params: { prediction: params } }
 
@@ -349,7 +349,7 @@ describe PredictionsController do
       end
 
       context 'not owned by current user' do
-        let(:logged_in_user) { FactoryGirl.create(:user) }
+        let(:logged_in_user) { FactoryBot.create(:user) }
         it 'is forbidden when not owned by current user' do
           show
           expect(response.response_code).to eq 302

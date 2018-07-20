@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 feature 'credence game' do
-  let(:user) { FactoryGirl.create(:user) }
-  let!(:question) { FactoryGirl.create(:credence_question, text: 'Do you have a stupid face?') }
-  let!(:answers) { FactoryGirl.create_list(:credence_answer, 2, credence_question: question) }
+  let(:user) { FactoryBot.create(:user) }
+  let!(:question) { FactoryBot.create(:credence_question, text: 'Do you have a stupid face?') }
+  let!(:answers) { FactoryBot.create_list(:credence_answer, 2, credence_question: question) }
 
   before { login_as user }
 

@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe Api::PredictionsController, type: :controller do
-  let(:user) { FactoryGirl.create(:user, api_token: 'real-token') }
-  let(:prediction) { FactoryGirl.create(:prediction) }
+  let(:user) { FactoryBot.create(:user, api_token: 'real-token') }
+  let(:prediction) { FactoryBot.create(:prediction) }
 
   before do
     user
@@ -133,7 +133,7 @@ describe Api::PredictionsController, type: :controller do
     let(:new_prediction_params) do
       { description: 'The world definitely will not end tomorrow!' }
     end
-    let(:prediction) { FactoryGirl.create(:prediction, creator: user) }
+    let(:prediction) { FactoryBot.create(:prediction, creator: user) }
 
     context 'with valid API token' do
       context 'authorized user' do

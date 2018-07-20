@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe PredictionGroup do
   describe '#method_missing' do
-    let(:prediction_group) { FactoryGirl.create(:prediction_group, predictions: 3) }
+    let(:prediction_group) { FactoryBot.create(:prediction_group, predictions: 3) }
 
     specify do
       expect(prediction_group.prediction_0_description)

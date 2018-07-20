@@ -11,7 +11,7 @@ describe ApplicationController do
 
   describe 'setting timezone before_filter' do
     describe 'when logged in' do
-      let(:user) { FactoryGirl.create(:user, timezone: timezone) }
+      let(:user) { FactoryBot.create(:user, timezone: timezone) }
 
       before { sign_in user if user.present? }
 

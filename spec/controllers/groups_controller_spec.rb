@@ -19,8 +19,8 @@ describe GroupsController do
         group
       end
 
-      let(:group) { FactoryGirl.create(:group) }
-      let(:user) { FactoryGirl.create(:user) }
+      let(:group) { FactoryBot.create(:group) }
+      let(:user) { FactoryBot.create(:user) }
 
       specify do
         index
@@ -29,7 +29,7 @@ describe GroupsController do
       end
 
       context 'user is in a group' do
-        before { FactoryGirl.create(:group_member, group: group, user: user) }
+        before { FactoryBot.create(:group_member, group: group, user: user) }
 
         specify do
           index
@@ -39,7 +39,7 @@ describe GroupsController do
       end
 
       context 'user is an invitee to a group' do
-        before { FactoryGirl.create(:group_member, :invitee, group: group, user: user) }
+        before { FactoryBot.create(:group_member, :invitee, group: group, user: user) }
 
         specify do
           index
@@ -53,7 +53,7 @@ describe GroupsController do
   describe 'GET show' do
     subject(:show) { get :show, params: { id: group.id } }
 
-    let(:group) { FactoryGirl.create(:group) }
+    let(:group) { FactoryBot.create(:group) }
 
     context 'not logged in' do
       specify do
@@ -65,10 +65,10 @@ describe GroupsController do
     context 'logged in' do
       before { sign_in user }
 
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { FactoryBot.create(:user) }
 
       specify do
-        FactoryGirl.create(:group_member, user: user, group: group)
+        FactoryBot.create(:group_member, user: user, group: group)
         show
         expect(response).to render_template :show
         expect(assigns[:group]).not_to be_nil
@@ -83,7 +83,7 @@ describe GroupsController do
 
       context 'user is an invitee but has not accepted invitation' do
         specify do
-          FactoryGirl.create(:group_member, :invitee, user: user, group: group)
+          FactoryBot.create(:group_member, :invitee, user: user, group: group)
           expect { show }.to raise_error ActionController::RoutingError
         end
       end
@@ -103,7 +103,7 @@ describe GroupsController do
     context 'logged in' do
       before { sign_in user }
 
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { FactoryBot.create(:user) }
 
       specify do
         new
@@ -130,11 +130,11 @@ describe GroupsController do
     context 'logged in' do
       before do
         sign_in user
-        FactoryGirl.create(:user, login: 'me')
-        FactoryGirl.create(:user, login: 'you')
+        FactoryBot.create(:user, login: 'me')
+        FactoryBot.create(:user, login: 'you')
       end
 
-      let(:user) { FactoryGirl.create(:user, login: 'admin') }
+      let(:user) { FactoryBot.create(:user, login: 'admin') }
 
       specify do
         expect(GroupMemberMailer).to receive(:invitation).exactly(2).times.and_call_original
@@ -145,7 +145,7 @@ describe GroupsController do
       end
 
       context 'duplicate name' do
-        before { FactoryGirl.create(:group, name: 'my new group') }
+        before { FactoryBot.create(:group, name: 'my new group') }
 
         specify do
           expect(GroupMemberMailer).not_to receive(:invitation)
@@ -161,7 +161,7 @@ describe GroupsController do
   describe 'GET edit' do
     subject(:edit) { get :edit, params: { id: group.id } }
 
-    let(:group) { FactoryGirl.create(:group) }
+    let(:group) { FactoryBot.create(:group) }
 
     context 'not logged in' do
       specify do
@@ -173,11 +173,11 @@ describe GroupsController do
     context 'logged in' do
       before { sign_in user }
 
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { FactoryBot.create(:user) }
 
       context 'current user is not group admin' do
         before do
-          FactoryGirl.create(:group_member, :contributor, group: group, user: user)
+          FactoryBot.create(:group_member, :contributor, group: group, user: user)
         end
 
         specify do
@@ -189,7 +189,7 @@ describe GroupsController do
 
       context 'current user is group admin' do
         before do
-          FactoryGirl.create(:group_member, :admin, group: group, user: user)
+          FactoryBot.create(:group_member, :admin, group: group, user: user)
         end
 
         specify do
@@ -217,15 +217,15 @@ describe GroupsController do
       context 'logged in' do
         before do
           sign_in user
-          FactoryGirl.create(:user, email: 'me@email.com')
-          FactoryGirl.create(:user, email: 'you@email.com')
+          FactoryBot.create(:user, email: 'me@email.com')
+          FactoryBot.create(:user, email: 'you@email.com')
         end
 
-        let(:user) { FactoryGirl.create(:user, email: 'admin@email.com') }
+        let(:user) { FactoryBot.create(:user, email: 'admin@email.com') }
 
         context 'current user is not group admin' do
           before do
-            FactoryGirl.create(:group_member, :contributor, group: group, user: user)
+            FactoryBot.create(:group_member, :contributor, group: group, user: user)
           end
 
           specify do
@@ -237,7 +237,7 @@ describe GroupsController do
 
         context 'current user is group admin' do
           before do
-            FactoryGirl.create(:group_member, :admin, group: group, user: user)
+            FactoryBot.create(:group_member, :admin, group: group, user: user)
           end
 
           specify do
@@ -248,7 +248,7 @@ describe GroupsController do
           end
 
           context 'duplicate name' do
-            before { FactoryGirl.create(:group, name: 'my new group') }
+            before { FactoryBot.create(:group, name: 'my new group') }
 
             specify do
               update
@@ -264,7 +264,7 @@ describe GroupsController do
     describe 'DELETE destroy' do
       subject(:destroy) { delete :destroy, params: { id: group.id } }
 
-      let(:group) { FactoryGirl.create(:group) }
+      let(:group) { FactoryBot.create(:group) }
 
       context 'not logged in' do
         specify do
@@ -276,11 +276,11 @@ describe GroupsController do
       context 'logged in' do
         before { sign_in user }
 
-        let(:user) { FactoryGirl.create(:user) }
+        let(:user) { FactoryBot.create(:user) }
 
         context 'current user is not group admin' do
           before do
-            FactoryGirl.create(:group_member, :contributor, group: group, user: user)
+            FactoryBot.create(:group_member, :contributor, group: group, user: user)
           end
 
           specify do
@@ -292,7 +292,7 @@ describe GroupsController do
 
         context 'current user is group admin' do
           before do
-            FactoryGirl.create(:group_member, :admin, group: group, user: user)
+            FactoryBot.create(:group_member, :admin, group: group, user: user)
           end
 
           specify do

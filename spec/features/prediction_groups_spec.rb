@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 feature 'creating and modifying prediction groups', js: true do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
   before { login_as user }
 
   scenario 'making a new prediction group' do
@@ -36,7 +36,7 @@ feature 'creating and modifying prediction groups', js: true do
   end
 
   scenario 'editing a prediction' do
-    prediction_group = FactoryGirl.create(:prediction_group, creator: user, predictions: 5)
+    prediction_group = FactoryBot.create(:prediction_group, creator: user, predictions: 5)
     visit edit_prediction_group_path(prediction_group)
 
     fill_in 'prediction_group_description', with: 'A new prediction'

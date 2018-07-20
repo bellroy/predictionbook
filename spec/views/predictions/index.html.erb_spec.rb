@@ -15,7 +15,7 @@ describe 'predictions/index.html.erb' do
   end
 
   it 'renders predictions' do
-    prediction = FactoryGirl.create(:prediction)
+    prediction = FactoryBot.create(:prediction)
     assign(:predictions, Prediction.page(1))
 
     render

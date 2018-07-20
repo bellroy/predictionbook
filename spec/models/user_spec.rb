@@ -68,16 +68,16 @@ describe User do
       end
 
       context 'prediction in group' do
-        let(:group) { FactoryGirl.create(:group) }
+        let(:group) { FactoryBot.create(:group) }
         let(:prediction) do
           user.predictions.build(creator: creator_user, visibility: :visible_to_group, group: group)
         end
         let(:action) { 'show' }
-        let(:user) { FactoryGirl.create(:user) }
+        let(:user) { FactoryBot.create(:user) }
 
         context 'user in group' do
           before do
-            FactoryGirl.create(:group_member, role, group: group, user: user)
+            FactoryBot.create(:group_member, role, group: group, user: user)
           end
 
           let(:role) { :contributor }

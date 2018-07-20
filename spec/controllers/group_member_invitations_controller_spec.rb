@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe GroupMemberInvitationsController do
-  let(:group_member) { FactoryGirl.create(:group_member, :invitee) }
+  let(:group_member) { FactoryBot.create(:group_member, :invitee) }
   let(:group) { group_member.group }
 
   describe 'GET show' do

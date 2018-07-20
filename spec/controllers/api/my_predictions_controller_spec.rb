@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Api::MyPredictionsController, type: :controller do
-  let(:user) { FactoryGirl.create(:user, api_token: 'real-token', name: 'Freddy') }
+  let(:user) { FactoryBot.create(:user, api_token: 'real-token', name: 'Freddy') }
 
   before do
     user
@@ -12,8 +12,8 @@ describe Api::MyPredictionsController, type: :controller do
   describe 'GET /api/my_predictions' do
     context 'with valid API token' do
       context 'and a public prediction' do
-        let(:my_prediction) { FactoryGirl.create(:prediction, creator: user) }
-        let(:her_prediction) { FactoryGirl.create(:prediction) }
+        let(:my_prediction) { FactoryBot.create(:prediction, creator: user) }
+        let(:her_prediction) { FactoryBot.create(:prediction) }
         let(:parsed_response) { JSON.parse(response.body) }
 
         before do

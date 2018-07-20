@@ -5,15 +5,15 @@ describe Statistics do
     let(:stats) { Statistics.new }
 
     before :each do
-      first_response = FactoryGirl.create(:response, confidence: 50)
-      FactoryGirl.create(:judgement, prediction: first_response.prediction, outcome: 0)
-      second_response = FactoryGirl.create(:response, confidence: 40)
-      FactoryGirl.create(:judgement, prediction: second_response.prediction, outcome: 0)
-      third_response = FactoryGirl.create(:response, confidence: 70)
-      FactoryGirl.create(:judgement, prediction: third_response.prediction, outcome: 1)
-      FactoryGirl.create(:response, confidence: nil)
-      FactoryGirl.create(:judgement, prediction: first_response.prediction, outcome: 1)
-      FactoryGirl.create(:response, confidence: 80)
+      first_response = FactoryBot.create(:response, confidence: 50)
+      FactoryBot.create(:judgement, prediction: first_response.prediction, outcome: 0)
+      second_response = FactoryBot.create(:response, confidence: 40)
+      FactoryBot.create(:judgement, prediction: second_response.prediction, outcome: 0)
+      third_response = FactoryBot.create(:response, confidence: 70)
+      FactoryBot.create(:judgement, prediction: third_response.prediction, outcome: 1)
+      FactoryBot.create(:response, confidence: nil)
+      FactoryBot.create(:judgement, prediction: first_response.prediction, outcome: 1)
+      FactoryBot.create(:response, confidence: 80)
     end
 
     it 'creates all intervals' do

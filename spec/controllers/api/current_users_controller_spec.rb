@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Api::CurrentUsersController, type: :controller do
-  let!(:user) { FactoryGirl.create(:user, api_token: 'real-token') }
+  let!(:user) { FactoryBot.create(:user, api_token: 'real-token') }
 
   describe 'GET show' do
     context 'with valid API token' do

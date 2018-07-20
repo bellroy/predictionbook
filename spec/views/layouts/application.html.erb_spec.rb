@@ -18,7 +18,7 @@ describe 'layouts/application.html.erb' do
   end
 
   describe 'for a logged in user' do
-    let(:user) { FactoryGirl.build(:user) }
+    let(:user) { FactoryBot.build(:user) }
     before(:each) do
       allow(view).to receive(:current_user).and_return user
     end

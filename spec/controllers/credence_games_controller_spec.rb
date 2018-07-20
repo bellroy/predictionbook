@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe CredenceGamesController do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
   before { sign_in user }
 
   describe '#show' do
@@ -14,8 +14,8 @@ describe CredenceGamesController do
     end
 
     describe 'Receiving a question' do
-      let!(:question) { FactoryGirl.create(:credence_question) }
-      let!(:answers) { FactoryGirl.create_list(:credence_answer, 2, credence_question: question) }
+      let!(:question) { FactoryBot.create(:credence_question) }
+      let!(:answers) { FactoryBot.create_list(:credence_answer, 2, credence_question: question) }
 
       it 'should assign @game and @question' do
         show
@@ -50,7 +50,7 @@ describe CredenceGamesController do
   end
 
   describe '#destroy' do
-    let(:game) { FactoryGirl.create(:credence_game, user: user) }
+    let(:game) { FactoryBot.create(:credence_game, user: user) }
 
     before { game }
 
