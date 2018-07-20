@@ -2,20 +2,20 @@ require 'spec_helper'
 
 describe CredenceGame do
   it 'should calculate score correctly' do
-    game = FactoryGirl.create(:credence_game, num_answered: 3, score: 21)
+    game = FactoryBot.create(:credence_game, num_answered: 3, score: 21)
     expect(game.average_score).to eq 7
   end
 
   it 'should give 0 score with no answered questions' do
-    game = FactoryGirl.create(:credence_game, num_answered: 0, score: 0)
+    game = FactoryBot.create(:credence_game, num_answered: 0, score: 0)
     expect(game.average_score).to eq 0
   end
 
   it 'should find answered questions' do
-    question = FactoryGirl.create(:credence_question)
-    answers = FactoryGirl.create_list(:credence_answer, 2, credence_question: question)
-    game = FactoryGirl.create(:credence_game) # should create a random response
-    FactoryGirl.create(:credence_game_response, credence_game: game, credence_question: question,
+    question = FactoryBot.create(:credence_question)
+    answers = FactoryBot.create_list(:credence_answer, 2, credence_question: question)
+    game = FactoryBot.create(:credence_game) # should create a random response
+    FactoryBot.create(:credence_game_response, credence_game: game, credence_question: question,
                                                 first_answer: answers.first,
                                                 second_answer: answers.second)
     expect(game.responses.count).to eq 2
@@ -23,10 +23,10 @@ describe CredenceGame do
   end
 
   it 'should find most recently answered questions' do
-    question = FactoryGirl.create(:credence_question)
-    answers = FactoryGirl.create_list(:credence_answer, 2, credence_question: question)
-    game = FactoryGirl.create(:credence_game) # should create a random response
-    last_response = FactoryGirl.create(
+    question = FactoryBot.create(:credence_question)
+    answers = FactoryBot.create_list(:credence_answer, 2, credence_question: question)
+    game = FactoryBot.create(:credence_game) # should create a random response
+    last_response = FactoryBot.create(
       :credence_game_response,
       credence_game: game, credence_question: question,
       first_answer: answers.first, second_answer: answers.second

@@ -29,8 +29,8 @@ describe DeadlineNotification do
 
     describe 'notify overdue unsent' do
       it 'sends notification emails for all unsent and overdue' do
-        user = FactoryGirl.create(:user)
-        prediction = FactoryGirl.create(:prediction, deadline: 2.days.ago, creator: user)
+        user = FactoryBot.create(:user)
+        prediction = FactoryBot.create(:prediction, deadline: 2.days.ago, creator: user)
         dn = prediction.deadline_notifications.first
         dn.update_attributes!(enabled: true, sent: false)
         DeadlineNotification.send_all!
@@ -38,8 +38,8 @@ describe DeadlineNotification do
       end
 
       it 'should not send notification emails for pending notifications' do
-        user = FactoryGirl.create(:user)
-        prediction = FactoryGirl.create(:prediction, deadline: 2.days.from_now, creator: user)
+        user = FactoryBot.create(:user)
+        prediction = FactoryBot.create(:prediction, deadline: 2.days.from_now, creator: user)
         prediction.save!
         dn = prediction.deadline_notifications.first
         dn.update_attributes!(enabled: true, sent: false)
@@ -50,7 +50,7 @@ describe DeadlineNotification do
   end
 
   describe 'instance method' do
-    let(:notification) { FactoryGirl.create(:deadline_notification) }
+    let(:notification) { FactoryBot.create(:deadline_notification) }
 
     describe 'deliver!' do
       it 'calls deliver and update sent' do

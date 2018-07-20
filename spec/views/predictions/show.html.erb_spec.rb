@@ -1,16 +1,16 @@
 require 'spec_helper'
 
 describe 'predictions/show.html.erb' do
-  let(:user) { FactoryGirl.create(:user, name: 'person who created it', login: 'login.name') }
-  let(:prediction) { FactoryGirl.create(:prediction, creator: user) }
-  let(:prediction_response) { FactoryGirl.build(:response, prediction: prediction, user: user) }
+  let(:user) { FactoryBot.create(:user, name: 'person who created it', login: 'login.name') }
+  let(:prediction) { FactoryBot.create(:prediction, creator: user) }
+  let(:prediction_response) { FactoryBot.build(:response, prediction: prediction, user: user) }
 
   before(:each) do
     assign(:prediction, prediction)
     assign(:events, [])
     assign(:prediction_response, prediction_response)
-    assign(:deadline_notification, FactoryGirl.create(:deadline_notification))
-    assign(:response_notification, FactoryGirl.create(:response_notification))
+    assign(:deadline_notification, FactoryBot.create(:deadline_notification))
+    assign(:response_notification, FactoryBot.create(:response_notification))
     assign(:edit_path, edit_prediction_path(prediction))
 
     allow(view).to receive(:current_user).and_return(user)

@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe ResponsesController do
-  let(:logged_in_user) { FactoryGirl.create(:user) }
+  let(:logged_in_user) { FactoryBot.create(:user) }
 
   before(:each) do
     expect(controller).to receive(:set_timezone)

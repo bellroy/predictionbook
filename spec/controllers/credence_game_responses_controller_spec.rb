@@ -3,10 +3,10 @@
 require 'spec_helper'
 
 describe CredenceGameResponsesController do
-  let(:user) { FactoryGirl.create(:user) }
-  let!(:question) { FactoryGirl.create(:credence_question) }
-  let!(:answers) { FactoryGirl.create_list(:credence_answer, 2, credence_question: question) }
-  let!(:game) { FactoryGirl.create(:credence_game, user: user) }
+  let(:user) { FactoryBot.create(:user) }
+  let!(:question) { FactoryBot.create(:credence_question) }
+  let!(:answers) { FactoryBot.create_list(:credence_answer, 2, credence_question: question) }
+  let!(:game) { FactoryBot.create(:credence_game, user: user) }
   before { sign_in user }
 
   context '#update' do
@@ -31,11 +31,11 @@ describe CredenceGameResponsesController do
 
     context 'response_id is a different response' do
       let(:response_id) do
-        FactoryGirl.create(:credence_game_response, credence_game: other_game).id
+        FactoryBot.create(:credence_game_response, credence_game: other_game).id
       end
 
       context 'game belongs to someone else' do
-        let(:other_game) { FactoryGirl.create(:credence_game) }
+        let(:other_game) { FactoryBot.create(:credence_game) }
         specify do
           update
           expect(response).to be_forbidden

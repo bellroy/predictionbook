@@ -3,10 +3,10 @@
 require 'spec_helper'
 
 describe PredictionGroupsController do
-  let(:logged_in_user) { FactoryGirl.create(:user) }
-  let(:creator) { FactoryGirl.create(:user) }
+  let(:logged_in_user) { FactoryBot.create(:user) }
+  let(:creator) { FactoryBot.create(:user) }
   let(:prediction_group) do
-    FactoryGirl.create(:prediction_group, predictions: 1, visibility: visibility, creator: creator)
+    FactoryBot.create(:prediction_group, predictions: 1, visibility: visibility, creator: creator)
   end
   let(:visibility) { :visible_to_everyone }
   let(:prediction) do

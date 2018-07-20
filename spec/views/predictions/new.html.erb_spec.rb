@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'predictions/new' do
-  let(:prediction) { FactoryGirl.build(:prediction) }
+  let(:prediction) { FactoryBot.build(:prediction) }
   let(:user) { instance_double(User, has_email?: false, to_param: 'username') }
 
   before(:each) do

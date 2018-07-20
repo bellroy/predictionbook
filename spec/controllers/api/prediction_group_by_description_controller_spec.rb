@@ -4,8 +4,8 @@ require 'spec_helper'
 
 module Api
   describe PredictionGroupByDescriptionController, type: :controller do
-    let!(:user) { FactoryGirl.create(:user, api_token: 'real-token') }
-    let!(:prediction_group) { FactoryGirl.create(:prediction_group, predictions: 1) }
+    let!(:user) { FactoryBot.create(:user, api_token: 'real-token') }
+    let!(:prediction_group) { FactoryBot.create(:prediction_group, predictions: 1) }
 
     describe 'update' do
       let(:new_prediction_group_params) do
@@ -21,7 +21,7 @@ module Api
         }
       end
       let(:prediction_group) do
-        FactoryGirl.create(:prediction_group, creator: user, predictions: 1)
+        FactoryBot.create(:prediction_group, creator: user, predictions: 1)
       end
 
       context 'with valid API token' do

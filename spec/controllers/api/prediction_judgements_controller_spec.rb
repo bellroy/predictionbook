@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Api::PredictionJudgementsController, type: :controller do
-  let(:user) { FactoryGirl.create(:user, api_token: 'real-token') }
+  let(:user) { FactoryBot.create(:user, api_token: 'real-token') }
 
   before { user }
 

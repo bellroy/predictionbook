@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'users/settings' do
   describe 'visibility_default checkbox' do
     before do
-      assigns[:user] = @user = FactoryGirl.create(:user)
+      assigns[:user] = @user = FactoryBot.create(:user)
       allow(view).to receive(:current_user).and_return(@user)
       allow(@user).to receive(:api_token).and_return('token')
       allow(@user).to receive(:id).and_return(1)

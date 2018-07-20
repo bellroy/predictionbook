@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe UsersController do
-  let(:logged_in_user) { FactoryGirl.create(:user, api_token: 'other-real-token') }
-  let(:target_user) { FactoryGirl.create(:user, api_token: 'real-token') }
+  let(:logged_in_user) { FactoryBot.create(:user, api_token: 'other-real-token') }
+  let(:target_user) { FactoryBot.create(:user, api_token: 'real-token') }
 
   before(:each) do
     sign_in logged_in_user if logged_in_user.present?
@@ -99,11 +99,11 @@ describe UsersController do
   describe 'PUT update' do
     subject(:update) { put :update, params: { id: user_id, user: user_params } }
 
-    let(:group) { FactoryGirl.create(:group) }
+    let(:group) { FactoryBot.create(:group) }
     let(:user_params) { { visibility_default: "visible_to_group_#{group.id}" } }
 
     context 'not logged in user' do
-      let(:user_id) { FactoryGirl.create(:user).id }
+      let(:user_id) { FactoryBot.create(:user).id }
 
       specify do
         update
