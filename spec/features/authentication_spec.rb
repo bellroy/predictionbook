@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature 'authentication' do
-  let!(:user) { FactoryGirl.create(:user, name: 'Bob', login: 'login') }
+  let!(:user) { FactoryBot.create(:user, name: 'Bob', login: 'login') }
 
   scenario 'user logs in and logs out again' do
     visit root_path

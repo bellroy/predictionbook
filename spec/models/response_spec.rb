@@ -37,10 +37,10 @@ describe Response do
 
     describe 'wagers' do
       it 'returns responses with confidences' do
-        with_confidence_0 = FactoryGirl.create(:response, confidence: 0)
-        with_confidence_50 = FactoryGirl.create(:response, confidence: 50)
-        with_confidence_100 = FactoryGirl.create(:response, confidence: 100)
-        without_confidence = FactoryGirl.create(:response, confidence: nil)
+        with_confidence_0 = FactoryBot.create(:response, confidence: 0)
+        with_confidence_50 = FactoryBot.create(:response, confidence: 50)
+        with_confidence_100 = FactoryBot.create(:response, confidence: 100)
+        without_confidence = FactoryBot.create(:response, confidence: nil)
         expect(Response.wagers).to include(with_confidence_0)
         expect(Response.wagers).to include(with_confidence_50)
         expect(Response.wagers).to include(with_confidence_100)
@@ -142,7 +142,7 @@ describe Response do
   end
 
   describe 'validations' do
-    let(:response) { FactoryGirl.build(:response, @attributes) }
+    let(:response) { FactoryBot.build(:response, @attributes) }
     let(:errors) do
       response.valid?
       response.errors

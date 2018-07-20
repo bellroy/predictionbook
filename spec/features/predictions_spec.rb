@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature 'creating and modifying predictions' do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
   before { login_as user }
 
   scenario 'making a new prediction' do
@@ -17,7 +17,7 @@ feature 'creating and modifying predictions' do
   end
 
   scenario 'editing a prediction' do
-    prediction = FactoryGirl.create(:prediction, creator: user)
+    prediction = FactoryBot.create(:prediction, creator: user)
     visit edit_prediction_path(prediction)
 
     fill_in 'prediction_description', with: 'A new prediction'

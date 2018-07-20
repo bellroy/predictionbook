@@ -5,14 +5,14 @@ describe PredictionVersion do
     subject(:create) { PredictionVersion.create_from_current_prediction_if_required(prediction) }
 
     context 'prediction has not changed' do
-      let!(:prediction) { FactoryGirl.create(:prediction) }
+      let!(:prediction) { FactoryBot.create(:prediction) }
       specify { expect { create }.not_to change { prediction.versions.length } }
     end
 
     context 'prediction is new' do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { FactoryBot.create(:user) }
       let!(:prediction) do
-        FactoryGirl.build(:prediction, description: 'A description', deadline: Date.yesterday,
+        FactoryBot.build(:prediction, description: 'A description', deadline: Date.yesterday,
                                        creator: user, uuid: 'uuid1', withdrawn: true)
       end
 
@@ -30,7 +30,7 @@ describe PredictionVersion do
   end
 
   describe '#previous_version' do
-    let(:prediction) { FactoryGirl.create(:prediction, description: 'old description') }
+    let(:prediction) { FactoryBot.create(:prediction, description: 'old description') }
     let(:most_recent_version) { prediction.versions.last }
 
     subject(:previous_version) { most_recent_version.previous_version }

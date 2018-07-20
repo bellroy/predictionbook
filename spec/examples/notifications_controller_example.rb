@@ -9,7 +9,7 @@ shared_examples_for 'NotificationsController' do
 
     before(:each) do
       expect(controller).to receive(:notification_collection).and_return(collection)
-      sign_in FactoryGirl.create(:user)
+      sign_in FactoryBot.create(:user)
     end
 
     describe 'creating a notification' do

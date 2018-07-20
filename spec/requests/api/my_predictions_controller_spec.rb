@@ -8,9 +8,9 @@ describe Api::MyPredictionsController, type: :request do
     response
   end
 
-  let(:user) { FactoryGirl.create(:user, api_token: 'real-token') }
-  let(:prediction) { FactoryGirl.create(:prediction, creator: user) }
-  let(:another_prediction) { FactoryGirl.create(:prediction) }
+  let(:user) { FactoryBot.create(:user, api_token: 'real-token') }
+  let(:prediction) { FactoryBot.create(:prediction, creator: user) }
+  let(:another_prediction) { FactoryBot.create(:prediction) }
 
   before do
     user
@@ -49,7 +49,7 @@ describe Api::MyPredictionsController, type: :request do
 
     context do
       let(:another_prediction) do
-        FactoryGirl.create(:prediction, creator: user, created_at: 1.minute.from_now)
+        FactoryBot.create(:prediction, creator: user, created_at: 1.minute.from_now)
       end
 
       specify do

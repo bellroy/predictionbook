@@ -15,7 +15,7 @@ describe ResponseNotificationsController do
       let(:relation) { instance_double(ActiveRecord::Relation) }
 
       before(:each) do
-        sign_in FactoryGirl.create(:user)
+        sign_in FactoryBot.create(:user)
         expect_any_instance_of(User).to receive(:response_notifications).and_return(relation)
       end
 
@@ -48,7 +48,7 @@ describe ResponseNotificationsController do
       let(:prediction) { instance_double(Prediction, id: '7') }
 
       before(:each) do
-        sign_in FactoryGirl.create(:user)
+        sign_in FactoryBot.create(:user)
         expect_any_instance_of(User).to receive(:response_notifications).and_return(relation)
         expect(relation).to receive(:find).and_return(notification)
         expect(notification).to receive(:prediction).and_return(prediction)

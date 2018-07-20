@@ -1,6 +1,6 @@
 require 'ffaker'
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :prediction do
     association(:creator, factory: :user)
     prediction_group { nil }
@@ -30,11 +30,11 @@ FactoryGirl.define do
       predictions { 0 }
       visibility { :visible_to_everyone }
       group_id { nil }
-      creator { FactoryGirl.build(:user) }
+      creator { FactoryBot.build(:user) }
     end
 
     after(:build) do |prediction_group, evaluator|
-      prediction_group.predictions = FactoryGirl.build_list(:prediction, evaluator.predictions,
+      prediction_group.predictions = FactoryBot.build_list(:prediction, evaluator.predictions,
                                                             prediction_group: prediction_group,
                                                             visibility: evaluator.visibility,
                                                             group_id: evaluator.group_id,
@@ -98,9 +98,9 @@ FactoryGirl.define do
     after(:build) do |response, evaluator|
       question = response.credence_question
       response.first_answer = evaluator.first_answer ||
-                              FactoryGirl.create(:credence_answer, credence_question: question)
+                              FactoryBot.create(:credence_answer, credence_question: question)
       response.second_answer = evaluator.second_answer ||
-                               FactoryGirl.create(:credence_answer, credence_question: question)
+                               FactoryBot.create(:credence_answer, credence_question: question)
     end
 
     trait :answered do
@@ -119,7 +119,7 @@ FactoryGirl.define do
 
     trait :with_answer do
       after(:build) do |question, _|
-        FactoryGirl.build(:credence_answer, credence_question: question)
+        FactoryBot.build(:credence_answer, credence_question: question)
       end
     end
   end

@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 feature 'discussing predictions' do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:prediction) { FactoryGirl.create(:prediction) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:prediction) { FactoryBot.create(:prediction) }
 
   before { login_as user }
 

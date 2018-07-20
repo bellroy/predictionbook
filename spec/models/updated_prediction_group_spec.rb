@@ -4,9 +4,9 @@ require 'spec_helper'
 
 describe UpdatedPredictionGroup do
   let(:updated_prediction_group) { described_class.new(prediction_group, user, params) }
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
   let(:prediction_group) { PredictionGroup.new }
-  let(:group) { FactoryGirl.create(:group) }
+  let(:group) { FactoryBot.create(:group) }
   let(:params) do
     HashWithIndifferentAccess.new(
       description: 'This will happen tomorrow',
@@ -136,7 +136,7 @@ describe UpdatedPredictionGroup do
 
       context 'updating confidences' do
         let(:prediction_group) do
-          FactoryGirl.create(:prediction_group, predictions: 3, creator: user,
+          FactoryBot.create(:prediction_group, predictions: 3, creator: user,
                                                 description: 'This will happen tomorrow')
         end
         let(:first_prediction) { prediction_group.predictions[0] }

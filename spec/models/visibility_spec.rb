@@ -8,7 +8,7 @@ describe Visibility do
 
     let(:current_visibility) { 'visible_to_creator' }
     let(:current_group_id) { nil }
-    let(:group) { FactoryGirl.create(:group, name: 'TrikeApps') }
+    let(:group) { FactoryBot.create(:group, name: 'TrikeApps') }
 
     specify do
       expect(html).to eq '<option value="visible_to_everyone" >Visible to everyone</option>' \

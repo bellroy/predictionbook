@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe CredenceQuestion do
-  let(:game) { FactoryGirl.create(:credence_game) }
+  let(:game) { FactoryBot.create(:credence_game) }
 
   it 'should be able to create random questions' do
-    question = FactoryGirl.create(:credence_question)
+    question = FactoryBot.create(:credence_question)
     (0..9).each do |rank|
-      FactoryGirl.create(:credence_answer, credence_question: question, rank: rank)
+      FactoryBot.create(:credence_answer, credence_question: question, rank: rank)
     end
 
     response = question.build_random_response(game)
@@ -21,8 +21,8 @@ describe CredenceQuestion do
     puts
     puts 'Running uniform distribution test for credence games. Usually takes about 10 seconds.'
 
-    question = FactoryGirl.create(:credence_question)
-    FactoryGirl.create_list(:credence_answer, 3, credence_question: question)
+    question = FactoryBot.create(:credence_question)
+    FactoryBot.create_list(:credence_answer, 3, credence_question: question)
 
     counts = Hash.new(0)
     10_000.times do

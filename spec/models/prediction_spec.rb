@@ -23,7 +23,7 @@ describe Prediction do
   end
 
   describe 'callbacks' do
-    let(:prediction_group) { FactoryGirl.create(:prediction_group, predictions: 2) }
+    let(:prediction_group) { FactoryBot.create(:prediction_group, predictions: 2) }
     let(:first_prediction) do
       prediction = prediction_group.predictions.first
       prediction.update_attributes(deadline: 1.day.ago, visibility: :visible_to_everyone)
@@ -59,8 +59,8 @@ describe Prediction do
       end
 
       it 'passes on objects from modelfactory' do
-        expect(FactoryGirl.build(:prediction)).to be_valid
-        expect(FactoryGirl.create(:prediction)).to be_valid
+        expect(FactoryBot.build(:prediction)).to be_valid
+        expect(FactoryBot.create(:prediction)).to be_valid
       end
 
       it 'requires a creator' do
@@ -83,7 +83,7 @@ describe Prediction do
       context 'and a description over 255 characters' do
         let(:long_string) { 'a' * 256 }
         let(:prediction) do
-          FactoryGirl.build(:prediction, description: long_string)
+          FactoryBot.build(:prediction, description: long_string)
         end
 
         before { prediction.save }
@@ -141,28 +141,28 @@ describe Prediction do
 
     it 'persists UUID set for the new record' do
       stub_uuid_create('64a5189c-25b3-11da-a97b-00c04fd430c8')
-      prediction = FactoryGirl.build(:prediction)
+      prediction = FactoryBot.build(:prediction)
       expect(prediction.uuid).to eq '64a5189c-25b3-11da-a97b-00c04fd430c8'
       prediction.save!
       expect(prediction.reload.uuid).to eq '64a5189c-25b3-11da-a97b-00c04fd430c8'
     end
 
     it 'allows write access to UUIDs on create' do
-      prediction = FactoryGirl.create(:prediction, uuid: '21f7f8de-8051-5b89-8680-0195ef798b6a')
+      prediction = FactoryBot.create(:prediction, uuid: '21f7f8de-8051-5b89-8680-0195ef798b6a')
       expect(prediction.uuid).to eq '21f7f8de-8051-5b89-8680-0195ef798b6a'
     end
 
     it 'does not allow write access to UUIDs loaded from DB' do
       stub_uuid_create('64a5189c-25b3-11da-a97b-00c04fd430c8')
-      prediction = FactoryGirl.create(:prediction)
+      prediction = FactoryBot.create(:prediction)
       prediction.update_attributes! uuid: 'other uuid'
       expect(prediction.reload.uuid).to eq '64a5189c-25b3-11da-a97b-00c04fd430c8'
     end
 
     it 'raises DuplicateRecord on create if there is a record with that UUID already' do
       stub_uuid_create('64a5189c-25b3-11da-a97b-00c04fd430c8')
-      FactoryGirl.create(:prediction)
-      expect { FactoryGirl.create(:prediction) }.to raise_error(Prediction::DuplicateRecord)
+      FactoryBot.create(:prediction)
+      expect { FactoryBot.create(:prediction) }.to raise_error(Prediction::DuplicateRecord)
     end
   end
 
@@ -191,20 +191,20 @@ describe Prediction do
 
   describe '#judgement' do
     it 'returns most recent judgement' do
-      prediction = FactoryGirl.create(:prediction)
+      prediction = FactoryBot.create(:prediction)
       prediction.judge!(:right)
       prediction.judge!(:wrong)
       expect(prediction.judgement.outcome).to eq false
       expect(prediction).to be_wrong
     end
     it 'returns nil if no judgements' do
-      expect(FactoryGirl.create(:prediction).judgement).to be_nil
+      expect(FactoryBot.create(:prediction).judgement).to be_nil
     end
   end
 
   describe '#judged_at' do
     it 'returns when judgement occured' do
-      prediction = FactoryGirl.create(:prediction)
+      prediction = FactoryBot.create(:prediction)
 
       judged_at = 15.minutes.from_now
       allow(Time).to receive(:now).and_return(judged_at)
@@ -220,48 +220,48 @@ describe Prediction do
     end
 
     it 'has a finder for the most recent predictions' do
-      prediction1 = FactoryGirl.create(:prediction, created_at: 2.weeks.ago)
-      prediction2 = FactoryGirl.create(:prediction)
+      prediction1 = FactoryBot.create(:prediction, created_at: 2.weeks.ago)
+      prediction2 = FactoryBot.create(:prediction)
       expect(Prediction.recent).to eq [prediction2, prediction1]
     end
 
     describe 'popular predictions' do
       it 'has a finder for recent popular predictions' do
-        prediction1 = FactoryGirl.create(:prediction, created_at: 1.week.ago, deadline: 4.days.from_now)
-        FactoryGirl.create(:response, prediction: prediction1)
-        prediction2 = FactoryGirl.create(:prediction, created_at: 2.days.ago, deadline: 2.days.from_now)
-        prediction3 = FactoryGirl.create(:prediction, created_at: 1.week.ago, deadline: 3.days.from_now)
-        FactoryGirl.create(:response, prediction: prediction3)
-        FactoryGirl.create(:response, prediction: prediction3)
-        prediction4 = FactoryGirl.create(:prediction, created_at: 1.day.ago, deadline: 1.day.from_now)
+        prediction1 = FactoryBot.create(:prediction, created_at: 1.week.ago, deadline: 4.days.from_now)
+        FactoryBot.create(:response, prediction: prediction1)
+        prediction2 = FactoryBot.create(:prediction, created_at: 2.days.ago, deadline: 2.days.from_now)
+        prediction3 = FactoryBot.create(:prediction, created_at: 1.week.ago, deadline: 3.days.from_now)
+        FactoryBot.create(:response, prediction: prediction3)
+        FactoryBot.create(:response, prediction: prediction3)
+        prediction4 = FactoryBot.create(:prediction, created_at: 1.day.ago, deadline: 1.day.from_now)
         expect(Prediction.popular).to eq [prediction3, prediction1, prediction4, prediction2]
       end
 
       it 'excludes overdue predictions' do
-        FactoryGirl.create(:prediction, created_at: 1.week.ago, deadline: 1.day.ago)
-        prediction2 = FactoryGirl.create(:prediction, created_at: 1.week.ago, deadline: 1.day.from_now)
+        FactoryBot.create(:prediction, created_at: 1.week.ago, deadline: 1.day.ago)
+        prediction2 = FactoryBot.create(:prediction, created_at: 1.week.ago, deadline: 1.day.from_now)
         expect(Prediction.popular).to eq [prediction2]
       end
 
       it 'excludes judged (known) predictions' do
-        prediction1 = FactoryGirl.create(:prediction, created_at: 1.week.ago, deadline: 1.day.from_now)
-        FactoryGirl.create(:judgement, prediction: prediction1, outcome: false)
-        prediction2 = FactoryGirl.create(:prediction, created_at: 1.week.ago, deadline: 1.day.from_now)
+        prediction1 = FactoryBot.create(:prediction, created_at: 1.week.ago, deadline: 1.day.from_now)
+        FactoryBot.create(:judgement, prediction: prediction1, outcome: false)
+        prediction2 = FactoryBot.create(:prediction, created_at: 1.week.ago, deadline: 1.day.from_now)
         expect(Prediction.popular).to eq [prediction2]
       end
 
       it 'excludes predictions made more than 2 weeks ago' do
-        FactoryGirl.create(:prediction, created_at: 3.weeks.ago, deadline: 1.day.from_now)
-        FactoryGirl.create(:prediction, created_at: 4.weeks.ago, deadline: 2.days.from_now)
-        FactoryGirl.create(:prediction, created_at: 5.weeks.ago, deadline: 3.days.from_now)
+        FactoryBot.create(:prediction, created_at: 3.weeks.ago, deadline: 1.day.from_now)
+        FactoryBot.create(:prediction, created_at: 4.weeks.ago, deadline: 2.days.from_now)
+        FactoryBot.create(:prediction, created_at: 5.weeks.ago, deadline: 3.days.from_now)
         expect(Prediction.popular).to be_empty
       end
     end
 
     describe 'judged predictions' do
       it 'orders by most recently judged first' do
-        first = FactoryGirl.create(:prediction)
-        last = FactoryGirl.create(:prediction)
+        first = FactoryBot.create(:prediction)
+        last = FactoryBot.create(:prediction)
 
         first.judge!(:right)
         future = 10.minutes.from_now.time
@@ -272,14 +272,14 @@ describe Prediction do
       end
 
       it 'includes judged predictions' do
-        judged = FactoryGirl.create(:prediction)
+        judged = FactoryBot.create(:prediction)
         judged.judge!(:right, nil)
 
         expect(Prediction.judged).to eq [judged]
       end
 
       it 'does not include unjudged predictions' do
-        FactoryGirl.create(:prediction)
+        FactoryBot.create(:prediction)
 
         expect(Prediction.judged).to eq []
       end
@@ -287,29 +287,29 @@ describe Prediction do
 
     describe 'for unjudged predictions' do
       it 'does not return judged predictions' do
-        judged = FactoryGirl.create(:prediction)
+        judged = FactoryBot.create(:prediction)
         judged.judge!(:right, nil)
-        unjudged = FactoryGirl.create(:prediction)
+        unjudged = FactoryBot.create(:prediction)
 
         expect(Prediction.unjudged).to eq [unjudged]
       end
 
       it 'does not return predictions whose deadline is in the future' do
-        FactoryGirl.create(:prediction, deadline: 2.years.from_now)
-        past = FactoryGirl.create(:prediction, deadline: 2.days.ago)
+        FactoryBot.create(:prediction, deadline: 2.years.from_now)
+        past = FactoryBot.create(:prediction, deadline: 2.days.ago)
 
         expect(Prediction.unjudged).to eq [past]
       end
 
       it 'orders by deadline' do
-        long_ago = FactoryGirl.create(:prediction, deadline: 2.days.ago)
-        longer_ago = FactoryGirl.create(:prediction, deadline: 2.weeks.ago)
+        long_ago = FactoryBot.create(:prediction, deadline: 2.days.ago)
+        longer_ago = FactoryBot.create(:prediction, deadline: 2.weeks.ago)
 
         expect(Prediction.unjudged).to eq [long_ago, longer_ago]
       end
 
       it 'returns currently unjudged predictions with previous judgements' do
-        rejudged = FactoryGirl.create(:prediction)
+        rejudged = FactoryBot.create(:prediction)
         rejudged.judge!(:right, nil)
         Timecop.travel(Time.zone.now + 1.second)
         rejudged.judge!(nil, nil)
@@ -318,7 +318,7 @@ describe Prediction do
       end
 
       it 'does not return currently judged predictions with previous unknown judgements' do
-        rejudged = FactoryGirl.create(:prediction)
+        rejudged = FactoryBot.create(:prediction)
         rejudged.judge!(nil, nil)
         Timecop.travel(Time.zone.now + 1.second)
         rejudged.judge!(:right, nil)
@@ -329,23 +329,23 @@ describe Prediction do
 
     describe 'for future predictions' do
       it 'does not return judged predictions' do
-        judged = FactoryGirl.create(:prediction, deadline: 2.days.from_now)
+        judged = FactoryBot.create(:prediction, deadline: 2.days.from_now)
         judged.judge!(:right, nil)
-        unjudged = FactoryGirl.create(:prediction, deadline: 2.days.from_now)
+        unjudged = FactoryBot.create(:prediction, deadline: 2.days.from_now)
 
         expect(Prediction.future).to eq [unjudged]
       end
 
       it 'does not return predictions whose deadline is in the past' do
-        future = FactoryGirl.create(:prediction, deadline: 2.years.from_now)
-        FactoryGirl.create(:prediction, deadline: 2.days.ago)
+        future = FactoryBot.create(:prediction, deadline: 2.years.from_now)
+        FactoryBot.create(:prediction, deadline: 2.days.ago)
 
         expect(Prediction.future).to eq [future]
       end
 
       it 'orders by ascending deadline' do
-        further = FactoryGirl.create(:prediction, deadline: 2.weeks.from_now)
-        sooner = FactoryGirl.create(:prediction, deadline: 2.days.from_now)
+        further = FactoryBot.create(:prediction, deadline: 2.weeks.from_now)
+        sooner = FactoryBot.create(:prediction, deadline: 2.days.from_now)
 
         expect(Prediction.future).to eq [sooner, further]
       end
@@ -510,7 +510,7 @@ describe Prediction do
 
       describe '#judge' do
         before(:each) do
-          @prediction = FactoryGirl.create(:prediction)
+          @prediction = FactoryBot.create(:prediction)
           @user = mock_model(User)
         end
 
@@ -534,7 +534,7 @@ describe Prediction do
 
     describe 'withdraw modifier' do
       before(:each) do
-        @prediction = FactoryGirl.create(:prediction)
+        @prediction = FactoryBot.create(:prediction)
       end
 
       it 'is not be withdrawn by default' do
@@ -613,10 +613,10 @@ describe Prediction do
 
   describe 'confidence aggregation' do
     it 'calculates correctly' do
-      prediction = FactoryGirl.create(:prediction)
+      prediction = FactoryBot.create(:prediction)
       prediction.responses.first.update_attributes(confidence: 50)
-      FactoryGirl.create(:response, prediction: prediction, confidence: 56)
-      FactoryGirl.create(:response, prediction: prediction, confidence: 83)
+      FactoryBot.create(:response, prediction: prediction, confidence: 56)
+      FactoryBot.create(:response, prediction: prediction, confidence: 83)
       expect(prediction.mean_confidence).to eq 63
     end
   end
