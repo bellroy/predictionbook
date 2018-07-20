@@ -14,7 +14,8 @@ describe Api::MyPredictionsController, type: :controller do
       context 'and a public prediction' do
         let(:my_prediction) { FactoryGirl.create(:prediction, creator: user) }
         let(:her_prediction) { FactoryGirl.create(:prediction) }
-        let(:parsed_response) { JSON.load(response.body) }
+        let(:parsed_response) { JSON.parse(response.body) }
+
         before do
           my_prediction
           her_prediction
@@ -23,13 +24,19 @@ describe Api::MyPredictionsController, type: :controller do
 
         specify { expect(response).to be_success }
         specify { expect(response.content_type).to eq 'application/json' }
+
         it 'includes my prediction' do
-          expect(parsed_response['predictions'].to_s).to include my_prediction.description_with_group
+          expect(parsed_response['predictions'].to_s)
+            .to include my_prediction.description_with_group
           expect(parsed_response['user']['name']).to eq user.name
           expect(parsed_response['user']['user_id']).to eq user.id
           expect(parsed_response['user']['email']).to eq user.email
           expect(parsed_response['predictions'].to_s).not_to include user.email
+          expect(parsed_response['predictions'].to_s).to include 'outcome'
+          expect(parsed_response['predictions'].to_s).to include 'description_with_group'
+          expect(parsed_response['predictions'].to_s).to include 'responses'
         end
+
         it "does not includes someone else's prediction" do
           expect(response.body).to_not include her_prediction.description_with_group
         end
