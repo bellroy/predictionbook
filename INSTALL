@@ -14,7 +14,7 @@ $ rake secret # run twice ; set 'session_secret' / 'rest_auth_site_key' in crede
 $ rake db:create
 $ rake db:schema:load
 $ rake spec # run specs
-$ script/server
+$ script/rails server
 $ ^Z # ctrl+z
 $ bg
 $ open http://127.0.0.1:3000/
