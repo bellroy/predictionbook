@@ -12,7 +12,7 @@ $ cp config/credentials.yml.example config/credentials.yml
 $ bundle install
 $ rake secret # run twice ; set 'session_secret' / 'rest_auth_site_key' in credentials.yml
 $ rake db:create
-$ rake db:schema:load
+$ rake db:schema:load # or db:migrate and db:test:prepare
 $ rake spec # run specs
 $ script/server
 $ ^Z # ctrl+z
