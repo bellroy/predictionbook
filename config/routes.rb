@@ -66,8 +66,6 @@ PredictionBook::Application.routes.draw do
     get '(page/:page)', :action => :index, :on => :collection, :as => ''
   end
 
-  resources :my_resources, :concerns => :paginatable
-
   get '/predictions(/page/:page)' => 'predictions#index', :page => 1
   get '/predictions/unjudged(/page/:page)' => 'predictions#unjudged', :page => 1
   get '/predictions/judged(/page/:page)' => 'predictions#judged', :page => 1
