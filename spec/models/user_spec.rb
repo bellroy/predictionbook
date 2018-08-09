@@ -61,7 +61,7 @@ describe User do
       it { is_expected.to be false }
 
       context 'user is admin' do
-        let(:user) { User.new(login: 'matt') }
+        let(:user) { User.new(admin: true) }
         let(:creator_user) { User.new }
 
         it { is_expected.to be true }
