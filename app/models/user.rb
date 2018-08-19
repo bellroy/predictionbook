@@ -93,10 +93,6 @@ class User < ActiveRecord::Base
     prediction.visible_to_everyone? || (prediction.visible_to_group? && user_group.present?)
   end
 
-  def admin?
-    %w[matt gwern].include?(login)
-  end
-
   def to_param
     (login || '').gsub('.', '[dot]')
   end
