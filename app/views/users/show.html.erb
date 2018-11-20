@@ -11,7 +11,8 @@
   </div>
 
   <div id="predictions">
-    <h2>Most recent predictions by <%= show_user(@user) %></h2>
+    <h2><%= show_user(@user) %> has made <%= @count %> predictions. Displaying most recent ones: </h2>
+    
     <ul>
       <%= render :partial => @predictions %>
     </ul>
