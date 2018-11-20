@@ -26,7 +26,7 @@
     <%= f.password_field :current_password, autocomplete: "off", placeholder: 'confirm with your current password' %>
   </div>
 
-  <%- # This is clearing the old password and salt fields %>
+  <% # This is clearing the old password and salt fields %>
   <%= f.hidden_field :crypted_password, value: '' %>
   <%= f.hidden_field :salt, value: '' %>
 

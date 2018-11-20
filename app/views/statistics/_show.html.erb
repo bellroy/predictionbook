@@ -4,25 +4,25 @@
     <thead>
       <tr>
         <th class="narrow">Confidence</th>
-        <%- @statistics.each do |stat| -%>
+        <% @statistics.each do |stat| %>
         <th><%= certainty_heading(stat.heading) %></th>
-        <%- end -%>
+        <% end %>
         <th>Total</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <th class="narrow">Accuracy</th>
-        <%- @statistics.each do |stat| -%>
+        <% @statistics.each do |stat| %>
           <td><%= stat.accuracy %>%</td>
-        <%- end -%>
+        <% end %>
         <td>&nbsp;</td>
       </tr>
       <tr>
         <th class="narrow">Sample Size</th>
-        <%- @statistics.each do |stat| -%>
+        <% @statistics.each do |stat| %>
           <td><%= stat.count %></td>
-        <%- end -%>
+        <% end %>
         <td><%= @statistics.size %></td>
       </tr>
     </tbody>

@@ -1,10 +1,10 @@
-<% unless @unjudged.empty? -%>
+<% unless @unjudged.empty? %>
 <h2><%= link_to 'Recently Transpired & Awaiting Judgement', unjudged_predictions_url %></h2>
 <ul class='unjudged'>
 <%= render @unjudged %>
 </ul>
 <p class='links'><%= link_to 'Show All', unjudged_predictions_url %></p>
-<% end -%>
+<% end %>
 
 <h2><%= link_to 'Recently Predicted', predictions_url %></h2>
 <ul class='recent'>

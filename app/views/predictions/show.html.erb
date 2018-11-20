@@ -8,24 +8,24 @@
 <p>
   Created by <%= show_user(@prediction.creator) %>
   <%= TimeInContentTagPresenter.new(@prediction.created_at).tag %>;
-  known <%= TimeInContentTagPresenter.new(@prediction.deadline).tag -%><% if @prediction.judgement %>;
-  <%= render @prediction.judgement %><% end -%>
+  known <%= TimeInContentTagPresenter.new(@prediction.deadline).tag %><% if @prediction.judgement %>;
+  <%= render @prediction.judgement %><% end %>
 </p>
 
-<%- if @prediction.visible_to_creator? -%>
+<% if @prediction.visible_to_creator? %>
   <p class='note'>
     This prediction is <strong>private</strong>. <%= render 'predictions/private_note' %>
   </p>
-<%- end -%>
-<%- if @prediction.visible_to_group? -%>
+<% end %>
+<% if @prediction.visible_to_group? %>
   <p class='note'>
     This prediction is only visible to members of the <strong><%= link_to @prediction.group.name, group_path(@prediction.group) %></strong> group.
   </p>
-<%- end -%>
+<% end %>
 
 <%= render 'predictions/events', events: @events %>
 
-<% if current_user.present? -%>
+<% if current_user.present? %>
   <div id='response'>
     <%= render 'responses/form' %>
   </div>
@@ -34,11 +34,11 @@
     <div id="deadline_notification"><%= render @deadline_notification %></div>
     <div id="response_notification"><%= render @response_notification %></div>
   </div>
-<% else -%>
+<% else %>
   <p><span class='notice'>Please <%= link_to 'log in', new_user_session_path %> to respond to or judge prediction</span></p>
-<% end -%>
+<% end %>
 
-<% if current_user.present? && !@prediction.withdrawn? -%>
+<% if current_user.present? && !@prediction.withdrawn? %>
   <div id="judgement">
     <h2>Judge this prediction</h2>
     <p class="note">Only judge this prediction once its outcome is known.<br />Record your opinion above, <strong>not</strong> here!</p>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>PredictionBook: <%=h @title ? @title : 'How sure are you?' -%></title>
+  <title>PredictionBook: <%=h @title ? @title : 'How sure are you?' %></title>
   <meta charset="utf-8" />
   <%= stylesheet_link_tag "application" %>
 	<%= csrf_meta_tag %>
@@ -42,15 +42,15 @@
 			</ul>
 
       <ul id="user-links">
-			  <%- unless current_user.present? -%>
+			  <% unless current_user.present? %>
 	        <li><%= link_to 'Login', new_user_session_path %></li>
 	        <li><%= link_to 'Signup', new_user_registration_path %></li>
-	  		<%- else -%>
+	  		<% else %>
 	  		  <li><%= link_to 'Your profile', user_path(current_user) %></li>
 					<li><%= link_to 'Groups', groups_path %></li>
 	  		  <li><%= link_to 'Settings', settings_user_path(current_user) %></li>
 	  		  <li><%= link_to 'Logout', destroy_user_session_path, method: 'delete' %></li>
-	  		<%- end -%>
+	  		<% end %>
       </ul>
 
 		</div><!-- #nav -->

@@ -1,9 +1,9 @@
-<%- unless judgement.worthless? -%>
+<% unless judgement.worthless? %>
 <span class='<%= classes('judgement', flash[:judged]) %>'>judged
-  <span class='outcome'><%= judgement.outcome_in_words -%></span>
-  <% if judgement.user -%>
-    by <%= show_user(judgement.user) -%>
-  <% end -%>
-  <%= TimeInContentTagPresenter.new(judgement.created_at, 'created_at').tag -%>.
+  <span class='outcome'><%= judgement.outcome_in_words %></span>
+  <% if judgement.user %>
+    by <%= show_user(judgement.user) %>
+  <% end %>
+  <%= TimeInContentTagPresenter.new(judgement.created_at, 'created_at').tag %>.
 </span>
-<%- end -%>
+<% end %>

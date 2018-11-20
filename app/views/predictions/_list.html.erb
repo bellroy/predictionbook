@@ -1,24 +1,24 @@
-<%- if @show_statistics -%>
-	<%- cache(global_statistics_cache_key) do -%>
+<% if @show_statistics %>
+	<% cache(global_statistics_cache_key) do %>
 		<%= render 'statistics/show' %>
-	<%- end -%>
-<%- end -%>
+	<% end %>
+<% end %>
 
 <h2><%= title || 'Predictions' %></h2>
 
 <div class="popular">
-  <%- if @predictions.present? -%>
+  <% if @predictions.present? %>
   <ul <%= "class='#{@filter}'" if @filter %>>
     <%= render @predictions  %>
   </ul>
-  <%- else -%>
+  <% else %>
   <p>
-    No predictions to show<%- if current_user %>; so
-    <%= link_to 'make your own!', new_prediction_path %><%- end %>
+    No predictions to show<% if current_user %>; so
+    <%= link_to 'make your own!', new_prediction_path %><% end %>
   </p>
-  <%- end %>
+  <% end %>
 </div>
 
-<%- unless current_page?('/') %>
+<% unless current_page?('/') %>
 <p class="pagination"><%= paginate @predictions %></p>
-<%- end %>
+<% end %>

@@ -1,13 +1,13 @@
-<%- if @user.present? %>
-  <%- cache(user_statistics_cache_key @user) do -%>
+<% if @user.present? %>
+  <% cache(user_statistics_cache_key @user) do %>
   	<%= render 'statistics/show' %>
-  <%- end -%>
+  <% end %>
 
   <div id="score">
     <h2>Calibration</h2>
-    <%- cache(user_calibration_scores_cache_key @user) do -%>
+    <% cache(user_calibration_scores_cache_key @user) do %>
     	<%= render 'calibration_scores/show' %>
-    <%- end -%>
+    <% end %>
   </div>
 
   <div id="predictions">
