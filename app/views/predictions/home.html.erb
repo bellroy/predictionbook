@@ -17,7 +17,7 @@
 </div><!-- #feature -->
 <%- end -%>
 
-<%= render :partial => 'form' if current_user %>
+<%= render 'form' if current_user %>
 
 <% unless current_user -%>
 <div id="intro">
@@ -29,14 +29,14 @@
 <% end -%>
 
 <div id='popular'>
-  <%= render :partial => 'list', :locals => { :title => 'Popular Predictions' } %>
+  <%= render 'list', :locals => { :title => 'Popular Predictions' } %>
 </div>
 
 <% if current_user -%>
 <div id='responses'>
   <h2><%= link_to 'Happenstance', happenstance_path %></h2>
   <ul>
-  <%= render :partial => @responses %>
+  <%= render @responses %>
   </ul>
 </div>
 <% end -%>

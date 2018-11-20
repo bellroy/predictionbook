@@ -1,6 +1,6 @@
 <%- if @show_statistics -%>
 	<%- cache(global_statistics_cache_key) do -%>
-		<%= render :partial => 'statistics/show' %>
+		<%= render 'statistics/show' %>
 	<%- end -%>
 <%- end -%>
 
@@ -9,7 +9,7 @@
 <div class="popular">
   <%- if @predictions.present? -%>
   <ul <%= "class='#{@filter}'" if @filter %>>
-    <%= render :partial => @predictions  %>
+    <%= render @predictions  %>
   </ul>
   <%- else -%>
   <p>

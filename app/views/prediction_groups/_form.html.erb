@@ -1,7 +1,7 @@
 
 <%= form_for(@prediction_group, :html => { :honeypot => true }) do |f| %>
   <%= f.text_field :description, :label => "Start a sentence that each of your predictions will complete (e.g. My factory's total widget production will be)" %>
-  <p class='note'><%= render :partial => 'predictions/private_note' %></p>
+  <p class='note'><%= render 'predictions/private_note' %></p>
 
   <div class='prediction-group-predictions'>
     <% @prediction_group.predictions.each_with_index do |prediction, index| %>

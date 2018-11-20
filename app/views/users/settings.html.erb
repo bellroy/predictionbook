@@ -4,7 +4,7 @@
   <%= f.text_field :email %>
   <%= f.timezone_field :timezone %>
   <%= f.select_field :visibility_default, raw(Visibility.select_options_html((current_user.try(:groups) || []), @user.visibility_default, @user.group_default_id)), label: 'By default, create predictions that are' %>
-  <p class='note'><%= render :partial => 'predictions/private_note' %></p>
+  <p class='note'><%= render 'predictions/private_note' %></p>
   <%= f.submit 'Change details' %>
 <% end -%>
 <h2>Password</h2>

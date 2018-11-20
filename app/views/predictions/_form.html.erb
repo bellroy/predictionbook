@@ -12,7 +12,7 @@
     <%- end -%>
     <% %>
     <%= f.select_field :visibility, raw(Visibility.select_options_html((current_user.try(:group_members) || []).reject(&:invitee?).map(&:group), @prediction.visibility, @prediction.group_id)), label: 'Visibility' %>
-    <p class='note'><%= render :partial => 'private_note' %></p>
+    <p class='note'><%= render 'private_note' %></p>
     <%= f.submit 'Lock it in!' %>
   </div>
 <% end %>

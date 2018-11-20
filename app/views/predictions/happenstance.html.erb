@@ -1,26 +1,26 @@
 <% unless @unjudged.empty? -%>
 <h2><%= link_to 'Recently Transpired & Awaiting Judgement', unjudged_predictions_url %></h2>
 <ul class='unjudged'>
-<%= render :partial => @unjudged %>
+<%= render @unjudged %>
 </ul>
 <p class='links'><%= link_to 'Show All', unjudged_predictions_url %></p>
 <% end -%>
 
 <h2><%= link_to 'Recently Predicted', predictions_url %></h2>
 <ul class='recent'>
-<%= render :partial => @recent %>
+<%= render @recent %>
 </ul>
 <p class='links'><%= link_to 'Show All', predictions_url %></p>
 
 <h2><%= link_to 'Recently Judged', judged_predictions_url %></h2>
 <ul class='judged'>
-<%= render :partial => @judged %>
+<%= render @judged %>
 </ul>
 <p class='links'><%= link_to 'Show All', judged_predictions_url %></p>
 
 <h2>Recent Responses</h2>
 <div id="responses">
 <ul>
-<%= render :partial => @responses %>
+<%= render @responses %>
 </ul>
 </div>

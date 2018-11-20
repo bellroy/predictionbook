@@ -9,12 +9,12 @@
   Created by <%= show_user(@prediction.creator) %>
   <%= TimeInContentTagPresenter.new(@prediction.created_at).tag %>;
   known <%= TimeInContentTagPresenter.new(@prediction.deadline).tag -%><% if @prediction.judgement %>;
-  <%= render :partial => @prediction.judgement %><% end -%>
+  <%= render @prediction.judgement %><% end -%>
 </p>
 
 <%- if @prediction.visible_to_creator? -%>
   <p class='note'>
-    This prediction is <strong>private</strong>. <%= render :partial => 'predictions/private_note' %>
+    This prediction is <strong>private</strong>. <%= render 'predictions/private_note' %>
   </p>
 <%- end -%>
 <%- if @prediction.visible_to_group? -%>
@@ -27,12 +27,12 @@
 
 <% if current_user.present? -%>
   <div id='response'>
-    <%= render :partial => 'responses/form' %>
+    <%= render 'responses/form' %>
   </div>
   <div id='notification'>
     <h2>Email Notifications</h2>
-    <div id="deadline_notification"><%= render :partial => @deadline_notification %></div>
-    <div id="response_notification"><%= render :partial => @response_notification %></div>
+    <div id="deadline_notification"><%= render @deadline_notification %></div>
+    <div id="response_notification"><%= render @response_notification %></div>
   </div>
 <% else -%>
   <p><span class='notice'>Please <%= link_to 'log in', new_user_session_path %> to respond to or judge prediction</span></p>
