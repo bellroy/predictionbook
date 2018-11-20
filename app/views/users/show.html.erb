@@ -12,7 +12,12 @@
 
   <div id="predictions">
     <h2><%= show_user(@user) %> has made <%= @count %> predictions. Displaying most recent ones: </h2>
-    
+
+    <%= form_tag @user, method: :get, class: "prediction-filter" do %>
+      <%= select_tag :filter, options_for_select([["All", ""], ["Judged", "judged"], ["Unjudged", "unjudged"], ["Future", "future"]]) %>
+      <%= submit_tag "Filter list" %>
+    <% end %>
+
     <ul>
       <%= render :partial => @predictions %>
     </ul>
