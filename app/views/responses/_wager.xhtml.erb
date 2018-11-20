@@ -1,11 +1,11 @@
 <%= show_user(wager.user) %>
 estimated
-<%= content_tag :span, "#{wager.confidence}%", :class => "confidence",
-  :style => style_for_confidence(wager.confidence) %>
+<%= content_tag :span, "#{wager.confidence}%", class: "confidence",
+  style: style_for_confidence(wager.confidence) %>
 on
 <%= content_tag :span,
    link_to(TitleTagPresenter.new(wager.prediction.description_with_group).tag, wager.prediction),
-   :class => (wager.prediction.withdrawn? ? 'withdrawn ' : '') + "break-word" -%>
+   class: (wager.prediction.withdrawn? ? 'withdrawn ' : '') + "break-word" -%>
 <%= %>
 <abbr title="To be decided (judged)">TBD</abbr>
 <%= TimeInContentTagPresenter.new(wager.prediction.deadline).tag -%>
@@ -15,7 +15,7 @@ on
 <% end -%>
 <% elsif !wager.unknown?; outcome = wager.correct? ? 'correct' : 'wrong' %>
 and was
-<%= content_tag :span, outcome, :class => "outcome #{outcome}" -%>
+<%= content_tag :span, outcome, class: "outcome #{outcome}" -%>
 <% else %>
 but withdrew the prediction <%= TimeInContentTagPresenter.new(wager.prediction.updated_at).tag -%>
 <% end -%>

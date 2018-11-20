@@ -14,6 +14,6 @@ module PredictionHelper
                when Judgement then 'judgements'
                when PredictionVersion then 'predictions/versions'
     end
-    render partial: "#{dir_name}/event", locals: { event: event }
+    render partial: "#{dir_name}/event", event: event
   end
 end

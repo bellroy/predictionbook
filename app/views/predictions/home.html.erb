@@ -2,18 +2,18 @@
 
 <%- content_for :feature do -%>
 <div id="feature">
-  <%= image_tag "title-banner.png", :id => "title", :alt => "How Sure Are You?" %>
+  <%= image_tag "title-banner.png", id: "title", alt: "How Sure Are You?" %>
 	<div class="content clear">
 		<h2>Find out just how sure you should be, and get better at being only as sure as the facts justify.</h2>
     <%- unless current_user.present? -%>
 		<p class="actions clear">
-		  <%= link_to 'Login', new_user_session_path, :class => 'button' %>
+		  <%= link_to 'Login', new_user_session_path, class: 'button' %>
 		  <span>or</span>
-		  <%= link_to 'Sign Up', new_user_registration_path, :class => 'button' %>
+		  <%= link_to 'Sign Up', new_user_registration_path, class: 'button' %>
 	  </p>
 	  <%- end -%>
 	</div>
-  <%= image_tag "graphs.png", :id => "illustration", :alt => "PredictionBook" %>
+  <%= image_tag "graphs.png", id: "illustration", alt: "PredictionBook" %>
 </div><!-- #feature -->
 <%- end -%>
 
@@ -29,7 +29,7 @@
 <% end -%>
 
 <div id='popular'>
-  <%= render 'list', :locals => { :title => 'Popular Predictions' } %>
+  <%= render 'list', title: 'Popular Predictions'  %>
 </div>
 
 <% if current_user -%>

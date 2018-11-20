@@ -1,2 +1,2 @@
-<%= render 'responses/wager', :locals => {:wager => response} if response.confidence? -%>
-<%= render 'responses/comment', :locals => {:comment => response}  if response.comment? -%>
+<%= render 'responses/wager', wager: response if response.confidence? -%>
+<%= render 'responses/comment', comment: response  if response.comment? -%>

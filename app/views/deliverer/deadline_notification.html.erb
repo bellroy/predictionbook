@@ -9,4 +9,4 @@
 <p>
   Now that <strong><%= @prediction.prettied_deadline %></strong> has been reached, it's judgement time.
 </p>
-<p><%= link_to 'Go forth and deliver your judgement', prediction_url(@prediction, :token=> @deadline.uuid) %></p>
+<p><%= link_to 'Go forth and deliver your judgement', prediction_url(@prediction, token: @deadline.uuid) %></p>
