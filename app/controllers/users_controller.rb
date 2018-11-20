@@ -11,6 +11,13 @@ class UsersController < ApplicationController
     @predictions = @user.predictions
     @statistics  = @user.statistics
     @predictions = @predictions.visible_to_everyone unless user_is_current_user?
+
+    case params[:filter]
+    when 'judged' then @predictions = @predictions.judged
+    when 'unjudged' then @predictions = @predictions.unjudged
+    when 'future' then @predictions = @predictions.future
+    end
+    @count = @predictions.count
     @predictions = @predictions.page(params[:page])
     @score_calculator = ScoreCalculator.new(@user, start_date: 6.months.ago, interval: 1.month)
   end
