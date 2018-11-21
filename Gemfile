@@ -37,6 +37,8 @@ gem 'loofah', '~> 2.2.3'
 gem 'sentry-raven'
 
 group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'cap-deploy-tagger'
   gem 'capistrano', '~> 3.5.0'
   gem 'capistrano-bundler', require: false
