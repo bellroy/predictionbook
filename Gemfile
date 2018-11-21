@@ -5,6 +5,7 @@ gem 'haml-rails'
 gem 'jquery-rails'
 gem 'rails'
 gem 'rails-observers'
+
 # Models
 gem 'active_model_serializers'
 gem 'chronic'
@@ -49,8 +50,10 @@ group :development do
   gem 'puma'
 end
 
-group :test, :development do
+group :development, :test do
   gem 'awesome_print'
+  gem 'capybara'
+  gem 'database_cleaner'
   gem 'hirb'
   gem 'poltergeist'
   gem 'pry'
@@ -59,13 +62,8 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'selenium-webdriver', require: false
   gem 'simplecov'
-  gem 'wirble'
-end
-
-group :development, :test do
-  gem 'capybara'
-  gem 'database_cleaner'
   gem 'timecop'
+  gem 'wirble'
 end
 
 group :test do
