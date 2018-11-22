@@ -33,6 +33,7 @@ gem 'rack-cors'
 # Misc
 gem 'hashdiff'
 gem 'honeypot-captcha', git: 'https://github.com/RandieM/honeypot-captcha'
+gem 'loofah', '~> 2.2.3'
 gem 'sentry-raven'
 
 group :development do
