@@ -7,18 +7,9 @@ class UsersController < ApplicationController
   before_action :allow_iframe_requests, only: [:statistics]
 
   def show
-    @title       = "Most recent predictions by #{@user}"
-    @predictions = @user.predictions
-    @statistics  = @user.statistics
-    @predictions = @predictions.visible_to_everyone unless user_is_current_user?
-
-    case params[:filter]
-    when 'judged' then @predictions = @predictions.judged
-    when 'unjudged' then @predictions = @predictions.unjudged
-    when 'future' then @predictions = @predictions.future
-    end
-    @count = @predictions.count
-    @predictions = @predictions.page(params[:page])
+    @title = "Most recent predictions by #{@user}"
+    @predictions = PredictionFilter.filter(@user, current_user, params[:filter], params[:page])
+    @statistics = @user.statistics
     @score_calculator = ScoreCalculator.new(@user, start_date: 6.months.ago, interval: 1.month)
   end
 
