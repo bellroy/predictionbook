@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Group < ActiveRecord::Base
+class Group < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   has_many :group_members, autosave: true, dependent: :destroy

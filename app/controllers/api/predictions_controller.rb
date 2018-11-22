@@ -28,7 +28,7 @@ module Api
     end
 
     def update
-      if @prediction.update_attributes(prediction_params)
+      if @prediction.update(prediction_params)
         render json: @prediction
       else
         render json: @prediction.errors, status: :unprocessable_entity

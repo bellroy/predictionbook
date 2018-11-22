@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-feature 'credence game' do
+describe 'credence game' do
   let(:user) { FactoryBot.create(:user) }
   let!(:question) { FactoryBot.create(:credence_question, text: 'Do you have a stupid face?') }
   let!(:answers) { FactoryBot.create_list(:credence_answer, 2, credence_question: question) }
 
   before { login_as user }
 
-  scenario 'user tries the credence game' do
+  it 'user tries the credence game' do
     visit root_path
     within 'ul#nav-menu' do
       click_link 'Credence game'

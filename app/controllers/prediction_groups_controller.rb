@@ -61,7 +61,7 @@ class PredictionGroupsController < ApplicationController
 
   def find_prediction_group
     @prediction_group = PredictionGroup.includes(predictions: %i[responses versions judgements])
-                                       .find(params[:id])
+      .find(params[:id])
   end
 
   def prediction_group_params

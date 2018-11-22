@@ -13,6 +13,7 @@ class GroupsController < ApplicationController
   def show
     @group = @group_member.try(:group)
     raise ActionController::RoutingError, 'Not Found' if @group.nil? || @group_member.invitee?
+
     @statistics = @group.statistics
     @score_calculator = ScoreCalculator.new(@group, start_date: 6.months.ago, interval: 1.month)
     @predictions =

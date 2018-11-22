@@ -26,7 +26,7 @@ describe Api::PredictionJudgementsController, type: :controller do
 
       it 'judges the prediction' do
         create
-        expect(response).to be_success
+        expect(response).to be_created
         expect(response.body).to eq 'my new judgement'
       end
     end
@@ -36,7 +36,7 @@ describe Api::PredictionJudgementsController, type: :controller do
 
       specify do
         create
-        expect(response).not_to be_success
+        expect(response).not_to be_ok
       end
     end
   end

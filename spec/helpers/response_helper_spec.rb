@@ -1,15 +1,18 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe ResponseHelper do
-  include ResponseHelper
+  include described_class
 
   describe '#comment_for' do
-    let(:response) { Response.new(comment: comment) }
-
     subject { comment_for(response) }
+
+    let(:response) { Response.new(comment: comment) }
 
     context 'no comment' do
       let(:comment) { nil }
+
       it { is_expected.to be_nil }
     end
 

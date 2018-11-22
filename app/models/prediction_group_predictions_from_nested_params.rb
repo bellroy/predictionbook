@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PredictionGroupPredictionsFromNestedParams
   def initialize(prediction_group, creator, params)
     self.prediction_group = prediction_group

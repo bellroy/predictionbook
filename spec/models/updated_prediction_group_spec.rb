@@ -137,7 +137,7 @@ describe UpdatedPredictionGroup do
       context 'updating confidences' do
         let(:prediction_group) do
           FactoryBot.create(:prediction_group, predictions: 3, creator: user,
-                                                description: 'This will happen tomorrow')
+                                               description: 'This will happen tomorrow')
         end
         let(:first_prediction) { prediction_group.predictions[0] }
         let(:second_prediction) { prediction_group.predictions[1] }

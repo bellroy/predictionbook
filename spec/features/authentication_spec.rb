@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-feature 'authentication' do
+describe 'authentication' do
   let!(:user) { FactoryBot.create(:user, name: 'Bob', login: 'login') }
 
-  scenario 'user logs in and logs out again' do
+  it 'user logs in and logs out again' do
     visit root_path
     within 'ul#user-links' do
       click_link 'Login'

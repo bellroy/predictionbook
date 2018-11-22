@@ -7,7 +7,7 @@ shared_examples_for 'NotificationsController' do
     let(:collection) { double('collection') }
     let(:notification) { controller.notification_type.new }
 
-    before(:each) do
+    before do
       expect(controller).to receive(:notification_collection).and_return(collection)
       sign_in FactoryBot.create(:user)
     end
@@ -33,7 +33,7 @@ shared_examples_for 'NotificationsController' do
     describe 'updating a notification' do
       let(:collection) { double('notifications', find: notification) }
 
-      before { expect(notification).to receive(:update_attributes!) }
+      before { expect(notification).to receive(:update!) }
 
       it 'redirects to the prediction for non xhr request' do
         expect(notification).to receive(:prediction).and_return(1)

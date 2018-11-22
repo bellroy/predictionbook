@@ -1,4 +1,6 @@
-class CredenceAnswer < ActiveRecord::Base
+# frozen_string_literal: true
+
+class CredenceAnswer < ApplicationRecord
   belongs_to :credence_question
 
   validates :rank, uniqueness: { scope: :credence_question_id }

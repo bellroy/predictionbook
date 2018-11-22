@@ -1,4 +1,6 @@
-class Prediction < ActiveRecord::Base
+# frozen_string_literal: true
+
+class Prediction < ApplicationRecord
   attr_reader :notify_creator
 
   has_many :versions, autosave: true, class_name: PredictionVersion.name, dependent: :destroy
@@ -176,11 +178,11 @@ class Prediction < ActiveRecord::Base
   end
 
   def outcome
-    judgement.outcome if judgement
+    judgement&.outcome
   end
 
   def judged_at
-    judgement.created_at if judgement
+    judgement&.created_at
   end
 
   def readable_outcome
@@ -197,6 +199,7 @@ class Prediction < ActiveRecord::Base
 
   def withdraw!
     raise ArgumentError, 'Prediction must be open to be withdrawn' unless open?
+
     update_attribute(:withdrawn, true)
   end
 
@@ -255,9 +258,10 @@ class Prediction < ActiveRecord::Base
   end
 
   def description_with_group
-    result = ''
-    result << "[#{prediction_group.description}] " if prediction_group_id.present?
-    result << description
+    tokens = []
+    tokens << "[#{prediction_group.description}]" if prediction_group_id.present?
+    tokens << description
+    tokens.join(' ')
   end
 
   def creator=(value)
@@ -272,21 +276,25 @@ class Prediction < ActiveRecord::Base
 
   def too_futuristic?
     return deadline.year > 9999 unless deadline.nil?
+
     false
   end
 
   def before_christ?
     return deadline.year < 1 unless deadline.nil?
+
     false
   end
 
   def retrodiction?
     return deadline < Time.zone.now - 15.days unless deadline.nil?
+
     false
   end
 
   def synchronise_group_visibility_and_deadline
     return if prediction_group_id.blank?
+
     vis_int = Visibility::VALUES[visibility.to_sym]
     predictions_in_group = Prediction.where(prediction_group_id: prediction_group_id)
     predictions_in_group.update_all(deadline: deadline, visibility: vis_int, group_id: group_id)

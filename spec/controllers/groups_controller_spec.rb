@@ -137,7 +137,7 @@ describe GroupsController do
       let(:user) { FactoryBot.create(:user, login: 'admin') }
 
       specify do
-        expect(GroupMemberMailer).to receive(:invitation).exactly(2).times.and_call_original
+        expect(GroupMemberMailer).to receive(:invitation).twice.and_call_original
         create
         expect(response).to redirect_to group_path(Group.last)
         expect(assigns[:group].name).to eq 'my new group'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TitleTagPresenter
   include ActionView::Helpers::SanitizeHelper
   include ActionView::Helpers::TextHelper
