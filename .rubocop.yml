@@ -1,33 +1,61 @@
-Rails:
-  Enabled: true
-
-AllCops:
-  TargetRubyVersion: 2.4
-  Include:
-    - 'app/**/*.rb'
-    - 'lib/**/*.rb'
-    - 'spec/**/*.rb'
-  Exclude:
-    - 'app/assets/**/*'
-    - 'bin/**/*'
-    - 'client/node_modules/**/*'
-    - 'config/**/*'
-    - 'coverage/**/*'
-    - 'data/**/*'
-    - 'db/**/*'
-    - 'log/**/*'
-    - 'phrase/**/*'
-    - 'public/**/*'
-    - 'tmp/**/*'
-    - 'vendor/**/*'
-  TargetRubyVersion: 2.4
-
+---
 Documentation:
   Enabled: false
-
+Rails:
+  Enabled: true
+AllCops:
+  Include:
+  - app/**/*.rb
+  - lib/**/*.rb
+  - spec/**/*.rb
+  Exclude:
+  - app/assets/**/*
+  - bin/**/*
+  - client/node_modules/**/*
+  - config/**/*
+  - coverage/**/*
+  - data/**/*
+  - db/**/*
+  - db_*/**/*
+  - dw/**/*
+  - log/**/*
+  - phrase/**/*
+  - public/**/*
+  - tmp/**/*
+  - vendor/**/*
+  TargetRubyVersion: 2.4
 Metrics/LineLength:
   Max: 100
-
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
-    '%w': '[]'
+    "%w": "[]"
+RSpec/ExampleLength:
+  Enabled: false
+  Max: 10
+RSpec/MultipleExpectations:
+  Enabled: false
+  Max: 10
+RSpec/NestedGroups:
+  Enabled: false
+  Max: 10
+RSpec/MessageExpectation:
+  Enabled: false
+RSpec/MissingExampleGroupArgument:
+  Enabled: false
+require:
+- rubocop-rspec
+- test_prof/rubocop
+Metrics/BlockLength:
+  Enabled: false
+RSpec/MessageSpies:
+  Enabled: false
+RSpec/ExpectInHook:
+  Enabled: false
+RSpec/AggregateFailures:
+  Enabled: true
+  Include:
+  - spec/**/*.rb
+Rails/InverseOf:
+  Enabled: false

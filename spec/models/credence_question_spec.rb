@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe CredenceQuestion do
   let(:game) { FactoryBot.create(:credence_game) }
 
-  it 'should be able to create random questions' do
+  it 'is able to create random questions' do
     question = FactoryBot.create(:credence_question)
     (0..9).each do |rank|
       FactoryBot.create(:credence_answer, credence_question: question, rank: rank)
@@ -13,19 +15,20 @@ describe CredenceQuestion do
     expect(response.class).to eq CredenceGameResponse
   end
 
-  it 'should uniformly distribute responses in answer-space' do
+  it 'distributes responses uniformly in answer-space' do
     # gen.build_random_response(game) is sufficiently slow that we don't want to do
     # it loads of times. But if we don't do it enough, our test will be prone to
     # failing randomly.
     #   Is it possible to only have this test run if we request it explicitly?
     puts
-    puts 'Running uniform distribution test for credence games. Usually takes about 10 seconds.'
+    puts 'Running uniform distribution test for credence games.'
 
     question = FactoryBot.create(:credence_question)
     FactoryBot.create_list(:credence_answer, 3, credence_question: question)
 
     counts = Hash.new(0)
-    10_000.times do
+    10_000.times do |i|
+      puts "Built #{i} out of 10,000 responses" if i % 1000 == 0
       response = question.build_random_response(game)
       counts[response.first_answer_id * 100 + response.second_answer_id] += 1
     end
@@ -41,14 +44,14 @@ describe CredenceQuestion do
     end
   end
 
-  it 'should create questions from parsed XML' do
+  it 'creates questions from parsed XML' do
     parsed = Nokogiri::XML(<<-XML).root
       <QuestionGenerator Id="text-id" Tags="" Used="y" Type="Sorted" Weight="0.5" QuestionText="question" AdjacentWithin="-1" InfoPrefix="prefix" InfoSuffix="suffix">
         <Answer Text="first" Value="B" />
         <Answer Text="second" Value="A" />
       </QuestionGenerator>
     XML
-    question = CredenceQuestion.create_from_xml_element!(parsed, 'id-prefix')
+    question = described_class.create_from_xml_element!(parsed, 'id-prefix')
 
     expect(question.enabled).to eq true
     expect(question.text_id).to eq 'id-prefix:text-id'
@@ -59,14 +62,14 @@ describe CredenceQuestion do
     expect(question.adjacent_within).to eq(-1)
     expect(question.weight).to eq 0.5
 
-    answer_0 = question. answers[0]
-    expect(answer_0.rank).to eq 0
-    expect(answer_0.text).to eq 'first'
-    expect(answer_0.value).to eq 'B'
+    first_answer = question.answers[0]
+    expect(first_answer.rank).to eq 0
+    expect(first_answer.text).to eq 'first'
+    expect(first_answer.value).to eq 'B'
 
-    answer_1 = question. answers[1]
-    expect(answer_1.rank).to eq 1
-    expect(answer_1.text).to eq 'second'
-    expect(answer_1.value).to eq 'A'
+    second_answer = question.answers[1]
+    expect(second_answer.rank).to eq 1
+    expect(second_answer.text).to eq 'second'
+    expect(second_answer.value).to eq 'A'
   end
 end
