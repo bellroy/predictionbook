@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StatisticsSweeper < ActionController::Caching::Sweeper
   observe Judgement
 

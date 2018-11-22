@@ -1,4 +1,6 @@
-class CredenceQuestion < ActiveRecord::Base
+# frozen_string_literal: true
+
+class CredenceQuestion < ApplicationRecord
   has_many :answers, class_name: CredenceAnswer.name, dependent: :destroy, autosave: true
   has_many :responses, class_name: CredenceGameResponse.name, dependent: :destroy, autosave: true
 

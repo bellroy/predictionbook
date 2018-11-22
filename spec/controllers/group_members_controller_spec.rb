@@ -250,7 +250,7 @@ describe GroupMembersController do
           let(:role) { 'contributor' }
 
           specify do
-            group_member.update_attributes(role: 'admin')
+            group_member.update(role: 'admin')
             update
             expect(response).to redirect_to group_group_members_path(group)
             expect(assigns[:group_member]).to be_contributor

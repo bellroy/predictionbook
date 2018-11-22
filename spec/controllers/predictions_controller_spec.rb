@@ -126,6 +126,7 @@ describe PredictionsController do
   describe 'Getting a form for a new Prediction' do
     context 'user logged in' do
       let(:logged_in_user) { nil }
+
       it 'redirects to the login page if not logged in' do
         get :new
         expect(response).to redirect_to(new_user_session_path)
@@ -135,7 +136,7 @@ describe PredictionsController do
     context 'user logged in' do
       it 'responds with http success status' do
         get :new
-        expect(response).to be_success
+        expect(response).to be_ok
       end
 
       it 'renders new template' do
@@ -157,18 +158,19 @@ describe PredictionsController do
   end
 
   describe 'Creating a new prediction' do
-    let(:params) { FactoryBot.build(:prediction).attributes }
-
     subject(:create) { post :create, params: { prediction: params } }
+
+    let(:params) { FactoryBot.build(:prediction).attributes }
 
     describe 'privacy' do
       before do
-        logged_in_user.update_attributes(visibility_default: Visibility::VALUES[:visible_to_creator])
+        logged_in_user.update(visibility_default: Visibility::VALUES[:visible_to_creator])
       end
 
       describe 'when creator private default is true ' do
         context 'creating public prediction' do
           let(:params) { { visibility: 'visible_to_everyone' } }
+
           it 'is false when prediction privacy is false' do
             create
             expect(assigns[:prediction].visible_to_everyone?).to be true
@@ -210,7 +212,7 @@ describe PredictionsController do
 
       describe 'when creator private default is false' do
         before do
-          logged_in_user.update_attributes(visibility_default: Visibility::VALUES[:visible_to_everyone])
+          logged_in_user.update(visibility_default: Visibility::VALUES[:visible_to_everyone])
         end
 
         context 'prediction privacy is false' do
@@ -244,6 +246,7 @@ describe PredictionsController do
 
     context 'not logged in' do
       let(:logged_in_user) { nil }
+
       it 'redirects to the login page if not logged in' do
         create
         expect(response).to redirect_to(new_user_session_path)
@@ -279,7 +282,7 @@ describe PredictionsController do
     end
 
     describe 'when the params are invalid' do
-      before(:each) do
+      before do
         expect(Prediction).to receive(:create!)
           .and_raise(ActiveRecord::RecordInvalid.new(prediction))
       end
@@ -302,9 +305,9 @@ describe PredictionsController do
   end
 
   describe 'viewing a prediction' do
-    let(:logged_in_user) { creator }
-
     subject(:show) { get :show, params: { id: prediction.id } }
+
+    let(:logged_in_user) { creator }
 
     it 'assigns the prediction' do
       show
@@ -338,18 +341,19 @@ describe PredictionsController do
 
     it 'filters the deadline notifications by the current user' do
       show
-      expect(response).to be_success
+      expect(response).to be_ok
       expect(assigns[:deadline_notification]).to be_a DeadlineNotification
     end
 
     describe 'private predictions' do
-      before(:each) do
+      before do
         allow_any_instance_of(Prediction).to receive(:visible_to_everyone?).and_return(false)
         allow_any_instance_of(Prediction).to receive(:visible_to_creator?).and_return(true)
       end
 
       context 'not owned by current user' do
         let(:logged_in_user) { FactoryBot.create(:user) }
+
         it 'is forbidden when not owned by current user' do
           show
           expect(response.response_code).to eq 302
@@ -377,10 +381,10 @@ describe PredictionsController do
   end
 
   describe 'Updating the outcome of a prediction' do
+    subject(:judge) { post :judge, params: { id: id, outcome: outcome } }
+
     let(:id) { prediction.id }
     let(:outcome) { '' }
-
-    subject(:judge) { post :judge, params: { id: id, outcome: outcome } }
 
     context 'not logged in' do
       let(:logged_in_user) { nil }
@@ -438,7 +442,7 @@ describe PredictionsController do
       end
 
       context 'logged in' do
-        before(:each) do
+        before do
           expect(controller).to receive(:must_be_authorized_for_prediction)
         end
 
@@ -463,7 +467,7 @@ describe PredictionsController do
     describe action.to_s do
       let(:relation) { class_double(Prediction) }
 
-      before :each do
+      before do
         # touch to instantiate
         expect(Prediction).to receive(action).and_return(relation)
         expect(relation).to receive(:page).and_return(:collection)
@@ -494,6 +498,7 @@ describe PredictionsController do
 
     describe 'not logged in' do
       let(:logged_in_user) { nil }
+
       it 'requires a login' do
         edit
         expect(response).to redirect_to(new_user_session_path)

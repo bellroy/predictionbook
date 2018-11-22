@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CredenceStatistics < BaseStatistics
   attr_reader :groups, :intervals
 

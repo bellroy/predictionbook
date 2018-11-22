@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe UserLogin do
@@ -8,11 +10,13 @@ describe UserLogin do
 
     context 'a value' do
       let(:login) { 'something' }
+
       it { is_expected.to eq 'something' }
     end
 
     context 'a value with [dot] in it' do
       let(:login) { 'some[dot]thing' }
+
       it { is_expected.to eq 'some.thing' }
     end
   end

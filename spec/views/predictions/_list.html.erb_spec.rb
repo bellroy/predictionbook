@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'prediction list' do
@@ -14,7 +16,7 @@ describe 'prediction list' do
   end
 
   describe 'when showing statistics' do
-    before(:each) do
+    before do
       assign(:show_statistics, true)
       expect(view).to receive(:global_statistics_cache_key).and_return('foo')
     end

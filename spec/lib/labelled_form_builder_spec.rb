@@ -1,14 +1,14 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe LabelledFormBuilder do
   class BogusTemplate
     include ActionView::Helpers::TagHelper
 
-    def text_field(*_args)
-    end
+    def text_field(*_args); end
 
-    def label(*_args)
-    end
+    def label(*_args); end
 
     def capture(*_args)
       yield.to_s
@@ -18,7 +18,7 @@ describe LabelledFormBuilder do
   let(:errors) { {} }
   let(:record) { instance_double(ActiveRecord::Base, errors: errors) }
   let(:template) { BogusTemplate.new }
-  let(:builder) { LabelledFormBuilder.new('record_name', record, template, {}) }
+  let(:builder) { described_class.new('record_name', record, template, {}) }
 
   it 'adds a label to every text field' do
     expect(template).to receive(:label).with('record_name', :name, anything, anything)

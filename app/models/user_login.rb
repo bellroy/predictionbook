@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserLogin
   def initialize(login)
     self.login = login

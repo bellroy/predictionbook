@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Notification do
   describe 'validations' do
-    before(:each) do
-      @dn = Notification.new
+    before do
+      @dn = described_class.new
       @dn.valid?
     end
 
@@ -22,15 +24,15 @@ describe Notification do
       user.save(validate: false)
       prediction = Prediction.new
       prediction.save(validate: false)
-      Notification.create!(user: user, prediction: prediction)
-      expect { Notification.create!(user: user, prediction: prediction) }
+      described_class.create!(user: user, prediction: prediction)
+      expect { described_class.create!(user: user, prediction: prediction) }
         .to raise_error(ActiveRecord::RecordInvalid, /already been taken/)
     end
   end
 
   describe 'unique identifier' do
-    before(:each) do
-      @dn = Notification.new
+    before do
+      @dn = described_class.new
       allow(@dn).to receive(:valid?).and_return(true)
     end
 
@@ -40,54 +42,54 @@ describe Notification do
 
     it 'persists over saves' do
       @dn.save
-      expect(Notification.find(@dn.id).uuid).to eq @dn.uuid
+      expect(described_class.find(@dn.id).uuid).to eq @dn.uuid
     end
   end
 
   describe 'use_token!' do
-    before(:each) do
-      @dn = Notification.new
+    before do
+      @dn = described_class.new
     end
 
     it 'looks up by uuid' do
-      expect(Notification).to receive(:find_by_uuid).with('token')
-      Notification.use_token!('token')
+      expect(described_class).to receive(:find_by).with(uuid: 'token')
+      described_class.use_token!('token')
     end
 
     it 'yields if token unused' do
-      expect(Notification).to receive(:find_by_uuid).and_return(@dn)
+      expect(described_class).to receive(:find_by).with(uuid: anything).and_return(@dn)
       expect((b = double('block test'))).to receive(:called!)
-      Notification.use_token!(:token) { |_dn| b.called! }
+      described_class.use_token!(:token) { |_dn| b.called! }
     end
 
     it 'yields the deadline notification' do
-      expect(Notification).to receive(:find_by_uuid).and_return(@dn)
-      Notification.use_token!(:token) { |dn| expect(dn).to eq @dn }
+      expect(described_class).to receive(:find_by).with(uuid: anything).and_return(@dn)
+      described_class.use_token!(:token) { |dn| expect(dn).to eq @dn }
     end
 
     it 'does not yield if no token' do
-      expect(Notification).to receive(:find_by_uuid).and_return(nil)
+      expect(described_class).to receive(:find_by).with(uuid: anything).and_return(nil)
       expect((b = double('block test'))).not_to receive(:called!)
-      Notification.use_token!(:token) { |_dn| b.called! }
+      described_class.use_token!(:token) { |_dn| b.called! }
     end
 
     it 'does not yield if token already used' do
-      expect(Notification).to receive(:find_by_uuid).and_return(@dn)
+      expect(described_class).to receive(:find_by).with(uuid: anything).and_return(@dn)
       expect(@dn).to receive(:token_used?).and_return(true)
       expect((b = double('block test'))).not_to receive(:called!)
-      Notification.use_token!(:token) { |_dn| b.called! }
+      described_class.use_token!(:token) { |_dn| b.called! }
     end
 
     it 'marks the token used if yielded' do
-      expect(Notification).to receive(:find_by_uuid).and_return(@dn)
+      expect(described_class).to receive(:find_by).with(uuid: anything).and_return(@dn)
       expect(@dn).to receive(:use_token!)
-      Notification.use_token!(:token) { |_hai| }
+      described_class.use_token!(:token) { |_hai| }
     end
   end
 
   describe 'token used marker' do
-    before(:each) do
-      @dn = Notification.new
+    before do
+      @dn = described_class.new
     end
 
     it 'is false by default' do
@@ -102,13 +104,13 @@ describe Notification do
     it 'persists over saves' do
       @dn.use_token!
       @dn.save
-      expect(Notification.find(@dn.id).token_used?).to be true
+      expect(described_class.find(@dn.id).token_used?).to be true
     end
   end
 
   describe 'validations' do
-    before(:each) do
-      @dn = Notification.new
+    before do
+      @dn = described_class.new
       @dn.valid?
     end
 
@@ -127,15 +129,15 @@ describe Notification do
       user.save(validate: false)
       prediction = Prediction.new
       prediction.save(validate: false)
-      Notification.create!(user: user, prediction: prediction)
-      expect { Notification.create!(user: user, prediction: prediction) }
+      described_class.create!(user: user, prediction: prediction)
+      expect { described_class.create!(user: user, prediction: prediction) }
         .to raise_error(ActiveRecord::RecordInvalid, /already been taken/)
     end
   end
 
   describe 'unique identifier' do
-    before(:each) do
-      @dn = Notification.new
+    before do
+      @dn = described_class.new
       allow(@dn).to receive(:valid?).and_return(true)
     end
 
@@ -145,54 +147,54 @@ describe Notification do
 
     it 'persists over saves' do
       @dn.save
-      expect(Notification.find(@dn.id).uuid).to eq @dn.uuid
+      expect(described_class.find(@dn.id).uuid).to eq @dn.uuid
     end
   end
 
   describe 'use_token!' do
-    before(:each) do
-      @dn = Notification.new
+    before do
+      @dn = described_class.new
     end
 
     it 'looks up by uuid' do
-      expect(Notification).to receive(:find_by_uuid).with('token')
-      Notification.use_token!('token')
+      expect(described_class).to receive(:find_by).with(uuid: 'token')
+      described_class.use_token!('token')
     end
 
     it 'yields if token unused' do
-      expect(Notification).to receive(:find_by_uuid).and_return(@dn)
+      expect(described_class).to receive(:find_by).with(uuid: anything).and_return(@dn)
       expect((b = double('block test'))).to receive(:called!)
-      Notification.use_token!(:token) { |_dn| b.called! }
+      described_class.use_token!(:token) { |_dn| b.called! }
     end
 
     it 'yields the deadline notification' do
-      expect(Notification).to receive(:find_by_uuid).and_return(@dn)
-      Notification.use_token!(:token) { |dn| expect(dn).to eq @dn }
+      expect(described_class).to receive(:find_by).with(uuid: anything).and_return(@dn)
+      described_class.use_token!(:token) { |dn| expect(dn).to eq @dn }
     end
 
     it 'does not yield if no token' do
-      expect(Notification).to receive(:find_by_uuid).and_return(nil)
+      expect(described_class).to receive(:find_by).with(uuid: anything).and_return(nil)
       expect((b = double('block test'))).not_to receive(:called!)
-      Notification.use_token!(:token) { |_dn| b.called! }
+      described_class.use_token!(:token) { |_dn| b.called! }
     end
 
     it 'does not yield if token already used' do
-      expect(Notification).to receive(:find_by_uuid).and_return(@dn)
+      expect(described_class).to receive(:find_by).with(uuid: anything).and_return(@dn)
       expect(@dn).to receive(:token_used?).and_return(true)
       expect((b = double('block test'))).not_to receive(:called!)
-      Notification.use_token!(:token) { |_dn| b.called! }
+      described_class.use_token!(:token) { |_dn| b.called! }
     end
 
     it 'marks the token used if yielded' do
-      expect(Notification).to receive(:find_by_uuid).and_return(@dn)
+      expect(described_class).to receive(:find_by).with(uuid: anything).and_return(@dn)
       expect(@dn).to receive(:use_token!)
-      Notification.use_token!(:token) { |_hai| }
+      described_class.use_token!(:token) { |_hai| }
     end
   end
 
   describe 'token used marker' do
-    before(:each) do
-      @dn = Notification.new
+    before do
+      @dn = described_class.new
     end
 
     it 'is false by default' do
@@ -207,7 +209,7 @@ describe Notification do
     it 'persists over saves' do
       @dn.use_token!
       @dn.save
-      expect(Notification.find(@dn.id).token_used?).to be true
+      expect(described_class.find(@dn.id).token_used?).to be true
     end
   end
 end

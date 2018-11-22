@@ -39,7 +39,7 @@ module Api
 
           specify do
             update
-            expect(response).to be_success
+            expect(response).to be_ok
             expect(response.content_type).to eq 'application/json'
 
             description = new_prediction_group_params[:description]
@@ -51,7 +51,7 @@ module Api
             let(:id) { 'some description that does not exist' }
 
             specify do
-              expect { update }.to change { PredictionGroup.count }.by(1)
+              expect { update }.to change(PredictionGroup, :count).by(1)
             end
           end
         end
@@ -64,7 +64,7 @@ module Api
           end
 
           specify do
-            expect(response).to_not be_success
+            expect(response).not_to be_ok
             expect(response.content_type).to eq 'application/json'
           end
         end
@@ -78,7 +78,7 @@ module Api
         end
 
         specify do
-          expect(response).to_not be_success
+          expect(response).not_to be_ok
           expect(response.content_type).to eq 'application/json'
         end
       end

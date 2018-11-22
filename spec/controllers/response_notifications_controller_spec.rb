@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe ResponseNotificationsController do
-  before(:each) do
+  before do
     expect(controller).to receive(:set_timezone)
   end
 
@@ -14,7 +16,7 @@ describe ResponseNotificationsController do
     describe 'when logged in' do
       let(:relation) { instance_double(ActiveRecord::Relation) }
 
-      before(:each) do
+      before do
         sign_in FactoryBot.create(:user)
         expect_any_instance_of(User).to receive(:response_notifications).and_return(relation)
       end
@@ -47,7 +49,7 @@ describe ResponseNotificationsController do
       let(:relation) { instance_double(ActiveRecord::Relation) }
       let(:prediction) { instance_double(Prediction, id: '7') }
 
-      before(:each) do
+      before do
         sign_in FactoryBot.create(:user)
         expect_any_instance_of(User).to receive(:response_notifications).and_return(relation)
         expect(relation).to receive(:find).and_return(notification)
@@ -55,7 +57,7 @@ describe ResponseNotificationsController do
       end
 
       it 'updates a response notification record' do
-        expect(notification).to receive(:update_attributes!)
+        expect(notification).to receive(:update!)
         put :update, params: { id: 'hai', response_notification: { prediction_id: '7' } }
       end
 

@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-feature 'creating and modifying predictions' do
+describe 'creating and modifying predictions' do
   let(:user) { FactoryBot.create(:user) }
+
   before { login_as user }
 
-  scenario 'making a new prediction' do
+  it 'making a new prediction' do
     visit new_prediction_path
     fill_in 'prediction_description', with: 'Desc'
     fill_in 'prediction_initial_confidence', with: '55'
@@ -16,7 +19,7 @@ feature 'creating and modifying predictions' do
     expect(page).to have_content 'estimated 55%'
   end
 
-  scenario 'editing a prediction' do
+  it 'editing a prediction' do
     prediction = FactoryBot.create(:prediction, creator: user)
     visit edit_prediction_path(prediction)
 
@@ -27,8 +30,8 @@ feature 'creating and modifying predictions' do
     expect(page).to have_content 'A new prediction'
   end
 
-  scenario 'when user has set a visibility default' do
-    user.update_attributes(visibility_default: 'visible_to_creator')
+  it 'when user has set a visibility default' do
+    user.update(visibility_default: 'visible_to_creator')
 
     visit new_prediction_path
     fill_in 'prediction_description', with: 'Desc'

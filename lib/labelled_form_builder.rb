@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LabelledFormBuilder < ActionView::Helpers::FormBuilder
   def select_field(method, html_options, options = {})
     options = add_input_class(options)
@@ -116,7 +118,7 @@ class LabelledFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def extract_labelling_options!(options)
-    names = [:trailing_content, :preview, :label_containing, :label]
+    names = %i[trailing_content preview label_containing label]
     names.collect { |name| options.delete(name) }
   end
 end
