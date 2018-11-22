@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResponseNotification < Notification
   def deliver
     Deliverer.response_notification(self).deliver
@@ -5,7 +7,7 @@ class ResponseNotification < Notification
 
   def viewed!
     unless new_record?
-      update_attributes!(
+      update!(
         sent: false,
         token_used: false,
         new_activity: false
@@ -14,7 +16,7 @@ class ResponseNotification < Notification
   end
 
   def new_activity!
-    update_attributes!(new_activity: true)
+    update!(new_activity: true)
   end
 
   def sendable?

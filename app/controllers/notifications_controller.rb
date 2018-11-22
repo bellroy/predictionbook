@@ -10,7 +10,7 @@ class NotificationsController < ApplicationController
 
   def update
     notification = notification_collection.find(params[:id])
-    notification.update_attributes!(notification_params)
+    notification.update!(notification_params)
     redirect_or_render(notification)
   end
 

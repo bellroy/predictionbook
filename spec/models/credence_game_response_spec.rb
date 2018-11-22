@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe CredenceGameResponse do
@@ -6,8 +8,8 @@ describe CredenceGameResponse do
   let(:answer_credence) { 50 }
   let(:response) do
     FactoryBot.build(:credence_game_response, correct_index: correct_index,
-                                               given_answer: given_answer,
-                                               answer_credence: answer_credence)
+                                              given_answer: given_answer,
+                                              answer_credence: answer_credence)
   end
 
   describe '#answer_correct?' do
@@ -17,6 +19,7 @@ describe CredenceGameResponse do
 
     context 'given answer is different' do
       let(:given_answer) { 1 }
+
       it { is_expected.to be false }
     end
   end

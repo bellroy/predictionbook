@@ -15,7 +15,7 @@ module Api
         end
 
         specify do
-          expect(response).to be_success
+          expect(response).to be_ok
           expect(response.content_type).to eq 'application/json'
           expect(response.body).to include prediction_group.description
         end
@@ -25,7 +25,7 @@ module Api
         before { get :index, params: { api_token: 'fake-token' } }
 
         specify do
-          expect(response).to_not be_success
+          expect(response).not_to be_ok
           expect(response.content_type).to eq 'application/json'
         end
       end
@@ -39,9 +39,9 @@ module Api
 
         specify do
           show
-          expect(response).to be_success
+          expect(response).to be_ok
           expect(response.content_type).to eq 'application/json'
-          expect(response.body).to_not be_empty
+          expect(response.body).not_to be_empty
         end
       end
 
@@ -50,7 +50,7 @@ module Api
 
         specify do
           show
-          expect(response).to_not be_success
+          expect(response).not_to be_ok
           expect(response.content_type).to eq 'application/json'
         end
       end
@@ -94,7 +94,7 @@ module Api
           end
 
           specify do
-            expect(response).to_not be_success
+            expect(response).not_to be_ok
             expect(response.body).to include('a probability is between')
           end
         end
@@ -133,10 +133,9 @@ module Api
         end
 
         specify do
-          expect(response.body).to_not include(prediction_group_params[:description])
-          expect(response).to_not be_success
+          expect(response.body).not_to include(prediction_group_params[:description])
+          expect(response).not_to be_ok
         end
-
       end
     end
 
@@ -157,7 +156,7 @@ module Api
           end
 
           specify do
-            expect(response).to be_success
+            expect(response).to be_ok
             expect(response.content_type).to eq 'application/json'
           end
 
@@ -177,7 +176,7 @@ module Api
           end
 
           specify do
-            expect(response).to_not be_success
+            expect(response).not_to be_ok
             expect(response.content_type).to eq 'application/json'
           end
         end
@@ -191,7 +190,7 @@ module Api
         end
 
         specify do
-          expect(response).to_not be_success
+          expect(response).not_to be_ok
           expect(response.content_type).to eq 'application/json'
         end
       end

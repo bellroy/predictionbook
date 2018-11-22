@@ -1,4 +1,6 @@
-class PredictionGroup < ActiveRecord::Base
+# frozen_string_literal: true
+
+class PredictionGroup < ApplicationRecord
   has_many :predictions, dependent: :destroy, autosave: true
 
   validates :description, presence: true

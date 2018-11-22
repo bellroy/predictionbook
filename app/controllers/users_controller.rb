@@ -85,8 +85,7 @@ class UsersController < ApplicationController
   private
 
   def updated_user_api_token?
-    current_user &&
-      current_user.update_attributes(api_token: User.generate_api_token)
+    current_user&.update(api_token: User.generate_api_token)
   end
 
   def update_api_token_error_message

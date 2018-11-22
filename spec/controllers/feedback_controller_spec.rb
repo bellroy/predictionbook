@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe FeedbackController do
   describe 'date' do
-    it 'should parse the date with Chronic.parse' do
+    it 'parses the date with Chronic.parse' do
       expect(Chronic).to receive(:parse).with('a date string', anything)
       get :show, params: { date: 'a date string' }
     end

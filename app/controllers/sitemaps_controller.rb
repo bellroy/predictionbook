@@ -6,10 +6,10 @@ class SitemapsController < ApplicationController
   # The sitemap lists out all the sitemap indexes:
   def index
     @total_prediction_sitemaps = Prediction
-                                 .visible_to_everyone
-                                 .page(1)
-                                 .per(MAXIMUM_ENTRIES_IN_SITEMAP)
-                                 .total_pages
+      .visible_to_everyone
+      .page(1)
+      .per(MAXIMUM_ENTRIES_IN_SITEMAP)
+      .total_pages
   end
 
   # Static links go into this sitemap:

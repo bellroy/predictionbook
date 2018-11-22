@@ -1,10 +1,13 @@
-class PredictionVersion < ActiveRecord::Base
+# frozen_string_literal: true
+
+class PredictionVersion < ApplicationRecord
   belongs_to :prediction
 
   enum visibility: Visibility::VALUES
 
   def self.create_from_current_prediction_if_required(prediction)
     return unless new_version_required?(prediction)
+
     new_version = prediction.versions.build
     versioned_prediction_columns.each do |attribute|
       new_version.send "#{attribute}=".to_sym, prediction.send(attribute)
@@ -24,6 +27,7 @@ class PredictionVersion < ActiveRecord::Base
 
   def previous_version
     return nil if version == 1
+
     prediction.versions.where('version < ?', version).order(version: :desc).first
   end
 end

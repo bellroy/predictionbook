@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe PredictionVersion do
   describe '.create_from_current_prediction_if_required' do
-    subject(:create) { PredictionVersion.create_from_current_prediction_if_required(prediction) }
+    subject(:create) { described_class.create_from_current_prediction_if_required(prediction) }
 
     context 'prediction has not changed' do
       let!(:prediction) { FactoryBot.create(:prediction) }
+
       specify { expect { create }.not_to change { prediction.versions.length } }
     end
 
@@ -13,7 +16,7 @@ describe PredictionVersion do
       let(:user) { FactoryBot.create(:user) }
       let!(:prediction) do
         FactoryBot.build(:prediction, description: 'A description', deadline: Date.yesterday,
-                                       creator: user, uuid: 'uuid1', withdrawn: true)
+                                      creator: user, uuid: 'uuid1', withdrawn: true)
       end
 
       specify do
@@ -30,13 +33,13 @@ describe PredictionVersion do
   end
 
   describe '#previous_version' do
+    subject(:previous_version) { most_recent_version.previous_version }
+
     let(:prediction) { FactoryBot.create(:prediction, description: 'old description') }
     let(:most_recent_version) { prediction.versions.last }
 
-    subject(:previous_version) { most_recent_version.previous_version }
-
     specify do
-      prediction.update_attributes(description: 'new description')
+      prediction.update(description: 'new description')
       expect(most_recent_version.description).to eq 'new description'
       expect(previous_version.description).to eq 'old description'
     end

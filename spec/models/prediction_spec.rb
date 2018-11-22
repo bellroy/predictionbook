@@ -10,28 +10,28 @@ describe Prediction do
   end
 
   it 'has a creator attribute that is initially nil' do
-    expect(Prediction.new.creator).to be_nil
+    expect(described_class.new.creator).to be_nil
   end
 
   it 'has a description attribute that is initially nil' do
-    expect(Prediction.new.description).to be_nil
+    expect(described_class.new.description).to be_nil
   end
 
   it 'has an inital_confidence attribute that is nil initially' do
-    expect(Prediction.new.initial_confidence).to be_nil
-    expect(Prediction.new).to respond_to(:initial_confidence=)
+    expect(described_class.new.initial_confidence).to be_nil
+    expect(described_class.new).to respond_to(:initial_confidence=)
   end
 
   describe 'callbacks' do
     let(:prediction_group) { FactoryBot.create(:prediction_group, predictions: 2) }
     let(:first_prediction) do
       prediction = prediction_group.predictions.first
-      prediction.update_attributes(deadline: 1.day.ago, visibility: :visible_to_everyone)
+      prediction.update(deadline: 1.day.ago, visibility: :visible_to_everyone)
       prediction
     end
     let(:second_prediction) do
       prediction = prediction_group.predictions.first
-      prediction.update_attributes(deadline: 2.days.ago, visibility: :visible_to_creator)
+      prediction.update(deadline: 2.days.ago, visibility: :visible_to_creator)
       prediction
     end
 
@@ -53,8 +53,8 @@ describe Prediction do
 
   describe 'validations' do
     describe 'with default values' do
-      before(:each) do
-        @prediction = Prediction.new
+      before do
+        @prediction = described_class.new
         @prediction.valid?
       end
 
@@ -88,33 +88,35 @@ describe Prediction do
 
         before { prediction.save }
 
-        it { expect(prediction).to_not be_valid }
-        it { expect(prediction.errors.full_messages).to include(/255/) }
+        it 'works', :aggregate_failures do
+          expect(prediction).not_to be_valid
+          expect(prediction.errors.full_messages).to include(/255/)
+        end
       end
 
       it 'does not accept a deadline too far into the future to store' do
         date = 300_000.years.from_now
-        prediction = Prediction.new(deadline: date)
+        prediction = described_class.new(deadline: date)
         prediction.valid?
         prediction.valid?
         expect(prediction.errors[:deadline].length).to eq 1
       end
       it 'does not accept retrodictions' do
         date = 1.month.ago
-        prediction = Prediction.new(deadline: date)
+        prediction = described_class.new(deadline: date)
         prediction.valid?
         prediction.valid?
         expect(prediction.errors[:deadline].length).to eq 1
       end
       it 'does not accept a deadline too far in the past to store' do
         date = 300_000.years.ago
-        prediction = Prediction.new(deadline: date)
+        prediction = described_class.new(deadline: date)
         prediction.valid?
         prediction.valid?
         expect(prediction.errors[:deadline].length).to eq 1
       end
       it 'does not accept an invalid deadline even after being created' do
-        prediction = Prediction.new(deadline: 2.months.from_now)
+        prediction = described_class.new(deadline: 2.months.from_now)
         prediction.valid?
         expect(prediction.errors[:deadline].length).to eq 0
         prediction.deadline = 300_000.years.from_now
@@ -126,7 +128,7 @@ describe Prediction do
 
   describe 'with uuid' do
     it 'has a uuid attribute' do
-      expect(Prediction.new).to respond_to(:uuid)
+      expect(described_class.new).to respond_to(:uuid)
     end
 
     def stub_uuid_create(string)
@@ -136,7 +138,7 @@ describe Prediction do
 
     it 'sets the UUID for a new record' do
       stub_uuid_create('21f7f8de-8051-5b89-8680-0195ef798b6a')
-      expect(Prediction.new.uuid).to eq '21f7f8de-8051-5b89-8680-0195ef798b6a'
+      expect(described_class.new.uuid).to eq '21f7f8de-8051-5b89-8680-0195ef798b6a'
     end
 
     it 'persists UUID set for the new record' do
@@ -155,7 +157,7 @@ describe Prediction do
     it 'does not allow write access to UUIDs loaded from DB' do
       stub_uuid_create('64a5189c-25b3-11da-a97b-00c04fd430c8')
       prediction = FactoryBot.create(:prediction)
-      prediction.update_attributes! uuid: 'other uuid'
+      prediction.update! uuid: 'other uuid'
       expect(prediction.reload.uuid).to eq '64a5189c-25b3-11da-a97b-00c04fd430c8'
     end
 
@@ -169,20 +171,20 @@ describe Prediction do
   describe 'with responses' do
     describe 'initial response creation' do
       it 'builds a response before validation' do
-        p = Prediction.new
+        p = described_class.new
         p.valid?
         expect(p.responses.length).to eq 1
       end
 
       it 'assigns response user from creator' do
         u = User.new
-        p = Prediction.new(creator: u)
+        p = described_class.new(creator: u)
         p.valid?
         expect(p.responses.first.user).to eq u
       end
 
       it 'assigns initial confidence from passed value' do
-        p = Prediction.new(initial_confidence: 50)
+        p = described_class.new(initial_confidence: 50)
         p.valid?
         expect(p.responses.first.confidence).to eq 50
       end
@@ -216,13 +218,13 @@ describe Prediction do
 
   describe 'finders and scopes' do
     before do
-      Prediction.destroy_all
+      described_class.destroy_all
     end
 
     it 'has a finder for the most recent predictions' do
       prediction1 = FactoryBot.create(:prediction, created_at: 2.weeks.ago)
       prediction2 = FactoryBot.create(:prediction)
-      expect(Prediction.recent).to eq [prediction2, prediction1]
+      expect(described_class.recent).to eq [prediction2, prediction1]
     end
 
     describe 'popular predictions' do
@@ -234,27 +236,27 @@ describe Prediction do
         FactoryBot.create(:response, prediction: prediction3)
         FactoryBot.create(:response, prediction: prediction3)
         prediction4 = FactoryBot.create(:prediction, created_at: 1.day.ago, deadline: 1.day.from_now)
-        expect(Prediction.popular).to eq [prediction3, prediction1, prediction4, prediction2]
+        expect(described_class.popular).to eq [prediction3, prediction1, prediction4, prediction2]
       end
 
       it 'excludes overdue predictions' do
         FactoryBot.create(:prediction, created_at: 1.week.ago, deadline: 1.day.ago)
         prediction2 = FactoryBot.create(:prediction, created_at: 1.week.ago, deadline: 1.day.from_now)
-        expect(Prediction.popular).to eq [prediction2]
+        expect(described_class.popular).to eq [prediction2]
       end
 
       it 'excludes judged (known) predictions' do
         prediction1 = FactoryBot.create(:prediction, created_at: 1.week.ago, deadline: 1.day.from_now)
         FactoryBot.create(:judgement, prediction: prediction1, outcome: false)
         prediction2 = FactoryBot.create(:prediction, created_at: 1.week.ago, deadline: 1.day.from_now)
-        expect(Prediction.popular).to eq [prediction2]
+        expect(described_class.popular).to eq [prediction2]
       end
 
       it 'excludes predictions made more than 2 weeks ago' do
         FactoryBot.create(:prediction, created_at: 3.weeks.ago, deadline: 1.day.from_now)
         FactoryBot.create(:prediction, created_at: 4.weeks.ago, deadline: 2.days.from_now)
         FactoryBot.create(:prediction, created_at: 5.weeks.ago, deadline: 3.days.from_now)
-        expect(Prediction.popular).to be_empty
+        expect(described_class.popular).to be_empty
       end
     end
 
@@ -268,20 +270,20 @@ describe Prediction do
         allow(Time).to receive(:now).and_return(future)
         last.judge!(:right)
 
-        expect(Prediction.judged).to eq [last, first]
+        expect(described_class.judged).to eq [last, first]
       end
 
       it 'includes judged predictions' do
         judged = FactoryBot.create(:prediction)
         judged.judge!(:right, nil)
 
-        expect(Prediction.judged).to eq [judged]
+        expect(described_class.judged).to eq [judged]
       end
 
       it 'does not include unjudged predictions' do
         FactoryBot.create(:prediction)
 
-        expect(Prediction.judged).to eq []
+        expect(described_class.judged).to eq []
       end
     end
 
@@ -291,21 +293,21 @@ describe Prediction do
         judged.judge!(:right, nil)
         unjudged = FactoryBot.create(:prediction)
 
-        expect(Prediction.unjudged).to eq [unjudged]
+        expect(described_class.unjudged).to eq [unjudged]
       end
 
       it 'does not return predictions whose deadline is in the future' do
         FactoryBot.create(:prediction, deadline: 2.years.from_now)
         past = FactoryBot.create(:prediction, deadline: 2.days.ago)
 
-        expect(Prediction.unjudged).to eq [past]
+        expect(described_class.unjudged).to eq [past]
       end
 
       it 'orders by deadline' do
         long_ago = FactoryBot.create(:prediction, deadline: 2.days.ago)
         longer_ago = FactoryBot.create(:prediction, deadline: 2.weeks.ago)
 
-        expect(Prediction.unjudged).to eq [long_ago, longer_ago]
+        expect(described_class.unjudged).to eq [long_ago, longer_ago]
       end
 
       it 'returns currently unjudged predictions with previous judgements' do
@@ -314,7 +316,7 @@ describe Prediction do
         Timecop.travel(Time.zone.now + 1.second)
         rejudged.judge!(nil, nil)
 
-        expect(Prediction.unjudged).to eq [rejudged]
+        expect(described_class.unjudged).to eq [rejudged]
       end
 
       it 'does not return currently judged predictions with previous unknown judgements' do
@@ -323,7 +325,7 @@ describe Prediction do
         Timecop.travel(Time.zone.now + 1.second)
         rejudged.judge!(:right, nil)
 
-        expect(Prediction.unjudged).to eq []
+        expect(described_class.unjudged).to eq []
       end
     end
 
@@ -333,21 +335,21 @@ describe Prediction do
         judged.judge!(:right, nil)
         unjudged = FactoryBot.create(:prediction, deadline: 2.days.from_now)
 
-        expect(Prediction.future).to eq [unjudged]
+        expect(described_class.future).to eq [unjudged]
       end
 
       it 'does not return predictions whose deadline is in the past' do
         future = FactoryBot.create(:prediction, deadline: 2.years.from_now)
         FactoryBot.create(:prediction, deadline: 2.days.ago)
 
-        expect(Prediction.future).to eq [future]
+        expect(described_class.future).to eq [future]
       end
 
       it 'orders by ascending deadline' do
         further = FactoryBot.create(:prediction, deadline: 2.weeks.from_now)
         sooner = FactoryBot.create(:prediction, deadline: 2.days.from_now)
 
-        expect(Prediction.future).to eq [sooner, further]
+        expect(described_class.future).to eq [sooner, further]
       end
     end
   end
@@ -356,7 +358,7 @@ describe Prediction do
     describe 'default' do
       describe 'when has creator' do
         let(:user) { User.new }
-        let(:prediction) { Prediction.new(creator: user) }
+        let(:prediction) { described_class.new(creator: user) }
 
         it 'is true if user has email' do
           allow(user).to receive(:notify_on_overdue?).and_return true
@@ -373,7 +375,7 @@ describe Prediction do
         describe 'is false' do
           before do
             @user = User.new
-            @prediction = Prediction.new(creator: @user, notify_creator: false)
+            @prediction = described_class.new(creator: @user, notify_creator: false)
           end
 
           it 'is false even if user has email' do
@@ -388,7 +390,7 @@ describe Prediction do
         describe 'is true' do
           before do
             @user = User.new
-            @prediction = Prediction.new(creator: @user, notify_creator: true)
+            @prediction = described_class.new(creator: @user, notify_creator: true)
           end
 
           it 'is true even if user has email' do
@@ -403,54 +405,54 @@ describe Prediction do
     end
 
     it 'is assignable' do
-      expect(Prediction.new(notify_creator: true).notify_creator).to be true
-      expect(Prediction.new(notify_creator: false).notify_creator).to be false
+      expect(described_class.new(notify_creator: true).notify_creator).to be true
+      expect(described_class.new(notify_creator: false).notify_creator).to be false
     end
 
     it 'accepts checkbox form values' do
-      expect(Prediction.new(notify_creator: '1').notify_creator).to be true
-      expect(Prediction.new(notify_creator: '0').notify_creator).to be false
+      expect(described_class.new(notify_creator: '1').notify_creator).to be true
+      expect(described_class.new(notify_creator: '0').notify_creator).to be false
     end
   end
 
   describe 'initial deadline notification' do
     it 'exists when notify creator is true' do
-      prediction = Prediction.new(notify_creator: true)
+      prediction = described_class.new(notify_creator: true)
       prediction.valid?
       expect(prediction.deadline_notifications).not_to be_empty
     end
 
     it 'does not exist when notify creator is false' do
-      expect(Prediction.new(notify_creator: false).deadline_notifications).to be_empty
+      expect(described_class.new(notify_creator: false).deadline_notifications).to be_empty
     end
   end
 
   describe 'deadline' do
     it 'has a deadline attribute that is initially nil' do
-      expect(Prediction.new.deadline).to be_nil
+      expect(described_class.new.deadline).to be_nil
     end
 
     it 'is a date field' do
       date = 5.weeks.from_now
-      prediction = Prediction.new(deadline: date)
+      prediction = described_class.new(deadline: date)
       expect(prediction.deadline.to_s(:db)).to eq date.to_s(:db)
     end
 
     it 'transforms natural language date "tomorrow" to date' do
-      prediction = Prediction.new
+      prediction = described_class.new
       prediction.deadline_text = 'tomorrow'
       expect(prediction.deadline.to_s(:db)).to eq 1.day.from_now.noon.to_s(:db)
     end
 
     it 'has an error on deadline_text if invalid' do
-      prediction = Prediction.new
+      prediction = described_class.new
       prediction.save
       expect(prediction.errors.keys).to include(:deadline_text)
     end
 
     describe 'prettied' do
       it 'looks nice' do
-        prediction = Prediction.new
+        prediction = described_class.new
         prediction.deadline_text = 'Fri Aug 15 13:17:07 +1000 2008'
         expect(prediction.prettied_deadline).to eq 'August 15, 2008 03:17'
       end
@@ -459,29 +461,29 @@ describe Prediction do
 
   describe 'due for judgement?' do
     it 'is true when outcome unknown and past deadline' do
-      prediction = Prediction.new(deadline: 10.minutes.ago)
+      prediction = described_class.new(deadline: 10.minutes.ago)
       expect(prediction).to receive(:outcome).and_return(nil)
       expect(prediction).to be_due_for_judgement
     end
 
     it 'is false when outcome known and past deadline' do
-      prediction = Prediction.new(deadline: 10.minutes.ago)
+      prediction = described_class.new(deadline: 10.minutes.ago)
       expect(prediction).to receive(:outcome).and_return(true)
       expect(prediction).not_to be_due_for_judgement
     end
 
     it 'is false when outcome unknown and not past deadline' do
-      prediction = Prediction.new(deadline: 10.minutes.from_now)
+      prediction = described_class.new(deadline: 10.minutes.from_now)
       expect(prediction).not_to be_due_for_judgement
     end
 
     it 'is false when outcome known and not past deadline' do
-      prediction = Prediction.new(deadline: 10.minutes.from_now)
+      prediction = described_class.new(deadline: 10.minutes.from_now)
       expect(prediction).not_to be_due_for_judgement
     end
 
     it 'is false when withdrawn' do
-      prediction = Prediction.new(deadline: 10.minutes.ago)
+      prediction = described_class.new(deadline: 10.minutes.ago)
       expect(prediction).to receive(:withdrawn?).and_return(true)
       expect(prediction).not_to be_due_for_judgement
     end
@@ -489,27 +491,27 @@ describe Prediction do
 
   describe 'outcome' do
     it 'has an outcome attribute that is initially nil' do
-      expect(Prediction.new.outcome).to be_nil
+      expect(described_class.new.outcome).to be_nil
     end
 
     describe 'with versioning' do
       it 'has a list of judgements' do
-        expect(Prediction.new.judgements).to eq []
+        expect(described_class.new.judgements).to eq []
       end
 
       describe 'delegate' do
         it 'delegates outcome to judgement' do
-          prediction = Prediction.new
+          prediction = described_class.new
           allow(prediction).to receive(:judgement).and_return(mock_model(Judgement, outcome: true))
           expect(prediction.outcome).to eq true
         end
         it 'returns nil if unjudged' do
-          expect(Prediction.new.outcome).to be_nil
+          expect(described_class.new.outcome).to be_nil
         end
       end
 
       describe '#judge' do
-        before(:each) do
+        before do
           @prediction = FactoryBot.create(:prediction)
           @user = mock_model(User)
         end
@@ -533,7 +535,7 @@ describe Prediction do
     end
 
     describe 'withdraw modifier' do
-      before(:each) do
+      before do
         @prediction = FactoryBot.create(:prediction)
       end
 
@@ -558,8 +560,8 @@ describe Prediction do
     end
 
     describe 'query methods' do
-      before(:each) do
-        @prediction = Prediction.new
+      before do
+        @prediction = described_class.new
       end
 
       it 'returns true for right? when outcome is true' do
@@ -594,17 +596,17 @@ describe Prediction do
 
     describe 'accessor for readable outcome' do
       it 'delegates to the judgement' do
-        prediction = Prediction.new
+        prediction = described_class.new
         judgement = mock_model(Judgement)
         allow(prediction).to receive(:judgement).and_return(judgement)
         expect(judgement).to receive(:outcome_in_words)
         prediction.readable_outcome
       end
       it 'returns nil if no judgement' do
-        expect(Prediction.new.readable_outcome).to be_nil
+        expect(described_class.new.readable_outcome).to be_nil
       end
       it 'returns withdrawn if so' do
-        p = Prediction.new
+        p = described_class.new
         expect(p).to receive(:withdrawn?).and_return(true)
         expect(p.readable_outcome).to eq 'withdrawn'
       end
@@ -614,7 +616,7 @@ describe Prediction do
   describe 'confidence aggregation' do
     it 'calculates correctly' do
       prediction = FactoryBot.create(:prediction)
-      prediction.responses.first.update_attributes(confidence: 50)
+      prediction.responses.first.update(confidence: 50)
       FactoryBot.create(:response, prediction: prediction, confidence: 56)
       FactoryBot.create(:response, prediction: prediction, confidence: 83)
       expect(prediction.mean_confidence).to eq 63
@@ -622,14 +624,14 @@ describe Prediction do
   end
 
   describe 'events collection' do
-    before(:each) do
-      @prediction = Prediction.new
+    before do
+      @prediction = described_class.new
       @r1 = instance_double(Response, created_at: 10.days.ago)
-      @v1 = instance_double(Prediction, created_at: 10.days.ago)
+      @v1 = instance_double(described_class, created_at: 10.days.ago)
       @j1 = instance_double(Judgement, created_at: 6.days.ago)
-      @v2 = instance_double(Prediction, created_at: 5.days.ago)
+      @v2 = instance_double(described_class, created_at: 5.days.ago)
       @j2 = instance_double(Judgement, created_at: 4.days.ago)
-      @v3 = instance_double(Prediction, created_at: 3.days.ago)
+      @v3 = instance_double(described_class, created_at: 3.days.ago)
       @r2 = instance_double(Response, created_at: 1.day.ago)
       allow(@prediction).to receive(:responses).and_return([@r1, @r2])
       allow(@prediction).to receive(:versions).and_return([@v1, @v2, @v3])

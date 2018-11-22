@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResponseObserver < ActiveRecord::Observer
   observe :response
 

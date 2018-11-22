@@ -8,21 +8,21 @@ describe DeadlineNotification do
       # have to hit the DB, named_routes rely on SQL
       describe 'unsent' do
         it 'finds all unsent' do
-          unsent = DeadlineNotification.new(sent: false)
+          unsent = described_class.new(sent: false)
           unsent.save(validate: false)
-          DeadlineNotification.new(sent: true).save(validate: false)
+          described_class.new(sent: true).save(validate: false)
 
-          expect(DeadlineNotification.unsent).to eq [unsent]
+          expect(described_class.unsent).to eq [unsent]
         end
       end
 
       describe 'sendable' do
         it 'filters to having email and judgement due' do
-          dns = instance_double(DeadlineNotification).as_null_object
+          dns = instance_double(described_class).as_null_object
           expect(dns).to receive(:sendable?)
-          expect(DeadlineNotification).to receive(:unsent).and_return([dns])
+          expect(described_class).to receive(:unsent).and_return([dns])
 
-          DeadlineNotification.sendable
+          described_class.sendable
         end
       end
     end
@@ -32,18 +32,18 @@ describe DeadlineNotification do
         user = FactoryBot.create(:user)
         prediction = FactoryBot.create(:prediction, deadline: 2.days.ago, creator: user)
         dn = prediction.deadline_notifications.first
-        dn.update_attributes!(enabled: true, sent: false)
-        DeadlineNotification.send_all!
+        dn.update!(enabled: true, sent: false)
+        described_class.send_all!
         expect(dn.reload).to be_sent
       end
 
-      it 'should not send notification emails for pending notifications' do
+      it 'does not send notification emails for pending notifications' do
         user = FactoryBot.create(:user)
         prediction = FactoryBot.create(:prediction, deadline: 2.days.from_now, creator: user)
         prediction.save!
         dn = prediction.deadline_notifications.first
-        dn.update_attributes!(enabled: true, sent: false)
-        DeadlineNotification.send_all!
+        dn.update!(enabled: true, sent: false)
+        described_class.send_all!
         expect(dn.reload).not_to be_sent
       end
     end
@@ -61,7 +61,7 @@ describe DeadlineNotification do
     end
 
     describe 'deliver' do
-      it 'should do the actual mailer stuff' do
+      it 'does the actual mailer stuff' do
         mailer = instance_double(ActionMailer::MessageDelivery)
         expect(mailer).to receive(:deliver_now)
         expect(Deliverer).to receive(:deadline_notification).with(notification).and_return(mailer)
@@ -72,13 +72,13 @@ describe DeadlineNotification do
     describe 'sendable?' do
       subject { notification.sendable? }
 
-      let(:notification) { DeadlineNotification.new }
+      let(:notification) { described_class.new }
       let(:has_email) { true }
       let(:due_for_judgement) { true }
       let(:enabled) { true }
       let(:withdrawn) { false }
 
-      before(:each) do
+      before do
         allow(notification).to receive(:has_email?).and_return(has_email)
         allow(notification).to receive(:due_for_judgement?).and_return(due_for_judgement)
         allow(notification).to receive(:enabled?).and_return(enabled)
@@ -89,36 +89,43 @@ describe DeadlineNotification do
 
       context 'does not have email' do
         let(:has_email) { false }
+
         it { is_expected.to be false }
 
         context 'is not enabled' do
           let(:enabled) { false }
+
           it { is_expected.to be false }
 
           context 'not due for judgement' do
             let(:due_for_judgement) { false }
+
             it { is_expected.to be false }
           end
         end
 
         context 'not due for judgement' do
           let(:due_for_judgement) { false }
+
           it { is_expected.to be false }
         end
       end
 
       context 'not due for judgement' do
         let(:due_for_judgement) { false }
+
         it { is_expected.to be false }
 
         context 'is not enabled' do
           let(:enabled) { false }
+
           it { is_expected.to be false }
         end
       end
 
       context 'withdrawn' do
         let(:withdrawn) { true }
+
         it { is_expected.to be false }
       end
     end

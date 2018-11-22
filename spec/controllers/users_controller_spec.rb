@@ -6,19 +6,19 @@ describe UsersController do
   let(:logged_in_user) { FactoryBot.create(:user, api_token: 'other-real-token') }
   let(:target_user) { FactoryBot.create(:user, api_token: 'real-token') }
 
-  before(:each) do
+  before do
     sign_in logged_in_user if logged_in_user.present?
     expect(controller).to receive(:set_timezone)
   end
 
   describe '#show' do
+    subject(:show) { get :show, params: { id: target_user.id } }
+
     let(:relation) { class_double(Prediction) }
 
     before do
       expect_any_instance_of(User).to receive(:predictions).and_return relation
     end
-
-    subject(:show) { get :show, params: { id: target_user.id } }
 
     context 'logged in user and target user are the same' do
       let(:target_user) { logged_in_user }
@@ -82,7 +82,7 @@ describe UsersController do
 
       specify do
         settings
-        expect(response).to be_success
+        expect(response).to be_ok
         expect(assigns[:user]).to eq target_user
       end
     end

@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 module MarkupHelper
   # A copy of the private AUTO_LINK_RE from ActionView::Helpers::TextHelper,
@@ -19,7 +19,7 @@ module MarkupHelper
       (?:\#[\w\-]*)?           # trailing anchor
     )
     ([[:punct:]]|<|$|)       # trailing text
-   }x
+   }x.freeze
 
   def show_user(user, cls = nil)
     link_to h(user), user_path(user), class: classes('user', cls)

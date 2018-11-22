@@ -22,8 +22,10 @@ describe Api::MyPredictionsController, type: :controller do
           get :index, params: { api_token: user.api_token }
         end
 
-        specify { expect(response).to be_success }
-        specify { expect(response.content_type).to eq 'application/json' }
+        specify 'works', :aggregate_failures do
+          expect(response).to be_ok
+          expect(response.content_type).to eq 'application/json'
+        end
 
         it 'includes my prediction' do
           expect(parsed_response['predictions'].to_s)
@@ -38,7 +40,7 @@ describe Api::MyPredictionsController, type: :controller do
         end
 
         it "does not includes someone else's prediction" do
-          expect(response.body).to_not include her_prediction.description_with_group
+          expect(response.body).not_to include her_prediction.description_with_group
         end
       end
     end
@@ -46,8 +48,10 @@ describe Api::MyPredictionsController, type: :controller do
     context 'with invalid API token' do
       before { get :index, params: { api_token: 'fake-token' } }
 
-      specify { expect(response).to_not be_success }
-      specify { expect(response.content_type).to eq 'application/json' }
+      specify 'works', :aggregate_failures do
+        expect(response).not_to be_ok
+        expect(response.content_type).to eq 'application/json'
+      end
     end
   end
 end
