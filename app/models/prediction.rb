@@ -33,7 +33,7 @@ class Prediction < ActiveRecord::Base
     visible_to_everyone
       .not_withdrawn
       .includes(DEFAULT_INCLUDES)
-      .where('(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NULL AND deadline < UTC_TIMESTAMP()')
+      .where('(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NULL AND deadline < CURRENT_TIMESTAMP')
       .order(deadline: :desc)
   end
 
@@ -50,7 +50,7 @@ class Prediction < ActiveRecord::Base
     visible_to_everyone
       .not_withdrawn
       .includes(DEFAULT_INCLUDES)
-      .where('(id NOT IN (SELECT prediction_id FROM judgements) OR id IN (SELECT prediction_id FROM judgements WHERE outcome IS NULL)) AND deadline > UTC_TIMESTAMP()')
+      .where('(id NOT IN (SELECT prediction_id FROM judgements) OR id IN (SELECT prediction_id FROM judgements WHERE outcome IS NULL)) AND deadline > CURRENT_TIMESTAMP')
       .order(:deadline)
   end
 
@@ -63,7 +63,7 @@ class Prediction < ActiveRecord::Base
       .not_withdrawn
       .includes(DEFAULT_INCLUDES)
       .joins(:responses)
-      .where('predictions.deadline > UTC_TIMESTAMP() AND predictions.created_at > ?', 2.weeks.ago)
+      .where('predictions.deadline > CURRENT_TIMESTAMP AND predictions.created_at > ?', 2.weeks.ago)
       .where('predictions.id NOT IN (SELECT prediction_id FROM judgements WHERE outcome IS NOT NULL)')
       .order('count(responses.prediction_id) DESC, predictions.deadline ASC')
       .group('predictions.id')
@@ -116,8 +116,11 @@ class Prediction < ActiveRecord::Base
 
   def save!
     super
-  rescue ActiveRecord::StatementInvalid => error
-    raise DuplicateRecord, Prediction.find_by(uuid: uuid) if error.message.match?(/Duplicate entry/)
+  rescue ActiveRecord::RecordNotUnique => error
+    if error.message.match?(/index_predictions_on_uuid/)
+      raise DuplicateRecord, Prediction.find_by(uuid: uuid)
+    end
+
     raise
   end
 

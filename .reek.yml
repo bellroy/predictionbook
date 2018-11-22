@@ -1,0 +1,32 @@
+---
+detectors:
+  IrresponsibleModule:
+    enabled: false
+  TooManyStatements:
+    enabled: true
+    max_statements: 10
+  NilCheck:
+    enabled: false
+directories:
+  app/controllers:
+    NestedIterators:
+      max_allowed_nesting: 2
+    UnusedPrivateMethod:
+      enabled: false
+  app/helpers:
+    UtilityFunction:
+      enabled: false
+exclude_paths:
+- app/assets
+- bin
+- client/node_modules
+- config
+- coverage
+- data
+- db
+- dw
+- log
+- phrase
+- public
+- tmp
+- vendor

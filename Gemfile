@@ -19,7 +19,7 @@ gem 'RedCloth'
 gem 'sass-rails'
 
 # Servers
-gem 'mysql2', '< 0.5.0'
+gem 'pg'
 gem 'thin'
 
 # App housekeeping

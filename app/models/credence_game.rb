@@ -44,7 +44,12 @@ class CredenceGame < ActiveRecord::Base
   end
 
   def create_new_response_to_random_question
-    question = CredenceQuestion.where(enabled: true).order('RAND()').first
+    enabled_questions = CredenceQuestion.where(enabled: true)
+    enabled_question_count = enabled_questions.count
+    return if enabled_question_count.zero?
+
+    random_offset = Random.rand(enabled_question_count)
+    question = enabled_questions.offset(random_offset).first
     self.current_response = question.build_random_response(self) if question.present?
     save! if saved_changes?
   end
