@@ -70,6 +70,12 @@ GEM
     arel (9.0.0)
     awesome_print (1.8.0)
     bcrypt (3.1.12)
+    better_errors (2.5.0)
+      coderay (>= 1.0.0)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
+    binding_of_caller (0.8.0)
+      debug_inspector (>= 0.0.1)
     bluecloth (2.2.0)
     builder (3.2.3)
     byebug (10.0.2)
@@ -118,6 +124,7 @@ GEM
     crass (1.0.4)
     daemons (1.2.6)
     database_cleaner (1.7.0)
+    debug_inspector (0.0.3)
     devise (4.5.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -392,6 +399,8 @@ DEPENDENCIES
   RedCloth
   active_model_serializers
   awesome_print
+  better_errors
+  binding_of_caller
   cap-deploy-tagger
   capistrano (~> 3.5.0)
   capistrano-bundler
