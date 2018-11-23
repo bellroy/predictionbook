@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe 'Prediction responses partial' do
   def render_partial
-    render partial: 'predictions/events', events: @events 
+    render 'predictions/events', events: @events 
   end
 
   before do

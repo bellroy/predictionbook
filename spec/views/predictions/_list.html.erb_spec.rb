@@ -12,7 +12,7 @@ describe 'prediction list' do
   end
 
   def render_view
-    render partial: 'predictions/list', title: 'Title' 
+    render 'predictions/list', title: 'Title' 
   end
 
   describe 'when showing statistics' do
