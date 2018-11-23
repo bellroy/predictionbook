@@ -133,7 +133,7 @@ GEM
     erubi (1.7.1)
     erubis (2.7.0)
     eventmachine (1.2.7)
-    exception_notification (4.2.2)
+    exception_notification (4.3.0)
       actionmailer (>= 4.0, < 6)
       activesupport (>= 4.0, < 6)
     execjs (2.7.0)
@@ -418,7 +418,6 @@ DEPENDENCIES
   jquery-rails
   kaminari
   launchy
-  loofah (~> 2.2.3)
   newrelic_rpm
   pg
   poltergeist
