@@ -33,7 +33,7 @@ class PredictionsController < ApplicationController
   end
 
   def update
-    @prediction.update_attributes!(prediction_params)
+    @prediction.update!(prediction_params)
     redirect_to prediction_path(@prediction)
   rescue ActiveRecord::RecordInvalid => invalid
     @prediction = invalid.record
@@ -62,7 +62,7 @@ class PredictionsController < ApplicationController
     @page = params[:page]
     # Grabbing IDs & updated_at of all non-private predictions:
     @predictions = Prediction.order(created_at: :desc).visible_to_everyone.page(@page)
-                             .per(MAXIMUM_ENTRIES_IN_SITEMAP).pluck(:id, :updated_at)
+      .per(MAXIMUM_ENTRIES_IN_SITEMAP).pluck(:id, :updated_at)
   end
 
   def index

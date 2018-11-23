@@ -7,7 +7,7 @@ class GroupMemberInvitationsController < ApplicationController
       redirect_to(root_url)
       return
     end
-    group_member.update_attributes(role: 'contributor')
+    group_member.update(role: 'contributor')
     group = group_member.group
     redirect_to(root_url, notice: "You are now a contributing member of the #{group.name} group")
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'ffaker'
 
 FactoryBot.define do
@@ -35,10 +37,10 @@ FactoryBot.define do
 
     after(:build) do |prediction_group, evaluator|
       prediction_group.predictions = FactoryBot.build_list(:prediction, evaluator.predictions,
-                                                            prediction_group: prediction_group,
-                                                            visibility: evaluator.visibility,
-                                                            group_id: evaluator.group_id,
-                                                            creator: evaluator.creator)
+                                                           prediction_group: prediction_group,
+                                                           visibility: evaluator.visibility,
+                                                           group_id: evaluator.group_id,
+                                                           creator: evaluator.creator)
     end
   end
 

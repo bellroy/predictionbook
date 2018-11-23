@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe VersionHelper do
-  include VersionHelper
+  include described_class
 
   describe 'changes' do
+    subject { changes(second_version) }
+
     let(:deadline) { Time.zone.now.to_s }
     let(:attributes_before) { { 'deadline' => deadline, 'withdrawn' => 'true' } }
     let(:first_version) { instance_double(PredictionVersion, attributes: attributes_before) }
@@ -12,10 +16,10 @@ describe VersionHelper do
       instance_double(PredictionVersion, previous_version: first_version, attributes: attributes_now)
     end
 
-    subject { changes(second_version) }
-
-    it { is_expected.to include('withdrew the prediction') }
-    it { is_expected.not_to include('deadline') }
+    it 'works', :aggregate_failures do
+      expect(subject).to include('withdrew the prediction')
+      expect(subject).not_to include('deadline')
+    end
   end
 
   describe 'changed_detail' do
@@ -25,6 +29,7 @@ describe VersionHelper do
       let(:field) { :description }
       let(:new_value) { 'new desc' }
       let(:old_value) { 'old desc' }
+
       it { is_expected.to match(/changed their prediction from.*old desc.*/) }
     end
 
@@ -32,6 +37,7 @@ describe VersionHelper do
       let(:field) { :deadline }
       let(:new_value) { 10.minutes.from_now }
       let(:old_value) { 40.minutes.ago }
+
       it { is_expected.to match(/changed the deadline from.+40 minutes ago.*/) }
     end
 
@@ -39,6 +45,7 @@ describe VersionHelper do
       let(:field) { :withdrawn }
       let(:new_value) { true }
       let(:old_value) { false }
+
       it { is_expected.to eq 'withdrew the prediction' }
     end
 
@@ -48,11 +55,13 @@ describe VersionHelper do
 
       context 'made private' do
         let(:new_value) { 1 }
+
         it { is_expected.to eq 'made the prediction visible to creator' }
       end
 
       context 'made visible to group' do
         let(:new_value) { 2 }
+
         it { is_expected.to eq 'made the prediction visible to group' }
       end
     end

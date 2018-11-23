@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Array core extensions' do
   describe 'rsort!' do
-    it 'should reverse order the elements by the field passed' do
+    it 'reverses order the elements by the field passed' do
       a = '1'
       b = '2'
       c = '3'

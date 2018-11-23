@@ -6,10 +6,11 @@ describe DeadlineNotificationsController do
   it_behaves_like 'NotificationsController'
 
   describe 'index' do
-    let(:user) { FactoryBot.create(:user) }
-    before { sign_in user }
-
     subject(:get_index) { get :index, params: { user_id: user.id } }
+
+    let(:user) { FactoryBot.create(:user) }
+
+    before { sign_in user }
 
     it 'renders ok' do
       get_index
@@ -72,7 +73,7 @@ describe DeadlineNotificationsController do
       end
 
       it 'modifies the notification' do
-        expect(@notification).to receive(:update_attributes!).with('enabled' => '1')
+        expect(@notification).to receive(:update!).with('enabled' => '1')
 
         put :update, params: { id: '1', deadline_notification: { enabled: '1' } }
       end

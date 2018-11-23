@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
 
   def force_change_password
     return unless current_user.present? && request.format.html?
+
     notice = 'PredictionBook has recently undergone a major upgrade. As part of the upgrade, our ' \
              'authentication system has changed. We are currently transitioning users across to ' \
              'use the new authentication system. You will need to change your password and ' \
@@ -46,7 +47,7 @@ class ApplicationController < ActionController::Base
 
   def set_timezone
     user_timezone = current_user.try(:timezone)
-    Time.zone = user_timezone.blank? ? 'UTC' : user_timezone
+    Time.zone = user_timezone.presence || 'UTC'
     Chronic.time_class = Time.zone
   end
 

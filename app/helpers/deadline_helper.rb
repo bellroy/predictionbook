@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DeadlineHelper
   def deadline_notification_info(deadline_notification)
     set_your_email = link_to 'set your email', settings_user_path(deadline_notification.user)
@@ -13,11 +15,11 @@ module DeadlineHelper
       time = TimeInContentTagPresenter.new(deadline_notification.deadline).tag
       will_would = deadline_notification.enabled ? 'will be' : 'would be'
       will_would = 'would have been' if deadline_notification.overdue?
-      if deadline_notification.has_email?
-        notification_text = "You #{will_would} notified #{time}."
-      else
-        notification_text = "You #{will_would} notified #{time} if you #{set_your_email}."
-      end
+      notification_text = if deadline_notification.has_email?
+                            "You #{will_would} notified #{time}."
+                          else
+                            "You #{will_would} notified #{time} if you #{set_your_email}."
+                          end
       notification_text.html_safe
     end
   end

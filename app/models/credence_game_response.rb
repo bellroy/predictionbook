@@ -1,4 +1,6 @@
-class CredenceGameResponse < ActiveRecord::Base
+# frozen_string_literal: true
+
+class CredenceGameResponse < ApplicationRecord
   belongs_to :credence_game
   belongs_to :credence_question
   belongs_to :first_answer, class_name: 'CredenceAnswer'
@@ -28,6 +30,7 @@ class CredenceGameResponse < ActiveRecord::Base
   # credence. credence is a _percentage_, i.e. in the range [1, 99].
   def score_answer
     return nil if answer_credence.nil? || !valid?
+
     correct = answer_correct?
     truth_credence = correct ? answer_credence : (100 - answer_credence)
     score = (Math.log(2 * truth_credence.to_f / 100.0, 2) * 100).round

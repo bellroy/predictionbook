@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Prediction responses partial' do
@@ -5,7 +7,7 @@ describe 'Prediction responses partial' do
     render partial: 'predictions/events', locals: { events: @events }
   end
 
-  before(:each) do
+  before do
     user = mock_model(User).as_null_object
     @wager = mock_model(Response, created_at: Time.zone.now, user: user).as_null_object
     @events = [@wager]
@@ -42,7 +44,7 @@ describe 'Prediction responses partial' do
   end
 
   describe 'includes any supplied comments' do
-    before(:each) do
+    before do
       expect(@wager).to receive(:comment?).and_return(true)
       expect(@wager).to receive(:comment).and_return(@comment = double('comment'))
       expect(@wager).to receive(:action_comment?).and_return(false)

@@ -1,4 +1,6 @@
-class Judgement < ActiveRecord::Base
+# frozen_string_literal: true
+
+class Judgement < ApplicationRecord
   belongs_to :user
   belongs_to :prediction
 

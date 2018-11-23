@@ -1,5 +1,6 @@
-# -*- coding: utf-8 -*-
-class User < ActiveRecord::Base
+# frozen_string_literal: true
+
+class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable,
          :validatable, :confirmable
 
@@ -90,11 +91,8 @@ class User < ActiveRecord::Base
     user_group_role = user_group.user_role(self) if user_group.present?
     return true if is_creator || admin? || user_group_role == 'admin'
     return false unless %w[index show].include?(action)
-    prediction.visible_to_everyone? || (prediction.visible_to_group? && user_group.present?)
-  end
 
-  def admin?
-    %w[matt gwern].include?(login)
+    prediction.visible_to_everyone? || (prediction.visible_to_group? && user_group.present?)
   end
 
   def to_param

@@ -12,7 +12,7 @@ describe Api::CurrentUsersController, type: :controller do
       end
 
       specify do
-        expect(response).to be_success
+        expect(response).to be_ok
         expect(response.content_type).to eq 'application/json'
         expect(response.body).to include user.login
       end
@@ -22,7 +22,7 @@ describe Api::CurrentUsersController, type: :controller do
       before { get :show, params: { id: 'me', api_token: 'fake-token' } }
 
       specify do
-        expect(response).to_not be_success
+        expect(response).not_to be_ok
         expect(response.content_type).to eq 'application/json'
       end
     end

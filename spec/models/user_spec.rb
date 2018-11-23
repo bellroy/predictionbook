@@ -1,27 +1,29 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe User do
   it 'has a name accessor' do
-    expect(User.new).to respond_to(:name)
-    expect(User.new).to respond_to(:name=)
+    expect(described_class.new).to respond_to(:name)
+    expect(described_class.new).to respond_to(:name=)
   end
 
   it 'has a private_default field which defaults to false' do
-    expect(User.new.visible_to_everyone?).to be true
+    expect(described_class.new.visible_to_everyone?).to be true
   end
 
   it 'has an email with name' do
-    u = User.new(name: 'Tester', email: 'test@test.com')
+    u = described_class.new(name: 'Tester', email: 'test@test.com')
     expect(u.email_with_name).to eq '"Tester" <test@test.com>'
   end
 
-  it 'should escape dots in the username with [dot]' do
-    expect(User.new(login: 'login.name').to_param).to eq 'login[dot]name'
+  it 'escapes dots in the username with [dot]' do
+    expect(described_class.new(login: 'login.name').to_param).to eq 'login[dot]name'
   end
 
   describe 'with statistics' do
-    it 'should delegate statistics to wagers' do
-      user = User.new
+    it 'delegates statistics to wagers' do
+      user = described_class.new
       user.id = 123
       stats = double(Statistics)
       expect(Statistics).to receive(:new).with('r.user_id = 123').and_return(stats)
@@ -30,14 +32,15 @@ describe User do
   end
 
   describe 'when given empty string' do
-    before(:each) do
-      @user = User.new
+    before do
+      @user = described_class.new
     end
-    it 'should store empty name as nil' do
+
+    it 'stores empty name as nil' do
       @user.name = " \t \n "
       expect(@user.name).to be_nil
     end
-    it 'should store email as nil' do
+    it 'stores email as nil' do
       @user.email = ''
       expect(@user.email).to be_nil
     end
@@ -46,7 +49,7 @@ describe User do
   describe 'authorized_for?' do
     subject { user.authorized_for?(prediction, action) }
 
-    let(:user) { User.new }
+    let(:user) { described_class.new }
     let(:creator_user) { user }
     let(:action) { 'edit' }
     let(:prediction) do
@@ -56,13 +59,13 @@ describe User do
     it { is_expected.to be true }
 
     context 'not created by user' do
-      let(:creator_user) { User.new }
+      let(:creator_user) { described_class.new }
 
       it { is_expected.to be false }
 
       context 'user is admin' do
-        let(:user) { User.new(login: 'matt') }
-        let(:creator_user) { User.new }
+        let(:user) { described_class.new(admin: true) }
+        let(:creator_user) { described_class.new }
 
         it { is_expected.to be true }
       end
@@ -102,7 +105,6 @@ describe User do
 
           it { is_expected.to be false }
         end
-
       end
     end
   end
