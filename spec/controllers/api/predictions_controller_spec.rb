@@ -17,16 +17,20 @@ describe Api::PredictionsController, type: :controller do
         get :index, params: { api_token: user.api_token }
       end
 
-      specify { expect(response).to be_success }
-      specify { expect(response.content_type).to eq 'application/json' }
-      specify { expect(response.body).to include prediction.description_with_group }
+      specify 'works', :aggregate_failures do
+        expect(response).to be_ok
+        expect(response.content_type).to eq 'application/json'
+        expect(response.body).to include prediction.description_with_group
+      end
     end
 
     context 'with invalid API token' do
       before { get :index, params: { api_token: 'fake-token' } }
 
-      specify { expect(response).to_not be_success }
-      specify { expect(response.content_type).to eq 'application/json' }
+      specify 'works', :aggregate_failures do
+        expect(response).not_to be_ok
+        expect(response.content_type).to eq 'application/json'
+      end
     end
   end
 
@@ -36,23 +40,29 @@ describe Api::PredictionsController, type: :controller do
         get :show, params: { id: prediction.id, api_token: user.api_token }
       end
 
-      specify { expect(response).to be_success }
-      specify { expect(response.content_type).to eq 'application/json' }
-      specify { expect(response.body).to_not be_empty }
+      specify 'works', :aggregate_failures do
+        expect(response).to be_ok
+        expect(response.content_type).to eq 'application/json'
+        expect(response.body).not_to be_empty
+      end
     end
 
     context 'with invalid API token' do
       before { get :show, params: { id: prediction.id, api_token: 'fake-token' } }
 
-      specify { expect(response).to_not be_success }
-      specify { expect(response.content_type).to eq 'application/json' }
+      specify 'works', :aggregate_failures do
+        expect(response).not_to be_ok
+        expect(response.content_type).to eq 'application/json'
+      end
     end
 
     context 'with non-existent id' do
       before { get :show, params: { id: 999, api_token: 'fake-token' } }
 
-      specify { expect(response).to_not be_success }
-      specify { expect(response.content_type).to eq 'application/json' }
+      specify 'works', :aggregate_failures do
+        expect(response).not_to be_ok
+        expect(response.content_type).to eq 'application/json'
+      end
     end
   end
 
@@ -77,8 +87,10 @@ describe Api::PredictionsController, type: :controller do
           post :create, params: { prediction: prediction_params, api_token: user.api_token }
         end
 
-        specify { expect(response).to_not be_success }
-        specify { expect(response.body).to include('a probability is between') }
+        specify 'works', :aggregate_failures do
+          expect(response).not_to be_ok
+          expect(response.body).to include('a probability is between')
+        end
       end
 
       context 'with new visibility' do
@@ -122,10 +134,10 @@ describe Api::PredictionsController, type: :controller do
       end
 
       specify do
-        expect(response.body).to_not include(prediction_params[:description])
+        expect(response.body).not_to include(prediction_params[:description])
       end
 
-      specify { expect(response).to_not be_success }
+      specify { expect(response).not_to be_ok }
     end
   end
 
@@ -143,8 +155,10 @@ describe Api::PredictionsController, type: :controller do
                                  prediction: new_prediction_params }
         end
 
-        specify { expect(response).to be_success }
-        specify { expect(response.content_type).to eq 'application/json' }
+        specify 'works', :aggregate_failures do
+          expect(response).to be_ok
+          expect(response.content_type).to eq 'application/json'
+        end
 
         it 'updates the existing prediction' do
           description = new_prediction_params[:description]
@@ -161,8 +175,10 @@ describe Api::PredictionsController, type: :controller do
                                  prediction: new_prediction_params }
         end
 
-        specify { expect(response).to_not be_success }
-        specify { expect(response.content_type).to eq 'application/json' }
+        specify 'works', :aggregate_failures do
+          expect(response).not_to be_ok
+          expect(response.content_type).to eq 'application/json'
+        end
       end
     end
 
@@ -173,8 +189,10 @@ describe Api::PredictionsController, type: :controller do
                                prediction: new_prediction_params }
       end
 
-      specify { expect(response).to_not be_success }
-      specify { expect(response.content_type).to eq 'application/json' }
+      specify 'works', :aggregate_failures do
+        expect(response).not_to be_ok
+        expect(response.content_type).to eq 'application/json'
+      end
     end
   end
 end

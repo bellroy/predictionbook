@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DeadlineNotification < Notification
   def deliver
     Deliverer.deadline_notification(self).deliver_now

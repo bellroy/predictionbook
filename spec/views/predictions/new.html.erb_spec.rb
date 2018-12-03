@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'predictions/new' do
   let(:prediction) { FactoryBot.build(:prediction) }
   let(:user) { instance_double(User, has_email?: false, to_param: 'username') }
 
-  before(:each) do
+  before do
     assign(:prediction, prediction)
     assign(:statistics, Statistics.new)
     assign(:groups, [])
@@ -49,7 +51,7 @@ describe 'predictions/new' do
     it 'is unchecked if user does not have email' do
       expect(prediction).to receive(:notify_creator).and_return false
       render
-      expect(rendered).to_not have_checked_field('prediction[notify_creator]')
+      expect(rendered).not_to have_checked_field('prediction[notify_creator]')
     end
   end
 

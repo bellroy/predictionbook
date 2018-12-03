@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 SimpleCov.start do
   add_filter '/vendor/'
 end
 
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -31,7 +33,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.before(:example) do
+  config.before do
     DatabaseCleaner.strategy = :transaction
   end
 
@@ -39,12 +41,12 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :deletion
   end
 
-  config.before(:example) do
+  config.before do
     DatabaseCleaner.start
     Capybara.reset_sessions!
   end
 
-  config.after(:example) do
+  config.after do
     DatabaseCleaner.clean
   end
 end

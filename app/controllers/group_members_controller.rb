@@ -10,10 +10,10 @@ class GroupMembersController < ApplicationController
 
   def index
     @group_members = Group
-                     .find(params[:group_id])
-                     .group_members
-                     .includes(:user)
-                     .sort_by { |gm| gm.user.login || 'anonymous' }
+      .find(params[:group_id])
+      .group_members
+      .includes(:user)
+      .sort_by { |gm| gm.user.login || 'anonymous' }
   end
 
   def new
@@ -39,8 +39,8 @@ class GroupMembersController < ApplicationController
 
   def update
     role_param = params[:role]
-    if role_param.present? && GroupMember::ROLES.keys.include?(role_param.to_sym)
-      @group_member.update_attributes(role: role_param)
+    if role_param.present? && GroupMember::ROLES.key?(role_param.to_sym)
+      @group_member.update(role: role_param)
     else
       @group_member.send_invitation
     end

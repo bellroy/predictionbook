@@ -1,4 +1,6 @@
-class Response < ActiveRecord::Base
+# frozen_string_literal: true
+
+class Response < ApplicationRecord
   include ActionView::Helpers::SanitizeHelper
 
   belongs_to :prediction
@@ -19,7 +21,7 @@ class Response < ActiveRecord::Base
 
   nillify_blank :comment
 
-  WAGER_CONDITION = 'confidence is not null'.freeze
+  WAGER_CONDITION = 'confidence is not null'
   scope :wagers, -> { where(WAGER_CONDITION) }
 
   scope :visible_to_everyone, -> { where(prediction: Prediction.visible_to_everyone) }
@@ -46,6 +48,7 @@ class Response < ActiveRecord::Base
 
   def correct?
     return if unknown?
+
     correct_prediction = prediction.right?
     (correct_prediction && agree?) || (!correct_prediction && !agree?)
   end
@@ -55,7 +58,7 @@ class Response < ActiveRecord::Base
   end
 
   def action_comment?
-    comment? && comment.starts_with?('/me ') && !action_comment.blank?
+    comment? && comment.starts_with?('/me ') && action_comment.present?
   end
 
   def action_comment
@@ -73,8 +76,10 @@ class Response < ActiveRecord::Base
   private
 
   def length_of_comment_maximum
-    errors.add(:comment,
-               "must be less than #{MAX_COMMENT_LENGTH} characters") unless characters_left > 0
+    unless characters_left > 0
+      errors.add(:comment,
+                 "must be less than #{MAX_COMMENT_LENGTH} characters")
+    end
   end
 
   def presence_of_either_confidence_or_comment

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PredictionGroupPredictionsFromFlatParams
   def initialize(prediction_group, creator, params)
     self.prediction_group = prediction_group
@@ -51,6 +53,7 @@ class PredictionGroupPredictionsFromFlatParams
   def existing_prediction_matching(index)
     id = prediction_id(index)
     return nil if id.blank?
+
     predictions.find { |pred| pred.id.to_s == id }
   end
 

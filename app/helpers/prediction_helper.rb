@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PredictionHelper
   def outcome_button(outcome)
     submit_tag outcome,

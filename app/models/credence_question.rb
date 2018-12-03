@@ -1,12 +1,21 @@
-class CredenceQuestion < ActiveRecord::Base
+# frozen_string_literal: true
+
+class CredenceQuestion < ApplicationRecord
   has_many :answers, class_name: CredenceAnswer.name, dependent: :destroy, autosave: true
   has_many :responses, class_name: CredenceGameResponse.name, dependent: :destroy, autosave: true
 
   def build_random_response(game)
-    randomly_sorted_answers = answers.order('RAND()').first(5)
-    raise 'Not enough answers to create a random response' if randomly_sorted_answers.length < 2
-    first_answer = randomly_sorted_answers.first
-    second_answer = randomly_sorted_answers.find { |answer| answer.value != first_answer.value }
+    random_answers = []
+    answer_count = answers.size
+    while answer_count >= 0 && random_answers.length < [answer_count, 5].minmax.first
+      random_index = Random.rand(answer_count)
+      random_answer = answers[random_index]
+      random_answers << random_answer unless random_answers.include?(random_answer)
+    end
+    raise 'Not enough answers to create a random response' unless random_answers.length >= 2
+
+    first_answer = random_answers.first
+    second_answer = random_answers.find { |answer| answer.value != first_answer.value }
     which = first_answer.rank < second_answer.rank ? 0 : 1
     responses.new(credence_game: game, first_answer: first_answer, second_answer: second_answer,
                   correct_index: which)

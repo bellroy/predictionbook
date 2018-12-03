@@ -1,9 +1,10 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 module VersionHelper
   def changes(version)
     previous_version = version.previous_version
     return [] if previous_version.nil?
+
     prev_attrs = previous_version.attributes
     columns = PredictionVersion.versioned_prediction_columns.map(&:to_s)
     raw_diff = HashDiff.diff(prev_attrs, version.attributes)

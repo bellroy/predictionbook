@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PredictionSerializer < ActiveModel::Serializer
   attributes :id, :description, :description_with_group, :deadline, :created_at, :updated_at,
              :creator_id, :uuid, :withdrawn, :version, :visibility, :group_id, :prediction_group_id,

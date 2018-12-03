@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2017_06_26_055158) do
 
-  create_table "credence_answers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "credence_answers", id: :integer, force: :cascade do |t|
     t.integer "credence_question_id"
     t.text "text"
     t.text "value"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2017_06_26_055158) do
     t.index ["credence_question_id"], name: "index_credence_answers_on_credence_question_id"
   end
 
-  create_table "credence_game_responses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "credence_game_responses", id: :integer, force: :cascade do |t|
     t.integer "credence_question_id"
     t.integer "first_answer_id"
     t.integer "second_answer_id"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2017_06_26_055158) do
     t.index ["credence_question_id"], name: "index_credence_game_responses_on_credence_question_id"
   end
 
-  create_table "credence_games", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "credence_games", id: :integer, force: :cascade do |t|
     t.integer "current_response_id"
     t.integer "score", default: 0, null: false
     t.integer "user_id"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2017_06_26_055158) do
     t.index ["user_id"], name: "index_credence_games_on_user_id", unique: true
   end
 
-  create_table "credence_questions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "credence_questions", id: :integer, force: :cascade do |t|
     t.boolean "enabled"
     t.string "text"
     t.string "prefix"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2017_06_26_055158) do
     t.index ["text_id"], name: "index_credence_questions_on_text_id", unique: true
   end
 
-  create_table "group_members", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "group_members", id: :integer, force: :cascade do |t|
     t.integer "group_id"
     t.integer "user_id"
     t.integer "role"
@@ -73,13 +73,13 @@ ActiveRecord::Schema.define(version: 2017_06_26_055158) do
     t.index ["user_id"], name: "index_group_members_on_user_id"
   end
 
-  create_table "groups", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "groups", id: :integer, force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "judgements", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "judgements", id: :integer, force: :cascade do |t|
     t.integer "prediction_id"
     t.integer "user_id"
     t.boolean "outcome"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2017_06_26_055158) do
     t.index ["user_id"], name: "index_judgements_on_user_id"
   end
 
-  create_table "notifications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "notifications", id: :integer, force: :cascade do |t|
     t.integer "prediction_id"
     t.integer "user_id"
     t.boolean "sent", default: false
@@ -104,13 +104,13 @@ ActiveRecord::Schema.define(version: 2017_06_26_055158) do
     t.index ["user_id"], name: "index_deadline_notifications_on_user_id"
   end
 
-  create_table "prediction_groups", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "prediction_groups", id: :integer, force: :cascade do |t|
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "prediction_versions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "prediction_versions", id: :integer, force: :cascade do |t|
     t.integer "prediction_id"
     t.integer "version"
     t.string "description"
@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 2017_06_26_055158) do
     t.integer "visibility", default: 0, null: false
   end
 
-  create_table "predictions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "predictions", id: :integer, force: :cascade do |t|
     t.string "description"
     t.datetime "deadline"
     t.datetime "created_at"
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(version: 2017_06_26_055158) do
     t.index ["visibility"], name: "index_predictions_on_visibility"
   end
 
-  create_table "responses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "responses", id: :integer, force: :cascade do |t|
     t.integer "prediction_id"
     t.integer "confidence"
     t.datetime "created_at"
@@ -153,7 +153,7 @@ ActiveRecord::Schema.define(version: 2017_06_26_055158) do
     t.index ["user_id"], name: "index_responses_on_user_id"
   end
 
-  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", id: :integer, force: :cascade do |t|
     t.string "login"
     t.string "name"
     t.string "email"
@@ -189,7 +189,7 @@ ActiveRecord::Schema.define(version: 2017_06_26_055158) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "wagers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "wagers", id: :integer, force: :cascade do |t|
     t.integer "prediction_id"
     t.string "name"
     t.integer "confidence"

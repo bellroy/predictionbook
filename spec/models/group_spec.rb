@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Group, type: :model do
@@ -14,11 +16,13 @@ RSpec.describe Group, type: :model do
 
     context 'is a contributor' do
       before { FactoryBot.create(:group_member, :contributor, group: group, user: user) }
+
       it { is_expected.to eq 'contributor' }
     end
 
     context 'is an admin' do
       before { FactoryBot.create(:group_member, :admin, group: group, user: user) }
+
       it { is_expected.to eq 'admin' }
     end
   end

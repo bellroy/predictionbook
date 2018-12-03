@@ -42,15 +42,25 @@ class ScoreCalculator
 
   def score_for_date(end_date)
     sql = score_sql(end_date)
-    sum, count = ActiveRecord::Base.connection.execute(sql).first
+    record_values = ActiveRecord::Base.connection.execute(sql).first.values
+    sum = record_values.first.to_f
+    count = record_values.last.to_i
     self.judged_prediction_count = count
     return { score: 1, count: 0, error: 0 } if count.zero?
+
     { score: (sum / count).round(4), count: count, error: (1 / Math.sqrt(count)).round(4) }
   end
 
   def score_sql(end_date)
-    <<-EOS
-      SELECT SUM(POW(IF(j.outcome, 1.0 - (CAST(r.confidence AS DECIMAL) / 100.0), (CAST(r.confidence AS DECIMAL) / 100.0)), 2)), COUNT(*)
+    <<-SQL
+      SELECT SUM(POW(
+        CASE
+        WHEN j.outcome = TRUE THEN
+          1.0 - (CAST(r.confidence AS DECIMAL) / 100.0)
+        ELSE
+          (CAST(r.confidence AS DECIMAL) / 100.0)
+        END
+      , 2)), COUNT(*)
       FROM responses r
       INNER JOIN predictions p ON p.id = r.prediction_id
       INNER JOIN (
@@ -62,8 +72,8 @@ class ScoreCalculator
       WHERE #{prediction_scope_condition}
       AND r.confidence IS NOT NULL
       AND cast(r.created_at as date) <= '#{end_date.strftime('%Y-%m-%d')}'
-      AND (p.withdrawn IS NULL OR p.withdrawn = 0)
-    EOS
+      AND (p.withdrawn IS NULL OR p.withdrawn = FALSE)
+    SQL
   end
 
   def prediction_scope_condition

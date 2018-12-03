@@ -2,11 +2,12 @@
 
 require 'spec_helper'
 
-feature 'creating and modifying prediction groups', js: true do
+describe 'creating and modifying prediction groups', js: true do
   let(:user) { FactoryBot.create(:user) }
+
   before { login_as user }
 
-  scenario 'making a new prediction group' do
+  it 'making a new prediction group' do
     visit new_prediction_group_path
     fill_in 'prediction_group[description]', with: 'I will do a thing in'
     fill_in 'prediction_group[prediction_0_description]', with: 'Less than a day'
@@ -35,7 +36,7 @@ feature 'creating and modifying prediction groups', js: true do
     expect(page).to have_content '( 95% confidence )'
   end
 
-  scenario 'editing a prediction' do
+  it 'editing a prediction' do
     prediction_group = FactoryBot.create(:prediction_group, creator: user, predictions: 5)
     visit edit_prediction_group_path(prediction_group)
 
@@ -53,8 +54,8 @@ feature 'creating and modifying prediction groups', js: true do
     expect(current_path).to eq prediction_group_path(prediction_group)
   end
 
-  scenario 'when user has set a visibility default' do
-    user.update_attributes(visibility_default: 'visible_to_creator')
+  it 'when user has set a visibility default' do
+    user.update(visibility_default: 'visible_to_creator')
 
     visit new_prediction_group_path
     fill_in 'prediction_group_description', with: 'Tomorrow'

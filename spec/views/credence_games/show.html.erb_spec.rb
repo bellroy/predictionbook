@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'credence_games/show' do
   describe 'without a game' do
-    it 'should render without errors' do
+    it 'renders without errors' do
       render
-      expect(rendered).to_not be_blank
+      expect(rendered).not_to be_blank
     end
   end
 
@@ -16,29 +18,29 @@ describe 'credence_games/show' do
       @response = @game.current_response
     end
 
-    it 'should render without errors' do
+    it 'renders without errors' do
       render
-      expect(rendered).to_not be_blank
+      expect(rendered).not_to be_blank
     end
 
-    it 'should have credence buttons' do
+    it 'has credence buttons' do
       render
       expect(rendered).to have_button('60%')
     end
 
-    it 'should not show the graph with no questions answered' do
+    it 'does not show the graph with no questions answered' do
       render
-      expect(rendered).to_not have_css('div#credence-graph')
+      expect(rendered).not_to have_css('div#credence-graph')
     end
 
-    it 'should be able to show the graph immediately' do
+    it 'is able to show the graph immediately' do
       @show_graph = true
       @game.num_answered = 1
       render
       expect(rendered).to have_css('div#credence-graph.show')
     end
 
-    it 'should be able to not show the graph immediately' do
+    it 'is able to not show the graph immediately' do
       @show_graph = false
       @game.num_answered = 1
       render
