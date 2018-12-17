@@ -20,15 +20,11 @@ describe CredenceQuestion do
     # it loads of times. But if we don't do it enough, our test will be prone to
     # failing randomly.
     #   Is it possible to only have this test run if we request it explicitly?
-    puts
-    puts 'Running uniform distribution test for credence games.'
-
     question = FactoryBot.create(:credence_question)
     FactoryBot.create_list(:credence_answer, 3, credence_question: question)
 
     counts = Hash.new(0)
     10_000.times do |i|
-      puts "Built #{i} out of 10,000 responses" if i % 1000 == 0
       response = question.build_random_response(game)
       counts[response.first_answer_id * 100 + response.second_answer_id] += 1
     end

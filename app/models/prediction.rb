@@ -67,7 +67,7 @@ class Prediction < ApplicationRecord
       .joins(:responses)
       .where('predictions.deadline > CURRENT_TIMESTAMP AND predictions.created_at > ?', 2.weeks.ago)
       .where('predictions.id NOT IN (SELECT prediction_id FROM judgements WHERE outcome IS NOT NULL)')
-      .order('count(responses.prediction_id) DESC, predictions.deadline ASC')
+      .order(Arel.sql('count(responses.prediction_id) DESC, predictions.deadline ASC'))
       .group('predictions.id')
   end
 
