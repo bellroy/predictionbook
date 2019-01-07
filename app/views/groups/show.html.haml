@@ -18,21 +18,21 @@
 
 - cache(group_statistics_cache_key @group) do
   - @heading = 'Group statistics'
-  = render partial: 'statistics/show'
+  = render 'statistics/show'
 
 %p
 
 #score
   %h2 Group calibration
   - cache(group_calibration_scores_cache_key @group) do
-    = render partial: 'calibration_scores/show'
+    = render 'calibration_scores/show'
 
 %p
 
 #leaderboard
   %h2 Group leaderboard
   - cache(group_leaderboard_cache_key @group) do
-    = render partial: 'leaderboard/show'
+    = render 'leaderboard/show'
 
 %p
 
