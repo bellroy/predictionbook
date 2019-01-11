@@ -11,7 +11,7 @@
   </div>
 
   <div id="predictions">
-    <h2>Displaying <%= params[:filter].nil? ? 'all' : params[:filter] %> predictions made by <%= show_user(@user) %>, filtered by:
+    <h2>Displaying <%= params[:filter].nil? ? 'all' : params[:filter] %> predictions made by <%= show_user(@user) %>. Filter by:
       <%= form_tag @user, method: :get, class: 'prediction-filter' do %>
         <%= select_tag :filter, options_for_select(['all predictions', 'judged', 'unjudged', 'future'], params[:filter]) %>
         <%= submit_tag 'Go!' %>
