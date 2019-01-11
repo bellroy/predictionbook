@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+require 'pathname'
+require 'fileutils'
+require 'yaml'
+include FileUtils
+
+# path to your application root.
+APP_ROOT = Pathname.new File.expand_path('../../', __FILE__)
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+def log(message)
+  puts "\n== #{message} =="
+end
+
+chdir APP_ROOT do
+  log 'Installing Bundler'
+  system! 'gem install bundler --conservative'
+
+  log 'Running submodule update'
+  system! 'git submodule update --init'
+
+  log 'Installing Gems'
+  system('bundle check') || system!('bundle install')
+
+  log "Dropping and recreating development database"
+  system! 'bundle exec rake db:drop db:create'
+
+  log "Building test database"
+  system! 'RAILS_ENV=test bundle exec rake db:migrate'
+
+  log "Restarting application server"
+  system! 'bin/rails restart'
+end
