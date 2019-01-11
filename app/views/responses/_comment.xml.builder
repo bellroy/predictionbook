@@ -1,1 +1,1 @@
-xml << render(:partial => 'responses/comment.xhtml.erb', :locals => {:comment => comment })
+xml << render(partial: 'responses/comment.xhtml.erb', comment: comment )

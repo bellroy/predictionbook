@@ -1,13 +1,13 @@
  <li class="prediction <%= prediction.readable_outcome %>">
    <p>
-      <%- if prediction.visible_to_creator? -%><span class='status private'>[private]</span><%- end -%>
-      <%- if prediction.visible_to_group? -%><span class='status private'>[<%= link_to prediction.group.name, group_path(prediction.group) %>]</span><%- end -%>
-      <%= render :partial => 'predictions/simple', :locals => {:prediction => prediction} %>
+      <% if prediction.visible_to_creator? %><span class='status private'>[private]</span><% end %>
+      <% if prediction.visible_to_group? %><span class='status private'>[<%= link_to prediction.group.name, group_path(prediction.group) %>]</span><% end %>
+      <%= render 'predictions/simple', prediction: prediction %>
    </p>
    <p class='description'>
      Created by <%= show_user(prediction.creator, 'creator') %>
      <%= TimeInContentTagPresenter.new(prediction.created_at, 'created_at').tag %>;
      <span class='deadline'>known <%= TimeInContentTagPresenter.new(prediction.deadline).tag %><%= prediction.judgement? ? ';' : '.' %></span>
-    <%= render :partial => prediction.judgement if prediction.judgement? -%>
+    <%= render prediction.judgement if prediction.judgement? %>
   </p>
  </li>

@@ -63,12 +63,12 @@ PredictionBook::Application.routes.draw do
   end
 
   concern :paginatable do
-    get '(page/:page)', :action => :index, :on => :collection, :as => ''
+    get '(page/:page)', action: :index, on: :collection, as: ''
   end
 
-  get '/predictions(/page/:page)' => 'predictions#index', :page => 1
-  get '/predictions/unjudged(/page/:page)' => 'predictions#unjudged', :page => 1
-  get '/predictions/judged(/page/:page)' => 'predictions#judged', :page => 1
-  get '/predictions/future(/page/:page)' => 'predictions#future', :page => 1
-  get '/users/:id(/page/:page)' => 'users#show', :page => 1
+  get '/predictions(/page/:page)' => 'predictions#index', page: 1
+  get '/predictions/unjudged(/page/:page)' => 'predictions#unjudged', page: 1
+  get '/predictions/judged(/page/:page)' => 'predictions#judged', page: 1
+  get '/predictions/future(/page/:page)' => 'predictions#future', page: 1
+  get '/users/:id(/page/:page)' => 'users#show', page: 1
 end

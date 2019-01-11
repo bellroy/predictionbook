@@ -6,4 +6,4 @@
   <%= pluralize(@prediction.comments.size, 'comment') %>.
 </p>
 
-<p><%= link_to "Check out what's happened", prediction_url(@prediction, :token=> @notification.uuid) %></p>
+<p><%= link_to "Check out what's happened", prediction_url(@prediction, token: @notification.uuid) %></p>
