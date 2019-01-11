@@ -68,7 +68,7 @@ class PredictionsController < ApplicationController
   def index
     @title = 'Recent Predictions'
     @filter = 'recent'
-    @predictions = Prediction.recent.page(params[:page])
+    @predictions = Prediction.visible_to_everyone.recent.page(params[:page])
     @show_statistics = true
   end
 
@@ -93,7 +93,7 @@ class PredictionsController < ApplicationController
   def judged
     @title = 'Judged Predictions'
     @filter = 'judged'
-    @predictions = Prediction.judged.page(params[:page])
+    @predictions = Prediction.visible_to_everyone.judged.page(params[:page])
     @show_statistics = true
     render action: 'index'
   end
@@ -101,22 +101,22 @@ class PredictionsController < ApplicationController
   def unjudged
     @title = 'Unjudged Predictions'
     @filter = 'unjudged'
-    @predictions = Prediction.unjudged.page(params[:page])
+    @predictions = Prediction.visible_to_everyone.unjudged.page(params[:page])
     render action: 'index'
   end
 
   def future
     @title = 'Upcoming Predictions'
     @filter = 'future'
-    @predictions = Prediction.future.page(params[:page])
+    @predictions = Prediction.visible_to_everyone.future.page(params[:page])
     render action: 'index'
   end
 
   def happenstance
     @title = 'Recent Happenstance'
-    @unjudged = Prediction.unjudged.limit(5)
-    @judged = Prediction.judged.limit(5)
-    @recent = Prediction.recent.limit(5)
+    @unjudged = Prediction.visible_to_everyone.unjudged.limit(5)
+    @judged = Prediction.visible_to_everyone.judged.limit(5)
+    @recent = Prediction.visible_to_everyone.recent.limit(5)
     @responses = Response.recent(limit: 25).includes(prediction: :judgements, user: nil)
   end
 

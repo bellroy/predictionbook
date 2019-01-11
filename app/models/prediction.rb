@@ -32,16 +32,14 @@ class Prediction < ApplicationRecord
                        group: nil }.freeze
 
   def self.unjudged
-    visible_to_everyone
-      .not_withdrawn
+    not_withdrawn
       .includes(DEFAULT_INCLUDES)
       .where('(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NULL AND deadline < CURRENT_TIMESTAMP')
       .order(deadline: :desc)
   end
 
   def self.judged
-    visible_to_everyone
-      .not_withdrawn
+    not_withdrawn
       .includes(DEFAULT_INCLUDES)
       .joins(:judgements)
       .where('(SELECT outcome AS most_recent_outcome FROM judgements WHERE prediction_id = predictions.id ORDER BY created_at DESC LIMIT 1) IS NOT NULL')
@@ -49,15 +47,14 @@ class Prediction < ApplicationRecord
   end
 
   def self.future
-    visible_to_everyone
-      .not_withdrawn
+    not_withdrawn
       .includes(DEFAULT_INCLUDES)
       .where('(id NOT IN (SELECT prediction_id FROM judgements) OR id IN (SELECT prediction_id FROM judgements WHERE outcome IS NULL)) AND deadline > CURRENT_TIMESTAMP')
       .order(:deadline)
   end
 
   def self.recent
-    order(created_at: :desc).visible_to_everyone.not_withdrawn.includes(DEFAULT_INCLUDES)
+    order(created_at: :desc).not_withdrawn.includes(DEFAULT_INCLUDES)
   end
 
   def self.popular
