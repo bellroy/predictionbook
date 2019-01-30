@@ -6,7 +6,6 @@ on
 <%= content_tag :span,
    link_to(TitleTagPresenter.new(wager.prediction.description_with_group).tag, wager.prediction),
    class: (wager.prediction.withdrawn? ? 'withdrawn ' : '') + "break-word" %>
-<%= %>
 <abbr title="To be decided (judged)">TBD</abbr>
 <%= TimeInContentTagPresenter.new(wager.prediction.deadline).tag %>
 <% if wager.prediction.open? %>
