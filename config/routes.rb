@@ -1,29 +1,35 @@
 PredictionBook::Application.routes.draw do
+  # start with the root
+  root to: 'predictions#home'
+
+  # then devise, which is its own thing
   devise_for :users
 
-  resources :users, only: [:show, :update] do
-    get :settings, on: :member
-    get :statistics, on: :member, format: :html
-    get :due_for_judgement, on: :member
-    post :generate_api_token, on: :member
+  # then the other stuff having to do with users
+  resources :users, only: %i[show update] do
+    # nested resources come before member/collection routes
     resources :deadline_notifications
+    member do
+      get :settings
+      get :statistics
+      get :due_for_judgement
+      post :generate_api_token
+    end
   end
 
-  resources :groups, format: :html do
-    resources :group_members, format: :html, only: [:index, :new, :create, :update, :destroy]
-  end
+  # then everything else in alphabetical order
+  resources :credence_games, only: %i[show destroy]
+  resources :credence_game_responses, only: :update
+  resources :deadline_notifications   # TODO: duplicated within users
+  resource :feedback, controller: 'feedback'  # test fails if this line is changed (???)
   resources :group_member_invitations, only: :show
 
-  resources :deadline_notifications
-  resources :response_notifications
-
-  resource :feedback, controller: 'feedback'
-
-  resources :responses do
-    get :preview, on: :collection
+  resources :groups do
+    resources :group_members, only: %i[index new create update destroy]
   end
 
-  resources :prediction_groups, only: [:show, :new, :create, :edit, :update]
+  resources :prediction_groups, only: %i[show new create edit update]
+
   resources :predictions do
     collection do
       get :recent
@@ -40,27 +46,19 @@ PredictionBook::Application.routes.draw do
       get :preview, on: :collection
     end
   end
-  resources :credence_games, only: [:show, :destroy]
-  resources :credence_game_responses, only: :update
+
+  resources :response_notifications
+
+  resources :responses do
+    get :preview, on: :collection
+  end
 
   # Due to rules around sitemap locations and allowed paths all sitemaps are at the root:
-  resources :sitemaps, only: [:index], path: "sitemap"
+  resources :sitemaps, only: :index, path: "sitemap"
   get "/static-sitemap" => "sitemaps#static", as: :static_sitemap
   get "/predictions-sitemap:page" => "predictions#sitemap", as: :predictions_sitemap
-
   get '/happenstance' => 'predictions#happenstance', as: :happenstance
-
-  root to: 'predictions#home'
-
   get '/healthcheck' => 'content#healthcheck'
-  namespace :api, format: :json do
-    resources :current_users, only: :show
-    resources :my_predictions, only: :index
-    resources :predictions
-    resources :prediction_group_by_description, only: [:update]
-    resources :prediction_groups
-    resources :prediction_judgements, only: [:create]
-  end
 
   concern :paginatable do
     get '(page/:page)', action: :index, on: :collection, as: ''
@@ -71,4 +69,14 @@ PredictionBook::Application.routes.draw do
   get '/predictions/judged(/page/:page)' => 'predictions#judged', page: 1
   get '/predictions/future(/page/:page)' => 'predictions#future', page: 1
   get '/users/:id(/page/:page)' => 'users#show', page: 1
+
+  # Finally, the API routes
+  namespace :api, format: :json do
+    resources :current_users, only: :show
+    resources :my_predictions, only: :index
+    resources :predictions
+    resources :prediction_group_by_description, only: :update
+    resources :prediction_groups
+    resources :prediction_judgements, only: :create
+  end
 end
