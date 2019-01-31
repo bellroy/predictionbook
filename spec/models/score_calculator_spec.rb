@@ -4,8 +4,9 @@ require 'spec_helper'
 
 describe ScoreCalculator do
   let(:user) { FactoryBot.create(:user) }
+  let(:today) { Time.zone.today }
   let(:calculator) do
-    described_class.new(user, start_date: Time.zone.today - 3.months, interval: 1.month)
+    described_class.new(user, start_date: today - 3.months, interval: 1.month)
   end
 
   describe '.score' do
@@ -108,7 +109,7 @@ describe ScoreCalculator do
       let(:wagers) { Response.none }
 
       specify do
-        today = Time.zone.today
+        # today = Time.zone.today
         expect(time_series).to eq(
           (today - 3.months) => { score: 1, count: 0, error: 0 },
           (today - 2.months) => { score: 1, count: 0, error: 0 },
@@ -130,7 +131,7 @@ describe ScoreCalculator do
       let!(:wagers) { wager.user.wagers }
 
       specify do
-        today = Time.zone.today
+        # today = Time.zone.today
         expect(time_series).to eq(
           (today - 3.months) => { score: 1, count: 0, error: 0 },
           (today - 2.months) => { score: 1, count: 0, error: 0 },
@@ -154,7 +155,7 @@ describe ScoreCalculator do
       let!(:wagers) { wager.user.wagers }
 
       specify do
-        today = Time.zone.today
+        # today = Time.zone.today
         expect(time_series).to eq(
           (today - 3.months) => { score: 1, count: 0, error: 0 },
           (today - 2.months) => { score: 1, count: 0, error: 0 },
@@ -199,7 +200,7 @@ describe ScoreCalculator do
       let!(:wagers) { user.wagers }
 
       specify do
-        today = Time.zone.today
+        # today = Time.zone.today
         expect(time_series).to eq(
           (today - 3.months) => { score: 1, count: 0, error: 0 },
           (today - 2.months) => { score: 0.81, count: 1, error: 1.0 },
