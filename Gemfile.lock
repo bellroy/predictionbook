@@ -78,6 +78,9 @@ GEM
       debug_inspector (>= 0.0.1)
     bluecloth (2.2.0)
     builder (3.2.3)
+    bullet (5.9.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (10.0.2)
     cap-deploy-tagger (0.2.0)
     capistrano (3.5.0)
@@ -380,6 +383,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
+    uniform_notifier (1.12.1)
     uuidtools (2.1.5)
     warden (1.2.8)
       rack (>= 2.0.6)
@@ -401,6 +405,7 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
+  bullet
   cap-deploy-tagger
   capistrano (~> 3.5.0)
   capistrano-bundler

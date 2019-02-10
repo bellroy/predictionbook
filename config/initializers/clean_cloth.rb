@@ -21,7 +21,7 @@ module CleanCloth
       end
 
       def link(opts)
-        super opts.merge(:rel => 'nofollow')
+        super opts.merge(rel: 'nofollow')
       end
 
       def pba(opts)

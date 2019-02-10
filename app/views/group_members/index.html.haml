@@ -4,7 +4,7 @@
 
 .popular
   %ul
-    = render partial: @group_members
+    = render @group_members
 
 - if @current_user_group_member.admin?
   = button_to "Invite another user", new_group_group_member_path(@group), method: :get

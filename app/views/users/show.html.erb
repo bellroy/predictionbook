@@ -1,13 +1,13 @@
-<%- if @user.present? %>
-  <%- cache(user_statistics_cache_key @user) do -%>
-  	<%= render :partial => 'statistics/show' %>
-  <%- end -%>
+<% if @user.present? %>
+  <% cache(user_statistics_cache_key @user) do %>
+  	<%= render 'statistics/show' %>
+  <% end %>
 
   <div id="score">
     <h2>Calibration</h2>
-    <%- cache(user_calibration_scores_cache_key @user) do -%>
-    	<%= render :partial => 'calibration_scores/show' %>
-    <%- end -%>
+    <% cache(user_calibration_scores_cache_key @user) do %>
+    	<%= render 'calibration_scores/show' %>
+    <% end %>
   </div>
 
   <div id="predictions">
@@ -18,7 +18,7 @@
       <% end %>
     </h2>
     <ul>
-      <%= render :partial => @predictions %>
+      <%= render @predictions %>
     </ul>
   </div>
   <p class="pagination"><%= paginate @predictions %></p>

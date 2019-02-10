@@ -4,6 +4,6 @@
 
 .popular
   %ul
-    = render partial: @groups
+    = render @groups
 
 = button_to "Create a new group", new_group_path, method: :get

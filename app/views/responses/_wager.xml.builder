@@ -1,1 +1,1 @@
-xml << render(:partial => 'responses/wager.xhtml.erb', :locals => {:wager => wager })
+xml << render(partial: 'responses/wager.xhtml.erb', wager: wager )

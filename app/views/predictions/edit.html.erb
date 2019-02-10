@@ -1,10 +1,10 @@
 <%= form_for(@prediction) do |f| %>
 <div class="clear">
   <h2>Edit this Prediction</h2>
-  <%= f.text_area :description, :label => 'What do you think will happen?' %>
-  <%= f.text_field :deadline_text, :label => 'When you will know?', :trailing_content => link_to('Help', '#date-help', :class => 'help facebox'), :preview => true, class: 'deadline_text' %>
+  <%= f.text_area :description, label: 'What do you think will happen?' %>
+  <%= f.text_field :deadline_text, label: 'When you will know?', trailing_content: link_to('Help', '#date-help', class: 'help facebox'), preview: true, class: 'deadline_text' %>
   <%= f.select_field :visibility, raw(Visibility.select_options_html((current_user.try(:groups) || []), @prediction.visibility, @prediction.group_id)), label: 'Visibility' %>
-  <p class='note'><%= render :partial => 'private_note' %></p>
+  <p class='note'><%= render 'private_note' %></p>
   <%= f.submit 'Save changes' %>
 </div>
 <% end %>
