@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :lookup_user, only: %i[show update settings due_for_judgement statistics]
   before_action :authenticate_user!, only: %i[settings update generate_api_token]
   before_action :user_must_be_current_user, only: %i[settings update]
-  before_action :allow_iframe_requests, only: [:statistics]
+  before_action :allow_iframe_requests, only: :statistics
 
   def show
     @title = "Most recent predictions by #{@user}"
