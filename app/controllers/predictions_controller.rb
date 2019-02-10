@@ -44,7 +44,8 @@ class PredictionsController < ApplicationController
     visibility = current_user.try(:visibility_default) || 'visible_to_everyone'
     group_id = current_user.try(:group_default_id)
     @prediction = Prediction.new(creator: current_user, visibility: visibility, group_id: group_id)
-    @responses = Response.recent(limit: 25).includes(prediction: :judgements, user: nil)
+    @responses = Response.recent(limit: 25)
+      .includes(prediction: %i[prediction_group judgements], user: nil)
     @title = 'How sure are you?'
     @filter = 'popular'
     @predictions = Prediction.popular.limit(5)

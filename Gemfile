@@ -39,6 +39,7 @@ gem 'sentry-raven'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'bullet'
   gem 'cap-deploy-tagger'
   gem 'capistrano', '~> 3.5.0'
   gem 'capistrano-bundler', require: false
