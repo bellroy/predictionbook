@@ -9,7 +9,7 @@ xml.rss(version: '2.0') do
     @responses.each do |response|
       xml.item do
         xml.title "#{response.user} on “#{response.prediction.description_with_group}”"
-        xml.description render(partial: 'responses/response', locals: { response: response })
+        xml.description render(partial: 'responses/response', response: response )
         xml.pubDate response.created_at.to_s(:rfc822)
         xml.guid "response_#{response.id}", isPermaLink: false
       end

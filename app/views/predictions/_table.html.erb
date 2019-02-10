@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-  <%- predictions.each do |prediction| -%>
+  <% predictions.each do |prediction| %>
     <tr>
       <td><%= show_user(prediction.creator) %></td>
       <td><%= link_to TitleTagPresenter.new(prediction.description_with_group).tag, prediction_path(prediction) %></td>
@@ -24,6 +24,6 @@
       <td><%= confidence_and_count(prediction) %></td>
       <td><%= outcome(prediction) %></td>
     </tr>
-  <%- end -%>
+  <% end %>
   </tbody>
 </table>

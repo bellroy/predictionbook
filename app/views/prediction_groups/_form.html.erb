@@ -1,7 +1,7 @@
 
-<%= form_for(@prediction_group, :html => { :honeypot => true }) do |f| %>
-  <%= f.text_field :description, :label => "Start a sentence that each of your predictions will complete (e.g. My factory's total widget production will be)" %>
-  <p class='note'><%= render :partial => 'predictions/private_note' %></p>
+<%= form_for(@prediction_group, html: { honeypot: true }) do |f| %>
+  <%= f.text_field :description, label: "Start a sentence that each of your predictions will complete (e.g. My factory's total widget production will be)" %>
+  <p class='note'><%= render 'predictions/private_note' %></p>
 
   <div class='prediction-group-predictions'>
     <% @prediction_group.predictions.each_with_index do |prediction, index| %>
@@ -9,9 +9,9 @@
         <h2>Prediction <%= index + 1 %></h2>
         <%= f.hidden_field "prediction_#{index}_id" %>
         <div class='prediction-group-prediction-description'>
-          <%= f.text_area "prediction_#{index}_description", :label => 'What do you think will (or won\'t) happen?' %>
+          <%= f.text_area "prediction_#{index}_description", label: 'What do you think will (or won\'t) happen?' %>
         </div>
-        <%= f.confidence_field "prediction_#{index}_initial_confidence", :label => 'What\'s your estimate of this happening?' %>
+        <%= f.confidence_field "prediction_#{index}_initial_confidence", label: 'What\'s your estimate of this happening?' %>
       </div>
     <% end %>
   </div>
@@ -20,11 +20,11 @@
 
   <p>
 
-  <%= f.text_field :deadline_text, :label => 'When will you know?', :trailing_content => link_to('Help', '#date-help', :class => 'help facebox'), :preview => true, class: 'deadline_text' %>
-  <%= f.check_box :notify_creator, :label => 'Email me when I should know the outcome' %>
-  <%- unless !current_user.present? || current_user.has_email? -%>
+  <%= f.text_field :deadline_text, label: 'When will you know?', trailing_content: link_to('Help', '#date-help', class: 'help facebox'), preview: true, class: 'deadline_text' %>
+  <%= f.check_box :notify_creator, label: 'Email me when I should know the outcome' %>
+  <% unless !current_user.present? || current_user.has_email? %>
     <p>(Email will not be sent until you <%= link_to "set your email", settings_user_path(current_user) %>)</p>
-  <%- end -%>
+  <% end %>
   <%= f.select_field :visibility, raw(Visibility.select_options_html((current_user.try(:groups) || []), @prediction_group.visibility, @prediction_group.group_id)), label: 'Visibility' %>
 
   <p>

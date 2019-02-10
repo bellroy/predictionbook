@@ -1,35 +1,69 @@
 # frozen_string_literal: true
 
 class Prediction < ApplicationRecord
-  attr_reader :notify_creator
+  # == Constants ============================================================
+  DEFAULT_INCLUDES = { judgements: :user, responses: nil, creator: nil, prediction_group: nil,
+                       group: nil }.freeze
 
+  # == Attributes ===========================================================
+  attr_reader :notify_creator
+  attr_readonly :uuid, :creator_id
+  attr_writer :initial_confidence
+
+  delegate :comments, to: :responses
+  delegate :wagers, to: :responses
+
+  enum visibility: Visibility::VALUES
+
+  # == Extensions ===========================================================
+  class DuplicateRecord < ActiveRecord::RecordInvalid; end
+
+  # == Relationships ========================================================
+  has_many :deadline_notifications, dependent: :destroy
+  has_many :judgements,             dependent: :destroy
+  has_many :response_notifications, dependent: :destroy
+  has_many :responses,              dependent: :destroy, autosave: true
   has_many :versions, autosave: true, class_name: PredictionVersion.name, dependent: :destroy
 
+  belongs_to :creator, class_name: 'User'
   belongs_to :group
   belongs_to :prediction_group
 
-  enum visibility: Visibility::VALUES
+  # == Validations ==========================================================
+  validates :description, length: { maximum: 255, message: 'Keep your description under 255 characters in length' }
+  validates :deadline, presence: { message: "When will you know you're right?" }
+  validates :creator, presence: { message: 'Who are you?' }
+  validates :description, presence: { message: 'What are you predicting?' }
+  validates :initial_confidence, presence: { message: 'How sure are you?', on: :create }
+  validate :confidence_on_response, on: :create
+  validate :bound_deadline
+
+  # == Scopes ===============================================================
+  scope :not_withdrawn, -> { where(withdrawn: false) }
+
+  # == Callbacks ============================================================
+  after_initialize do
+    self.uuid ||= UUIDTools::UUID.random_create.to_s if has_attribute?(:uuid)
+  end
+
+  before_validation(on: :create) do
+    @initial_response ||= responses.build(prediction: self, confidence: initial_confidence,
+                                          user: creator)
+
+    deadline_notifications.build(prediction: self, user: creator) if notify_creator
+  end
+
+  after_validation do
+    errors.add(:deadline_text, errors[:deadline])
+  end
 
   before_save :create_version_if_required
   after_save :synchronise_group_visibility_and_deadline
 
-  def create_version_if_required
-    PredictionVersion.create_from_current_prediction_if_required(self)
-    true # Never halt save
-  end
-
-  class DuplicateRecord < ActiveRecord::RecordInvalid; end
-
-  belongs_to :creator, class_name: 'User'
-
+  # == Class Methods ========================================================
   def self.parse_deadline(date)
     Chronic.parse(date, context: :future)
   end
-
-  scope :not_withdrawn, -> { where(withdrawn: false) }
-
-  DEFAULT_INCLUDES = { judgements: :user, responses: nil, creator: nil, prediction_group: nil,
-                       group: nil }.freeze
 
   def self.unjudged
     not_withdrawn
@@ -68,37 +102,11 @@ class Prediction < ApplicationRecord
       .group('predictions.id')
   end
 
-  belongs_to :creator, class_name: 'User'
+  # == Instance Methods =====================================================
 
-  has_many :deadline_notifications, dependent: :destroy
-  has_many :response_notifications, dependent: :destroy
-  has_many :judgements,             dependent: :destroy
-  has_many :responses,              dependent: :destroy, autosave: true
-
-  delegate :wagers, to: :responses
-  delegate :comments, to: :responses
-
-  validates :description, length: { maximum: 255, message: 'Keep your description under 255 characters in length' }
-  validates :deadline, presence: { message: "When will you know you're right?" }
-  validates :creator, presence: { message: 'Who are you?' }
-  validates :description, presence: { message: 'What are you predicting?' }
-  validates :initial_confidence, presence: { message: 'How sure are you?', on: :create }
-  validate :confidence_on_response, on: :create
-  validate :bound_deadline
-
-  after_validation do
-    errors.add(:deadline_text, errors[:deadline])
-  end
-
-  after_initialize do
-    self.uuid ||= UUIDTools::UUID.random_create.to_s if has_attribute?(:uuid)
-  end
-
-  before_validation(on: :create) do
-    @initial_response ||= responses.build(prediction: self, confidence: initial_confidence,
-                                          user: creator)
-
-    deadline_notifications.build(prediction: self, user: creator) if notify_creator
+  def create_version_if_required
+    PredictionVersion.create_from_current_prediction_if_required(self)
+    true # Never halt save
   end
 
   def initialize(attributes = nil)
@@ -123,15 +131,10 @@ class Prediction < ApplicationRecord
     raise
   end
 
-  attr_readonly :uuid, :creator_id
-
   def initial_confidence
     @initial_confidence || responses.first.try(:confidence)
   end
 
-  attr_writer :initial_confidence
-
-  # attr_reader :deadline_text
   def deadline_text
     @deadline_text || (deadline ? deadline.localtime.to_s(:db) : '')
   end

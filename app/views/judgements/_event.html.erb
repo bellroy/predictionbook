@@ -1,10 +1,10 @@
-<%- unless event.worthless? -%>
-<% if event.user -%>
-  <%= show_user(event.user) -%>
+<% unless event.worthless? %>
+<% if event.user %>
+  <%= show_user(event.user) %>
 <% else %>
   Anonymous
 <% end %>
 &nbsp; judged this prediction
-<span class='outcome'><%= event.outcome_in_words -%></span>
-<%= TimeInContentTagPresenter.new(event.created_at, 'created_at').tag -%>.
-<%- end -%>
+<span class='outcome'><%= event.outcome_in_words %></span>
+<%= TimeInContentTagPresenter.new(event.created_at, 'created_at').tag %>.
+<% end %>

@@ -5,5 +5,5 @@
 </h1>
 
 <% @prediction_group.predictions.each do |prediction| %>
-  <%= render partial: 'predictions/prediction', locals: { prediction: prediction } %>
+  <%= render 'predictions/prediction', prediction: prediction  %>
 <% end %>
