@@ -11,6 +11,7 @@ set :keep_releases,       5
 set :scm, :git
 set :git_strategy, Capistrano::Git::SubmoduleStrategy
 set :application_label,   'PredictionBook'
+set :slack_webhook_urls,  ['https://hooks.slack.com/services/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']
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 
 namespace :deploy do
