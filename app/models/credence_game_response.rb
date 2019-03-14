@@ -6,10 +6,10 @@ class CredenceGameResponse < ApplicationRecord
   belongs_to :first_answer, class_name: 'CredenceAnswer'
   belongs_to :second_answer, class_name: 'CredenceAnswer'
 
-  validates :credence_game_id, presence: true
-  validates :credence_question_id, presence: true
-  validates :first_answer_id, presence: true
-  validates :second_answer_id, presence: true
+  validates :credence_game, presence: true
+  validates :credence_question, presence: true
+  validates :first_answer, presence: true
+  validates :second_answer, presence: true
   validates :correct_index, presence: true
   validates :answer_credence, inclusion: { in: 1..99, message: 'must be between 1 and 99' },
                               allow_nil: true

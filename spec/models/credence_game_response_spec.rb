@@ -7,9 +7,12 @@ describe CredenceGameResponse do
   let(:given_answer) { 0 }
   let(:answer_credence) { 50 }
   let(:response) do
-    FactoryBot.build(:credence_game_response, correct_index: correct_index,
-                                              given_answer: given_answer,
-                                              answer_credence: answer_credence)
+    FactoryBot.build(
+      :credence_game_response,
+      correct_index: correct_index,
+      given_answer: given_answer,
+      answer_credence: answer_credence
+    )
   end
 
   describe '#answer_correct?' do
