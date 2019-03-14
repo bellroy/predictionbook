@@ -84,8 +84,8 @@ FactoryBot.define do
   end
 
   factory :credence_game_response do
-    association(:credence_game)
-    association(:credence_question)
+    association(:credence_game, factory: :credence_game)
+    association(:credence_question, factory: :credence_question)
     correct_index { 0 }
     asked_at { Time.zone.now }
     given_answer { nil }
