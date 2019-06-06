@@ -1,4 +1,4 @@
-server 'tangelo-staging.trikeapps.com', user: 'predictionbook-staging', roles: [:app, :web, :db]
+server 'kiwi-staging.trikeapps.com', user: 'predictionbook-staging', roles: [:app, :web, :db]
 
 set :application,            'predictionbook-staging'
 set :branch,                 'master'

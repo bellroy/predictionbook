@@ -7,9 +7,8 @@ require 'capistrano/rails'
 require 'capistrano/bundler'
 require 'capistrano/git-submodule-strategy'
 require 'whenever/capistrano'
-import 'lib/capistrano/tasks/trike/secrets.rake'
-import 'lib/capistrano/tasks/trike/precheck.rake'
-Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
+
+Dir.glob('lib/capistrano/tasks/trike/*.rake').each { |r| import r }
 # Includes tasks from other gems included in your Gemfile
 #
 # For documentation on these, see for example:
