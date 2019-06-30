@@ -1,5 +1,5 @@
 <h1 class="<%= @prediction.readable_outcome %>">
-  <% if current_user && current_user.authorized_for?(@prediction) %>
+  <% if current_user&.authorized_for?(@prediction, 'edit') %>
     <%= link_to 'Edit', @edit_path, class: 'edit' %>
   <% end %>
   <%= TitleTagPresenter.new(@prediction.description_with_group).tag %>
