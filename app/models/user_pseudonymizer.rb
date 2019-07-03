@@ -15,6 +15,8 @@ class UserPseudonymizer
       update_creator_associations
       update_user_associations
     end
+
+    true
   end
 
   private

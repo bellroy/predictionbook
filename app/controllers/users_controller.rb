@@ -1,10 +1,19 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :lookup_user, only: %i[show update settings due_for_judgement statistics]
-  before_action :authenticate_user!, only: %i[settings update generate_api_token]
-  before_action :user_must_be_current_user, only: %i[settings update]
+  before_action :lookup_user, only: %i[destroy show update settings due_for_judgement statistics]
+  before_action :authenticate_user!, only: %i[destroy settings update generate_api_token]
+  before_action :user_must_be_current_user, only: %i[destroy settings update]
   before_action :allow_iframe_requests, only: :statistics
+
+  def destroy
+    if current_user.pseudonymize! && current_user.destroy
+      redirect_to root_url
+    else
+      flash[:error] = 'The user record failed to be destroyed!'
+      redirect_to settings_user_url(current_user)
+    end
+  end
 
   def show
     @title = "Most recent predictions by #{@user}"
