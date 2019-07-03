@@ -65,6 +65,10 @@ FactoryBot.define do
     timezone { 'Melbourne' }
     confirmed_at { 1.day.ago }
     id { Random.rand(100_000) }
+
+    trait :pseudonymous do
+      login { User::PSEUDONYMOUS_LOGIN }
+    end
   end
 
   factory :deadline_notification do
