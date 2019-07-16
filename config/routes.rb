@@ -6,7 +6,7 @@ PredictionBook::Application.routes.draw do
   devise_for :users
 
   # then the other stuff having to do with users
-  resources :users, only: %i[show update] do
+  resources :users, only: %i[destroy show update ] do
     # nested resources come before member/collection routes
     resources :deadline_notifications
     member do
