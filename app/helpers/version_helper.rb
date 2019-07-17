@@ -7,7 +7,7 @@ module VersionHelper
 
     prev_attrs = previous_version.attributes
     columns = PredictionVersion.versioned_prediction_columns.map(&:to_s)
-    raw_diff = HashDiff.diff(prev_attrs, version.attributes)
+    raw_diff = Hashdiff.diff(prev_attrs, version.attributes)
     diff = raw_diff.select { |array| columns.include?(array[1]) }
     diff.map { |array| changed_detail(array[1], array[3], array[2]) }
   end
