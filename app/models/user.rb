@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  PSEUDONYMOUS_LOGIN = 'PseudonymousUser'
+
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable,
          :validatable, :confirmable
 
@@ -36,6 +38,10 @@ class User < ApplicationRecord
                       allow_nil: true
                     }
 
+  def self.pseudonymous_user
+    find_by(login: PSEUDONYMOUS_LOGIN)
+  end
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     login = conditions.delete(:login)
@@ -50,6 +56,10 @@ class User < ApplicationRecord
 
   def self.generate_api_token
     SecureRandom.urlsafe_base64
+  end
+
+  def pseudonymize!
+    UserPseudonymizer.call(self)
   end
 
   def predictions
