@@ -46,7 +46,7 @@ describe User do
     end
   end
 
-  describe 'authorized_for?' do
+  describe '#authorized_for?' do
     subject { user.authorized_for?(prediction, action) }
 
     let(:user) { described_class.new }
@@ -105,6 +105,59 @@ describe User do
 
           it { is_expected.to be false }
         end
+      end
+    end
+  end
+
+  describe '#pseudonymize!' do
+    let!(:pseudonymous_user) { FactoryBot.create(:user, :pseudonymous) }
+    let!(:user) { FactoryBot.create(:user) }
+
+    context 'for a user with a judgement' do
+      let(:judgement) { FactoryBot.create(:judgement, user: user) }
+
+      it 'results in a judgement that references the pseudonymous user' do
+        id = judgement.id
+        user.pseudonymize!
+        expect(Judgement.find(id).user).to eq(pseudonymous_user)
+      end
+    end
+
+    context 'for a user with a prediction' do
+      let(:prediction) { FactoryBot.create(:prediction, creator: user) }
+
+      it 'results in a prediction that references the pseudonymous user' do
+        id = prediction.id
+        user.pseudonymize!
+        expect(Prediction.find(id).creator).to eq(pseudonymous_user)
+      end
+    end
+
+    context 'for a user with a prediction version' do
+      let(:prediction) { FactoryBot.create(:prediction, creator: user) }
+      let(:prediction_version) do
+        PredictionVersion.create(
+          creator_id: prediction.creator.id,
+          prediction: prediction,
+          version: prediction.version + 1
+        )
+      end
+
+      it 'results in a version that references the pseudonymous user' do
+        id = prediction_version.id
+        user.pseudonymize!
+        expect(PredictionVersion.find(id).creator_id)
+          .to eq(pseudonymous_user.id)
+      end
+    end
+
+    context 'for a user with a response' do
+      let(:response) { FactoryBot.create(:response, user: user) }
+
+      it 'results in a response that references the pseudonymous user' do
+        id = response.id
+        user.pseudonymize!
+        expect(Response.find(id).user).to eq(pseudonymous_user)
       end
     end
   end

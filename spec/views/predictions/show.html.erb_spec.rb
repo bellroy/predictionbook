@@ -24,6 +24,36 @@ describe 'predictions/show.html.erb' do
     expect(rendered).to have_css('h1', text: 'Prediction Heading')
   end
 
+  context 'when the user is' do
+    context 'not authorized to edit the prediction' do
+      before do
+        allow(user)
+          .to receive(:authorized_for?)
+          .with(prediction, 'edit')
+          .and_return(false)
+        render
+      end
+
+      it 'will not render the edit button' do
+        expect(rendered).not_to have_css('a', class: 'edit')
+      end
+    end
+
+    context 'authorized to edit the prediction' do
+      before do
+        allow(user)
+          .to receive(:authorized_for?)
+          .with(prediction, 'edit')
+          .and_return(true)
+        render
+      end
+
+      it 'will render the edit button' do
+        expect(rendered).to have_css('a', class: 'edit')
+      end
+    end
+  end
+
   describe 'creation time' do
     before do
       @time = 3.days.ago

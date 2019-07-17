@@ -58,6 +58,19 @@ describe UsersController do
     end
   end
 
+  describe '#destroy' do
+    subject(:destroy)   { delete :destroy, params: { id: user_id } }
+    let(:user_id) { logged_in_user.id }
+
+    it "pseudonymizes the user's associated records and deletes the account" do
+      FactoryBot.create(:user, :pseudonymous)
+      allow(logged_in_user).to receive(:pseudonymize!).and_return(true)
+      destroy
+      expect(response).to redirect_to root_path
+      expect(User.find_by(id: user_id)).to_not be
+    end
+  end
+
   describe 'users setting page' do
     subject(:settings) { get :settings, params: { id: user_id } }
 
