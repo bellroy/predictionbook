@@ -96,13 +96,7 @@ class User < ApplicationRecord
   end
 
   def authorized_for?(prediction, action = 'show')
-    is_creator = self == prediction.creator
-    user_group = groups.find { |ug| ug.id == prediction.group_id }
-    user_group_role = user_group.user_role(self) if user_group.present?
-    return true if is_creator || admin? || user_group_role == 'admin'
-    return false unless %w[index show].include?(action)
-
-    prediction.visible_to_everyone? || (prediction.visible_to_group? && user_group.present?)
+    UserAuthorizer.call(user: self, prediction: prediction, action: action)
   end
 
   def to_param
