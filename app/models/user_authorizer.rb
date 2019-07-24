@@ -13,7 +13,7 @@ class UserAuthorizer
     return true if privileged_user?
     return false unless read_only_action?
 
-    prediction.visible_to_everyone? || accessible_through_group?
+    prediction.visible_to_everyone? || accessible_through_group? || already_responded?
   end
 
   private
@@ -24,12 +24,20 @@ class UserAuthorizer
     prediction.visible_to_group? && user_group.present?
   end
 
+  def admin_role?
+    user_group_role == 'admin'
+  end
+
+  def already_responded?
+    prediction.responses.where(user: user).count.positive?
+  end
+
   def creator?
     user == prediction.creator
   end
 
   def privileged_user?
-    creator? || user.admin? || user_group_role == 'admin'
+    creator? || user.admin? || admin_role?
   end
 
   def read_only_action?
