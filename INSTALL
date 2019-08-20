@@ -25,7 +25,3 @@ $ fg
 
 * In file "config/credentials.yml"
   + replace [your_analytics_tracker_id] with your Google Analytics tracker id
-
-=== OSX "Can't connect to local MySQL server through socket" Error
-
-* add "host: 127.0.0.1" to the database.yml for local
