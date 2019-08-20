@@ -13,13 +13,6 @@ env:
   global:
     - RACK_ENV=test
 
-addons:
-  apt:
-    packages:
-    - mysql-server-5.6
-    - mysql-client-core-5.6
-    - mysql-client-5.6
-
 before_install:
   - cp config/database.yml.example config/database.yml
   - cp config/credentials.yml.example config/credentials.yml
