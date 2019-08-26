@@ -83,17 +83,15 @@ GEM
       uniform_notifier (~> 1.11)
     byebug (11.0.1)
     cap-deploy-tagger (0.2.0)
-    capistrano (3.5.0)
+    capistrano (3.11.0)
       airbrussh (>= 1.0.0)
-      capistrano-harrow
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
     capistrano-bundler (1.6.0)
       capistrano (~> 3.1)
-    capistrano-git-submodule-strategy (0.1.23)
-      capistrano (>= 3.1.0, < 3.7)
-    capistrano-harrow (0.5.3)
+    capistrano-git-submodule-strategy (0.1.22)
+      capistrano (~> 3.1)
     capistrano-rails (1.4.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
@@ -332,17 +330,16 @@ GEM
     ruby_parser (3.13.1)
       sexp_processor (~> 4.9)
     rubyzip (1.2.3)
-    sass (3.7.4)
-      sass-listen (~> 4.0.0)
-    sass-listen (4.0.0)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-    sass-rails (5.0.7)
-      railties (>= 4.0.0, < 6)
-      sass (~> 3.1)
-      sprockets (>= 2.8, < 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
-      tilt (>= 1.1, < 3)
+    sass-rails (6.0.0)
+      sassc-rails (~> 2.1, >= 2.1.1)
+    sassc (2.1.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     selenium-webdriver (3.142.3)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
@@ -407,7 +404,7 @@ DEPENDENCIES
   binding_of_caller
   bullet
   cap-deploy-tagger
-  capistrano (~> 3.5.0)
+  capistrano (>= 3.5.0)
   capistrano-bundler
   capistrano-git-submodule-strategy
   capistrano-rails
@@ -420,7 +417,7 @@ DEPENDENCIES
   email_spec
   exception_notification
   factory_bot
-  ffaker
+  ffaker (~> 2.11.0)
   formatize!
   guard-rspec
   haml-rails
@@ -439,7 +436,7 @@ DEPENDENCIES
   pry-byebug
   puma
   rack-cors
-  rails
+  rails (~> 5.0)
   rails-controller-testing
   rails-observers
   rb-fsevent
