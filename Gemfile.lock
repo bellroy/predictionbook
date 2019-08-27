@@ -83,15 +83,17 @@ GEM
       uniform_notifier (~> 1.11)
     byebug (11.0.1)
     cap-deploy-tagger (0.2.0)
-    capistrano (3.11.0)
+    capistrano (3.6.1)
       airbrussh (>= 1.0.0)
+      capistrano-harrow
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
     capistrano-bundler (1.6.0)
       capistrano (~> 3.1)
-    capistrano-git-submodule-strategy (0.1.22)
-      capistrano (~> 3.1)
+    capistrano-git-submodule-strategy (0.1.23)
+      capistrano (>= 3.1.0, < 3.7)
+    capistrano-harrow (0.5.3)
     capistrano-rails (1.4.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
@@ -404,7 +406,7 @@ DEPENDENCIES
   binding_of_caller
   bullet
   cap-deploy-tagger
-  capistrano (>= 3.5.0)
+  capistrano (~> 3.6.0)
   capistrano-bundler
   capistrano-git-submodule-strategy
   capistrano-rails
