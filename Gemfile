@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'devise'
 gem 'haml-rails'
 gem 'jquery-rails'
-gem 'rails'
+gem 'rails', '~> 5.0'
 gem 'rails-observers'
 
 # Models
@@ -41,7 +41,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'bullet'
   gem 'cap-deploy-tagger'
-  gem 'capistrano', '~> 3.5.0'
+  gem 'capistrano', '>= 3.5.0'
   gem 'capistrano-bundler', require: false
   gem 'capistrano-git-submodule-strategy'
   gem 'capistrano-rails'
@@ -69,7 +69,7 @@ end
 group :test do
   gem 'email_spec'
   gem 'factory_bot'
-  gem 'ffaker'
+  gem 'ffaker', '~> 2.11.0' # 2.12 generates emails with apostrophes in them (!!!)
   gem 'guard-rspec'
   gem 'launchy'
   gem 'rails-controller-testing'
