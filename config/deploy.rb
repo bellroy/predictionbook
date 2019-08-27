@@ -1,4 +1,4 @@
-lock '3.5.0'
+lock '3.6.1'
 
 set :repo_url,            'git@github.com:tricycle/predictionbook-deploy.git'
 set :secrets_repository,  'git@git.trikeapps.com:settings/predictionbook.git'
