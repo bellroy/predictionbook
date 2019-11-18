@@ -13,8 +13,7 @@ jobs:
       with:
         ruby-version: 2.6.3
     - name: Install system packages
-      run: |
-        command -v bundler || gem install bundler
+      run: command -v bundler || gem install bundler:2.0.2
     - name: Install gems
       run: bundle install --jobs $(nproc) --retry 3
     - name: Run RSpec test suite
