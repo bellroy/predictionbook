@@ -6,6 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Install Linux dependencies
+      run: apt-get update -qq && apt-get install -y libpq-dev
     - name: Checkout branch
       uses: actions/checkout@v1
     - name: Set up Ruby
