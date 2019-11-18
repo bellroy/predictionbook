@@ -26,15 +26,15 @@ jobs:
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6.3
-    - name: Install system packages
-      run: (bundler -v | grep "2.0.2") || gem install bundler:2.0.2
     - name: Cache gems
       uses: actions/cache@v1
       with:
         path: vendor/bundle
-        key: ${{ runner.OS }}-gem-cache-${{ hashFiles('Gemfile.lock') }}
+        key: ${{ runner.OS }}-gem-cache-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
           ${{ runner.OS }}-gem-cache-
+    - name: Install system packages
+      run: (bundler -v | grep "2.0.2") || gem install bundler:2.0.2
     - name: Install gems
       run: bundle install --jobs $(nproc) --retry 3 --without metrics --deployment
     - name: Set database settings
@@ -50,4 +50,5 @@ jobs:
     env:
       RAILS_ENV: test
       POSTGRES_HOST: localhost
+      POSTGRES_PASSWORD: postgres
       POSTGRES_PORT: 5432
