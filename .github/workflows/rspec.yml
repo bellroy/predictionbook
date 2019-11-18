@@ -1,0 +1,21 @@
+name: RSpec Test Suite
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout branch
+      uses: actions/checkout@v1
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.3
+    - name: Install system packages
+      run: |
+        command -v bundler || gem install bundler
+    - name: Install gems
+      run: bundle install --jobs $(nproc) --retry 3
+    - name: Run RSpec test suite
+      run: bundle exec rspec spec
