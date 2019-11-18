@@ -52,4 +52,4 @@ jobs:
     env:
       RAILS_ENV: test
       POSTGRES_HOST: localhost
-      POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+      POSTGRES_PORT: ${{ build.services.postgres.ports[5432] }}
