@@ -14,9 +14,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
         ports:
-          # will assign a random free host port
-          - 5432/tcp
-        # needed because the postgres container does not provide a healthcheck
+          - 5432/5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
@@ -52,4 +50,4 @@ jobs:
     env:
       RAILS_ENV: test
       POSTGRES_HOST: localhost
-      POSTGRES_PORT: ${{ build.services.postgres.ports[5432] }}
+      POSTGRES_PORT: 5432
