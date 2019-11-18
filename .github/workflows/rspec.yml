@@ -10,7 +10,7 @@ jobs:
       postgres:
         image: postgres:10.10
         env:
-          POSTGRES_USER: postgres
+          POSTGRES_USER: runner
           POSTGRES_DB: postgres
         ports:
           - 5432:5432
@@ -50,4 +50,3 @@ jobs:
       RAILS_ENV: test
       PGHOST: localhost
       PGPORT: 5432
-      PGUSER: postgres
