@@ -48,5 +48,6 @@ jobs:
       run: bundle exec rspec spec
     env:
       RAILS_ENV: test
-      POSTGRES_HOST: localhost
-      POSTGRES_PORT: 5432
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
