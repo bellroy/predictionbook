@@ -37,7 +37,7 @@ jobs:
     - name: Create cache directory
       run: mkdir -p tmp/cache
     - name: Load database structure
-      run: bundle exec rake db:create schema:load
+      run: bundle exec rake db:create db:schema:load
     - name: Run RSpec test suite
       run: bundle exec rspec spec
       env:
