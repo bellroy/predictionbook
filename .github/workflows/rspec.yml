@@ -28,10 +28,6 @@ jobs:
         restore-keys: "${{ runner.OS }}-gem-cache-\n"
     - name: Install bundler
       run: (bundler -v | grep "2.0.2") || gem install bundler:2.0.2
-    - run: 'echo "---" > ~/.gem/credentials && echo ":github: Bearer ${{ secrets.TRIKE_DEPLOY_ACCESS_TOKEN
-        }}" >> ~/.gem/credentials'
-    - run: bundle config https://rubygems.pkg.github.com/tricycle trike-deploy:${{
-        secrets.TRIKE_DEPLOY_ACCESS_TOKEN }}
     - name: Install gems
       run: bundle install --jobs $(nproc) --retry 3 --without metrics --deployment
     - name: Create cache directory
