@@ -1,13 +1,20 @@
 ---
 name: RSpec Test Suite
 on:
-- push
+  push:
+    branches-ignore:
+    - refs/tags/*_staging
+    - refs/tags/*_production
 jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
     - name: Checkout branch
       uses: actions/checkout@v1
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
     - name: Install Linux dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y libpq-dev
     - name: Set up Ruby
@@ -44,11 +51,11 @@ jobs:
       env:
         SLACK_BOT_TOKEN: "${{ secrets.SLACK_BOT_TOKEN }}"
       with:
-        args: '{\"channel\":\"C33574SJJ\",\"text\":\"*BUILD FAILURE*: ${{ github.repository
-          }}\n*${{ github.actor }}* made some changes, hoping that they''d pass...
-          those changes now are coming back to bite them in the... :boom:\", \"attachments\":
-          [{ \"fallback\": \"Failure summary\", \"color\": \"#ff0000\", \"fields\":
-          [{ \"title\": \"What broke\", \"value\": \"https://github.com/${{ github.repository
+        args: '{\"channel\":\"C33574SJJ\",\"text\":\"* ${{ github.repository }} BUILD
+          FAILURE*\", \"attachments\": [{ \"fallback\": \"Failure summary\", \"color\":
+          \"#ff0000\", \"fields\": [{\"title\": \"Branch\", \"value\":\"${{ steps.extract_branch.outputs.branch
+          }}\"}, {\"title\": \"Who broke it\", \"value\":\"${{ github.actor }}\"},
+          { \"title\": \"Build output\", \"value\": \"https://github.com/${{ github.repository
           }}/commit/${{ github.sha }}/checks\", \"short\": false }]}]}'
     services:
       postgres:
