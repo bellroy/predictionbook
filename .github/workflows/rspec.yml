@@ -44,7 +44,7 @@ jobs:
     - name: Run RSpec test suite
       run: bundle exec rspec spec
       env:
-        METRICS: 1
+        METRICS: '1'
     - name: Post to Slack if build fails
       if: failure()
       uses: pullreminders/slack-action@master
