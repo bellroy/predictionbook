@@ -46,7 +46,7 @@ jobs:
       env:
         METRICS: '1'
     - name: Post to Slack if build fails
-      if: failure()
+      if: failure() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/stable')
       uses: pullreminders/slack-action@master
       env:
         SLACK_BOT_TOKEN: "${{ secrets.SLACK_BOT_TOKEN }}"
