@@ -1,13 +1,20 @@
 ---
-name: RSpec Test Suite
+name: Continuous Integration
 on:
-- push
+  push:
+    branches-ignore:
+    - refs/tags/*_staging
+    - refs/tags/*_production
 jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
     - name: Checkout branch
       uses: actions/checkout@v1
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
     - name: Install Linux dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y libpq-dev
     - name: Set up Ruby
@@ -28,10 +35,6 @@ jobs:
         restore-keys: "${{ runner.OS }}-gem-cache-\n"
     - name: Install bundler
       run: (bundler -v | grep "2.0.2") || gem install bundler:2.0.2
-    - run: 'echo "---" > ~/.gem/credentials && echo ":github: Bearer ${{ secrets.TRIKE_DEPLOY_ACCESS_TOKEN
-        }}" >> ~/.gem/credentials'
-    - run: bundle config https://rubygems.pkg.github.com/tricycle trike-deploy:${{
-        secrets.TRIKE_DEPLOY_ACCESS_TOKEN }}
     - name: Install gems
       run: bundle install --jobs $(nproc) --retry 3 --without metrics --deployment
     - name: Create cache directory
@@ -41,22 +44,22 @@ jobs:
     - name: Run RSpec test suite
       run: bundle exec rspec spec
       env:
-        METRICS: 1
+        METRICS: '1'
     - name: Post to Slack if build fails
-      if: failure()
+      if: failure() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/stable')
       uses: pullreminders/slack-action@master
       env:
         SLACK_BOT_TOKEN: "${{ secrets.SLACK_BOT_TOKEN }}"
       with:
-        args: '{\"channel\":\"C33574SJJ\",\"text\":\"*BUILD FAILURE*: ${{ github.repository
-          }}\n*${{ github.actor }}* made some changes, hoping that they''d pass...
-          those changes now are coming back to bite them in the... :boom:\", \"attachments\":
-          [{ \"fallback\": \"Failure summary\", \"color\": \"#ff0000\", \"fields\":
-          [{ \"title\": \"What broke\", \"value\": \"https://github.com/${{ github.repository
+        args: '{\"channel\":\"C33574SJJ\",\"text\":\"* ${{ github.repository }} BUILD
+          FAILURE*\", \"attachments\": [{ \"fallback\": \"Failure summary\", \"color\":
+          \"#ff0000\", \"fields\": [{\"title\": \"Branch\", \"value\":\"${{ steps.extract_branch.outputs.branch
+          }}\"}, {\"title\": \"Who broke it\", \"value\":\"${{ github.actor }}\"},
+          { \"title\": \"Build output\", \"value\": \"https://github.com/${{ github.repository
           }}/commit/${{ github.sha }}/checks\", \"short\": false }]}]}'
     services:
       postgres:
-        image: postgres:10.10
+        image: postgres:11.5
         env:
           POSTGRES_USER: runner
           POSTGRES_DB: postgres
