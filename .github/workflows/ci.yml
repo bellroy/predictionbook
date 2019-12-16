@@ -1,5 +1,5 @@
 ---
-name: RSpec Test Suite
+name: Continuous Integration
 on:
   push:
     branches-ignore:
@@ -59,7 +59,7 @@ jobs:
           }}/commit/${{ github.sha }}/checks\", \"short\": false }]}]}'
     services:
       postgres:
-        image: postgres:10.10
+        image: postgres:11.5
         env:
           POSTGRES_USER: runner
           POSTGRES_DB: postgres
