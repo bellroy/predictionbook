@@ -81,11 +81,6 @@ group :assets do
   gem 'uglifier'
 end
 
-group :linux, :production do
-  # Does not build on Mountain Lion nor is it needed on OS X
-  gem 'therubyracer'
-end
-
 group :darwin do
   gem 'rb-fsevent', require: false # OSX specific
 end
