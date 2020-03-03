@@ -1,0 +1,73 @@
+---
+name: Continuous Integration
+on:
+  push:
+    branches-ignore:
+    - refs/tags/*_staging
+    - refs/tags/*_production
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout branch
+      uses: actions/checkout@v1
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+    - name: Install Linux dependencies
+      run: sudo apt-get update -qq && sudo apt-get install -y libpq-dev
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.5
+    - run: |
+        for f in config/*.sample
+        do
+          echo "Copying $f to ${f%.*}"
+          cp $f ${f%.*}
+        done
+    - name: Cache gems
+      uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: "${{ runner.OS }}-gem-cache-${{ hashFiles('**/Gemfile.lock') }}"
+        restore-keys: "${{ runner.OS }}-gem-cache-\n"
+    - name: Install bundler
+      run: (bundler -v | grep "2.0.2") || gem install bundler:2.0.2
+    - name: Install gems
+      run: bundle install --jobs $(nproc) --retry 3 --without metrics --deployment
+    - name: Create cache directory
+      run: mkdir -p tmp/cache
+    - name: Load database structure
+      run: bundle exec rake db:create db:schema:load
+    - name: Run RSpec test suite
+      run: bundle exec rspec spec
+      env:
+        METRICS: '1'
+    - name: Post to Slack if build fails
+      if: failure() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/stable')
+      uses: pullreminders/slack-action@master
+      env:
+        SLACK_BOT_TOKEN: "${{ secrets.SLACK_BOT_TOKEN }}"
+      with:
+        args: '{\"channel\":\"C33574SJJ\",\"text\":\"* ${{ github.repository }} BUILD
+          FAILURE*\", \"attachments\": [{ \"fallback\": \"Failure summary\", \"color\":
+          \"#ff0000\", \"fields\": [{\"title\": \"Branch\", \"value\":\"${{ steps.extract_branch.outputs.branch
+          }}\"}, {\"title\": \"Who broke it\", \"value\":\"${{ github.actor }}\"},
+          { \"title\": \"Build output\", \"value\": \"https://github.com/${{ github.repository
+          }}/commit/${{ github.sha }}/checks\", \"short\": false }]}]}'
+    services:
+      postgres:
+        image: postgres:11.5
+        env:
+          POSTGRES_USER: runner
+          POSTGRES_DB: postgres
+        ports:
+        - 5432:5432
+        options: "--health-cmd pg_isready --health-interval 10s --health-timeout 5s
+          --health-retries 5"
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      RAILS_ENV: test
