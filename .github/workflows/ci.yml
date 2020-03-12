@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - name: Checkout branch
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: Extract branch name
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
