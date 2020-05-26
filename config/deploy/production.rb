@@ -1,5 +1,3 @@
-require 'cap-deploy-tagger/capistrano'
-
 server 'kiwi.trikeapps.com', user: 'predictionbook-production', roles: [:app, :web, :db]
 set :deploy_tag, Time.now.strftime('%Y%m%d%H%M')
 set :application,            'predictionbook-production'
