@@ -18,9 +18,9 @@ jobs:
     - name: Install Linux dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y libpq-dev
     - name: Set up Ruby
-      uses: actions/setup-ruby@v1
+      uses: actions/setup-ruby@v1.1.1
       with:
-        ruby-version: 2.6.5
+        ruby-version: 2.6.6
     - run: |
         for f in config/*.sample
         do
@@ -34,7 +34,7 @@ jobs:
         key: "${{ runner.OS }}-gem-cache-${{ hashFiles('**/Gemfile.lock') }}"
         restore-keys: "${{ runner.OS }}-gem-cache-\n"
     - name: Install bundler
-      run: (bundler -v | grep "2.0.2") || gem install bundler:2.0.2
+      run: (bundler -v | grep "2.1.4") || gem install bundler:2.1.4
     - name: Install gems
       run: bundle install --jobs $(nproc) --retry 3 --without metrics --deployment
     - name: Create cache directory
