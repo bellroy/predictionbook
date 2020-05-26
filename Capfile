@@ -5,8 +5,15 @@ require 'capistrano/setup'
 require 'capistrano/deploy'
 require 'capistrano/rails'
 require 'capistrano/bundler'
-require 'capistrano/git-submodule-strategy'
 require 'whenever/capistrano'
+
+# Use Git
+require 'capistrano/scm/git'
+install_plugin Capistrano::SCM::Git
+
+# Use Git with submodules
+require 'capistrano/scm/git-with-submodules'
+install_plugin Capistrano::SCM::Git::WithSubmodules
 
 Dir.glob('lib/capistrano/tasks/trike/*.rake').each { |r| import r }
 # Includes tasks from other gems included in your Gemfile

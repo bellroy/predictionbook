@@ -1,5 +1,3 @@
-lock '3.6.1'
-
 set :repo_url,            'git@github.com:tricycle/predictionbook-deploy.git'
 set :secrets_repository,  'git@git.trikeapps.com:settings/predictionbook.git'
 set :linked_dirs,         ['public/assets', 'log']
@@ -8,8 +6,6 @@ set :engine,              'passenger'
 set :deploy_to,           -> { "/srv/www/#{fetch(:application)}" }
 set :format,              :pretty
 set :keep_releases,       5
-set :scm, :git
-set :git_strategy, Capistrano::Git::SubmoduleStrategy
 set :application_label,   'PredictionBook'
 set :slack_webhook_urls,  ['https://hooks.slack.com/services/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']
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
