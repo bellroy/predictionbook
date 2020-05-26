@@ -41,10 +41,10 @@ group :development do
   gem 'binding_of_caller'
   gem 'bullet'
   gem 'cap-deploy-tagger'
-  # Capistrano 3.7 deprecates the submodule strategy
-  gem 'capistrano', '~> 3.6.0'
+  gem 'capistrano'
+  gem 'capistrano-ext'
   gem 'capistrano-bundler', require: false
-  gem 'capistrano-git-submodule-strategy'
+  gem 'capistrano-git-with-submodules'
   gem 'capistrano-rails'
   gem 'capistrano-rvm', require: false
   gem 'httparty'
