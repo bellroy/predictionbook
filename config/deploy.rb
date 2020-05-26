@@ -29,4 +29,5 @@ namespace :deploy do
 
   after :publishing, :restart
   after 'deploy:symlink:linked_dirs', :symlink_configs
+  after 'deploy:cleanup', 'deploy:tag'
 end
