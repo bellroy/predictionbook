@@ -28,7 +28,7 @@ jobs:
           cp $f ${f%.*}
         done
     - name: Cache gems
-      uses: actions/cache@v1
+      uses: actions/cache@v2
       with:
         path: vendor/bundle
         key: "${{ runner.OS }}-gem-cache-${{ hashFiles('**/Gemfile.lock') }}"
