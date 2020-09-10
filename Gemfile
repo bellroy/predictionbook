@@ -70,7 +70,7 @@ end
 group :test do
   gem 'email_spec'
   gem 'factory_bot'
-  gem 'ffaker', '~> 2.11.0' # 2.12 generates emails with apostrophes in them (!!!)
+  gem 'ffaker'
   gem 'guard-rspec'
   gem 'launchy'
   gem 'rails-controller-testing'
