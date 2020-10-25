@@ -55,7 +55,18 @@ module Api
     def build_predictions
       limit = params[:limit].to_i
       limit = DEFAULT_PREDICTIONS_LIMIT unless (1..MAXIMUM_PREDICTIONS_LIMIT).cover?(limit)
-      @predictions = Prediction.visible_to_everyone.recent.limit(limit)
+      @predictions = if params[:page_number].blank?
+                       Prediction.visible_to_everyone.recent.limit(limit)
+                     else
+                       page_number = [params[:page_number].to_i, 1].max - 1
+                       Prediction
+                        .visible_to_everyone
+                        .not_withdrawn
+                        .includes(Prediction::DEFAULT_INCLUDES)
+                        .order(created_at: :asc)
+                        .limit(limit)
+                        .offset(page_number * limit)
+                     end
     end
 
     def find_prediction
