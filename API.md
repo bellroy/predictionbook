@@ -7,7 +7,8 @@ GET http://predictionbook.com/api/predictions
 Parameter name | Value   | Description
 ---------------| --------|------------
 api_token      | string  | A token that identifies a unique user
-limit          | integer | The maximum number of predictions that will be returned (optional)
+limit          | integer | The maximum number of predictions that will be returned. Also specifies page size when the page_number parameter is present. If not specified, defaults to 100. When specified, will be set to the minimum of 1000 or the specified value (optional)
+page_number    | integer | The one-based (1 is the first page) page number of predictions that will be returned. When specified, data is returned in chronological order. When unspecified, data is returned in reverse chronological order (optional)
 
 GET http://predictionbook.com/api/predictions/:id
 
