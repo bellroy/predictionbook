@@ -14,13 +14,35 @@ describe Api::PredictionsController, type: :controller do
   describe 'GET /predictions' do
     context 'with valid API token' do
       before do
-        get :index, params: { api_token: user.api_token }
+        get :index, params: params
       end
+
+      let(:params) { { api_token: user.api_token } }
 
       specify 'works', :aggregate_failures do
         expect(response).to be_ok
         expect(response.content_type).to eq 'application/json'
         expect(response.body).to include prediction.description_with_group
+      end
+
+      context 'when specifying page_number 1 and limit 10' do
+        let(:params) { { api_token: user.api_token, page_number: 1, limit: 10 } }
+
+        specify 'works', :aggregate_failures do
+          expect(response).to be_ok
+          expect(response.content_type).to eq 'application/json'
+          expect(response.body).to include prediction.description_with_group
+        end
+      end
+
+      context 'when specifying page_number 2 and limit 10' do
+        let(:params) { { api_token: user.api_token, page_number: 2, limit: 10 } }
+
+        specify 'works', :aggregate_failures do
+          expect(response).to be_ok
+          expect(response.content_type).to eq 'application/json'
+          expect(JSON.parse(response.body)).to eq []
+        end
       end
     end
 
