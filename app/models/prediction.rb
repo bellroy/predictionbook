@@ -2,7 +2,7 @@
 
 class Prediction < ApplicationRecord
   # == Constants ============================================================
-  DEFAULT_INCLUDES = { judgements: :user, responses: nil, creator: nil, prediction_group: nil,
+  DEFAULT_INCLUDES = { judgements: :user, responses: :user, creator: nil, prediction_group: nil,
                        group: nil }.freeze
 
   # == Attributes ===========================================================
