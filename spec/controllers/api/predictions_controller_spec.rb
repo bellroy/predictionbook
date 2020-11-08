@@ -5,6 +5,7 @@ require 'spec_helper'
 describe Api::PredictionsController, type: :controller do
   let(:user) { FactoryBot.create(:user, api_token: 'real-token') }
   let(:prediction) { FactoryBot.create(:prediction) }
+  let(:parsed_response) { JSON.parse(response.body) }
 
   before do
     user
@@ -18,11 +19,13 @@ describe Api::PredictionsController, type: :controller do
       end
 
       let(:params) { { api_token: user.api_token } }
+      let(:first_prediction) { parsed_response[0] }
 
       specify 'works', :aggregate_failures do
         expect(response).to be_ok
         expect(response.content_type).to eq 'application/json'
-        expect(response.body).to include prediction.description_with_group
+        expect(first_prediction['description_with_group']).to eq prediction.description_with_group
+        expect(first_prediction['creator_label']).to eq prediction.creator.to_s
       end
 
       context 'when specifying page_number 1 and limit 10' do
@@ -31,7 +34,8 @@ describe Api::PredictionsController, type: :controller do
         specify 'works', :aggregate_failures do
           expect(response).to be_ok
           expect(response.content_type).to eq 'application/json'
-          expect(response.body).to include prediction.description_with_group
+          expect(first_prediction['description_with_group']).to eq prediction.description_with_group
+          expect(first_prediction['creator_label']).to eq prediction.creator.to_s
         end
       end
 
@@ -41,7 +45,7 @@ describe Api::PredictionsController, type: :controller do
         specify 'works', :aggregate_failures do
           expect(response).to be_ok
           expect(response.content_type).to eq 'application/json'
-          expect(JSON.parse(response.body)).to eq []
+          expect(parsed_response).to eq []
         end
       end
     end
@@ -100,7 +104,8 @@ describe Api::PredictionsController, type: :controller do
     context 'with valid API token' do
       it 'creates a new prediction' do
         post :create, params: { prediction: prediction_params, api_token: user.api_token }
-        expect(response.body).to include(prediction_params[:description])
+        expect(parsed_response['description_with_group']).to eq(prediction_params[:description])
+        expect(parsed_response['creator_label']).to eq(user.to_s)
       end
 
       context 'with a malformed prediction' do
@@ -111,7 +116,8 @@ describe Api::PredictionsController, type: :controller do
 
         specify 'works', :aggregate_failures do
           expect(response).not_to be_ok
-          expect(response.body).to include('a probability is between')
+          expect(parsed_response['initial_confidence'].first)
+            .to include('a probability is between 0 and 100%')
         end
       end
 
