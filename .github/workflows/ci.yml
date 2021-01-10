@@ -17,10 +17,10 @@ jobs:
       id: extract_branch
     - name: Install Linux dependencies
       run: sudo apt-get update -qq && sudo apt-get install -y libpq-dev
-    - name: Set up Ruby
-      uses: actions/setup-ruby@v1.1.1
+    - uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.6.6
+        bundler-cache: false
     - run: |
         for f in config/*.sample
         do
@@ -35,8 +35,10 @@ jobs:
         restore-keys: "${{ runner.OS }}-gem-cache-\n"
     - name: Install bundler
       run: (bundler -v | grep "2.1.4") || gem install bundler:2.1.4
+    - name: Remove metrics from bundled gems
+      run: bundle config set without 'metrics'
     - name: Install gems
-      run: bundle install --jobs $(nproc) --retry 3 --without metrics --deployment
+      run: bundle install --jobs $(nproc) --retry 3 --deployment
     - name: Create cache directory
       run: mkdir -p tmp/cache
     - name: Load database structure
