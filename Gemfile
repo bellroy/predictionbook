@@ -25,7 +25,6 @@ gem 'thin'
 
 # App housekeeping
 gem 'exception_notification'
-gem 'newrelic_rpm'
 gem 'whenever'
 
 # allowing CORS
@@ -40,12 +39,10 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'bullet'
-  gem 'cap-deploy-tagger'
-  # Capistrano 3.7 deprecates the submodule strategy
-  gem 'capistrano', '~> 3.6.0'
+  gem 'capistrano', '>= 3.11.0', require: false
   gem 'capistrano-bundler', require: false
-  gem 'capistrano-git-submodule-strategy'
-  gem 'capistrano-rails'
+  gem 'capistrano-git-with-submodules', require: false
+  gem 'capistrano-rails', group: :development, require: false
   gem 'capistrano-rvm', require: false
   gem 'httparty'
   gem 'puma'
