@@ -11,6 +11,7 @@ $ cp config/database.yml.sample config/database.yml # update db user / password 
 $ cp config/credentials.yml.sample config/credentials.yml
 $ bin/setup
 $ rails secret # run twice ; set 'session_secret' / 'rest_auth_site_key' in credentials.yml
+$ rails db:schema:load # or db:migrate and db:test:prepare
 $ rails spec # run specs
 $ script/rails server
 $ ^Z # ctrl+z
