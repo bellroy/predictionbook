@@ -7,13 +7,12 @@ Something like:
 --------------------
 $ git clone git://github.com/tricycle/predictionbook.git
 $ cd predictionbook
-$ cp config/database.yml.example config/database.yml # update db user / password / database names if necessary
-$ cp config/credentials.yml.example config/credentials.yml
-$ bundle install
-$ rake secret # run twice ; set 'session_secret' / 'rest_auth_site_key' in credentials.yml
-$ rake db:create
-$ rake db:schema:load # or db:migrate and db:test:prepare
-$ rake spec # run specs
+$ cp config/database.yml.sample config/database.yml # update db user / password / database names if necessary
+$ cp config/credentials.yml.sample config/credentials.yml
+$ bin/setup
+$ rails secret # run twice ; set 'session_secret' / 'rest_auth_site_key' in credentials.yml
+$ rails db:migrate
+$ rails spec # run specs
 $ script/rails server
 $ ^Z # ctrl+z
 $ bg
