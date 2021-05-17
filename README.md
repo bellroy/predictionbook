@@ -29,4 +29,4 @@ Group](http://investling.com/), which then merged into its sister company
 
 ## Installation
 
-See INSTALL.
+See [INSTALL](INSTALL).
