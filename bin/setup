@@ -26,10 +26,10 @@ chdir APP_ROOT do
   system('bundle check') || system!('bundle install')
 
   log "Dropping and recreating development database"
-  system! 'bundle exec rake db:drop db:create'
+  system! 'bundle exec rake db:drop db:create db:schema:load db:seed'
 
   log "Building test database"
-  system! 'RAILS_ENV=test bundle exec rake db:migrate'
+  system! 'RAILS_ENV=test bundle exec rake db:test:prepare'
 
   log "Restarting application server"
   system! 'bin/rails restart'

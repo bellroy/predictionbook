@@ -1,6 +1,6 @@
 PredictionBook
 ==============
-[![Build Status](https://travis-ci.org/tricycle/predictionbook.svg?branch=add-travis-yml)](https://travis-ci.org/tricycle/predictionbook)
+![Build Status](https://github.com/bellroy/predictionbook/actions/workflows/ci.yml/badge.svg)
 
 [PredictionBook](http://predictionbook.com/) is a site to record and
 track your predictions.
@@ -19,8 +19,9 @@ will happen, do happen.
 
 PredictionBook was originally written by
 [TrikeApps](http://trikeapps.com/), the geeking arm of the [Investling
-Group](http://investling.com/). It is now an open source project [hosted
-at GitHub](https://github.com/tricycle/predictionbook).
+Group](http://investling.com/), which then merged into its sister company
+[Bellroy](https://bellroy.com). PredictionBook is now an open source project
+[hosted at GitHub](https://github.com/bellroy/predictionbook).
 
 ## License
 
