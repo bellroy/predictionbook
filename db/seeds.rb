@@ -122,5 +122,10 @@ end
 
 finish_time = Time.current
 
+puts 'creating credence questions and answers'
+CredenceQuestionGenerator
+  .new('db/questions/OfficialCfarQuestions.xml', quiet: true)
+  .call
+
 puts 'END SEEDING'
 puts "Seeding the database took #{finish_time - start_time} seconds."
