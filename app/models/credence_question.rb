@@ -4,6 +4,8 @@ class CredenceQuestion < ApplicationRecord
   has_many :answers, class_name: CredenceAnswer.name, dependent: :destroy, autosave: true
   has_many :responses, class_name: CredenceGameResponse.name, dependent: :destroy, autosave: true
 
+  scope :enabled, -> { where(enabled: true) }
+
   def build_random_response(game)
     random_answers = []
     answer_count = answers.size

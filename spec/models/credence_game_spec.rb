@@ -39,4 +39,38 @@ describe CredenceGame do
     expect(game.most_recently_answered(3).length).to eq 1
     expect(game.most_recently_answered(3).first).to eq last_response
   end
+
+  describe '#add_score' do
+    let(:question) { FactoryBot.create(:credence_question) }
+    let(:answers) do
+      FactoryBot.create_list(:credence_answer, 2, credence_question: question)
+    end
+    let(:game) { FactoryBot.create(:credence_game) }
+    let(:response) do
+      FactoryBot.create(
+        :credence_game_response,
+        credence_game: game, credence_question: question,
+        first_answer: answers.first, second_answer: answers.second
+      )
+    end
+    let(:other_response) { FactoryBot.create(:credence_game_response) }
+
+    it 'increments the number answered' do
+      response
+
+      expect{ game.add_score(1) }.to change{ game.num_answered }.from(0).to(1)
+    end
+
+    it 'increments the number answered' do
+      response
+
+      expect{ game.add_score(2) }.to change{ game.score }
+    end
+
+    it 'sets the current response' do
+      response && other_response
+
+      expect{ game.add_score(3) }.to change{ game.current_response }.from(nil)
+    end
+  end
 end

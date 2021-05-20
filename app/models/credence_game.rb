@@ -34,25 +34,34 @@ class CredenceGame < ApplicationRecord
   end
 
   def add_score(new_score)
-    self.score = score + new_score
-    self.num_answered = num_answered + 1
-    create_new_response_to_random_question
+    self.score += new_score
+    self.num_answered += 1
+    set_current_response
+    save!
   end
 
   private
 
-  def ensure_current_response
-    create_new_response_to_random_question if current_response.nil?
+  def enabled_questions
+    @enabled_questions ||= CredenceQuestion.enabled
   end
 
-  def create_new_response_to_random_question
-    enabled_questions = CredenceQuestion.where(enabled: true)
+  def ensure_current_response
+    unless current_response.present?
+      set_current_response
+      save!
+    end
+  end
+
+  def set_current_response
     enabled_question_count = enabled_questions.count
     return if enabled_question_count.zero?
 
     random_offset = Random.rand(enabled_question_count)
     question = enabled_questions.offset(random_offset).first
-    self.current_response = question.build_random_response(self) if question.present?
-    save! if saved_changes?
+
+    if question.present?
+      self.current_response = question.build_random_response(self)
+    end
   end
 end
