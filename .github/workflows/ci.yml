@@ -34,7 +34,7 @@ jobs:
         key: "${{ runner.OS }}-gem-cache-${{ hashFiles('**/Gemfile.lock') }}"
         restore-keys: "${{ runner.OS }}-gem-cache-\n"
     - name: Install bundler
-      run: (bundler -v | grep "2.1.4") || gem install bundler:2.1.4
+      run: (bundler -v | grep "2.2.16") || gem install bundler:2.2.16
     - name: Remove metrics from bundled gems
       run: bundle config set without 'metrics'
     - name: Install gems
