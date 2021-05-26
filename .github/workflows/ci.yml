@@ -34,7 +34,7 @@ jobs:
         key: "${{ runner.OS }}-gem-cache-${{ hashFiles('**/Gemfile.lock') }}"
         restore-keys: "${{ runner.OS }}-gem-cache-\n"
     - name: Install bundler
-      run: (bundler -v | grep "2.2.16") || gem install bundler:2.2.16
+      run: (bundler -v | grep "2.1.4") || gem install bundler:2.1.4
     - name: Remove metrics from bundled gems
       run: bundle config set without 'metrics'
     - name: Install gems
@@ -48,8 +48,9 @@ jobs:
       env:
         METRICS: '1'
     - name: Post to Slack if build fails
-      if: failure() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/stable')
-      uses: pullreminders/slack-action@master
+      if: failure() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+        || github.ref == 'refs/heads/stable')
+      uses: pullreminders/slack-action@a5a262c896a1cc80dcbae59ba95513e2dfb21439
       env:
         SLACK_BOT_TOKEN: "${{ secrets.SLACK_BOT_TOKEN }}"
       with:
