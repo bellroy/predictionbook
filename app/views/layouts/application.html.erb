@@ -83,26 +83,20 @@
 	</div><!-- #main-inner -->
 	</div><!-- #main-wrap -->
 
-	<div id="footer" class="wrapper clear">
-		<ul class="left-links">
-			<li><%= link_to 'Home', '/' %></li>
-			<li><%= link_to 'New prediction', new_prediction_path %></li>
-		  <li><%= link_to 'View predictions', predictions_path %></li>
+  <div id="footer" class="wrapper clear">
+    <ul class="left-links">
+      <li><%= link_to 'Home', '/' %></li>
+      <li><%= link_to 'New prediction', new_prediction_path %></li>
+      <li><%= link_to 'View predictions', predictions_path %></li>
       <li><%= link_to 'Happenstance', happenstance_path %></li>
       <li><%= link_to 'Upcoming', future_predictions_path %></li>
       <li><%= link_to 'Credence game', credence_game_path('try') %></li>
       <li><%= link_to 'PredictionBook on GitHub', "https://github.com/tricycle/predictionbook" %></li>
-
-      <%# <li><a href="#">Education Centre</a></li>
-      <li><a href="#">Links</a></li> %>
-		</ul>
-	<ul class="right-links">
-		<span class="copyright">PredictionBook © 2008-<%= Date.today.year %></span>
-	</ul>
-
-
-	</div><!-- #footer -->
-
+    </ul>
+    <ul class="right-links">
+      <li><span class="copyright">PredictionBook © 2008-<%= Date.today.year %></span></li>
+    </ul>
+  </div><!-- #footer -->
 </div><!-- #container -->
 
 <script src="https://pbook.uservoice.com/pages/general/widgets/tab.js?alignment=right&amp;color=000000" type="text/javascript"></script>
