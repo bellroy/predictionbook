@@ -15,6 +15,12 @@ jobs:
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
+    - run: |
+        for f in config/*.sample
+        do
+          echo "Copying $f to ${f%.*}"
+          cp $f ${f%.*}
+        done
     - name: Cache gems
       uses: actions/cache@v2
       with:
