@@ -15,38 +15,24 @@ jobs:
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
-    - name: Install Linux dependencies
-      run: sudo apt-get update -qq && sudo apt-get install -y libpq-dev
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.6.6
-        bundler-cache: false
-    - run: |
-        for f in config/*.sample
-        do
-          echo "Copying $f to ${f%.*}"
-          cp $f ${f%.*}
-        done
     - name: Cache gems
       uses: actions/cache@v2
       with:
         path: vendor/bundle
-        key: "${{ runner.OS }}-gem-cache-${{ hashFiles('**/Gemfile.lock') }}"
+        key: "${{ runner.OS }}-gem-cache-${{ hashFiles('**/*.gemspec')
+          }}"
         restore-keys: "${{ runner.OS }}-gem-cache-\n"
-    - name: Install bundler
-      run: (bundler -v | grep "2.1.4") || gem install bundler:2.1.4
-    - name: Remove metrics from bundled gems
-      run: bundle config set without 'metrics'
-    - name: Install gems
-      run: bundle install --jobs $(nproc) --retry 3 --deployment
-    - name: Create cache directory
-      run: mkdir -p tmp/cache
-    - name: Load database structure
-      run: bundle exec rake db:create db:schema:load
-    - name: Run RSpec test suite
-      run: bundle exec rspec spec
+    - uses: "cachix/install-nix-action@8d6d5e949675fbadb765c6b1a975047fa5f09b27"
+      with:
+        extra_nix_config: |
+          post-build-hook = /etc/nix/upload-to-cache.sh
+          substituters = https://cache.nixos.org/
+          trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+        nix_path: nixpkgs=channel:nixos-21.05
+    - name: Run CI through nix-shell
       env:
-        METRICS: '1'
+        GEMFURY_DEPLOY_TOKEN: ${{ secrets.GEMFURY_DEPLOY_TOKEN }}
+      run: nix-shell --run "chmod 755 ./run_ci.sh && ./run_ci.sh"
     - name: Post to Slack if build fails
       if: failure() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
         || github.ref == 'refs/heads/stable')
