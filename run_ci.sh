@@ -4,4 +4,4 @@ set -e
 bundle config build.sassc --disable-lto
 bundle install
 bundle exec rake db:create db:schema:load
-bundle exec rspec spec
+USE_SELENIUM=1 bundle exec rspec spec
