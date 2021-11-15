@@ -15,7 +15,7 @@ nixpkgs.mkShell {
     ruby_2_7
     zlib
   ]
-  ++ (if stdenv.hostPlatform.isDarwin then [ libiconv darwin.apple_sdk.frameworks.CoreServices ] else [ ]);
+  ++ (nixpkgs.lib.optionals stdenv.hostPlatform.isDarwin [ libiconv darwin.apple_sdk.frameworks.CoreServices ]);
   shellHook = ''
     bundle config --local path "$PWD/vendor/bundle"
   '';
