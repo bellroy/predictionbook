@@ -16,6 +16,7 @@ class Prediction < ApplicationRecord
   enum visibility: Visibility::VALUES
 
   # == Extensions ===========================================================
+  Gutentag::ActiveRecord.call self
   class DuplicateRecord < ActiveRecord::RecordInvalid; end
 
   # == Relationships ========================================================

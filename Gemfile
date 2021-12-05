@@ -10,6 +10,7 @@ gem 'rails-observers'
 # Models
 gem 'active_model_serializers'
 gem 'chronic'
+gem 'gutentag', '~> 2.6'
 gem 'kaminari'
 gem 'uuidtools'
 
