@@ -1,3 +1,4 @@
+# TODO: Merge with PredictionFilter
 class PredictionsQuery
   DEFAULT_PAGE = 1
   DEFAULT_PAGE_SIZE = 100

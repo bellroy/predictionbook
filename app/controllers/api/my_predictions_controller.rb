@@ -3,20 +3,15 @@
 module Api
   class MyPredictionsController < AuthorisedController
     def index
-      render json: my_predictions_hash
+      render json: { user: @user.to_h, predictions: prediction_hash_array }
     end
 
     private
 
-    def my_predictions_hash
-      prediction_hash_array = predictions.map do |prediction|
+    def prediction_hash_array
+      predictions.map do |prediction|
         PredictionSerializer.new(prediction).serializable_hash
       end
-
-      {
-        user: { user_id: @user.id, name: @user.name, email: @user.email },
-        predictions: prediction_hash_array
-      }
     end
 
     def predictions
