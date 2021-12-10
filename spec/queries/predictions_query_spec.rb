@@ -10,7 +10,7 @@ describe PredictionsQuery do
         :prediction,
         creator: creator,
         deadline: 1.year.from_now,
-	tag_names: ['covid']
+	      tag_names: ['covid']
       )
     end
     let(:sports_prediction) do
@@ -18,13 +18,13 @@ describe PredictionsQuery do
         :prediction,
         creator: creator,
         deadline: 1.year.from_now,
-	tag_names: ['sports']
+	      tag_names: ['sports']
       )
     end
 
     it 'returns only the specified tags' do
       covid_prediction && sports_prediction
-      predictions = described_class.new(user: creator, tag_names: ['covid']).call
+      predictions = described_class.new(creator: creator, tag_names: ['covid']).call
       expect(predictions).to include(covid_prediction)
       expect(predictions).to_not include(sports_prediction)
     end

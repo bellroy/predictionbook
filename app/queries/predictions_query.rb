@@ -1,30 +1,44 @@
-# TODO: Merge with PredictionFilter
 class PredictionsQuery
   DEFAULT_PAGE = 1
   DEFAULT_PAGE_SIZE = 100
   MAXIMUM_PAGE_SIZE = 1000
 
-  def initialize(user:, page: DEFAULT_PAGE, page_size: DEFAULT_PAGE_SIZE, tag_names: [])
+  def initialize(creator:, page: DEFAULT_PAGE, page_size: DEFAULT_PAGE_SIZE, status: nil, tag_names: [])
     @page = page
     @page_size = page_size
+    @status = status
     @tag_names = tag_names
-    @user = user
+    @creator = creator
   end
 
   def call
-    filter_by_tags(initial_results)
-      .includes(Prediction::DEFAULT_INCLUDES)
-      .order(created_at: :desc)
-      .page(page)
-      .per(page_size)
+    FILTERS.reduce(initial_results) do |results, filter|
+      apply_filter(results, filter)
+    end.includes(Prediction::DEFAULT_INCLUDES).newest.page(page).per(page_size)
   end
 
   private
 
-  attr_reader :tag_names, :user
+  FILTERS = [:status, :tags].freeze
+
+  STATUSES = ['judged', 'unjudged', 'future']
+
+  attr_reader :status, :tag_names, :creator
+
+  def apply_filter(results, filter)
+    send("filter_by_#{filter}", results)
+  end
 
   def initial_results
-    user.predictions.not_withdrawn
+    creator.predictions.not_withdrawn
+  end
+
+  def filter_by_status(results)
+    if STATUSES.include?(status)
+      results.public_send(status)
+    else
+      results
+    end
   end
 
   def filter_by_tags(results)
