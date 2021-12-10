@@ -77,5 +77,27 @@ describe Api::MyPredictionsController, type: :request do
         expect(actor['email']).to eq user.email
       end
     end
+
+    context 'when specifying tags' do
+      let(:params) { { api_token: user.api_token, tag_names: ['mars'] } }
+      let(:tagged_prediction) do
+        FactoryBot.create(
+          :prediction,
+          creator: user,
+          tag_names: ['mars', 'rockets']
+        )
+      end
+
+      before { user && prediction && tagged_prediction }
+
+      it 'returns only those predictions with matching tags' do
+        json_hash = JSON.parse(server_response.body)
+        descriptions = json_hash['predictions'].map do |prediction|
+          prediction['description']
+        end
+        expect(descriptions).to include(tagged_prediction.description)
+        expect(descriptions).not_to include(prediction.description)
+      end
+    end
   end
 end

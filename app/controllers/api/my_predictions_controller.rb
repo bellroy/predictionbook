@@ -18,7 +18,8 @@ module Api
       PredictionsQuery.new(
         page: params[:page].to_i,
         page_size: params[:page_size].to_i,
-        predictions: @user.predictions.not_withdrawn
+        predictions: @user.predictions.not_withdrawn,
+        tag_names: params.fetch(:tag_names, [])
       ).call
     end
   end
