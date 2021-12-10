@@ -16,9 +16,9 @@ module Api
 
     def predictions
       PredictionsQuery.new(
-        creator: @user,
         page: params[:page].to_i,
-        page_size: params[:page_size].to_i
+        page_size: params[:page_size].to_i,
+        predictions: @user.predictions.not_withdrawn
       ).call
     end
   end

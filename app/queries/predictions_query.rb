@@ -3,16 +3,16 @@ class PredictionsQuery
   DEFAULT_PAGE_SIZE = 100
   MAXIMUM_PAGE_SIZE = 1000
 
-  def initialize(creator:, page: DEFAULT_PAGE, page_size: DEFAULT_PAGE_SIZE, status: nil, tag_names: [])
+  def initialize(predictions: Prediction.none, page: DEFAULT_PAGE, page_size: DEFAULT_PAGE_SIZE, status: nil, tag_names: [])
     @page = page
     @page_size = page_size
+    @predictions = predictions
     @status = status
     @tag_names = tag_names
-    @creator = creator
   end
 
   def call
-    FILTERS.reduce(initial_results) do |results, filter|
+    FILTERS.reduce(predictions) do |results, filter|
       apply_filter(results, filter)
     end.includes(Prediction::DEFAULT_INCLUDES).newest.page(page).per(page_size)
   end
@@ -23,14 +23,10 @@ class PredictionsQuery
 
   STATUSES = ['judged', 'unjudged', 'future']
 
-  attr_reader :status, :tag_names, :creator
+  attr_reader :predictions, :status, :tag_names
 
   def apply_filter(results, filter)
     send("filter_by_#{filter}", results)
-  end
-
-  def initial_results
-    creator.predictions.not_withdrawn
   end
 
   def filter_by_status(results)

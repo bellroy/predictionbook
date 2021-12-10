@@ -24,7 +24,8 @@ describe PredictionsQuery do
 
     it 'returns only the specified tags' do
       covid_prediction && sports_prediction
-      predictions = described_class.new(creator: creator, tag_names: ['covid']).call
+      predictions = creator.predictions.not_withdrawn
+      predictions = described_class.new(predictions: predictions, tag_names: ['covid']).call
       expect(predictions).to include(covid_prediction)
       expect(predictions).to_not include(sports_prediction)
     end
