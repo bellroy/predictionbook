@@ -12,20 +12,16 @@ describe Api::MyPredictionsController, type: :request do
   let(:prediction) { FactoryBot.create(:prediction, creator: user) }
   let(:another_prediction) { FactoryBot.create(:prediction) }
 
-  before do
-    user
-    prediction
-    another_prediction
-  end
-
   describe '#index' do
     let(:url) { '/api/my_predictions' }
     let(:params) { { api_token: user.api_token } }
 
     context do
+      before { user && prediction && another_prediction }
+
       it { is_expected.to have_http_status(:ok) }
 
-      specify do
+      it do
         json_hash = JSON.parse(server_response.body)
         predictions = json_hash['predictions']
         actor = json_hash['user']
@@ -38,11 +34,15 @@ describe Api::MyPredictionsController, type: :request do
     context do
       let(:params) { {} }
 
+      before { user && prediction && another_prediction }
+
       it { is_expected.to have_http_status(:unauthorized) }
     end
 
     context do
       let(:params) { { api_token: 'a-fake-api-token' } }
+
+      before { user && prediction && another_prediction }
 
       it { is_expected.to have_http_status(:unauthorized) }
     end
@@ -52,7 +52,9 @@ describe Api::MyPredictionsController, type: :request do
         FactoryBot.create(:prediction, creator: user, created_at: 1.minute.from_now)
       end
 
-      specify do
+      before { user && prediction && another_prediction }
+
+      it do
         get url, params: params
         json_hash = JSON.parse(response.body)
         predictions = json_hash['predictions']
