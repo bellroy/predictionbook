@@ -40,7 +40,6 @@ class Prediction < ApplicationRecord
   validate :bound_deadline
 
   # == Scopes ===============================================================
-  scope :newest, -> { order(created_at: :desc) }
   scope :not_withdrawn, -> { where(withdrawn: false) }
 
   # == Callbacks ============================================================

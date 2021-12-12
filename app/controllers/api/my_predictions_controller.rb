@@ -19,6 +19,7 @@ module Api
         page: params[:page].to_i,
         page_size: params[:page_size].to_i,
         predictions: @user.predictions.not_withdrawn,
+        status: 'recent',
         tag_names: params.fetch(:tag_names, [])
       ).call
     end

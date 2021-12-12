@@ -14,14 +14,14 @@ class PredictionsQuery
   def call
     FILTERS.reduce(predictions) do |results, filter|
       apply_filter(results, filter)
-    end.includes(Prediction::DEFAULT_INCLUDES).newest.page(page).per(page_size)
+    end.page(page).per(page_size)
   end
 
   private
 
   FILTERS = [:status, :tags].freeze
 
-  STATUSES = ['judged', 'unjudged', 'future']
+  STATUSES = ['judged', 'unjudged', 'future', 'recent']
 
   attr_reader :predictions, :status, :tag_names
 
