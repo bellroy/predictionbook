@@ -233,13 +233,28 @@ describe Response do
     end
   end
 
-  describe 'comment' do
+  describe '#comment' do
     it 'returns nil of comment is nil' do
       expect(described_class.new(comment: nil).comment).to be_nil
     end
-    describe 'text only' do
+
+    context 'when text only' do
       it 'removes html tags' do
         expect(described_class.new(comment: '"link":http://google.com').text_only_comment).to eq 'link'
+      end
+
+      context 'but contains hash tags' do
+        let(:comment) { "Things are going to get bad #covid #pandemic" }
+        let(:response) do
+          FactoryBot.create(:response, comment: comment, prediction: prediction)
+        end
+        let(:prediction) { FactoryBot.create(:prediction) }
+
+        it 'associates the prediction with the appropriate tags' do
+          expect(prediction.tag_names).to be_empty
+          response
+          expect(prediction.reload.tag_names).to include('covid', 'pandemic')
+        end
       end
     end
 
