@@ -72,7 +72,8 @@ class PredictionsController < ApplicationController
     @predictions = PredictionsQuery.new(
       page: params[:page].to_i, 
       predictions: Prediction.visible_to_everyone,
-      status: @filter
+      status: @filter,
+      tag_names: params.fetch(:tag_names, [])
     ).call
     @show_statistics = true
   end
