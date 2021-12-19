@@ -45,3 +45,4 @@ Parameter name | Value   | Description
 api_token      | string  | A token that identifies a unique user
 page_size      | integer | Predictions returned per page (default 100, max 1000)
 page           | integer | Increment to page through more than page_size predictions (default 1)
+tag_names      | array   | When specified, only predictions that match any of the tags are returned

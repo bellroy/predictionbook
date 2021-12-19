@@ -4,10 +4,10 @@ if ENV['USE_SELENIUM']
   require 'selenium/webdriver'
 
   Capybara.register_driver :selenium do |app|
-    Capybara::Selenium::Driver.new(app)
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
 
-  Capybara.javascript_driver = :selenium
+  Capybara.javascript_driver = :selenium_chrome_headless
   Capybara.run_server        = true
   Capybara.server_port       = 30_000
   Capybara.default_max_wait_time = 10

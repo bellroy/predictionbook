@@ -105,9 +105,8 @@ describe PredictionsController do
 
       describe 'collection' do
         before do
-          @collection = []
-          relation = class_double(Prediction, page: @collection)
-          expect(Prediction).to receive(:recent).and_return(relation)
+          @collection = Prediction.none
+          expect(Prediction).to receive(:recent).and_return(@collection)
         end
 
         it 'assigns the collection' do
