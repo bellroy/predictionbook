@@ -21,7 +21,7 @@ describe Api::MyPredictionsController, type: :request do
 
       it { is_expected.to have_http_status(:ok) }
 
-      it do
+      specify do
         json_hash = JSON.parse(server_response.body)
         predictions = json_hash['predictions']
         actor = json_hash['user']
@@ -54,7 +54,7 @@ describe Api::MyPredictionsController, type: :request do
 
       before { user && prediction && another_prediction }
 
-      it do
+      specify do
         get url, params: params
         json_hash = JSON.parse(response.body)
         predictions = json_hash['predictions']
