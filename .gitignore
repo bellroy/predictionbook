@@ -19,3 +19,7 @@ Vagrantfile
 .vagrant
 
 tags*
+
+vendor
+.direnv
+.envrc

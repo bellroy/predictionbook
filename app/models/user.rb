@@ -99,6 +99,10 @@ class User < ApplicationRecord
     UserAuthorizer.call(user: self, prediction: prediction, action: action)
   end
 
+  def to_h
+    { email: email, name: name, user_id: id }
+  end
+
   def to_param
     (login || '').gsub('.', '[dot]')
   end

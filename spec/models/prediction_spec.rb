@@ -191,6 +191,16 @@ describe Prediction do
     end
   end
 
+  describe '#tag_names' do
+    it 'ignores duplicates' do
+      prediction = FactoryBot.create(:prediction)
+      prediction.tag_names << 'covid'
+      prediction.tag_names << 'covid'
+      prediction.save
+      expect(prediction.reload.tag_names).to match_array(['covid'])
+    end
+  end
+
   describe '#judgement' do
     it 'returns most recent judgement' do
       prediction = FactoryBot.create(:prediction)
