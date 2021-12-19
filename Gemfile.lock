@@ -188,6 +188,8 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    gutentag (2.6.1)
+      activerecord (>= 3.2.0)
     haml (5.2.2)
       temple (>= 0.8.0)
       tilt
@@ -267,12 +269,12 @@ GEM
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
-    pry (0.14.1)
+    pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    pry-byebug (3.8.0)
+    pry-byebug (3.9.0)
       byebug (~> 11.0)
-      pry (~> 0.10)
+      pry (~> 0.13.0)
     public_suffix (4.0.6)
     puma (5.5.2)
       nio4r (~> 2.0)
@@ -447,6 +449,7 @@ DEPENDENCIES
   ffaker
   formatize!
   guard-rspec
+  gutentag (~> 2.6)
   haml-rails
   hashdiff
   hirb
@@ -459,7 +462,7 @@ DEPENDENCIES
   pg
   poltergeist
   pry
-  pry-byebug
+  pry-byebug (= 3.9.0)
   puma
   rack-cors
   rails (~> 5.0)

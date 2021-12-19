@@ -161,4 +161,10 @@ describe User do
       end
     end
   end
+
+  describe '#to_h' do
+    subject { FactoryBot.create(:user) }
+
+    it { expect(subject.to_h.keys).to include(:email, :name, :user_id) }
+  end
 end

@@ -10,6 +10,7 @@ gem 'rails-observers'
 # Models
 gem 'active_model_serializers'
 gem 'chronic'
+gem 'gutentag', '~> 2.6'
 gem 'kaminari'
 gem 'uuidtools'
 
@@ -56,7 +57,7 @@ group :development, :test do
   gem 'hirb'
   gem 'poltergeist'
   gem 'pry'
-  gem 'pry-byebug'
+  gem 'pry-byebug', '3.9.0'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
   gem 'selenium-webdriver', require: false

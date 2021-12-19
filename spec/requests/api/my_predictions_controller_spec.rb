@@ -12,17 +12,13 @@ describe Api::MyPredictionsController, type: :request do
   let(:prediction) { FactoryBot.create(:prediction, creator: user) }
   let(:another_prediction) { FactoryBot.create(:prediction) }
 
-  before do
-    user
-    prediction
-    another_prediction
-  end
-
   describe '#index' do
     let(:url) { '/api/my_predictions' }
     let(:params) { { api_token: user.api_token } }
 
     context do
+      before { user && prediction && another_prediction }
+
       it { is_expected.to have_http_status(:ok) }
 
       specify do
@@ -38,11 +34,15 @@ describe Api::MyPredictionsController, type: :request do
     context do
       let(:params) { {} }
 
+      before { user && prediction && another_prediction }
+
       it { is_expected.to have_http_status(:unauthorized) }
     end
 
     context do
       let(:params) { { api_token: 'a-fake-api-token' } }
+
+      before { user && prediction && another_prediction }
 
       it { is_expected.to have_http_status(:unauthorized) }
     end
@@ -51,6 +51,8 @@ describe Api::MyPredictionsController, type: :request do
       let(:another_prediction) do
         FactoryBot.create(:prediction, creator: user, created_at: 1.minute.from_now)
       end
+
+      before { user && prediction && another_prediction }
 
       specify do
         get url, params: params
@@ -73,6 +75,28 @@ describe Api::MyPredictionsController, type: :request do
         expect(predictions.length).to eq 1
         expect(predictions.first['description']).to eq prediction.description
         expect(actor['email']).to eq user.email
+      end
+    end
+
+    context 'when specifying tags' do
+      let(:params) { { api_token: user.api_token, tag_names: ['mars'] } }
+      let(:tagged_prediction) do
+        FactoryBot.create(
+          :prediction,
+          creator: user,
+          tag_names: ['mars', 'rockets']
+        )
+      end
+
+      before { user && prediction && tagged_prediction }
+
+      it 'returns only those predictions with matching tags' do
+        json_hash = JSON.parse(server_response.body)
+        descriptions = json_hash['predictions'].map do |prediction|
+          prediction['description']
+        end
+        expect(descriptions).to include(tagged_prediction.description)
+        expect(descriptions).not_to include(prediction.description)
       end
     end
   end

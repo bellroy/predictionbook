@@ -12,6 +12,14 @@
   <%= render @prediction.judgement %><% end %>
 </p>
 
+<% if @prediction.tag_names.any? %>
+  <p>
+    <% @prediction.tag_names.each do |name| %>
+      <%= link_to("##{name}", predictions_path(params: { tag_names: [name]})) %>
+    <% end %>
+  </p>
+<%end %>
+
 <% if @prediction.visible_to_creator? %>
   <p class='note'>
     This prediction is <strong>private</strong>. <%= render 'predictions/private_note' %>

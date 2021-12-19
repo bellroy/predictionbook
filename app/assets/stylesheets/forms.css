@@ -37,6 +37,11 @@ p.note em {
   font-weight: bold;
   font-style: normal;
 }
+p.tag-message {
+  font-style: italic;
+  color: #777;
+  width: 28em;
+}
 .withdraw p.note {
   width: inherit;
 }

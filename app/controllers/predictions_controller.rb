@@ -69,7 +69,12 @@ class PredictionsController < ApplicationController
   def index
     @title = 'Recent Predictions'
     @filter = 'recent'
-    @predictions = Prediction.visible_to_everyone.recent.page(params[:page])
+    @predictions = PredictionsQuery.new(
+      page: params[:page].to_i, 
+      predictions: Prediction.visible_to_everyone,
+      status: @filter,
+      tag_names: params.fetch(:tag_names, [])
+    ).call
     @show_statistics = true
   end
 
