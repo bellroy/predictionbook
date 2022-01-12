@@ -77,11 +77,6 @@ group :test do
   gem 'webdrivers'
 end
 
-group :linux, :production do
-  # Does not build on Mountain Lion nor is it needed on OS X
-  gem 'therubyracer'
-end
-
 group :assets do
   gem 'uglifier'
 end
