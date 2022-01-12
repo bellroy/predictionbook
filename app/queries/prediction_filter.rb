@@ -5,14 +5,6 @@ module PredictionFilter
     predictions = user.predictions
     predictions = predictions.visible_to_everyone unless current_user == user
 
-    predictions =
-      case filter
-      when 'judged' then predictions.judged
-      when 'unjudged' then predictions.unjudged
-      when 'future' then predictions.future
-      else predictions
-      end
-
-    predictions.page(page)
+    PredictionsQuery.new(page: page, predictions: predictions, status: filter).call
   end
 end
