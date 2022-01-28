@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
   def show
     @title = "Most recent predictions by #{@user}"
-    @predictions = PredictionFilter.filter(@user, current_user, params[:filter], params[:page])
+    @predictions = showable_predictions
     @statistics = @user.statistics
     @score_calculator = ScoreCalculator.new(@user, start_date: 6.months.ago, interval: 1.month)
   end
@@ -90,6 +90,13 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def showable_predictions
+    predictions = @user.predictions
+    predictions = predictions.visible_to_everyone unless current_user == @user
+
+    PredictionsQuery.new(page: params[:page], predictions: predictions, status: params[:filter]).call
+  end
 
   def updated_user_api_token?
     current_user&.update(api_token: User.generate_api_token)
