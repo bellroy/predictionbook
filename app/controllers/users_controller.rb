@@ -95,7 +95,12 @@ class UsersController < ApplicationController
     predictions = @user.predictions
     predictions = predictions.visible_to_everyone unless current_user == @user
 
-    PredictionsQuery.new(page: params[:page], predictions: predictions, status: params[:filter]).call
+    PredictionsQuery.new(
+      page: params[:page],
+      predictions: predictions,
+      status: params[:filter],
+      tag_names: Array.wrap(params[:tags]).reject(&:blank?)
+    ).call
   end
 
   def updated_user_api_token?
