@@ -5,4 +5,4 @@ module UserHelper
     user.predictions.includes(:tags).pluck(:name)
   end
 end
-  
+
