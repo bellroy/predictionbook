@@ -3,9 +3,9 @@ class PredictionsQuery
   DEFAULT_PAGE_SIZE = 100
   MAXIMUM_PAGE_SIZE = 1000
 
-  def initialize(predictions: Prediction.none, page: DEFAULT_PAGE, page_size: DEFAULT_PAGE_SIZE, status: nil, tag_names: [])
-    @page = page
-    @page_size = page_size
+  def initialize(predictions: Prediction.none, page: nil, page_size: nil, status: nil, tag_names: [])
+    @page = page || DEFAULT_PAGE
+    @page_size = page_size || DEFAULT_PAGE_SIZE
     @predictions = predictions
     @status = status
     @tag_names = tag_names
