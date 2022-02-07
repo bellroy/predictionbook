@@ -2,7 +2,7 @@
 
 module UserHelper
   def tag_name_options(user)
-    user.predictions.includes(:tags).pluck(:name)
+    user.predictions.includes(:tags).pluck(:name).uniq
   end
 end
 
