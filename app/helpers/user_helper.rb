@@ -2,7 +2,14 @@
 
 module UserHelper
   def tag_name_options(user)
-    user.predictions.includes(:tags).pluck(:name).uniq
+    Gutentag::Tag
+      .where(
+        id: Gutentag::Tagging.where(
+          taggable_id: user.predictions.pluck(:id),
+          taggable_type: Prediction.name
+        ).pluck(:tag_id)
+      )
+      .order(:name)
+      .pluck(:name)
   end
 end
-

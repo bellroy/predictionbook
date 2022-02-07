@@ -12,13 +12,13 @@ describe UserHelper do
         prediction.save
       end
     end
-    let(:other_prediction) do 
+    let(:other_prediction) do
       FactoryBot.build(:prediction).tap do |prediction|
         prediction.tag_names << "ciência"
         prediction.save
       end
     end
-    let(:prediction) do 
+    let(:prediction) do
       FactoryBot.build(:prediction, creator: user).tap do |prediction|
         prediction.tag_names << "esportes"
         prediction.save
@@ -43,4 +43,3 @@ describe UserHelper do
     end
   end
 end
-
