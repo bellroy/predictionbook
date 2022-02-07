@@ -29,5 +29,14 @@ describe PredictionsQuery do
       expect(predictions).to include(covid_prediction)
       expect(predictions).to_not include(sports_prediction)
     end
+
+    it 'filters by status' do
+      covid_prediction && sports_prediction
+      covid_prediction.judge!(true, creator)
+      query = described_class.new(predictions: creator.predictions.not_withdrawn, status: 'judged')
+      predictions = query.call
+      expect(predictions).to include(covid_prediction)
+      expect(predictions).to_not include(sports_prediction)
+    end
   end
 end

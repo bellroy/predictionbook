@@ -31,6 +31,7 @@ puts 'SEEDING!'
 start_time = Time.current
 
 DATA_SIZE = 500
+TAGS = ['covid', 'sports', 'war'].freeze
 
 clean_database
 
@@ -61,6 +62,7 @@ DATA_SIZE.times do
     description: "I'm #{confidence} confident that this #{is_private ? "private " : ""}future event will come true",
     visibility: is_private ? Visibility::VALUES[:visible_to_creator] : Visibility::VALUES[:visible_to_everyone]
   )
+  prediction.tag_names << TAGS.sample
   prediction.save!
   prediction.responses.create!(user: second_user, confidence: random_int) unless is_private and random_int < 75
 end
@@ -76,6 +78,7 @@ DATA_SIZE.times do
     description: "I'm #{confidence} confident that this #{is_private ? "private " : ""}past event will come true",
     visibility: is_private ? Visibility::VALUES[:visible_to_creator] : Visibility::VALUES[:visible_to_everyone]
   )
+  prediction.tag_names << TAGS.sample
   prediction.save!
   prediction.responses.create!(user: first_user, confidence: random_int) unless is_private and random_int < 75
 end
@@ -91,6 +94,7 @@ DATA_SIZE.times do
     description: "I was #{confidence} confident that this #{is_private ? "private " : ""}past event would come true",
     visibility: is_private ? Visibility::VALUES[:visible_to_creator] : Visibility::VALUES[:visible_to_everyone]
   )
+  prediction.tag_names << TAGS.sample
   prediction.save!
   prediction.responses.create!(user: second_user, confidence: random_int) unless is_private and random_int < 75
 
@@ -112,6 +116,7 @@ DATA_SIZE.times do
     description: "I'm #{confidence} confident that this #{is_private ? "private " : ""}interesting future event will come true",
     visibility: is_private ? Visibility::VALUES[:visible_to_creator] : Visibility::VALUES[:visible_to_everyone]
   )
+  prediction.tag_names << TAGS.sample
   prediction.save!
 
   prediction.responses.create!(

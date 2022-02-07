@@ -14,33 +14,22 @@ describe UsersController do
   describe '#show' do
     subject(:show) { get :show, params: { id: target_user.id } }
 
-    let(:relation) { class_double(Prediction) }
-
-    before do
-      expect_any_instance_of(User).to receive(:predictions).and_return relation
-    end
-
     context 'logged in user and target user are the same' do
       let(:target_user) { logged_in_user }
 
       specify do
-        predictions = instance_double(ActiveRecord::Relation)
-        expect(relation).to receive(:page).and_return(predictions)
         show
-        expect(assigns[:predictions]).to eq predictions
+        expect(assigns[:predictions].map(&:id)).to eq logged_in_user.predictions.map(&:id)
         expect(assigns[:user]).to eq target_user
       end
     end
 
     context 'logged in user and target user are different' do
       specify do
-        predictions = class_double(Prediction)
-        expect(relation).to receive(:visible_to_everyone).and_return predictions
-        paged_predictions = class_double(Prediction)
-        expect(predictions).to receive(:page).and_return(paged_predictions)
+        FactoryBot.create(:prediction, creator: target_user)
 
         show
-        expect(assigns[:predictions]).to eq paged_predictions
+        expect(assigns[:predictions].map(&:id)).to eq target_user.predictions.map(&:id)
         expect(assigns[:user]).to eq target_user
       end
     end
