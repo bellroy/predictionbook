@@ -45,6 +45,7 @@ class Prediction < ApplicationRecord
   # == Callbacks ============================================================
   after_initialize do
     self.uuid ||= UUIDTools::UUID.random_create.to_s if has_attribute?(:uuid)
+    TagAdder.new(prediction: self, save: false, string: description).call
   end
 
   before_validation(on: :create) do

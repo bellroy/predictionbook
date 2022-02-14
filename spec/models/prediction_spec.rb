@@ -40,6 +40,13 @@ describe Prediction do
       second_prediction
     end
 
+    it 'adds tags included in the description' do
+      first_prediction.description = "Foo will bar before baz #foo #bar #baz"
+      first_prediction.save!
+      first_prediction.reload
+      expect(first_prediction.tag_names).to contain_exactly("foo", "bar", "baz")
+    end
+
     it 'synchronises some properties for predictions in the same group' do
       first_prediction.reload
       expect(first_prediction.deadline).to be < 25.hours.ago

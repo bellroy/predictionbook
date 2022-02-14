@@ -1,6 +1,7 @@
 class TagAdder
-  def initialize(prediction:, string:)
+  def initialize(prediction:, save: true, string:)
     @prediction = prediction
+    @save = save
     @string = string
   end
 
@@ -8,7 +9,7 @@ class TagAdder
     if string.present? && prediction.present?
       tag_names.each do |tag_name|
 	      prediction.tag_names << tag_name
-      end && prediction.save
+      end && save && prediction.save
     end
   end
 
@@ -20,5 +21,5 @@ class TagAdder
 
   HASH_TAG_REGEX = /#\w+/
 
-  attr_reader :prediction, :string
+  attr_reader :prediction, :save, :string
 end
