@@ -5,13 +5,6 @@
   <%= TitleTagPresenter.new(@prediction.description_with_group).tag %>
 </h1>
 
-<p>
-  Created by <%= show_user(@prediction.creator) %>
-  <%= TimeInContentTagPresenter.new(@prediction.created_at).tag %>;
-  known <%= TimeInContentTagPresenter.new(@prediction.deadline).tag %><% if @prediction.judgement %>;
-  <%= render @prediction.judgement %><% end %>
-</p>
-
 <% if @prediction.tag_names.any? %>
   <p>
     <% @prediction.tag_names.each do |name| %>
@@ -19,6 +12,13 @@
     <% end %>
   </p>
 <%end %>
+
+<p>
+  Created by <%= show_user(@prediction.creator) %>
+  <%= TimeInContentTagPresenter.new(@prediction.created_at).tag %>;
+  known <%= TimeInContentTagPresenter.new(@prediction.deadline).tag %><% if @prediction.judgement %>;
+  <%= render @prediction.judgement %><% end %>
+</p>
 
 <% if @prediction.visible_to_creator? %>
   <p class='note'>
