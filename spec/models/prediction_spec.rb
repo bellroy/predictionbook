@@ -40,6 +40,28 @@ describe Prediction do
       second_prediction
     end
 
+    it 'adds tags included in the description' do
+      prediction = FactoryBot.build(
+        :prediction,
+        description: "Foo will bar before baz #foo #bar #baz"
+      )
+      prediction.save!
+      prediction.reload
+      expect(prediction.tag_names).to contain_exactly("foo", "bar", "baz")
+    end
+
+    it 'strips tags from the description' do
+      prediction = FactoryBot.build(
+        :prediction,
+        description: "Foo will bar before baz #foo #bar #baz"
+      )
+      prediction.save!
+      description = prediction.reload.description
+      expect(description).not_to include("#foo")
+      expect(description).not_to include("#bar")
+      expect(description).not_to include("#baz")
+    end
+
     it 'synchronises some properties for predictions in the same group' do
       first_prediction.reload
       expect(first_prediction.deadline).to be < 25.hours.ago

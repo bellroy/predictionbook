@@ -5,20 +5,20 @@
   <%= TitleTagPresenter.new(@prediction.description_with_group).tag %>
 </h1>
 
+<% if @prediction.tag_names.any? %>
+  <div class="tags">
+    <% @prediction.tag_names.each_with_index do |name, index| %>
+      <%= link_to("##{name}", predictions_path(params: { tag_names: [name]}), class: "color#{index % 6 + 1}") %>
+    <% end %>
+  </div>
+<%end %>
+
 <p>
   Created by <%= show_user(@prediction.creator) %>
   <%= TimeInContentTagPresenter.new(@prediction.created_at).tag %>;
   known <%= TimeInContentTagPresenter.new(@prediction.deadline).tag %><% if @prediction.judgement %>;
   <%= render @prediction.judgement %><% end %>
 </p>
-
-<% if @prediction.tag_names.any? %>
-  <p>
-    <% @prediction.tag_names.each do |name| %>
-      <%= link_to("##{name}", predictions_path(params: { tag_names: [name]})) %>
-    <% end %>
-  </p>
-<%end %>
 
 <% if @prediction.visible_to_creator? %>
   <p class='note'>

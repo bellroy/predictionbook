@@ -48,10 +48,20 @@ class Prediction < ApplicationRecord
   end
 
   before_validation(on: :create) do
-    @initial_response ||= responses.build(prediction: self, confidence: initial_confidence,
-                                          user: creator)
+    @initial_response ||= responses.build(
+      confidence: initial_confidence,
+      prediction: self,
+      user: creator
+    )
 
-    deadline_notifications.build(prediction: self, user: creator) if notify_creator
+    if notify_creator
+      deadline_notifications.build(prediction: self, user: creator)
+    end
+
+    tag_adder = TagAdder.new(prediction: self, string: description)
+    if tag_adder.call
+      self.description = tag_adder.string_without_tags
+    end
   end
 
   after_validation do
