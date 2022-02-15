@@ -58,7 +58,7 @@ class Prediction < ApplicationRecord
       deadline_notifications.build(prediction: self, user: creator)
     end
 
-    tag_adder = TagAdder.new(prediction: self, save: false, string: description)
+    tag_adder = TagAdder.new(prediction: self, string: description)
     if tag_adder.call
       self.description = tag_adder.string_without_tags
     end
