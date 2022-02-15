@@ -32,7 +32,7 @@ class TagAdder
 
   private
 
-  HASH_TAG_REGEX = /#\w+/
+  HASH_TAG_REGEX = /#[\w-]+/
 
   attr_reader :prediction, :string
 end
