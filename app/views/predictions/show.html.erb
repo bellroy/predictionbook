@@ -6,11 +6,11 @@
 </h1>
 
 <% if @prediction.tag_names.any? %>
-  <p>
-    <% @prediction.tag_names.each do |name| %>
-      <%= link_to("##{name}", predictions_path(params: { tag_names: [name]})) %>
+  <div class="tags">
+    <% @prediction.tag_names.each_with_index do |name, index| %>
+      <%= link_to("##{name}", predictions_path(params: { tag_names: [name]}), class: "color#{index % 6 + 1}") %>
     <% end %>
-  </p>
+  </div>
 <%end %>
 
 <p>
