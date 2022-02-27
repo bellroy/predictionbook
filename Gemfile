@@ -35,7 +35,8 @@ gem 'rack-cors'
 # Misc
 gem 'hashdiff'
 gem 'honeypot-captcha', git: 'https://github.com/RandieM/honeypot-captcha'
-gem 'sentry-raven'
+gem 'sentry-rails', '>= 4.0'
+gem 'sentry-ruby', '>= 4.0'
 
 group :development do
   gem 'better_errors'
