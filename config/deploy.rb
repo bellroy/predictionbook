@@ -7,7 +7,7 @@ set :deploy_to,           -> { "/srv/www/#{fetch(:application)}" }
 set :format,              :pretty
 set :keep_releases,       5
 set :application_label,   'PredictionBook'
-set :slack_webhook_urls,  ['https://hooks.slack.com/services/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']
+set :slack_webhook_urls,  ['https://hooks.slack.com/services/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']
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 
 namespace :deploy do
