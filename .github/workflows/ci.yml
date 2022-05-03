@@ -1,5 +1,7 @@
 ---
 name: Continuous Integration
+env:
+  SLACK_CHANNEL_ID: C030T55NRGF
 on:
   push:
     branches-ignore:
@@ -37,9 +39,9 @@ jobs:
         || github.ref == 'refs/heads/stable')
       uses: pullreminders/slack-action@a5a262c896a1cc80dcbae59ba95513e2dfb21439
       env:
-        SLACK_BOT_TOKEN: "${{ secrets.SLACK_BOT_TOKEN }}"
+        SLACK_BOT_TOKEN: "${{ secrets.BELLROY_SLACK_TOKEN }}"
       with:
-        args: '{\"channel\":\"C33574SJJ\",\"text\":\"* ${{ github.repository }} BUILD
+        args: '{\"channel\":\"${{ env.SLACK_CHANNEL_ID }}\",\"text\":\"* ${{ github.repository }} BUILD
           FAILURE*\", \"attachments\": [{ \"fallback\": \"Failure summary\", \"color\":
           \"#ff0000\", \"fields\": [{\"title\": \"Branch\", \"value\":\"${{ steps.extract_branch.outputs.branch
           }}\"}, {\"title\": \"Who broke it\", \"value\":\"${{ github.actor }}\"},
