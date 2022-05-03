@@ -1,7 +1,7 @@
 ---
 name: Continuous Integration
 env:
-  SLACK_CHANNEL_ID: C030T55NRGF
+  SLACK_CHANNEL_ID: C0317P7C9C2
 on:
   push:
     branches-ignore:
