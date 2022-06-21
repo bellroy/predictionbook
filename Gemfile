@@ -58,7 +58,7 @@ group :development, :test do
   gem 'hirb'
   gem 'poltergeist'
   gem 'pry'
-  gem 'pry-byebug', '3.9.0'
+  gem 'pry-byebug'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
   gem 'selenium-webdriver', require: false
