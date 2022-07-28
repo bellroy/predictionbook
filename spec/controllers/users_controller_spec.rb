@@ -22,6 +22,13 @@ describe UsersController do
         expect(assigns[:predictions].map(&:id)).to eq logged_in_user.predictions.map(&:id)
         expect(assigns[:user]).to eq target_user
       end
+
+      context 'when requesting a particular page number' do
+        it 'renders the proper template without blowing up' do
+          get :show, params: { id: target_user.id, page: '2' }
+          expect(response).to render_template :show
+        end
+      end
     end
 
     context 'logged in user and target user are different' do
