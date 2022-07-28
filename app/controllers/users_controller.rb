@@ -96,7 +96,7 @@ class UsersController < ApplicationController
     predictions = predictions.visible_to_everyone unless current_user == @user
 
     PredictionsQuery.new(
-      page: params[:page],
+      page: params[:page].to_i,
       predictions: predictions,
       status: params[:filter],
       tag_names: Array.wrap(params[:tags]).reject(&:blank?)
