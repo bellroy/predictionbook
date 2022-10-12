@@ -8,9 +8,8 @@ nixpkgs.mkShell {
     bundler
     libnotify
     niv
-    nodejs-10_x
     pkg-config
-    postgresql_11
+    postgresql_12
     readline
     ruby_2_7
     zlib

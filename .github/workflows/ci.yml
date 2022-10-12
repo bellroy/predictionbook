@@ -5,58 +5,61 @@ env:
 on:
   push:
     branches-ignore:
-    - refs/tags/*_staging
-    - refs/tags/*_production
+      - refs/tags/*_staging
+      - refs/tags/*_production
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
-    - name: Checkout branch
-      uses: actions/checkout@v2
-    - name: Extract branch name
-      shell: bash
-      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      id: extract_branch
-    - run: |
-        for f in config/*.sample
-        do
-          echo "Copying $f to ${f%.*}"
-          cp $f ${f%.*}
-        done
-    - name: Cache gems
-      uses: actions/cache@v2
-      with:
-        path: vendor/bundle
-        key: "${{ runner.OS }}-gem-cache-${{ hashFiles('**/Gemfile.lock') }}"
-        restore-keys: "${{ runner.OS }}-gem-cache-\n"
-    - uses: "cachix/install-nix-action@8d6d5e949675fbadb765c6b1a975047fa5f09b27"
-      with:
-        nix_path: nixpkgs=channel:nixos-21.05
-    - name: Run CI through nix-shell
-      run: nix-shell --run "chmod 755 ./run_ci.sh && ./run_ci.sh"
-    - name: Post to Slack if build fails
-      if: failure() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
-        || github.ref == 'refs/heads/stable')
-      uses: pullreminders/slack-action@a5a262c896a1cc80dcbae59ba95513e2dfb21439
-      env:
-        SLACK_BOT_TOKEN: "${{ secrets.BELLROY_SLACK_TOKEN }}"
-      with:
-        args: '{\"channel\":\"${{ env.SLACK_CHANNEL_ID }}\",\"text\":\"* ${{ github.repository }} BUILD
-          FAILURE*\", \"attachments\": [{ \"fallback\": \"Failure summary\", \"color\":
-          \"#ff0000\", \"fields\": [{\"title\": \"Branch\", \"value\":\"${{ steps.extract_branch.outputs.branch
-          }}\"}, {\"title\": \"Who broke it\", \"value\":\"${{ github.actor }}\"},
-          { \"title\": \"Build output\", \"value\": \"https://github.com/${{ github.repository
-          }}/commit/${{ github.sha }}/checks\", \"short\": false }]}]}'
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      - run: |
+          for f in config/*.sample
+          do
+            echo "Copying $f to ${f%.*}"
+            cp $f ${f%.*}
+          done
+      - name: Cache gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: "${{ runner.OS }}-gem-cache-${{ hashFiles('**/Gemfile.lock') }}"
+          restore-keys: "${{ runner.OS }}-gem-cache-\n"
+      - uses: "cachix/install-nix-action@8d6d5e949675fbadb765c6b1a975047fa5f09b27"
+        with:
+          nix_path: nixpkgs=channel:nixos-22.05
+      - name: Run CI through nix-shell
+        run: nix-shell --run "chmod 755 ./run_ci.sh && ./run_ci.sh"
+      - name: Post to Slack if build fails
+        if:
+          failure() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+          || github.ref == 'refs/heads/stable')
+        uses: pullreminders/slack-action@a5a262c896a1cc80dcbae59ba95513e2dfb21439
+        env:
+          SLACK_BOT_TOKEN: "${{ secrets.BELLROY_SLACK_TOKEN }}"
+        with:
+          args:
+            '{\"channel\":\"${{ env.SLACK_CHANNEL_ID }}\",\"text\":\"* ${{ github.repository }} BUILD
+            FAILURE*\", \"attachments\": [{ \"fallback\": \"Failure summary\", \"color\":
+            \"#ff0000\", \"fields\": [{\"title\": \"Branch\", \"value\":\"${{ steps.extract_branch.outputs.branch
+            }}\"}, {\"title\": \"Who broke it\", \"value\":\"${{ github.actor }}\"},
+            { \"title\": \"Build output\", \"value\": \"https://github.com/${{ github.repository
+            }}/commit/${{ github.sha }}/checks\", \"short\": false }]}]}'
     services:
       postgres:
-        image: postgres:11.5
+        image: postgres:12.12
         env:
           POSTGRES_USER: runner
           POSTGRES_DB: postgres
           POSTGRES_PASSWORD: postgres
         ports:
-        - 5432:5432
-        options: "--health-cmd pg_isready --health-interval 10s --health-timeout 5s
+          - 5432:5432
+        options:
+          "--health-cmd pg_isready --health-interval 10s --health-timeout 5s
           --health-retries 5"
     env:
       PGHOST: localhost

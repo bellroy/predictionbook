@@ -238,7 +238,7 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
-    pg (1.4.3)
+    pg (1.4.4)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
@@ -462,4 +462,4 @@ DEPENDENCIES
   wirble
 
 BUNDLED WITH
-   2.1.4
+   2.3.9
