@@ -1,4 +1,4 @@
-server 'kiwi.trikeapps.com', user: 'predictionbook-production', roles: [:app, :web, :db]
+server 'kale.trikeapps.com', user: 'predictionbook-production', roles: [:app, :web, :db]
 set :deploy_tag, Time.now.strftime('%Y%m%d%H%M')
 set :application,            'predictionbook-production'
 set :branch,                 'stable'
