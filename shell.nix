@@ -17,5 +17,6 @@ nixpkgs.mkShell {
   ++ (lib.optionals stdenv.hostPlatform.isDarwin [ libiconv darwin.apple_sdk.frameworks.CoreServices ]);
   shellHook = ''
     bundle config --local path "$PWD/vendor/bundle"
+    bundle config --local build.sassc --disable-lto
   '';
 }
