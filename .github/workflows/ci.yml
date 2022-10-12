@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
@@ -24,13 +24,14 @@ jobs:
             cp $f ${f%.*}
           done
       - name: Cache gems
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: vendor/bundle
           key: "${{ runner.OS }}-gem-cache-${{ hashFiles('**/Gemfile.lock') }}"
           restore-keys: "${{ runner.OS }}-gem-cache-\n"
-      - uses: "cachix/install-nix-action@8d6d5e949675fbadb765c6b1a975047fa5f09b27"
+      - uses: "cachix/install-nix-action@v17"
         with:
+          install_url: "https://releases.nixos.org/nix/nix-2.7.0/install"
           nix_path: nixpkgs=channel:nixos-22.05
       - name: Run CI through nix-shell
         run: nix-shell --run "chmod 755 ./run_ci.sh && ./run_ci.sh"
