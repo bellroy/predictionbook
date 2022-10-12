@@ -1,7 +1,7 @@
 ---
 name: Continuous Integration
 env:
-  SLACK_CHANNEL_ID: C0317P7C9C2
+  SLACK_CHANNEL_ID: "${{ secrets.SLACK_CHANNEL_ID }}"
 on:
   push:
     branches-ignore:
@@ -35,9 +35,7 @@ jobs:
       - name: Run CI through nix-shell
         run: nix-shell --run "chmod 755 ./run_ci.sh && ./run_ci.sh"
       - name: Post to Slack if build fails
-        if:
-          failure() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
-          || github.ref == 'refs/heads/stable')
+        if: failure() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/stable')
         uses: pullreminders/slack-action@a5a262c896a1cc80dcbae59ba95513e2dfb21439
         env:
           SLACK_BOT_TOKEN: "${{ secrets.BELLROY_SLACK_TOKEN }}"
