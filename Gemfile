@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+ruby File.read('.ruby-version')
+
 gem 'devise'
 gem 'execjs', '~> 2.7.0'
 gem 'haml-rails'
