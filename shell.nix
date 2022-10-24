@@ -8,9 +8,8 @@ nixpkgs.mkShell {
     bundler
     libnotify
     niv
-    nodejs-10_x
     pkg-config
-    postgresql_11
+    postgresql_12
     readline
     ruby_2_7
     zlib
@@ -18,5 +17,6 @@ nixpkgs.mkShell {
   ++ (lib.optionals stdenv.hostPlatform.isDarwin [ libiconv darwin.apple_sdk.frameworks.CoreServices ]);
   shellHook = ''
     bundle config --local path "$PWD/vendor/bundle"
+    bundle config --local build.sassc --disable-lto
   '';
 }
