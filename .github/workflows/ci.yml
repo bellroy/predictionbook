@@ -12,10 +12,11 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v3
+        # Pin to v3.1.0 SHA
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
       - name: Extract branch name
         shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        run: echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
         id: extract_branch
       - run: |
           for f in config/*.sample
@@ -24,7 +25,8 @@ jobs:
             cp $f ${f%.*}
           done
       - name: Cache gems
-        uses: actions/cache@v3
+        # Pin to 3.0.11 SHA
+        uses: actions/cache@9b0c1fce7a93df8e3bb8926b0d6e9d89e92f20a7
         env:
           nix-hash: |
             ${{ hashFiles('default.nix', 'shell.nix', 'nix/sources.*') }}
@@ -37,7 +39,8 @@ jobs:
             ${{ runner.OS }}-gem-cache-${{ env.nix-hash }}-${{ env.dependencies-hash }}
           restore-keys: |
             ${{ runner.OS }}-gem-cache-${{ env.nix-hash }}-
-      - uses: "cachix/install-nix-action@v17"
+      # Pin to the v18 SHA
+      - uses: "cachix/install-nix-action@daddc62a2e67d1decb56e028c9fa68344b9b7c2a"
         with:
           install_url: "https://releases.nixos.org/nix/nix-2.7.0/install"
           nix_path: nixpkgs=channel:nixos-22.05
@@ -45,17 +48,37 @@ jobs:
         run: nix-shell --run "chmod 755 ./run_ci.sh && ./run_ci.sh"
       - name: Post to Slack if build fails
         if: failure() && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/stable')
-        uses: pullreminders/slack-action@a5a262c896a1cc80dcbae59ba95513e2dfb21439
+        # Pin to the v1.23.0 SHA
+        uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844
         env:
           SLACK_BOT_TOKEN: "${{ secrets.BELLROY_SLACK_TOKEN }}"
         with:
-          args:
-            '{\"channel\":\"${{ env.SLACK_CHANNEL_ID }}\",\"text\":\"* ${{ github.repository }} BUILD
-            FAILURE*\", \"attachments\": [{ \"fallback\": \"Failure summary\", \"color\":
-            \"#ff0000\", \"fields\": [{\"title\": \"Branch\", \"value\":\"${{ steps.extract_branch.outputs.branch
-            }}\"}, {\"title\": \"Who broke it\", \"value\":\"${{ github.actor }}\"},
-            { \"title\": \"Build output\", \"value\": \"https://github.com/${{ github.repository
-            }}/commit/${{ github.sha }}/checks\", \"short\": false }]}]}'
+          channel-id: "${{ env.SLACK_CHANNEL_ID }}"
+          payload: |
+            {
+              "text": "* ${{ github.repository }} BUILD FAILURE*",
+              "attachments": [
+                {
+                  "fallback": "Failure summary",
+                  "color": "ff0000",
+                  "fields": [
+                    {
+                      "title": "Branch",
+                      "value": "${{ steps.extract_branch.outputs.branch}}"
+                    },
+                    {
+                      "title": "Who broke it",
+                      "value": "${{ github.actor }}"
+                    },
+                    {
+                      "title": "Build output",
+                      "value": "https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks",
+                      "short": false
+                    }
+                  ]
+                }
+              ]
+            }
     services:
       postgres:
         image: postgres:12.12
