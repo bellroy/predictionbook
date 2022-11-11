@@ -1,9 +1,9 @@
-server 'kiwi-staging.trikeapps.com', user: 'predictionbook-staging', roles: [:app, :web, :db]
+server 'kale-staging.trikeapps.com', user: 'predictionbook-staging', roles: [:app, :web, :db]
 
 set :application,            'predictionbook-staging'
 set :branch,                 'master'
 set :rails_env,              'staging'
-set :domain_name,            'staging.predictionbook.trikeapps.com'
+set :domain_name,            'staging.predictionbook.com'
 set :conditionally_migrate,  false
 set :assets_roles,           [:web, :app]
 set :symlinked_dot_files,    []
