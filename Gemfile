@@ -82,7 +82,7 @@ end
 
 group :linux, :production do
   # Does not build on Mountain Lion nor is it needed on OS X
-  gem 'therubyracer'
+  gem 'mini_racer'
 end
 
 group :assets do
@@ -92,3 +92,10 @@ end
 group :darwin do
   gem 'rb-fsevent', require: false # OSX specific
 end
+
+# Ruby 3.1
+
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
+gem 'psych',  '< 4'

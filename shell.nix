@@ -1,20 +1,23 @@
-{ sources ? import ./nix/sources.nix }:
+{ sources ? import ./nix/sources.nix
+, system ? builtins.currentSystem
+}:
 let
-  nixpkgs = import sources.nixpkgs { };
+  nixpkgs = import sources.nixpkgs { inherit system; };
+  ruby = nixpkgs.ruby_3_1.override { };
+  bundler = nixpkgs.bundler.override { inherit ruby; };
 in
 nixpkgs.mkShell {
-  name = "bellroy-gem-env";
+  name = "bellroy-prediction-book-env";
   buildInputs = with nixpkgs; [
-    bundler
+    # bundler
     libnotify
     niv
     pkg-config
     postgresql_12
     readline
-    ruby_2_7
+    ruby
     zlib
-  ]
-  ++ (lib.optionals stdenv.hostPlatform.isDarwin [ libiconv darwin.apple_sdk.frameworks.CoreServices ]);
+  ] ++ lib.optionals stdenv.hostPlatform.isDarwin [ libiconv darwin.apple_sdk.frameworks.CoreServices ];
   shellHook = ''
     bundle config --local path "$PWD/vendor/bundle"
     bundle config --local build.sassc --disable-lto
