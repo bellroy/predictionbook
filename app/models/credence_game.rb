@@ -2,7 +2,7 @@
 
 class CredenceGame < ApplicationRecord
   belongs_to :user
-  belongs_to :current_response, class_name: CredenceGameResponse.name, autosave: true
+  belongs_to :current_response, class_name: CredenceGameResponse.name, autosave: true, optional: true
   has_many :responses, class_name: CredenceGameResponse.name, dependent: :destroy
 
   after_create :ensure_current_response

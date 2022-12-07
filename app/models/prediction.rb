@@ -26,9 +26,9 @@ class Prediction < ApplicationRecord
   has_many :responses,              dependent: :destroy, autosave: true
   has_many :versions, autosave: true, class_name: PredictionVersion.name, dependent: :destroy
 
-  belongs_to :creator, class_name: 'User'
-  belongs_to :group
-  belongs_to :prediction_group
+  belongs_to :creator, class_name: 'User', optional: true
+  belongs_to :group, optional: true
+  belongs_to :prediction_group, optional: true
 
   # == Validations ==========================================================
   validates :description, length: { maximum: 255, message: 'Keep your description under 255 characters in length' }

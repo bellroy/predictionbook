@@ -4,11 +4,10 @@ class Response < ApplicationRecord
   include ActionView::Helpers::SanitizeHelper
 
   belongs_to :prediction
-  belongs_to :user
+  belongs_to :user, optional: true
 
   MAX_COMMENT_LENGTH = 250
 
-  validates :prediction, presence: true
   validates :user, presence: { message: 'Who are you?' }
   validates :confidence, inclusion: { in: 0..100, message: 'a probability is between 0 and 100%' },
                          allow_nil: true

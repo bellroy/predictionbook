@@ -7,9 +7,8 @@ class Notification < ApplicationRecord
            to: :prediction
 
   belongs_to :prediction
-  belongs_to :user
+  belongs_to :user, optional: true
 
-  validates :prediction, presence: true
   validates :user, presence: true, uniqueness: { scope: %i[prediction type] }
 
   scope :unsent, -> { where(sent: false) }

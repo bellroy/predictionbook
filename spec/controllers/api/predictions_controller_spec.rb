@@ -23,7 +23,7 @@ describe Api::PredictionsController, type: :controller do
 
       specify 'works', :aggregate_failures do
         expect(response).to be_ok
-        expect(response.content_type).to eq 'application/json'
+        expect(response.media_type).to eq 'application/json'
         expect(first_prediction['description_with_group']).to eq prediction.description_with_group
         expect(first_prediction['creator_label']).to eq prediction.creator.to_s
       end
@@ -33,7 +33,7 @@ describe Api::PredictionsController, type: :controller do
 
         specify 'works', :aggregate_failures do
           expect(response).to be_ok
-          expect(response.content_type).to eq 'application/json'
+          expect(response.media_type).to eq 'application/json'
           expect(first_prediction['description_with_group']).to eq prediction.description_with_group
           expect(first_prediction['creator_label']).to eq prediction.creator.to_s
         end
@@ -44,7 +44,7 @@ describe Api::PredictionsController, type: :controller do
 
         specify 'works', :aggregate_failures do
           expect(response).to be_ok
-          expect(response.content_type).to eq 'application/json'
+          expect(response.media_type).to eq 'application/json'
           expect(parsed_response).to eq []
         end
       end
@@ -55,7 +55,7 @@ describe Api::PredictionsController, type: :controller do
 
       specify 'works', :aggregate_failures do
         expect(response).not_to be_ok
-        expect(response.content_type).to eq 'application/json'
+        expect(response.media_type).to eq 'application/json'
       end
     end
   end
@@ -68,7 +68,7 @@ describe Api::PredictionsController, type: :controller do
 
       specify 'works', :aggregate_failures do
         expect(response).to be_ok
-        expect(response.content_type).to eq 'application/json'
+        expect(response.media_type).to eq 'application/json'
         expect(response.body).not_to be_empty
       end
     end
@@ -78,7 +78,7 @@ describe Api::PredictionsController, type: :controller do
 
       specify 'works', :aggregate_failures do
         expect(response).not_to be_ok
-        expect(response.content_type).to eq 'application/json'
+        expect(response.media_type).to eq 'application/json'
       end
     end
 
@@ -87,7 +87,7 @@ describe Api::PredictionsController, type: :controller do
 
       specify 'works', :aggregate_failures do
         expect(response).not_to be_ok
-        expect(response.content_type).to eq 'application/json'
+        expect(response.media_type).to eq 'application/json'
       end
     end
   end
@@ -185,7 +185,7 @@ describe Api::PredictionsController, type: :controller do
 
         specify 'works', :aggregate_failures do
           expect(response).to be_ok
-          expect(response.content_type).to eq 'application/json'
+          expect(response.media_type).to eq 'application/json'
         end
 
         it 'updates the existing prediction' do
@@ -205,7 +205,7 @@ describe Api::PredictionsController, type: :controller do
 
         specify 'works', :aggregate_failures do
           expect(response).not_to be_ok
-          expect(response.content_type).to eq 'application/json'
+          expect(response.media_type).to eq 'application/json'
         end
       end
     end
@@ -219,7 +219,7 @@ describe Api::PredictionsController, type: :controller do
 
       specify 'works', :aggregate_failures do
         expect(response).not_to be_ok
-        expect(response.content_type).to eq 'application/json'
+        expect(response.media_type).to eq 'application/json'
       end
     end
   end
