@@ -58,12 +58,10 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'hirb'
-  gem 'poltergeist'
   gem 'pry'
   gem 'pry-byebug'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
-  gem 'selenium-webdriver', require: false
   gem 'simplecov'
   gem 'timecop'
   gem 'wirble'
