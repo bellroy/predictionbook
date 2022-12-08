@@ -479,7 +479,7 @@ describe Prediction do
     it 'has an error on deadline_text if invalid' do
       prediction = described_class.new
       prediction.save
-      expect(prediction.errors.keys).to include(:deadline_text)
+      expect(prediction.errors.attribute_names).to include(:deadline_text)
     end
 
     describe 'prettied' do
