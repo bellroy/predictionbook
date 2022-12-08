@@ -1,6 +1,6 @@
 module CleanCloth
   include RedCloth
-  
+
   module Formatters
     module HTML
       include RedCloth::Formatters::HTML
@@ -31,7 +31,7 @@ module CleanCloth
       end
     end
   end
-  
+
   class TextileDoc < RedCloth::TextileDoc
     def lite_mode; true; end;
     def filter_html; true; end;
@@ -39,14 +39,14 @@ module CleanCloth
     def filter_styles; true; end
     def filter_classes; true; end;
     def no_span_caps; true; end;
-        
+
     def to_html(*rules)
       apply_rules(rules)
 
       to(CleanCloth::Formatters::HTML)
     end
   end
-    
+
   def self.new(string, restrictions = [])
     CleanCloth::TextileDoc.new( string, restrictions )
   end

@@ -5,7 +5,7 @@ require 'spec_helper'
 include CleanCloth
 describe CleanCloth do
   describe 'after manipulation' do
-    subject { described_class.new(text).reverse.upcase[0..-1].reverse.downcase.to_html }
+    subject { described_class.new(text.reverse.upcase[0..-1].reverse.downcase).to_html }
 
     context 'html' do
       let(:text) { '<br />' }
