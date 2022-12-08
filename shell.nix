@@ -1,6 +1,8 @@
 { sources ? import ./nix/sources.nix }:
 let
   nixpkgs = import sources.nixpkgs { };
+  ruby = nixpkgs.ruby_3_1.override { jemallocSupport = false; };
+  bundler = nixpkgs.bundler.override { inherit ruby; };
 in
 nixpkgs.mkShell {
   name = "bellroy-gem-env";
@@ -11,7 +13,7 @@ nixpkgs.mkShell {
     pkg-config
     postgresql_12
     readline
-    ruby_2_7
+    ruby
     zlib
   ]
   ++ (lib.optionals stdenv.hostPlatform.isDarwin [ libiconv darwin.apple_sdk.frameworks.CoreServices ]);
