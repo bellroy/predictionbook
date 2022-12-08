@@ -6,7 +6,7 @@ gem 'devise'
 gem 'execjs', '~> 2.7.0'
 gem 'haml-rails'
 gem 'jquery-rails'
-gem 'rails', '< 6.1'
+gem 'rails', '< 7.0'
 gem 'rails-observers'
 
 # Models
