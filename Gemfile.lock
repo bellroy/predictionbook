@@ -152,6 +152,7 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
     docile (1.4.0)
+    ed25519 (1.3.0)
     email_spec (2.2.1)
       htmlentities (~> 4.3.3)
       launchy (~> 2.1)
@@ -448,6 +449,7 @@ DEPENDENCIES
   coffee-rails
   database_cleaner
   devise
+  ed25519
   email_spec
   exception_notification
   execjs (~> 2.7.0)
