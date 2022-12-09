@@ -30,7 +30,9 @@ class PredictionGroup < ApplicationRecord
   def must_have_predictions
     errors.add(:predictions, 'cannot be empty') if predictions.blank?
     predictions.each_with_index do |prediction, index|
-      prediction.errors.each do |attribute, message|
+      prediction.errors.each do |error|
+        attribute = error.attribute
+        message = error.message
         errors.add("prediction_#{index}_#{attribute}".to_sym, message)
       end
     end

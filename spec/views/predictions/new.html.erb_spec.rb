@@ -27,7 +27,7 @@ describe 'predictions/new' do
   it 'has a hidden field with the predictions UUID' do
     expect(prediction.uuid).not_to be_blank
     render
-    expect(rendered).to include '<input type="hidden" ' \
+    expect(rendered).to include '<input autocomplete="off" type="hidden" ' \
       "value=\"#{prediction.uuid}\" name=\"prediction[uuid]\" id=\"prediction_uuid\" />"
   end
 

@@ -6,7 +6,7 @@ gem 'devise'
 gem 'execjs', '~> 2.7.0'
 gem 'haml-rails'
 gem 'jquery-rails'
-gem 'rails', '~> 5.0'
+gem 'rails', '< 7.0'
 gem 'rails-observers'
 
 # Models
@@ -58,12 +58,10 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'hirb'
-  gem 'poltergeist'
   gem 'pry'
   gem 'pry-byebug'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
-  gem 'selenium-webdriver', require: false
   gem 'simplecov'
   gem 'timecop'
   gem 'wirble'
@@ -82,7 +80,7 @@ end
 
 group :linux, :production do
   # Does not build on Mountain Lion nor is it needed on OS X
-  gem 'therubyracer'
+  gem 'mini_racer'
 end
 
 group :assets do
@@ -92,3 +90,14 @@ end
 group :darwin do
   gem 'rb-fsevent', require: false # OSX specific
 end
+
+# Ruby 3.1 needed - We might be able to remove them after Rails 7 upgrade.
+
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
+
+# Need to be locked until we move to Rails => 7.0.3.1 -> There is a way we can update it, but we need to make changes
+# to existing code. https://bugs.ruby-lang.org/issues/17866 , https://github.com/rails/rails/commit/179d0a1f474ada02e0030ac3bd062fc653765dbe
+gem 'psych',  '< 4'
+gem 'zeitwerk', '< 2.6.4' # remove after merging: https://github.com/Shopify/packwerk/pull/251

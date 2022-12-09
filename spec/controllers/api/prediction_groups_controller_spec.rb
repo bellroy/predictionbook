@@ -16,7 +16,7 @@ module Api
 
         specify do
           expect(response).to be_ok
-          expect(response.content_type).to eq 'application/json'
+          expect(response.media_type).to eq 'application/json'
           expect(response.body).to include prediction_group.description
         end
       end
@@ -26,7 +26,7 @@ module Api
 
         specify do
           expect(response).not_to be_ok
-          expect(response.content_type).to eq 'application/json'
+          expect(response.media_type).to eq 'application/json'
         end
       end
     end
@@ -40,7 +40,7 @@ module Api
         specify do
           show
           expect(response).to be_ok
-          expect(response.content_type).to eq 'application/json'
+          expect(response.media_type).to eq 'application/json'
           expect(response.body).not_to be_empty
         end
       end
@@ -51,7 +51,7 @@ module Api
         specify do
           show
           expect(response).not_to be_ok
-          expect(response.content_type).to eq 'application/json'
+          expect(response.media_type).to eq 'application/json'
         end
       end
 
@@ -157,7 +157,7 @@ module Api
 
           specify do
             expect(response).to be_ok
-            expect(response.content_type).to eq 'application/json'
+            expect(response.media_type).to eq 'application/json'
           end
 
           it 'updates the existing prediction_group' do
@@ -177,7 +177,7 @@ module Api
 
           specify do
             expect(response).not_to be_ok
-            expect(response.content_type).to eq 'application/json'
+            expect(response.media_type).to eq 'application/json'
           end
         end
       end
@@ -191,7 +191,7 @@ module Api
 
         specify do
           expect(response).not_to be_ok
-          expect(response.content_type).to eq 'application/json'
+          expect(response.media_type).to eq 'application/json'
         end
       end
     end

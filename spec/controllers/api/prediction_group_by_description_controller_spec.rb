@@ -40,7 +40,7 @@ module Api
           specify do
             update
             expect(response).to be_ok
-            expect(response.content_type).to eq 'application/json'
+            expect(response.media_type).to eq 'application/json'
 
             description = new_prediction_group_params[:description]
             prediction_group.reload
@@ -65,7 +65,7 @@ module Api
 
           specify do
             expect(response).not_to be_ok
-            expect(response.content_type).to eq 'application/json'
+            expect(response.media_type).to eq 'application/json'
           end
         end
       end
@@ -79,7 +79,7 @@ module Api
 
         specify do
           expect(response).not_to be_ok
-          expect(response.content_type).to eq 'application/json'
+          expect(response.media_type).to eq 'application/json'
         end
       end
     end

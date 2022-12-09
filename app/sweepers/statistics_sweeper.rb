@@ -9,7 +9,7 @@ class StatisticsSweeper < ActionController::Caching::Sweeper
     associated_users = judgement.prediction.wagers.collect(&:user).uniq
     clear_user_caches(associated_users)
     clear_group_caches(associated_users)
-    Rails.cache.clear(global_statistics_cache_key)
+    Rails.cache.delete(global_statistics_cache_key)
   end
 
   private
@@ -17,8 +17,8 @@ class StatisticsSweeper < ActionController::Caching::Sweeper
   def clear_user_caches(associated_users)
     cache = Rails.cache
     associated_users.each do |user|
-      cache.clear(user_statistics_cache_key(user))
-      cache.clear(user_calibration_scores_cache_key(user))
+      cache.delete(user_statistics_cache_key(user))
+      cache.delete(user_calibration_scores_cache_key(user))
     end
   end
 

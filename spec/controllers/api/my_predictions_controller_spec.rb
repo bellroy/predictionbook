@@ -24,7 +24,7 @@ describe Api::MyPredictionsController, type: :controller do
 
         specify 'works', :aggregate_failures do
           expect(response).to be_ok
-          expect(response.content_type).to eq 'application/json'
+          expect(response.media_type).to eq 'application/json'
         end
 
         it 'includes my prediction' do
@@ -50,7 +50,7 @@ describe Api::MyPredictionsController, type: :controller do
 
       specify 'works', :aggregate_failures do
         expect(response).not_to be_ok
-        expect(response.content_type).to eq 'application/json'
+        expect(response.media_type).to eq 'application/json'
       end
     end
   end

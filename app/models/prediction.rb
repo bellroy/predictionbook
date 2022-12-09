@@ -26,9 +26,9 @@ class Prediction < ApplicationRecord
   has_many :responses,              dependent: :destroy, autosave: true
   has_many :versions, autosave: true, class_name: PredictionVersion.name, dependent: :destroy
 
-  belongs_to :creator, class_name: 'User'
-  belongs_to :group
-  belongs_to :prediction_group
+  belongs_to :creator, class_name: 'User', optional: true
+  belongs_to :group, optional: true
+  belongs_to :prediction_group, optional: true
 
   # == Validations ==========================================================
   validates :description, length: { maximum: 255, message: 'Keep your description under 255 characters in length' }
@@ -65,7 +65,9 @@ class Prediction < ApplicationRecord
   end
 
   after_validation do
-    errors.add(:deadline_text, errors[:deadline])
+    if errors[:deadline].any?
+      errors.add(:deadline_text, errors[:deadline])
+    end
   end
 
   before_save :create_version_if_required
@@ -253,7 +255,7 @@ class Prediction < ApplicationRecord
   end
 
   def confidence_on_response
-    if @initial_response && @initial_response.errors[:confidence]
+    if @initial_response && @initial_response.errors[:confidence].any?
       errors.add(:initial_confidence, @initial_response.errors[:confidence])
     end
   end

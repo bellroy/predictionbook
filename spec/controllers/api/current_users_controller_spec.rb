@@ -13,7 +13,7 @@ describe Api::CurrentUsersController, type: :controller do
 
       specify do
         expect(response).to be_ok
-        expect(response.content_type).to eq 'application/json'
+        expect(response.media_type).to eq 'application/json'
         expect(response.body).to include user.login
       end
     end
@@ -23,7 +23,7 @@ describe Api::CurrentUsersController, type: :controller do
 
       specify do
         expect(response).not_to be_ok
-        expect(response.content_type).to eq 'application/json'
+        expect(response.media_type).to eq 'application/json'
       end
     end
   end

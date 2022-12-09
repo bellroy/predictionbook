@@ -1,5 +1,6 @@
-PredictionBook::Application.routes.draw do
-  # start with the root
+Rails.application.routes.draw do
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+    # start with the root
   root to: 'predictions#home'
 
   # then devise, which is its own thing
