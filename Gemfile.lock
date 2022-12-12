@@ -87,6 +87,7 @@ GEM
       sshkit (>= 1.6.1, != 1.7.0)
     awesome_print (1.9.2)
     bcrypt (3.1.18)
+    bcrypt_pbkdf (1.1.0)
     better_errors (2.9.1)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
@@ -436,6 +437,7 @@ DEPENDENCIES
   RedCloth
   active_model_serializers
   awesome_print
+  bcrypt_pbkdf
   better_errors
   binding_of_caller
   bullet
@@ -501,4 +503,4 @@ RUBY VERSION
    ruby 3.1.2p20
 
 BUNDLED WITH
-   2.3.9
+   2.3.25

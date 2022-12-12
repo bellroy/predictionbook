@@ -41,6 +41,7 @@ gem 'sentry-rails', '>= 4.0'
 gem 'sentry-ruby', '>= 4.0'
 # Gem ed25519 is required by net-ssh to allow deploys when using this host key: https://github.com/net-ssh/net-ssh#host-keys
 gem 'ed25519'
+gem 'bcrypt_pbkdf'
 
 group :development do
   gem 'better_errors'
