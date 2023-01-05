@@ -13,7 +13,7 @@
     <% %>
     <%= f.select_field :visibility, raw(Visibility.select_options_html((current_user.try(:group_members) || []).reject(&:invitee?).map(&:group), @prediction.visibility, @prediction.group_id)), label: 'Visibility' %>
     <p class='note'><%= render 'private_note' %></p>
-    <p class='tag-message'>You can tag your prediction by adding a response containing hashtags (e.g. #sports, #politics, etc...).</p>
+    <p class='tag-message'>You can categorize your prediction by adding hashtags (e.g. #sports, #politics, etc...) to the description or adding them afterwards in a response.</p>
     <%= f.submit 'Lock it in!' %>
   </div>
 <% end %>
