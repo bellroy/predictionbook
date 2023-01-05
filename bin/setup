@@ -22,7 +22,7 @@ FileUtils.chdir APP_ROOT do
   puts '== Installing dependencies =='
   system! 'gem install bundler --conservative'
 
-  puts "\n== Running submodule update ==ß"
+  puts "\n== Running submodule update =="
   system! 'git submodule update --init'
 
   puts "\n== Installing Gems =="
