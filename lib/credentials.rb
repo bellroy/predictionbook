@@ -3,7 +3,7 @@
 require 'ostruct'
 
 module Credentials
-  def self.load_config
+  def self.load_dev_config
     credentials_file_path = Rails.root.join('config', 'credentials.yml')
     raise "Missing '#{credentials_file_path}'" unless File.exist?(credentials_file_path)
 
