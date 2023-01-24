@@ -1,0 +1,25 @@
+common: &common
+  adapter: postgresql
+  encoding: unicode
+  host: <%= PredictionBook.database_config[:host] %>
+  database: <%= PredictionBook.database_config[:database] %>
+
+development:
+  <<: *common
+
+production:
+  <<: *common
+  username: <%= PredictionBook.database_config[:username] %>
+  password: <%= PredictionBook.database_config[:password] %>
+  enconding: <%= PredictionBook.database_config[:enconding] %>
+  pool: <%= PredictionBook.database_config[:pool] %>
+  reconnect: <%= PredictionBook.database_config[:reconnect] %>
+
+staging:
+  <<: *common
+  username: <%= PredictionBook.database_config[:username] %>
+  password: <%= PredictionBook.database_config[:password] %>
+
+test:
+  <<: *common
+  database: predictionbook_test

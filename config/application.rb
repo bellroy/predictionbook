@@ -24,6 +24,10 @@ require_relative '../lib/credentials'
 Bundler.require(*Rails.groups)
 
 module PredictionBook
+  def self.database_config
+    @database_config = PredictionBook::Application.credentials.database.symbolize_keys
+  end
+
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1

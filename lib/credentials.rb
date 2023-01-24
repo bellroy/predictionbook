@@ -8,6 +8,6 @@ module Credentials
     raise "Missing '#{credentials_file_path}'" unless File.exist?(credentials_file_path)
 
     credentials = YAML.load_file(credentials_file_path)
-    PredictionBook::Application.config.credentials = OpenStruct.new(credentials)
+    PredictionBook::Application.credentials = OpenStruct.new(credentials)
   end
 end
