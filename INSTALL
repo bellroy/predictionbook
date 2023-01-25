@@ -7,10 +7,10 @@ Something like:
 --------------------
 $ git clone git://github.com/tricycle/predictionbook.git
 $ cd predictionbook
-$ cp config/database.yml.sample config/database.yml # update db user / password / database names if necessary
-$ cp config/credentials.yml.sample config/credentials.yml
 $ bin/setup
-$ rails secret # run twice ; set 'session_secret' / 'rest_auth_site_key' in credentials.yml
+$ Run `EDITOR='any of your choise (nano, vim)' bundle exec rails credentials:edit`
+$ Copy content from credentials.yml.sample
+$ Paste contents in the encrypted file and save
 $ rails spec # run specs
 $ script/rails server
 $ ^Z # ctrl+z
@@ -21,5 +21,5 @@ $ fg
 
 === Google Analytics
 
-* In file "config/credentials.yml"
+* In file "config/credentials.yml.enc"
   + replace [your_analytics_tracker_id] with your Google Analytics tracker id
