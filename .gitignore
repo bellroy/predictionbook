@@ -22,3 +22,6 @@ tags*
 vendor
 .direnv
 .envrc
+
+/config/master.key
+/config/credentials.yml.enc
