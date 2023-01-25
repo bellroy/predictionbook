@@ -2,10 +2,10 @@ common: &common
   adapter: postgresql
   encoding: unicode
   host: <%= PredictionBook.database_config[:host] %>
-  database: <%= PredictionBook.database_config[:database] %>
 
 development:
   <<: *common
+  database: predictionbook_development
 
 production:
   <<: *common
