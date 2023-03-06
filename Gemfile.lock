@@ -107,6 +107,8 @@ GEM
       sshkit (>= 1.9.0)
     capistrano-bundler (2.1.0)
       capistrano (~> 3.1)
+    capistrano-ext (1.2.1)
+      capistrano (>= 1.0.0)
     capistrano-git-with-submodules (2.0.6)
       capistrano (~> 3.7)
     capistrano-rails (1.6.2)
@@ -440,8 +442,9 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bullet
-  capistrano (>= 3.11.0)
+  capistrano
   capistrano-bundler
+  capistrano-ext
   capistrano-git-with-submodules
   capistrano-rails
   capistrano-rvm

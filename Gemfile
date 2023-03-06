@@ -47,10 +47,11 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'bullet'
-  gem 'capistrano', '>= 3.11.0', require: false
+  gem 'capistrano'
+  gem 'capistrano-ext'
   gem 'capistrano-bundler', require: false
-  gem 'capistrano-git-with-submodules', require: false
-  gem 'capistrano-rails', group: :development, require: false
+  gem 'capistrano-git-with-submodules'
+  gem 'capistrano-rails'
   gem 'capistrano-rvm', require: false
   gem 'httparty'
   gem 'puma'
