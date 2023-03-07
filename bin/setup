@@ -26,7 +26,7 @@ FileUtils.chdir APP_ROOT do
   system! 'git submodule update --init'
 
   puts "\n== Installing Gems =="
-  system('bundle check') || system!('bundle install')
+  system!('bundle install')
   # puts "\n== Copying sample files =="
   # unless File.exist?('config/database.yml')
   #   FileUtils.cp 'config/database.yml.sample', 'config/database.yml'
