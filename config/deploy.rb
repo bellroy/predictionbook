@@ -9,13 +9,8 @@ set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 set :slack_webhook_urls,  [ENV['SLACK_WEBHOOK_URL']].compact
 
 namespace :deploy do
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
-
+  before :starting, 'precheck:all'
+  after :finished, :update_slack_message
   after :publishing, :restart
-  after 'deploy:cleanup', 'deploy:tag'
+  after :cleanup, :tag
 end

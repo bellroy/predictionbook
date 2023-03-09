@@ -178,5 +178,3 @@ namespace :deploy do
     end
   end
 end
-
-before 'deploy:starting', 'deploy:precheck:all'

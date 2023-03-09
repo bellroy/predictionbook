@@ -20,6 +20,4 @@ namespace :deploy do
       SlackNotifier.singleton.post_deployment_failure_message
     end
   end
-
-  after :finished, :update_slack_message
 end
