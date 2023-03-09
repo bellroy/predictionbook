@@ -15,7 +15,7 @@ install_plugin Capistrano::SCM::Git
 require 'capistrano/scm/git-with-submodules'
 install_plugin Capistrano::SCM::Git::WithSubmodules
 
-Dir.glob('lib/capistrano/tasks/trike/*.rake').each { |r| import r }
+Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
 # Includes tasks from other gems included in your Gemfile
 #
 # For documentation on these, see for example:
