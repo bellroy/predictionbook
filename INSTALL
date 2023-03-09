@@ -8,8 +8,8 @@ Something like:
 $ git clone git://github.com/tricycle/predictionbook.git
 $ cd predictionbook
 $ bin/setup
-$ Run `EDITOR='any of your choise (nano, vim)' bundle exec rails credentials:edit`
-$ Copy content from credentials.yml.sample
+$ Run `EDITOR='any of your choise (nano, vim)' bundle exec rails credentials:edit --environment development`
+$ Copy content from config/credentials/development.yml.sample
 $ Paste contents in the encrypted file and save
 $ rails spec # run specs
 $ script/rails server
@@ -21,5 +21,5 @@ $ fg
 
 === Google Analytics
 
-* In file "config/credentials.yml.enc"
+* In file "config/credentials/development.yml.enc"
   + replace [your_analytics_tracker_id] with your Google Analytics tracker id
