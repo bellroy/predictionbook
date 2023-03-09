@@ -47,14 +47,17 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'bullet'
+  gem 'httparty'
+  gem 'puma'
+end
+
+group :deploy do
   gem 'capistrano'
   gem 'capistrano-ext'
   gem 'capistrano-bundler', require: false
   gem 'capistrano-git-with-submodules'
   gem 'capistrano-rails'
   gem 'capistrano-rvm', require: false
-  gem 'httparty'
-  gem 'puma'
 end
 
 group :development, :test do
