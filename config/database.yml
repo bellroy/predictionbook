@@ -14,6 +14,17 @@ test:
   <<: *default
   database: predictionbook_test
 
+credentials: &credentials
+  adapter: <%= Rails.application.credentials.dig(:database, :adapter) %>
+  host: <%= Rails.application.credentials.dig(:database, :host) %>
+  database: <%= Rails.application.credentials.dig(:database, :database) %>
+  username: <%= Rails.application.credentials.dig(:database, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :password) %>
+  pool: <%= Rails.application.credentials.dig(:database, :pool) %>
+  reconnect: <%= Rails.application.credentials.dig(:database, :reconnect) %>
+
+staging:
+  <<: *credentials
+
 production:
-  <<: *default
-  database: predictionbook_production
+  <<: *credentials
