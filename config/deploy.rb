@@ -1,7 +1,7 @@
 set :repo_url,            'git@github.com:bellroy/predictionbook.git'
 set :secrets_repository,  'git@git.trikeapps.com:settings/predictionbook.git'
 set :linked_dirs,         ['public/assets', 'log']
-set :symlinked_configs,   %w(database.yml credentials.yml)
+set :symlinked_configs,   ['database.yml', "credentials/#{fetch(:stage)}.key"]
 set :engine,              'passenger'
 set :deploy_to,           -> { "/srv/www/#{fetch(:application)}" }
 set :format,              :pretty
