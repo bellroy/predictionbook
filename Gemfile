@@ -29,7 +29,6 @@ gem 'thin'
 
 # App housekeeping
 gem 'exception_notification'
-gem 'whenever'
 
 # allowing CORS
 gem 'rack-cors'
@@ -58,6 +57,7 @@ group :deploy do
   gem 'capistrano-git-with-submodules'
   gem 'capistrano-rails'
   gem 'capistrano-rvm', require: false
+  gem 'whenever'
 end
 
 group :development, :test do
