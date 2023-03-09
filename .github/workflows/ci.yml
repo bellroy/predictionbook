@@ -117,6 +117,20 @@ jobs:
           fi
           echo "STAGE=$STAGE" >> $GITHUB_ENV
           echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+      - name: Set secrets to environment variables
+        shell: bash
+        id: set_secrets_to_environment_variables
+        run: |
+          echo "SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }}" >> $GITHUB_ENV
+          if [[ "${GITHUB_REF#refs/heads/}" == "stable" ]]; then
+            echo "PRODUCTION_SERVER_HOSTNAME=${{ secrets.PRODUCTION_SERVER_HOSTNAME }}" >> $GITHUB_ENV
+            echo "PRODUCTION_SERVER_USERNAME=${{ secrets.PRODUCTION_SERVER_USERNAME }}" >> $GITHUB_ENV
+            echo "RAILS_PRODUCTION_KEY=${{ secrets.RAILS_PRODUCTION_KEY }}" >> $GITHUB_ENV
+          else
+            echo "STAGING_SERVER_HOSTNAME=${{ secrets.STAGING_SERVER_HOSTNAME }}" >> $GITHUB_ENV
+            echo "STAGING_SERVER_USERNAME=${{ secrets.STAGING_SERVER_USERNAME }}" >> $GITHUB_ENV
+            echo "RAILS_STAGING_KEY=${{ secrets.RAILS_STAGING_KEY }}" >> $GITHUB_ENV
+          fi
       - name: Deploy with capistrano
         id: cap_deploy
         run: |
