@@ -46,7 +46,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'bullet'
-  gem 'httparty'
   gem 'puma'
 end
 
@@ -58,6 +57,7 @@ group :deploy do
   gem 'capistrano-rails'
   gem 'capistrano-rvm', require: false
   gem 'whenever'
+  gem 'httparty'
 end
 
 group :development, :test do
