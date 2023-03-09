@@ -7,9 +7,11 @@ set :keep_releases,       5
 set :application_label,   'PredictionBook'
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 set :slack_webhook_urls,  [ENV['SLACK_WEBHOOK_URL']].compact
+append :linked_files,     -> { "config/credentials/#{fetch(:stage)}.key" }
 
 namespace :deploy do
   before :starting, 'precheck:all'
+  before 'symlink:linked_files', :set_credentials_key
   after :finished, :update_slack_message
   after :publishing, :restart
   after :cleanup, :tag
