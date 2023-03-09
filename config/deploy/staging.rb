@@ -1,4 +1,4 @@
-server 'kale-staging.trikeapps.com', user: 'predictionbook-staging', roles: [:app, :web, :db]
+server ENV['STAGING_SERVER_HOSTNAME'], user: ENV['STAGING_SERVER_USERNAME'], roles: [:app, :web, :db]
 
 set :application,            'predictionbook-staging'
 set :branch,                 -> { ENV.fetch('DEPLOY_BRANCH', 'master') }

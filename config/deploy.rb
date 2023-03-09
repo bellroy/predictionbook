@@ -6,7 +6,7 @@ set :format,              :pretty
 set :keep_releases,       5
 set :application_label,   'PredictionBook'
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
-set :slack_webhook_urls,  [ENV['SLACK_WEBHOOK_URL']]
+set :slack_webhook_urls,  [ENV['SLACK_WEBHOOK_URL']].compact
 
 namespace :deploy do
   desc 'Restart application'
