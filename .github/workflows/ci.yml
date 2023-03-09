@@ -117,11 +117,6 @@ jobs:
           fi
           echo "STAGE=$STAGE" >> $GITHUB_ENV
           echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-      # Pin to the v18 SHA
-      - uses: "cachix/install-nix-action@daddc62a2e67d1decb56e028c9fa68344b9b7c2a"
-        with:
-          install_url: "https://releases.nixos.org/nix/nix-2.7.0/install"
-          nix_path: nixpkgs=channel:nixos-22.05
       - name: Deploy with capistrano
         id: cap_deploy
         run: |
