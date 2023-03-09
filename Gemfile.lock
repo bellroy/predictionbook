@@ -109,8 +109,6 @@ GEM
       capistrano (~> 3.1)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
-    capistrano-git-with-submodules (2.0.6)
-      capistrano (~> 3.7)
     capistrano-rails (1.6.2)
       capistrano (~> 3.1)
       capistrano-bundler (>= 1.1, < 3)
@@ -445,7 +443,6 @@ DEPENDENCIES
   capistrano
   capistrano-bundler
   capistrano-ext
-  capistrano-git-with-submodules
   capistrano-rails
   capistrano-rvm
   capybara

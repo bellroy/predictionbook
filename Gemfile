@@ -53,7 +53,6 @@ group :deploy do
   gem 'capistrano'
   gem 'capistrano-ext'
   gem 'capistrano-bundler', require: false
-  gem 'capistrano-git-with-submodules'
   gem 'capistrano-rails'
   gem 'capistrano-rvm', require: false
   gem 'whenever'

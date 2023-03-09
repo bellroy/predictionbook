@@ -11,10 +11,6 @@ require 'whenever/capistrano'
 require 'capistrano/scm/git'
 install_plugin Capistrano::SCM::Git
 
-# Use Git with submodules
-require 'capistrano/scm/git-with-submodules'
-install_plugin Capistrano::SCM::Git::WithSubmodules
-
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
 # Includes tasks from other gems included in your Gemfile
 #
