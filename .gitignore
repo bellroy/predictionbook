@@ -22,9 +22,6 @@ vendor
 .direnv
 .envrc
 
-/config/credentials/development.key
+/config/credentials/*.key
 /config/credentials/development.yml.enc
-/config/credentials/staging.key
-/config/credentials/staging.yml.enc
-/config/credentials/production.key
-/config/credentials/production.yml.enc
+/config/credentials/test.yml.enc
