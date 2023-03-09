@@ -8,6 +8,7 @@ set :format,              :pretty
 set :keep_releases,       5
 set :application_label,   'PredictionBook'
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
+set :slack_webhook_urls,  [ENV['SLACK_WEBHOOK_URL']]
 
 namespace :deploy do
   desc 'Create a symlink in the release path to all _symlinked_configs_'

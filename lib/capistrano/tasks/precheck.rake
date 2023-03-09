@@ -43,11 +43,9 @@ namespace :deploy do
       `git symbolic-ref --short HEAD`.chomp
     end
 
-    DEV_ANNOUNCE_SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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'
-
     def notifier
       @notifier ||= SlackNotifier.singleton(
-        webhook_urls: fetch(:slack_webhook_urls, [DEV_ANNOUNCE_SLACK_WEBHOOK_URL]),
+        webhook_urls: fetch(:slack_webhook_urls, []),
         deploy_message: deploy_message,
         message_attachments: message_attachments
       )
