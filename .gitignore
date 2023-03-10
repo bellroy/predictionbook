@@ -4,8 +4,6 @@ log/*.log
 tmp/
 .sass-cache/
 public/assets
-config/database.yml
-config/credentials.yml
 *.DS_Store
 public/uploads/*
 cache
@@ -23,3 +21,7 @@ tags*
 vendor
 .direnv
 .envrc
+
+/config/credentials/*.key
+/config/credentials/development.yml.enc
+/config/credentials/test.yml.enc

@@ -26,11 +26,15 @@ FileUtils.chdir APP_ROOT do
   system! 'git submodule update --init'
 
   puts "\n== Installing Gems =="
-  system('bundle check') || system!('bundle install')
-  # puts "\n== Copying sample files =="
-  # unless File.exist?('config/database.yml')
-  #   FileUtils.cp 'config/database.yml.sample', 'config/database.yml'
-  # end
+  system!('bundle install')
+
+  puts "\n== Creating credentials =="
+
+  if File.exists?("#{APP_ROOT}/config/credentials/development.yml.enc")
+    puts "\nAlready got development encrypted credentials file."
+  else
+    system! "EDITOR=any bundle exec rails credentials:edit --environment development"
+  end
 
   puts "\n== Preparing database =="
   system! 'bundle exec rake db:drop db:create db:schema:load db:seed'
@@ -43,4 +47,9 @@ FileUtils.chdir APP_ROOT do
 
   puts "\n== Restarting application server =="
   system! 'bin/rails restart'
+
+  puts "\nThere is only one more thing to do!\n
+  1 - Copy the contents of config/credentials.yml.sample
+  2 - Run `EDITOR='any of your choice (vim, nano)' bundle exec rails credentials:edit --environment development`
+  3 - Paste the contents, save the file, and you are good to go! :)\n"
 end

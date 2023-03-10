@@ -1,0 +1,30 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  host: localhost
+
+development:
+  <<: *default
+  database: predictionbook_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: predictionbook_test
+
+credentials: &credentials
+  adapter: <%= Rails.application.credentials.dig(:database, :adapter) %>
+  host: <%= Rails.application.credentials.dig(:database, :host) %>
+  database: <%= Rails.application.credentials.dig(:database, :database) %>
+  username: <%= Rails.application.credentials.dig(:database, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :password) %>
+  pool: <%= Rails.application.credentials.dig(:database, :pool) %>
+  reconnect: <%= Rails.application.credentials.dig(:database, :reconnect) %>
+
+staging:
+  <<: *credentials
+
+production:
+  <<: *credentials
