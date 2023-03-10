@@ -92,7 +92,7 @@ jobs:
       RAILS_ENV: test
 
   deploy:
-    if: github.ref == 'refs/heads/fix-deployments' || github.ref == 'refs/heads/stable'
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/stable'
     needs:
       - build
     defaults:
