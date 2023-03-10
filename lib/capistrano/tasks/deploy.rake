@@ -11,7 +11,8 @@ namespace :deploy do
   desc 'Fetch environment credentials key'
   task :set_credentials_key do
     on roles(:app), in: :sequence, wait: 5 do
-      execute :echo, "\"$RAILS_#{fetch(:stage).upcase}_KEY\" >> #{shared_path}/config/credentials/#{fetch(:stage)}.key"
+      execute :mkdir, "-p #{shared_path}/config/credentials"
+      execute :echo, "\"$RAILS_#{fetch(:stage).upcase}_KEY\" > #{shared_path}/config/credentials/#{fetch(:stage)}.key"
     end
   end
 

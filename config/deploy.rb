@@ -11,7 +11,7 @@ append :linked_files,     "config/credentials/#{fetch(:stage)}.key"
 
 namespace :deploy do
   before :starting, 'precheck:all'
-  before 'symlink:linked_files', :set_credentials_key
+  after 'precheck:all', :set_credentials_key
   after :finished, :update_slack_message
   after :publishing, :restart
   after :cleanup, :tag
