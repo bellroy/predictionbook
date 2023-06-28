@@ -11,7 +11,7 @@
   ] (system:
   let
     pkgs = import inputs.nixpkgs { inherit system; };
-    ruby = pkgs.ruby_3_1;
+    ruby = pkgs.ruby_3_2;
     bundler = pkgs.bundler.override { inherit ruby; };
     developmentInputs = with pkgs; [
       bundler

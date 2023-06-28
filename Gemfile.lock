@@ -499,7 +499,7 @@ DEPENDENCIES
   zeitwerk (< 2.6.4)
 
 RUBY VERSION
-   ruby 3.1.2p20
+   ruby 3.2.2p53
 
 BUNDLED WITH
-   2.3.25
+   2.4.13
