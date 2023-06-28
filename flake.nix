@@ -22,7 +22,7 @@
       ruby
       zlib
     ]
-    ++ (lib.optionals stdenv.hostPlatform.isDarwin [ libiconv darwin.apple_sdk.frameworks.CoreServices ]);
+    ++ (lib.optionals stdenv.hostPlatform.isDarwin [ pkgs.libiconv pkgs.darwin.apple_sdk.frameworks.CoreServices ]);
   in
   {
     devShells.default= pkgs.mkShell {
