@@ -19,7 +19,7 @@ html {
 body {
   background: transparent image-url("bg-gradient.png") repeat-x top left;
   margin: 0;
-  padding: 17px 0 20px;
+  padding: 0px 0 20px;
 }
 #container {
   margin: 0 auto;
@@ -217,6 +217,37 @@ ul#nav-menu li a {
   overflow: hidden;
   width: inherit;
 }
+
+.preheader {
+  background-color: #221e1f;
+  color: #fff;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: normal;
+  height: 29px;
+  margin-bottom: 17px;
+  overflow: hidden;
+  padding: 8px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.preheader a {
+  color: white;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+.preheader a:hover {
+  background-color: #ccc;
+}
+
+.preheader a:visited {
+  color: white;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
 a#logo {
   float: left;
   margin-right: 10px;
