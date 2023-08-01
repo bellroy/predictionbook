@@ -15,6 +15,8 @@
     bundler = pkgs.bundler.override { inherit ruby; };
     developmentInputs = with pkgs; [
       bundler
+      chromedriver
+      chromium
       libnotify
       pkg-config
       postgresql_12
@@ -36,4 +38,3 @@
     };
   });
 }
-
