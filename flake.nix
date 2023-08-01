@@ -15,9 +15,6 @@
     bundler = pkgs.bundler.override { inherit ruby; };
     developmentInputs = with pkgs; [
       bundler
-      chromedriver
-      chromium
-      gnumake
       libnotify
       pkg-config
       postgresql_12
