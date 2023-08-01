@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require 'csv'
+
 class PredictionsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create judge withdraw edit update]
+  before_action :authenticate_user!, only: %i[new create judge withdraw edit update mine]
   before_action :find_prediction, only: %i[judge show withdraw edit update]
   before_action :must_be_authorized_for_prediction, only: %i[withdraw edit update show]
   before_action :ensure_statistics, only: [:index]
@@ -52,6 +54,28 @@ class PredictionsController < ApplicationController
     @show_statistics = false
   end
 
+  def mine
+    ps = PredictionsQuery.new(
+      page: params[:page].to_i,
+      page_size: params[:page_size].to_i,
+      predictions: current_user.predictions.not_withdrawn,
+      status: 'recent',
+      tag_names: params.fetch(:tag_names, [])
+    ).call
+    serialized_predictions = ps.map { |p| PredictionSerializer.new(p).serializable_hash.except(:responses) }
+    generated_csv = CSV.generate do |csv|
+      written_column_headers = false
+      serialized_predictions.each do |h|
+        unless written_column_headers
+          csv << h.keys
+          written_column_headers = true
+        end
+        csv << h.values
+      end
+    end
+    send_data(generated_csv, filename: 'my_predictions.csv')
+  end
+
   def recent
     # TODO: remove this in a month or so
     redirect_to predictions_path, status: :moved_permanently
@@ -70,7 +94,7 @@ class PredictionsController < ApplicationController
     @title = 'Recent Predictions'
     @filter = 'recent'
     @predictions = PredictionsQuery.new(
-      page: params[:page].to_i, 
+      page: params[:page].to_i,
       predictions: Prediction.visible_to_everyone,
       status: @filter,
       tag_names: params.fetch(:tag_names, [])
