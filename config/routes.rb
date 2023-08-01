@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   resources :predictions do
     collection do
+      get :mine, format: :csv
       get :recent
       get :unjudged
       get :judged

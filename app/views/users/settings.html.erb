@@ -12,6 +12,7 @@
 <p><%= link_to 'Delete my account!', user_path(@user), method: :delete, data: { confirm: 'Are you sure you want to delete your account? This action is irreversible.' } %></p>
 
 <h2><%= link_to 'View notifications', [@user,:deadline_notifications] %></h2>
+<h2><%= link_to 'Export my predictions as CSV', mine_predictions_path %></h2>
 <br>
 <% if @user.api_token.present? %>
 <h2>API Token: <%= @user.api_token %></h2>
