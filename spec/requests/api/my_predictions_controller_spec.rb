@@ -60,7 +60,7 @@ describe Api::MyPredictionsController, type: :request do
         predictions = json_hash['predictions']
         expect(predictions.length).to eq 2
 
-        before_judgment_timestamp = Time.now
+        before_judgment_timestamp = Time.now - 1.second
         another_prediction.judgements.create!(outcome: true)
 
         get url, params: params.merge(page_size: 1, page: 1)
