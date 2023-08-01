@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'selenium/webdriver'
+
 Capybara.register_driver :chrome_headless do |app|
   options = Selenium::WebDriver::Chrome::Options.new
   options.add_argument('disable-dev-shm-usage')
@@ -11,7 +13,7 @@ Capybara.register_driver :chrome_headless do |app|
     options.binary = `which chromium`.chomp || `which google-chrome-stable`.chomp
   end
 
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome
+  capabilities = Selenium:q:WebDriver::Remote::Capabilities.chrome
 
   Capybara::Selenium::Driver.new(
     app, browser: :chrome, capabilities: [options, capabilities]
@@ -19,6 +21,3 @@ Capybara.register_driver :chrome_headless do |app|
 end
 
 Capybara.javascript_driver = :chrome_headless
-Capybara.run_server        = true
-Capybara.server_port       = 30_000
-Capybara.default_max_wait_time = 10
