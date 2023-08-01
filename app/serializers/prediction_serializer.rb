@@ -12,6 +12,7 @@ class PredictionSerializer < ActiveModel::Serializer
              :mean_confidence,
              :outcome,
              :prediction_group_id,
+             :last_judgement_at,
              :updated_at,
              :uuid,
              :version,
@@ -22,5 +23,9 @@ class PredictionSerializer < ActiveModel::Serializer
 
   def creator_label
     object.creator.to_s
+  end
+
+  def last_judgement_at
+    object.judged_at
   end
 end
