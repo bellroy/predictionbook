@@ -69,7 +69,7 @@ describe Api::MyPredictionsController, type: :request do
         actor = json_hash['user']
         expect(predictions.length).to eq 1
         expect(predictions.first['description']).to eq another_prediction.description
-        expect(predictions.first['last_judgement_at'] >= before_judgment_timestamp).to be true
+        expect(Time.parse(predictions.first['last_judgement_at']) >= before_judgment_timestamp).to be true
         expect(actor['email']).to eq user.email
 
         get url, params: params.merge(page_size: 1, page: 2)
