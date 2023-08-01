@@ -17,6 +17,7 @@
       bundler
       chromedriver
       chromium
+      gnumake
       libnotify
       pkg-config
       postgresql_12
