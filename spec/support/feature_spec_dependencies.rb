@@ -13,7 +13,7 @@ Capybara.register_driver :chrome_headless do |app|
     options.binary = `which chromium`.chomp || `which google-chrome-stable`.chomp
   end
 
-  capabilities = Selenium:q:WebDriver::Remote::Capabilities.chrome
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome
 
   Capybara::Selenium::Driver.new(
     app, browser: :chrome, capabilities: [options, capabilities]
