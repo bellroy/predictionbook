@@ -17,6 +17,7 @@
       bundler
       chromedriver
       chromium
+      libffi
       libnotify
       pkg-config
       postgresql_12
