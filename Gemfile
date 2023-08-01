@@ -80,7 +80,6 @@ group :test do
   gem 'guard-rspec'
   gem 'launchy'
   gem 'rails-controller-testing'
-  gem 'selenium-webdriver', require: false
   gem 'shoulda-matchers'
 end
 

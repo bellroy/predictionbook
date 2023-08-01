@@ -331,7 +331,6 @@ GEM
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.2.5)
     rouge (4.1.2)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
@@ -358,7 +357,6 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.12.1)
-    rubyzip (2.3.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -369,10 +367,6 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    selenium-webdriver (4.10.0)
-      rexml (~> 3.2, >= 3.2.5)
-      rubyzip (>= 1.2.2, < 3.0)
-      websocket (~> 1.0)
     sentry-rails (5.9.0)
       railties (>= 5.0)
       sentry-ruby (~> 5.9.0)
@@ -414,7 +408,6 @@ GEM
     uuidtools (2.2.0)
     warden (1.2.9)
       rack (>= 2.0.9)
-    websocket (1.2.9)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -483,7 +476,6 @@ DEPENDENCIES
   rspec-activemodel-mocks
   rspec-rails
   sass-rails
-  selenium-webdriver
   sentry-rails (>= 4.0)
   sentry-ruby (>= 4.0)
   shoulda-matchers
