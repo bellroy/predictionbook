@@ -27,9 +27,9 @@ class StatisticsSweeper < ActionController::Caching::Sweeper
     associated_groups =
       GroupMember.includes(:group).where(user_id: associated_users.map(&:id)).map(&:group).uniq
     associated_groups.each do |group|
-      cache.clear(group_statistics_cache_key(group))
-      cache.clear(group_calibration_scores_cache_key(group))
-      cache.clear(group_leaderboard_cache_key(group))
+      cache.delete(group_statistics_cache_key(group))
+      cache.delete(group_calibration_scores_cache_key(group))
+      cache.delete(group_leaderboard_cache_key(group))
     end
   end
 end
