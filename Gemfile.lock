@@ -282,7 +282,7 @@ GEM
       pry (>= 0.13, < 0.15)
     psych (3.3.4)
     public_suffix (5.0.1)
-    puma (6.3.0)
+    puma (6.3.1)
       nio4r (~> 2.0)
     racc (1.7.1)
     rack (2.2.7)
