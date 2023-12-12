@@ -55,7 +55,6 @@ group :deploy do
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails'
   gem 'capistrano-rvm', require: false
-  gem 'whenever'
   gem 'httparty'
 end
 

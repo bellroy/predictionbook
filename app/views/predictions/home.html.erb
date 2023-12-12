@@ -5,19 +5,15 @@
   <%= image_tag "title-banner.png", id: "title", alt: "How Sure Are You?" %>
 	<div class="content clear">
 		<h2>Find out just how sure you should be, and get better at being only as sure as the facts justify.</h2>
-    <% unless current_user.present? %>
-		<p class="actions clear">
-		  <%= link_to 'Login', new_user_session_path, class: 'button' %>
-		  <span>or</span>
-		  <%= link_to 'Sign Up', new_user_registration_path, class: 'button' %>
-	  </p>
-	  <% end %>
+    	<% unless current_user.present? %>
+			<p class="actions clear">
+			<%= link_to 'Login', new_user_session_path, class: 'button' %>
+			</p>
+		<% end %>
 	</div>
   <%= image_tag "graphs.png", id: "illustration", alt: "PredictionBook" %>
 </div><!-- #feature -->
 <% end %>
-
-<%= render 'form' if current_user %>
 
 <% unless current_user %>
 <div id="intro">

@@ -10,9 +10,6 @@ class User < ApplicationRecord
   has_many :group_members, dependent: :destroy
   has_many :groups, through: :group_members
   delegate :wagers, to: :responses
-  has_many :deadline_notifications, dependent: :destroy
-  has_many :response_notifications, dependent: :destroy
-  has_one :credence_game, dependent: :destroy
   has_many :judgements, dependent: :destroy
   has_many :predictions, dependent: :destroy, foreign_key: :creator_id
 
@@ -60,11 +57,6 @@ class User < ApplicationRecord
 
   def pseudonymize!
     UserPseudonymizer.call(self)
-  end
-
-  def predictions
-    prediction_ids = wagers.select(:prediction_id).map(&:prediction_id)
-    Prediction.where(id: prediction_ids).order(updated_at: :desc)
   end
 
   def devise_password_specified?

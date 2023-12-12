@@ -23,11 +23,11 @@ describe Statistics do
     end
 
     it 'has correct accuracies' do
-      expect(stats.accuracies).to eq [100, 100, 100, 0, 0, 67]
+      expect(stats.accuracies).to eq [100, 100, 100, 0, 0, 0]
     end
 
     it 'has correct sample sizes' do
-      expect(stats.sizes).to eq [1, 1, 1, 0, 0, 3]
+      expect(stats.sizes).to eq [1, 1, 1, 0, 0, 0]
     end
   end
 end

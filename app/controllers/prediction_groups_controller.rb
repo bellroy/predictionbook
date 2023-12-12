@@ -2,50 +2,12 @@
 
 class PredictionGroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_prediction_group, only: %i[show edit update]
-  before_action :must_be_authorized_for_prediction, only: %i[edit update show]
+  before_action :find_prediction_group, only: %i[show]
+  before_action :must_be_authorized_for_prediction, only: %i[show]
 
   def show
     @events = @prediction_group.predictions.flat_map(&:events).sort_by(&:created_at)
     @title = @prediction_group.description
-  end
-
-  def new
-    @title = 'Make a Prediction Group'
-    @statistics = current_user.try(:statistics)
-    visibility = current_user.try(:visibility_default) || 0
-    group_id = current_user.try(:group_default_id)
-    @prediction_group = PredictionGroup.new
-    @prediction_group.predictions.new(creator: current_user, visibility: visibility,
-                                      group_id: group_id)
-  end
-
-  def create
-    @prediction_group = UpdatedPredictionGroup.new(PredictionGroup.new,
-                                                   current_user,
-                                                   prediction_group_params).prediction_group
-    if @prediction_group.save
-      redirect_to prediction_group_path(@prediction_group)
-    else
-      @prediction_group.predictions.new if @prediction_group.default_prediction.nil?
-      render action: 'new', status: :unprocessable_entity
-    end
-  end
-
-  def edit
-    group_desc = @prediction_group.description
-    @title = "Editing: “!#{group_desc}”"
-  end
-
-  def update
-    @prediction_group = UpdatedPredictionGroup.new(@prediction_group,
-                                                   current_user,
-                                                   prediction_group_params).prediction_group
-    if @prediction_group.save
-      redirect_to prediction_group_path(@prediction_group)
-    else
-      render action: 'edit', status: :unprocessable_entity
-    end
   end
 
   private
@@ -62,9 +24,5 @@ class PredictionGroupsController < ApplicationController
   def find_prediction_group
     @prediction_group = PredictionGroup.includes(predictions: %i[responses versions judgements])
       .find(params[:id])
-  end
-
-  def prediction_group_params
-    params.require(:prediction_group).permit!
   end
 end

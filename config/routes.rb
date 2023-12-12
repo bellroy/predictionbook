@@ -7,31 +7,24 @@ Rails.application.routes.draw do
   devise_for :users
 
   # then the other stuff having to do with users
-  resources :users, only: %i[destroy show update ] do
-    # nested resources come before member/collection routes
-    resources :deadline_notifications
+  resources :users, only: %i[show] do
     member do
       get :settings
       get :statistics
       get :due_for_judgement
-      post :generate_api_token
     end
   end
 
   # then everything else in alphabetical order
-  resources :credence_games, only: %i[show destroy]
-  resources :credence_game_responses, only: :update
-  resources :deadline_notifications   # TODO: duplicated within users
   resource :feedback, controller: 'feedback'  # test fails if this line is changed (???)
-  resources :group_member_invitations, only: :show
 
-  resources :groups do
-    resources :group_members, only: %i[index new create update destroy]
+  resources :groups, only: %i[index show] do
+    resources :group_members, only: %i[index]
   end
 
-  resources :prediction_groups, only: %i[show new create edit update]
+  resources :prediction_groups, only: %i[show]
 
-  resources :predictions do
+  resources :predictions, only: %i[index show] do
     collection do
       get :mine, format: :csv
       get :recent
@@ -39,21 +32,11 @@ Rails.application.routes.draw do
       get :judged
       get :future
     end
-    member do
-      post :withdraw
-      post :judge
-    end
 
-    resources :responses do
-      get :preview, on: :collection
-    end
+    resources :responses, only: %i[index]
   end
 
-  resources :response_notifications
-
-  resources :responses do
-    get :preview, on: :collection
-  end
+  resources :responses, only: %i[index]
 
   # Due to rules around sitemap locations and allowed paths all sitemaps are at the root:
   resources :sitemaps, only: :index, path: "sitemap"
@@ -76,9 +59,7 @@ Rails.application.routes.draw do
   namespace :api, format: :json do
     resources :current_users, only: :show
     resources :my_predictions, only: :index
-    resources :predictions
-    resources :prediction_group_by_description, only: :update
-    resources :prediction_groups
-    resources :prediction_judgements, only: :create
+    resources :predictions, only: %i[index show]
+    resources :prediction_groups, only: %i[index show]
   end
 end

@@ -1,22 +1,6 @@
 <h2>Settings</h2>
-<%= form_for @user do |f| %>
-  <%= f.text_field :name %>
-  <%= f.text_field :email %>
-  <%= f.timezone_field :timezone %>
-  <%= f.select_field :visibility_default, raw(Visibility.select_options_html((current_user.try(:groups) || []), @user.visibility_default, @user.group_default_id)), label: 'By default, create predictions that are' %>
-  <p class='note'><%= render 'predictions/private_note' %></p>
-  <%= f.submit 'Change details' %>
-<% end %>
-<h2>Password</h2>
-<p><%= link_to 'Change password', edit_user_registration_path %></p>
-<p><%= link_to 'Delete my account!', user_path(@user), method: :delete, data: { confirm: 'Are you sure you want to delete your account? This action is irreversible.' } %></p>
-
-<h2><%= link_to 'View notifications', [@user,:deadline_notifications] %></h2>
 <h2><%= link_to 'Export my predictions as CSV', mine_predictions_path %></h2>
 <br>
 <% if @user.api_token.present? %>
 <h2>API Token: <%= @user.api_token %></h2>
-<%= button_to("Regenerate API Token", generate_api_token_user_path(@user)) %>
-<% else %>
-<%= button_to("Generate API Token", generate_api_token_user_path(@user)) %>
 <% end %>
