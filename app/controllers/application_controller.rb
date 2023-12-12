@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
 
-  before_action :set_timezone, :clear_return_to, :login_via_token
+  before_action :set_timezone, :clear_return_to
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protect_from_forgery with: :exception, prepend: true
@@ -33,13 +33,5 @@ class ApplicationController < ActionController::Base
 
   def clear_return_to
     session[:return_to] = nil
-  end
-
-  def login_via_token
-    token = params[:token]
-    if token.present?
-      DeadlineNotification.use_token!(token) { |dn| @current_user = dn.user }
-      redirect_to # get rid of token in url so if it is copied and pasted it's not propagated
-    end
   end
 end

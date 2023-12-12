@@ -11,7 +11,6 @@ def clean_database
   Prediction.delete_all
   Judgement.delete_all
   Response.delete_all
-  DeadlineNotification.delete_all
 end
 
 def random_future_day
@@ -126,11 +125,6 @@ DATA_SIZE.times do
 end
 
 finish_time = Time.current
-
-puts 'creating credence questions and answers'
-CredenceQuestionGenerator
-  .new('db/questions/OfficialCfarQuestions.xml', quiet: true)
-  .call
 
 puts 'END SEEDING'
 puts "Seeding the database took #{finish_time - start_time} seconds."
