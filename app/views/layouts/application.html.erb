@@ -31,7 +31,7 @@
 
 <div class="preheader">
   <p>
-    PredictionBook transitioning to read-only mode at the end of 2023
+    PredictionBook is now read-only
     (
       <a href="https://github.com/bellroy/predictionbook/issues/262" target="_blank">read more</a>
     ).
@@ -43,17 +43,14 @@
 	<div id="header" class="wrapper clear">
 		<div id="main_nav" class="clear">
 			<ul id="nav-menu">
-			  <li><%= link_to 'New prediction', new_prediction_path %></li>
         <li><%= link_to 'View predictions', predictions_path %></li>
 			  <li><%= link_to 'Happenstance', happenstance_path %></li>
         <li><%= link_to 'Upcoming', future_predictions_path %></li>
-				<li><%= link_to 'Credence game', credence_game_path('try') %></li>
 			</ul>
 
       <ul id="user-links">
 			  <% unless current_user.present? %>
 	        <li><%= link_to 'Login', new_user_session_path %></li>
-	        <li><%= link_to 'Signup', new_user_registration_path %></li>
 	  		<% else %>
 	  		  <li><%= link_to 'Your profile', user_path(current_user) %></li>
 					<li><%= link_to 'Groups', groups_path %></li>
@@ -95,11 +92,9 @@
   <div id="footer" class="wrapper clear">
     <ul class="left-links">
       <li><%= link_to 'Home', '/' %></li>
-      <li><%= link_to 'New prediction', new_prediction_path %></li>
       <li><%= link_to 'View predictions', predictions_path %></li>
       <li><%= link_to 'Happenstance', happenstance_path %></li>
       <li><%= link_to 'Upcoming', future_predictions_path %></li>
-      <li><%= link_to 'Credence game', credence_game_path('try') %></li>
       <li><%= link_to 'PredictionBook on GitHub', "https://github.com/tricycle/predictionbook" %></li>
     </ul>
     <ul class="right-links">

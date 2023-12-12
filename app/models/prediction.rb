@@ -20,9 +20,7 @@ class Prediction < ApplicationRecord
   class DuplicateRecord < ActiveRecord::RecordInvalid; end
 
   # == Relationships ========================================================
-  has_many :deadline_notifications, dependent: :destroy
   has_many :judgements,             dependent: :destroy
-  has_many :response_notifications, dependent: :destroy
   has_many :responses,              dependent: :destroy, autosave: true
   has_many :versions, autosave: true, class_name: PredictionVersion.name, dependent: :destroy
 
@@ -36,42 +34,10 @@ class Prediction < ApplicationRecord
   validates :creator, presence: { message: 'Who are you?' }
   validates :description, presence: { message: 'What are you predicting?' }
   validates :initial_confidence, presence: { message: 'How sure are you?', on: :create }
-  validate :confidence_on_response, on: :create
   validate :bound_deadline
 
   # == Scopes ===============================================================
   scope :not_withdrawn, -> { where(withdrawn: false) }
-
-  # == Callbacks ============================================================
-  after_initialize do
-    self.uuid ||= UUIDTools::UUID.random_create.to_s if has_attribute?(:uuid)
-  end
-
-  before_validation(on: :create) do
-    @initial_response ||= responses.build(
-      confidence: initial_confidence,
-      prediction: self,
-      user: creator
-    )
-
-    if notify_creator
-      deadline_notifications.build(prediction: self, user: creator)
-    end
-
-    tag_adder = TagAdder.new(prediction: self, string: description)
-    if tag_adder.call
-      self.description = tag_adder.string_without_tags
-    end
-  end
-
-  after_validation do
-    if errors[:deadline].any?
-      errors.add(:deadline_text, errors[:deadline])
-    end
-  end
-
-  before_save :create_version_if_required
-  after_save :synchronise_group_visibility_and_deadline
 
   # == Class Methods ========================================================
   def self.parse_deadline(date)
@@ -117,11 +83,6 @@ class Prediction < ApplicationRecord
 
   # == Instance Methods =====================================================
 
-  def create_version_if_required
-    PredictionVersion.create_from_current_prediction_if_required(self)
-    true # Never halt save
-  end
-
   def initialize(attributes = nil)
     notify_creator_bool = extract_notify_creator_bool(attributes)
     super
@@ -132,16 +93,6 @@ class Prediction < ApplicationRecord
     notify_creator_bool = extract_notify_creator_bool(attributes)
     super
     assign_notify_creator_with_default(notify_creator_bool)
-  end
-
-  def save!
-    super
-  rescue ActiveRecord::RecordNotUnique => error
-    if error.message.match?(/index_predictions_on_uuid/)
-      raise DuplicateRecord, Prediction.find_by(uuid: uuid)
-    end
-
-    raise
   end
 
   def initial_confidence
@@ -176,10 +127,6 @@ class Prediction < ApplicationRecord
 
   def events
     [responses, versions[1..-1], judgements].flatten.sort_by(&:created_at)
-  end
-
-  def judge!(outcome, user = nil)
-    judgements.create!(user: user, outcome: outcome)
   end
 
   def judgement
@@ -246,12 +193,8 @@ class Prediction < ApplicationRecord
     wagers.where(user_id: user.id).count
   end
 
-  def deadline_notification_for_user(user)
-    deadline_notifications.find_by(user_id: user) || deadline_notifications.build(user: user, enabled: false)
-  end
-
-  def response_notification_for_user(user)
-    response_notifications.find_by(user_id: user) || response_notifications.build(user: user, enabled: false)
+  def judge!(outcome, user = nil)
+    judgements.create!(user: user, outcome: outcome)
   end
 
   def confidence_on_response

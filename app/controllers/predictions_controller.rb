@@ -3,44 +3,10 @@
 require 'csv'
 
 class PredictionsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create judge withdraw edit update mine]
-  before_action :find_prediction, only: %i[judge show withdraw edit update]
-  before_action :must_be_authorized_for_prediction, only: %i[withdraw edit update show]
+  before_action :authenticate_user!, only: %i[mine]
+  before_action :find_prediction, only: %i[show]
+  before_action :must_be_authorized_for_prediction, only: %i[show]
   before_action :ensure_statistics, only: [:index]
-
-  cache_sweeper :statistics_sweeper, only: :judge
-
-  def new
-    @title = 'Make a Prediction'
-    @statistics = current_user.try(:statistics)
-    visibility = current_user.try(:visibility_default) || 0
-    group_id = current_user.try(:group_default_id)
-    @prediction = Prediction.new(creator: current_user, visibility: visibility, group_id: group_id)
-  end
-
-  def create
-    begin
-      @prediction = Prediction.create!(prediction_params)
-    rescue Prediction::DuplicateRecord => duplicate
-      @prediction = duplicate.record
-    end
-    redirect_to prediction_path(@prediction)
-  rescue ActiveRecord::RecordInvalid => invalid
-    @prediction = invalid.record
-    render action: 'new', status: :unprocessable_entity
-  end
-
-  def edit
-    @title = "Editing: “#{@prediction.description_with_group}”"
-  end
-
-  def update
-    @prediction.update!(prediction_params)
-    redirect_to prediction_path(@prediction)
-  rescue ActiveRecord::RecordInvalid => invalid
-    @prediction = invalid.record
-    render action: 'edit', status: :unprocessable_entity
-  end
 
   def home
     visibility = current_user.try(:visibility_default) || 'visible_to_everyone'
@@ -105,16 +71,7 @@ class PredictionsController < ApplicationController
   def show
     if current_user.present?
       @prediction_response = Response.new(user: current_user)
-      @deadline_notification = @prediction.deadline_notification_for_user(current_user)
-      @response_notification = @prediction.response_notification_for_user(current_user)
-      @response_notification.viewed!
     end
-
-    @edit_path = if @prediction.prediction_group_id.present?
-                   edit_prediction_group_path(@prediction.prediction_group)
-                 else
-                   edit_prediction_path(@prediction)
-                 end
 
     @events = @prediction.events
     @title = @prediction.description_with_group
@@ -150,17 +107,6 @@ class PredictionsController < ApplicationController
     @responses = Response.recent(limit: 25).includes(prediction: :judgements, user: nil)
   end
 
-  def judge
-    @prediction.judge!(params[:outcome], current_user)
-    flash[:judged] = 'judged'
-    redirect_to @prediction
-  end
-
-  def withdraw
-    @prediction.withdraw!
-    redirect_to @prediction
-  end
-
   private
 
   def ensure_statistics
@@ -176,16 +122,5 @@ class PredictionsController < ApplicationController
 
   def find_prediction
     @prediction = Prediction.find(params[:id])
-  end
-
-  def prediction_params
-    result = params.require(:prediction).permit!
-    visibility = result[:visibility]
-    result.merge!(Visibility.option_to_attributes(visibility)) if visibility.present?
-    if @prediction.nil?
-      result[:visibility] = current_user.try(:visibility_default) unless result.key?(:visibility)
-      result[:creator_id] = current_user.id
-    end
-    result
   end
 end

@@ -46,69 +46,6 @@ describe User do
     end
   end
 
-  describe '#authorized_for?' do
-    subject { user.authorized_for?(prediction, action) }
-
-    let(:user) { described_class.new }
-    let(:creator_user) { user }
-    let(:action) { 'edit' }
-    let(:prediction) do
-      user.predictions.build(creator: creator_user, visibility: :visible_to_creator)
-    end
-
-    it { is_expected.to be true }
-
-    context 'not created by user' do
-      let(:creator_user) { described_class.new }
-
-      it { is_expected.to be false }
-
-      context 'user is admin' do
-        let(:user) { described_class.new(admin: true) }
-        let(:creator_user) { described_class.new }
-
-        it { is_expected.to be true }
-      end
-
-      context 'prediction in group' do
-        let(:group) { FactoryBot.create(:group) }
-        let(:prediction) do
-          user.predictions.build(creator: creator_user, visibility: :visible_to_group, group: group)
-        end
-        let(:action) { 'show' }
-        let(:user) { FactoryBot.create(:user) }
-
-        context 'user in group' do
-          before do
-            FactoryBot.create(:group_member, role, group: group, user: user)
-          end
-
-          let(:role) { :contributor }
-
-          it { is_expected.to be true }
-
-          context 'editing' do
-            let(:action) { 'edit' }
-
-            it { is_expected.to be false }
-
-            context 'user is admin' do
-              let(:role) { :admin }
-
-              it { is_expected.to be true }
-            end
-          end
-        end
-
-        context 'user not in group' do
-          before { group }
-
-          it { is_expected.to be false }
-        end
-      end
-    end
-  end
-
   describe '#pseudonymize!' do
     let!(:pseudonymous_user) { FactoryBot.create(:user, :pseudonymous) }
     let!(:user) { FactoryBot.create(:user) }

@@ -1,8 +1,0 @@
-= form_for(@group, html: { honeypot: true }) do |f|
-  = f.text_field :name, label: "Name your group"
-
-  - if @group.new_record?
-    = label_tag :invitees, "Enter the logins of up to 20 PredictionBook friends, one per line. Invalid logins will be ignored. You can invite more friends later. Note: the login is the slug that appears in the URL when you view someone's profile (i.e. in http://predictionbook.com/users/a_predictionbook_user, a_predictionbook_user is that user's login)."
-    = text_area_tag :invitees, "", rows: 20, cols: 100
-
-  = f.submit 'Create my group!'

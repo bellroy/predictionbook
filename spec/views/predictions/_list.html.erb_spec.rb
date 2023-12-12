@@ -12,7 +12,7 @@ describe 'prediction list' do
   end
 
   def render_view
-    render 'predictions/list', title: 'Title' 
+    render 'predictions/list', title: 'Title'
   end
 
   describe 'when showing statistics' do
@@ -32,20 +32,11 @@ describe 'prediction list' do
     describe 'when logged in' do
       it 'shows a message if there are no predictions' do
         render_view
-        expect(rendered).to have_css('p', text: /No predictions to show; so\s+make your own!/)
-      end
-
-      it 'provides a link to make a new prediction if there are none' do
-        render_view
-        expect(rendered).to have_selector("a[href='/predictions/new']")
+        expect(rendered).to have_css('p', text: /No predictions to show/)
       end
     end
 
     describe 'when not logged in' do
-      before do
-        expect(view).to receive(:current_user).and_return nil
-      end
-
       it 'shows a message if there are no predictions' do
         render_view
         expect(rendered).to have_css('p', text: 'No predictions to show')
