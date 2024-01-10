@@ -5,7 +5,6 @@ require 'capistrano/setup'
 require 'capistrano/deploy'
 require 'capistrano/rails'
 require 'capistrano/bundler'
-require 'whenever/capistrano'
 
 # Use Git
 require 'capistrano/scm/git'

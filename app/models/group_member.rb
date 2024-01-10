@@ -19,16 +19,4 @@ class GroupMember < ApplicationRecord
   after_initialize do
     self.uuid ||= UUIDTools::UUID.random_create.to_s
   end
-
-  def send_invitation
-    return if !invitee? || user.email.nil?
-
-    GroupMemberMailer.invitation(self).deliver_later
-  end
-
-  def send_ejection
-    return if user.email.nil?
-
-    GroupMemberMailer.ejection(self).deliver_later
-  end
 end

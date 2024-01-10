@@ -2,7 +2,7 @@
   description = "PredictionBook";
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-23.05-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-23.11-darwin";
   };
   outputs = inputs:
   inputs.flake-utils.lib.eachSystem [

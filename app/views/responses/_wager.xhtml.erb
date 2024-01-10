@@ -9,9 +9,6 @@ on
 <abbr title="To be decided (judged)">TBD</abbr>
 <%= TimeInContentTagPresenter.new(wager.prediction.deadline).tag %>
 <% if wager.prediction.open? %>
-<% if Time.current > wager.prediction.deadline %>
-, so <%= link_to 'judge them!', wager.prediction %>
-<% end %>
 <% elsif !wager.unknown?; outcome = wager.correct? ? 'correct' : 'wrong' %>
 and was
 <%= content_tag :span, outcome, class: "outcome #{outcome}" %>

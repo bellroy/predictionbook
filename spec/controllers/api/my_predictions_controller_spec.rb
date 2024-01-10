@@ -28,8 +28,7 @@ describe Api::MyPredictionsController, type: :controller do
         end
 
         it 'includes my prediction' do
-          expect(parsed_response['predictions'].to_s)
-            .to include my_prediction.description_with_group
+          expect(parsed_response['predictions'].to_s).to include my_prediction.description_with_group
           expect(parsed_response['user']['name']).to eq user.name
           expect(parsed_response['user']['user_id']).to eq user.id
           expect(parsed_response['user']['email']).to eq user.email
